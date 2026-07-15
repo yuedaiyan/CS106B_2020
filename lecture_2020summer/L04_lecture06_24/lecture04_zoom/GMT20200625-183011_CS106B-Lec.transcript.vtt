@@ -1,0 +1,1822 @@
+WEBVTT
+
+1
+00:00:03.330 --> 00:00:04.529
+Nick Bowman: Can you see the slides.
+
+2
+00:00:08.490 --> 00:00:08.880
+Nick Bowman: No.
+
+3
+00:00:11.550 --> 00:00:11.910
+Nick Bowman: Screen.
+
+4
+00:00:13.230 --> 00:00:14.070
+Nick Bowman: Yeah, you're right.
+
+5
+00:00:19.650 --> 00:00:23.790
+Nick Bowman: Now, yes. Okay, great. Cool. And it's recording
+
+6
+00:00:27.240 --> 00:00:36.600
+Nick Bowman: Awesome. So welcome to lecture. And so today we're going to be talking about console programs that there's an grids are first exposure to data structures.
+
+7
+00:00:37.050 --> 00:00:48.120
+Nick Bowman: And so today's question is what is the first thing that comes to your mind when you think of the phrase Danish structure. So go ahead and think about that for a little bit and drop that in the chat as I go and talk about the outline
+
+8
+00:00:49.620 --> 00:00:55.920
+Nick Bowman: And so today, we're going to go on our roadmap is actually going to be our first exposure to
+
+9
+00:00:56.340 --> 00:01:06.210
+Nick Bowman: Kind of the first name of our class when it comes to this distinction between client or looking at the user client side of things and sort of talking about some really important instructions.
+
+10
+00:01:06.750 --> 00:01:17.100
+Nick Bowman: And in particular, we're going to talk about vectors and grids. After a brief sort of introduction to console program as well, which are another sort of important and user attraction.
+
+11
+00:01:18.900 --> 00:01:27.960
+Nick Bowman: And so we have two questions today. So our first question is going to be how we build programs that interact with users. And then our second question is really how to restructure data using instructions and cook.
+
+12
+00:01:28.620 --> 00:01:38.010
+Nick Bowman: And answer these questions. We're going to go over four main areas. We're going to do a little bit of review and strings testing and simple test with a little bit of an ad workspace activity.
+
+13
+00:01:38.490 --> 00:01:42.330
+Nick Bowman: Then we're going to talk about console programs which are programs and interact with users.
+
+14
+00:01:42.960 --> 00:01:52.290
+Nick Bowman: Then we'll jump into talking about abstract data types will definitely get to talking about vectors and grids, maybe time committing. So, I mean, I get to that today to say that for Monday.
+
+15
+00:01:52.830 --> 00:02:00.270
+Nick Bowman: And along the way, and we'll talk about the safety of pass by reference which is a super important idea that you'll see show up over and over again, over the course of the quarter.
+
+16
+00:02:02.070 --> 00:02:10.740
+Nick Bowman: So let's get her interview so and we talked about kind of talked about simple test yesterday. So remember that simple test is the testing library that will be using this quarter.
+
+17
+00:02:11.310 --> 00:02:15.750
+Nick Bowman: Testing is super important. And we talked to a lot of reasons about why testing is super important yesterday.
+
+18
+00:02:16.320 --> 00:02:26.700
+Nick Bowman: And if you remember sort of the main components of that. How simple test works. And there's always going to be this little bit of a cryptic if statement line in your main function, whenever you want to be able to run tests.
+
+19
+00:02:27.000 --> 00:02:34.590
+Nick Bowman: And there's a number of different flags that you can use to say whether you want to run all the tests, none of the tests or that a menu that allows you to choose which testimony.
+
+20
+00:02:35.430 --> 00:02:37.830
+Nick Bowman: When you're actually writing the test, you have two options.
+
+21
+00:02:38.610 --> 00:02:47.670
+Nick Bowman: Or is there are two options. You will usually use the student test option to add tests, but you will see also in your code. These things are provided test which we give to you as part of starter code.
+
+22
+00:02:48.630 --> 00:03:00.810
+Nick Bowman: And when you're actually writing the test sort of the core bread and butter of what you use is this thing called expect equal which allows you to make function calls and compare data structures and basically say that for the results of the test.
+
+23
+00:03:01.260 --> 00:03:12.480
+Nick Bowman: To be correct, you expect to things to people. And there are other things like expect and expect error as well and that are in the testing guy, but will encounter those over the course of the quarter, you'll get more practice with that.
+
+24
+00:03:14.130 --> 00:03:18.600
+Nick Bowman: And so, so that was our review simple test. So we also talked about strings yesterday.
+
+25
+00:03:19.320 --> 00:03:28.080
+Nick Bowman: And we talked about this idea of streaming being very powerful and being able to solve interesting problems. And so I want to actually touch on some areas where strings are actually can be really useful and powerful.
+
+26
+00:03:28.800 --> 00:03:36.360
+Nick Bowman: So the first is when it comes to encryption, decryption. So a lot of when it comes to sending messages and encrypted and decrypted things
+
+27
+00:03:36.870 --> 00:03:46.440
+Nick Bowman: Messages and things like that are representative strings. And so there's a little bit of a challenge for you on here so anyone can can tell me after class what the cipher is and
+
+28
+00:03:47.130 --> 00:03:52.080
+Nick Bowman: That is your little, little bit of challenge. You can you can pull up in the slides and check out, see what's going on their
+
+29
+00:03:53.610 --> 00:04:02.910
+Nick Bowman: Streams are also involved in language translation. Right. So when you have something like Google Translate and it's taking an input a string that's during processing on those strings. And then it's
+
+30
+00:04:03.300 --> 00:04:09.300
+Nick Bowman: Output instruments and I always love this example because as much as we worked on google translate over the years.
+
+31
+00:04:09.660 --> 00:04:22.020
+Nick Bowman: It still has these kind of funny flaws or if you translate it initial statement into a language and then back to English you get these kind of funny translations and and show some of the kind of nuances of how difficult translating language actually is.
+
+32
+00:04:23.730 --> 00:04:34.770
+Nick Bowman: And then DNA analysis. So DNA, actually, a lot of times just represented as long strings of base pairs. And so you can do all kinds of gene analysis and mythology score analysis on DNA.
+
+33
+00:04:35.640 --> 00:04:40.860
+Nick Bowman: And the reason that I bring this up is we're actually going to do a little bit of a warm up exercise unrelated to DNA.
+
+34
+00:04:41.910 --> 00:04:46.980
+Nick Bowman: So your quick 32nd biology lesson for the day. And so for those of you that
+
+35
+00:04:48.150 --> 00:05:08.820
+Nick Bowman: Have been exposed to in a before it's just sort of the fundamental unit of DNA is these things called basis. There's four possible basis represented the letters GC empty and these these nucleotides in the DNA, they form pairs. So as always pairs with T and G always pairs with see
+
+36
+00:05:10.620 --> 00:05:17.760
+Nick Bowman: And so, DNA is composed of is sort of two complimentary sequences were all the base pairs on one of the strands have their compliment on the other side.
+
+37
+00:05:19.470 --> 00:05:26.700
+Nick Bowman: And so what exercise that we're going to work through as we're going to actually work on writing this function that has the prototype or an assumption called compliment
+
+38
+00:05:27.150 --> 00:05:37.500
+Nick Bowman: Which takes industry as a parameter and also returns a string. And the idea is given a single DNA and and can you generate the compliment complimentary based per sequence of that.
+
+39
+00:05:39.690 --> 00:05:44.430
+Nick Bowman: And there's a couple of restrictions on how we want the function to work. We want it to be case insensitive.
+
+40
+00:05:44.700 --> 00:05:56.880
+Nick Bowman: And you'll see this word case insensitive a lot show up in this class and show up a lot when you're doing the strings and all it means is that input should be treated the same regardless of which case, they're in. So regardless of whether they're uppercase or lowercase.
+
+41
+00:05:57.180 --> 00:06:10.650
+Nick Bowman: We should get the same result out of function and and then you can assume that the inputs that you're given in the actual DNA strand are all valid input. So they're all either the uppercase or lowercase versions of the four base pairs at GNC
+
+42
+00:06:11.970 --> 00:06:21.210
+Nick Bowman: And so what the upside is going to be is we're gonna we're going to try out so we put this at the beginning of class time so we can't possibly run out of time before we, before we get to the exercise.
+
+43
+00:06:22.020 --> 00:06:28.560
+Nick Bowman: But we're going to send you off to add workspaces and breakout rooms and I'll show you the workspace in a second. So you can see where
+
+44
+00:06:28.920 --> 00:06:29.370
+Zelin (James) Li: Things are
+
+45
+00:06:29.640 --> 00:06:33.600
+Nick Bowman: No less with me try that there might have been a little bit of confusion about where the files were actually located
+
+46
+00:06:34.860 --> 00:06:45.330
+Nick Bowman: But what we've given us. We actually giving you an a, a version of this compliment function already implemented and but it's been implemented a little bit incorrectly, so there's there's a bug sort of
+
+47
+00:06:46.590 --> 00:06:54.450
+Nick Bowman: As a good friendship, a quarter buggy. Boy, there's a buggy boy hidden in the code somewhere that that it doesn't do exactly what we wanted to do.
+
+48
+00:06:55.110 --> 00:06:59.280
+Nick Bowman: And so what we're going to want you all to do is brainstorm with your group members.
+
+49
+00:06:59.460 --> 00:07:08.700
+Nick Bowman: And look at the tests that we provided because the tricky thing is we actually giving you some tests and the tests all paths. So you might look at them and say, oh, well, all the test class is the is the function. Correct.
+
+50
+00:07:09.180 --> 00:07:19.530
+Nick Bowman: And the functions actually not fully correct. So you're going to try to write first right and additional tests that fails. Right. So a test that should pass, but actually feels will be given code.
+
+51
+00:07:20.100 --> 00:07:25.380
+Nick Bowman: And the news that test actually fix and are finding fix the bug in the code. And if you have time
+
+52
+00:07:26.100 --> 00:07:42.030
+Nick Bowman: Training this test, and they're discussing with your group. What other tests or groups of test, you might actually want to add as well. And so you'll have five minutes to work on this before we send you off into breakout rooms. I just want to show you what it will actually look like to
+
+53
+00:07:43.290 --> 00:07:51.810
+Nick Bowman: To get there. And so once you get assigned to a breakout room, you will see a number at the top of your breakout room and it'll be a number somewhere between one and 50
+
+54
+00:07:52.470 --> 00:08:01.200
+Nick Bowman: So once you see that number go to Ed, go to the workspaces page and click on the breakout room or the workspace that matches up with the breakout room number
+
+55
+00:08:02.280 --> 00:08:10.050
+Nick Bowman: I'm going to click on my own version right now. So this is a private version that I have and but you'll see a workspace that looks like this. And there's two important files.
+
+56
+00:08:11.190 --> 00:08:19.650
+Nick Bowman: And there's an extension. There's an instruction that TXT file, which just tells you everything that's sort of summarized in the slides about what you need to do.
+
+57
+00:08:20.280 --> 00:08:29.940
+Nick Bowman: And then if you go in the source folder, the SRC folder and then you double click on DNA dot cpp that's where you'll find the bug new implementation of the function
+
+58
+00:08:30.510 --> 00:08:37.590
+Nick Bowman: But provide a test that we've already given you and then the space where you can add your own test to actually work on uncovering these books.
+
+59
+00:08:39.840 --> 00:08:44.820
+Nick Bowman: And then the last thing is, once you're ready to actually or the way that you actually run the test as remember you can open up the terminal.
+
+60
+00:08:45.180 --> 00:08:56.970
+Nick Bowman: And then type in Nick run and then you should see the testing menu pop up and then you can just say on the testing that CDP and you'll see everything that we've given you for for now.
+
+61
+00:08:59.280 --> 00:09:08.460
+Nick Bowman: Cool. So I think that is all the logistics account. If you go ahead and send people to break out rooms and you guys will have about five minutes and then we'll bring you all back.
+
+62
+00:09:13.920 --> 00:09:17.850
+Nick Bowman: It's actually funny that invites me to break out into because I think because I'm not the host
+
+63
+00:09:20.430 --> 00:09:25.650
+Nick Bowman: For those of you so everyone's doing and so bring people back at around 1144
+
+64
+00:09:27.780 --> 00:09:36.960
+Nick Bowman: And but so for those of you that are that are here watching the video remotely afterwards and I recommend actually go ahead and pause the video right now.
+
+65
+00:09:37.290 --> 00:09:47.490
+Nick Bowman: And follow the instructions that I just said and open up one of the breakout rooms and likely what what what it will look like for you because we will
+
+66
+00:09:48.900 --> 00:09:56.970
+Nick Bowman: Sort of freeze access to the breakout rooms. Shortly after lecture. So we'll probably make one for you, that looks something like lecture for exercise public
+
+67
+00:09:57.300 --> 00:10:04.140
+Nick Bowman: And that's where you can go and sort of see the code and mess around and play around with things. And maybe if you get lucky. Someone else that's also watching lecture.
+
+68
+00:10:05.490 --> 00:10:10.110
+Nick Bowman: Afterwards might be there as well. And then you can use the chat feature to chat with them.
+
+69
+00:10:11.250 --> 00:10:21.060
+Nick Bowman: But yeah, so I would actually recommend positivity right now go to add. See if you can find the lecture for exercise. And if you can't find it. Yeah, go ahead and just post on it and bump us to actually make it and we can make it for you.
+
+70
+00:10:22.140 --> 00:10:29.310
+Nick Bowman: But if you open it up and what you should go ahead and see and hopefully that
+
+71
+00:10:31.440 --> 00:10:43.200
+Nick Bowman: Yeah, so go ahead and just look at what the provided functions and, more importantly, look at what test cases we have here and what test cases, maybe we don't have here.
+
+72
+00:10:43.590 --> 00:10:50.580
+Nick Bowman: So what potential inputs into this function that we should be able to want to expect to handle properly actually aren't there.
+
+73
+00:10:51.180 --> 00:11:03.990
+Nick Bowman: And so, oh, that's really done, I'll let you to work on that on your own. And maybe you can also chat with a friend if you have one available as well. And then once you're done, feel free to on pause and just fast forward until we come back.
+
+74
+00:11:13.500 --> 00:11:18.570
+kylie jue: No, I think that's it. Um, yeah, I just mentioned in the chat that you don't have to finish the problem.
+
+75
+00:11:19.620 --> 00:11:21.660
+Nick Bowman: Yeah, this is good.
+
+76
+00:11:26.070 --> 00:11:40.020
+kylie jue: And I'm seeing someone said they're having trouble accessing Ed. So I threw the link in the chat. And if you're still not able to access it. Go ahead and send me and Nick an email and we'll help you debug that later, but not essential. If you can't get in right now.
+
+77
+00:11:47.250 --> 00:11:49.290
+kylie jue: Alright, what time you want me to call them back.
+
+78
+00:11:51.330 --> 00:12:02.010
+Nick Bowman: Um, let's do 1144 and we'll just resigned to the fact, right now that we're not going to get to this. Okay.
+
+79
+00:12:06.030 --> 00:12:11.280
+Nick Bowman: Let's see breakout room 41 only had one person. Let me see. I can
+
+80
+00:12:11.310 --> 00:12:12.510
+kylie jue: reassign you
+
+81
+00:12:14.550 --> 00:12:15.780
+Guys to a different room.
+
+82
+00:12:23.730 --> 00:12:27.480
+kylie jue: I just sent you to 11 they might be part way through. But try it out.
+
+83
+00:12:37.980 --> 00:12:44.250
+Nick Bowman: Folks that are still here if you want to, I don't know if you guys if you have any technical difficulties joining the breakout rooms, feel free to
+
+84
+00:12:45.720 --> 00:12:46.500
+Nick Bowman: Use the chat.
+
+85
+00:12:47.520 --> 00:12:54.780
+Nick Bowman: Tell us know if there's a reason you weren't able to join or and you can also feel free to drop brainstorming ideas into what's going on.
+
+86
+00:12:59.970 --> 00:13:10.680
+kylie jue: I'm actually not getting set to another room. If you click on the breakout rooms on the bottom bar where you see breakout rooms. If you click on it, it should have an option to go to a room. It might not have the pop up, come up
+
+87
+00:13:31.980 --> 00:13:39.690
+Nick Bowman: He said 1144 4544 okay like once it hits 44 you can start bringing
+
+88
+00:13:43.200 --> 00:13:47.040
+kylie jue: Them to come back in 10 seconds. So it'll be a very fast, everyone. We're back when I
+
+89
+00:13:49.770 --> 00:13:59.370
+kylie jue: I also was thinking about, because I can auto send everyone to a room and like override like sudden, they don't have to click on the pop up. But then I realized I think you would magically get Center, which
+
+90
+00:14:02.850 --> 00:14:05.220
+Nick Bowman: Yeah, that's fine.
+
+91
+00:14:12.390 --> 00:14:12.840
+Sure.
+
+92
+00:14:31.230 --> 00:14:34.110
+Alright, everyone should be back. I think
+
+93
+00:14:39.330 --> 00:14:41.880
+kylie jue: There's a lag because it definitely says they're all closed.
+
+94
+00:14:45.360 --> 00:14:59.010
+Nick Bowman: Go ahead and go ahead and become an awesome so thanks everyone for going ahead and participating in that. And so I'll just give a quick recap of the activities you guys if you weren't able to fully get through it and you can see what
+
+95
+00:15:00.090 --> 00:15:07.860
+Nick Bowman: What might have been the issue. And so if you looked at our test cases you went to notice something that was missing, which is that the we don't actually have any test cases with lowercase letters.
+
+96
+00:15:08.160 --> 00:15:15.300
+Nick Bowman: And so one of the tests that you could have added. I was actually the test that I had an example which is lowercase a lowercase T lowercase G.
+
+97
+00:15:15.810 --> 00:15:29.670
+Nick Bowman: And you would expect that to get translated, etc. But what probably we should have noticed is with the given code actually the lowercase letters were just completely ignored. And so the output was sort of very broken for inputs of lowercase letters.
+
+98
+00:15:30.780 --> 00:15:37.350
+Nick Bowman: And so some of you looked like I was just poking around the breakout rooms like some of you got to the point of fixing the book as well, which is great.
+
+99
+00:15:37.680 --> 00:15:43.890
+Nick Bowman: And really what he needed to do was just be able to do a conversion to the characters in the string to either uppercase or lowercase.
+
+100
+00:15:44.580 --> 00:15:50.190
+Nick Bowman: To make sure to just normalize the case. And then, yeah, so that says lowercase, uppercase would have an easier there.
+
+101
+00:15:51.030 --> 00:15:55.620
+Nick Bowman: So there's a couple ways that you could have done it. You could have done it on a character by character level inside before
+
+102
+00:15:56.370 --> 00:16:01.980
+Nick Bowman: You could have converted the whole script application before you started the both of those ways with her work equally well
+
+103
+00:16:02.580 --> 00:16:09.840
+Nick Bowman: And there is a slightly less optimal way you could have done it as well, which is where you could have added for more if statements to also check for the lowercase base pairs.
+
+104
+00:16:10.260 --> 00:16:17.310
+Nick Bowman: And I would say that as a style tip on that probably has less optimal just because you do want to minimize the number of sort of hard coded explicitly state.
+
+105
+00:16:18.360 --> 00:16:24.360
+Nick Bowman: And so for already is kind of a lot, but we we can't get away with less than four because we do need to handle the four cases separately.
+
+106
+00:16:24.900 --> 00:16:33.690
+Nick Bowman: So if you can avoid adding a bunch more and sort of handle it a little bit more programmatically by covering the whole string or lower case back and be a good way
+
+107
+00:16:35.640 --> 00:16:43.770
+Nick Bowman: Okay, cool. And so now we'll sort of move on to our first big question for the day, which is how do we build programs that interact with users.
+
+108
+00:16:44.280 --> 00:16:51.000
+Nick Bowman: And and this is sort of a big moment in the class because this is sort of our first transition into into content that really is.
+
+109
+00:16:51.540 --> 00:16:59.340
+Nick Bowman: Probably going to be new for a lot of you and and that really focuses on this core topic of abstractions.
+
+110
+00:16:59.610 --> 00:17:13.710
+Nick Bowman: And so what we're going to work on is this, this idea of things called console Programs, Admin console programs are going to be our first example of looking at an abstraction boundary and thinking of programs as abstractions between users and the programs that right
+
+111
+00:17:15.210 --> 00:17:24.510
+Nick Bowman: So what is the console program, a concept program is just any program that uses the interactive terminal or console, which we've seen before. And as a communication boundary with the user.
+
+112
+00:17:25.110 --> 00:17:38.580
+Nick Bowman: So the user is able to to read and write information into the console and the programmers able to write logic that handles that input and how certain behaviors and the console itself acts as this abstraction boundary or communication boundary between the user and program.
+
+113
+00:17:39.750 --> 00:17:45.450
+Nick Bowman: And it's a really console programs or just an obstruction for the user. They can use a program and without actually having to know how it works.
+
+114
+00:17:47.280 --> 00:17:55.140
+Nick Bowman: And so you've already seen some console program. So the, the, the example that we did in lecture on Tuesday with the lift off countdown.
+
+115
+00:17:55.890 --> 00:18:02.670
+Nick Bowman: Just displaying a countdown to the user. That's a console program. There's two more console programs that will cut up a little bit today.
+
+116
+00:18:03.120 --> 00:18:10.530
+Nick Bowman: But you can think of it as kind of cute little personalized welcome message. So you can have a user to input their name and their favorite food and greet them a message.
+
+117
+00:18:11.250 --> 00:18:25.590
+Nick Bowman: And then you can also think of a little bit more intensive console program where you can kind of write a program that continuously does a task. So continuously keeps asking the user for input and giving them some sort of calculated programmed output based off.
+
+118
+00:18:28.080 --> 00:18:37.200
+Nick Bowman: And so the question is well how do we actually get information from the user. Because in order to have an interactive console program like this, we need some way of being able to get information from
+
+119
+00:18:38.580 --> 00:18:47.130
+Nick Bowman: And the answer is going to view this function called get line and so get mine is going to be a function define them the same for c++ libraries. And that's going to be super useful for us.
+
+120
+00:18:48.090 --> 00:18:57.030
+Nick Bowman: And so, like I mentioned before, the console is sort of just the text output area that we've already seen before. It's where whenever you see out. That's where information goes to the console.
+
+121
+00:18:57.600 --> 00:19:12.780
+Nick Bowman: And so see how it can be used to display text and but the console can also be used to solicit text and the way that we do that is with this function called get line and but yet line function takes in a single parameter which is a proxy to show the user. So it'll show them a prompt
+
+122
+00:19:14.220 --> 00:19:21.840
+Nick Bowman: And then what I'll do is I'll actually sit there and wait. It'll actually pause the execution of record I mineral sit there and wait until the user types in text of console.
+
+123
+00:19:23.100 --> 00:19:33.960
+Nick Bowman: Once that's user types in text and then hit the Enter or Return key and the function will return that value that the user typing in the console and then your, your, your code will keep running.
+
+124
+00:19:34.500 --> 00:19:40.290
+Nick Bowman: And so it's important that if we want to actually use that value. I'm probably gonna have to store it in a variable along the way.
+
+125
+00:19:41.970 --> 00:19:47.910
+Nick Bowman: And so actually want to show you a demo of these three console programs.
+
+126
+00:19:53.280 --> 00:19:56.670
+Nick Bowman: Okay. Um, so let me
+
+127
+00:19:58.710 --> 00:19:58.950
+Make
+
+128
+00:20:00.000 --> 00:20:09.180
+Nick Bowman: it bigger. OK, cool. So if you remember, and I'll pull this up. So the first concept program, the one that we've already seen before. Right. Was this liftoff.
+
+129
+00:20:10.320 --> 00:20:18.660
+Nick Bowman: Liftoff program is really simple. It doesn't solicit end user input and it just prints out sort of the liftoff countdown screen and
+
+130
+00:20:19.680 --> 00:20:28.920
+Nick Bowman: I always forget that this takes way longer than I expected. And so hopefully see the console little bit
+
+131
+00:20:32.460 --> 00:20:33.060
+kylie jue: Larger
+
+132
+00:20:33.810 --> 00:20:34.980
+Nick Bowman: A cutie window.
+
+133
+00:20:36.570 --> 00:20:38.220
+Nick Bowman: Yes, yeah.
+
+134
+00:20:42.810 --> 00:20:43.470
+Nick Bowman: Is that better.
+
+135
+00:20:43.740 --> 00:20:47.490
+kylie jue: Yes, I'm get line returns a string, just to clarify, someone
+
+136
+00:20:48.060 --> 00:20:51.240
+Nick Bowman: Deadline refers. Yeah. Yes. And we'll get to us, not
+
+137
+00:20:52.740 --> 00:20:59.430
+Nick Bowman: Cool. And so you see pop up. Unfortunately, this is the same town town sequence that we saw before, which is great.
+
+138
+00:21:01.110 --> 00:21:05.610
+Nick Bowman: So now let's actually see how we use the get line function. So it's kind of just mentioned.
+
+139
+00:21:06.210 --> 00:21:20.340
+Nick Bowman: The get line function returns a string. And so like I said, it takes in a single parameter which is the prompt interview user and then it returns a string. So we always want to store the value returned my get mine in a variable, so we can you
+
+140
+00:21:20.490 --> 00:21:22.980
+kylie jue: later. Bye. Can you get bigger as well.
+
+141
+00:21:23.130 --> 00:21:24.240
+Nick Bowman: That was hyper still busy.
+
+142
+00:21:28.290 --> 00:21:31.620
+Nick Bowman: Is up there. Yeah, that looks great. Okay, cool.
+
+143
+00:21:34.020 --> 00:21:45.360
+Nick Bowman: Cool, yeah. Sorry about that. So, um, what we see here, right. So we see the get line function, we have the prompt that we want to show to the user. And then, like I was saying, we always want to store the return value of that.
+
+144
+00:21:45.840 --> 00:21:49.530
+Nick Bowman: In a string and in the string variable. So we can do something with it later on.
+
+145
+00:21:50.550 --> 00:21:58.350
+Nick Bowman: We have a we had a couple of good questions in previous lectures and on the c++ survey about how do you actually print out different types of variables to the console.
+
+146
+00:21:58.620 --> 00:22:06.540
+Nick Bowman: And we can actually see is the air. Air operators actually really nice in the sense that you can just, you can just insert variables kind of to print out wherever you like
+
+147
+00:22:07.080 --> 00:22:15.600
+Nick Bowman: So if we want to print up. Hello, and then the person's name we can print out the string literal. Hello, and then the string variable name and then the rest of the messenger.
+
+148
+00:22:17.790 --> 00:22:23.610
+Nick Bowman: And so we'll see everyone. This program is we will see that we have the ability
+
+149
+00:22:25.380 --> 00:22:27.420
+Nick Bowman: To have this interactive
+
+150
+00:22:29.550 --> 00:22:30.180
+Nick Bowman: And
+
+151
+00:22:31.680 --> 00:22:34.920
+Nick Bowman: I will next next for the next one I'll run it before I start talking
+
+152
+00:22:47.430 --> 00:22:52.920
+Nick Bowman: And while that's loading. Let's go ahead and comment. Actually, the code down here.
+
+153
+00:22:58.020 --> 00:23:11.610
+Nick Bowman: And so we can see as our program actually pauses right after consult the prompt and so none of the code on lines 24 to 26 actually hasn't run yet. I'm going to run until I give input. So now if I type in my name, and then enter
+
+154
+00:23:13.470 --> 00:23:22.560
+Nick Bowman: My favorite food, and I hit Enter. And then finally, it gets two lines 25 and 26 and it prints out those customized message based on that.
+
+155
+00:23:24.480 --> 00:23:27.480
+Nick Bowman: So that's a cute little example of a concept program.
+
+156
+00:23:28.890 --> 00:23:30.150
+You can see that as well.
+
+157
+00:23:31.350 --> 00:23:41.580
+Nick Bowman: And and so now for the last example. A lot of times, you know, we want to have a program that allows the user to do an action more than once.
+
+158
+00:23:41.970 --> 00:23:47.190
+Nick Bowman: And and the reason why we want that, as you know, whatever we're doing with the program and, you know,
+
+159
+00:23:47.580 --> 00:23:55.350
+Nick Bowman: Programs often sort of run in perpetuity, or they sort of just run for a really long time and they give us the opportunity to sort of do some interesting piece of work.
+
+160
+00:23:55.680 --> 00:24:10.200
+Nick Bowman: And then keep doing that until we close the program until we tell them that it's done. And so you see here is actually a program and that uses a loop to continuously ask the user for a number and convert that up.
+
+161
+00:24:11.400 --> 00:24:13.260
+Nick Bowman: Quicker than the rest of we'll get to that in a second.
+
+162
+00:24:13.920 --> 00:24:21.810
+Nick Bowman: So it asks the user for a number of important notes so kind of pointed out that get mine always returns a string. So if we want to be able to
+
+163
+00:24:22.020 --> 00:24:30.180
+Nick Bowman: do math on this number, we actually need to explicitly convert it to an integer. So this is a helpful helpful functioning in the standard c++ libraries that allows us to do that.
+
+164
+00:24:31.020 --> 00:24:43.830
+Nick Bowman: And then we print out to the user. The output of but they're squared members. And one thing I want to point out is this this structure of the loop might actually be a little bit unfamiliar with you and so
+
+165
+00:24:44.760 --> 00:24:52.590
+Nick Bowman: A lot of times where you may not have seen this concept of a wild true for and at first note it kind of sends off alarm bells. It's like, oh, that seems wrong.
+
+166
+00:24:52.980 --> 00:24:56.310
+Nick Bowman: Usually well true loops mean infinite loops infinite loop. So, usually that
+
+167
+00:24:56.880 --> 00:25:04.260
+Nick Bowman: But in this gives an infinite loop is actually really helpful because a lot of the program to kind of just keep running which so shows up on the side.
+
+168
+00:25:05.160 --> 00:25:11.730
+Nick Bowman: It allows the program to just keep running. And, you know, we can put the number four and the number 10
+
+169
+00:25:11.970 --> 00:25:19.380
+Nick Bowman: Number four, and the number negative one. And the program just keeps running it just keeps running in the background and keeps asking us for numbers.
+
+170
+00:25:19.770 --> 00:25:27.690
+Nick Bowman: Until we explicitly tell it. We want to stop and the way that we stopped iteration with a for loop is what this special control statement com Greek
+
+171
+00:25:28.290 --> 00:25:43.350
+Nick Bowman: And so break actually says, all right, if we ever see a string that is equal to the empty string. And the only way that you'll get an empty string from the deadline function is if the user just hits return without typing and at that point.
+
+172
+00:25:44.760 --> 00:25:52.140
+Nick Bowman: You'll get the empty string stored in your variable and then we can explicitly just have a condition that causes our loop to finish and
+
+173
+00:25:52.920 --> 00:26:00.120
+Nick Bowman: And so oftentimes when you write your own concept programs this wild true break structure can actually be a really powerful and clean way.
+
+174
+00:26:00.600 --> 00:26:03.420
+Nick Bowman: To establish the sort of logical flow that you want in the program.
+
+175
+00:26:04.140 --> 00:26:11.430
+Nick Bowman: And now this isn't the only way to do it. You could totally do this with a sort of a normal while loop where you sort of input your conditional statement.
+
+176
+00:26:11.910 --> 00:26:19.710
+Nick Bowman: Directly into there and there is a little bit there's issues of fence posting the fence post problem, which is sort of off by one errors in terms of how many times you
+
+177
+00:26:19.710 --> 00:26:20.400
+Qing Lin: Move runs
+
+178
+00:26:20.700 --> 00:26:22.470
+Nick Bowman: And that come up when you do it that way.
+
+179
+00:26:22.920 --> 00:26:33.030
+Nick Bowman: But I would encourage you as a good exercise. See if you can download this code after lecture and actually find a different way to write up this. Can you write up this loop in such a way that actually uses an explicit condition in the plastic
+
+180
+00:26:33.690 --> 00:26:42.720
+Nick Bowman: And if you're able to do that and compare between the two. And, see, see which one you like more my personal preference is to write these kinds of programs. This way, but you might find that your preferences to do
+
+181
+00:26:44.700 --> 00:26:50.160
+kylie jue: A quick question. So folks are asking about the stylistic not putting in curly braces on that if break
+
+182
+00:26:50.850 --> 00:26:52.170
+Nick Bowman: Oh, I'm sorry.
+
+183
+00:26:53.370 --> 00:27:02.700
+Nick Bowman: I got too excited about that. Yes. So this is the the elephant in the room, um, you are you can as, as you can see that it works. You can
+
+184
+00:27:03.600 --> 00:27:09.960
+Nick Bowman: Put like sort of one line statements on the same line as statement if there's true, it only one line of code. You want to execute
+
+185
+00:27:10.470 --> 00:27:17.880
+Nick Bowman: And in pretty much all scenarios that isn't break, I would not recommend it. Stylistically and so normally you would you would want to write it.
+
+186
+00:27:18.120 --> 00:27:22.020
+Nick Bowman: And sort of like that. So with the curly braces, even if it's a single line of code.
+
+187
+00:27:22.380 --> 00:27:34.230
+Nick Bowman: And but I wouldn't say actually the, the, if, or the wild true breaks syntax is generally well established enough that I would actually say that like writing your break statement like this is stylistically fine.
+
+188
+00:27:34.680 --> 00:27:42.870
+Nick Bowman: But I would say for any other one line statement, you always want to be sure you're putting in the curly braces, because as soon as you started building the curly braces. We really things can start happening with you.
+
+189
+00:27:45.030 --> 00:27:46.350
+Yeah, it's a great question.
+
+190
+00:27:48.900 --> 00:27:59.100
+Nick Bowman: Okay, awesome. So if we go back to the slides. And so our summary of what happens in console programs.
+
+191
+00:28:02.310 --> 00:28:10.680
+Nick Bowman: And so you can use get line with the prompt to get information from the user. And remember that there's always returns a string. So if you need to do a data type conversion, make sure to do that.
+
+192
+00:28:11.400 --> 00:28:18.780
+Nick Bowman: There's also as a side note, there's some extra functions that allow you to get different types of data from the user in the SIM IO.
+
+193
+00:28:19.830 --> 00:28:25.830
+Nick Bowman: File of the Stanford c++ library. So you can check out the link documentation there and to see what other functions exist.
+
+194
+00:28:26.910 --> 00:28:38.100
+Nick Bowman: And you can use a wild troops or even use a wireless to enable multiple runs every program and then wild true here with a break statement can be a very powerful and clean way to express the logical flow of a console program.
+
+195
+00:28:39.150 --> 00:28:48.060
+Nick Bowman: And the one thing that I didn't put this out explicitly when we were at Trader and but whenever you write console programs and they're always going to be called directly from me.
+
+196
+00:28:48.510 --> 00:28:56.520
+Nick Bowman: And it doesn't really make sense to write tests using simple tests for console programs because there is no clearly defined like return value output.
+
+197
+00:28:58.020 --> 00:29:05.610
+Nick Bowman: And so whenever you write console programs and you'll see this in the first assignment as well. We'll do a little bit of context switching between running
+
+198
+00:29:06.120 --> 00:29:14.130
+Nick Bowman: Code from tests and running code from the main function. And whenever you're writing console programs, you're going to be directly calling your code.
+
+199
+00:29:17.460 --> 00:29:17.820
+Cool.
+
+200
+00:29:19.710 --> 00:29:28.290
+Nick Bowman: And so we'll take a brief break for an absence, right, you little plus. And so, just a reminder that section started yesterday.
+
+201
+00:29:28.680 --> 00:29:44.970
+Nick Bowman: Make sure that you're checking your section time and that your attendance second participation and being engaged in section is a part of your answers mature. To do that, we released Assignment one yesterday around 5pm it will be doing this upcoming Tuesday 11:59pm in your local timezone
+
+202
+00:29:46.170 --> 00:29:50.250
+Nick Bowman: Are awesome head to your trip hosted a session, which is your early assignment help
+
+203
+00:29:51.090 --> 00:30:02.250
+Nick Bowman: That's been recorded and posted on canvas under the course videos tab. That's a slightly different location from where the recorded lectures are located. So if you're having trouble hearing difficulties locating that just let us know and we can pointing right direction.
+
+204
+00:30:03.450 --> 00:30:13.170
+Nick Bowman: And a couple of notes about and workspaces. So hopefully you all had a relatively smooth experience using AdWords faces today and give you a little bit more time and a little bit
+
+205
+00:30:14.010 --> 00:30:25.080
+Nick Bowman: Less time pressure in which to do things. And if you didn't have technical difficulties during yesterday's example do make sure to check out the last five recorded Minutes of yesterday's lecture. We did walk through
+
+206
+00:30:25.620 --> 00:30:30.630
+Nick Bowman: Kind of the mechanics of how to use and to do these activities and then a note for some of you,
+
+207
+00:30:31.170 --> 00:30:40.770
+Nick Bowman: Yesterday we mentioned that you will be able to afford public workspaces, which basically means to make your own copy of the post lecture workspaces. Unfortunately, that doesn't seem to be true right now.
+
+208
+00:30:41.190 --> 00:30:48.990
+Nick Bowman: And you can download the contents for later use by right clicking on the file view on the right hand side and clicking download all
+
+209
+00:30:49.380 --> 00:30:52.830
+Nick Bowman: And we're going to work on trying to make that a little bit of a similar experience.
+
+210
+00:30:53.400 --> 00:31:03.390
+Nick Bowman: But just know. For now, after lecture is done. We're going to close the workspaces, just so we can preserve the status and see where everyone cartoon, and you will be able to go back and look at your code and download it, but you won't be able to master.
+
+211
+00:31:04.620 --> 00:31:04.770
+It.
+
+212
+00:31:06.240 --> 00:31:14.610
+Nick Bowman: And then the last announcement is we're making a push tomorrow and Ed and thank you to everyone that filled out the c++ survey and how a lot of really valuable questions and then
+
+213
+00:31:14.820 --> 00:31:20.010
+Nick Bowman: It got it sort of what we talked about yesterday, his lecture and there's a lot of content, we weren't able to answer yesterday.
+
+214
+00:31:20.700 --> 00:31:25.980
+Nick Bowman: And so we're going to put together a comprehensive post on Ed addressing some common questions that you all had about c++
+
+215
+00:31:26.190 --> 00:31:32.850
+Nick Bowman: I just keep an eye out for that over the next day or two. I'm sure you're going to post it sometime tomorrow and hopefully you'll be able to get your questions answered.
+
+216
+00:31:35.880 --> 00:31:41.820
+Nick Bowman: Cool. So now we're going to move on to perhaps maybe my favorite topic in this class. Actually, it comes very around
+
+217
+00:31:42.180 --> 00:31:47.130
+Nick Bowman: And it's answering this question that, how do we structure data using abstractions and code.
+
+218
+00:31:47.550 --> 00:31:52.470
+Nick Bowman: And we're going to spend almost a full week of lecture talking about this question. It's a really, really important question.
+
+219
+00:31:52.800 --> 00:31:57.210
+Nick Bowman: And then we're gonna we're gonna have a full assignment dedicated to it and we're really going to hopefully
+
+220
+00:31:58.020 --> 00:32:11.700
+Nick Bowman: Get you really comfortable and familiar with this idea of using data structures as abstractions and in order to do so before we start talking about specific data structures. I want to talk about this this concept of an abstract to detach
+
+221
+00:32:13.200 --> 00:32:30.690
+Nick Bowman: And so deal structures are abstract data takes a really powerful obstructions and what the allows to do is they allow us as programmers. So now we're thinking about obstructions as programmers to store data in structured organized ways that allow us to sort of a calm.
+
+222
+00:32:46.080 --> 00:32:48.810
+Nick Bowman: Organized the way in which your properties that it's going to have
+
+223
+00:32:49.830 --> 00:32:52.620
+kylie jue: Your audio cut out for a while.
+
+224
+00:32:53.790 --> 00:32:54.000
+kylie jue: Can you
+
+225
+00:32:54.900 --> 00:32:57.120
+Nick Bowman: Yeah, can hear you now. Sorry, what was the last thing you heard
+
+226
+00:32:58.080 --> 00:33:02.430
+kylie jue: Um, you were defining what data structures were ever
+
+227
+00:33:02.460 --> 00:33:04.920
+Nick Bowman: Cool. Sorry. Oh, I will go back a step, then
+
+228
+00:33:07.200 --> 00:33:20.010
+Nick Bowman: So so data structures. We also hear suffered of them using this notion of abstract data types are really powerful instructions that allow us as programmers to store data and structured organized ways
+
+229
+00:33:21.690 --> 00:33:27.930
+Nick Bowman: And so what that means is, these ETFs give us some guarantees about the way that our data will be organized
+
+230
+00:33:28.860 --> 00:33:32.370
+Nick Bowman: But the nice thing is we don't have to worry about managing this underlying
+
+231
+00:33:32.940 --> 00:33:43.440
+Nick Bowman: Structure organization, we just get sort of the guarantees that are given to us and these will vary from specific data structures specific data structure and we'll talk about our very first one today.
+
+232
+00:33:44.070 --> 00:33:50.490
+Nick Bowman: But it's either really, really powerful abstractions and their extraction that we use the programmers can use, which was the point
+
+233
+00:33:51.900 --> 00:33:58.410
+Nick Bowman: While we're specifically going to study in teams from the Stanford c++ libraries and these principles transcend language boundary. So
+
+234
+00:33:58.500 --> 00:34:04.320
+Nick Bowman: You all are probably actually already been exposed to a lot of abstract data types of data structures in the programming languages that are familiar with.
+
+235
+00:34:06.360 --> 00:34:08.580
+Nick Bowman: What we're going to try to do is we're going to try our best to
+
+236
+00:34:08.580 --> 00:34:09.600
+Nick Bowman: Point out comparisons to
+
+237
+00:34:09.600 --> 00:34:11.040
+Nick Bowman: Java and Python along the way.
+
+238
+00:34:12.150 --> 00:34:21.960
+Nick Bowman: But the kind of that will tell you this, we are not going to be using the standard c++ data structures and we're going to be using the Stanford ones which are a little bit more user friendly.
+
+239
+00:34:22.380 --> 00:34:36.000
+Nick Bowman: And if you're interested in learning about the standard c++ one. So the SPL data structures and you can check out the the course materials for CS one of six. So it's a related follow on course and it focuses a lot more using sort of standard c++
+
+240
+00:34:38.010 --> 00:34:46.800
+Nick Bowman: Cool. Um, alright, so now let's talk about our very first concrete example of an abstract data taken c++ and that's going to be actors.
+
+241
+00:34:48.030 --> 00:34:49.530
+Nick Bowman: And so what are vectors.
+
+242
+00:34:49.530 --> 00:34:57.270
+Nick Bowman: So vectors are going to be ordered collections of elements of the same type, that can grow and shrink in size. And so let's break down the statement.
+
+243
+00:34:57.840 --> 00:35:03.870
+Nick Bowman: And so order collection of elements. So what does that mean well every element in our collection is going to have a location where we can find it.
+
+244
+00:35:04.470 --> 00:35:11.610
+Nick Bowman: Specifically, it's going to be called an index. So if you guys are concept. You've heard of the concept of an index before we'll be talking about that a lot. When it comes to vectors.
+
+245
+00:35:12.570 --> 00:35:28.860
+Nick Bowman: And elements of the same type. So all elements in a doctor actually must be the same type. So unlike in other programming languages like Python and we're collections can hold variables are elements of different types all vectors in c++ must follow the exact same thing.
+
+246
+00:35:30.000 --> 00:35:36.210
+Nick Bowman: And then there's this idea that they can grow and shrink in size and so vectors are really nice because they're flexible and the number of elements that they can store.
+
+247
+00:35:36.390 --> 00:35:43.350
+Nick Bowman: So for unsure about how much information we need to store, but we know that we need to store it in a very ordered highly structured way doctors are great.
+
+248
+00:35:45.360 --> 00:35:58.320
+Nick Bowman: And so you shout out to other languages, the analytics that you've seen in Python would be the list data structure and in Java, would be the real estate structure as we work through the operations on vectors. I'll try to point out that some of the similarities and differences.
+
+249
+00:35:59.670 --> 00:36:08.160
+Nick Bowman: And where this is defined as in the vector ah header file. So whenever you want to use vectors in your code, you have to make sure to pound include the vector that each header file.
+
+250
+00:36:08.790 --> 00:36:15.540
+Nick Bowman: And we haven't formally defined what header files are yet. And we'll talk about them a little bit more formally. Once we get to talking about classes.
+
+251
+00:36:16.020 --> 00:36:24.690
+Nick Bowman: But you have a header file is just a collection of declared function prototypes that allow us to do code sharing and code reuse between different programmers.
+
+252
+00:36:25.080 --> 00:36:35.430
+Nick Bowman: So some programmers have written the Stanford c++ libraries and by including their header files that they have defined, we as programmers. Now get the power and the ability to use, but the destruction of it.
+
+253
+00:36:39.270 --> 00:36:51.450
+Nick Bowman: So let's talk through some basic reparations. And so if you want to create a vector, the syntax. To do so would be to write capital V vector, please, please, please make sure you use capital, the vector. If you lose if you use lowercase b.
+
+254
+00:36:51.690 --> 00:36:55.440
+Nick Bowman: And they're going to run into some of your problems of capital D vector is very important.
+
+255
+00:36:56.070 --> 00:37:01.050
+Nick Bowman: And then in the brackets. We put the type that we want to store. And so in this case this is going to be a vector of integers.
+
+256
+00:37:01.950 --> 00:37:17.670
+Nick Bowman: And going back to our variable some text, you can think of this as creating a suitcase and it's going to have some internal structure to store both values and indexes for those values or storing and it's a little bit thing so we can have it expensive things
+
+257
+00:37:19.740 --> 00:37:33.570
+Nick Bowman: So again, you must specify the type of the values that are going to be held at creation time and you can only hold one type of values are variables in the structure. Unlike in Python or a list. You don't have to declare the type in in c++ you get
+
+258
+00:37:34.830 --> 00:37:39.210
+Nick Bowman: And the default state of the vector is going to be empty. When you initialize so there's not going to be anything
+
+259
+00:37:41.100 --> 00:37:52.410
+Nick Bowman: So now we can add on it. So adding elements can be done with a dot add function and it works just about as you would expect. So we add an element, we see that the first element always gets added an index zero. So note that
+
+260
+00:37:53.070 --> 00:38:05.400
+Nick Bowman: In a lot in programming. We do this thing called zero index. So just make sure to keep an eye out for that. And then we can just continue adding elements. So we can add an eight that gets added index one another 15 that gets indexed.
+
+261
+00:38:07.050 --> 00:38:14.340
+Nick Bowman: And one cool thing that you can do is you can actually combine these four lines of code into one. And if you know exactly what values when you put into your vector
+
+262
+00:38:14.820 --> 00:38:30.960
+Nick Bowman: And so you can use this thing called an initialization list actually use the curly brackets and a comma separated list of values to create this vector actually all in one line of code. And so this is just a helpful for me and you'll probably see us use this shorthand input examples.
+
+263
+00:38:32.970 --> 00:38:34.260
+Nick Bowman: And so you can access
+
+264
+00:38:34.260 --> 00:38:38.070
+Nick Bowman: Elements by using the bracket syntax, so
+
+265
+00:38:38.460 --> 00:38:45.570
+Nick Bowman: You're seeing this with lists and Python and can use the square brackets and then passing the index to the square brackets to actress.
+
+266
+00:38:46.890 --> 00:38:52.380
+Nick Bowman: So when you access the value index one and you'll get you'll print up the value eight in this case.
+
+267
+00:38:53.790 --> 00:39:05.340
+Nick Bowman: And so here's another example. So we can try accessing the vector index three and actually have a quick poll for you all, which is what is going to happen.
+
+268
+00:39:06.840 --> 00:39:15.570
+Nick Bowman: If you try to access the element at index three here. And so what's going to happen.
+
+269
+00:39:21.960 --> 00:39:28.200
+kylie jue: Neck while you're taking a poll. There was a question about can you initialize a vector of a specific size and I
+
+270
+00:39:28.440 --> 00:39:36.480
+kylie jue: And there was also a question, somewhat related but a little bit different about default values in vectors. When you initialize them. And I think those two are sort of related such one
+
+271
+00:39:36.540 --> 00:39:44.820
+Nick Bowman: Yeah, yeah, those are those are both great questions and if you're interested in the best place to look for that is actually the vector documentation.
+
+272
+00:39:45.120 --> 00:39:54.090
+Nick Bowman: And I'll tell you that. Yes, there is a way to create a vector of a specific size. And if you don't specify the default value the values will all be zero in it.
+
+273
+00:39:54.930 --> 00:40:05.370
+Nick Bowman: But there is also a version of the constructor that allows you to create things with default values and you'll find information more information about all of that in the in the documentation factors.
+
+274
+00:40:07.500 --> 00:40:11.520
+Nick Bowman: OK, cool. So go ahead and end the poll and share the results and and so
+
+275
+00:40:13.140 --> 00:40:18.780
+Nick Bowman: And so for those of you that said, this will cause a program crash. That's exactly right. And so this will actually throw an error.
+
+276
+00:40:19.830 --> 00:40:29.970
+Nick Bowman: And in particular, it's going to result actually in a crash with a program. So the compiler will recognize it and but the program will actually crash. And the reason why is the vector does bounds checking for you.
+
+277
+00:40:30.510 --> 00:40:39.180
+Nick Bowman: It will not allow you to access elements that are indexes that don't exist. So we're trying to act or something index three here we encounter some unfortunately
+
+278
+00:40:40.410 --> 00:40:45.570
+Nick Bowman: So always be very careful to make sure that you're not trying to access elements at indexes.
+
+279
+00:40:48.060 --> 00:40:54.540
+Nick Bowman: Cool. We can also remove elements when you specify to remove something you specify the index remove that
+
+280
+00:40:55.440 --> 00:41:04.620
+Nick Bowman: And the way that this works is it just takes out that element and it shifts everything else over by one. So the indexes will always start at zero and they'll get reassigned to things that need to get shipped.
+
+281
+00:41:07.440 --> 00:41:14.730
+Nick Bowman: And there's also a function that allows you get the sizing vector. And so if you print out the side of the spectrum, you're just yet, but there's two
+
+282
+00:41:17.670 --> 00:41:30.030
+Nick Bowman: And so there's two ways to traverse the vector. So there's two different ways that you'll see. To do this, and we have our traditional for loop, which is just using before the syntax that we saw on Tuesday, and it uses the square bracket.
+
+283
+00:41:31.470 --> 00:41:47.130
+Nick Bowman: Accessing to just print out the elements one at a time. And if you're on this code and you're just get the output 106 notice that this allows us to group over elements in an in an ordered way. So we want to preserve the the elements in our list that a lot of students.
+
+284
+00:41:48.600 --> 00:41:57.120
+Nick Bowman: And then as kind of talked about yesterday when we had this thing called a for each over a string. We also have this idea of a for each over a vector.
+
+285
+00:41:57.420 --> 00:42:06.990
+Nick Bowman: And so that allows us to directly over the elements contained in the vector itself. And so notice now we were directly looping over integers and the vector
+
+286
+00:42:07.350 --> 00:42:14.850
+Nick Bowman: And when we print things out. We don't do any indexing anymore because we're not looping over the indexes are actually looping over the values directly themselves.
+
+287
+00:42:15.360 --> 00:42:26.400
+Nick Bowman: But the important thing to note here is when you do this for a vector again order is preserved and so that means that you'll get the same output, which is the number one and number zero number six.
+
+288
+00:42:29.580 --> 00:42:40.020
+Nick Bowman: So these are a list of helpful vector functions and I'm not going to go over all these individually, and I will highlight these for on the slides for you because these are the ones that are going to be helpful on assignment one
+
+289
+00:42:40.560 --> 00:42:50.730
+Nick Bowman: But as I mentioned earlier, I've linked the Stanford vector class documentation here. And so I highly recommend checking it out. If you have any questions about what you are allowed to do it or not allowed to do it to that person's
+
+290
+00:42:53.400 --> 00:42:56.250
+Nick Bowman: Cool. So Nancy, a little bit of an example with vectors.
+
+291
+00:42:57.360 --> 00:43:07.620
+Nick Bowman: So my mom was saying shows like to say eliminate the negatives and accentuate the positives. And so we're going to kind of come up with a little bit of a toy problem here.
+
+292
+00:43:07.950 --> 00:43:12.870
+Nick Bowman: And we're going to say, you know, given a vector of numbers. We want to sort of eliminate negativity, from the vector
+
+293
+00:43:13.530 --> 00:43:25.050
+Nick Bowman: We want to take all the values that are negative. And we just want to turn them into their positive reports. And so I've written up a first go at this task here for you all. And, and I want to
+
+294
+00:43:27.630 --> 00:43:35.040
+Nick Bowman: Oh wow, I totally published the wrong poll earlier. I don't know. Okay, all right. Sorry, I totally published the wrong poll earlier.
+
+295
+00:43:35.760 --> 00:43:40.410
+Nick Bowman: Because my polls are a little bit out of order. So I'm actually going to republish the same exact pole.
+
+296
+00:43:40.860 --> 00:43:50.730
+Nick Bowman: Because this is actually correct for the snippet. Now, I'm so sorry. So here's, here's the correct snippet of code, if you guys were confused by the poll earlier you guys somehow still got the right answer. So I'm impressed.
+
+297
+00:43:51.240 --> 00:43:57.750
+Nick Bowman: But this is actually going to be the correct. Call now and so this is my first attempt to write a function that that accomplishes what I want to do.
+
+298
+00:43:58.200 --> 00:44:09.810
+Nick Bowman: And it's going to relaunch for one and I'm going to clear out your old data. And so what's the results of this code snippet one. What's gonna get printed out by the main function after this friends.
+
+299
+00:44:20.700 --> 00:44:28.650
+Nick Bowman: Okay, so we're seeing some scattered answers. So pretty evenly split between the first option and the second option right now.
+
+300
+00:44:29.130 --> 00:44:36.240
+Nick Bowman: So this is a really tricky question. So actually don't don't want you guys to think you have to be able to get the correct answers. It's really tricky.
+
+301
+00:44:36.720 --> 00:44:43.260
+Nick Bowman: And so let me end the poll and share the results. And so it looks like in the end what one out was the correct up
+
+302
+00:44:43.680 --> 00:44:50.340
+Nick Bowman: Which are set correctly to say our desired up which is that when we print this out and we would actually get the numbers one for 1811
+
+303
+00:44:51.090 --> 00:45:01.320
+Nick Bowman: Unfortunately that's actually not what's going to happen and the correct answer is actually what the output is going to be as the first option, it's going to print out one negative for 18 and negative 11
+
+304
+00:45:01.890 --> 00:45:10.140
+Nick Bowman: And so you might ask yourself, well, why is this true, remember when we pass parameters in c++ they're passed by value. What does that mean,
+
+305
+00:45:10.740 --> 00:45:14.100
+Nick Bowman: We get a copy of the vector in the eliminate negativity function.
+
+306
+00:45:14.580 --> 00:45:28.620
+Nick Bowman: And so any changes that we make to this copy right when we modify the vector elements and none of those actually persist on the original vector that we passed in. And so even though we want to try to eliminate the negativity. Our first tried doesn't work. The changes dark persistent
+
+307
+00:45:29.940 --> 00:45:36.150
+Nick Bowman: And so we kind of have to ask ourselves are this important question, how do we actually allow functions to modify better or data structure.
+
+308
+00:45:37.980 --> 00:45:42.270
+Nick Bowman: And this will take us to sort of what our last topic is for the day. Today, I'll take the last five minutes to talk about it.
+
+309
+00:45:42.750 --> 00:45:52.920
+Nick Bowman: And we'll, we'll revisit it with a review on on Monday, which is it a pass by reference which allows us into the question of how do we efficiently and effectively handle data structures and functions.
+
+310
+00:45:54.240 --> 00:46:01.740
+Nick Bowman: And so we've talked about class by value before so past the value was idea that when we pass a parameter, the new variable gets a copy of the past in documentary
+
+311
+00:46:03.120 --> 00:46:15.480
+Nick Bowman: And but now we're going to see is pass by reference. And when pass by reference means is that when you pass a parameter don't function. The new variable will store a reference to the past in value, which allows you to directly edit the original value.
+
+312
+00:46:16.530 --> 00:46:27.120
+Nick Bowman: What does that mean, so before we had regular variables regular variables. They were these named containers, they directly sort of value. They have this nice suitcase or container representation
+
+313
+00:46:28.380 --> 00:46:33.390
+Nick Bowman: references are going to look a little bit different. We're going to think of references as these little boxes.
+
+314
+00:46:34.020 --> 00:46:45.450
+Nick Bowman: That refer to an existing variable. And when I say referred here. I mean this arrow. So visually represented by this arrow pointing from the little filled in black box to the existing variable.
+
+315
+00:46:46.710 --> 00:46:57.240
+Nick Bowman: Now references do have names and types. They are similar to normal variables in that sense that they have a type and they have names and the way that they're type is defined is with
+
+316
+00:46:57.240 --> 00:46:58.080
+Qing Lin: This and percent
+
+317
+00:46:58.140 --> 00:47:06.240
+Nick Bowman: So if you put an ampersand after our one of our normal types. That's what allows us to indicate that it's a reference to the data type, rather than the data type itself.
+
+318
+00:47:06.750 --> 00:47:16.620
+Nick Bowman: I mean, so there's this very important distinction. Right. We have a Double This Double week down here. But then we have a double ampersand reference called wheat ref passed in up there.
+
+319
+00:47:18.660 --> 00:47:31.350
+Nick Bowman: And what you see is, and the way that this would look like encode the way that he would actually establish this is that when you define the parameter for a function. So say we wanted to write a very simple function that just has given a variable and triples the value of that variable.
+
+320
+00:47:32.700 --> 00:47:42.000
+Nick Bowman: We pass and we put the ampersand, we put in the ampersand after the data. And what that creates is this reference it gives it a name which is wait underscore f
+
+321
+00:47:42.450 --> 00:47:58.110
+Nick Bowman: And it establishes it establishes that is having this type of double reference. And what that means is now when we run this code because the reference doesn't have a value itself because it's only referencing another variable when we do operations on the reference
+
+322
+00:47:59.400 --> 00:48:03.390
+Nick Bowman: Oh, it doesn't look like the value doesn't actually get updated.
+
+323
+00:48:04.140 --> 00:48:18.000
+Nick Bowman: In the diagram, which is my bad. I'll fix that in the slides afterwards and but when we do this operation down in the main function and the output of this will actually be 3.18 the value inside this container will actually be updated to save money.
+
+324
+00:48:20.190 --> 00:48:28.590
+Nick Bowman: But we, you might be wondering, well, why did we learn about references right when we first started talking about functions. And that's because, well, this isn't exactly how we use references all the time.
+
+325
+00:48:29.520 --> 00:48:31.800
+Nick Bowman: references are actually usually most helpful.
+
+326
+00:48:31.830 --> 00:48:35.520
+Nick Bowman: When we want helper functions to be able to edit data structures in other functions.
+
+327
+00:48:36.300 --> 00:48:44.610
+Nick Bowman: And and so you know that's like a previous example where we wanted to eliminate the negativity, from the vector. And we wanted to just sort of get rid of
+
+328
+00:48:45.150 --> 00:48:55.770
+Nick Bowman: You know actually make some permanent modifications to it, but one thing you might ask yourself is, well, why don't you just return the vector, right, you could just construct a new vector put all the positive values and you can just return
+
+329
+00:48:57.240 --> 00:49:03.960
+Nick Bowman: And this is where the really key part of references comes in. Remember, and passed by value we had to make copies
+
+330
+00:49:04.470 --> 00:49:11.280
+Nick Bowman: With pass by reference. We don't have to make copies. I mean, this allows us to avoid having to make new copies of large data structures and memory.
+
+331
+00:49:11.550 --> 00:49:19.380
+Nick Bowman: And it makes our code, way, way, way more efficient and when we're dealing with large data structures that store a lot of information, the sufficiency is really, really important.
+
+332
+00:49:21.030 --> 00:49:28.020
+Nick Bowman: And so references also have this nice ability that they give us a workaround to return multiple values if we want
+
+333
+00:49:28.500 --> 00:49:35.820
+Nick Bowman: And so earlier when I introduced functions. I actually mentioned that we have this restriction that we can only return a single value from a function
+
+334
+00:49:36.300 --> 00:49:47.730
+Nick Bowman: Well with references and we can actually just passing as many things that we want a modified or function and then the function can modify them and then we've, you know, quote unquote returned multiple value, we've produced
+
+335
+00:49:48.360 --> 00:49:56.430
+Nick Bowman: Multiple interesting output values from our function. And this is actually a kind of a cool cool side effect of these references.
+
+336
+00:49:58.020 --> 00:50:07.260
+Nick Bowman: And and so as we finish up. So about like 30 seconds left. I think I want to actually show you in future creator how this ends up working
+
+337
+00:50:07.860 --> 00:50:19.110
+Nick Bowman: And so we have our eliminate negativity function. And so remember what we have to do here is we have to add this little and percent. And so the crazy thing is I'm not going to change anything about the code.
+
+338
+00:50:19.530 --> 00:50:27.480
+Nick Bowman: Except just adding in this one small reference parameter here. And if I uncommon out the code snippet that we saw earlier.
+
+339
+00:50:28.710 --> 00:50:32.610
+Nick Bowman: Hopefully, what we'll see in like three hours after my cutie actually finished building
+
+340
+00:50:33.420 --> 00:50:43.530
+Nick Bowman: Is that we get exactly the opposite. We want it right, we actually permanently changed the vector to change the values that were negative and permanently change them to be positive.
+
+341
+00:50:44.310 --> 00:50:54.600
+Nick Bowman: And references are going to show up a lot. So if you're sort of a little bit on sort of uncertain about how they work, or why they're needed right now we're going to keep seeing them over the course of the next few lectures.
+
+342
+00:50:55.260 --> 00:51:00.450
+Nick Bowman: There we go. So you can see now. Right now, we get the desired output that we want, which is we get all the positive values.
+
+343
+00:51:02.370 --> 00:51:13.920
+Nick Bowman: And so on. Yeah. And so I'll finish by saying this. And we don't use references always right. And we references can make things a little bit confusing.
+
+344
+00:51:14.610 --> 00:51:18.660
+Nick Bowman: So, things can get a little bit weird with scoping and if we always use References
+
+345
+00:51:19.230 --> 00:51:30.960
+Nick Bowman: And we don't use references when the data is small. So you'll notice that we would talk to you and we introduced this idea of primitives and sort of instant strings and stuff like that. We didn't really use references for the most part, because
+
+346
+00:51:31.470 --> 00:51:41.430
+Nick Bowman: That data was so small, but copying it wasn't very expensive, but really where we try to use these things as when we're dealing with data structures and start getting really big and we want to avoid the cost of copying.
+
+347
+00:51:43.770 --> 00:51:56.970
+Nick Bowman: And. And then the last thing that I'll note is if you use references one side effect is you can no longer passive literally as arguments to functions. So references again because they have to reference a variable.
+
+348
+00:51:57.270 --> 00:52:02.790
+Nick Bowman: And you must pass a variable as the argument into your function if you're taking a brand for veterans.
+
+349
+00:52:04.170 --> 00:52:10.500
+Nick Bowman: So that was really quick. Sorry, I had to rush through that at the end. But what we will see. Let me skip forward.
+
+350
+00:52:10.980 --> 00:52:19.500
+Nick Bowman: To what's next. And what we will go ahead and see on Monday as well actually loop back and covered grid so grades or another really interesting data structure.
+
+351
+00:52:20.070 --> 00:52:28.320
+Nick Bowman: And then we'll talk about stacks and Q's, which are two other very interesting abstract data types and that will get a lot of use out of this class.
+
+352
+00:52:29.520 --> 00:52:40.890
+Nick Bowman: So that's all we have for today. Sorry for giving us a little bit late. And as always, if you have any questions, feel free to hang out with us and ask after lecture and you can access the slides and the workspaces on Ed.
+
+353
+00:52:42.120 --> 00:52:45.510
+Nick Bowman: To get those materials as well. Cool. Alright. Thanks everyone.
+
+354
+00:52:46.050 --> 00:52:51.840
+kylie jue: Let's answer some of the questions that are being asked in the chat right now. Yes, finishing up um
+
+355
+00:52:52.350 --> 00:52:54.900
+Nick Bowman: Yeah, first we can keep the recording going. Whoa, answer this question.
+
+356
+00:52:55.170 --> 00:53:02.220
+kylie jue: Yeah. The first one I wanted to just touch on was there was a question about, sorry. Thanks for moving really are changing and I can't
+
+357
+00:53:05.100 --> 00:53:06.360
+kylie jue: I lost it. Sorry.
+
+358
+00:53:12.420 --> 00:53:18.510
+kylie jue: Is it possible. So this is the question is, is it possible to only use reference for one input instead of making the function use reference
+
+359
+00:53:19.920 --> 00:53:30.390
+Nick Bowman: Yeah, that's a great question. And so I had a little bit. So I'll just cover this right now. It'll be on the recording and we can encourage you to go back and check it out. And so you can absolutely
+
+360
+00:53:31.170 --> 00:53:39.930
+Nick Bowman: have control over which functions or which parameters passed info function or pass by reference. So for example, if I wanted to, maybe,
+
+361
+00:53:40.440 --> 00:53:45.840
+Nick Bowman: Maybe if I wanted to have like a threshold for, like, what, what negativity was right. So maybe
+
+362
+00:53:46.470 --> 00:53:54.000
+Nick Bowman: Maybe I was okay with like a little bit of negativity right but not a lot. And I can totally pass one parameter into a function of a reference and another
+
+363
+00:53:54.570 --> 00:54:08.070
+Nick Bowman: Parameter info function by value and that's totally okay so maybe I could pass him maybe say like, you know, negative five is okay. And just as a note, if you ever update your function yourself to update the declaration.
+
+364
+00:54:09.360 --> 00:54:16.230
+Nick Bowman: And so you can see here, this will be this will be totally fine. This will compile level. This will allow us to do kind of exactly what we want.
+
+365
+00:54:16.920 --> 00:54:27.330
+Nick Bowman: So the way that I would think of it as it's not the whole function is is relegated to passing things by reference. You have a parameter by parameter control over whether something is passed by reference or not. So you
+
+366
+00:54:27.630 --> 00:54:39.600
+Nick Bowman: And one of the things that you'll learn how to do is make sort of judicious like good decisions about when you want to have something by value. And when you want to pass by reference. And a lot of functions of you. Right. Well, that's a great question.
+
+367
+00:54:40.590 --> 00:54:44.550
+kylie jue: Another question. Someone was asking if you could just clarify what the meaning of scope is again.
+
+368
+00:54:45.960 --> 00:54:57.690
+Nick Bowman: Yeah, absolutely. Um so scope. I'm just generally refers to where we're in the code variable is valid and it's what I mean by that is, for example,
+
+369
+00:54:59.760 --> 00:55:01.500
+Nick Bowman: So when we have groups, for example.
+
+370
+00:55:02.910 --> 00:55:09.900
+Nick Bowman: The variable that is defined inside of a for loop is only valid between the opening curly brace the for loop and the closing curly braces.
+
+371
+00:55:10.680 --> 00:55:21.420
+Nick Bowman: And so when we say the scope of a variable. It basically refers to which set of brackets. Is it valid. And what I mean by that. What I mean by valid is if actually try to access
+
+372
+00:55:22.020 --> 00:55:37.890
+Nick Bowman: The variable i. And what you should hopefully see is that my yeah and so my the compiler will complain to me, I'll say, hey, I don't know what you mean by i, i is out of scope, right, because I'm trying to reference it outside of a set of brackets, where it's defined
+
+373
+00:55:40.050 --> 00:55:45.960
+Nick Bowman: And it's still going to play. Oh, sorry. Yes. And the last thing I'll say is scope can apply to functions. Right. So functions.
+
+374
+00:55:46.320 --> 00:55:59.100
+Nick Bowman: So everything that's defined inside this function and scope can also apply to loops right skill can apply to conditional statements really anything that's defining a block of code by a set of brackets and scoping as well. Yeah.
+
+375
+00:55:59.520 --> 00:56:02.040
+kylie jue: We had a couple questions on why is wait Rafa literal
+
+376
+00:56:03.990 --> 00:56:06.090
+Nick Bowman: Why is it wait ref a literal
+
+377
+00:56:07.980 --> 00:56:09.360
+Weight raft coding
+
+378
+00:56:10.710 --> 00:56:11.310
+Nick Bowman: It's not
+
+379
+00:56:11.880 --> 00:56:13.110
+Nick Bowman: It shouldn't be on I think is
+
+380
+00:56:13.110 --> 00:56:13.950
+kylie jue: The answer right.
+
+381
+00:56:14.520 --> 00:56:18.450
+Nick Bowman: Yeah, I don't think it is. Let me go back to the slides.
+
+382
+00:56:24.150 --> 00:56:27.660
+kylie jue: And then so I am trying to catch up on.
+
+383
+00:56:30.810 --> 00:56:31.800
+kylie jue: A literal is
+
+384
+00:56:32.940 --> 00:56:41.670
+kylie jue: It's not quite a constant a constant would be a variable where you're storing a literal on the net wouldn't change, but you could think about it sort of is like a
+
+385
+00:56:42.690 --> 00:56:47.850
+kylie jue: Like when you put the direct number or the direct string in the code that's considered a literal. Yeah.
+
+386
+00:56:48.690 --> 00:57:01.110
+Nick Bowman: Yeah, and so you know if you knew it on the slides right so one point like us. They got guys kind of mentioned 1.06 is a literal because you think it is literally defining a value, right, that that is a specific number of hours.
+
+387
+00:57:02.100 --> 00:57:08.880
+Nick Bowman: But wait, is a variable right way. There's just a container and the construct any value. It happens to be storing the value 1.06 right now.
+
+388
+00:57:09.660 --> 00:57:13.740
+Nick Bowman: But eventually it's going to, you know, it could store anything you want it to.
+
+389
+00:57:14.310 --> 00:57:27.990
+Nick Bowman: And so it's important, is it's the variable that's get passed in to the reference here or it's the variable that gets passing of the reference parameter and not the literal so I could not just put the value 1.06 directly into the pronunciation
+
+390
+00:57:28.410 --> 00:57:32.010
+kylie jue: Um, I think the other thing was, if you go to the slide where we said, Don't do this.
+
+391
+00:57:36.270 --> 00:57:37.710
+kylie jue: Like don't don't make some literal
+
+392
+00:57:39.390 --> 00:57:41.070
+Nick Bowman: Yes, sorry my
+
+393
+00:57:43.650 --> 00:57:52.530
+kylie jue: And I know there was a request to read to review the multiple returns values with references, I'm saving that for some of the ones that were immediately about this, um,
+
+394
+00:57:52.590 --> 00:57:52.890
+Nick Bowman: Yeah.
+
+395
+00:57:53.340 --> 00:57:57.450
+kylie jue: So yeah, that's why I was saying. So what we're saying here is what, what happens is
+
+396
+00:57:57.990 --> 00:58:01.290
+kylie jue: That call at the bottom triple wait 1.06 is
+
+397
+00:58:01.560 --> 00:58:14.220
+kylie jue: Actually passing in a literal to the function triple. Wait, wait, your f as opposed to storing 1.96 in a variable first. So that's why we're saying don't do that because you're passing a literal directly into the function as opposed to starting in verse
+
+398
+00:58:16.140 --> 00:58:26.340
+Nick Bowman: Yeah, and um yeah let me. I actually, I had a prepared example of a trend at a time for for the multiple returns. So let me, let me just, let me put that here. So say for example,
+
+399
+00:58:27.240 --> 00:58:39.180
+Nick Bowman: While you were eliminating, you know, sort of negativity, from your life you wanted to keep track of how many value that change. Right. And maybe you want to keep track of, like, I'm eliminated. Right.
+
+400
+00:58:40.770 --> 00:58:53.910
+Nick Bowman: So when I say that you can pass in multiple values to a function by reference. Right. So we might say, all right, I want to pass this variable in and it's an integer, taken by reference. And it's actually gonna tell us
+
+401
+00:58:55.350 --> 00:59:05.700
+Nick Bowman: It's gonna allow us to keep track of kind of how many things we've updated so every time that we update a negative value. Let's just say we increment this value.
+
+402
+00:59:10.860 --> 00:59:11.820
+This
+
+403
+00:59:18.000 --> 00:59:24.030
+Nick Bowman: And so what you can see that we've done here is we're going to get to valuable pieces of information out of the function
+
+404
+00:59:24.420 --> 00:59:29.040
+Nick Bowman: We're going to get a modified vector right we're going to get a vector that has all the numbers may positive
+
+405
+00:59:29.820 --> 00:59:33.810
+Nick Bowman: But we're also going to get a count of how many things we actually modified along the way.
+
+406
+00:59:34.320 --> 00:59:40.170
+Nick Bowman: And notice that we can't just, you know, it would be hard for us to figure out not on our own. I mean, we could do it.
+
+407
+00:59:40.680 --> 00:59:47.580
+Nick Bowman: But the function. This function is already doing the work of actually making the changes. So we say, all right, function, you'll also be responsible for telling me.
+
+408
+00:59:48.030 --> 00:59:58.020
+Nick Bowman: How many things that was that you that you that you change along the way. And so what we can do here is if we print out this value.
+
+409
+00:59:59.460 --> 01:00:03.420
+Nick Bowman: We see if I can spell and
+
+410
+01:00:09.570 --> 01:00:19.080
+Nick Bowman: Yeah. And so all this builds right this is this is what the idea of multiple attorneys. It basically says I can get multiple interesting pieces of information out of a single function.
+
+411
+01:00:19.650 --> 01:00:27.840
+Nick Bowman: With just returned values. That's not possible. Right. But just returned values, you get one thing you could either get the vector or you can get the count, but you couldn't get both.
+
+412
+01:00:28.380 --> 01:00:37.920
+Nick Bowman: And with this idea of multiple return and taking advantage of passing things by reference to take advantage of that you're able to get multiple pieces of valuable information on the function
+
+413
+01:00:38.160 --> 01:00:43.740
+Nick Bowman: And so you can see here, not only do we get to modify vector, but we actually also get the count of how many things do change.
+
+414
+01:00:44.700 --> 01:00:54.720
+kylie jue: And something else. I think that someone asked those a good clarification ticket on recording is that that function eliminate negativity doesn't have to be for it to use multiple returns, or to use references there.
+
+415
+01:00:55.230 --> 01:01:05.130
+kylie jue: You could have returned num eliminated as the return value for eliminate negativity like suppose instead of like just eliminating negativity. We said we call this function like
+
+416
+01:01:06.030 --> 01:01:17.130
+kylie jue: Find number of negatives, or something like that and you return to that number limited instead of passing it by reference. I would actually say I think a better style would be to return that. And then to pass the vector by reference.
+
+417
+01:01:17.970 --> 01:01:23.700
+Nick Bowman: Yeah, absolutely. Yes. Um, yeah. So you could, yeah, you can totally do it like this.
+
+418
+01:01:48.480 --> 01:01:52.320
+kylie jue: There was a question that I wasn't 100% sure what was being asked here.
+
+419
+01:01:52.710 --> 01:02:02.070
+kylie jue: If Kathleen is still on the call and wants to clarify the question was, is the main representative of the global scope. So whatever the value is within main is that always the global value.
+
+420
+01:02:03.450 --> 01:02:04.440
+Nick Bowman: Um,
+
+421
+01:02:06.660 --> 01:02:12.480
+kathleen bryan: Yeah, I was just asking because there's a question about the scope and like with other programming languages, you can just kind of
+
+422
+01:02:13.440 --> 01:02:27.960
+kathleen bryan: Like have these global variables, but it seems like everything is kind of feeding back into main when it's changed by reference. I was wondering if like the main was kind of like holding the global scope of the variables. I don't know if that makes sense.
+
+423
+01:02:28.410 --> 01:02:39.780
+Nick Bowman: Yeah, no, I get what you're saying. And that's a good question. And the interesting thing about me is, even though it's a little bit special in the sense that it is like the one function that always runs
+
+424
+01:02:40.140 --> 01:02:45.180
+Nick Bowman: And it's mostly not special. And what I mean by that is it like any other function.
+
+425
+01:02:45.960 --> 01:02:52.980
+Nick Bowman: Which means that it has its own scope that is true, right, like it like mean is defined by a set of open curly braces that has its own scope.
+
+426
+01:02:53.640 --> 01:03:03.120
+Nick Bowman: Um, but I wouldn't say that that scope is global, right, that scope works just like any other function. So, and if you call other functions, they're gonna have their own different scope.
+
+427
+01:03:03.360 --> 01:03:09.960
+Nick Bowman: And just because they got called by me doesn't mean that they have like privileged access, they're not going to just be able to like extracting from me.
+
+428
+01:03:10.020 --> 01:03:12.270
+Nick Bowman: Okay, there's, there's two options.
+
+429
+01:03:13.500 --> 01:03:14.520
+Nick Bowman: You still have kind of like
+
+430
+01:03:14.520 --> 01:03:20.670
+kathleen bryan: Your prototypes and you're like global variables. And those are like the true global things, but mainly just kind of like a special function.
+
+431
+01:03:21.510 --> 01:03:32.310
+Nick Bowman: Yeah, and for the entirety of this class, pretty much. We're never going to see global variables in c++ specifically global variables are really not great style and
+
+432
+01:03:33.090 --> 01:03:41.910
+Nick Bowman: We generally try to avoid them. And so you'll notice in all programming written so far. And I will say almost all of the programs you're right in the future in this class.
+
+433
+01:03:42.180 --> 01:03:48.780
+Nick Bowman: And there won't be any global variables. And sometimes if you need constants, you can define constants globally. And that's really the one exception.
+
+434
+01:03:49.890 --> 01:03:57.870
+Nick Bowman: But you're right, the prototypes are declared up here. Right. And those are declared. You can think of it as, quote unquote globally so that everyone can know about them and reference them.
+
+435
+01:03:58.740 --> 01:04:07.800
+Nick Bowman: But there is no data. There's no variables that are declared globally. And so, generally, we're going to try our best to avoid global a global data and global variables.
+
+436
+01:04:08.820 --> 01:04:12.450
+Nick Bowman: And that's more of a more of a stylistic thing. Okay.
+
+437
+01:04:12.600 --> 01:04:14.400
+kathleen bryan: Thank you. That makes sense. Yeah.
+
+438
+01:04:18.450 --> 01:04:23.070
+Nick Bowman: Was there anything else should we stop the recording. We can still add some more questions. If you want to stop the recording.
+
+439
+01:04:24.030 --> 01:04:25.230
+kylie jue: We can stop the recording.
+
+440
+01:04:26.340 --> 01:04:36.150
+kylie jue: Oh, actually, sorry. Last question that I think can you explain the top section of the program, particularly like what's going on with the includes and then the namespace review.
+
+441
+01:04:37.200 --> 01:04:47.610
+Nick Bowman: Yeah. So remember the pond include functions allow us to reference code written by other programmers. So if we want to use vector right we have to pound include the file and which
+
+442
+01:04:48.120 --> 01:04:55.950
+Nick Bowman: Has been defined so specifically that file is called vector each. And so by including this right we allow it allows us to declare things like the vector
+
+443
+01:04:57.060 --> 01:05:08.880
+Nick Bowman: And they using namespace STD. I'm not really going to explain what it does for now, just know that it's going to be at the top of all of our programs and it's the way that we can access
+
+444
+01:05:09.300 --> 01:05:21.510
+Nick Bowman: Think of it as accessing the pool of like general c++ resources. So things like strings and it's well that's not correct scratch with us for things like strings. Really, it's like strings.
+
+445
+01:05:22.200 --> 01:05:32.610
+Nick Bowman: Movements are the main reason we really that line. It defines a kind of standard pool of programming resources that we always want to be able to make you so in our programs.
+
+446
+01:05:33.360 --> 01:05:45.750
+Nick Bowman: And that's kind of why it's necessary, and we'll talk a little bit more about new spaces, again, once we get to talking about classes, but for now and just think of it as something that will always show up at the top of your programs.
+
+447
+01:05:47.010 --> 01:05:49.260
+edouard des: That's gonna ask him actually asked for question on that.
+
+448
+01:05:51.090 --> 01:05:57.000
+edouard des: And or the other ones names pieces to like a vector. He is that is that not is that name spaces as well or
+
+449
+01:05:57.960 --> 01:06:06.120
+Nick Bowman: Yes, that's a good question. The things really really simply put the things defined in header file. So the things that we get when we
+
+450
+01:06:06.630 --> 01:06:13.710
+Nick Bowman: Include or just function prototypes. So, interestingly enough, right. Like these are from two prototypes and these are function prototypes for things that we've written
+
+451
+01:06:14.220 --> 01:06:24.330
+Nick Bowman: And really all that we're getting out of this file is just a bunch more of these things. It's just a bunch more of declarations of types and functions and things we can do to these
+
+452
+01:06:24.990 --> 01:06:35.730
+Nick Bowman: To these things. So I would not say names faces are different and different concept. Really, I would think of header files. These things that we include as including
+
+453
+01:06:37.350 --> 01:06:44.430
+Nick Bowman: A bunch of function prototypes defining code written by other programmers that we want to do not take you. So maybe some
+
+454
+01:06:46.110 --> 01:06:46.410
+Okay.
+
+455
+01:06:52.320 --> 01:06:54.510
+Nick Bowman: Go ahead and pause the recording. Sure.
+

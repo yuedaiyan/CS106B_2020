@@ -1,0 +1,110 @@
+00:09:49	kathleen bryan:	Trees
+00:10:01	shirley li:	Shells
+00:10:02	Hemant Chaudhary:	Snail shells!
+00:10:08	Kenneth Fischer:	Tree branches
+00:10:13	I. Lemhadri:	Ants ?
+00:10:13	christopher cooper:	Mowing a lawn
+00:10:19	Jordan Lin:	Pyramid schemes?
+00:10:21	Elan Smolar Eisenberg:	Spirals
+00:10:26	alan hu:	branches
+00:10:34	Siddharth Balaji:	Circular staircases
+00:10:40	yukun yang:	A meme of using a 3D printer to print 3D printer
+00:11:02	Sachin Montgomery Kaul:	Chain mail
+00:11:09	ian rundle:	“I used the stones to destroy the stones”
+00:11:21	Thomas Tao Hale:	Wow Nick’s audio is really fuzzy
+00:11:30	Humaid Alzaabi:	a spark in a gas fuel
+00:11:40	Humaid Alzaabi:	And yeah audio is fuzzy today
+00:11:42	kylie jue:	Is the audio hard to understand?
+00:11:47	max chou:	no
+00:11:50	Siddharth Balaji:	It’s understandable just fuzzy
+00:11:51	I. Lemhadri:	It is a bit
+00:11:51	Demi Lei:	no its all good
+00:11:54	Regina Ta:	Yeah a little grainy
+00:11:57	edouard des:	Words with deep meanings that can really only be defined by themselves, like ”red.” What is red? Red.
+00:12:12	Humaid Alzaabi:	It's understandable, but slightly harder to follow
+00:12:15	Liza George:	mining with bombs, nuclear reactions, anything that goes boom boom
+00:12:19	Evan F Davis:	yes
+00:12:20	Humaid Alzaabi:	Yes
+00:12:21	Ryan Gabel:	Yes
+00:12:21	Cheng Peng:	Yes!
+00:12:21	I. Lemhadri:	Yeah
+00:12:21	Demi Lei:	yes
+00:12:21	Kenneth Fischer:	 Yes
+00:12:21	Evan F Davis:	much better
+00:12:23	Demi Lei:	a lot
+00:12:23	Siddharth Balaji:	Yeah much better
+00:12:23	alan hu:	yes
+00:12:23	edouard des:	Yes
+00:12:24	Sachin Montgomery Kaul:	Yup
+00:12:24	alan hu:	Way better
+00:12:24	Thomas Tao Hale:	much
+00:12:25	edouard des:	Magical
+00:12:27	ian rundle:	amazing
+00:12:33	Kenneth W.K. Wang:	:O
+00:13:17	Siddharth Balaji:	Taco cat
+00:13:34	Liza George:	malayalam
+00:13:44	hriday chhabria:	dad
+00:13:47	Michael M Hu:	A
+00:13:51	Gautham Rajesh:	mom
+00:14:06	kylie jue:	Love the palindromes but let’s not spam the chat with palindromes please! :)
+00:14:56	Elan Smolar Eisenberg:	Couldn’t u just split the string in the middle and check if str1-str2 == “”?
+00:20:04	Michael M Hu:	Would this function require two base cases for odd/even length strings?
+00:20:23	kylie jue:	Yes you’ll see that shortly! (Although you’ll see how we can combine it into one in the code)
+00:20:54	Michael M Hu:	O I see
+00:22:05	Kenny Wang:	what does boolalpha do again?
+00:22:19	kylie jue:	It allows booleans to get printed as “true” and “false” instead of 0 and 1
+00:22:19	Kenny Wang:	is it necessary in order to cout a bool?
+00:22:26	Kenny Wang:	ahhh I see thanks
+00:23:17	Aadi M Rane:	can you do return (s[0] == s[word.length()-1]) && isPalindrome(word.substr(1, word.length()-2)
+00:23:23	Aadi M Rane:	?
+00:23:26	kylie jue:	Yes that would also work
+00:31:14	Evan F Davis:	there are 4095 branches
+00:32:56	Pablo Manjon Gamez:	When will assignment 3 be due?
+00:33:17	Siddharth Balaji:	Most probably next Wednesday 11:59 PDT
+00:33:18	kylie jue:	July 16
+00:33:37	kylie jue:	July 16
+00:33:46	Siddharth Balaji:	Oops yeah sorry that was wrong
+00:34:01	kylie jue:	Schedule of all assignments and due dates is here: http://web.stanford.edu/class/cs106b/schedule
+00:37:00	Elena Williams:	Do you need to import a header for the graphics?
+00:37:56	kylie jue:	Yes you do have to import a header file - I’d have to double check what it is, but you should see it in today’s starter code for lecture.  We’ll often include it for you in programs where you need graphics
+00:38:03	Elena Williams:	Ok, thanks!
+00:40:18	Julia L Wang:	]
+00:42:48	I. Lemhadri:	is it the same as break ?
+00:43:08	kylie jue:	It’s similar - break is used for exiting out of a loop, but return exits the entire function
+00:44:44	alan hu:	Could you do float oneThird = 1/3 ?
+00:45:03	kylie jue:	It would actually still evaluate the right hand side first and would set the float equal to 0
+00:45:25	alan hu:	thanks
+00:48:38	Liza George:	is a recursive structure with only one recursive call in the function (like if we had the cantor drawing with only the first oneThird line) still called a tree?
+00:49:12	Liza George:	like would you still use terms like order and stuff?
+00:49:58	Raymond Lora Johns:	VA-tswav (first name)
+00:50:14	Evan Baldonado:	Might have missed this, but how does the program know when to stop drawing the left side and move on to the right side? What stops it from continuing recursively onward indefinitely?
+00:50:49	kylie jue:	@Liza Yes you can still use terms like order even if it only gets smaller along one “branch”  The recursive call structure just won’t look like a tree - it will be a single line (like with factorial/reverse string)
+00:51:19	Liza George:	ok, thanks!
+00:51:24	kylie jue:	@Evan the base case is what tells it when to stop (when you end up at order 0)
+00:51:39	Siddharth Balaji:	In the case of the Sierpinski carpet is the carpet drawn or are parts of the carpet removed?
+00:51:47	Evan Baldonado:	Thanks!
+00:51:53	kylie jue:	drawn not removed
+00:52:01	Siddharth Balaji:	Gotchu thanks
+00:56:50	Thomas Tao Hale:	Probably should turn off annotation for all of us lol
+00:57:38	Kenneth Fischer:	Sorry I kept dropping out, my connection is really flaky.
+01:01:52	Chenlan / Yu:	thank you
+01:01:58	Gautham Rajesh:	thanks!
+01:01:58	Kevin H Fan:	Thank you!
+01:02:00	shirley li:	Thank you.
+01:02:00	alan hu:	Thanks!
+01:02:01	Aadi M Rane:	thank you
+01:02:02	Kenneth Fischer:	Thank you!
+01:02:03	Julia L Wang:	Thank you!
+01:02:04	paul gialis:	thank you
+01:02:05	louise marzolf:	thank you
+01:02:06	Guozhen Miao:	thank you
+01:02:07	Akash Bhargava:	Thank you!
+01:02:07	Magdalena Warren:	Thank you!
+01:02:10	Jennifer Anna Bonello:	Thanks
+01:03:03	Kenny Wang:	question: which library is the pause() function in cantor.cpp from? it looks useful for my maze graphics
+01:03:45	Jordan Lin:	You can actually find any function you don't know where it is from in the master list of Stanford c++ functions
+01:04:06	Kenny Wang:	lemme go check that
+01:04:12	Jordan Lin:	https://web.stanford.edu/dept/cs_edu/cppdoc/functions.html
+01:04:36	Jordan Lin:	Yep from this it seems to be from gwindow.h
+01:05:00	kylie jue:	Yup that looks right - thanks Jordan!
+01:06:04	Kenny Wang:	ty Jordan

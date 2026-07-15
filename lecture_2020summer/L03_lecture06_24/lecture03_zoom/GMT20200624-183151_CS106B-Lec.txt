@@ -1,0 +1,197 @@
+00:10:59	nicole koch:	lol
+00:11:01	tongjun zhang:	Time zone + unstable connection
+00:11:04	edouard des:	Figure out where to go –– there are so many Zoom links! I suppose it’s kind of like finding one’s way around campus, however, so perhaps it’s not so different…
+00:11:15	Kyle Booker:	Working with people :/
+00:11:48	rayjohns@stanford.edu:	Too many platforms — ed, campus wire, canvas, etc
+00:11:59	rayjohns@stanford.edu:	you can pop out the chat and it can help a little
+00:12:03	alan hu:	^ this
+00:12:06	Hemant Chaudhary:	Finding people to work with!
+00:12:15	Jordan Lin:	There is a Q&A feature in zoom
+00:12:35	Brenna Marie Wakefield:	Not having one assignment handout vs. tons of links to follow is also hard to follow for assignments
+00:12:35	Chloe Su:	^I think that’s only for Webinars. We did that for CS106A
+00:12:42	Thomas Tao Hale:	Can’t you change chat stuff via chat settings?
+00:13:58	Nick Bowman:	Zoom Q&A is confined only to Webinars unfortunately, so we are sticking with Chat as our tool for Q&A this quarter.
+00:15:02	Jihe He:	Is the assigned time for the section released yet?
+00:15:13	Thomas Tao Hale:	Yes jihe
+00:15:13	Jihe He:	I don't know where to find it
+00:15:19	Thomas Tao Hale:	Should be in your emais
+00:15:50	Nick Bowman:	Yes, section times have been published on the CS198 website, and you should have also been sent an email.
+00:15:51	Nick Bowman:	https://cs198.stanford.edu/cs198/auth/default.aspx
+00:16:07	Jihe He:	Thank you so much!
+00:19:28	alan hu:	Functions w/ the same name but different parameters—does this work like it does in java?
+00:19:38	Thomas Tao Hale:	yes
+00:19:52	Nick Bowman:	Correct, you can have multiple functions with the same name, but with different numbers/types of parameters.
+00:20:04	alan hu:	thanks
+00:21:30	Vrisan:	Why do you make the main method of return type “int” and not “void”?
+00:22:05	Nick Bowman:	This is a C++ convention! It’s a quirk that we just have to work around.
+00:22:24	kathleen bryan:	do you have to have a return for every function?
+00:22:32	Nick Bowman:	main will always have return type int, due to some of the historical convention that got inherited from C
+00:22:45	Chloe Su:	What does the return 0 do?
+00:23:02	Nick Bowman:	Nope, not every function has to return a value! You can have a function with return type “void” which means that it does not return a value. Then, you just wouldn’t have a return statement int he body of the function.
+00:23:07	Trip Louis Master:	@Chloe return 0 in main is basically a signal that the program exited successfully
+00:23:15	Trip Louis Master:	you might return -1 on an error
+00:23:28	Oz Gitelson:	if we wanted to create a new program using the Stanford c++ libraries, how would we do that
+00:23:49	Nick Bowman:	There is a blank project linked on the course website that you can use! It has the Stanford C++ libraries already packaged in it
+00:24:05	Nick Bowman:	Starting truly from scratch is a little beyond the scope of this class
+00:25:25	I. Lemhadri:	is it normal to have the warnings ? I always get them
+00:25:26	sidharth bhat:	why does c++ take so long to compile anyways?
+00:25:27	kenneth wang:	yay
+00:25:43	Nick Bowman:	Yes, having warning in the code sometimes is normal.
+00:25:50	kenneth wang:	ew python immutable strings
+00:26:00	Nick Bowman:	@sidharth, good question, feel free to come by office hours and we can chat about that in more depth!
+00:26:10	Evan Baldonado:	Is there a way to force the poll window to show up? Not showing for me
+00:27:30	Nick Bowman:	@Evan, I’m not entirely sure if there’s a way to force it or not. If it doesn’t work for you at all during the lecture, feel free to come chat with us at the end and we’ll see if we can get it figured out.
+00:27:38	Lukas Fullner:	Should letter_str be letterStr?
+00:27:42	Evan Baldonado:	Will do, thanks!
+00:27:43	kenneth wang:	is the typo intentional?
+00:27:52	Nick Bowman:	Nope, that’s my bad. Sorry abiout that!
+00:28:00	kenneth wang:	okay good whew
+00:28:22	Thomas Tao Hale:	Is it a typo if its intentional?
+00:28:25	sidharth bhat:	also, is there a way to simply use an interpreter for c++ code instead of compiling each time?
+00:28:42	Nick Bowman:	No, since C++ is a compiled language, there is no such thing as a C++ “interpreter”.
+00:29:08	isabel salovaara:	How do you comment out a block of code like that?
+00:29:18	Usman Iqbal Hanif:	Didn’t we just say to mutate a string it has to be a char? Or was that only if your are using the [] operator?
+00:29:22	Nick Bowman:	Cmd + / on Mac or Ctrl + / on Windows
+00:29:29	Trip Louis Master:	If you do want to write some really really quick cpp code though, you can use an online cpp sandbox. It still compiles your code, but you don't need to write up big boi qt creator. You need to code in standard cpp though
+00:29:30	sidharth bhat:	but I've been able to execute a c++ program written on a web compiler in seconds. what's up with that?
+00:29:34	Dima Timofeev:	How fast strings concat?
+00:30:16	Trip Louis Master:	part of the slowness comes down to Qt creator; it has to build the big Stanford libraries. Zoom also isn't helping haha
+00:30:23	Nick Bowman:	@Sidharth we can chat about that after class if you’d like, but let’s focus on the lecture content for now.
+00:30:56	Thomas Tao Hale:	Oh that’s why it’s so slow, I thought my computer was just slow or something
+00:31:21	Trip Louis Master:	@Dima string concatenation is super fast! We'll be able to formalize how fast it is in a few weeks :)
+00:31:25	Siddharth Balaji:	Wait so how exactly is it evaluating which is less? Is it doing it alphabetically?
+00:31:34	Sedef Emekli:	Shouldn’t it rather evaluate them after converting them from ASCII characters to numbers?
+00:31:43	Nick Bowman:	Yes, the comparison are done alphabetically! good observation :)
+00:31:59	alan hu:	Is this kind of comparison considered “idiomatic” cpp?
+00:32:43	Jordan Lin:	What happens with comparisons with non-letter characters?
+00:32:51	kenneth wang:	depends on ascii value
+00:32:53	Nick Bowman:	@Usman you can modify a specific character of an existing string using the [] notation, or you can add on characters to an existing string using the + operator
+00:33:11	Thomas Tao Hale:	Does that mean you could compare two unicode characters?
+00:33:21	kathleen bryan:	if you add two chars together is that still treated as a char if it is in ‘ ‘ ?
+00:33:22	Trip Louis Master:	@Jordan Kenneth is correct. Chars have a backing integer value, and comparisons compare the magnitudes of those int values. 
+00:33:52	Usman Iqbal Hanif:	Yes, but when using [] we can’t use strings to do so? Like we can’t do “a” to put into some string? But we can concat on “a” to a string?
+00:34:00	nicole koch:	so does it not use ascii if the strings have the same first char?
+00:34:22	Trip Louis Master:	If they have the same first char, I believe it goes to the next one
+00:34:34	Sedef Emekli:	why doesn’t it compare according to total value of the characters but compares according to the first different character?
+00:35:15	Trip Louis Master:	@Sedef that's just how they wrote it haha. You can compare string lengths separately
+00:35:46	Trip Louis Master:	It's nice for alphabetically ordering!
+00:36:09	Jordan Lin:	(you just have to remember to convert to all lower case)
+00:36:35	Andrew Shin:	Can we mix characters and numbers and save it into string
+00:36:58	Nick Bowman:	@Kathleen good question! Adding two characters together can result in a little bit of weird behavior, we’ll see an example of doing arithmetic to characters in a second
+00:37:20	Kenny Wang:	can I ask an oddly specific question?
+00:37:49	Nick Bowman:	@Usman correct, if you use [] to overwrite a value in a string, you must assign a character to it (using single quotes). If you append to a string with + then you need to be appending a string (We will see an example of this in a little bit)
+00:38:03	Nick Bowman:	@Kenny Feel free to DM me so we don’t clutter up the chat!
+00:38:26	George Halal:	how do you quickly comment/uncomment multiple lines in Qt
+00:38:28	Faith Aing Okamoto:	Could you modify a string within a for each loop?
+00:38:40	Dima Timofeev:	Is each element of a string - a char?
+00:38:42	Kyle Booker:	How do you print an empty line?
+00:39:00	Trip Louis Master:	@faith Good question. You can, if you change the length of the string in the loop you'll get weird behavior, so be careful!
+00:39:01	Nick Bowman:	@Andrew, yes a string can contain both numbers and letters, but the way in which you construct these strings matters. We will see an example of this in a little bit.
+00:39:18	Nick Bowman:	@George Its Cmd/Ctrl + /
+00:39:34	Nick Bowman:	@Dima, yes every element of a string is a char
+00:39:46	Nick Bowman:	@Kyle you can do this with cout << endl
+00:40:09	Nick Bowman:	or cout << endl << endl; if you want multiple blank lines
+00:40:12	Remy Shearer Kartzman:	when do you need to build your code versus just running it ?
+00:41:09	nicole koch:	what is a control character?
+00:41:31	kevin yang:	What’s the difference between print and graphical character
+00:41:36	Liza George:	is the naming convention for functions in c++ all lowercase?
+00:41:51	Oz Gitelson:	can you pass string[x] into tolower/toupper
+00:41:56	Nick Bowman:	@remy you need to rebuild your code any time you make any change to any part of your code. You can run the code multiple times without rebuilding if you don’t make any changes. The green play button in Qt does both build + run
+00:42:09	Nick Bowman:	@Nicoel @Kevin let’s chat after class about that
+00:42:10	Brenna Marie Wakefield:	What is the #include for again?
+00:42:13	Siddharth Balaji:	Why would you use the .append or .compare method when you can simply add a string to another string as we saw before or compare two strings with logical operators?
+00:42:15	alan hu:	Do you have to include <string> to use string methods?
+00:42:32	Trip Louis Master:	@Oz toupper returns the changed char, so you could say str[i] = toupper(str[I])
+00:42:33	Nick Bowman:	@Alan yes
+00:42:38	Andrew Shin:	when does s.compare(str) returns -1?
+00:42:41	Thomas Tao Hale:	So will it error if you try to run edited code without building or will it just run the version of code it was built with?
+00:42:49	Nick Bowman:	@Brenna #include allows you to include code written by other people to use in your own code
+00:42:59	Kyle Booker:	With replace can you use length zero
+00:42:59	Blake Salvador:	With s.replace, does the replacement string str have to be the same length as len?
+00:43:07	kathleen bryan:	Does this lib include a strip function for taking out space?
+00:43:16	kathleen bryan:	is space counted?
+00:43:30	Trip Louis Master:	@kathleen I'm pretty sure there's a strip function for whitespace. Yes it's counted in length
+00:43:48	Nick Bowman:	@Liza normal naming convention is camelCase but some utility functions eschew this naming convention, which is a bit annoying
+00:43:59	alan hu:	When you include a lib, does it automatically take all functions from the lib? What then happens when two imported libs have functions of the same name?
+00:44:08	Trip Louis Master:	@Blake I believe the replaced string can be a substring of the original string
+00:44:23	shreyas ravi:	is there a string splitting function? like splitting a string at spaces into an array?
+00:44:26	Trip Louis Master:	@alan that's a good question for OH haha
+00:44:34	alan hu:	👍🏼
+00:45:03	Trip Louis Master:	@shreyas Yes there is! stringSplit in strlib.h
+00:45:47	Nick Bowman:	@Blake @Kyyle @Andrew you can test these out on your own/read the documentation to find out!
+00:46:30	Nick Bowman:	@Thomas Qt Creator will autosave and re-build for you if you’ve made changes (more accurately, it’ll give you a popup asking you to save before you click run the next time)
+00:47:31	Chloe Su:	What’s the difference in syntax when creating a C++ string vs. a C string?
+00:47:34	Siddharth Balaji:	Why would you use the .append or .compare method when you can simply add a string to another string as we saw before or compare two strings with logical operators?
+00:47:55	Trip Louis Master:	@chloe by default, if you use the string type, you'll use cpp strings
+00:48:05	kathleen bryan:	Sorry what made it a C string could you still do
+
+String one = "hi";
+String two = "there"; 
+
+String three = one + two; ?
+00:48:37	Trip Louis Master:	@Kathleen I think that's okay, because you're making these things cpp strings
+00:48:40	Nick Bowman:	@Siddharth, it’s a common trend to see multiple ways to accomplish the same goal! Up to you what you want to use
+00:49:10	Thomas Tao Hale:	Thats really funky, I can definitely see why you need to know what you are doing in C++ here
+00:49:11	Liza George:	wait so c strings can be used as explicit parameters?
+00:49:13	Usman Iqbal Hanif:	Wait so why doesn’t the c string + char no crash? But c string + c string does?
+00:49:18	Nick Bowman:	@Kathleen that code is valid because you do conversion to c++ strings when you store them in variables
+00:49:20	Trip Louis Master:	@liza yes
+00:49:39	Nick Bowman:	@Usman Because C++ is fun like that! The real reason why is beyond the scope of this class
+00:49:39	Nate Hedgecock:	Do you have to make all strings into C++ strings?
+00:49:59	Usman Iqbal Hanif:	Ah okay okay! Sounds good!
+00:50:00	paul gialis:	Where can we find assignment 1?
+00:50:06	Kelly L. Boles:	Could someone please summarize the difference between a C string and a C++ string? as far as syntax?
+00:50:16	Evan F Davis:	By the way, how can you check if Assignment 0 was successfully submitted?
+00:50:19	Oz Gitelson:	is there a list of people able to work with minors
+00:50:19	Trip Louis Master:	Come to YEAH :)
+00:50:26	Nick Bowman:	@Kelly go ahead and ask that on Ed and we can summarize that after class
+00:50:27	Oz Gitelson:	for making sure we are in an ok section
+00:50:53	Chloe Su:	Why doesn’t it become garbage when you add c string + char again?
+00:50:53	Nick Bowman:	@paul Assignment 1 is linked on the course website under the “Assignments” tab
+00:51:02	Jordan Lin:	Are methods like .append() slower than the addition signs? Or are they similar in speed?
+00:51:13	Nick Bowman:	@Oz that list can be found in the lecture slides from Lecture 1
+00:51:14	Trip Louis Master:	@jordan it should be the same
+00:51:38	Nick Bowman:	@Evan as long as you submitted the Google Form, you’re fine
+00:51:40	david vu:	do we have to have any work prepared for the sections
+00:51:52	Nick Bowman:	@David no, just come prepared to discuss
+00:52:26	Kyle Booker:	Are we going to get reference sheets for the different string and character operations/methods?
+00:52:31	Kenny Wang:	my discussion section is Thursday, will it begin tomorrow or the week after?
+00:52:32	Samuel Lynn Ledden:	Where can we find these sslides?
+00:52:33	Thomas Tao Hale:	In my opinion, programming is actually 5% making code, and 95% debugging code
+00:52:43	Nick Bowman:	@Chloe  the real reason why is a little beyond the scope of this class, but feel free to come by OHs if you want to chat in more detail
+00:52:44	Trip Louis Master:	@samuel slides are on the website under lectures!
+00:52:58	Trip Louis Master:	Section starts this week!
+00:53:25	lyndsea warkenthien:	Could you please show or talk through an example of how to test for what a function returns?
+00:53:27	Kelly L. Boles:	+1 Kyle
+00:53:41	Nick Bowman:	@Lyndsea coming in like 2 minutes!
+00:53:58	Evan F Davis:	How can you check if a Google form was successfully submitted? I am 99% sure it was for me for Assignment 0 but I hope to confirm it
+00:54:04	Jihe He:	Although I read the guidelines, but for assignments in general, do we need to put line comment explanations next to some lines that might appear confusing after code simplification?
+00:54:25	Nick Bowman:	@Kyle @Kelly you can use the slides as reference sheets, and we will put some more comprehensive ones together when it comes time for the diagnostic assessment
+00:54:26	Trip Louis Master:	@Jihe yes! That's good style
+00:54:32	Jihe He:	Thank you!
+00:54:35	Nick Bowman:	@Evan email me if you’re worried about not having submitted
+00:54:44	Thomas Tao Hale:	All the comments!
+00:55:03	Elan Smolar Eisenberg:	Can we comment out some provided tests for quicker checking?
+00:55:12	Nick Bowman:	@Elan yes
+00:55:21	Trip Louis Master:	cant fail tests if you don't have any!
+00:55:33	Trip Louis Master:	^^ don't do this
+00:55:57	Siddharth Balaji:	To call the provided_test method from testing-examples.cpp would you put it in the parentheses where the SELECTED_TESTS is?
+00:56:14	Trip Louis Master:	SELECTED_TESTS should give you the option to run provided tests
+00:56:28	Siddharth Balaji:	Sounds good thanks
+01:00:03	I. Lemhadri:	main file did not appear in Ed
+01:00:13	Kenny Wang:	main file was under the folder "src"
+01:00:13	I. Lemhadri:	It said : file is too large and cannot be displayed
+01:00:15	Brandon James Kier:	^
+01:00:22	Kenny Wang:	it was main.cpp not the "main" that was too large to see
+01:00:29	I. Lemhadri:	Oh shoot thanks
+01:00:31	Liza George:	were you looking at the main.cpp file in the src folder?
+01:00:33	Trip Louis Master:	You were looking at the executable, not main.cpp
+01:00:34	Kenny Wang:	YOU JUST GOT VECTORED
+01:00:38	paul gialis:	Thank you
+01:00:40	alan hu:	Thanks!
+01:00:41	Kyle Booker:	Thanks!
+01:00:42	Jordan Lin:	Thank you :)
+01:00:43	Weiqi Yu:	Thank you
+01:00:43	Siddharth Balaji:	Thank you have a good day!
+01:00:43	Elena Williams:	Thanks so much!
+01:00:43	craig cargill:	Is the section today in 10 mins on?

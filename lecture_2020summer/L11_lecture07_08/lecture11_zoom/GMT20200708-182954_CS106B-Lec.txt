@@ -1,0 +1,176 @@
+00:18:47	Siddharth Balaji:	Iteration because im more used to it
+00:18:48	Evan Baldonado:	Iteration, used to it
+00:18:50	karan parikh:	iteration cause recursion is hard to keep track of
+00:18:51	catherine deng:	Iteration because I’m more familiar with it
+00:18:54	Oz Gitelson:	Im way more used to iteration
+00:18:54	Samuel Lynn Ledden:	iteration, easier to think of
+00:18:55	Michael M Hu:	Iteration: learned it first and more commonly used and seen
+00:18:56	Kenneth Fischer:	Iteration, because I understand it
+00:18:56	Kyle Thomas Booker:	Iteration because grids
+00:18:57	Aadi M Rane:	recursion, more elegant
+00:18:57	kathleen bryan:	Iteration, because I’ve never used recursion
+00:18:57	Hemant Chaudhary:	Iteration- I like how I can keep track of it!
+00:18:58	Ryan Gabel:	Iteration is easier
+00:18:58	hriday chhabria:	Iteration used to it
+00:19:00	Demi Lei:	iterationsince im bad at recursion
+00:19:00	Jacob Knego:	Iteration, more intuitive
+00:19:00	alan hu:	Iteration, recursion requires function calls and more stack frames :P
+00:19:01	Julia L Wang:	Iteration, it’s more intuitive
+00:19:01	Jaelyn N Kelly:	Iteration since it is more straight forward
+00:19:01	pranaavn@stanford.edu:	Iteration because it’s simpler
+00:19:02	Rigel Cupido Wafford:	Iteration. Easier to understand, and more common. Not as much tracing needed to fix bugs.
+00:19:02	brianzhg@stanford.edu:	Iteration because recursion is harder to trace
+00:19:03	Zachary Alon:	Iteration, because Its easier to keep track of for me
+00:19:03	Jordan Lin:	Recursion, because the (generally) shorter code makes things look more elegant
+00:19:04	Humaid Alzaabi:	iteration, easier to visualize
+00:19:04	Arul Saxena:	iteration
+00:19:04	hunter ruebsamen:	iteration, its easy to nest several loops
+00:19:04	Angela Zhang:	iteration because recursion makes confusion
+00:19:05	rayjohns@stanford.edu:	It depends on the problem - iteration if breadth makes more sense, recursion if it makes more sense to exhaust an option before proceeding
+00:19:05	Kenny Wang:	recursion is very fun though
+00:19:06	Elena Williams:	I like recursion, it feels like you can do more interesting things with it!
+00:19:06	Jihe He:	recursion looks more op
+00:19:10	Kenny Wang:	it depends on the problem
+00:19:10	shreyas ravi:	iteration is easier to trace and keep track of
+00:19:11	ian rundle:	Recursion because of the memes and looks cooler
+00:19:11	Liza George:	recursion (when possible) because it makes me feel like i'm big brain
+00:19:14	Yukun Yang:	Iteration: Learned it first and easier than recursion, plus unlikely to form infinite loops
+00:19:16	rayjohns@stanford.edu:	lol @liza
+00:19:18	shirley li:	Iteration since it's less "leap of faith" than recursion.
+00:20:17	rayjohns@stanford.edu:	A really cool recursive example I came across yesterday https://en.wikipedia.org/wiki/Free_group
+00:20:18	edouard des:	Iteration. The simple reason for that is that I am cynical about recursions ability for operations of unlimited size.  BFS can go on forever, while recursion cannot create the full fractal unless it has completely finished one branch, which it will never accomplish if it is unlimited…
+00:20:55	rayjohns@stanford.edu:	the cool thing @edouard is that there’s no such thing as a full fractal — recursion lets us explore the infinite! :))
+00:21:07	tomhal@stanford.edu:	Iterations because its easier to debug
+00:21:25	Liza George:	@edouard yes it doesn't make sense to use recursion for BFS, but there are others searches like DFS that is much, _much_ easier with recursion
+00:28:32	Siddharth Balaji:	Lol I was in a breakout room alone
+00:28:40	Kenny Wang:	aww that's sad
+00:28:45	Tommy Ly:	Sorry to hear!
+00:29:29	Nick Bowman:	Sorry about that, I’ll reassign you a different one next time around.
+00:29:35	Siddharth Balaji:	Sounds good thank you
+00:29:49	Hemant Chaudhary:	I faced a similar issue
+00:29:57	Liza George:	Same here
+00:31:18	David Huang:	Why are source, dest, and aux are char type
+00:31:46	Nick Bowman:	That’s just the way the underlying graphics animation we’re gonna see represents the pegs. The pegs are just ‘a’, ‘b’, and 'c'
+00:32:42	Kenny Wang:	that is so cool
+00:32:53	Liza George:	does this algorithm always find the most efficient solution?
+00:33:14	Nick Bowman:	Yes, this algorithm will always use the minimum possible number of moves to solve the problem.
+00:33:24	shreyas ravi:	what would be the big O complexity for this?
+00:33:26	Liza George:	wow that's cool
+00:33:35	Aadi M Rane:	recursion is amazing
+00:33:50	Nick Bowman:	@shreyas the minimum number of moves to solve the towers of Hanoi with N disks is 2^N - 1
+00:34:03	Nick Bowman:	so any solution to towers of Hanoi will have big O of O(2^n)
+00:34:15	shreyas ravi:	oh ok
+00:35:07	Nick Bowman:	@Liza @Hemant @Siddharth I’ve coalesced you all into the same breakout room for our later exercise
+00:35:16	Siddharth Balaji:	Thank you
+00:35:19	Hemant Chaudhary:	Great!
+00:35:44	Liza George:	thanks~
+00:39:07	Jordan Lin:	Is there an efficient function for researching in a unsorted list?
+00:39:11	Jordan Lin:	*searching
+00:40:31	Nick Bowman:	@Jordan good question. If there’s no structure in your data that you can leverage, you can’t really do better than exhaustively searching through all the elements to find what you need
+00:44:19	Nick Bowman:	Going to re-send my earlier message because I know receiving messages can be weird when people are in breakout rooms
+00:44:21	Nick Bowman:	@Jordan good question. If there’s no structure in your data that you can leverage, you can’t really do better than exhaustively searching through all the elements to find what you need
+00:44:53	Siddharth Balaji:	Couldn’t you sort the vector first and then apply the binary search algorithm?
+00:45:08	Siddharth Balaji:	It would be more efficient than exhaustively searching through the entire vector right?
+00:45:18	Jordan Lin:	But if your sort function is less efficient than O(n)
+00:45:23	hriday chhabria:	I think the sort would be less efficient
+00:45:23	Jordan Lin:	You might as well use linear search at that point
+00:45:25	Nick Bowman:	Actually no, because sorting is a more expensive operation than just searching the whole vector
+00:45:42	Nick Bowman:	The most efficient general sorts we can get all have worse big O than O(n)
+00:45:46	Nick Bowman:	we’ll have a lecture on this in a couple weeks!
+00:45:52	tomhal@stanford.edu:	Will we also cover merge sort later on?
+00:46:02	Nick Bowman:	Yes, that will be one of the sorts that we talk about later this quarter.
+00:46:14	tomhal@stanford.edu:	Bogosort best sort
+00:46:29	Jordan Lin:	O(n!)
+00:46:37	Kenny Wang:	lmaooo
+00:46:48	Nick Bowman:	Let’s keep it on topics guys.
+00:49:05	Liza George:	wait why don't we keep the base 2 in the big o notation?
+00:49:06	Aadi M Rane:	Isnt it O(log_2 n) or is no base implying base 2?
+00:49:26	alan hu:	I feel like log base 2 is assumed
+00:49:31	Nick Bowman:	@Aadi @Liza Good question! We can drop the base for the same reason that we can drop constant factors when calculating Big-O
+00:49:48	Nick Bowman:	Basically, the base doesn’t matter, because the growth rate is dominated by the logarithmic operation itself
+00:49:55	Siddharth Balaji:	Is it just a generalization of the formula for the runtime excluding the specific constants?
+00:50:14	Nick Bowman:	That being said, base 2 is the most common base we will see given the “divide and conquer” nature of splitting a problem into two halves
+00:50:16	Kenny Wang:	if you think about it, if it was log_3 n, it would just be a constant * log_2 n
+00:50:21	tomhal@stanford.edu:	The processing power required for zoom could slow things down
+00:50:35	Kenny Wang:	so we're sort of just dropping the constant
+00:50:56	Nick Bowman:	@Siddharth Yes, Big-O is a generalization of growth rate, ignoring constant factors
+00:51:15	ian rundle:	If you say “vec[52]” or something does the program have to do more work to get there than “vec[2]”? Im not sure how that works assuming vec is the same size for both
+00:51:30	Nick Bowman:	No, its the same amount of work to get to both. We’ll talk about why next week!
+00:51:31	Siddharth Balaji:	So im seeing that O(log N) is slightly less efficient than O(n) for certain values of n, is It possible to use two different algorithms to complete the same task depending on what n is to get the best possible speed?
+00:52:22	Nick Bowman:	@Siddharth yes, real world algorithms do implement strategies exactly as you described to try and optimize the behavior of algorithms across different input sizes
+00:52:24	alan hu:	thanks
+00:52:32	Siddharth Balaji:	Thats cool thank you
+00:52:33	I. Lemhadri:	why is remove O(log(n)) for sets and not for vectors ?
+00:52:51	Kenny Wang:	because sets are ordered upon inserting
+00:52:55	Aadi M Rane:	I don't think vectors ar sorted
+00:52:55	Nick Bowman:	To remove for a vector, you need to shift over up to n-1 element sin the worst case (if you remove the element at index 0)
+00:52:59	Aadi M Rane:	*are
+00:53:59	I. Lemhadri:	But sets are unordered so isn’t harder to find an element ?
+00:54:17	Nick Bowman:	Sets store their data in a structured way that allows us to apply binary search to find them quickly
+00:54:26	Nick Bowman:	We will talk exactly what that underlying structure is in a couple weeks
+00:54:35	I. Lemhadri:	ok thanks !
+00:55:02	Kenny Wang:	is it theoretically possible (if very difficult) to use iteration to solve anything that recursion can?
+00:55:37	Liza George:	wait were those keywords choose-unchoose-choose? I'm not sure if I heard it properly
+00:55:57	Kenneth Fischer:	@liza choose-explore-unchoose
+00:56:02	Liza George:	oh thanks!
+00:56:07	Nick Bowman:	I think there’s some deeper mathematical analysis that would have to happen to concretely answer that question. We’ll see an example tomorrow of just how ugly iterative solutions for recursive backtracking problems might look
+00:56:21	Ryan Bernstein:	Can't you do a breadth-first search for this instead of a recursion?
+00:56:22	Kenny Wang:	alright, thanks
+00:57:01	Nick Bowman:	@Ryan That’s a good insight and the answer is that you probably could, but the solution wouldn’t nearly be as straightforward as it would be with recursion
+00:57:11	Ryan Bernstein:	ok thanks
+00:57:17	Ali Mahdi:	can recursion be used for the bfs algorithm and also, would it be more efficient than iteration?
+00:57:38	Demi Lei:	is the base this case flipping one coin?
+00:58:05	Nick Bowman:	It would be rather hard to code up BFS recursively, because finding self similarity in that algorithm is much more challenging
+00:58:24	Nick Bowman:	@Demi we’ll talk about the base case here in a second
+01:03:28	kevin yang:	Shouldn’t the variable be soFar instead of sofar
+01:04:15	Nick Bowman:	Yeah, that would probably be slightly clearer but both work equally well.
+01:04:42	Liza George:	(this is a little unrelated to recursion but) is it best practice to always include function headers for readability? or could we just rearrange the order of our methods so avoid that error (if possible)
+01:05:02	Nick Bowman:	Including function headers for readability is good practice! And also decreases your headaches when it comes to ordering things.
+01:05:10	Liza George:	ok, thanks!
+01:05:49	tomhal@stanford.edu:	So for like dice rolls
+01:05:58	rayjohns@stanford.edu:	So you could  use this to generate a truth table
+01:05:59	Siddharth Balaji:	Is the a formula we can get to determine the number of combinations there are
+01:06:00	tomhal@stanford.edu:	Would you need like 6 calls of the recursive function?
+01:06:23	Jordan Lin:	At that point you can just use a for loop, but yes, technically 6 would be needed
+01:06:25	Nick Bowman:	@Ray correct!
+01:07:02	Nick Bowman:	@Siddharth yes, generally if you are making ordered sequences the number of total number of sequences is (number of options)^number of trials/decisions
+01:07:17	Siddharth Balaji:	Got it thank you
+01:07:22	Nick Bowman:	@Tom yes you need as many recursive calls as you have number of options for a given decision
+01:08:22	Kenny Wang:	I've heard that iteration is faster than recursion - are there exceptions to this?
+01:08:34	rayjohns@stanford.edu:	So recursion can be more  efficient with runtime but not necessarily with space complexity, right?
+01:08:44	Nick Bowman:	@Ray yeah, that’s a good way to think about it
+01:09:18	rayjohns@stanford.edu:	the deeper the recursion the more memory you need, I think
+01:09:23	Kevin H Fan:	Thank you!
+01:09:24	shreyas ravi:	could we use recursive backtracking to solve the maze?
+01:09:24	Angela Zhang:	Thank you!
+01:09:25	hyy:	thank you
+01:09:26	Julia L Wang:	Thank you!
+01:09:27	Kenneth Fischer:	Thank you!
+01:09:27	Jennifer Anna Bonello:	Thanks
+01:09:29	tongjun zhang:	Thank you
+01:09:29	alan hu:	What’s the relationship b/w backtracking and dis?
+01:09:32	Nick Bowman:	@Kenny it depends on what you mean by faster and what you’re comparing. For the simple problems we started this week where the recursive and iterative oslutions are equivalent in the number of operations they need to do, iteration is usually faster because it doesnt involve creating additional stack frames
+01:09:32	alan hu:	dfs*
+01:09:33	Gautham Rajesh:	thanks
+01:09:38	ian rundle:	Thanks!
+01:09:38	Guozhen Miao:	thank you
+01:09:52	Lawrence Li:	thanks~
+01:09:53	Kenny Wang:	@shreyas yes totally
+01:10:06	Kenny Wang:	ah thanks Nick
+01:10:09	rayjohns@stanford.edu:	What is the reason why certain languages like python have so many problems with recursion depth?
+01:10:09	hriday chhabria:	Is the search engine supposed to handle numbers?
+01:10:24	Kenny Wang:	I think numbers aren't supposed to be deleted in the search engine
+01:10:25	Nick Bowman:	But as we talked about today, solving problems recursively often allows you to achieve log n runtimes, which are better than the comparable O(n) iterative appraoch
+01:10:33	ethan ramchandani:	can you walk through the heads/tails recursive function one more time because i didn’t entirely understand what went on
+01:10:34	Kenny Wang:	got it
+01:10:42	alan hu:	Also will we cover tail recursion
+01:10:43	Nick Bowman:	Yes, that is correct, the deeper you recurse the more stack frames you need and stack frames take up space in memory
+01:11:00	Nick Bowman:	You'll explore the limits of how many stack frames you can have in memroemory on the next assignment!
+01:13:17	Nick Bowman:	My computer is having a ba dtime so I won't be able to talk.
+01:13:30	Nick Bowman:	@shreyas yes, you definitely could!
+01:14:18	Nick Bowman:	In this class, we’ll equate the two. Depth-first search would be an example of recursive backtracking
+01:14:52	alan hu:	Ahh cool. So you could kind of do the same thing iteratively w/ a stack?
+01:15:36	Nick Bowman:	Yeah if you wanted to iteratively generate a decision tree you probably could but it would involve some involved implementation of a BFS-like algorithm
+01:15:54	alan hu:	Thanks guys!
+01:22:33	Hanna Mofid:	thank you!
+01:22:54	Liza George:	bye, thank you!

@@ -1,0 +1,1938 @@
+WEBVTT
+
+1
+00:00:08.550 --> 00:00:09.990
+Kylie Jue: Alright, can you see my screen.
+
+2
+00:00:10.050 --> 00:00:12.990
+edouard des: And I'm not sure. Okay, hold on. Okay.
+
+3
+00:00:31.050 --> 00:00:31.740
+Kylie Jue: Voting for you.
+
+4
+00:00:37.980 --> 00:00:38.610
+Nick Bowman: Stop there.
+
+5
+00:00:45.690 --> 00:00:46.530
+Does that bring you back.
+
+6
+00:00:47.790 --> 00:00:48.150
+Nope.
+
+7
+00:00:55.470 --> 00:00:57.090
+Kylie Jue: Sorry. All right, here we go.
+
+8
+00:00:58.110 --> 00:01:11.370
+Kylie Jue: Today we're going to be talking about why we use recursion. So if you are here while we do this short introduction, go ahead and throw in the chat so far. Which of you preferred iteration or recursion and then just do a short little phrase explaining why
+
+9
+00:01:12.750 --> 00:01:20.010
+Kylie Jue: Doesn't have to be super formalized and hopefully we can get you to like recursion even more if you're on the iteration side over the next few days. So
+
+10
+00:01:20.820 --> 00:01:25.500
+Kylie Jue: We're still over here learning more about recursive problem solving. And today, particular
+
+11
+00:01:25.920 --> 00:01:34.560
+Kylie Jue: Now that you've learned the basics of recursion. We're going to talk about why is recursion such a powerful problem solving tool in particular, and there's sort of three big ideas that we're going to talk about
+
+12
+00:01:34.980 --> 00:01:42.360
+Kylie Jue: Elegance efficiency and the category of problems that are really best suited for recursion, which will bring us to the curse of backtracking.
+
+13
+00:01:42.990 --> 00:01:51.810
+Kylie Jue: But before we jump into that, let's do a very quick review of fractals which Nick covered yesterday. So the big idea with fractals. Is this visual self similarity that we see.
+
+14
+00:01:52.410 --> 00:02:00.870
+Kylie Jue: That is very common in recursive problems in general but with fractals. It makes it very clear what that actually looks like when you have a smaller copy of yourself over time.
+
+15
+00:02:01.680 --> 00:02:08.070
+Kylie Jue: A fractals any repeated graphical pattern and can be composed of or is composed of repeated instances of the same shape.
+
+16
+00:02:08.370 --> 00:02:15.060
+Kylie Jue: Arranged in a structured way so snowflakes are great real real world examples of that trees. There are some example patterns there.
+
+17
+00:02:15.780 --> 00:02:19.920
+Kylie Jue: We also talked about sort of how we define fractals. And what differentiates
+
+18
+00:02:20.520 --> 00:02:36.660
+Kylie Jue: fractals of different sizes and have smaller sort of orders than others. So when you add a smaller tree to a larger one. When you're building this order three tree, the order to a tree. Is that a different position. It has a different size it's smaller, and it has a different orientation.
+
+19
+00:02:37.740 --> 00:02:49.950
+Kylie Jue: We also talk about it, having a different order. So if this is your order three tree. This is your order to and these are your order ones. And if you were to make an order for tree, you would add another set of order one trees here and this will become your order for
+
+20
+00:02:51.240 --> 00:02:55.140
+Kylie Jue: Flash, just a quick review of the terminology that we learned for fractals yesterday.
+
+21
+00:02:56.490 --> 00:03:07.020
+Kylie Jue: We also learned about different we got some experience. It's different types of fractals specifically. This was the code for Sir Pinsky carpet, which was the giant square with like square eight squares inside around the edges of it.
+
+22
+00:03:08.730 --> 00:03:16.170
+Kylie Jue: And what so Pinsky carpet really showed us is that we can have multiple recursive calls within the recursive case of our function.
+
+23
+00:03:16.710 --> 00:03:20.400
+Kylie Jue: In particular, we had eight because we were drawing eight of a lower order.
+
+24
+00:03:21.360 --> 00:03:30.060
+Kylie Jue: fractal within the order above it and, in particular, what they showed us is that it's actually completely reasonable to mix iteration and recursion in the same function.
+
+25
+00:03:30.480 --> 00:03:37.170
+Kylie Jue: And we're going to get some more practice with that today. And actually when you use these two things in combination. It can be extremely powerful.
+
+26
+00:03:38.220 --> 00:03:48.300
+Kylie Jue: So to transition into a little bit of today's work we gave you some homework at the end of lecture yesterday, some informal homework to play towers of Hanoi. So hopefully you did take a little bit of time to do that.
+
+27
+00:03:48.600 --> 00:03:57.330
+Kylie Jue: And we asked you to look for patterns of how to solve problem the problem as you increase the number of desks and if you felt up for the challenge actually defining it recursive Lee.
+
+28
+00:03:57.720 --> 00:04:04.500
+Kylie Jue: So we're going to return to that problem in a moment. As we continue to answer this question of, excuse me, why do we use recursion.
+
+29
+00:04:05.340 --> 00:04:14.490
+Kylie Jue: So this first example is specifically going to look at elegance in recursion. Why does recursion allow us to solve problems with such clean and concise code or how does it do that.
+
+30
+00:04:14.970 --> 00:04:20.130
+Kylie Jue: Then we're going to do another example around efficiency and how recursion can often or not often
+
+31
+00:04:20.550 --> 00:04:29.820
+Kylie Jue: Sometimes, give us better runtime when solving problems. And then the last thing we'll look at this a set of dynamic problems which are problems that are often hard to solve intuitively
+
+32
+00:04:30.780 --> 00:04:33.390
+Kylie Jue: So let's look at the elegant example we're going to look at towers of annoying.
+
+33
+00:04:34.080 --> 00:04:44.970
+Kylie Jue: If you remember, this was the pseudo code for three deaths. We went over the solution for how the seven steps for how to take three discs that are on peg a and move them to peg. See, and just in case anyone
+
+34
+00:04:45.390 --> 00:04:54.480
+Kylie Jue: didn't remember the rules for towers of noise. You can move one disc at a time between pegs. You cannot put a larger disk on top of a smaller disk and your goal is to get this stack.
+
+35
+00:04:55.290 --> 00:05:06.900
+Kylie Jue: All the way to the last stack using this auxiliary pin or this pen in the middle and just moving things around until you're able to get it here. So seven. This is actually ideal number of steps, the best number of steps you can get
+
+36
+00:05:07.410 --> 00:05:16.950
+Kylie Jue: For three desks. So now the question is, what if we add a fourth disk. So we have something that looks like this. Right. We have towers of annoying with four discs.
+
+37
+00:05:17.550 --> 00:05:29.250
+Kylie Jue: They're all starting on the source pin here and the general idea with towers of an hour, right, our goal. The first thing we want to do is we want to move this largest disk over to the destination peg.
+
+38
+00:05:29.670 --> 00:05:36.900
+Kylie Jue: Right, that's what we did with the three case as well. But because we want this at the bottom. It has to be the thing that we're moving over to destination first
+
+39
+00:05:37.860 --> 00:05:48.570
+Kylie Jue: So basically, the way we can think about it is, okay, in order to move the largest disk over to the destination pin. We need to get the three above it out of the way so that we can get it over to the destination there.
+
+40
+00:05:48.990 --> 00:06:02.430
+Kylie Jue: How do we get the three this out of the way. While we actually already have an algorithm for moving three deaths from a source peg to a destination pack. Right. So if we have the pseudo code. If we think about this algorithm we are moving the desk from
+
+41
+00:06:03.900 --> 00:06:11.760
+Kylie Jue: From peg a to peg. See, and instead of moving them to the destination, we can actually just move them instead of to the auxiliary pin.
+
+42
+00:06:12.000 --> 00:06:24.150
+Kylie Jue: And what does that mean in this case we are swapping our auxiliary and our destination pin in our algorithm here. But in general, we have a general algorithm for moving three deaths from beginning peg to an end peg. And so we're going to take advantage of that.
+
+43
+00:06:24.930 --> 00:06:33.180
+Kylie Jue: So basically we're going to apply that previous algorithm and say that will allow us to move these three discs without even thinking about the fourth disc onto this auxiliary peg.
+
+44
+00:06:34.080 --> 00:06:50.100
+Kylie Jue: So now we're free to just move that over to the destination paper largest one and now we have the same problem. We need to move this back of three from the auxiliary pin to the destination pen. And again, we have an idea, a general algorithm for moving three deaths from a source pin to
+
+45
+00:06:51.390 --> 00:06:59.190
+Kylie Jue: To a result pen and we can use that existing algorithm. So now instead of saying, Okay, we're going to move them from the start from a to see
+
+46
+00:06:59.460 --> 00:07:05.820
+Kylie Jue: The idea is we're going to say, okay, now those three discs are starting at be and we're going to move them from B to C.
+
+47
+00:07:06.090 --> 00:07:17.610
+Kylie Jue: And so basically what we're doing is we're swapping the auxiliary and the source. They're starting at the auxiliary and they're going to end up at the destination. Still, but we're using the source pen is sort of that in between place where we can put them in the meantime.
+
+48
+00:07:19.230 --> 00:07:28.050
+Kylie Jue: Alright, so now that I've sort of gone over a big idea and how we think about towers of Hanoi. We're going to put you into breakout rooms for about three to four minutes.
+
+49
+00:07:28.350 --> 00:07:37.110
+Kylie Jue: And I want you to formally talk about how would you define towers of Hanoi recursive Lee and we have the ED workspaces up here and an instruction file.
+
+50
+00:07:37.410 --> 00:07:43.110
+Kylie Jue: And we want you to just fill in your recursive intuition here talk about what patterns. You may have seen if you have a chance to play.
+
+51
+00:07:43.380 --> 00:07:51.210
+Kylie Jue: And then try to actually define. See if you can define sort of the idea of the base case in the recursive case here, and then we'll come back and actually coded up, Nick. Could you open those up.
+
+52
+00:07:52.680 --> 00:07:52.980
+Cool.
+
+53
+00:07:57.570 --> 00:07:57.840
+Awesome.
+
+54
+00:08:26.790 --> 00:08:36.810
+Kylie Jue: Alright. And for those of you watching at home, go ahead and try to do that yourself. Try to think about where the base cases and recursive cases here for this tower is a paranoid problem and you can
+
+55
+00:08:37.320 --> 00:08:46.020
+Kylie Jue: Don't go forward in the slides but refer back to this and think about what's the self similarity. We're seeing what's the patterns, how would this work if we then moved up to a five disc problem.
+
+56
+00:09:24.210 --> 00:09:26.760
+Kylie Jue: You want to go ahead and bring them back at 40
+
+57
+00:09:29.220 --> 00:09:29.820
+Yeah, let's do
+
+58
+00:10:36.750 --> 00:10:38.670
+Nick Bowman: It looks like some people are starting to come back close
+
+59
+00:10:54.330 --> 00:11:05.760
+Kylie Jue: Great. Alright, so hopefully you got a chance to discuss the pseudo code a little bit of what how we could generalize this towers of Hanoi solution. And we're going to go ahead and I'm going to go. Go ahead and code it for you.
+
+60
+00:11:06.960 --> 00:11:09.660
+So make this little bigger.
+
+61
+00:11:11.010 --> 00:11:17.580
+Kylie Jue: So the first thing I actually want to show you before. I'm going to fill in this function here called find solution with the recursive solution.
+
+62
+00:11:17.850 --> 00:11:19.860
+Kylie Jue: I'm going to show you that are in of algorithm.
+
+63
+00:11:20.190 --> 00:11:32.430
+Kylie Jue: You don't need to understand it and I'm not going to walk through it, but I just want to show you because the emphasis of this example is elegance and recursion. And what that and the powerful, but the power of recursion to build elegant solutions. So here's the iterative solution.
+
+64
+00:11:34.080 --> 00:11:42.030
+Kylie Jue: You actually have to. So we're going to handle the graphics for annoying for you but you actually have to keep track of stacks to be able to figure out what you're going to do.
+
+65
+00:11:42.900 --> 00:11:48.930
+Kylie Jue: It's not the nicest looking solution. You can walk through it on your own later there's an algorithm in the comments at the top.
+
+66
+00:11:50.370 --> 00:11:54.990
+Kylie Jue: But it's pretty long, and we're going to see how recursion is actually a much more elegant way of solving the problem.
+
+67
+00:11:55.500 --> 00:12:10.050
+Kylie Jue: But we'll see what they actually do the same thing. So all this is doing is it's running our demo for us. We do some initial ization and then we're putting an end which is the number of this that we have and then we're giving in a source peg a destination peg and then an auxiliary peg.
+
+68
+00:12:11.100 --> 00:12:13.980
+Kylie Jue: Which we have here under solution. So let's go ahead and code. This
+
+69
+00:12:14.310 --> 00:12:25.110
+Kylie Jue: So in our base case we're actually going to use the base case of when there's only one disk and we need to move it from the source to the destination, because if you remember in our algorithm we were talking about how that is sort of
+
+70
+00:12:25.380 --> 00:12:32.340
+Kylie Jue: The goal that we want to get to. But it's also the simplest case, you can only have one if you only had one disk. So in that case, what we're going to say is, when is equal to one.
+
+71
+00:12:33.000 --> 00:12:36.840
+Kylie Jue: We have this nice function called move single disc and this is going to help trigger the
+
+72
+00:12:37.350 --> 00:12:46.620
+Kylie Jue: Graphics for us. And I mentioned this at the end we mentioned this at the end of class yesterday that you can just give it a source and the destination. So what we're going to do is we're going to move
+
+73
+00:12:47.970 --> 00:12:48.840
+Kylie Jue: The move
+
+74
+00:12:49.980 --> 00:12:52.260
+Kylie Jue: The disc over from the source to the destination pin.
+
+75
+00:12:53.700 --> 00:13:00.570
+Kylie Jue: And then in our recursive case, what we want to do is exactly what we talked about with the moving from the four to the three case.
+
+76
+00:13:00.930 --> 00:13:07.080
+Kylie Jue: We want to call find solution. So we're going to do the same thing on n minus one, right, we want to take the top
+
+77
+00:13:07.560 --> 00:13:20.790
+Kylie Jue: N minus one disks and move them from the current source tag to the auxiliary peg using the destination. Right. So it's exactly what I mentioned before, where you are swapping the destination and auxiliary peg.
+
+78
+00:13:22.110 --> 00:13:26.070
+Kylie Jue: And so we're just going to call our function and say, like, this is going to do, do it for us.
+
+79
+00:13:27.450 --> 00:13:31.650
+Kylie Jue: It's going to move the dis above the largest one over to the auxiliary peg for us.
+
+80
+00:13:32.010 --> 00:13:38.940
+Kylie Jue: And then what we're going to do once they're out of the way, we can say, let's move the single disc and we're going to move again the single disc from source to destination.
+
+81
+00:13:39.480 --> 00:13:49.440
+Kylie Jue: And then remember the last step, we had is, we need to now, now that all of our desk, it's going to show now that all our discs are here and we have the largest one over here, we need to move
+
+82
+00:13:49.770 --> 00:14:00.450
+Kylie Jue: The remaining dis on top over to the destination from the auxiliary. So again, what we can do is we can call our function with n minus one and our new source pin is the auxiliary pin.
+
+83
+00:14:01.830 --> 00:14:03.960
+Kylie Jue: The destination is still the destination.
+
+84
+00:14:05.250 --> 00:14:10.230
+Kylie Jue: And our auxiliary pin now becomes the source. So what we just did is we swapped the auxiliary and the source patents.
+
+85
+00:14:11.670 --> 00:14:13.800
+Kylie Jue: And that's it. This is the base case.
+
+86
+00:14:15.090 --> 00:14:17.160
+Kylie Jue: And this is a recursive case.
+
+87
+00:14:18.270 --> 00:14:19.680
+Kylie Jue: So let's go ahead and see it in action.
+
+88
+00:14:28.200 --> 00:14:33.210
+Let's see if I can pull up the visualization quickly once it
+
+89
+00:14:38.400 --> 00:14:46.890
+Kylie Jue: There we go. So it's actually moving. You can play around with this. This is in the starter code itself. And you can also change. And over here, to change the number of desks.
+
+90
+00:14:47.340 --> 00:14:53.790
+Kylie Jue: So again, what we're seeing is it actually is moving all those does for us so that it gets all of those first four discs over to the middle pin.
+
+91
+00:14:54.120 --> 00:15:01.470
+Kylie Jue: And it moves the largest one and then it's going to use the same algorithm, the same pattern to move those four days now over to the right hand side.
+
+92
+00:15:05.220 --> 00:15:09.810
+Kylie Jue: Cool. This is a very satisfying visualization to watch. So definitely do a lot of that yesterday.
+
+93
+00:15:11.460 --> 00:15:21.210
+Kylie Jue: Alright, so that's how we can define towers of Hanoi recursive Lee. Are there any questions before I move on to the next example, Nick anything in the chat.
+
+94
+00:15:25.620 --> 00:15:25.920
+Nick Bowman: No.
+
+95
+00:15:27.180 --> 00:15:27.420
+Nick Bowman: Okay.
+
+96
+00:15:27.990 --> 00:15:28.290
+Nick Bowman: Great.
+
+97
+00:15:29.220 --> 00:15:40.440
+Kylie Jue: So I'm going to go ahead and stop the program and we're going to move on to our next example which is focused on. Oh, we have someone who raised their hand. Oh, I just saw
+
+98
+00:15:41.910 --> 00:15:47.760
+rayjohns@stanford.edu: Yeah, there was a question in the chat that I'd like to echo. Oh, yeah. Nick was answering it. The algorithm, finding the most efficient solution.
+
+99
+00:15:48.600 --> 00:15:54.960
+Nick Bowman: Yeah, the algorithm always use the minimum number of moves on possible to to solve the tires on your question.
+
+100
+00:15:57.390 --> 00:15:57.660
+Alright.
+
+101
+00:16:00.210 --> 00:16:07.350
+Kylie Jue: So let's go ahead and talk about our next example of why we might use recursion and that is for efficiency purposes. And one of the really
+
+102
+00:16:07.920 --> 00:16:14.670
+Kylie Jue: common use cases of recursive solutions is actually searching problems. And we're going to talk about an algorithm called binary search
+
+103
+00:16:15.600 --> 00:16:23.580
+Kylie Jue: So let's imagine that we have a sorted list of numbers and we want to find a particular number we're looking for the number 89. So how might we do this.
+
+104
+00:16:25.200 --> 00:16:26.670
+Kylie Jue: Many of you had asked also
+
+105
+00:16:27.540 --> 00:16:38.130
+Kylie Jue: Does the vector have this sort function we sort of said no, you have to loop through all of the numbers in order to find something inside of a vector. So our first idea is, well, maybe we can just go in order through this list.
+
+106
+00:16:38.400 --> 00:16:42.660
+Kylie Jue: And find the element that we're looking for, by doing a linear search from left to right.
+
+107
+00:16:43.680 --> 00:16:52.710
+Kylie Jue: So we would start at the left hand side and we'd keep going. And we'd have to go through all of the elements zero all the way up until eight until we said okay, we found at nine.
+
+108
+00:16:53.490 --> 00:17:00.540
+Kylie Jue: So in general linear search when you go from one end to the other is always going is going to be order. Bingo.
+
+109
+00:17:01.020 --> 00:17:10.980
+Kylie Jue: oh of n, because at worst, your element is going to be at the last, the last thing inside of your element. The last thing inside of your list. So you have to go through all and elements.
+
+110
+00:17:12.240 --> 00:17:18.480
+Kylie Jue: Alright, so, so that's our first pass at a potential solution for finding a number in a sorted list. What can we do better.
+
+111
+00:17:18.840 --> 00:17:25.470
+Kylie Jue: In particular, can we take advantage of the fact that our data is structured so that our data is sorted. So how might we do that.
+
+112
+00:17:26.370 --> 00:17:34.410
+Kylie Jue: And I want to bring back something that we have not yet revisited, which is this big oh matrix for our data structures we talked about how there's these oh
+
+113
+00:17:35.190 --> 00:17:42.060
+Kylie Jue: Oh, one this constant time operations as well as these linear operations oh of n. But we never determined what exactly
+
+114
+00:17:42.930 --> 00:17:50.910
+Kylie Jue: Is the efficiency for these operations and sets and maps and we did give a little bit of a hint and said, it's going to be a little bit better actually than linear time.
+
+115
+00:17:51.540 --> 00:17:53.820
+Kylie Jue: So that's what we're going to learn through this example.
+
+116
+00:17:54.660 --> 00:18:04.590
+Kylie Jue: Just as a brief note said some apps don't actually use the sorted list to store information, but they do store their information in assorted way which allows them to use the same idea when searching for something.
+
+117
+00:18:05.100 --> 00:18:11.700
+Kylie Jue: So just something about the implementation will actually learn more about implementation of these once again move across the abstraction boundary
+
+118
+00:18:12.600 --> 00:18:21.600
+Kylie Jue: But another thing to note about this sort of ideas. Remember how the elements and keys. When you actually pointed out, etc map are in alphabetical order. And that gives you a hint that the underlying
+
+119
+00:18:22.050 --> 00:18:33.180
+Kylie Jue: way it's structured it does actually have an order and we're going to take advantage of that when we use something like search to find different elements inside. Alright, so let's revisit this problem. How do we get the number 89
+
+120
+00:18:34.410 --> 00:18:45.270
+Kylie Jue: Our second idea or what we're going to end up with is binary search. So the idea behind binary search is that we want to eliminate half of the data at each step of the process. So here's our algorithm.
+
+121
+00:18:46.200 --> 00:18:53.490
+Kylie Jue: We're going to look at the middle element of our list. And we're going to calculate the middle element by just adding the start and end index and dividing by two.
+
+122
+00:18:54.150 --> 00:18:58.860
+Kylie Jue: If the middle element is bigger than your desired value. So in this case, our desired value is 89
+
+123
+00:18:59.280 --> 00:19:05.070
+Kylie Jue: We're going to eliminate the right half of the data and repeat. Because since the data is sorted. If the middle element is bigger
+
+124
+00:19:05.250 --> 00:19:16.620
+Kylie Jue: We know that what we're looking for needs to be less than that. And so it's going to be in the left half of our data and vice versa, if the middle element is smaller than your desired value you're going to eliminate the left half of the data and only look at the right
+
+125
+00:19:18.030 --> 00:19:26.160
+Kylie Jue: Otherwise your cases that the middle element is the thing you're looking for itself. And so you found what you need. So these are sort of our three cases.
+
+126
+00:19:26.820 --> 00:19:38.640
+Kylie Jue: In our general algorithm. So let's do an example. So whereas at nine. So we're going to start by looking at start index, plus an index, which is zero plus nine. And then when you divide that by two with integer division. We're going to get four
+
+127
+00:19:40.050 --> 00:19:44.880
+Kylie Jue: And that's gonna, we're going to look at the number 37 and we're going to say okay 37 is less than 89
+
+128
+00:19:45.330 --> 00:19:57.420
+Kylie Jue: So we're going to eliminate the left half of our data and just look at the right half. So now are starting index is five and our Index. Index is nine. And so when you add these together and divide them by two, you're going to get seven
+
+129
+00:19:59.670 --> 00:20:09.390
+Kylie Jue: And that's also too small. So again, we're going to eliminate the left half of our data. And then if we do another calculation. We're going to get 17 divided by two which is going to end up with, we're going to end up with eight
+
+130
+00:20:10.530 --> 00:20:20.010
+Kylie Jue: And that's going to give us the element that we want. So that was much fewer checks. Then when we did linear right when we went from left to right and it took us eight checks, just to find the number 89
+
+131
+00:20:21.600 --> 00:20:30.150
+Kylie Jue: So let's actually define binary search recursive, the way we're going to do this is we're going to actually use recursion to do this elimination of half the data, each time.
+
+132
+00:20:30.630 --> 00:20:34.290
+Kylie Jue: So what are recursive cases. If you haven't found the element.
+
+133
+00:20:34.920 --> 00:20:44.490
+Kylie Jue: You have the case where the element is either too small or too large. And so we're going to binary search either the right half of the data or the left half of the data, depending on what we're seeing at that middle element.
+
+134
+00:20:44.790 --> 00:20:51.030
+Kylie Jue: So again, this is the sort of you're looking for patterns when you're trying to figure out what the recursive cases. And you see that we're searching again.
+
+135
+00:20:51.420 --> 00:20:57.780
+Kylie Jue: And so that's going to tell us this is a recursive case where we're searching on a smaller part of our list.
+
+136
+00:20:58.560 --> 00:21:03.660
+Kylie Jue: What are our base cases. So there's this third part where you found the element right the element at the middle is the desired element.
+
+137
+00:21:04.020 --> 00:21:16.920
+Kylie Jue: And then there's this case where maybe the desired element is actually not in your data, maybe it's not going to be there and we're going to look at the code in a second to see exactly how do we determine that. Oh, actually, the elements, just not in the data that we're looking for.
+
+138
+00:21:18.330 --> 00:21:18.690
+Kylie Jue: All right.
+
+139
+00:21:19.770 --> 00:21:30.360
+Kylie Jue: Before I are actually. So we're going to give you the code for binary search. And what we want you to do before I sort of walk through it step by step, is I'd like you to go back into your breakout rooms and actually read it.
+
+140
+00:21:30.750 --> 00:21:37.080
+Kylie Jue: Will give you till 1155 to do this. I'm going to try to identify the base and recursive cases. And so this is what the code is going to look like.
+
+141
+00:21:37.320 --> 00:21:48.120
+Kylie Jue: You have a file in your Ed workspace called binary search dot cpp read through it in the rooms and try to find the base and recursive cases and understand how they're working it could you go ahead and reopen those
+
+142
+00:21:51.210 --> 00:21:51.570
+Awesome.
+
+143
+00:22:18.750 --> 00:22:31.200
+Kylie Jue: And then for those of you at home. I'll go ahead and walk through this sort of generally line by line, what we're doing. And then I'm going to go big picture and talk about the different parts. When people come back as well.
+
+144
+00:22:32.850 --> 00:22:39.960
+Kylie Jue: So we have our function here, which is binary search. And what we want it to return is an integer, which is the index in our list of where
+
+145
+00:22:40.410 --> 00:22:50.550
+Kylie Jue: Where the element, we're looking for is the vector here of integers is representing our list our target value is what we're looking for. And then we have a start index and an end index, which we're going to use
+
+146
+00:22:50.880 --> 00:22:54.900
+Kylie Jue: Just like we talked about him the pseudo code where we're actually calculating what the middle is
+
+147
+00:22:56.760 --> 00:22:59.580
+Kylie Jue: And so this is going to be one of our
+
+148
+00:23:00.210 --> 00:23:08.550
+Kylie Jue: base cases where we're actually seeing that the start index is created in the end index. That's when something is not inside the list. And so when something is not inside the list. We're actually going to return negative one.
+
+149
+00:23:09.060 --> 00:23:23.520
+Kylie Jue: And then this is our calculation of the middle index, just like we showed them the pseudo code to get the actual value at that index, you have to do V and then index into the vector with middle index. And then this is another one of our base cases where we're checking if they're equal.
+
+150
+00:23:24.540 --> 00:23:31.800
+Kylie Jue: And these are two recursive cases where we actually look at, okay, that middle value is less than or equal to the target file that we want.
+
+151
+00:23:32.700 --> 00:23:49.530
+Kylie Jue: And then if it's greater than if it's greater than the target value that we want, then we're going to binary search on the left hand side of the data. And if it's less than the target value that we want them. We're going to binary search on the right hand side of the
+
+152
+00:23:50.610 --> 00:23:56.640
+Kylie Jue: Of the remaining data and we update our start indexes and end indexes accordingly.
+
+153
+00:24:00.300 --> 00:24:00.840
+All right.
+
+154
+00:24:01.980 --> 00:24:04.320
+Kylie Jue: 55 right Nick.
+
+155
+00:24:58.860 --> 00:24:59.250
+Nick Bowman: Sounds good.
+
+156
+00:25:13.980 --> 00:25:16.710
+Kylie Jue: Go ahead and walk through this code together, hopefully you got a chance
+
+157
+00:25:16.710 --> 00:25:22.860
+Kylie Jue: To talk through it and make some hypotheses with your group. So now we're going to just talk about what is this code exactly doing
+
+158
+00:25:23.340 --> 00:25:33.330
+Kylie Jue: So we have our binary search function which is returning an integer. And this integer is the index in the vector where our target value is. So we're looking for target value inside of
+
+159
+00:25:33.750 --> 00:25:37.980
+Kylie Jue: A vector, which represents our list. And then we're going to return the index. If we find it.
+
+160
+00:25:38.430 --> 00:25:46.740
+Kylie Jue: And then our start indexing ended index are going to be used like we talked about in the pseudo code to actually figure out where are we searching and what is the middle element that we're starting out.
+
+161
+00:25:47.550 --> 00:25:48.840
+Kylie Jue: Or that we're looking at not starting up
+
+162
+00:25:49.290 --> 00:25:56.580
+Kylie Jue: And so this is actually our first base case that we didn't formalize in our pseudo code of is the element not inside of our list.
+
+163
+00:25:56.730 --> 00:26:09.330
+Kylie Jue: So if the element is not inside of the list. Eventually your start index will end up greater than your end index and you just want to return. Negative one to say we weren't able to find what we were looking for. And then, this looks more like the pseudo code that we had been talking about.
+
+164
+00:26:10.800 --> 00:26:13.020
+Kylie Jue: The middle indexes calculated with this line and then
+
+165
+00:26:13.350 --> 00:26:24.000
+Kylie Jue: To actually get and determine what is the value located at the middle index, we have to index into our vector using what we just calculated and that's going to give us current file. So what are our base cases and recursive cases.
+
+166
+00:26:24.990 --> 00:26:31.320
+Kylie Jue: We have our two base cases here. The first being that you didn't find the element and the second being that you did. So, suppose
+
+167
+00:26:31.830 --> 00:26:39.240
+Kylie Jue: You actually get current value equal to what you're looking for. You can just return the index that you currently have for middle index. And then these are two recursive cases.
+
+168
+00:26:40.080 --> 00:26:49.440
+Kylie Jue: This is the case where the middle of the thing in the middle right is greater than what you're looking for. If the thing in the middle is greater than what you're looking for. Then you want to look at the left half of the data.
+
+169
+00:26:49.950 --> 00:26:56.520
+Kylie Jue: So our start index is going to be the same, right, it's still the first element in our list and then the middle index is going to be
+
+170
+00:26:57.450 --> 00:27:06.570
+Kylie Jue: Whatever you currently have minus one, because we know that the element, we just looked at is not the thing we want. So we're just going to look at the start to the thing right before the middle element we looked at
+
+171
+00:27:07.440 --> 00:27:10.410
+Kylie Jue: And then vice versa, if the current value is
+
+172
+00:27:10.770 --> 00:27:19.320
+Kylie Jue: Smaller than the target value we're looking at, then we want to look at the right half of our data. And in that case, we can add one to the middle index and that becomes our new start and then our end stays the same.
+
+173
+00:27:19.800 --> 00:27:24.060
+Kylie Jue: And this is how, sort of, we'll just going to recursive we eliminate half of the data, each time.
+
+174
+00:27:26.370 --> 00:27:33.990
+Kylie Jue: One quick note that this is a pattern that we're going to see later in or as we keep going with more complex recursive problems.
+
+175
+00:27:34.230 --> 00:27:40.470
+Kylie Jue: And. But you could imagine that if you are actually going to say, I'm going to give someone my binary search function to use in code.
+
+176
+00:27:40.680 --> 00:27:44.520
+Kylie Jue: You really wouldn't want them to have to specify okay if I'm passing in my vector
+
+177
+00:27:44.700 --> 00:27:53.520
+Kylie Jue: Always start at the beginning of my vector for the start index and always use the end index, which is the length of my vector. When someone uses their code, then they're always going to be giving in this like
+
+178
+00:27:53.820 --> 00:28:05.100
+Kylie Jue: Basically the entire vector. So, these parameters are only useful as we rehearse, right, because that's what helps those eliminate half of our data, but the person who's using the binary search function doesn't really need to see them.
+
+179
+00:28:05.760 --> 00:28:15.300
+Kylie Jue: So how do we actually, how do we obscure that away, or how do we allow them to have an abstraction, basically, that doesn't worry about identifying what those indices are
+
+180
+00:28:15.930 --> 00:28:27.300
+Kylie Jue: We can use a recursive helper function. So what we can do is basically I changed the name of the function that you saw on the previous slide to binary search helper. So the same codes in here and the recursive calls are going to be the binary search helper.
+
+181
+00:28:28.230 --> 00:28:32.910
+Kylie Jue: But the actual function that our user is going to call is going to be called binary search
+
+182
+00:28:33.120 --> 00:28:44.610
+Kylie Jue: And you'll notice binary search just basically removes the start and end index parameters and always passes in zero as the first start index and the size of your vector minus one as the end index.
+
+183
+00:28:45.780 --> 00:28:54.510
+Kylie Jue: And this is a very common pattern that you're going to see in recursion, where you use this helper function to sort of abstract away the extra parameters that you need for your recursive calls.
+
+184
+00:28:54.780 --> 00:29:05.100
+Kylie Jue: And the function that we asked you to write or that you will be providing to your user is just going to have the minimum number of parameters needed for them to get the functionality that you actually want
+
+185
+00:29:05.610 --> 00:29:12.030
+Kylie Jue: So again, this is the same function that's on this slide just renamed to a helper function, since that's not what your user is going to see
+
+186
+00:29:13.500 --> 00:29:20.430
+Kylie Jue: All right, any questions about how binary search is working before I move on to. Why are we talking about efficiency with this example.
+
+187
+00:29:27.540 --> 00:29:29.190
+Kylie Jue: Alright, cool.
+
+188
+00:29:29.850 --> 00:29:32.130
+Kylie Jue: So that's an overview of how you would implement
+
+189
+00:29:32.760 --> 00:29:41.790
+Kylie Jue: Binary search. So why is this faster. So let's formalize. Why is this faster than just doing a linear starts, you probably could see the intuition by only looking at
+
+190
+00:29:42.960 --> 00:29:48.660
+Kylie Jue: Things look doing a fewer number of checks on inside of the data. But let's actually formally defined that runtime.
+
+191
+00:29:49.440 --> 00:29:57.630
+Kylie Jue: So to formally defined the number of checks that you're doing. We want to figure out, okay, if your data size if the total number of elements in your list is n
+
+192
+00:29:58.500 --> 00:30:07.440
+Kylie Jue: Worst case scenario is you have to keep eliminating half of your elements until only one thing remains and you found the thing or you say it wasn't in my list at all right.
+
+193
+00:30:08.670 --> 00:30:12.420
+Kylie Jue: And so how many divisions does it take to get from n to one thing
+
+194
+00:30:13.470 --> 00:30:20.280
+Kylie Jue: We can reframe that question and say, well, how many times do I have to multiply one by to in order to get to em.
+
+195
+00:30:20.670 --> 00:30:27.810
+Kylie Jue: And this is where we can actually use exponents and log. We're going to call this number of multiplication x, right. So how many times in my multiplying
+
+196
+00:30:28.140 --> 00:30:36.900
+Kylie Jue: To by itself in order to get n which is the number of things on our list. And so since x is what we care about, right, the number of multiplication is telling us our runtime or the number of
+
+197
+00:30:38.160 --> 00:30:42.510
+Kylie Jue: The number of operations that we have to do x is going to be logged based to have an
+
+198
+00:30:43.530 --> 00:30:56.880
+Kylie Jue: And so what we can say is binary search has a logarithmic runtime or a logarithmic bingo, where we say binary searches. Oh, log in and this is a new runtime that we're that we're going to see pop up in recursion.
+
+199
+00:30:58.410 --> 00:31:05.940
+Kylie Jue: So I actually show you the speed of how binary search is better than linear search. I'm going to go ahead and run
+
+200
+00:31:06.300 --> 00:31:19.710
+Kylie Jue: A demo. And the way I'm going to do this is I'm going to turn on the selected test flag and my main and here's the code, we have it. This is exactly the code that you saw on the slides just also has a linear search, which is just looping over the elements. And then I have a bunch of
+
+201
+00:31:21.180 --> 00:31:32.580
+Kylie Jue: Well, first let's double check it but equal but then I have a bunch of time trials at the end so that you can see for n elements. How fast is binary search. And then I have some more time trials for linear. So let's go ahead and run it and see how it works.
+
+202
+00:31:40.380 --> 00:31:42.210
+Alright, so I have my console here.
+
+203
+00:31:44.400 --> 00:31:48.930
+Kylie Jue: And I'm going to go ahead and drink to for just the binary search ones.
+
+204
+00:31:50.820 --> 00:31:52.740
+Kylie Jue: So it's doing more time trials now.
+
+205
+00:31:54.840 --> 00:31:56.010
+Trying to make this bag.
+
+206
+00:32:05.550 --> 00:32:08.790
+Let's see how fast my computer can go here.
+
+207
+00:32:23.640 --> 00:32:26.580
+Right. It was not this slow when I have to run it.
+
+208
+00:32:28.230 --> 00:32:34.890
+Kylie Jue: Here we go. Okay. So binary search just finished linear. So just going to take a little more time. So while we're waiting for those numbers. I'm going to keep talking.
+
+209
+00:32:35.250 --> 00:32:41.190
+Kylie Jue: And then I'll bring them back up when they appear so I'll show. I'll talk about in a second. But this is generally the graph that compares
+
+210
+00:32:41.790 --> 00:32:46.920
+Kylie Jue: Logarithmic runtime to linear time. This is our own log n curve with
+
+211
+00:32:47.850 --> 00:33:00.300
+Kylie Jue: Time on this access and data input or size of n on this access and this is our open curve. So in general, oh login is much better than open. All right. We just got our results back. So just to show you what that looks like.
+
+212
+00:33:00.630 --> 00:33:06.510
+Kylie Jue: Here our numbers. You can see that as we're increasing here with linear search by a factor.
+
+213
+00:33:06.990 --> 00:33:18.180
+Kylie Jue: Of two, it goes up by approximately a factor of two. It's not exact. And that's the nature of running things on a computer where things are going to be a little bit different depending on different factors like we talked about before.
+
+214
+00:33:19.110 --> 00:33:29.640
+Kylie Jue: But, approximately, you'll see this is scaling linearly. So the factor for be size is the same as the factor for the amount of time. It's taking versus here that is not the case. This factor.
+
+215
+00:33:30.390 --> 00:33:34.470
+Kylie Jue: Is following a little bit more of that log and or the log to
+
+216
+00:33:34.830 --> 00:33:47.340
+Kylie Jue: Factor. And again, it's not going to be perfect and exact, but if you generally see something that is not constant time. Right. It's not just taking the same amount of time every time, and it's not linear. It's not increasing by about a factor of two, every time, then it's probably oh login
+
+217
+00:33:49.050 --> 00:33:54.270
+Kylie Jue: Alright, so, yeah. Generally, a lot faster. If we do binary search overlay or search
+
+218
+00:33:55.710 --> 00:34:04.440
+Kylie Jue: So we can actually fill in our big O matrix here. Now that we have these numbers so sets and maps when they do these ads removals contains
+
+219
+00:34:05.250 --> 00:34:12.270
+Kylie Jue: Basically, trying to find a particular place or a particular element inside of them. They're all log and because they're storing their data in a sort of way.
+
+220
+00:34:13.770 --> 00:34:17.130
+Kylie Jue: Alright, any questions about that before I stopped for announcements.
+
+221
+00:34:19.380 --> 00:34:26.280
+alan hu: Yes, is the set run times that specific to like an implementation or is that just common across all set.
+
+222
+00:34:26.940 --> 00:34:28.020
+Kylie Jue: Yeah, that's a good question.
+
+223
+00:34:28.290 --> 00:34:37.500
+Kylie Jue: It's common across all sets we are going to learn about a different type of set that is implemented differently, called a hash set, but that won't be till the very end of the
+
+224
+00:34:38.130 --> 00:34:45.180
+Kylie Jue: Of the quarter. So you might hear about different implementations with hash that versus regular set, but for sets. In particular, if this is yeah, this is what you're going to go
+
+225
+00:34:49.530 --> 00:34:51.030
+Kylie Jue: All right, any other questions in the chat mic.
+
+226
+00:34:52.740 --> 00:34:53.010
+Okay.
+
+227
+00:34:54.600 --> 00:34:54.870
+Kylie Jue: Sorry.
+
+228
+00:34:55.830 --> 00:34:59.250
+Kylie Jue: So I'm going to take. We're going to take a quick break for announcements and then we'll move on to our last
+
+229
+00:34:59.280 --> 00:35:09.720
+Kylie Jue: Example of why we use recursion. So announcements pretty short today assignment to is do tonight at 11:59pm again PDT just in case you missed that.
+
+230
+00:35:10.110 --> 00:35:15.930
+Kylie Jue: And then assignment three will be released by the end of the day tomorrow and assignment three is going to be all about recursion.
+
+231
+00:35:16.470 --> 00:35:24.030
+Kylie Jue: So you'll get lots of practice with that will be releasing more concrete information about the diagnostic including practice problems over the weekend.
+
+232
+00:35:24.540 --> 00:35:34.440
+Kylie Jue: But it's it's most of the information is already there on the assessments information page will just be again giving more specific on how do you take it and example problems of what it will look like.
+
+233
+00:35:35.880 --> 00:35:36.270
+Kylie Jue: Alright.
+
+234
+00:35:37.410 --> 00:35:42.840
+Kylie Jue: So let's go ahead and move on to our final example of why would we use recursion for problem solving.
+
+235
+00:35:43.170 --> 00:35:54.750
+Kylie Jue: I'm in particular recursion is super powerful when we have to explore problems that have a lot of possible solutions or but need to look at a lot of possibilities and we're going to call those dynamic examples.
+
+236
+00:35:55.620 --> 00:36:04.260
+Kylie Jue: So limits of iteration. So far we've seen problems that can be solved intuitively or recursive Lee, even if, in the case of something like towers of annoying the iteration is pretty ugly.
+
+237
+00:36:04.770 --> 00:36:13.890
+Kylie Jue: But both work, they get the job done and you can argue that one is better than the other, depending on what you prefer or depending on what style you find to be sort of easier to understand.
+
+238
+00:36:14.670 --> 00:36:21.510
+Kylie Jue: However, there is a class of problems that are difficult or at least almost impossible to solve with an iterative iterative approach.
+
+239
+00:36:22.260 --> 00:36:26.820
+Kylie Jue: And again, this occurs, specifically when we have multiple possibilities, or solutions that we need to generate
+
+240
+00:36:27.780 --> 00:36:35.550
+Kylie Jue: Because iteration is inherently limited linear. It's not dynamic, it's often used to build up a single solution without exploring many possible alternatives.
+
+241
+00:36:36.360 --> 00:36:43.950
+Kylie Jue: And what recursion allows us to do is it allows us to look at all the possibilities using that power of branching that we get from having multiple recursive calls.
+
+242
+00:36:45.120 --> 00:36:50.790
+Kylie Jue: And so the specific strategy that we're going to learn about and that we're going to talk about pretty much for the next three classes on recursion.
+
+243
+00:36:51.270 --> 00:36:57.030
+Kylie Jue: Is this problem solving technique called recursive backtracking. And it's specific to solving these problems that need
+
+244
+00:36:57.390 --> 00:37:04.680
+Kylie Jue: Or need to generate many possible solutions. The key steps and recursive backtracking is that you're going to make a choice about how to generate your solution.
+
+245
+00:37:05.100 --> 00:37:07.620
+Kylie Jue: And then you're going to explore that choice using recursion.
+
+246
+00:37:08.010 --> 00:37:14.550
+Kylie Jue: And then you might make a different choice after that and then repeat the process, which is what this is what allows you to generate all these different options.
+
+247
+00:37:14.850 --> 00:37:21.720
+Kylie Jue: And this paradigm of like making a choice exploring it and then making a different choice is going to be called choose explore and choose
+
+248
+00:37:21.930 --> 00:37:32.010
+Kylie Jue: And we'll dive a little bit more into that later. But just remember those words because it'll be super helpful when you actually start coding up recursive backtracking to thinking about those three steps and what they mean in your code.
+
+249
+00:37:33.150 --> 00:37:35.130
+Kylie Jue: Alright, so let's go ahead and actually do an example.
+
+250
+00:37:35.610 --> 00:37:48.300
+Kylie Jue: So one example that you could that that we can think about is generating coin sequences. So you're playing a game where you take a coin and you flip it a number of times in a row and you care about the number of heads or tails that you're going to get. So what we want to do.
+
+251
+00:37:49.350 --> 00:37:53.790
+Kylie Jue: Is. Let's say you have to coin flips, we want to think about what are all the possible outcomes that I can get
+
+252
+00:37:54.540 --> 00:38:02.340
+Kylie Jue: And you could use this information later down the line to calculate things like probability of you getting a certain score that sort of thing. But this initial task is we're going to use the
+
+253
+00:38:03.180 --> 00:38:16.470
+Kylie Jue: Advantage of our computer to actually generate what are all the possible different combinations of coin flips that we could get if we take two flips. So you could get heads, heads, heads, tails, tails, heads and tails, tails. Not too many for just two quarters. Right.
+
+254
+00:38:17.670 --> 00:38:23.910
+Kylie Jue: But you can imagine that this gets more complicated as you add more flips to what you're doing. So let's look at the three coin possibilities.
+
+255
+00:38:25.770 --> 00:38:37.920
+Kylie Jue: And this case we have eight possibility. So definitely more than the four before. And as you again add more, you're just going to keep getting more and more coins that are harder for you to just figure out I think about as a human being. Right.
+
+256
+00:38:39.810 --> 00:38:49.470
+Kylie Jue: And so how do we know that we got all the possibilities and how do we make sure that we avoid repeat. So we want to actually use this recursive backtracking strategy to generate these possibilities.
+
+257
+00:38:50.550 --> 00:39:01.380
+Kylie Jue: So what we can do is we want to look for patterns. Again, this is part of the recursion, problem solving, that we did even before backtracking. What are the patterns between the outcomes that we saw in the game with two flips.
+
+258
+00:39:01.680 --> 00:39:09.960
+Kylie Jue: Versus the patterns and the outcome that we saw on the games with three flips. And so what you kind of see is this from our first set of solutions with only two flips.
+
+259
+00:39:11.520 --> 00:39:22.890
+Kylie Jue: You can start to draw and this should look start to look familiar to our fractals yesterday and you can start to draw these branches for options from the three flips, but are coming off of the to flip options right
+
+260
+00:39:24.840 --> 00:39:32.040
+Kylie Jue: And primarily there's a self similar entry like relationship between the outcomes of two verses three in particular.
+
+261
+00:39:32.460 --> 00:39:37.830
+Kylie Jue: At each of these branches. You're deciding okay from my to flip outcome of heads, heads, heads.
+
+262
+00:39:38.130 --> 00:39:41.730
+Kylie Jue: After I flipped two heads. There's two things that could happen. I can either flip ahead then.
+
+263
+00:39:41.940 --> 00:39:54.240
+Kylie Jue: Or I could flip a tail. So there's two different things that could happen afterwards and you have this branching point at each of the to flip options but helps us generate all three flip options and together these branching sequences actually define
+
+264
+00:39:55.980 --> 00:40:00.780
+Kylie Jue: Decision tree and decision trees are going to be a super useful tool as we're thinking about backtracking recursion.
+
+265
+00:40:01.320 --> 00:40:13.740
+Kylie Jue: So why do we use decision trees. Again, we've already seen trees in the context of fractals and drawing shapes. But now we're actually going to take these trees and apply meaningful context to them outside just the visual representation of recursion that we were seeing
+
+266
+00:40:15.600 --> 00:40:24.090
+Kylie Jue: In problems where we care about lots of different outcomes, the trees. Help us illustrate how do we actually generate all those outcomes. What are the steps and decisions we have to make
+
+267
+00:40:24.990 --> 00:40:30.450
+Kylie Jue: In particular, they modeled the different options you can choose. And then the decision you make about which option along the way.
+
+268
+00:40:30.900 --> 00:40:42.030
+Kylie Jue: So in this case, if you're thinking about n coin flips and making a decision tree each decision is a single flip that you make, right, and then the option for a given decision is going to be either heads or tails.
+
+269
+00:40:42.570 --> 00:40:53.760
+Kylie Jue: So again, when you're thinking about drawing a tree or if you're trying to visualize what the recursive backtracking strategy is, it's helpful to think about what are my decisions and then what are the actual options at each decision.
+
+270
+00:40:55.800 --> 00:41:06.240
+Kylie Jue: So let's draw an example tree. So we'd start off with no results right no head no tales and when you start off with two flips. You can either flip a heads or you can flip the tables.
+
+271
+00:41:07.470 --> 00:41:12.780
+Kylie Jue: And then from there, if we look at this left side when you flip. Again, you can either flip heads or you could flip tables.
+
+272
+00:41:13.470 --> 00:41:26.100
+Kylie Jue: And then on this side you can flip tales, or you could flip side, you can flip heads of you could folk tales and notice that at each point to I'm keeping track of. Okay, how many flips, do I have left because our end is to which means I'm only going to make two flips.
+
+273
+00:41:28.050 --> 00:41:35.910
+Kylie Jue: So now let's actually formally defined it in a recursive sense. So this is our sort of tree or upside down tree for recursive backtracking.
+
+274
+00:41:36.300 --> 00:41:44.670
+Kylie Jue: And our base case when we want to stop when we know that we've generated all the possible solutions or we've exhausted or gone down a particular branch, as far as we can.
+
+275
+00:41:44.970 --> 00:41:51.930
+Kylie Jue: Is one flips is equal to zero, right, one flips is equal to zero. We shouldn't keep flipping our core and we're not going to keep adding on to the sequence that we're generating
+
+276
+00:41:52.860 --> 00:42:00.810
+Kylie Jue: And in particular, these base cases happen whenever you reach the leaves of our decision tree. So when you're thinking about the decision tree. The other reason that super useful if you're like,
+
+277
+00:42:01.140 --> 00:42:09.060
+Kylie Jue: I don't really know how to formally defined my base case and recursive case the tree will help you do that, and particularly the base case happens at the bleeps
+
+278
+00:42:09.840 --> 00:42:17.700
+Kylie Jue: And then a recursive case is what's going to happen at each decision point. So, like this is a decision point. This is a decision point. This is a decision point
+
+279
+00:42:18.030 --> 00:42:30.840
+Kylie Jue: And each decision point where either deciding, are we adding heads are we adding tales and remember this whole sort of choose explore on shoes paradigm where the choose part were either choosing heads or we're choosing tales.
+
+280
+00:42:32.310 --> 00:42:44.550
+Kylie Jue: And again, the, the analog to the tree is that our decision or a recursive cases is looking at what's happening at each branching point and finding that pattern that will help us define a recursive call.
+
+281
+00:42:46.200 --> 00:43:00.210
+Kylie Jue: Alright, so let's actually code it. So we are going to code, an actual function called generate sequences that takes in the length of the sequence, you want to generate of coins and basically generates all combinations are all possible
+
+282
+00:43:01.590 --> 00:43:15.690
+Kylie Jue: Flips for heads and tails for that link sequence. So I'm going to go ahead and here and this is our starter code. So again, this is what we want to create. We want to create a function called generate sequences that just prints out all the possible sequences of a particular length.
+
+283
+00:43:16.800 --> 00:43:29.010
+Kylie Jue: And in our demo which let me go ahead and activate that here to make sure when I run into does it. We're going to look at for to begin with. So how might we actually go about this. So if we remember right
+
+284
+00:43:30.570 --> 00:43:53.280
+Kylie Jue: We said that our base case was going to be when there are no more flips left and then we set a recursive case it was going to be either add a heads right and each or you want to add a tail. And so the other thing is we want to print out these
+
+285
+00:43:54.660 --> 00:44:05.340
+Kylie Jue: Sequences as we generate them. And so the other thing is, okay, if this is a recursive case, we kind of have to know if we're adding a heads or tails. What are we adding it to right if we remember and we go back to our tree here.
+
+286
+00:44:05.640 --> 00:44:14.160
+Kylie Jue: If I'm at this step, I need to remember that I just picked the heads right so this is a signal to us that maybe we need to store additional information when we're writing our function.
+
+287
+00:44:14.430 --> 00:44:22.560
+Kylie Jue: That is not just clear from just storing the length. Right. And so what we're going to do here is we're going to define a helper function generate
+
+288
+00:44:23.400 --> 00:44:42.060
+Kylie Jue: Sequences helper that just for clarity. I'm going to actually say, okay, we need to keep track of flips left as well as what we've built up so far. So I'm going to call this flips left. And then we're also going to have a string that is so far, like basically what we've written so far.
+
+289
+00:44:43.170 --> 00:44:43.560
+Kylie Jue: All right.
+
+290
+00:44:45.000 --> 00:44:56.190
+Kylie Jue: And so what does that mean inside of generate sequences again with our helper pattern we're always going to start at whatever gets passed in as the length. So we're going to say generate
+
+291
+00:44:57.210 --> 00:45:02.790
+Kylie Jue: Sequences helper. And I'm going to pass in length and then the string so far.
+
+292
+00:45:03.120 --> 00:45:07.470
+Kylie Jue: Is always going to start as the empty string right there's always nothing in our sequence to begin with.
+
+293
+00:45:07.740 --> 00:45:15.990
+Kylie Jue: And let's go ahead and move these basic recursive cases into our helper because that's where they're actually going to go. And so our generate sequences function here. Looks pretty simple.
+
+294
+00:45:16.350 --> 00:45:27.690
+Kylie Jue: And notice I'm getting our Use of undeclared identifier. I need to actually use a function prototype up here to tell my code. Hey, I'm going to have a helper that I'm going to be able to use
+
+295
+00:45:28.770 --> 00:45:37.980
+Kylie Jue: Alright, so let's go this. So for our base case, what we want to say, if there are no flips left. So what does that mean we're going to literally say it flips left is equal to zero.
+
+296
+00:45:39.450 --> 00:45:44.250
+Kylie Jue: Just like we talked about, then let's go ahead and print so far.
+
+297
+00:45:45.180 --> 00:45:53.310
+Kylie Jue: Another thing I want to note here is that it is totally possible to use recursion, where you're not actually returning value. Right. You're just printing something out at the end.
+
+298
+00:45:53.670 --> 00:45:58.470
+Kylie Jue: And so in this case we're not returning. And that's why both of these functions are bored. We just want to print when we get
+
+299
+00:45:59.790 --> 00:46:08.040
+Kylie Jue: When we get to a final string that is of the right length. Else what we want to do is we want to do a recursive case, right. So we want to actually
+
+300
+00:46:09.360 --> 00:46:15.030
+Kylie Jue: Add a heads or tails to what we have so far. So how do we do that we're going to make two recursive calls.
+
+301
+00:46:15.750 --> 00:46:39.720
+Kylie Jue: To our generate sequences helper. We're going to do flips left minus one, right, because this means that we've done an additional flip and then we want to do so far, plus the string H and generate sequences helper flips left minus one. And instead, we're going to do so far, plus t
+
+302
+00:46:44.130 --> 00:46:46.230
+Kylie Jue: Alright, so those are the crystal calls
+
+303
+00:46:47.250 --> 00:46:50.280
+Kylie Jue: And let's go ahead and see how this works. So I'm going to go ahead and run it.
+
+304
+00:47:02.640 --> 00:47:04.350
+The test turned off, let me turn off tasks.
+
+305
+00:47:06.750 --> 00:47:07.290
+Tasks.
+
+306
+00:47:16.950 --> 00:47:25.770
+Kylie Jue: Alright, and that is just printing out all of our four letter sequences. So let's look at what this would look like if we have a larger number. So let's go with like
+
+307
+00:47:42.480 --> 00:47:54.000
+Kylie Jue: It's going to take a little bit longer there. But you can see it actually. And if you try this out on your own. You'll see sort of how it's going through the tree when it's generating these 10 sequences. So it's kind of fun to watch.
+
+308
+00:47:55.080 --> 00:47:59.280
+Kylie Jue: This might take a while. So I'm going to go ahead and
+
+309
+00:48:00.300 --> 00:48:04.110
+Kylie Jue: Stop it here. Well, actually, while it's running. Does anyone have any questions on
+
+310
+00:48:05.640 --> 00:48:07.470
+Kylie Jue: How this code is working.
+
+311
+00:48:13.200 --> 00:48:15.960
+Kylie Jue: Right. I mean, finished. Was there anything in the chat next
+
+312
+00:48:19.170 --> 00:48:19.530
+Kylie Jue: Week.
+
+313
+00:48:21.030 --> 00:48:29.130
+Kylie Jue: Yeah. So again, a common thing you'll see in this backtracking strategy is multiple calls multiple recursive calls in order to generate
+
+314
+00:48:30.540 --> 00:48:32.730
+Kylie Jue: multiple solutions for multiple possibilities.
+
+315
+00:48:38.160 --> 00:48:38.610
+Kylie Jue: Alright.
+
+316
+00:48:39.060 --> 00:48:39.990
+Kylie Jue: So I'm going to go ahead
+
+317
+00:48:40.020 --> 00:48:43.530
+Kylie Jue: And let's talk about just the takeaways. In the last couple minutes so
+
+318
+00:48:44.160 --> 00:48:54.060
+Kylie Jue: One thing that I really want to note because it's a little bit of a different way of thinking. And you'll notice this. When you start seeing the recursion problems versus the regular that sorry the recursion recursive backtracking problems.
+
+319
+00:48:54.270 --> 00:49:01.650
+Kylie Jue: Versus looking closer at the recursive problems I'm unlike in our recursion paradigm with like factorial and reverse string.
+
+320
+00:49:01.950 --> 00:49:14.640
+Kylie Jue: Remember what those we do the stack frames and the solution was getting built up as the calls returned back to the original call right so in our base case we had sort of the smallest thing, which was like, often the empty string or a smallest number
+
+321
+00:49:15.390 --> 00:49:18.510
+Kylie Jue: And then it got added to as you went back up the call stack.
+
+322
+00:49:19.350 --> 00:49:28.410
+Kylie Jue: This sort of is not this doing almost the opposite right in backtracking. Our final output actually occurs at the base case at the leaves, which is when you go all the way down.
+
+323
+00:49:28.950 --> 00:49:36.420
+Kylie Jue: Our decision tree with more recursive calls being made. So that's just something to keep in mind it's reversing when the final output is being created.
+
+324
+00:49:37.740 --> 00:49:42.810
+Kylie Jue: The height of the tree in particular corresponds to the number of decisions that we have to make and the width.
+
+325
+00:49:43.260 --> 00:49:47.520
+Kylie Jue: Is going to be the decisions you have at each point which we saw what the heads, tails examples.
+
+326
+00:49:48.360 --> 00:49:58.950
+Kylie Jue: And again to exhaustively explore the entire space. We have to try every possible option so that can mean there's a lot of things, just like you saw with that 1010 the length 10 string for the heads and tails.
+
+327
+00:49:59.670 --> 00:50:09.330
+Kylie Jue: So we have to make any decisions with two choices for every decision and the corn example. And what does this mean, this means we have to to the end possible outcomes, which is a pretty pretty large.
+
+328
+00:50:11.670 --> 00:50:21.420
+Kylie Jue: So in summary, why do we use recursion. We have elegance efficiency and it allows us to also solve dynamic problems. You can imagine that with the heads, tails example.
+
+329
+00:50:22.020 --> 00:50:28.740
+Kylie Jue: If you just get were given an end and you had to like intuitively, figure out how many loops are we going to have to call for
+
+330
+00:50:29.520 --> 00:50:37.830
+Kylie Jue: Something called make for generating all possible solutions, it makes it really hard to say like, Oh, we're just generating a string of length for an iterating over four
+
+331
+00:50:39.330 --> 00:50:47.550
+Kylie Jue: Verses 10 like I encourage you to think about what would the iterative solution actually look like for that sequences problem. It's not pretty.
+
+332
+00:50:48.600 --> 00:50:54.540
+Kylie Jue: And then what we've also learned that was that there are two different types of recursion, you sort of understood the basics with fractals.
+
+333
+00:50:55.170 --> 00:50:59.610
+Kylie Jue: Where you have like again a repeat of tasks that builds up the solution as you come back up the call stack.
+
+334
+00:50:59.880 --> 00:51:04.800
+Kylie Jue: And the final base cases sort of that initial seed of the solution that gets added to with each call
+
+335
+00:51:05.040 --> 00:51:13.020
+Kylie Jue: And then again, the last call or the start the initial call to the recursive function that you make, is what produces the final solution or returns the final output.
+
+336
+00:51:13.380 --> 00:51:18.450
+Kylie Jue: Versus in backtracking. Here you have many possible solutions with multiple recursive calls at each step.
+
+337
+00:51:18.780 --> 00:51:29.400
+Kylie Jue: And the seed is actually going to be empty. So the first call starts off with an empty solution. And at each base case, you have a potential solution that you're out, putting. So again, they're a little bit different.
+
+338
+00:51:30.660 --> 00:51:44.850
+Kylie Jue: All right. And then what's next, we're going to dive really deep into backtracking tomorrow. Nick's going to talk about potential uses a fact tracking and how we can formalize it a little bit more in terms of a recursive problem solving strategy, but we'll stick around for questions. Thanks.
+
+339
+00:51:47.790 --> 00:51:48.330
+Siddharth Balaji: Thank you.
+
+340
+00:51:48.810 --> 00:51:49.800
+Thank you. Thank you.
+
+341
+00:51:51.060 --> 00:51:51.360
+Thank you.
+
+342
+00:51:54.930 --> 00:51:55.440
+christopher cooper: Thank you.
+
+343
+00:51:57.240 --> 00:51:57.720
+Jihe He: Thank you.
+
+344
+00:52:00.180 --> 00:52:00.780
+edouard des: Thank you so much.
+
+345
+00:52:03.870 --> 00:52:08.460
+Can I find the zoom bar to exit out of present mode.
+
+346
+00:52:15.630 --> 00:52:16.920
+I see a hand raised.
+
+347
+00:52:18.600 --> 00:52:27.930
+karan parikh: Yeah, um, I want to ask them, What's the grading. So for like Assignment one or the one that was just returning a few days ago, there's like either a check or a check, plus
+
+348
+00:52:29.010 --> 00:52:38.250
+karan parikh: But how do, is there like specific notes anywhere where we can see the difference between that decision or is it, like, I'm just to check a checkbox is that all we have
+
+349
+00:52:39.000 --> 00:52:43.290
+Kylie Jue: Yeah, so your sexual leadership will have given you a lot of feedback in terms of like
+
+350
+00:52:44.460 --> 00:52:54.000
+Kylie Jue: What resulted in either a check or a check. Plus, or any other grade. There's no like formal like here's the line of which, like this is a check, plus versus a check.
+
+351
+00:52:54.600 --> 00:53:08.640
+Kylie Jue: But in general, like what that bucket means is that if you have a check flossing means you saw the understood the material. It's great. You were able to implement a solution that had no no or very minimal bugs versus a check would be something that has
+
+352
+00:53:09.720 --> 00:53:14.970
+Kylie Jue: You're definitely like meeting expectations but maybe there were some larger bugs or
+
+353
+00:53:16.320 --> 00:53:18.870
+Kylie Jue: Conceptual areas that you'll want to revisit before the next assignment.
+
+354
+00:53:20.100 --> 00:53:20.400
+karan parikh: Okay.
+
+355
+00:53:29.100 --> 00:53:30.120
+Yeah, sure. Now,
+
+356
+00:53:32.490 --> 00:53:40.800
+Junhao Wang: Well, I just have a question for the maze on for those Simon like so we went over, like the contains like in the set.
+
+357
+00:53:41.460 --> 00:53:58.440
+Junhao Wang: And then like we really like and the complexity is old log and then would it be better to create another exact copy of the maze and then like set everything. Everything visited as true since like accessing the grid on the has a complexity of one
+
+358
+00:54:01.980 --> 00:54:04.560
+Kylie Jue: I'm not sure I totally followed
+
+359
+00:54:05.760 --> 00:54:09.210
+Kylie Jue: How you would use the two sets, Nick, did you catch
+
+360
+00:54:10.050 --> 00:54:13.050
+Junhao Wang: Like a question like, how we like. Like, I mean like
+
+361
+00:54:13.110 --> 00:54:14.640
+Junhao Wang: The visit hit like parts.
+
+362
+00:54:14.670 --> 00:54:15.150
+Nick Bowman: Like yeah
+
+363
+00:54:15.270 --> 00:54:16.020
+Junhao Wang: Yeah, how we like.
+
+364
+00:54:16.500 --> 00:54:18.360
+Junhao Wang: Put like all the grid locations.
+
+365
+00:54:18.420 --> 00:54:19.050
+Nick Bowman: In the said
+
+366
+00:54:19.320 --> 00:54:21.990
+Junhao Wang: But every time we add a neighbor. We knew check if it's like
+
+367
+00:54:22.380 --> 00:54:22.620
+Nick Bowman: In the
+
+368
+00:54:22.920 --> 00:54:23.970
+Junhao Wang: In the set or not.
+
+369
+00:54:24.570 --> 00:54:25.230
+Junhao Wang: But what if you
+
+370
+00:54:25.260 --> 00:54:29.040
+Junhao Wang: Just like make another grid like exact copy of the maze.
+
+371
+00:54:29.460 --> 00:54:35.580
+Junhao Wang: Okay, and then like set all the visited to be true, would, would that be like better, or
+
+372
+00:54:35.820 --> 00:54:41.310
+Kylie Jue: Oh, sure. I see what you're saying. Yeah, you could do that. So there's, again, there's going to be trade offs there.
+
+373
+00:54:41.850 --> 00:54:51.840
+Kylie Jue: It'd be faster to check right of checking the true or false, but then you're storing this entire extra copy of the grid. So it's a little bit hard to weigh and say, like, this one's definitely better versus this one.
+
+374
+00:54:52.650 --> 00:55:06.510
+Kylie Jue: Is definitely worse depending on, it'll, it'll depend on sort of like the size of the grid that you're making the copy of and having to store two of them versus like if it's small enough good like again login time is actually not that bad. It's actually pretty good, you know,
+
+375
+00:55:07.350 --> 00:55:08.160
+Kylie Jue: Okay, but yeah.
+
+376
+00:55:15.900 --> 00:55:18.900
+Kylie Jue: I can't see the participants list because I can't change my
+
+377
+00:55:20.250 --> 00:55:27.090
+Kylie Jue: I, for some reason, can't I don't have the share button. They went away on zoom. But if I know other people have their hands raised. Nick, do you see people
+
+378
+00:55:29.250 --> 00:55:30.570
+Kylie Jue: I think Nick is very frozen.
+
+379
+00:55:34.920 --> 00:55:41.760
+Kylie Jue: We can't. I don't know what you said it on it. But if the next person who raise their hand wants to ask a question, you can just unmute yourself and
+
+380
+00:55:41.760 --> 00:55:42.060
+Ask
+
+381
+00:55:44.220 --> 00:55:45.540
+Aadi M Rane: So I'm
+
+382
+00:55:46.920 --> 00:55:59.220
+Aadi M Rane: Sorry. Um, so I don't like I still don't get like the difference between like, you know, normal recursion and the backtracking one. So you like
+
+383
+00:56:00.600 --> 00:56:03.900
+Aadi M Rane: So, so what does it mean it gets a solution at the base case.
+
+384
+00:56:04.050 --> 00:56:11.010
+Kylie Jue: Yeah, so for example with the heads and tails example here, right at the base case we found
+
+385
+00:56:11.220 --> 00:56:11.490
+Kylie Jue: Like
+
+386
+00:56:11.550 --> 00:56:13.470
+Kylie Jue: One of the sequences, you can generate so we
+
+387
+00:56:13.470 --> 00:56:18.480
+Kylie Jue: Can call that, like, one of our possible solutions or one of the possibilities that we're trying to explore. Right.
+
+388
+00:56:19.950 --> 00:56:23.850
+Kylie Jue: And in a base case for something like the recursive. Let's say factorial
+
+389
+00:56:23.910 --> 00:56:25.980
+Kylie Jue: Right, our base case was when you got
+
+390
+00:56:25.980 --> 00:56:27.780
+Kylie Jue: To the simplest number, which was actually like
+
+391
+00:56:27.780 --> 00:56:38.820
+Kylie Jue: factorial of zero. Right. And so in order to calculate the other factorial, you had something down here. That would be like factorial of n minus one is equal to start factorial is equal to, like,
+
+392
+00:56:39.600 --> 00:56:41.250
+Kylie Jue: The current number of times. Factorial of n.
+
+393
+00:56:41.250 --> 00:56:41.760
+Aadi M Rane: Minus one.
+
+394
+00:56:41.790 --> 00:56:42.180
+Kylie Jue: Great.
+
+395
+00:56:42.330 --> 00:56:54.270
+Kylie Jue: And so what happens is if it returns zero at the base case you get you end up multiplying as you return back up the call stack versus here as you go down the tree. You're actually like, Oh, I found a solution at the bottom. Oh, I found the solution at the bottom.
+
+396
+00:56:54.480 --> 00:56:56.940
+Kylie Jue: In this like bottom most recursive call.
+
+397
+00:56:57.090 --> 00:57:04.620
+Kylie Jue: As opposed to saying I'm only going to get my solution when I come all the way back up to the original call like we did in factorial. So make sense.
+
+398
+00:57:05.340 --> 00:57:06.570
+Aadi M Rane: So I'm
+
+399
+00:57:07.710 --> 00:57:10.380
+Aadi M Rane: So over the coin one the
+
+400
+00:57:12.780 --> 00:57:14.400
+Aadi M Rane: Super isn't the top
+
+401
+00:57:15.780 --> 00:57:21.810
+Aadi M Rane: The top of the tree, the MC and fills the top of the top three the empty string. So it's the
+
+402
+00:57:21.810 --> 00:57:22.800
+Aadi M Rane: MTC one
+
+403
+00:57:23.880 --> 00:57:25.860
+Aadi M Rane: So, um,
+
+404
+00:57:26.970 --> 00:57:31.380
+Aadi M Rane: So when that be the base or
+
+405
+00:57:31.830 --> 00:57:38.520
+Kylie Jue: So this will be sort of your original call right now. And you could imagine in factorial, like the parallel diagram here.
+
+406
+00:57:38.700 --> 00:57:46.860
+Kylie Jue: Would be in the original factorial calling factorial, five right then you call factorial four and you call factorial 3210 right
+
+407
+00:57:47.670 --> 00:57:55.530
+Kylie Jue: So what happens here is factorial zero is going to return one. And then, this one's going to return one times one and then two times one. And then, etc. Right. As you go back up.
+
+408
+00:57:55.950 --> 00:58:07.500
+Kylie Jue: And then the final call up here is what returns like 100 I think it's like 120 Right for the answer versus here. You're getting an answer at the bottom of the calls right at here you've got, heads, heads.
+
+409
+00:58:07.950 --> 00:58:08.640
+Aadi M Rane: Heads, tails.
+
+410
+00:58:08.700 --> 00:58:09.480
+Kylie Jue: Does that make sense.
+
+411
+00:58:11.010 --> 00:58:13.950
+Aadi M Rane: Oh, so so you don't go back up at all.
+
+412
+00:58:14.760 --> 00:58:22.470
+Kylie Jue: You will end up going I guess like you will end up going up in the sense that the functions return, but the solutions are being produced at the bottom.
+
+413
+00:58:23.160 --> 00:58:24.300
+Aadi M Rane: If okay yeah
+
+414
+00:58:24.750 --> 00:58:24.960
+Aadi M Rane: Yeah.
+
+415
+00:58:25.050 --> 00:58:25.500
+Good question.
+
+416
+00:58:27.180 --> 00:58:27.990
+Aadi M Rane: All right, thanks.
+
+417
+00:58:35.910 --> 00:58:38.670
+Kylie Jue: Is there anyone else who has their hand raised. I can't see.
+
+418
+00:58:39.510 --> 00:58:46.260
+Oz Gitelson: Yeah, um, I was wondering like via trade see the code again. Yeah.
+
+419
+00:58:48.780 --> 00:58:50.280
+Oz Gitelson: Because I'm
+
+420
+00:58:53.370 --> 00:58:58.680
+Oz Gitelson: Like wouldn't let just create a long string of heads because the
+
+421
+00:59:02.460 --> 00:59:05.370
+Kylie Jue: Very first thing is the long string of
+
+422
+00:59:05.370 --> 00:59:05.790
+Heads.
+
+423
+00:59:07.980 --> 00:59:15.420
+Kylie Jue: And then what happens is after you. You're exactly right. You're going down this branch where it's like pick heads pick heads because because 10 times right
+
+424
+00:59:16.140 --> 00:59:21.120
+Oz Gitelson: Oh this. So, this function is. I'm just putting every possible combination
+
+425
+00:59:21.120 --> 00:59:22.680
+Kylie Jue: Exactly. Yeah. Okay. And I
+
+426
+00:59:22.890 --> 00:59:26.100
+Kylie Jue: Picked heads, then you go back up one step and you pick one tales.
+
+427
+00:59:26.460 --> 00:59:27.660
+Kylie Jue: Right. You see how that morning.
+
+428
+00:59:27.690 --> 00:59:29.850
+Oz Gitelson: Yeah. Alright. Thanks.
+
+429
+00:59:33.000 --> 00:59:44.370
+rayjohns@stanford.edu: Um, could you walk through a little bit how the recursive version of the Hanoi towers works just a bit. I'm getting a little dyslexic over which is a little bit of a cup game right
+
+430
+00:59:46.320 --> 00:59:49.380
+rayjohns@stanford.edu: Post goes where. And I just kind of wanted to understand fully
+
+431
+00:59:49.860 --> 00:59:53.850
+Kylie Jue: I know it's definitely a tricky one to wrap your head around.
+
+432
+00:59:55.380 --> 00:59:58.500
+Kylie Jue: Let me pull back up the slide with the
+
+433
+00:59:59.580 --> 01:00:06.390
+Kylie Jue: Actual algorithm. Okay, so in the three. WELL, LET'S GO TO THE FOUR PACK case. So you're starting here.
+
+434
+01:00:09.150 --> 01:00:17.400
+Kylie Jue: And so we have everything in the first call right which you can imagine this this unless just actually change and for
+
+435
+01:00:20.550 --> 01:00:33.060
+Kylie Jue: And so when we're here and as equal the very first call right and is equal to for our source peg has all the things on it and then auxiliary and destination are empty and then we're passing in the order destination and then on cooler.
+
+436
+01:00:35.220 --> 01:00:36.990
+Kylie Jue: In our base case we're saying okay
+
+437
+01:00:38.400 --> 01:00:47.460
+Kylie Jue: When there's only one disc. We're just going to move that desk. But until then, we're going to recursive Lee sort of solve the problem. And so if we think about just the for this case.
+
+438
+01:00:47.970 --> 01:00:54.660
+Kylie Jue: Our general solution was okay, we want to move this big desk. The bottom just from source to destination.
+
+439
+01:00:55.050 --> 01:01:02.670
+Kylie Jue: But in order to do that we need to move the top three desks out of the way. And how do we do that well we can sort of like play towers of hanalei
+
+440
+01:01:03.600 --> 01:01:08.580
+Kylie Jue: Where we don't even worry about the bottom just yet. We're just going to say, let's move these to the auxiliary pin.
+
+441
+01:01:09.570 --> 01:01:17.430
+Kylie Jue: And so what we have to say is, we're going to play towers of Hanoi for three desks, where instead of moving the three just to the destination pin. We're trying to move them to the auxiliary pen.
+
+442
+01:01:17.850 --> 01:01:27.480
+Kylie Jue: And that's what that first call is doing it saying for one less disk than the total number or the end right move the pins from the source pay, which is where they are right now.
+
+443
+01:01:27.870 --> 01:01:34.170
+Kylie Jue: To the auxiliary pin instead of the destination and then you can think about this third parameter is just sort of like
+
+444
+01:01:34.500 --> 01:01:39.570
+Kylie Jue: What's the post. We're using as like a temporary place we're going to put things as we're moving things along the way.
+
+445
+01:01:39.930 --> 01:01:51.870
+Kylie Jue: And so what we're using now as the auxiliary pin essentially becomes destination. And that's the first step is like, okay, I'll actually just commented here move top and minus one discs.
+
+446
+01:01:54.210 --> 01:01:54.900
+Kylie Jue: Out of the way
+
+447
+01:01:57.630 --> 01:02:11.610
+Kylie Jue: And so that's the first step. And so now you end up with something that looks like this right after this call, you end up with this. And you can say, okay, now we can take this biggest disk and move it over to destination without worrying, right. So that's what this call is doing.
+
+448
+01:02:12.750 --> 01:02:16.530
+Kylie Jue: And then what you do now is now that we have something that looks like that.
+
+449
+01:02:16.800 --> 01:02:24.810
+Kylie Jue: We have to say, okay, we need to take play towers of Hanoi with three discs again but now instead of moving from source to destination. Now we're moving from auxiliary to destination.
+
+450
+01:02:25.200 --> 01:02:39.330
+Kylie Jue: So what does the call look like it looks exactly the same as this one, except now the starting point is auxiliary our destination pin is the real destination and then the sort of like help or pin that we're using as a temporary place is the remaining pin which is just the source.
+
+451
+01:02:40.470 --> 01:02:41.160
+Kylie Jue: Does that make sense.
+
+452
+01:02:43.440 --> 01:02:44.580
+rayjohns@stanford.edu: Yeah, that definitely helps. Thank you.
+
+453
+01:02:45.120 --> 01:02:45.480
+Kylie Jue: No problem.
+
+454
+01:02:49.470 --> 01:02:49.800
+Demi Lei: Um,
+
+455
+01:02:49.890 --> 01:03:00.090
+Demi Lei: So, um, I, I understand like the whole. I'm like, sort of the algorithm, how it works, but I just don't really understand the code.
+
+456
+01:03:00.720 --> 01:03:04.350
+Demi Lei: For this yes for ivory tower of Hanoi so
+
+457
+01:03:05.610 --> 01:03:17.250
+Demi Lei: I'm like, I understand how like in this case it works. But is that because every time you call it, you kind of just repeated like sort of like you just repeat the whole thing.
+
+458
+01:03:17.550 --> 01:03:20.850
+Demi Lei: Yeah, like you repeat the whole n minus one until like
+
+459
+01:03:21.810 --> 01:03:25.650
+Demi Lei: Until it's an equal one and then you go back up.
+
+460
+01:03:25.980 --> 01:03:28.530
+Kylie Jue: Yeah. So for example, if you just had one disc right
+
+461
+01:03:28.890 --> 01:03:29.220
+Demi Lei: I'm
+
+462
+01:03:29.250 --> 01:03:30.870
+Kylie Jue: Just over from source to destination.
+
+463
+01:03:32.430 --> 01:03:37.470
+Kylie Jue: Right. So then what you would do is, you're calling this where and is equal to one. And you're saying okay
+
+464
+01:03:38.070 --> 01:03:54.900
+Kylie Jue: You have to just starting on source. Let's only worry about the top this because when minus one is one and when you call it, what you're saying is, okay, move the smallest disk from the source to the auxiliary pin right so you move it like that and then. And again, it's
+
+465
+01:03:56.310 --> 01:04:05.400
+Kylie Jue: Your with your base case there and then you're saying okay now move the largest desk from source destination. So that'd be too. Right, so the bottom Dennis's to and it moved there.
+
+466
+01:04:05.610 --> 01:04:07.680
+Kylie Jue: And then it says okay now move the small desk from
+
+467
+01:04:07.830 --> 01:04:15.930
+Kylie Jue: exhilarated destination. And actually if you keep doing that with like three and with like we did before. It'll actually it feel a little bit like magic, but it'll work.
+
+468
+01:04:16.620 --> 01:04:17.400
+Demi Lei: Okay, okay.
+
+469
+01:04:17.610 --> 01:04:24.390
+Demi Lei: So basically, it's kind of like it will just repeat. I like that oh yeah cuz it called a function within the function
+
+470
+01:04:24.420 --> 01:04:27.330
+Demi Lei: Yep. Okay, so just keep repeating. Okay, got it.
+
+471
+01:04:28.350 --> 01:04:33.630
+rayjohns@stanford.edu: Where I was getting confused is like I wasn't really seeing that like move single disc is just not going to execute
+
+472
+01:04:34.920 --> 01:04:38.400
+rayjohns@stanford.edu: Until that inner find solution is done. Correct, yes.
+
+473
+01:04:42.870 --> 01:04:43.650
+Demi Lei: Thank you.
+
+474
+01:04:47.550 --> 01:04:48.600
+Kylie Jue: Are there other questions.
+
+475
+01:04:55.680 --> 01:04:58.800
+Kylie Jue: Nick. Is there anything in the chat. That's worth saying out loud for the recording.
+
+476
+01:05:00.960 --> 01:05:03.540
+Nick Bowman: I had to leave and rejoin so much that cleared out
+
+477
+01:05:04.710 --> 01:05:05.490
+Kylie Jue: I'm not sure.
+
+478
+01:05:05.580 --> 01:05:06.990
+Nick Bowman: My computer is really haven't been time
+
+479
+01:05:12.210 --> 01:05:18.330
+Kylie Jue: I am also my computer's not doing great, because I have no zoom controls can't even hang up this call.
+
+480
+01:05:21.300 --> 01:05:25.980
+Kylie Jue: Their hands up just unmute or say a chat question out loud, feel free to
+
+481
+01:05:25.980 --> 01:05:26.760
+Kylie Jue: do that now.
+
+482
+01:05:33.600 --> 01:05:34.920
+We can go ahead and close
+
+483
+01:05:36.090 --> 01:05:38.280
+Nick Bowman: The call. Yeah. Third quarter. Yeah.
+
+484
+01:05:39.120 --> 01:05:40.260
+Cool. All right.
+

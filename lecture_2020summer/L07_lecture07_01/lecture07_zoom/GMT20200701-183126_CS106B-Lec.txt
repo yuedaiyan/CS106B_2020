@@ -1,0 +1,113 @@
+00:13:59	kylie jue:	Thank you!
+00:14:04	Siddharth Balaji:	No problem
+00:14:17	tomhal@stanford.edu:	Set an alarm for it lol
+00:19:58	shreyas ravi:	so the map key is the character and the value is the frequency?
+00:20:08	kylie jue:	yes!
+00:20:14	Weiqi Yu:	is that bucket sort?
+00:21:01	kylie jue:	it’s not quite bucket sort – if you’er interested in looking it up later, it’s similar to radix sort
+00:21:33	Elan Smolar Eisenberg:	Is a map kinda like a Java array but instead of getting the info by index, you get it by a key?
+00:22:01	kylie jue:	@Elan - yes you can think of Maps like arrays where indices aren’t numerical
+00:27:45	Elan Smolar Eisenberg:	Is there a getkey method?
+00:28:11	kylie jue:	To get one key or all keys?
+00:28:23	kylie jue:	there’s .containsKey() and .keys()
+00:28:49	Elan Smolar Eisenberg:	Could you loop through strings like (for string : map.keys()) ?
+00:29:10	Siddharth Balaji:	So I understand we could complete this problem with a map, but would it be more efficient to loop through the original string and add all chars to a new vector, using the vec.sort() function and then looping through this vector and adding the chars to a new string? This wouldn’t generate the frequency map but im just wondering which would be a more efficient solution?
+00:29:27	kylie jue:	Yes you can - if the map’s keys are strings, you can do: for(string key : map.keys()) {}
+00:29:34	Weiqi Yu:	I don't think the keys are going to be sorted in the Vector
+00:30:34	kylie jue:	@Siddharth you would have to implement the sort function since the Stanford vector does not have a sort function.  So to answer whether or not it’s more efficient, it depends on how sort is implemented
+00:31:00	Siddharth Balaji:	Makes sense thank you
+00:31:23	shreyas ravi:	how do you know if the word is an actual word?
+00:31:29	Kenny Wang:	I thought I used a Stanford vector sort function in Assignment 1?
+00:31:55	Kenny Wang:	hmm.
+00:32:04	kylie jue:	@Shreyas you can imagine we have a lexicon of valid English words
+00:32:21	kylie jue:	@Kenny hmm it’s possible it’s not in the documentation, but I don’t see a sort function here: https://web.stanford.edu/dept/cs_edu/cppdoc/Vector-class.html
+00:32:32	Siddharth Balaji:	It was in the soundexsearch part of the assignment
+00:32:45	Siddharth Balaji:	There was a vec.sort() function that we could use
+00:32:59	Kenny Wang:	yeah ^
+00:33:31	kylie jue:	Ah okay - I’ll check to see how that’s implemented for A1
+00:41:15	yukun yang:	Question: should we also avoid changing the same word at all cost?
+00:42:21	kathleen bryan:	Wouldn’t it be inefficient to have to go all the way back through anything that has been evaluated every time>
+00:42:25	Shifeng Hong:	when we try new word，do we just loop through char a to z？
+00:42:31	kathleen bryan:	*?
+00:42:54	tomhal@stanford.edu:	mayday
+00:43:23	kylie jue:	@shifeng yes!
+00:43:44	shreyas ravi:	we can assume that the start and end words are the same length right?
+00:43:56	kylie jue:	@kathleen do you mind clarifying your question out loud after this?
+00:44:01	kathleen bryan:	sure
+00:44:03	kylie jue:	@shreyas yes
+00:44:36	Kyle Booker:	So we start from the more guaranteed answers and then move to a more brute force answers?
+00:44:42	karan parikh:	is that the only possible ladder?
+00:44:52	kylie jue:	@Karan there can be multiple different possible answers
+00:45:12	karan parikh:	so could map -> may -> ray also be a ladder?
+00:46:03	kylie jue:	@Kyle I’m not sure I understand the question.  We start with words that are closer neighbors and move farther out - so I think the answer is yes?  But not 100 percent sure what you mean by brute force answers
+00:46:16	kylie jue:	@Karan you could have map -> may -> ray -> way
+00:46:31	kylie jue:	But we’ll actually see in our solution that we’ll end up with the shortest possible ladders
+00:46:41	kylie jue:	so map -> may -> way will come up first
+00:48:38	Kyle Booker:	sets 0.0
+00:48:39	Samuel Lynn Ledden:	thasett's a
+00:48:40	Ryan Gabel:	set
+00:48:42	Jennifer Anna Bonello:	set
+00:48:42	Samuel Lynn Ledden:	set
+00:48:45	Siddharth Balaji:	set
+00:48:47	edouard des:	I agree
+00:48:47	Aadi M Rane:	Do you need to set
+00:48:49	Aadi M Rane:	set
+00:48:50	kylie jue:	You’ll discuss in breakout rooms!
+00:48:56	Weiqi Yu:	lol
+00:54:24	Pepe Bolorinos:	Why not map instead of set for keeping track of words we have already checked?
+00:54:32	Chloe Su:	So for #2, you would add all the words that’s 1 step away to the queue first then add words that’s 2 steps?
+00:54:42	kylie jue:	@Chloe you’ll see shortly!
+00:55:19	kylie jue:	@Pepe you only need to know if a word has appeared or not so you can just keep all the words.  A map would need keys and values and in this case the values so it’s not necessary to have values here
+00:55:31	kylie jue:	*keep a set of all the words
+00:55:46	Pepe Bolorinos:	ah, makes sense, thanks
+00:55:47	Pepe Bolorinos:	!
+00:57:19	Liza George:	we don't need to keep track of already visited partial paths right?
+00:57:39	kylie jue:	@Liza correct - since we’re already keeping track of visited words
+00:58:59	karan parikh:	you can put stacks inside of queues like that?
+00:59:03	Kenny Wang:	is this in our homework?
+00:59:23	kylie jue:	@Karan yes!  We’ll talk more about nested data structures at the beginning of lecture tomorrow
+00:59:39	kylie jue:	@Kenny you’ll use breadth-first search in the assignment for a different use case
+01:00:04	Kenny Wang:	alright, will we be able to see Nick's code after class?
+01:00:48	kylie jue:	The pseudocode (and this video) will be available but not the exact code
+01:01:08	Kenny Wang:	good to know :)
+01:03:55	Liza George:	do we need to worry about taking shallow/deep copies of ADTs in c++?
+01:04:34	kylie jue:	that’s actually similar to the pass by reference vs. pass by reference issues across functions!
+01:05:16	kylie jue:	when you reassign a data structure to a new variable, you’ll be creating an entirely new copy in C++
+01:05:28	Liza George:	oh ok. so it is a similar situation where like for this problem we don't need to edit the old ladder so we can just copy its values into a new ladder?
+01:05:57	kylie jue:	yes exactly
+01:06:05	Liza George:	ok, thank you!
+01:06:06	karan parikh:	does the YEAH have problems with minor vs non-minor? can minors go to that?
+01:06:06	Jordan Lin:	The idea of shallow/deep copies seems to be more prevalent in Python, where everything is pass by reference
+01:06:22	kylie jue:	@Karan minors unfortunately can’t go to YEAH hours but they’ll be recorded
+01:06:28	kylie jue:	@Jordan yes that’s correct
+01:06:32	Elan Smolar Eisenberg:	Bye thank you!
+01:06:34	Kevin H Fan:	Thank you!
+01:06:37	Guozhen Miao:	thank you
+01:06:38	Weiqi Yu:	thank you!
+01:06:39	nicole koch:	Thank you!
+01:06:39	paul gialis:	Thank you
+01:06:41	Edward Chung Yik Yeung:	thank you
+01:06:42	Chitra Mukherjee:	Thank you!
+01:06:45	Shifeng Hong:	Thank you
+01:06:45	hyy:	thank you
+01:06:47	kevin yang:	Thank you!
+01:06:49	Akash Bhargava:	Thank you!
+01:06:50	Angela Zhang:	thank you!
+01:06:51	karan parikh:	are the YEAH recordings in the canvas?
+01:06:53	Gautham Rajesh:	thanks
+01:06:55	I. Lemhadri:	Thank you !
+01:06:55	Arul Saxena:	thank you!
+01:06:57	christopher cooper:	Thank You!
+01:06:57	Lawrence Li:	thank you~
+01:07:02	kylie jue:	@Karan yes under Course Videos
+01:07:09	Kenneth Fischer:	Thank you!
+01:07:11	shirley li:	Thank you.
+01:07:25	Kenny Wang:	Question: We were able to use Vector.sort() in Assignment 1, but this isn't in the documentation. What was that about?
+01:08:44	Kenny Wang:	okay, good to know
+01:10:23	Liza George:	@kenny this is bit of a weird way to do it, but if you do want to look at the public implementation of the methods you can look at the lib\StanfordCPPLib directory in every project
+01:13:20	Liza George:	bye, thank you!
+01:13:21	karan parikh:	thank you
+01:13:25	haoming li:	Have a good one. Thank you
+01:13:26	ian rundle:	Thank you!
+01:13:27	Jennifer Anna Bonello:	Thanks
+01:13:30	Shifeng Hong:	Thank you

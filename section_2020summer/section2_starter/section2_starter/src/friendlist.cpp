@@ -1,0 +1,65 @@
+/*
+ * CS106B Section Handout Test Harness: Section 1
+ * ----------------------------------------------
+ * These problems have been galvanized from years of
+ * section handouts that have been worked on by numerous
+ * instructors and TA's. Codified by Trip Master and Nick
+ * Bowman for CS106B Spring 2020.
+ *
+ * A huge thank you to Keith Schwarz and Julie Zelenski
+ * for creating an amazing testing harness!
+ */
+
+#include <iostream>
+#include "map.h"
+#include "vector.h"
+#include "filelib.h"
+#include "strlib.h"
+#include "testing/SimpleTest.h"
+#include "testing/TextUtils.h"
+using namespace std;
+
+/*
+ * Friend List (Code Write)
+ * ----------------------------------
+ * Write a function named friendList that takes in a file name and reads
+ * friend relationships from a file and writes them to a Map.
+ * friendList should return the populated Map. Friendships are bi-directional.
+ * The file contains one friend relationship per line, with names separated
+ * by a single space. You do not have to worry about malformed entries.
+ */
+
+// 读取一个文件,获得 好友关系 Map
+Map<string, Vector<string>> friendList(string filename) {
+
+    Map<string, Vector<string>> result;
+
+    ifstream in;
+    Vector<string> lines;
+    openFile(in, filename);
+    readEntireFile(in, lines);
+    // cout << "lines: " << lines << endl;
+    for (string line : lines) {
+        Vector<string> friends = stringSplit(line, " ");
+        if (!result.containsKey(friends[0]) || !result.containsKey(friends[1])) {
+
+            // result.put(friends[0], friends[1]);
+            // result.put(friends[1], friends[0]);
+            result[friends[0]] += { friends[1] };
+            result[friends[1]] += { friends[0] };
+        }
+    }
+
+    return result;
+}
+
+
+/* * * * * Provided Tests Below This Point * * * * */
+
+PROVIDED_TEST("provided test case from handout") {
+    Map<string, Vector<string>> soln;
+    soln["Trip"] = {"Kylie", "Nick"};
+    soln["Kylie"] = {"Trip"};
+    soln["Nick"] = {"Trip"};
+    EXPECT_EQUAL(soln, friendList("res/buddies.txt"));
+}

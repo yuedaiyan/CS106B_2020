@@ -1,0 +1,149 @@
+00:08:27	Ryan Bernstein:	U2++?
+00:08:38	Evan Baldonado:	30 MB/s?
+00:08:38	Samuel Lynn Ledden:	debugging
+00:08:44	Kenny Wang:	writing test cases
+00:08:48	Arul Saxena:	coming up with unique test cases
+00:08:48	Evan Baldonado:	Starting it whoops
+00:08:49	dyson ye:	testing
+00:08:49	hriday chhabria:	Finding test cases
+00:08:50	kevin yang:	Searching
+00:08:52	Pranav Nair:	Debugging all the functions
+00:08:53	hunter ruebsamen:	Trying to index sets
+00:08:54	Humaid Alzaabi:	Being thorough
+00:08:55	Faith Aing Okamoto:	trying to figure out how the random-number generators works
+00:08:55	tongjun zhang:	testing
+00:08:56	kathleen bryan:	The logic of the search engine + and -
+00:08:56	Rohan N Chowla:	Debugging
+00:08:57	Siddharth Balaji:	Figuring our what test cases would be the most efficient/helpful
+00:08:57	Zachary Alon:	debugging
+00:08:58	Liza George:	not procrastinating
+00:08:58	Kyle Booker:	Navigating documentation
+00:08:58	Jordan Lin:	Optimizing the code
+00:08:59	Kenny Wang:	testing is really helpful but it takes ages
+00:08:59	brianzhg@stanford.edu:	writing test cases
+00:09:01	Jaelyn N Kelly:	debugging
+00:09:02	Kai Ssempa:	Literally still on the warmup chile…
+00:09:03	david vu:	fixing buggs
+00:09:03	Lukas Fullner:	working with precreated code
+00:09:03	yukun yang:	Running test cases: Always run into exception or unexpected crashes
+00:09:04	shirley li:	Making test cases thoroughly
+00:09:04	Jacob Knego:	Comprehensive testing
+00:09:05	Rigel Cupido Wafford:	Trying to make efficient algorithms.
+00:09:09	ian rundle:	Debugging ahhhh!
+00:09:11	Hemant Chaudhary:	Debugging!
+00:09:16	Nadia Palar:	optimising + debugging
+00:09:19	gavin gee:	writing good tests
+00:09:19	Ryan Bernstein:	Getting the same amount of unique terms as the website says
+00:09:25	edouard des:	Interesting bugs with QT creator in which it just does not want to work
+00:09:33	karan parikh:	starting lol
+00:09:39	Magdalena Warren:	testing
+00:12:24	Lukas Fullner:	Woot Scratch!
+00:12:42	Jordan Lin:	It still looks exactly the same as years ago
+00:12:45	Jordan Lin:	Awesome
+00:13:06	Kenny Wang:	can we see the original code too?
+00:14:26	Nick Bowman:	It’s linked to from the Ed workspaces
+00:18:15	Kenny Wang:	wait what we can use scratch in breakout rooms or is there some link
+00:18:25	Thomas Tao Hale:	There is a link
+00:18:29	Jordan Lin:	It's in the Ed workspace
+00:18:42	Nick Bowman:	There was a link in the Ed workspace associated with your breakout room. You can go back and play around with it after lecture
+00:19:05	Shifeng Hong:	Is there an order of branch extending? do all various branches extend at the same time?
+00:20:12	Nick Bowman:	Good question! If you go back and watch closely, you will see one branch being created at a time, so they are not all being extended at the same time. The sprite goes and fully draws one branch before coming back and starting to draw another one
+00:21:29	Shifeng Hong:	I see thanks, I suppose it has to do with call stack?
+00:21:35	Thomas Tao Hale:	I wonder how the debugger handles recursion
+00:21:55	Nick Bowman:	@Shifeng correct and we will talk about this in about 10-515 minutes
+00:22:08	Shifeng Hong:	Thanks
+00:22:22	Nick Bowman:	@Thomas You will get practice with using the debugger alongside recursive functions on the next assignment!
+00:23:05	Liza George:	does this assume that there are no gaps in a column? like everyone is sitting as far forward as possible?
+00:23:46	Nick Bowman:	Uhhhh I think you could have gaps, as long as person’s voice cold bridge the gap to ask the person that’s immediately behind them, wherever they’re actually sitting
+00:24:08	Aadi M Rane:	Is this similar to a recursive sequence?
+00:24:09	runze yu:	Should the total number of people in that column be 60 because there are 59 people sitting behind the first person?
+00:24:45	Nick Bowman:	@Aadi yes there is definitely a strong tie-in with recursively defined sequences
+00:25:17	Nick Bowman:	@Runze i’ll have to go back and look at the slides, but it may have been off-by-one (depending on what question we are specifically trying to answer)
+00:25:43	Elan Smolar Eisenberg:	Wait, if I turn it in on Wednesday, do I get the 5% bonus?
+00:26:22	Nick Bowman:	Yes, Wednesday is the assignment deadline. Turning in by the assignment deadline results in the 5% bonus. If you take advantage of the grace period to submit on Thursday then theres no bonus
+00:32:04	Hemant Chaudhary:	Instead of setting if(n == 0) could we just stop at if(n == 1)?
+00:32:42	Nick Bowman:	You technically could, but 0! = 1 is the simplest possible definition of a factorial value, and we always want our base case to be as simple as possible
+00:33:16	Nick Bowman:	This is a common design question you will run into when designing recursive algorithms! So I’m glad that you’re asking about it
+00:33:52	karan parikh:	what is the diagnostic like? should we start studying from now or is it supposed to be straightforward
+00:34:16	Nick Bowman:	Let’s keep questions on topic to the lecture content right now. If you have class logistics questions, feel free to come chat with us after class.
+00:34:39	Evan Baldonado:	Can you explain again what a “stack frame” is, please? Didn’t quite understand
+00:34:41	Rafael Vila:	Is there any computational/processing benefit of recursion vs. iteratives?
+00:35:14	Nick Bowman:	@Evan good question, we’ll answer that one live
+00:35:21	Evan Baldonado:	Thanks!
+00:35:38	Nick Bowman:	@Rafael yes, there are efficiency tradeoffs regarding recursion that we’ll talk about later int he week and explore in more depth in the assignment
+00:35:39	Siddharth Balaji:	How can we use Big O notation to determine if a specific problem would have a more efficient solution if implemented recursively or iteratively?
+00:35:47	Evan Baldonado:	Yes, thanks!
+00:36:33	Nick Bowman:	@Siddharth We’ll talk about that exact question on Wednesday and you will see a new fast runtime that can be accomplished with recursion
+00:36:41	Siddharth Balaji:	Sounds good thank you
+00:48:25	shreyas ravi:	couldn’t the base case just be 1 letter left?
+00:48:33	Rohan N Chowla:	Could the base case be when there is only one character left
+00:48:35	kevin yang:	^
+00:49:00	Nick Bowman:	That’s a good question, but I want to refer you back to the comment I made earlier regarding why the factorial function stopped at n == 0 rather than n == 1
+00:49:11	Nick Bowman:	You always want to make sure your base case is the simplest possible problem you can solve
+00:49:42	shreyas ravi:	but wouldn’t it be faster to just stop at 1 letter instead of going to the empty string?
+00:49:44	Kai Ssempa:	But are we ever really reversing the string? It looks like were just moving the letters from the front of one string to the back of another
+00:50:04	Nick Bowman:	Additionally you want your function to be robust and to be able to handle the input of just initially being given the empty string. If you had the base case as a string with a single letter, than you would need an additional case to handle that, which makes the code longer than necessary
+00:50:17	shreyas ravi:	ah ok thanks
+00:50:35	Nick Bowman:	@Shreyas the efficiency tradeoff of one additional stack frame is pretty much negligible in this case
+00:51:07	Kenny Wang:	would it be fine to make the base case like "n <= 1"?
+00:51:17	Nick Bowman:	@Kai That is kind of what we’re doing, but the overall result is that we’ve returned a value that was the reversal of the original string, which means we’ve effectively reversed the string
+00:51:32	Aadi M Rane:	isn't it reverse(s.substr(1))?
+00:51:41	Demi Lei:	^
+00:51:53	Magdalena Warren:	^
+00:52:44	Nick Bowman:	@Kenny sure you could also do that. There are often many ways that you can express a recursive algorithm
+00:53:03	Sedef Emekli:	can’t the recursive function work for the half size of this string by switching ith and size-ith elements and the base case can be when it gets to the middle letter, and if the string has an even number of letters the two middle letters will be switched and if it’s odd then the one in the middle can stay the same? wouldn’t we increase the efficiency by doing so?
+00:53:38	shreyas ravi:	@sedef that’s what I was thinking - we start at both ends and then swap
+00:53:59	Sedef Emekli:	@shreyas exactly!
+00:54:06	Nick Bowman:	Yeah, that’s a good thought! In this case, you would only have to do n/2 recursive calls rather than n to reverse the string
+00:54:22	Nick Bowman:	In terms of big O this means that both would be O(n) but one would be doing less work than the other
+00:55:12	Nick Bowman:	So yeah, great thought :) It’s a little more complex than what we’re doing here which is why we didn’t introduce the function that way, but I’m glad you were able to think of this improvement!
+00:56:16	mary fetter:	How can functions call themselves if are being created as they are called?
+00:57:05	Nick Bowman:	a function just defines a block of code, so if you call the function within itself, you can think of it as just executing the same code block again. By having a base case, we know that this process will eventually terminate.
+00:57:21	Kevin H Fan:	Thank you!
+00:57:22	Angela Zhang:	Thank you!
+00:57:23	Lukas Fullner:	thank you
+00:57:24	Akash Bhargava:	Thank you!
+00:57:25	julia wang:	Thank you!
+00:57:25	Guozhen Miao:	thank you
+00:57:26	Kenneth Fischer:	Thank you!
+00:57:26	Nikita Nitin Khapre:	Thank you !!
+00:57:26	Pranav Nair:	Thank You
+00:57:31	michael hu:	Thank you nick and Kylie
+00:57:32	Rohan N Chowla:	thanks
+00:57:33	louise marzolf:	thank you
+00:57:35	Magdalena Warren:	Thank you
+00:57:37	shirley li:	Thank you
+00:58:06	Hemant Chaudhary:	Should we download something for the diagnostic? (Like bluebook?)
+00:58:08	Gautham Rajesh:	thanks
+00:58:22	hriday chhabria:	Is the diagnostic pretty much the same as a midterm?
+00:58:30	Nick Bowman:	Yes, we will be administering the diagnostic using BlueBook and download instructions for that will be posted next week
+00:58:39	hriday chhabria:	Ohh cool!
+00:58:47	hriday chhabria:	Thank you!
+00:58:55	Nick Bowman:	@Hriday i would think about it more as a low stakes way to check in on your grasp of the core topics so far
+00:58:57	Hemant Chaudhary:	Great thanks Nick! 
+00:59:03	Aadi M Rane:	For the string recursion problem, should you use an else?
+00:59:23	hriday chhabria:	Great! Thank you!
+00:59:29	Nick Bowman:	You can, but you don’t have to. You know that if the if statement executes, you’ll hit a return statement which terminates execution of the function
+00:59:37	Liza George:	does the way recursive functions work in memory differ in other languages?
+00:59:38	Nick Bowman:	Stylistically I would say both are equally fine
+01:00:20	Nick Bowman:	@Liza recursion actually works pretty similarly in memory in most programming languages!
+01:00:46	Liza George:	Coolio, thanks!
+01:01:25	Aadi M Rane:	Are there problems that can only be solved by iteration (loops) or can every iterative problem be solved using recursive methods?
+01:01:50	Liza George:	(maybe you've been getting rid of punctuation within a word? like i'm vs. im)
+01:02:13	Shifeng Hong:	How is recursion different from the breadth-First Search? 
+01:02:16	Liza George:	(so it's and its would be incorrectly counted as the same word)
+01:04:12	Nick Bowman:	@Aadi good question. There are some problems that are much easier to solve iteratively and there are some problems that are much easier to solve recursively. We’ll touch on this more throughout the week!
+01:04:39	Liza George:	@shifeng i'm not entirely sure, but I think that a characteristic of a recursive function is that it calls itself. but bfs only has repeating steps within a while loop
+01:05:03	Nick Bowman:	@Shifeng Recursion actually most often does a type of search called depth-first search which is distinctly different from breadth-first search
+01:05:11	Aadi M Rane:	for assignment 2, digits do not count as punctuation, right?
+01:05:28	Nick Bowman:	It would be easiest explained via an illustration, I’ll see if we can incorporate that into a later example this week
+01:06:01	Nick Bowman:	it is actually very hard to implement breadth-first search recursively (this is also an answer to Aadi’s question somewhat!)
+01:06:10	Shifeng Hong:	@Nick @Lisa It would take me sometimes to understand, but thanks!
+01:06:38	Nick Bowman:	@Aadi correct, you can just rely on the ispunct function to make that distinction from you, but yes digits are not punctuation
+01:06:49	Jennifer Anna Bonello:	Thanks!
+01:07:14	catherine deng:	Even though they aren’t punctuation, should digits be removed?
+01:07:40	Nick Bowman:	No, digits should not be removed
+01:07:51	catherine deng:	Ok, thank you so much
+01:10:22	Demi Lei:	thank you!
+01:12:09	Liza George:	yeah you can. it was a little buggy, but you should be getting reset password links sent to your email
+01:12:21	Liza George:	i had to at the beginning of the year

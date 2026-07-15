@@ -1,0 +1,1454 @@
+WEBVTT
+
+1
+00:00:02.939 --> 00:00:07.379
+Alright, we are recording now. So these are today's questions. I'm going to keep going.
+
+2
+00:00:08.700 --> 00:00:09.059
+Alright.
+
+3
+00:00:10.740 --> 00:00:23.550
+So first I want to talk a little bit about go back to some of the course norms on how we can improve online learning the online learning environment, as we mentioned, as I mentioned during the first class we're learning all together right now both about how to learn
+
+4
+00:00:23.550 --> 00:00:24.000
+Online.
+
+5
+00:00:24.780 --> 00:00:33.510
+As well as from each other and that means we're going to hit some hiccups and be changing our norms along the way based on feedback that you're giving us. And I also want to just say thank you for your early feedback and keep it coming.
+
+6
+00:00:33.900 --> 00:00:39.990
+We know that not everything works for everyone. So we want to just make changes that will help make it easier for everyone to get the most as possible. Out of lectures.
+
+7
+00:00:41.250 --> 00:00:48.180
+The first thing we learned zoom chat can be distracting. We love the enthusiasm and curiosity, we're seeing with the chat on the side.
+
+8
+00:00:49.290 --> 00:01:02.490
+But we also got feedback from some folks that the chat can be pretty overwhelming for students during lecture, especially if folks are needing to wash my phone. There's actually no way to mute the chat and it pops up over the lecture screen. So that can be pretty distracting.
+
+9
+00:01:03.960 --> 00:01:14.880
+And I also found out that it was pretty hard to figure out whose questions have been answered because of how quickly the chat was moving on the side and some students whose questions were answered wouldn't always see their answers because they would get lost.
+
+10
+00:01:14.880 --> 00:01:16.050
+Demi Lei: In the chat scrolled up
+
+11
+00:01:16.710 --> 00:01:21.270
+So with that we want to have a new norm and we're going to try this, but we can always adjust it. If it doesn't work.
+
+12
+00:01:21.600 --> 00:01:28.950
+But we're going to say, anyone can ask questions at any time, but we're only going to have the core staff so me Nick and trip answer questions in the chat. Just so it's easier to see.
+
+13
+00:01:29.250 --> 00:01:39.450
+Who's answered what and so that doesn't overwhelm with messages in the chat for people who are watching from phones or who just feel it's distracting to get the little chat notification on the bottom of zoom
+
+14
+00:01:40.140 --> 00:01:44.670
+So we'll try that and thank you again for your early feedback. This is based on things that people have been telling us
+
+15
+00:01:44.670 --> 00:01:45.240
+Demi Lei: About as well.
+
+16
+00:01:46.410 --> 00:01:51.750
+Second thing that I wanted to bring up is that we can better center questions around learning. So one thing
+
+17
+00:01:52.080 --> 00:01:59.340
+That's really important is actually thinking about how you're learning this idea of metacognition is super important for you to get the most out of education.
+
+18
+00:01:59.790 --> 00:02:09.930
+And one thing that I've learned is sometimes asking a question immediately and then waiting for an answer can actually distract from your learning experience. And I'm totally guilty of this when I've taken my classes.
+
+19
+00:02:10.170 --> 00:02:17.760
+I will form a question and then focus on remembering that question and being ready to ask it or if I'm online like typing it in the chat and figuring out how to phrase it
+
+20
+00:02:17.970 --> 00:02:26.880
+And then I might completely miss the actual answer to the question out loud because I'm so focused on asking this question and sometimes the question gets answered, just like a moment or two later.
+
+21
+00:02:28.200 --> 00:02:36.840
+And this is vastly oversimplified, but there are generally two types of questions for when we're thinking about this one. There's questions that will enable you to understand the rest of the topic or lecture.
+
+22
+00:02:37.230 --> 00:02:46.470
+And so maybe we just said something and it was confusing and you didn't really understand it, but you need to understand to understand the rest of that concept or the rest of the lecture. So, for example,
+
+23
+00:02:46.650 --> 00:02:56.610
+If we go over for loops. But you think you know I didn't really understand those three different parts of the for loop and c++ I want to ask them to repeat it. That's something that is really important to your
+
+24
+00:02:57.150 --> 00:03:01.020
+Immediate understanding and then there's the questions that will expand her depth of knowledge.
+
+25
+00:03:01.320 --> 00:03:12.450
+But that your immediate understanding doesn't depend depend on. So for going over for loops and you understood the general concept of a for loop and different structures of it, but you're asking, can you use different types in the for loop.
+
+26
+00:03:13.650 --> 00:03:20.310
+Conditions and these things that we didn't actually cover or talk about, but you want to expand your knowledge about that topic that's sort of an example of question too.
+
+27
+00:03:20.640 --> 00:03:25.410
+So I'm going to present a couple of strategies on how to approach this sort of better center, you're learning
+
+28
+00:03:25.920 --> 00:03:33.420
+Depending on the type of question you have. So if it's the first question we definitely want you to just immediately raise your hand or put it in the chat if that's something that's more comfortable for you.
+
+29
+00:03:33.660 --> 00:03:37.050
+Because if you found it confusing. Someone else almost certainly did too.
+
+30
+00:03:37.380 --> 00:03:47.040
+And we want to celebrate struggle and we don't want you to feel like you're falling behind. During the course of a lecture. So if you have a question that you need to make sure you understand the topic definitely just asked that right away.
+
+31
+00:03:48.060 --> 00:03:54.540
+If it's one of these questions. Something I found that's helpful for myself is actually just writing or jotting down the question.
+
+32
+00:03:54.870 --> 00:03:59.100
+On the side on a piece of paper and then when it's clear that we're transitioning to a new topic.
+
+33
+00:03:59.580 --> 00:04:07.530
+That's when I'll type it in the chat or raise my hand to ask the question, because one, then I'm making sure that I've heard the whole topic. And then the question didn't get answered.
+
+34
+00:04:08.250 --> 00:04:16.890
+And to it's often a good stopping point like the instructors will often actually say we're going to stop for questions now. Now you can ask questions and it is a good time to
+
+35
+00:04:17.610 --> 00:04:25.710
+Actually, ask them. The other thing that I will mention about the second one is another useful strategy that I found here, that's really good for learning is to actually if you think
+
+36
+00:04:26.490 --> 00:04:32.460
+I have this question. Like, for example, what happens when I create a variable but don't define it, and I try to use it later.
+
+37
+00:04:33.930 --> 00:04:44.490
+If you can actually answer the question yourself by writing a small piece of code to test your question. We highly encourage that, because it actually will help you retain that information better by sort of going through that active exercise of trying it out yourself.
+
+38
+00:04:45.030 --> 00:04:49.500
+So that's another just suggestion for things you can try. If you have questions during lecture.
+
+39
+00:04:50.910 --> 00:04:56.550
+Alright so yeah takeaway here. Think about how to use questions to really maximize your concentration and learning during lecture.
+
+40
+00:04:57.210 --> 00:05:08.670
+And then the last thing I'm going to bring up is there is often a third type of question and this paragraph was written by one of the Stanford CS lectures, Cynthia D. She actually puts this paragraph.
+
+41
+00:05:09.180 --> 00:05:13.410
+In her syllabus around course norms at the beginning of every quarter. So we just wanted to reiterate it here.
+
+42
+00:05:13.800 --> 00:05:23.400
+And she writes some students asked questions that are not really questions so much as opportunities to demonstrate knowledge of jargon or facts that are beyond the scope of the topic at hand.
+
+43
+00:05:23.790 --> 00:05:33.060
+And this can often have a discouraging effect on students. If you find yourself wanting to make such a question or comment and lecture, I encourage you to consider office hours as a better venue for exploring that topic with me.
+
+44
+00:05:33.720 --> 00:05:40.020
+And I will say, like, the vast majority of questions. Yesterday did not fall into this category. I'm just bringing this up because I know it is something that will come up
+
+45
+00:05:40.380 --> 00:05:51.360
+And I will say from my experience teaching at the college level and even at the middle school level, one of the most difficult things about teaching CS is actually catering to an audience of such diverse backgrounds and prior programming experience.
+
+46
+00:05:51.600 --> 00:05:57.210
+Because we're seeing now that people are having such varied opportunities in computer science before coming to college or
+
+47
+00:05:57.840 --> 00:06:02.700
+While they're in high school or not having that at all. And so it's really hard to make a class that works for everyone.
+
+48
+00:06:03.000 --> 00:06:09.540
+And curiosity is wonderful and we're always happy to talk to you about advanced yes topics and things that you're interested in during office hours.
+
+49
+00:06:09.840 --> 00:06:14.910
+But we also want to be really careful that we don't send the message that you need to know about these things before entering one A 60
+
+50
+00:06:15.540 --> 00:06:25.050
+So in particular, we don't expect you to have prior knowledge of c++ or knowledge of topics that we will explicitly say hey we're introducing this from scratch. So just keep that in mind when you're asking questions.
+
+51
+00:06:25.470 --> 00:06:35.220
+And if you do have prior experience in c++ or any of the other topics. That's great. It'll often benefit you're learning to approach these with a beginner's mindset, so that you might notice and learn things that you didn't before.
+
+52
+00:06:35.940 --> 00:06:37.290
+So General takeaway here.
+
+53
+00:06:37.890 --> 00:06:42.780
+When you're asking a question. Think about if lecturer individual office hours is the right venue for your question.
+
+54
+00:06:43.260 --> 00:06:54.420
+So, particularly if it falls under if you think it's going to fall under Category two, is there a possibility that it's also under Category three, which is something that might not be directly related to the content as we're explaining it right now. It might be better asked
+
+55
+00:06:54.930 --> 00:06:58.050
+During an office hours to sort of go into an advanced topic.
+
+56
+00:06:59.280 --> 00:07:13.050
+All right. That is all I have on course norms. So now I want to do a very quick review of some of the things, Nick went over yesterday by just going over the spaceship dot cpp program that we showed in the ED workspace and I'll show you how to do that.
+
+57
+00:07:14.310 --> 00:07:19.410
+Before we do that, just as a reminder of what happened yesterday. So we went. I know my screen is great.
+
+58
+00:07:19.950 --> 00:07:26.820
+We went over functions and console programs and for loops and I just wanted to answer two of the questions that came up in the chat.
+
+59
+00:07:27.600 --> 00:07:30.870
+Yesterday that I wanted to clarify. So one was on the
+
+60
+00:07:31.800 --> 00:07:37.500
+Whether or not you can have functions that have the same name, but different return types. And the answer to that question is actually
+
+61
+00:07:37.710 --> 00:07:42.030
+No, you can't have a function that has the same name and different return types, if that's all that's different.
+
+62
+00:07:42.270 --> 00:07:49.770
+But you can actually have functions that have different numbers of parameters or different types of parameters and then the return type won't matter if they have the same name.
+
+63
+00:07:50.220 --> 00:07:54.990
+So that's just a copy up there. You can't but you want to kind of avoid that, because it can get confusing pretty quickly.
+
+64
+00:07:55.500 --> 00:08:05.760
+If you have functions with the same names. Anyway, so just try to avoid that and then the same question about variables. Can you have in one function two variables with the same name within different scope. So maybe you have a variable named
+
+65
+00:08:07.050 --> 00:08:19.320
+Foo in the larger function and then you also declare food inside of a loop that is possible and the function will know which one to use. But again, also gets confusing pretty quickly. So just try to avoid it.
+
+66
+00:08:19.890 --> 00:08:23.880
+So they're just to clarification. So I wanted to make based on questions that popped up in the chat yesterday.
+
+67
+00:08:24.450 --> 00:08:27.960
+But largely this shouldn't matter because you shouldn't really be using things with the same name, anyway.
+
+68
+00:08:28.920 --> 00:08:39.180
+Alright, so let's go ahead and jump into the problem that we worked on at the end of class, very briefly, or Nick just previewed which is writing a program that counts down from 10 to one.
+
+69
+00:08:40.590 --> 00:08:47.970
+And we gave you the Python code. I'm going to go ahead and show you how to do this. An edge just that you get the experience of seeing how to use these ad workspaces.
+
+70
+00:08:49.920 --> 00:08:56.910
+So to run the Python program. In this case, which we won't have you do very often, but this was just here as an example of how it works.
+
+71
+00:08:57.240 --> 00:09:06.210
+And there wasn't instructions dot txt file here as well which explained to this but Python three spaceship pi will run and show you. Okay, this is what I want my c++ code to do
+
+72
+00:09:06.990 --> 00:09:13.350
+To act, then you can actually edit spaceship dot cpp and both files are open here so that it does the same thing, but in
+
+73
+00:09:13.890 --> 00:09:23.190
+c++ so again this is going to be a review quick review of like a console program. So something that prints into the console using a for loop so
+
+74
+00:09:23.760 --> 00:09:29.130
+To write a for loop, we're going to use a for loop also instead of a while loop here because we know exactly how many numbers. We want to print
+
+75
+00:09:29.490 --> 00:09:36.540
+A while loop is better suited. If we don't know how many times, excuse me, we want to repeat something. So we're going to start our entire will call it
+
+76
+00:09:37.950 --> 00:09:43.140
+I at 10 because 10 is the first number that we print and we want to count down to one.
+
+77
+00:09:43.530 --> 00:09:56.190
+So we want to print i as long as. So remember, this is our condition, during which we repeat the for loop, as long as i is greater than zero, right, because we want to print from 10 to one and then once we get past one we want to stop.
+
+78
+00:09:56.790 --> 00:10:06.180
+And what we're going to do a common for that might have a plus plus here, but since we're counting down, we're actually going to use minus minus. And what that does is it subtract one from it each time you go through the loop.
+
+79
+00:10:06.690 --> 00:10:12.060
+And then here, remember, see out is how we print in in c++ we're just going to see out
+
+80
+00:10:13.500 --> 00:10:22.200
+Let's go ahead and try that. And so when you're in, Ed. If you're trying things out or working in a breakout room. The way you run your c++ code is you say make run
+
+81
+00:10:23.460 --> 00:10:31.050
+And so that Prince correctly. And then we just have to add liftoff. So outside here. I'm going to go ahead and say lift off.
+
+82
+00:10:32.280 --> 00:10:33.210
+And all
+
+83
+00:10:34.770 --> 00:10:42.810
+And then make run and that does what we wanted to do. Alright any questions here before I move on.
+
+84
+00:10:46.230 --> 00:10:46.680
+Okay.
+
+85
+00:10:47.970 --> 00:10:55.980
+And I'm going to go ahead and go back to here. So that was the example and then just a few notes about using these Ed workspaces.
+
+86
+00:10:56.580 --> 00:11:07.620
+To preserve the work that is done during lecture, we're going to set the breakout rooms to view only after lecture might not be right, immediately after because we want to give you a chance to download your code. If you want, or for the workspace.
+
+87
+00:11:08.010 --> 00:11:16.470
+That was another thing. There's this button here while it's editable that you can say to fork and that'll make a copy for yourself that you can set the privacy settings on so you could save your work after lecture.
+
+88
+00:11:17.220 --> 00:11:24.420
+So we'll leave that so you can download and forth your code right after lecture and then sometime late in the evening early morning we'll switch it to view only so that we can
+
+89
+00:11:24.510 --> 00:11:29.100
+Sort of be editing and getting ready for the next lecture because we're reusing the same workspaces every day.
+
+90
+00:11:29.850 --> 00:11:38.130
+And will wipe them and put new content on. And again, feel free to download or fork the workspace after class to continue working independently or to collaborate with others on these problems.
+
+91
+00:11:39.540 --> 00:11:43.110
+Alright, so now let's go ahead and get into the new content for today.
+
+92
+00:11:43.590 --> 00:11:50.820
+So what's special about strings and c++ so hopefully you've all seen strings before, whether you want no matter what programming language you're coming from.
+
+93
+00:11:51.180 --> 00:12:01.890
+And as a reminder, a string is a data type that represents a sequence of characters and characters can be letters, digits symbols, etc. And as a review strings are made up of characters.
+
+94
+00:12:03.000 --> 00:12:07.890
+In, and in particular in c++ characters use these single quotes and strings use double quotes
+
+95
+00:12:08.310 --> 00:12:14.850
+And characters in a particular string can be accessed by index. So these numbers along the bottom or the index of a particular character.
+
+96
+00:12:15.240 --> 00:12:23.700
+And this should hopefully be a little bit familiar if you've worked in like Python or Java the syntax looks very similar. So now I want to talk a little bit about what's different about strings in
+
+97
+00:12:24.090 --> 00:12:35.850
+c++ versus languages like Python or Java or maybe JavaScript depending on where you are coming from. So we're going to go ahead and do a quick demo activity. And the way I'm going to do this.
+
+98
+00:12:36.120 --> 00:12:37.860
+Is I'm going to open up c++
+
+99
+00:12:37.920 --> 00:12:45.780
+And I have some code here. So I have, if you go to the bar. If I go to the bottom. These are all the different polls that we're going to do, and I want you to try to
+
+100
+00:12:45.930 --> 00:12:53.520
+predict what's going to happen and I really want to emphasize here that the whole point of this exercise is I don't expect you to know the answers. The whole point is that you'll guess
+
+101
+00:12:53.790 --> 00:12:56.820
+And you will hopefully retain the answer better if you actually get it.
+
+102
+00:12:57.810 --> 00:13:02.490
+Wrong, or if you get it right, but just the point of guessing is to help you remember the information better, but I don't expect you to know them.
+
+103
+00:13:03.240 --> 00:13:14.610
+So the first poll. I want you to try to guess what happens to word this variable after this block of code, and it can you go ahead and open up that pole.
+
+104
+00:13:15.930 --> 00:13:16.680
+If folks see it.
+
+105
+00:13:18.240 --> 00:13:21.750
+Awesome. So go ahead and put in. What do you think will happen to word
+
+106
+00:13:27.420 --> 00:13:29.730
+Again, totally fine if it is a guess.
+
+107
+00:13:40.620 --> 00:13:42.330
+Just by the results right away. Once you're done.
+
+108
+00:13:43.290 --> 00:13:43.680
+Sure.
+
+109
+00:13:46.080 --> 00:13:56.130
+It doesn't. Yeah, it doesn't matter. While people are doing that. I'm just going to watch the percentage and I'm going to go ahead and run this code. So you can see, so it doesn't really matter if you show the answer, because I'm going to actually read
+
+110
+00:13:56.130 --> 00:13:56.880
+It and we can see it.
+
+111
+00:13:57.330 --> 00:14:02.670
+Um, so I'm going to go down here and I'm comment poll one
+
+112
+00:14:03.720 --> 00:14:05.040
+And then Run my code.
+
+113
+00:14:15.030 --> 00:14:15.420
+Alright.
+
+114
+00:14:19.770 --> 00:14:20.550
+Still building
+
+115
+00:14:23.640 --> 00:14:25.680
+Here we go. This is the answer.
+
+116
+00:14:27.720 --> 00:14:41.490
+So we get H A LL O and that is because just as we saw with the indexing, we are changing the character at index one which is not the first one. But the second character and we're setting it to a
+
+117
+00:14:43.290 --> 00:14:54.810
+And so the big takeaway here is that strings are actually mutable and c++ so unlike in Python and Java where you can't actually change the string, once you've created it, you can do that in c++
+
+118
+00:14:55.350 --> 00:15:08.610
+But you have to make sure you're assigning it to a character. So remember characters you see single quotes, not the double quotes. So don't do this, you want to do this. Alright, so that's the takeaway from that one. Let's go ahead and do a poll to so
+
+119
+00:15:09.660 --> 00:15:20.340
+This one is a little different in that I'm gonna when I actually run this. I'm going to comment out one one of each of these, so you can see what each of them does
+
+120
+00:15:21.030 --> 00:15:34.920
+But we want to say, Okay, if I do option A, what will it be valid when I tried to print. If I do option B will it be valid when I try to print. And if I do option C will it be valid when I tried to print. And when I say be valid. I just mean doesn't throw an error.
+
+121
+00:15:36.600 --> 00:15:41.460
+And so when I actually run these. I'm going to go ahead and comment these out. But, Nick. If you could open the pole.
+
+122
+00:15:44.640 --> 00:15:46.530
+Yeah, let me go down comment this
+
+123
+00:16:06.000 --> 00:16:19.860
+So an A, is your plus equaling letter. So a character to a string be you are adding together a character string and a character. And then in see you're adding together two strings.
+
+124
+00:16:27.180 --> 00:16:35.040
+Only about 60% of people have voted. So when we get to around 80 I will run each start running each one to see what this says.
+
+125
+00:16:40.740 --> 00:16:50.700
+Alright, we are at 80% so I'm going to go ahead and just run option. As you can see what happens when I run option A first. So if I run option A,
+
+126
+00:16:54.600 --> 00:16:55.890
+We get
+
+127
+00:16:59.370 --> 00:17:05.850
+We get high. So that one works. And let's go ahead, I think, actually, yeah. Let's go ahead and do
+
+128
+00:17:09.330 --> 00:17:16.650
+So option B. So now we're adding together. The word and the letter with the plus sign, instead of plus equals
+
+129
+00:17:20.670 --> 00:17:22.080
+This one also gave us high
+
+130
+00:17:23.100 --> 00:17:24.720
+And for our last one.
+
+131
+00:17:37.650 --> 00:17:42.960
+Sorry, my computer is so slow. Okay, here we go. This one also give us. Hi, I'm
+
+132
+00:17:43.980 --> 00:17:51.630
+Cool. And it looks like this one sort of is the most intuitive one to say, okay, when you add two strings together, this should work. So most people said this one would work.
+
+133
+00:17:51.960 --> 00:18:01.080
+But it turns out these are also valid ways of creating or changing strings in c++. I'm going to go ahead and comment this out and go back to here.
+
+134
+00:18:02.310 --> 00:18:04.890
+I'm here. Can you see this polls in the front of my screen.
+
+135
+00:18:06.150 --> 00:18:07.110
+You're good. Okay, great.
+
+136
+00:18:08.760 --> 00:18:18.600
+So take away from this one you can add character strings strings strings using the plus equals and plus operators in c++ strings have to use double quotes or characters. Use the single quotes
+
+137
+00:18:18.990 --> 00:18:28.620
+But there is a caveat, which we will see shortly, but I don't want you to worry about that. Just know that this works. All right, let's go to pull three
+
+138
+00:18:29.790 --> 00:18:32.880
+So for this one. I want you to think about
+
+139
+00:18:33.960 --> 00:18:39.540
+We have a string, ABC, which is lowercase ABC and then we have a string BC, which is lowercase BC.
+
+140
+00:18:39.900 --> 00:18:47.460
+And I want you to try to guess what's going to happen when I run this code is this if statement going to be true is this if statement going to be true.
+
+141
+00:18:47.940 --> 00:18:54.480
+So see, we're comparing these here or is it just going to say, I can't evaluate this expression because you can't compare two strings like that.
+
+142
+00:18:55.710 --> 00:18:56.340
+Open the poll
+
+143
+00:19:09.120 --> 00:19:10.230
+This one is interesting talk.
+
+144
+00:19:32.160 --> 00:19:41.160
+Alright, we are about 80% of people. So go ahead and put in your answers. And while you're doing that, since it takes my computer a while to build. Anyway, I'm going to go ahead and run
+
+145
+00:19:46.560 --> 00:20:02.460
+And we get this. So we get to ABC is less than BC. So what's happening here is that we look at the first letter in our string. And since a comes before be in the alphabet. We say A is less than B or have too many windows open. Okay.
+
+146
+00:20:03.750 --> 00:20:15.090
+And the blanks here doesn't matter. But if we were to say, have, like, let's suppose this was a, b, c, d. This string was still be less because it starts to look at length. Once you have the same first characters.
+
+147
+00:20:16.740 --> 00:20:17.130
+michael haynes: All right.
+
+148
+00:20:19.410 --> 00:20:21.600
+michael haynes: I'm gonna go ahead and so
+
+149
+00:20:21.660 --> 00:20:27.480
+That one you can basically take over here as you can use logical operators to compare strings. And this is also true of characters.
+
+150
+00:20:28.620 --> 00:20:35.520
+And for pull for it's similar one, but a little bit different. Except now we have
+
+151
+00:20:38.040 --> 00:20:51.240
+Capital ABC so ABC upper and then lowercase ABC and we're going to do the same comparison. And since we know now that we can compare do we think it's going to be less than, excuse me, greater than or equal to one another, go ahead and open that poll
+
+152
+00:21:19.290 --> 00:21:21.300
+Alright, and I'm gonna run those
+
+153
+00:21:31.950 --> 00:21:35.490
+Yeah, so most people actually thought that ABC would be greater than
+
+154
+00:21:36.210 --> 00:21:48.330
+Sorry capital ABC be greater than ABC, but the cases actually that uppercase letters are considered less than lowercase letters. So we end up in this first if statement here, which is the first option, you probably saw on the pole.
+
+155
+00:21:50.700 --> 00:21:54.480
+Alright, so I'm going to go ahead and close that
+
+156
+00:21:56.580 --> 00:22:01.410
+And talk a little bit about stringing character conventions. Before I do that, does anyone have any questions about these three
+
+157
+00:22:01.590 --> 00:22:09.900
+Characteristics of strings. These are things that are a little bit different than what you might have seen in other languages where you're allowed to use these logical operators and you can
+
+158
+00:22:10.080 --> 00:22:10.590
+Add in
+
+159
+00:22:10.650 --> 00:22:13.980
+You can, they're mutable, and you can add and concatenate them.
+
+160
+00:22:14.490 --> 00:22:15.840
+Ray Johns: You should that one more time.
+
+161
+00:22:16.140 --> 00:22:16.920
+Ray Johns: Yeah, for sure.
+
+162
+00:22:23.100 --> 00:22:28.230
+I also see a hand. Yeah. Yeah. Let me a couple questions. Kenneth, you want to go ahead and go first.
+
+163
+00:22:29.730 --> 00:22:37.500
+Kenneth Fischer: So when you're comparing the strings like that. Are you comparing the sq values Unicode values are like the actual characters themselves. Yeah.
+
+164
+00:22:38.070 --> 00:22:41.610
+You're comparing the ASCII values in this case of the first characters.
+
+165
+00:22:42.000 --> 00:22:53.760
+So ASCII values every care every character actually in c++ has a numerical corresponding value. So if you're interested. For those of you who don't know what ask is, if you just Google Search ASCII values.
+
+166
+00:22:54.120 --> 00:23:00.810
+Basically, it's just a conversion between character values to numbers. And that's what c++ represents them underneath the hood as numbers.
+
+167
+00:23:04.530 --> 00:23:04.950
+And then
+
+168
+00:23:06.360 --> 00:23:08.160
+Re redrawn
+
+169
+00:23:08.790 --> 00:23:08.970
+Yeah.
+
+170
+00:23:10.050 --> 00:23:22.350
+Ray Johns: I noticed in the in the first homework. When we were stepping through the code and the debugger, that there's no there's no like explicit conversion when you're using characters as, as you know, as something to multiply by is that
+
+171
+00:23:22.590 --> 00:23:23.460
+Because it's just
+
+172
+00:23:23.490 --> 00:23:26.400
+Ray Johns: Passively using the ASCII value. Yes.
+
+173
+00:23:27.000 --> 00:23:31.530
+Okay, when you say, multiply, you mean like in the Python sense of like character times a certain number two, like
+
+174
+00:23:31.590 --> 00:23:32.670
+Ray Johns: Um no I
+
+175
+00:23:32.670 --> 00:23:39.990
+Ray Johns: Mentioned game hash function and the name hash function you're taking a lowercase character and you using that as a value to multiply their numbers by
+
+176
+00:23:40.950 --> 00:23:41.160
+Yeah.
+
+177
+00:23:42.840 --> 00:23:43.890
+Yeah, the mathematical
+
+178
+00:23:43.890 --> 00:23:44.700
+Representation of it.
+
+179
+00:23:44.850 --> 00:23:45.390
+Ray Johns: Correct.
+
+180
+00:23:45.450 --> 00:23:53.280
+Ray Johns: Yeah, I thought it was weird that it was it was a declared char, and that there was no actual type conversion to like it or anything, but it was delicious. Nonetheless,
+
+181
+00:23:53.700 --> 00:23:57.630
+Yeah, it doesn't auto conversion between cars and in spite just taking nasty value.
+
+182
+00:23:58.110 --> 00:24:01.260
+Ray Johns: Okay, is that specific to Charles and that's just a type
+
+183
+00:24:01.290 --> 00:24:02.520
+weirdness of that particular
+
+184
+00:24:03.810 --> 00:24:04.170
+Yep.
+
+185
+00:24:04.230 --> 00:24:05.070
+Well, good question.
+
+186
+00:24:07.500 --> 00:24:08.550
+Nick. Are there other questions.
+
+187
+00:24:08.550 --> 00:24:08.970
+That
+
+188
+00:24:09.090 --> 00:24:10.380
+People have in the chat or
+
+189
+00:24:11.460 --> 00:24:12.060
+I think you're good.
+
+190
+00:24:12.300 --> 00:24:18.150
+Okay, great. So let's go ahead and talk a little bit about some string and character convention. So this is something
+
+191
+00:24:18.900 --> 00:24:21.540
+All languages have different ways of going through strings.
+
+192
+00:24:22.290 --> 00:24:31.080
+So I'm going to go ahead and just type in where my functions here. So I'm gonna show you two different ways to loop over a string. So let's suppose we're given. Let me comment out the right things here.
+
+193
+00:24:31.800 --> 00:24:41.820
+So we're going to loop find two ways to loop over strings. And the first one, we're just going to use a regular for loop. So for this one that convention for doing for looping over a string.
+
+194
+00:24:42.990 --> 00:24:48.510
+So I'm going to go ahead and say, and letter index equals zero.
+
+195
+00:24:49.860 --> 00:24:51.720
+Letter index.
+
+196
+00:24:53.910 --> 00:25:01.980
+Is less than Word doc link. So I'm going to talk about some functions that strings have built in by default, but one of them is
+
+197
+00:25:02.640 --> 00:25:14.670
+Doc length, which actually gives you the length of the string. So again, we have our typical for loop here where we're starting off with a variable and integer that's going to start at zero for our index and we want it to go all the way up to
+
+198
+00:25:15.510 --> 00:25:19.350
+Less than the word length and then i plus plus.
+
+199
+00:25:20.520 --> 00:25:27.480
+And then what I want to go ahead and do is I'm just going to see out word letter index.
+
+200
+00:25:29.220 --> 00:25:34.680
+And we're going to see what that puts oh nice letter index.
+
+201
+00:25:36.120 --> 00:25:39.870
+Right. And actually, let me go ahead and comment on the second one.
+
+202
+00:25:54.240 --> 00:25:57.300
+Sure, like playing music. Well, my computer.
+
+203
+00:25:58.380 --> 00:26:02.340
+compiles and runs code. Alright, so this is what it does, it prints one letter on each line.
+
+204
+00:26:03.930 --> 00:26:13.530
+And that's just sort of how you would for loop to get through all of the characters in a word, based on it's linked. So that's one convention, you'll see for looping over a string.
+
+205
+00:26:14.760 --> 00:26:17.670
+And you don't need to worry about this warning here.
+
+206
+00:26:18.060 --> 00:26:28.530
+And then another convention for looping over a string would be a for each loop. So, something we just have this for different data structures, some of them also have it for strings. I know Python has it. Similarly for a string.
+
+207
+00:26:28.980 --> 00:26:36.690
+So what you would do here is you can say for character again letter in words. So this call and sort of is like the word in
+
+208
+00:26:36.990 --> 00:26:48.570
+And what you're doing is you're saying I'm going to create a variable call that is a character type and it's called letter, and it's going to each time through the for loop take a letter value of one of the letters in Word.
+
+209
+00:26:49.380 --> 00:27:04.440
+So then what I can just do is see out letter itself. And this is just a completely different valid way of looping over a string. The benefit of this one is that you get the actual index. If you want it to work with that I'm inside the loop here, you're just working with the letter itself.
+
+210
+00:27:05.550 --> 00:27:08.340
+And I'll go ahead and run this. Oh, I didn't comment this
+
+211
+00:27:10.200 --> 00:27:11.190
+Let's do that again.
+
+212
+00:27:18.270 --> 00:27:27.390
+And this code as well as going to get posted on the website. Yeah, so it printed out both of our names with these two calls down here.
+
+213
+00:27:28.770 --> 00:27:37.980
+Great. So those were just two conventions for looping over strings. Again, similar to what you've probably seen in other languages, but just wanted to show you exactly what they look like in c++ itself.
+
+214
+00:27:38.310 --> 00:27:45.840
+And the other thing I want to show you. That's kind of cool. This is actually related to the question that we had asked about how characters actually get converted to numbers.
+
+215
+00:27:46.320 --> 00:27:59.130
+In c++ you can actually write a for loop that loops over all of the letters in the alphabet, because you can do this like plus plus two letter and it'll just go up by one letter. So what do I mean by that. Let me go ahead and comment alphabet loop.
+
+216
+00:28:01.530 --> 00:28:01.890
+Oops.
+
+217
+00:28:07.920 --> 00:28:09.240
+Sorry, my code looks like this.
+
+218
+00:28:14.520 --> 00:28:25.080
+And you're seeing it. Probably my application output to but I'll just pull up the console, so it's easier and what it's doing. Is it just goes through all the letters in the alphabet. So I say, starting with letter equals A going all the way up to until it's
+
+219
+00:28:25.350 --> 00:28:35.010
+Less than or equal to Z. Add one and then see out the letter. So that's just something that if you need to iterate over the alphabet. It shows you can use characters in these four loops as well.
+
+220
+00:28:36.420 --> 00:28:36.900
+Alright.
+
+221
+00:28:39.330 --> 00:28:42.660
+So now I want to talk about some string utility functions.
+
+222
+00:28:43.050 --> 00:28:47.670
+And this came up in the c++ survey that we asked you to fill out for today.
+
+223
+00:28:47.880 --> 00:28:57.900
+And it was one of the things that people felt least comfortable with. So I want to talk about. I'm not going to go into super depth on all of them, but just give you a sense of what exists out there for functions that you can use in the string with strings.
+
+224
+00:28:58.500 --> 00:29:06.960
+So there are three categories of functions, there's a built in C plus plus character functions and this is the angle bracket CC type library.
+
+225
+00:29:07.560 --> 00:29:11.790
+There's built in c++ string methods. So again, there's the string type in the character types.
+
+226
+00:29:12.720 --> 00:29:18.120
+And these are methods because they actually operate on the specific string itself. And I'll show you what I mean by that in a second.
+
+227
+00:29:18.510 --> 00:29:30.210
+And then this one is Stanford string library function. So these are specific to the Stanford libraries that we're providing you we give you some additional functionality that are not, but it's not built in immediately to the c++ but so it makes your life a little bit easier.
+
+228
+00:29:31.050 --> 00:29:41.940
+So the CC type library or the character library to use it, you would do the pound include and it looks like this with the angle brackets at the top of your code. I mean, these are just some of the functions.
+
+229
+00:29:42.390 --> 00:29:47.070
+That you'll see a lot of them check. So they return a Boolean or true false
+
+230
+00:29:47.640 --> 00:29:59.850
+Depending on what character you pass in. So here's an example of how you would use it you could declare a character L and then ask, is it lower. And what this will do is this specifically would return false because we have a couple uppercase L.
+
+231
+00:30:00.300 --> 00:30:09.180
+So basically you can take any of these functions and put the letter inside. And this is how you would write it, you would just call the function in the past the actual character into the parentheses there.
+
+232
+00:30:10.860 --> 00:30:22.530
+Some that might be useful when you're working on assignment one I've highlighted here. So, checking if something is an actual alphabetic character. So, A to Z uppercase or lowercase and then checking if something is lowercase or uppercase.
+
+233
+00:30:23.670 --> 00:30:32.790
+And then that would be his lower his upper actually and then to cover it, you would use to lower to upper and again these operate specifically on character. So you can't pass him strings to these functions.
+
+234
+00:30:34.710 --> 00:30:45.570
+Alright, some string method. So these are specifically for operating on strings and the format for this is a little bit different. You would actually put your string variable here and then say string dot and then call the method.
+
+235
+00:30:46.230 --> 00:30:53.040
+And we say it's a method because it belongs to the specific string. We'll talk more about these types of things methods and classes. Later in the quarter.
+
+236
+00:30:54.570 --> 00:30:58.260
+And then what you can do as you pass different arguments, depending on what you're doing. So these are just
+
+237
+00:30:58.290 --> 00:31:06.780
+All the different string methods and I'm not. Again, I'm not going to go through all them individually, but I recommend like coming back to these slides and using them as a reference while you're working on assignment, one that can be useful.
+
+238
+00:31:07.350 --> 00:31:18.120
+These are some of the ones that I'll highlight. So string a pen will actually take this text, which is another string and add it to the end of the existing string. So it does very similar to what the plus operator does here.
+
+239
+00:31:18.630 --> 00:31:27.120
+It sort of serves the same purpose string length, which you saw me using the for loop gives you the number of characters in the string and then also it will return an integer.
+
+240
+00:31:27.900 --> 00:31:36.150
+String replace replaces this many characters inside of the existing string, starting in a particular index.
+
+241
+00:31:37.110 --> 00:31:43.470
+With a particular string that you're replacing that you're putting into the string and then some string means just take
+
+242
+00:31:44.040 --> 00:31:56.700
+A sub string or a part of the existing string and you can give it a start and then the length. It's important I know in other languages. Sometimes you give a start and an end. But this is actually linked. So the number of characters. After that starting index that you want to
+
+243
+00:31:57.900 --> 00:32:01.950
+To grab. Or you could just do the starting index and it'll grab till the end of the string.
+
+244
+00:32:02.340 --> 00:32:11.820
+So those are some of the ones that might be useful for assignment one. And when I say useful. You don't have to use any of these. These are just some of the things we've seen people use to solve some of the problems, but you may not use all of them.
+
+245
+00:32:13.410 --> 00:32:18.330
+And then Stanford string library. So these are the ones that we provide to you based on code that
+
+246
+00:32:18.990 --> 00:32:26.790
+Stanford has written for around strings. And notice that the include looks a little bit different because we've written this file, and it's not a built in C plus plus.
+
+247
+00:32:27.480 --> 00:32:32.130
+Library. So you use quotation marks instead of this angle brackets, like what Nick was talking about yesterday.
+
+248
+00:32:33.060 --> 00:32:44.550
+And these are not called like this where you put the string dot the name of the method. These are called more similar to the character functions where you just call the method itself and then you pass in the string that you want to do the function on
+
+249
+00:32:45.750 --> 00:32:47.700
+Again, the ones that are really going to just be useful, you
+
+250
+00:32:48.180 --> 00:32:58.620
+Useful for you for this first assignment or this conversion to uppercase and lowercase where you just pass in the string itself and what it'll do is it'll return an actual string to you and you'll need to store that inside of a variable.
+
+251
+00:33:00.300 --> 00:33:05.850
+All right. Anything. Any questions on string libraries or character libraries.
+
+252
+00:33:11.220 --> 00:33:22.830
+All right. If not, I'm going to do this. This is the copy out of there are actually two types of c++ strings and c++ is a little weird, like best. We're going to do a couple more quick polls, just to
+
+253
+00:33:23.220 --> 00:33:27.840
+Get you thinking about what this means. And again, I don't expect you to know the answer to these off the bat, so
+
+254
+00:33:28.410 --> 00:33:37.770
+What do you think will happen with the following line of code. So I'm creating a string called Hi there, and I'm saying it's equal to high plus there. Would you get an air.
+
+255
+00:33:38.190 --> 00:33:45.330
+A string inside of hi there that is Hi there, or a garbage value that is stored inside of Hi there, and it can you open that pole for me.
+
+256
+00:33:52.260 --> 00:33:54.450
+Well that's happening.
+
+257
+00:33:57.180 --> 00:33:58.050
+I'm gonna
+
+258
+00:34:01.350 --> 00:34:06.030
+Comment out this and comment in my weird string examples.
+
+259
+00:34:11.040 --> 00:34:21.720
+We're about an 82 so I am going to go ahead and uncommon these lines. Well, no, that's not good. Where's Hi there, it is actually up here. Sorry.
+
+260
+00:34:25.050 --> 00:34:39.870
+And I don't even have to run this one because it actually gives me an error detect something's wrong before I even tried it and it actually will throw an error and it won't let me run it. There's a compiler error. I mean, it says invalid operations to binary expression.
+
+261
+00:34:41.130 --> 00:34:59.220
+And what is going on here. What's happening is in c++. There are two types of streams. There are see strings and see is sort of the lower level language that c++ was built on and then there C plus plus strings all of the things that I talked about over here with these library functions.
+
+262
+00:35:00.240 --> 00:35:05.850
+And the string methods. Those operate on C plus plus strings but in c++. There are also these
+
+263
+00:35:07.020 --> 00:35:15.720
+You may have heard the term string literal. So when you just put these double quotation marks directly in your code with a string inside that defaults to a C string type.
+
+264
+00:35:17.640 --> 00:35:22.800
+And what happens is the actual operators are different for see strings versus C plus plus drinks.
+
+265
+00:35:23.130 --> 00:35:30.480
+And it see strings. Do not they are, they don't allow you to add them together and it actually just gives you a compiler. So this is just not something you can do.
+
+266
+00:35:31.230 --> 00:35:42.180
+You would have to convert it to a string to a c++ string, which I'll show you how to do in a moment before adding them together. So something you can't do is add to string, literally, or to see strings together.
+
+267
+00:35:43.440 --> 00:35:48.240
+All right. Second question before I show. Oops. What happened.
+
+268
+00:35:49.680 --> 00:35:57.030
+Is this one. What do you think happens with this line of code. So now we know that there's such a thing as a string and not just a C plus plus string.
+
+269
+00:35:57.660 --> 00:36:06.930
+So what happens when you try to add a C string to a character do you think you're getting an error, would you get high question mark or would you get a garbage value stored inside of hi there.
+
+270
+00:36:08.490 --> 00:36:15.870
+And again, I don't expect you to know this answer. So it's always fun to see where these are going to fall because c++ can be a weirdly
+
+271
+00:36:22.920 --> 00:36:29.760
+Alright, so while you're still guessing. I'm going to go ahead and comment this one out or uncommon to this one. So this is pull six
+
+272
+00:36:30.750 --> 00:36:42.840
+So it actually does give me a warning, but not an error. So it would allow me to run it and it says that adding a character to a string does not append to the string. So that gives you a hint of it won't give you high question mark. Let's see what it does actually give us
+
+273
+00:36:43.920 --> 00:36:45.300
+All and comment this
+
+274
+00:36:54.870 --> 00:36:55.590
+All right.
+
+275
+00:36:56.820 --> 00:37:04.080
+Yeah, it just is not happy with the warnings here. But when I actually print something that's confusing.
+
+276
+00:37:05.640 --> 00:37:15.360
+So give you something that is just completely garbage here. And the reason for that is it's actually just getting really confused about types. When you try to add a different type to a C string.
+
+277
+00:37:15.690 --> 00:37:25.320
+And then it's get pointing to random garbage memory that is just not useful for us at all. So that's what happens when you add see strings to things.
+
+278
+00:37:27.390 --> 00:37:28.920
+And so just some takeaways.
+
+279
+00:37:29.430 --> 00:37:39.840
+See strings don't have methods. So you can't do the like this is something you may have seen in Python when you just have the literal dot function, you have to store it in a variable first in order to convert it to a see string.
+
+280
+00:37:40.050 --> 00:37:48.690
+Or c++ string. Sorry. So some think fixes to do this as you just have to convert beforehand. So you have to make sure to store it in a variable. You can also use some of these functions that
+
+281
+00:37:49.350 --> 00:37:56.940
+Are built in or that we provide for you so you can cast to a string by using string and then putting the literal inside or if you actually want to return for some reason.
+
+282
+00:37:58.260 --> 00:38:09.510
+Get a C string from a c++ string, you can do the variable dot C string but biggest takeaway here is just be aware of the sea string and try not to add it to different types because it can cause some very weird behavior in your programs.
+
+283
+00:38:11.880 --> 00:38:12.480
+All right.
+
+284
+00:38:13.890 --> 00:38:21.000
+For the sake of time, since it's 1210 so we only have about 10 minutes left. I'm going to speed through these announcements. And if you have questions on strings.
+
+285
+00:38:21.660 --> 00:38:28.740
+Nick can answer them in the chat that I'm not going to go over these weird examples, these weird are examples I will let you run for yourself.
+
+286
+00:38:29.310 --> 00:38:36.090
+A couple of them are garbage. One of one's a guard ones garbage ones and air and one is actually okay because you convert the first thing to a string.
+
+287
+00:38:36.300 --> 00:38:43.020
+And but I'll let you play around with those, those will be in the starter code online about other ways that see strings interact with strings so quick announcements.
+
+288
+00:38:43.740 --> 00:38:54.150
+Section start today. Those are up online CS one idea.stanford.edu so you can see what time and section. You've been assigned to please check that as soon as possible because some of you will have sections today.
+
+289
+00:38:55.200 --> 00:39:09.060
+Assignment zero is due at midnight tonight and then the assignment one has been released, and is due next Tuesday at 1159 in your local time zone. We also have yeah hours, which are your early assignment help hours. Yeah, I think I got that acronym.
+
+290
+00:39:10.260 --> 00:39:17.160
+Which are at 6pm tonight trips going to be holding those so unfortunately we can't have minors there live but they will be recorded and released immediately after
+
+291
+00:39:17.520 --> 00:39:28.350
+And what that does is it just gives you a little bit of an overview of how to start approaching Assignment one or if you have questions on the core topics that sort of thing. And then as a quick reminder Nick and I always have group and individual office hours every week.
+
+292
+00:39:29.550 --> 00:39:38.400
+The ones that are individual the appointment link that you can use to schedule them is on the one one or 6pm website and Nick has some tomorrow from nine to 11
+
+293
+00:39:39.870 --> 00:39:48.810
+All right, in the last nine or so minutes. I want to talk about how we test code in CS one of six speakers. This is going to be super important for what you're seeing in Assignment one
+
+294
+00:39:50.550 --> 00:40:00.690
+And so testing. This is a quote from Sam read one software and cathedrals are much the same. First we build them and we send red wine is a software developer, by the way, not just a random person who said that
+
+295
+00:40:02.280 --> 00:40:15.510
+So why is dusting important. I was going to have you go into breakout rooms, but I think just given time. I'm going to go through this and then give you the opportunity to try out an ED workspace at the end. But I want to talk about some of the basics first.
+
+296
+00:40:16.560 --> 00:40:19.080
+So some examples of why testing is important.
+
+297
+00:40:20.070 --> 00:40:28.770
+There was a large, there is a large hole in the ozone layer over Antarctica and they remain detective undetected for a really long time because data analysis software by NASA
+
+298
+00:40:29.040 --> 00:40:40.500
+Actually was designed to ignore values that were really big and different deviated greatly from what was expected. So because there was this giant hole. They're like, oh, it must have been an air. So we're going to ignore it. But it wasn't actually in there.
+
+299
+00:40:42.120 --> 00:40:48.780
+There are lots of these examples of how testing can have really, really terrible impact if you don't test your code beforehand.
+
+300
+00:40:50.340 --> 00:41:04.200
+European area and five rocket was set to deliver a payload, but then problems caused the launch of your off path just 37 seconds after the launch. And the reason for this was they use some of the code from a prior launch, but the flight conditions were very different
+
+301
+00:41:06.360 --> 00:41:16.980
+And then software and then a study actually by the National Institute of Standards and Technology estimated that software bugs cost the US economy $59.5 billion every year.
+
+302
+00:41:18.930 --> 00:41:23.160
+And so you also estimated how much of that could actually be eliminated. If you improved testing so
+
+303
+00:41:23.460 --> 00:41:31.500
+A little bit about just why testing is important. Also, if you're interested. There's way more examples. If you click on the source down here of, like, why you should make sure to test your code.
+
+304
+00:41:32.070 --> 00:41:33.240
+Some fun stories in there.
+
+305
+00:41:33.990 --> 00:41:47.550
+But why is testing important testing can save money testing can save lives, prevent disasters and really testing is a programmers responsibility. So we really think it's important that you think about the ethical considerations that your code will have on people when you develop it.
+
+306
+00:41:49.050 --> 00:41:53.880
+And if you don't test your code there huge implications behind that. So it's really important that you do.
+
+307
+00:41:54.690 --> 00:42:03.360
+What are some good testing strategies you want to write a wide variety of tests that cover different use cases for your function or your code or program and you'll use critical thinking and
+
+308
+00:42:03.870 --> 00:42:10.860
+Analysis skills to just identify the different ways that your code might be used even if it's not what you initially intended your code to be used for
+
+309
+00:42:12.510 --> 00:42:19.440
+Basic idea here is that there are use basic use cases and edge cases where edge cases are an extreme in a program situation.
+
+310
+00:42:19.650 --> 00:42:29.370
+As an example, if you have a function that takes in an integer. What would happen if you pass in a negative number, or zero number or a really large number, even if you're only expecting small positive numbers.
+
+311
+00:42:29.550 --> 00:42:41.820
+You might not only get always small positive numbers and you want to make sure your code behaves when something like that happens the library that we use at Stanford for this is called simple test and it hopefully will make your testing life a lot easier.
+
+312
+00:42:43.230 --> 00:42:52.560
+It was developed by some lectures here for unit testing and it's very similar if those of you who took 106 a token and Python, it'll be very similar to the doc test infrastructure that you might have learned
+
+313
+00:42:53.220 --> 00:42:58.380
+So you'll see a lot. It's going to be on pretty much every assignment and you'll learn how to write good comprehensive test suites.
+
+314
+00:42:59.460 --> 00:43:08.730
+Definitely read this guide it is linked in the first assignment. I'm not going to go through all the details. Since it's very well fleshed out and their examples in there that are much better explain than I could do in the next six minutes.
+
+315
+00:43:08.850 --> 00:43:11.910
+So make sure to read that to understand how that testing works.
+
+316
+00:43:13.290 --> 00:43:21.210
+But just as a quick overview. The idea here is that inside of your main function. And remember, every c++ file or program needs a main function.
+
+317
+00:43:21.900 --> 00:43:25.350
+You would put this if and this is saying, if you're running simple tests.
+
+318
+00:43:25.650 --> 00:43:35.880
+And then you give it a flag or a parameter that says what you want to do. Do you want to run no test when you run the code. Do you want to run only selected tests which gives you the ability to choose your tests or do you want to run all the tests in the code.
+
+319
+00:43:36.570 --> 00:43:43.500
+And then in another file where you might be writing code, which is this is the structure that you'll see an assignment one, although it could also be in Maine dot cpp
+
+320
+00:43:45.420 --> 00:43:47.940
+You would actually write your tests at the bottom of the file here.
+
+321
+00:43:48.210 --> 00:43:56.580
+There are provided tests that we will often give to you and we don't want you to edit those, those are things that we expect the want you to try to pass and make sure you pass and it's actually helpful for
+
+322
+00:43:56.790 --> 00:44:05.640
+70 checking or making sure your code is working as you expect, and then we'll also always ask you to write some tests in here under this part that says student tests and inside these
+
+323
+00:44:05.910 --> 00:44:12.510
+Quotation marks. You can put a description that is actually more useful than some provided test and students wrote this test to describe what those tests are doing
+
+324
+00:44:13.800 --> 00:44:21.870
+And then each test will have a specific type. This one is particularly checking equality so checking if when I call my factorial function.
+
+325
+00:44:23.010 --> 00:44:33.780
+And I pass in the number one isn't giving me one. In return, when I pass him to is it giving me to in return when I pass them three. So basically, checking is my factorial function doing what I think it should be doing.
+
+326
+00:44:33.990 --> 00:44:40.470
+By checking equality between these two values that are passed in. I mean, there are different types of tests, again, that are specified in that guide.
+
+327
+00:44:42.330 --> 00:44:53.760
+So quick know I guess we have about four minutes left. So here's what I would like you to do. I'm going to go back all the way to this breakout rooms and just spend three minutes in breakout rooms for the
+
+328
+00:44:54.480 --> 00:44:59.310
+Where you're going to be discussing and I'll show you. We're going to go to the end space and workspaces again.
+
+329
+00:44:59.730 --> 00:45:08.520
+And there are in the public workspaces breakout room number at the top and you're going to go to the one that is the number that you get assigned in your breakout room.
+
+330
+00:45:08.790 --> 00:45:16.020
+There are some instructions here and I want you to just for the next three minutes with your breakout rooms discuss your thoughts about why testing is important.
+
+331
+00:45:16.350 --> 00:45:23.520
+You can go into more depth than what I talked about and then actually just tried to run make run in here and follow these instructions for changing this
+
+332
+00:45:23.820 --> 00:45:27.900
+Flag in Maine dot cpp to see what happens when you change this to selected tests.
+
+333
+00:45:28.200 --> 00:45:38.250
+And all tests, just so you can see what it works. You don't have to actually write any tests, but I just want you to get a sense of how to use the testing library before you jump into Assignment one and it could you go ahead and open up those breakout rooms.
+
+334
+00:46:12.720 --> 00:46:14.850
+Will bring folks back right at 1220
+
+335
+00:46:22.050 --> 00:46:28.830
+Do you want to for the recording just pick a word, pick the non public workspace and show them.
+
+336
+00:46:29.100 --> 00:46:30.840
+Oh yeah, sure. I mean, I can just show what I have
+
+337
+00:46:30.840 --> 00:46:33.390
+Here. So, what you would be doing at home.
+
+338
+00:46:34.140 --> 00:46:40.740
+Feel free to brainstorm. Make a copy of this and like brainstorm why you think testing is important, but to run through the steps that are actually happening here.
+
+339
+00:46:40.920 --> 00:46:46.770
+Just to show you what would happen. So this first time if I do make run and this is the equivalent in cutie. If you just hit the red button.
+
+340
+00:46:47.820 --> 00:46:56.910
+First time I'm running with no test, nothing's going to happen and nothing's happening in this main function because all I'm doing in this file is just testing the function extracts numbers up here.
+
+341
+00:46:57.420 --> 00:47:05.580
+Which is actually just pulling out numbers from a string. So when I first do it with no test, nothing's going to happen. But if I change this to selected tests and I hit make run
+
+342
+00:47:06.900 --> 00:47:17.970
+You'll see me make this bigger than a little menu pops up that gives you the option to run, none of the tests just the tests that are provided you can run a student test in this case there is no student tests in this program.
+
+343
+00:47:18.600 --> 00:47:26.940
+All of them that are in this main dot cpp file or all of the above. The reason that we have this three verses four is that sometimes you may have the code.
+
+344
+00:47:27.540 --> 00:47:36.240
+Excuse me, said separated into separate files, where sometimes you might just want the ones in Maine. And sometimes you might want them from all of the files. So let's go ahead and just run
+
+345
+00:47:38.130 --> 00:47:39.480
+For all of the above.
+
+346
+00:47:40.590 --> 00:47:43.890
+And so what you'll see is the output of your tests and whether or not they pass
+
+347
+00:47:44.370 --> 00:47:49.740
+This is correct. The you I will look a little bit nicer when you're running it in cutie creator, it'll pop up in a separate window.
+
+348
+00:47:50.160 --> 00:47:56.280
+But just for the sake of working in and we haven't printing down here and right now of course it's passing all of the test because I've written
+
+349
+00:47:56.730 --> 00:48:05.460
+The function already and I encourage you, if you want to try things out in Ed at home you can fill in the student tester. Yeah. So again, when we provide tests.
+
+350
+00:48:07.110 --> 00:48:15.150
+Will give them to you. And we don't expect you to change them because we want your code to pass them unless we tell you to edit the provided test and then the student tests.
+
+351
+00:48:15.750 --> 00:48:27.480
+You'll fill into this section here and you can also make separate blocks like this so you don't have to all just put them in the same student test block, you can make multiple like you could say one is like edge cases you wrote
+
+352
+00:48:27.870 --> 00:48:36.360
+And one for something else. But basically, so you could separate your tests and give them a little bit more of a description about what is this block of test doing, what's the next block of tests doing
+
+353
+00:48:37.740 --> 00:48:39.090
+All right, Nick, you want to bring people back
+
+354
+00:48:40.230 --> 00:48:46.290
+Yes, and I did remember to set that 60 seconds thing to not this time let's try this close
+
+355
+00:48:58.920 --> 00:49:07.860
+Alright, I know we are almost out of time. And that was a whirlwind where you did not get as much time as I would have liked to give you in your breakout rooms. We're going to try to figure out the whole timing of this
+
+356
+00:49:08.610 --> 00:49:16.110
+But hopefully, that just gave you an experience with Ed workspaces. We'll leave those open for a little bit after electricity, you can still play around with them and try them out if you didn't get a chance to
+
+357
+00:49:16.560 --> 00:49:21.000
+And we'll go through and look at what people are writing to because we're interested to see why you think testing is important.
+
+358
+00:49:21.840 --> 00:49:29.400
+So very quickly, what's next. Tomorrow Nick is going to be jumping into our first area of the user client side of the extraction boundary
+
+359
+00:49:29.760 --> 00:49:38.790
+And specifically talking about vectors and grits. Our first introduction to abstract data structures and if you don't know what this references go look up Despicable Me. All right.
+
+360
+00:49:38.850 --> 00:49:39.420
+Thank you all.
+
+361
+00:49:44.580 --> 00:49:45.390
+Elan Smolar Eisenberg: Right. Thank you.
+
+362
+00:49:47.580 --> 00:49:47.910
+ian rundle: Thank you.
+
+363
+00:49:49.290 --> 00:49:49.650
+gavin gee: Thank you.
+

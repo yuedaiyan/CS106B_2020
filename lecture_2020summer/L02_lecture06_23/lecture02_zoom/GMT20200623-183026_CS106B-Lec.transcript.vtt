@@ -1,0 +1,1438 @@
+WEBVTT
+
+1
+00:00:02.790 --> 00:00:12.750
+Nick Bowman: Okay, awesome. Alright, so welcome everyone to today's lecture. So our question for today, we're going to get started off with
+
+2
+00:00:13.799 --> 00:00:21.930
+Nick Bowman: Our topic today is going to be talking a lot about an intro to c++ and getting used to that. But what I want to hear in the chat and what we
+
+3
+00:00:22.140 --> 00:00:34.020
+Nick Bowman: Want to see often years to get started is what programming language, are you most comfortable with right now. So all of you have at least one programming language that you know it's probably not c++. A lot of you mentioned Java or
+
+4
+00:00:34.050 --> 00:00:36.180
+Nick Bowman: Python but yeah
+
+5
+00:00:36.240 --> 00:00:37.680
+Nick Bowman: That'll be cool to sort of see
+
+6
+00:00:39.030 --> 00:00:50.940
+Nick Bowman: Where your classmates are at in terms of where they're coming from into this class, and also as a know I probably will have my video off today. It started freaking out about 90 seconds before class, so probably this
+
+7
+00:00:51.750 --> 00:00:52.440
+Evan F Davis: Video today.
+
+8
+00:00:53.790 --> 00:00:55.410
+Nick Bowman: Awesome. So let's go ahead and get started. So
+
+9
+00:00:56.580 --> 00:01:05.940
+Nick Bowman: So today we're going to really get started on our roadmap for the quarter and we're gonna get started today is on this idea of c++ basics and c++
+
+10
+00:01:05.940 --> 00:01:17.790
+Nick Bowman: Fundamentals. So there's a lot of things that you already know and you know you all have some introduction of programming before you've gotten here to this class. And a lot of you know the fundamentals and sort of
+
+11
+00:01:17.820 --> 00:01:29.520
+Nick Bowman: Web sort of core important things that that aren't you in programming. And so the purpose of today's lecture is to sort of revisit and review those things and show that show you sort of what they look like in c++
+
+12
+00:01:31.140 --> 00:01:39.120
+Nick Bowman: So today's questions we're going to revisit the question that kind of started off with last lecture, which is why c++
+
+13
+00:01:39.900 --> 00:01:46.170
+Nick Bowman: We're going to spend most of our time on the second question of asking ourselves what do core programming fundamentals look like in c++
+
+14
+00:01:46.860 --> 00:01:58.710
+Nick Bowman: Then we're going to jump into at the very end, if we have some time we're going to talk about what does it mean to test code. And how do we test code in season 267 with a short recap of what's next. And what's coming up tomorrow.
+
+15
+00:02:00.330 --> 00:02:08.280
+Nick Bowman: So our first question of why c++ and what I'm going to cover a few years a review unit, you'll remember these slides from what kind of talked about on Monday.
+
+16
+00:02:08.580 --> 00:02:15.990
+Nick Bowman: And and when we, when we ask this question of why c++ rate, we want to motivate why we're teaching you this programming language in this class.
+
+17
+00:02:16.290 --> 00:02:22.110
+Nick Bowman: And so, like I mentioned a lot of you are coming from one of six a or from a PCs, which is in Java or Python.
+
+18
+00:02:22.560 --> 00:02:29.430
+Nick Bowman: And so c++ sort of my is different from those languages in some ways and similar to them in some ways as well.
+
+19
+00:02:30.060 --> 00:02:41.430
+Nick Bowman: And so, so some of the first sort of critical way that it's different is the c++ as a compiled language. So you'll hear us talking a lot about the compiler this quarter will talk about compiler errors.
+
+20
+00:02:42.000 --> 00:02:57.720
+Nick Bowman: We'll talk about why actually compiling code can be beneficial versus something like Python, which is an interpreted language so that that's a difference that you'll see pop up and really offended pic sort of one core reason why we choose to
+
+21
+00:02:59.220 --> 00:03:10.920
+Nick Bowman: teach this class in c++ and it's because it gives you the language gives you access to lower level computing resources. So kind of more direct access to the raw power that your computer has then
+
+22
+00:03:11.370 --> 00:03:19.290
+Nick Bowman: Similar languages like Python or even Java do and those languages don't give you nearly the same control over what's happening in your computer that c++ does
+
+23
+00:03:19.740 --> 00:03:31.620
+Nick Bowman: And so as we sort of tried to go from using instructions to actually understanding them and building them ourselves that that power in that access is going to become really important
+
+24
+00:03:33.270 --> 00:03:39.750
+Nick Bowman: And and as as a note right the syntax that we're going to see today, right. So they were going to see a lot of c++ code.
+
+25
+00:03:40.110 --> 00:03:48.360
+Nick Bowman: And if you're coming from something like Python, you know, this lecture is really geared towards you, in the sense that, like we want to show you kind of all the syntax that you're going to have to get used to.
+
+26
+00:03:48.870 --> 00:03:54.420
+Nick Bowman: And we don't want it to be intimidating. Right. Like, you don't, we don't expect that you're going to get it all perfectly right off the bat.
+
+27
+00:03:54.900 --> 00:04:01.500
+Nick Bowman: But you're going to pick it up really quickly and as you start working on the assignments and working through practice go to things like that. You really are going to pick it up pretty quickly.
+
+28
+00:04:01.950 --> 00:04:13.290
+Nick Bowman: And and so, so don't be intimidated by all the new things that we're going to see today know that the core material that we're covering, you know, RA and it's sort of just learning how to express it using this new language.
+
+29
+00:04:13.950 --> 00:04:24.210
+Nick Bowman: If you're coming from somewhere like Java and you might actually sort of a lot of what you're going to see in this lecture in terms of the c++ syntax will actually look very familiar. And so hopefully that that'll
+
+30
+00:04:24.810 --> 00:04:29.070
+Nick Bowman: Sort of, you'll be able to compare and contrast. Some of the things that are the same and different between
+
+31
+00:04:31.980 --> 00:04:42.810
+Nick Bowman: And so when I do a quick zoom call. And so another reason I want to motivate why we learn c++ and it's going to launch a quick poll.
+
+32
+00:04:43.110 --> 00:04:49.560
+Nick Bowman: And so, where, where do you all think that c++ ranks among the popular programming languages of the world so
+
+33
+00:04:49.770 --> 00:05:05.490
+Nick Bowman: They do a yearly surveys of people that work in programming and software development and sort of see how much code is written in each of them like sort of major programming languages like c++ and Java and Python and some curious where were you all think c++ lines in that range.
+
+34
+00:05:06.600 --> 00:05:10.980
+Nick Bowman: Looks like we're getting pretty heavy concentration around second and third
+
+35
+00:05:11.640 --> 00:05:19.920
+Nick Bowman: Second, third, and fourth and. Yeah. So I think, I think you all have a pretty good sense, which are the c++ is a pretty popular programming language and
+
+36
+00:05:20.460 --> 00:05:26.310
+Nick Bowman: So in that poll and I'll show you guys the results so you guys can see what unit classmates, put it on.
+
+37
+00:05:27.030 --> 00:05:33.840
+Nick Bowman: The actual answered his fourth so c++ if you look at this graph. It's a little bit messy, but we'll, we'll kind of tease out what's happening here.
+
+38
+00:05:34.260 --> 00:05:46.590
+Nick Bowman: And if you look on the right side of the graph here, you'll see that c++ in the current times is the fourth most popular programming language and, and so it's very widespread.
+
+39
+00:05:47.010 --> 00:05:52.740
+Nick Bowman: The only things that it's actually less popular in our Java and Python, which a lot of you.
+
+40
+00:05:53.430 --> 00:06:00.570
+Nick Bowman: Have learned that as your first programming language. So now you're super well equipped to kind of go out and just be really familiar with a lot of code, what's out there in the world.
+
+41
+00:06:01.050 --> 00:06:10.350
+Nick Bowman: And actually the second most popular programming languages. See, and I'll talk about the history of c++ but you can guess from the naming that C and c++ are actually very related
+
+42
+00:06:10.800 --> 00:06:24.930
+Nick Bowman: And so when learning c++ this quarter, you actually do get a little bit of a jumpstart on understanding and and sort of building up your power and ability to learn and see which is if you go into future CS classes at Stanford. And that's a programming.
+
+43
+00:06:27.270 --> 00:06:33.390
+Nick Bowman: And so we're going to go over a brief overview I included this this quote. So the adventure of c++ and
+
+44
+00:06:33.780 --> 00:06:40.320
+Nick Bowman: He had this great quote, which is that if someone claims to have the perfect programming language to use either a fool, or a salesman, or both.
+
+45
+00:06:40.740 --> 00:06:49.080
+Nick Bowman: And so no, no programming languages. Perfect. And then, so that's why it's actually really important that all of you in this class are going to sort of pick up your second programming language.
+
+46
+00:06:49.500 --> 00:06:55.350
+Nick Bowman: And you're gonna you really gain this ability to think about the the drawbacks, and the trade offs are different programs.
+
+47
+00:06:56.910 --> 00:07:04.680
+Nick Bowman: And to, you know, the, what I want to talk about before we actually jumped into learning c++ is what are those benefits and drawbacks for c++
+
+48
+00:07:05.370 --> 00:07:13.830
+Nick Bowman: And so a little bit of history and c++ is a programming language is actually built on top of this programming language called C, which I mentioned
+
+49
+00:07:14.250 --> 00:07:20.520
+Nick Bowman: And C and c++ are both very conservatively really powerful really robust and really flexible languages.
+
+50
+00:07:21.030 --> 00:07:27.990
+Nick Bowman: So like I said earlier, they give you a lot of control over what your computer is doing and more so than some of the popular programming languages.
+
+51
+00:07:28.560 --> 00:07:40.800
+Nick Bowman: And and they're both super wide, the US. If you remember back to the graph that I should between them C and c++ as this sort of group are vastly more popular than any sort of related pair of languages, sort of in the world.
+
+52
+00:07:42.300 --> 00:07:53.040
+Nick Bowman: And what's special about c++ is it's been this thing called an object oriented programming language. And we're going to talk a lot about this paradigm of object oriented programming later on in this quarter.
+
+53
+00:07:53.220 --> 00:08:01.980
+Nick Bowman: And it's going to sort of be our, our midway point as we go from the side of using abstractions to the side of actually implementing in developing attractions.
+
+54
+00:08:02.550 --> 00:08:14.730
+Nick Bowman: And but object oriented programming and the idea of objects and of classes is really going to be at the core of where that abstraction boundary lines for essence class and so c++ is a language that itself has been built
+
+55
+00:08:14.760 --> 00:08:18.240
+Nick Bowman: In sort of oriented around that and which is sort of why
+
+56
+00:08:18.750 --> 00:08:20.130
+Nick Bowman: Recover it and why we talk about it.
+
+57
+00:08:22.020 --> 00:08:28.080
+Nick Bowman: The, the thing that you might have heard coming into this class, those that c++ is just so hard to learn
+
+58
+00:08:28.470 --> 00:08:35.730
+Nick Bowman: And and and I want to, I want to paint that in a little bit more of a positive light c++ is certainly a very complex language.
+
+59
+00:08:36.240 --> 00:08:42.960
+Nick Bowman: There's a lot of nuance and maturity and it's a very old programming language that's been developed by a lot of people are a lot of time.
+
+60
+00:08:43.710 --> 00:08:49.590
+Nick Bowman: And our goal in this class is to help you become literate as kind of set this whole idea of programming literacy
+
+61
+00:08:49.950 --> 00:09:01.230
+Nick Bowman: And we will not master c++ of this class and I don't want you to feel intimidated. Like you feel like you need to understand the intricacies and the details of c++ are very sort of high level of detail.
+
+62
+00:09:02.070 --> 00:09:15.870
+Nick Bowman: Our goal was to sort of get you familiar with it and get you comfortable with it and and it's this idea of c++ as a second programming language to start supplementing your, your understanding and your coding ability and the sort of Article coming out of this class.
+
+63
+00:09:17.670 --> 00:09:25.080
+Nick Bowman: And so a little bit about the benefits and drawbacks of c++ kind of summarize so c++ is very fast and
+
+64
+00:09:25.200 --> 00:09:29.700
+Nick Bowman: It's a little bit of strapped what that means, but we're going to have a concrete demo for you as part of the first
+
+65
+00:09:29.700 --> 00:09:33.900
+Nick Bowman: Assignment actually show you how much faster c++ is compared to Python.
+
+66
+00:09:35.130 --> 00:09:42.810
+Nick Bowman: As I mentioned c++ a super popular as you go into research projects or companies or jobs coming out of this class and
+
+67
+00:09:43.140 --> 00:09:49.200
+Nick Bowman: You'll, you'll encounter it all over the place. And so you'll be so much better equipped to sort of interface with other programmers.
+
+68
+00:09:50.160 --> 00:10:00.120
+Nick Bowman: And it's very powerful. So keep revisiting this idea of really getting close to the computer and and and taking full advantage of the computing power that it has to offer.
+
+69
+00:10:01.350 --> 00:10:09.210
+Nick Bowman: Some of the drawbacks, though, as I mentioned, and it is very complex. It's very difficult to really truly learn and understand and master c++
+
+70
+00:10:09.600 --> 00:10:19.290
+Nick Bowman: And so for that reason we're going to rely on these things called a Stanford c++ libraries actually provide a little bit more of a friendlier easier to learn level of attraction in this collapse.
+
+71
+00:10:20.070 --> 00:10:37.980
+Nick Bowman: In the future, if you choose to go beyond CS one of the 60 and you my interface with the standard c++ libraries which are sort of the more kind of uniform and standard way of writing c++ code and but we won't touch on those much in this class.
+
+72
+00:10:39.090 --> 00:10:46.590
+Nick Bowman: And c++ can be dangerous. So there's, you know, famous quote from Uncle Ben that with great power comes great responsibility.
+
+73
+00:10:47.010 --> 00:10:57.510
+Nick Bowman: And and this this flip side of the fact that c++ is very powerful. And is that when things go wrong and c++ so when we get errors and we run into problems in our code.
+
+74
+00:10:57.810 --> 00:11:03.810
+Nick Bowman: They're going to be a little bit scarier and a little bit more intimidating than what you may have encountered in the programming.
+
+75
+00:11:04.650 --> 00:11:14.100
+Nick Bowman: And and what we want to help you do is equip you with the tools to sort of not be intimidated by that and to sort of understand the full power of what's going on and to also be very careful as you write code.
+
+76
+00:11:14.430 --> 00:11:17.400
+Nick Bowman: And that's where we're going to talk about testing a little bit at the end of this lecture as well.
+
+77
+00:11:19.560 --> 00:11:27.120
+Nick Bowman: So moving on to the next section. So this is sort of our main question for today and I'm, which is what do you core programming fundamentals and look like in c++
+
+78
+00:11:27.720 --> 00:11:39.210
+Nick Bowman: And my little my little subtext here is going to be, you know, get ready for a whirlwind tour and it's going to seem like I'm going very fast and I am because there's a lot of material covered
+
+79
+00:11:40.110 --> 00:11:45.990
+Nick Bowman: But I want to sort of emphasize to all of you that like you know this material already everything that I'm about to present
+
+80
+00:11:46.230 --> 00:11:52.470
+Nick Bowman: Sort of, you know, assuming that you fulfilled kind of the level of prerequisite, you need for this class, you know these things.
+
+81
+00:11:52.800 --> 00:11:59.850
+Nick Bowman: And so I'm going to review them. I'm going to recover them and talk about this programming fundamentals. I'm going to show you what they look like in c++
+
+82
+00:12:00.180 --> 00:12:06.870
+Nick Bowman: And and I don't want you to feel like you have to understand all of it and sort of be or write a c++ program right at the end of this lecture.
+
+83
+00:12:07.590 --> 00:12:16.350
+Nick Bowman: But as you jump into the first assignment and the first section end up after today's lecture. You're really going to start to get good practice and start building up that or C or c++
+
+84
+00:12:16.830 --> 00:12:27.960
+Nick Bowman: And so if you have, if you have questions, definitely feel free to jump in and but I'm just going to sort of prepare you, it's going to be a whirlwind tour. So let's go ahead and jump right in.
+
+85
+00:12:28.980 --> 00:12:35.760
+Nick Bowman: So the first thing that I'm going to talk about, actually, a lot of you have already seen these things in c++ if you filled out our c++ survey.
+
+86
+00:12:36.780 --> 00:12:49.290
+Nick Bowman: Which linked you to sort of this this nice guide walking through all the different sort of syntax differences that happen in c++ and but this is kind of just a little bit of the like nitty gritty details that we need to know in order to be able to actually start writing
+
+87
+00:12:50.820 --> 00:13:04.110
+Nick Bowman: The first those comments comments exist and all programming languages and this is the syntax that you'll see for comments in c++ there's single line comments with to forward slashes. And then there's multi line comments with this slash asterisk syntax.
+
+88
+00:13:04.560 --> 00:13:18.330
+Nick Bowman: And and that's about all I have to say there you'll see lots of comments in our code will expect that you write lots of comments in your own code. And it's very important comment your code as part of the part of good style. And so when you do so you can make use of these components.
+
+89
+00:13:19.710 --> 00:13:25.800
+Nick Bowman: Another thing that you saw in our very first demo program or hello world program from yesterday and the Kylie went through.
+
+90
+00:13:26.160 --> 00:13:35.220
+Nick Bowman: And is this idea of including statements. And so if you're familiar with import statements from Python and or I think they're also called import statements in Java.
+
+91
+00:13:35.520 --> 00:13:40.740
+Nick Bowman: And this is the idea of it's very powerful to be able to use code that's been written by other people.
+
+92
+00:13:41.220 --> 00:13:46.200
+Nick Bowman: And but in order to do that we have to tell the computer. We have to tell the computer where to actually look for that code.
+
+93
+00:13:46.680 --> 00:13:55.860
+Nick Bowman: And so include statements are sort of little things that we include at the beginning of our program to say, hey, computer. I'm going to go try to make use of this code, go check it out over here.
+
+94
+00:13:57.030 --> 00:14:01.230
+Nick Bowman: There's two different styles of doing it. There's a style with angle brackets in the style with
+
+95
+00:14:01.980 --> 00:14:18.330
+Nick Bowman: What's the generally accepted standard here in the US angle brackets when you're using the standard c++ libraries and you use quotes when you're using custom c++ libraries, which includes code that you've written yourself and also code that comes from the Stanford c++
+
+96
+00:14:22.050 --> 00:14:26.700
+Nick Bowman: And then the last thing we need to know is this idea of the console. And this idea of console output.
+
+97
+00:14:27.270 --> 00:14:32.730
+Nick Bowman: And the console sort of the main way that you'll be able to have your programs communicate to the users of the program.
+
+98
+00:14:33.390 --> 00:14:43.920
+Nick Bowman: And whenever you run a program and beauty creator. You'll, you'll see this window pop up this little console now and if you're a Mac on dark mode, it'll show dark, but the window or something like this.
+
+99
+00:14:45.060 --> 00:14:48.960
+Nick Bowman: And the way that you get information onto this console from your program.
+
+100
+00:14:49.530 --> 00:14:58.710
+Nick Bowman: Is by using this thing called see out. So there's this the keyword calls to and then there's these two angle bracket operators, the arrow operators.
+
+101
+00:14:59.160 --> 00:15:08.640
+Nick Bowman: And putting them together, you can sort of think of the arrow, arrow operators as saying, send this information to the console. And so for example if I wanted to print out
+
+102
+00:15:09.120 --> 00:15:19.080
+Nick Bowman: This classic quote from Hitchhiker's Guide to the Galaxy, I can say see out, arrow, arrow, and then the information that I want to print out and separated by
+
+103
+00:15:19.800 --> 00:15:34.350
+Nick Bowman: As many error operators as I need and then we use this special and end of constant. And I'll talk about that in a second. But when you include a line like this in your code. You'll see output pop up on the console. When you run
+
+104
+00:15:36.780 --> 00:15:42.300
+Nick Bowman: And then the thing about the English need to know about. And though I know we got a question about it in the last lecture.
+
+105
+00:15:42.540 --> 00:15:55.440
+Nick Bowman: And it's basically just a way of ensuring a line break happens in the console. So if you want to force the next line of information without going to the console to show up on the next line and you can use the end or in order to make that drop down
+
+106
+00:15:56.940 --> 00:15:58.350
+Nick Bowman: And so there's another example.
+
+107
+00:16:02.190 --> 00:16:09.570
+Nick Bowman: One thing you may have noticed here is this is sort of our first lines of c++ code outside of the hello world program that we
+
+108
+00:16:10.050 --> 00:16:19.410
+Nick Bowman: Wrote on or that we work through on Monday. And so one thing that you might be noticing is the fact that there's a semi colon. At the end of every Stephen and c++
+
+109
+00:16:19.740 --> 00:16:25.410
+Nick Bowman: And you're going to notice this all throughout the quarter. So if you're coming from Java, then this is probably not unfamiliar.
+
+110
+00:16:25.680 --> 00:16:36.780
+Nick Bowman: And but if you're coming from Python and this may be something sort of new to you, which is this idea that every line of code that you write has to end in semicolon. So all programming statements are going to end in a semi colon.
+
+111
+00:16:37.380 --> 00:16:47.310
+Nick Bowman: And you'll you'll almost certainly run into a time in your code where you forget a semi colon and then you have to track one down, figure out where to put it. And that's kind of like one of the quintessential kind of
+
+112
+00:16:47.820 --> 00:16:53.040
+Nick Bowman: Welcoming you into into writing code in c++ Java. Is this something like that.
+
+113
+00:16:55.200 --> 00:17:03.330
+Nick Bowman: Cool. Um, I'll pause and stop for questions. I don't have any questions about sort of the basic stuff, but I wanted to hear anything.
+
+114
+00:17:05.430 --> 00:17:16.530
+kylie jue: There were some questions about different types in when using see out the answer was yes you can mix strings and introduce if you put them separate it. What do you call those characters between
+
+115
+00:17:16.950 --> 00:17:17.910
+Nick Bowman: A angle brackets.
+
+116
+00:17:18.390 --> 00:17:19.290
+kylie jue: Brackets. Yeah.
+
+117
+00:17:19.500 --> 00:17:20.100
+Nick Bowman: Yeah, there was
+
+118
+00:17:20.820 --> 00:17:27.570
+kylie jue: There was also a question about what Engel is I'm clarifying that it is end L not end one
+
+119
+00:17:28.140 --> 00:17:43.620
+Nick Bowman: Yes, sir. It is end, you know, you probably have you refer as an goal for that reason. But it's sort of similar to see out. It's just a special value that's defined my c++ and it works as sort of just a forcing that console to go to the next one.
+
+120
+00:17:50.610 --> 00:18:01.410
+Nick Bowman: Alright, so now we're going to jump into talking about variables and types and variables and types or quality. Some of the most kind of important things that we're going to talk about today.
+
+121
+00:18:03.120 --> 00:18:13.380
+Nick Bowman: And so if you remember from from whichever programming language you're coming from, right, and generally variables are just this construct that allow us to store information by associating of value within me.
+
+122
+00:18:14.070 --> 00:18:31.320
+Nick Bowman: And we're going to use this metaphor in this class. A lot of this idea of variables as containers. So you see this. The snazzy little suits, like on that trip. But the other last summer, but we're going to think of variables as containers and we're going to think of them as named containers.
+
+123
+00:18:32.910 --> 00:18:38.670
+Nick Bowman: And name containers scoring of values disappointing. I mean, so what does that mean well in this case right
+
+124
+00:18:39.480 --> 00:18:49.740
+Nick Bowman: The thing that you see here, these are both variables. Right. And these variables store value right so that each different container that each store of value inside that container.
+
+125
+00:18:50.190 --> 00:18:57.090
+Nick Bowman: And they each have a name that's associated with them. So for example, if we wanted a variable to represent the number of our class here and we can have a
+
+126
+00:18:57.450 --> 00:19:07.080
+Nick Bowman: Variable as far as the number one of six. And it's a pretty hot day today. So if we're honored to store the temperature of today. I'm in a variable rate. We could do that as well.
+
+127
+00:19:08.130 --> 00:19:18.030
+Nick Bowman: But variables are sorted is very important idea of a way of storing information and associating a knee was sort of a box or a container that holds a piece of information.
+
+128
+00:19:19.500 --> 00:19:27.990
+Nick Bowman: And one thing that you may notice that is different, especially if you're coming from Python and as it c++ uses this thing called the camel case naming convention.
+
+129
+00:19:28.380 --> 00:19:34.260
+Nick Bowman: And what you notice where you can notice about that there is that the first letter.
+
+130
+00:19:34.950 --> 00:19:42.630
+Nick Bowman: Of our variable name is a lowercase and every subsequent letter starts with an uppercase letter. And so that's what it means to be
+
+131
+00:19:43.050 --> 00:19:55.770
+Nick Bowman: In camel case. And this is opposed to in Python, you may have seen something you probably would have you named your variables with separated by an underscore and something called sneak case.
+
+132
+00:19:57.300 --> 00:20:07.020
+Nick Bowman: But in in C plus plus. We're always going to use camel case. And so whenever you're naming variables or when we talk about functions. Later on, you're going to be using this
+
+133
+00:20:10.080 --> 00:20:10.440
+Nick Bowman: Cool.
+
+134
+00:20:15.600 --> 00:20:22.920
+Nick Bowman: Great. And I really want to stress. Stress this variables are perhaps one of its kind of the most important things that we're going to talk about
+
+135
+00:20:23.370 --> 00:20:31.560
+Nick Bowman: It variables sort of didn't exist. The level of exclusivity and readability that we will be able to have in our programs would really be severely depleted.
+
+136
+00:20:32.010 --> 00:20:44.190
+Nick Bowman: And so we're going to you know spend a decent chunk of time talking about very modern c++ and I really hope that you all will take the time to make sure that you have a really solid fundamental understanding of how variables.
+
+137
+00:20:47.970 --> 00:20:55.140
+Nick Bowman: And so when you talk about variables, the sort of very important associated concept that you also have to talk about is this idea of types.
+
+138
+00:20:55.980 --> 00:21:08.070
+Nick Bowman: If you remember from prior programming classes all variables appetite. And what that means is that type describes the basically what the data that's being stored by that very place.
+
+139
+00:21:08.730 --> 00:21:16.080
+Nick Bowman: So different pieces of information have different types that represented in different ways. They represent different important pieces of information.
+
+140
+00:21:17.430 --> 00:21:25.680
+Nick Bowman: And depending on which language you're coming from some programming languages are very explicit about the types that they use and some programming language is a very implicit
+
+141
+00:21:25.920 --> 00:21:33.780
+Nick Bowman: So if you're coming from Java, you, you know, this idea of being very explicit with the types of your variables. Whereas with you're coming from Python.
+
+142
+00:21:34.320 --> 00:21:40.440
+Nick Bowman: You don't have to specify the types of your variables, the Python interpreter is almost smart enough to do that on its own.
+
+143
+00:21:41.040 --> 00:21:46.410
+Nick Bowman: And and so so what we're going to talk about next is we're sort of c++ fits into that.
+
+144
+00:21:47.280 --> 00:21:54.240
+Nick Bowman: But before we get started and talk about a couple of different types that you might see in c++ and so we have a tape called int.
+
+145
+00:21:54.540 --> 00:22:00.840
+Nick Bowman: And that's going to be a type that stores in numbers. So it's whole numbers are integer numbers but positive and negative
+
+146
+00:22:01.770 --> 00:22:12.240
+Nick Bowman: There's an associated type called long, but you'll also see an assignment one and you can think of long as it's a longer integer. So an integer that can store larger bigger numbers.
+
+147
+00:22:13.590 --> 00:22:20.250
+Nick Bowman: We have this idea of double so double is what we use to store, what we call floating point numbers and numbers that have decimals in it.
+
+148
+00:22:21.870 --> 00:22:32.820
+Nick Bowman: We have these things called strings and Kelly will talk a lot about the details of strings tomorrow and but you know we've already seen some strings. When we printed up things like hello world we're printing out messages to the console.
+
+149
+00:22:34.410 --> 00:22:49.410
+Nick Bowman: We have this idea of cards which stands for characters which are individual components of the string. And so you can see there's a single characters that might you might be able to type on a keyboard, for example, and we'll also talk about a lot more in depth about cars tomorrow.
+
+150
+00:22:51.060 --> 00:23:04.140
+Nick Bowman: But the most important thing and it's relates back to what I was saying earlier, is that it in c++ you must explicitly define your types. When you create the variables, and after a variable is created its type cannot change.
+
+151
+00:23:05.460 --> 00:23:14.160
+Nick Bowman: And so what does that mean that means that when you establish a container. You have to tell it. Okay, what value is it going to store. What type of value. It's going to store.
+
+152
+00:23:14.790 --> 00:23:24.180
+Nick Bowman: And once you've given it that label. Once you've given that container that specific type, the value or the container can never store anything else.
+
+153
+00:23:27.270 --> 00:23:28.740
+Nick Bowman: Was there was a questions in the chat.
+
+154
+00:23:29.940 --> 00:23:30.120
+Nick Bowman: Room.
+
+155
+00:23:30.570 --> 00:23:40.200
+kylie jue: Um, it was mostly just the question about pronunciation of card. I think I caught everyone's questions in the chat. But if I missed one that was previously above, feel free to plug in and again
+
+156
+00:23:43.980 --> 00:23:47.130
+kylie jue: One question that that yeah when an incident comes along.
+
+157
+00:23:48.450 --> 00:23:57.270
+Nick Bowman: Yeah, that's a great question. So actually, on this point of that you must explicitly define what type of variable is it's up to you as the programmer.
+
+158
+00:23:57.690 --> 00:24:08.730
+Nick Bowman: To define whether or not a variable is going to be into are going to be along for almost all of our use cases, this quarter inch will do just fine. And they can store numbers up to as largest 2 billion.
+
+159
+00:24:09.060 --> 00:24:19.890
+Nick Bowman: And so pretty, pretty large numbers. And if you ever feel like you'll need to store number that might be larger than 2 billion. And that's when long comes into play, but it's up to you to sort of make that decision about whether you're starting something
+
+160
+00:24:21.060 --> 00:24:22.680
+kylie jue: And the other question is about
+
+161
+00:24:25.320 --> 00:24:32.820
+Nick Bowman: How would you do it yeah casting casting does happen in c++ and I think we're actually going to talk about it a little bit later on this week.
+
+162
+00:24:33.630 --> 00:24:42.330
+Nick Bowman: We're not. I don't have any examples in the lecture today about converting between different types and but casting can and does happen in c++ and I think we're covering a little bit
+
+163
+00:24:47.160 --> 00:24:52.140
+Nick Bowman: So now let's actually look at some c++ code to create variables and
+
+164
+00:24:52.920 --> 00:24:59.550
+Nick Bowman: The first thing that you want to recognize and specifically if you're coming from hyphen that's different is this idea of explicit
+
+165
+00:25:00.030 --> 00:25:06.270
+Nick Bowman: Right. So if I want to create a variable. I'm going to give it a name. A I also need to tell the variable that it's been a store manager.
+
+166
+00:25:06.630 --> 00:25:15.900
+Nick Bowman: Right, and so I do that by using the syntax of saying in a semi colon, and that's going to do the process of declaring a new integer
+
+167
+00:25:16.740 --> 00:25:27.480
+Nick Bowman: And so I want to make a point here, right. I say, declaring because we haven't actually given it a value yet, right, we have just created an empty container that you can see on the right side here.
+
+168
+00:25:27.840 --> 00:25:36.660
+Nick Bowman: We've told this container. Hey, you have to hold an integer. Right. You're not allowed to hold anything else. And then we've given it a name. We say, all right, container. We're gonna refer to you with the name
+
+169
+00:25:37.770 --> 00:25:50.790
+Nick Bowman: But at this point, we haven't actually assigned the value. So how do you do that well assigning the value will look very similar to things you've seen before, right, so then we can use the assignment operator to take the value of five and actually store it in our
+
+170
+00:25:52.410 --> 00:25:53.640
+Nick Bowman: And so
+
+171
+00:25:54.720 --> 00:26:03.810
+Nick Bowman: The reason I broke this down actually into two lines of code is to show you that in C plus plus. There are two distinct steps that happen when you when you create a variable.
+
+172
+00:26:04.350 --> 00:26:17.370
+Nick Bowman: You start with the Declaration and the declaration is important because that's what creates the container and that you're going to store information and then you do the initialization and the initialization is what actually assign the value into a container.
+
+173
+00:26:18.960 --> 00:26:24.750
+Nick Bowman: That being said, you can do it all on the same line. So if we wanted to create a car variable.
+
+174
+00:26:25.590 --> 00:26:37.350
+Nick Bowman: And store the value x in it. We can do that all in one line. And so what you see here is the variable gets declared on the left hand side of the equal sign and then it gets initialized on the right hand side of the equal sign.
+
+175
+00:26:37.680 --> 00:26:41.340
+Nick Bowman: And we can combine this declaration industrialization into one.
+
+176
+00:26:42.390 --> 00:26:49.260
+Nick Bowman: And what what that creates on the right side is another container with the name be that holds the value of the character x
+
+177
+00:26:50.760 --> 00:27:08.640
+Nick Bowman: And you can see a very similar process for cars and strings. And so again, with these two lines of code, you can create the container. Take the time to define the type of value of the containers a lot to store and then put some value into that container for later use.
+
+178
+00:27:09.690 --> 00:27:14.520
+Nick Bowman: And so now I want to talk about some things that you can't do. So some things that you are not allowed to do
+
+179
+00:27:15.480 --> 00:27:21.450
+Nick Bowman: The first thing that you're not allowed to do right is you're not allowed to change the type of a container.
+
+180
+00:27:21.930 --> 00:27:37.860
+Nick Bowman: So what that means is I cannot redefine the name a right, I cannot change the container that's being that has the name a to store type double that's not allowed. If you try to do this, the compiler will complete it. You and it'll
+
+181
+00:27:39.030 --> 00:27:41.250
+Nick Bowman: Say something about a type mismatch and something that's not
+
+182
+00:27:43.440 --> 00:27:51.480
+Nick Bowman: Interestingly enough, though, you also are not allowed to redefine a variable of the exact same name with the type specification
+
+183
+00:27:52.110 --> 00:28:08.850
+Nick Bowman: And what I mean by that is if I wanted to change the value of that sort of this container and I want to change it from five to 12 and I you know it based on our previous examples, you might say, okay, well, I need to say it so that it knows that it's a equals 12
+
+184
+00:28:10.230 --> 00:28:16.650
+Nick Bowman: However, this declaration stuff that happens up here when you actually define the type and the name together.
+
+185
+00:28:17.490 --> 00:28:31.650
+Nick Bowman: That only ever has to happen once and like I shouldn't even say has to happen. That can only happen once right so the process of creating a container that has a certain name and has the specified type only happens once
+
+186
+00:28:32.670 --> 00:28:36.780
+Nick Bowman: So natural question is, well, what if I actually wanted to change the value that sort of the container.
+
+187
+00:28:40.770 --> 00:28:47.070
+Nick Bowman: Or if you want to change the value, then you can just update the that the variable like you would sort of be used to any other programming language.
+
+188
+00:28:47.550 --> 00:28:56.280
+Nick Bowman: So you could say a equals 12 and the reason we're allowed to do this is because a right still references the same variable that got declared up at the top.
+
+189
+00:28:57.690 --> 00:29:11.430
+Nick Bowman: And so this is sort of your, of your first exposure to kind of what it looks like I'm creating different types of variables in c++ and hopefully you'll get a lot of practice with working with these variables and working through the first part.
+
+190
+00:29:14.220 --> 00:29:14.730
+Nick Bowman: And
+
+191
+00:29:16.650 --> 00:29:20.100
+Nick Bowman: Any questions on types and variable.
+
+192
+00:29:22.050 --> 00:29:23.520
+Nate Hedgecock: Yeah, I had a quick question. So
+
+193
+00:29:24.720 --> 00:29:30.090
+Nate Hedgecock: Once you to find a type of variable or a type. Can you not ever go back and change it.
+
+194
+00:29:31.200 --> 00:29:33.030
+Nate Hedgecock: That's correct. Okay.
+
+195
+00:29:33.540 --> 00:29:38.850
+Nick Bowman: Yeah. So once you once a once a variable name in a variable type are associated with one another.
+
+196
+00:29:39.240 --> 00:29:52.590
+Nick Bowman: At least within the certain scope and we'll talk about more what scope means tomorrow, but within the certain scope of a function or if statement or a forward. For example, you cannot redefine that specific name to have a different type. Yeah.
+
+197
+00:29:52.770 --> 00:29:53.460
+Awesome. Thanks.
+
+198
+00:29:57.780 --> 00:29:58.620
+Any other questions.
+
+199
+00:30:01.470 --> 00:30:12.960
+kylie jue: If anyone would like to answer it asked any of the questions that I haven't been able to get to. I'm slowly scrolling down so it takes me a little while to catch up because of all the messages in the chat. But if you would like to ask one out loud, feel free to just unmute unmute yourself.
+
+200
+00:30:15.240 --> 00:30:25.680
+Julia L Wang: I have a quick question about strings. So in Java. I'm aware that streams are objects. So normally when you initialize like you write it with a capital S.
+
+201
+00:30:26.190 --> 00:30:28.350
+Julia L Wang: Does that apply in c++ as well.
+
+202
+00:30:29.100 --> 00:30:37.920
+Nick Bowman: Yeah, that's a great question. That's an awesome question. We'll talk a lot more in depth about springs tomorrow. But the short answer for today is strings are the same.
+
+203
+00:30:39.120 --> 00:30:51.780
+Nick Bowman: Category of types as things like instant Carson doubles and that's that is why you see it with the lowercase and that's that's a really good observation. And so they are what we call primitive types. So, and they all they're all handled the same. Yeah.
+
+204
+00:30:52.890 --> 00:30:53.310
+Nick Bowman: Thank you.
+
+205
+00:30:55.170 --> 00:31:23.760
+tongjun zhang: Hi. I got a question about types in c++ I read something about static cast and to a type value to a type and variable does that change the type of the original variable or it just like is the same as using a, like a type of arrival to give value to another of arrival
+
+206
+00:31:24.990 --> 00:31:34.860
+Nick Bowman: Um, if we're talking about static, but that's a little bit beyond the scope of what we're going to talk about today. Um, if you want to stick around after lecture and ask that we can talk about that, but that's that's a little bit young
+
+207
+00:31:39.690 --> 00:31:40.890
+Nick Bowman: Cool, yeah.
+
+208
+00:31:41.250 --> 00:31:42.780
+Dima Timofeev: One more question if we have time.
+
+209
+00:31:42.870 --> 00:31:43.140
+Yeah.
+
+210
+00:31:44.580 --> 00:31:57.180
+Dima Timofeev: I if we declared the wearable but we didn't initialize it and then we try to use it down the stream will I get some junk or welcome file complaint that then cannot proceed.
+
+211
+00:31:58.410 --> 00:32:05.280
+Nick Bowman: That is that is a great question and we'll talk a lot about that in depth, a little bit later on in the corner and but your first
+
+212
+00:32:05.640 --> 00:32:13.800
+Nick Bowman: Your first idea that was correct. If you do not initialize the value of variable you get what you call it garbage. Right. You get some
+
+213
+00:32:13.980 --> 00:32:20.460
+Nick Bowman: You, there's something stored in the container, but you have no idea what it is. And you have no control over what it is on industrialized
+
+214
+00:32:21.390 --> 00:32:30.600
+Nick Bowman: And so initializing the better initializing your variables is super, super important and not initializing variables is something that the compiler will try to point out to you.
+
+215
+00:32:36.870 --> 00:32:47.100
+Nick Bowman: And so let's keep moving on. So, so talking about functions and parameters. So, and I'll do a brief overview functions. Right. So if you remember functions from what you've seen before.
+
+216
+00:32:47.520 --> 00:32:56.100
+Nick Bowman: Functions sort of act as this black box that allows us to take some input and produce some output we call the input the parameters for the arguments.
+
+217
+00:32:57.510 --> 00:33:02.910
+Nick Bowman: And so parameters in this case we're just defined as variables that your function expects to have when it goes to run
+
+218
+00:33:04.470 --> 00:33:12.060
+Nick Bowman: And then the difference between parameters and arguments arguments is the specific values that you pass on to the function, but get assigned to the variables.
+
+219
+00:33:14.250 --> 00:33:26.820
+Nick Bowman: And then our functions always produce some return value. Um, so that's the output of the function and and so this is the ideas. This is our function does some amount of work and then hands back a value to the previous function.
+
+220
+00:33:28.980 --> 00:33:37.890
+Nick Bowman: And and so now let's talk a little about what the anatomy of a function looks like in c++ and what we're going to do is we're going to break down this thing called a function prototype.
+
+221
+00:33:38.310 --> 00:33:43.620
+Nick Bowman: A functioning prototype is actually something that you need to c++ in the sense that
+
+222
+00:33:44.520 --> 00:33:53.520
+Nick Bowman: It's, it's this idea that you need to declare your the types and the name of your function before you actually implement in my code.
+
+223
+00:33:54.180 --> 00:34:07.140
+Nick Bowman: And so what a function prototype looks like it sort of just as one line of code that contains all the important information about what the function takes it as input and produces output, but none of the actual implementation details and we get to the stuff of implementation details.
+
+224
+00:34:08.790 --> 00:34:11.910
+Nick Bowman: But just breaking down the parts of the function. Obviously, you have the name
+
+225
+00:34:12.570 --> 00:34:26.040
+Nick Bowman: You have the input parameters. Notice that just like variables, right, these, these parameters, need to be have explicitly declared types. So again, difference from Python right where you could just passing the parameters. What that means you need to explicitly declare the
+
+226
+00:34:26.040 --> 00:34:28.530
+nicole koch: Types of your parameters that you pass into a c++ function.
+
+227
+00:34:30.210 --> 00:34:35.100
+Nick Bowman: And then the other unique thing is we also need to specify the return type
+
+228
+00:34:35.220 --> 00:34:37.320
+Nick Bowman: So you keep seeing this idea of
+
+229
+00:34:37.440 --> 00:34:39.420
+Evan F Davis: very explicitly typing things
+
+230
+00:34:39.810 --> 00:34:51.420
+Nick Bowman: Show up over and over again. And so this this idea, this explicit types comes back again, and so we need to also declare this is specifically the type that our function is going to return.
+
+231
+00:34:54.060 --> 00:34:59.070
+Nick Bowman: The. This might raise the question of how do you, what if you want to write a function that actually doesn't return the value
+
+232
+00:34:59.550 --> 00:35:02.340
+Nick Bowman: Those kind of functions do exist and we will write some of them.
+
+233
+00:35:02.610 --> 00:35:16.080
+Nick Bowman: Over the course of this quarter. And there is a special type keyword called void if you put void in front of your function name that's a way of specifying to the compiler of saying, hey, my functions not actually going to return anything
+
+234
+00:35:16.890 --> 00:35:30.180
+Nick Bowman: You still need to explicitly say it. You can't just admit it, you can just not have a return type and expect the compiler to sort of deaths, what your intentions or you have to include this void keyword to very explicitly tell the compiler. I am not returning value from this
+
+235
+00:35:31.440 --> 00:35:40.770
+Nick Bowman: And note that this is a type. It's only applicable for return types. You can't have a void parameter and you can't have a void variable. So don't try to declare avoid printer.
+
+236
+00:35:43.260 --> 00:35:53.910
+Nick Bowman: And so now written. Now that we've written our function prototype or function declaration which says our main our inputs and outputs. Now we can actually now can actually implement the function
+
+237
+00:35:54.390 --> 00:36:01.140
+Nick Bowman: And so implementing the function means that we replicate the function header. So again, that's our name our inputs and outputs.
+
+238
+00:36:01.560 --> 00:36:11.160
+Nick Bowman: And then we just write some code right we write some code in the body and I sort of wrote a little bit of like pseudo code here to send you know might declare a variable and do some calculations.
+
+239
+00:36:11.640 --> 00:36:22.830
+Nick Bowman: And again, at the very end, right, we go ahead and we return our value and we make sure that our value that we're returning has the same type that we sort of declare as the return type of
+
+240
+00:36:25.170 --> 00:36:35.070
+Nick Bowman: And so here's a quick little example. So a little bit, a little c++ program that uses the main function and then this helper function called average and
+
+241
+00:36:35.580 --> 00:36:48.780
+Nick Bowman: And so another important note here is that a kind of quirk of c++ is that the order in which you declare things and matters. And what I mean by that is you must define a function, before you call
+
+242
+00:36:49.260 --> 00:36:57.270
+Nick Bowman: And so it's actually very important here that I included the average function higher up in my code file that I've actually call it down in me.
+
+243
+00:36:57.810 --> 00:37:04.950
+Nick Bowman: And if you ever run into a problem where the, where you've written a function and you try to use it and the compilers, like, I don't know what function you're talking about
+
+244
+00:37:05.310 --> 00:37:12.300
+Nick Bowman: And one of the first things you should check to see is, did I actually declare and right in my function. Before I tried to use it.
+
+245
+00:37:12.570 --> 00:37:19.860
+Nick Bowman: And that's kind of a quirk of using c++ and that doesn't exist in something like Python were in Python, you can have this habit anything any order that you want.
+
+246
+00:37:21.540 --> 00:37:31.140
+Nick Bowman: Um, but going back to this idea. So there's a there's a colleague function which is the function that is called. And then there's the color function, which are the the main function in this case.
+
+247
+00:37:32.610 --> 00:37:42.000
+Nick Bowman: We see all of our same suspect from before show up. So we have two parameters to our average function and a double our with a name of a and another double within the movie.
+
+248
+00:37:42.660 --> 00:37:50.910
+Nick Bowman: And we see that our double function or that our average function returns also returns a double. So just calculate average of the two numbers.
+
+249
+00:37:51.630 --> 00:38:08.220
+Nick Bowman: And we see again this distinction between parameters and arguments you can think of parameters as the variable declaration so parameters as a sort of variables that exists, specifically for a single function and then the arguments are the specific values that you pass
+
+250
+00:38:11.250 --> 00:38:22.380
+Nick Bowman: And so going back to our container and our suitcase diagram. And you can think of these three values a be in some as they're all just variables that exists within the average function.
+
+251
+00:38:23.070 --> 00:38:27.540
+Nick Bowman: And then you have this value myth that exists only within the main function and so
+
+252
+00:38:28.110 --> 00:38:39.420
+Nick Bowman: These functions don't have access to each other's variables. And so they sort of have their own copies of things and and the mid variable itself. You know exists on the inside.
+
+253
+00:38:40.410 --> 00:38:45.870
+Nick Bowman: And this is touching on this idea of scope and like I mentioned, we'll talk about a scope, a little bit more in detail tomorrow.
+
+254
+00:38:47.010 --> 00:38:48.300
+Nick Bowman: But that is sort of
+
+255
+00:38:51.330 --> 00:38:58.560
+Nick Bowman: The one last thing that I wanted to touch on. And so, passing parameters can sometimes be tricky.
+
+256
+00:38:59.220 --> 00:39:06.720
+Nick Bowman: Because it's it's tricky to think about, well, if I pass a variable into a function is the function actually allowed to modify that variable.
+
+257
+00:39:07.200 --> 00:39:13.770
+Nick Bowman: And so I want to do a quick second quick simple for you all, which is check out this this very brief snippet of code.
+
+258
+00:39:14.460 --> 00:39:29.220
+Nick Bowman: So we have a function called double value that takes in a parameter x, it multiplies x by two and stores the value back in x and then it returns the value and then we have this main function that
+
+259
+00:39:30.600 --> 00:39:39.090
+Nick Bowman: We have this main function that declares a variable called my value passes this variable into the result function and then prints out the results of the two variables.
+
+260
+00:39:39.510 --> 00:39:49.380
+Nick Bowman: And so my question for all of you. Another thought this second poll is what is the output of this function going to be. So think about it for a second.
+
+261
+00:39:50.430 --> 00:39:54.810
+Nick Bowman: And then see if you go ahead and input your results, there's
+
+262
+00:39:59.820 --> 00:40:09.180
+kylie jue: One question that I think everyone would benefit from hearing while they're answering this poll is what if you want to return multiple variable types in a function
+
+263
+00:40:09.930 --> 00:40:21.870
+Nick Bowman: Yeah, yeah, yeah, that's a great question. So unfortunately c++ actually has a limitation, you're only allowed to return one value. So you specifically only one type and one value.
+
+264
+00:40:22.230 --> 00:40:33.600
+Nick Bowman: And that may seem like a very sort of, you know, draconian restriction and because you know if you're coming from Python you you're familiar with this idea of like really being able to to enjoy.
+
+265
+00:40:34.020 --> 00:40:44.190
+Nick Bowman: And, you know, returning multiple things from functions. There are ways to get around this restriction and using a technique that we're actually going to talk about tomorrow as well.
+
+266
+00:40:44.790 --> 00:40:51.300
+Nick Bowman: But for now work into the assumption that you can only return the single value from a, from a function. Yeah, that's a great question.
+
+267
+00:40:52.470 --> 00:41:03.390
+Nick Bowman: Of course, so let me end the poll. So you guys did a great job almost 95% of you got the right answer. And so let me share those poll results and go on to the next slide.
+
+268
+00:41:03.840 --> 00:41:13.380
+Nick Bowman: And so you're right. So what you'll see here is that when you print out the value of the variables at the end of this function, you see that my value has the value five and result has the value
+
+269
+00:41:15.270 --> 00:41:21.870
+Nick Bowman: And the question is, why is this the case. And the reason that this is the case, and is the fact that
+
+270
+00:41:23.310 --> 00:41:34.200
+Nick Bowman: When you pass in variable to a function, the function gets a copy of that variable, so it gets its own brand new separate untouched copy
+
+271
+00:41:34.620 --> 00:41:43.200
+Nick Bowman: That it's sort of its own and only its own and so changing the value inside the function doesn't actually have any effects on the original variable, the past
+
+272
+00:41:44.130 --> 00:41:54.900
+Nick Bowman: And this way of passing things called pass by that I knew. The reason why is because the value itself as copy. And this is sort of the default mode of operation when it comes to parameters and c++
+
+273
+00:41:55.380 --> 00:42:08.880
+Nick Bowman: And C plus plus also supports a little bit of a different, more nuanced view of passing parameters and we'll see what that looks like tomorrow. But for now, right, you're gonna be working into the assumption that whenever you pass parameters to functions and you'll be passing things but
+
+274
+00:42:11.040 --> 00:42:14.280
+Nick Bowman: Yeah, you guys did a great job. And that's a great intuition.
+
+275
+00:42:16.020 --> 00:42:24.390
+Nick Bowman: And cool right so this is supposed to happen a lot earlier than electric, but I have a quick quick break for announcements and so most of the same announcements as yesterday.
+
+276
+00:42:24.960 --> 00:42:29.160
+Nick Bowman: I was talking about the C plus plus, or a little bit earlier today, just please make sure you fill that out.
+
+277
+00:42:29.700 --> 00:42:35.940
+Nick Bowman: We're going to be tailoring the content of tomorrow's lecture and in order to help us plan, what's going on there, based on that survey.
+
+278
+00:42:36.600 --> 00:42:41.490
+Nick Bowman: And if you haven't yet. Make sure to enter your section time preferences by 5pm Pacific time today.
+
+279
+00:42:41.940 --> 00:42:52.770
+Nick Bowman: And make sure to check your section assignment tomorrow morning, all the assignments will be read by Monday morning, so make sure to check your assignment to some of you will have sections starving after lecture tomorrow. So just keep an eye.
+
+280
+00:42:54.030 --> 00:42:58.890
+Nick Bowman: And make sure that you're working making good progress on assignment zero getting kitchen creator set up.
+
+281
+00:42:59.430 --> 00:43:05.820
+Nick Bowman: A lot of you have been asking good questions on add about like getting things set up on PT. And if you're running into issues. Don't panic.
+
+282
+00:43:06.150 --> 00:43:15.030
+Nick Bowman: Just kind of dropped by the Qt help session today at seven o'clock Pacific time will be doing a Q management using cute status instead of our normal
+
+283
+00:43:15.630 --> 00:43:30.930
+Nick Bowman: Letter mechanism. So there's a link to it in this slide, and also can only fit on the on the front. Of course, I'm saying if you're in a time zone that can't make it to this and help session. There's also morning 9am to 11am Pacific time
+
+284
+00:43:32.130 --> 00:43:38.730
+Nick Bowman: Office hours both layer and kind of office hours tomorrow morning. And so you can drop by either one of those two things.
+
+285
+00:43:39.360 --> 00:43:48.450
+Nick Bowman: And then the largest the announcement is that will be releasing the first assignment, a little bit later today. And after this lecture, you'll have all the skills that you need in order to get started on things.
+
+286
+00:43:49.170 --> 00:43:59.760
+Nick Bowman: There will be a what we call it your early assignment help session and held by trip from six or 7pm Pacific time on Wednesday evening to help folks get started on the assignment.
+
+287
+00:44:00.330 --> 00:44:03.390
+Nick Bowman: And will include this in description. Unfortunately, since it being
+
+288
+00:44:03.810 --> 00:44:10.890
+Nick Bowman: Hosted by trip. If you are a minor. You can't attend live and you can watch the recording and we'll get the recording posted as soon as we can, after the session.
+
+289
+00:44:11.250 --> 00:44:17.670
+Nick Bowman: But unfortunately, you're not going to be able to attend live and we'll be posting zoom information about that on the website later today.
+
+290
+00:44:21.990 --> 00:44:31.920
+Nick Bowman: Let me stop sharing this poll. And so we won't make it quite as far as you want it to today, but that's fine. And we'll use the last sort of six, seven minutes that we have here today.
+
+291
+00:44:32.550 --> 00:44:45.750
+Nick Bowman: To talk about control fluency plus plus. And there's a little there's a in class exercise that actually wanted you all to do today. And I truly the logistics of how you can go and do it. And so you can go after class and work on it if you'd like.
+
+292
+00:44:46.590 --> 00:44:49.800
+Nick Bowman: But unfortunately won't have time to do that together.
+
+293
+00:44:51.750 --> 00:44:52.260
+Nick Bowman: And
+
+294
+00:44:53.550 --> 00:45:02.520
+Nick Bowman: Okay so control flow. So Control Flow is this whole idea of what all using all kinds of different structures like loops and conditional statements and brilliant expressions.
+
+295
+00:45:03.000 --> 00:45:13.020
+Nick Bowman: To control the ways in which our program excellence and most of what you're going to see here is going to look very familiar. So here's a table of boy and expressions and c++
+
+296
+00:45:13.590 --> 00:45:22.950
+Nick Bowman: This should be pretty much exactly the same that you've seen in other programming languages. And if you're coming from Python and you haven't seen the ampersand or the pipe operator before that might be a little bit new
+
+297
+00:45:23.250 --> 00:45:35.550
+Nick Bowman: And but if you're coming from Java. It should look exactly the same as what you're used to. If you're coming from Python, this should look familiar and or not, they all work exactly the same way as you have been used to
+
+298
+00:45:37.860 --> 00:45:48.540
+Nick Bowman: Cook conditional statements in c++ so we have if L statements and c++ just like in any other programming language. We have this very similar structure where you can say if and then some expression.
+
+299
+00:45:49.710 --> 00:45:53.400
+Nick Bowman: So that would be, you know, some Boolean expression from this previous slide.
+
+300
+00:45:54.210 --> 00:46:00.810
+Nick Bowman: One syntactical note that I'll make an argument to make these columns about things that are a little bit different and c++ as compared to other languages.
+
+301
+00:46:01.140 --> 00:46:07.590
+Nick Bowman: And you do need parentheses around the expression. And if you don't have those parentheses, the compiler is not going to be super happy.
+
+302
+00:46:08.610 --> 00:46:16.320
+Nick Bowman: So make sure you include those parentheses. And the other thing is that now that we're getting into this idea of control flow, we have this
+
+303
+00:46:16.590 --> 00:46:24.510
+Nick Bowman: You saw this comp a little bit earlier with functions you saw these, these were kind of weird curly braces that are popping up all over the place. But I kind of want to shout out here that
+
+304
+00:46:25.770 --> 00:46:37.020
+Nick Bowman: It, whereas in Python, you may be used to white space being very important in the sense that like levels of indentation and things like that defined like which parts of code are part of an if statement or loop or things like that.
+
+305
+00:46:37.560 --> 00:46:45.690
+Nick Bowman: There is no such similar there's no such parallel structure in c++ and c++, you have to be very explicit about which code belongs to which block.
+
+306
+00:46:46.080 --> 00:46:53.940
+Nick Bowman: And the way that you do that is by using a curly braces. And so using opening curly brace to open up a blog and you use a closing curly brace to close the block.
+
+307
+00:46:54.480 --> 00:47:06.000
+Nick Bowman: And you'll see the show all over the place, or conditional statements and functions and loops and pretty much anything else in which you need to sort of bundle up multiple lines of code into into one block or one expression and
+
+308
+00:47:06.780 --> 00:47:11.040
+Nick Bowman: Just, just keep an eye out for that cutie actually has a really nice functionality, where
+
+309
+00:47:11.550 --> 00:47:26.190
+Nick Bowman: If your braces are correct. You can do Command command control a or commit and then command control I and I'll actually auto and then all your code for you. And so it'll sort of make it look all pretty and one of these days on the trial. I'll give you a quick demo.
+
+310
+00:47:28.290 --> 00:47:45.450
+Nick Bowman: And similar to in other languages. You can also add multiple expressions to a conditional statement using also else. And again, nothing to out of the ordinary here and just remember that you do have to put parentheses around each of the each of the conditional expressions.
+
+311
+00:47:47.490 --> 00:48:01.020
+Nick Bowman: And so now we'll talk about loops so loops are great right loops allowed us to repeat the execution of a certain block of code for a certain number of times in particular, while loops are really nice when you don't when you want to continue executing something until some
+
+312
+00:48:01.020 --> 00:48:01.830
+kylie jue: condition is met.
+
+313
+00:48:02.130 --> 00:48:12.060
+Nick Bowman: And you don't know exactly how many times you want to iterate for, for example. And so while loops and c++ will have this general sort of structure where, again, you'll have this
+
+314
+00:48:13.470 --> 00:48:24.360
+Nick Bowman: Expression in parentheses. So again, it's just another Boolean expression and and it'll just continue executing the block of code until that expression evaluates to false.
+
+315
+00:48:25.170 --> 00:48:33.000
+Nick Bowman: And so for a concrete example you might have a block of code that looks like this, which just initialize as a variable and continuous incremental the variable and
+
+316
+00:48:33.630 --> 00:48:43.050
+Nick Bowman: Until the value reaches five until you can see that I have this up, put on the right hand side and and another small thing little shout out.
+
+317
+00:48:43.530 --> 00:48:47.670
+Nick Bowman: If you're coming from pipeline, you may not be familiar with this plus plus operator.
+
+318
+00:48:48.630 --> 00:48:56.640
+Nick Bowman: Plus plus operator is a special shorthand. That is actually used to increment the value of variable by one and it's actually the reason c++ got its name.
+
+319
+00:48:57.210 --> 00:49:07.920
+Nick Bowman: And kind of like the next iteration of C c++ and there is a corresponding document operator, minus, minus, and you'll see both of those show up a lot when it comes to groups.
+
+320
+00:49:09.630 --> 00:49:19.290
+Nick Bowman: And and the very last thing that will talk about today is this idea of folders and so for loops and you know work super well and when, you know, sort of, you want to repeat something a fixed number of times.
+
+321
+00:49:19.950 --> 00:49:29.820
+Nick Bowman: And for loops in Texas c++ will look a little bit different if you're coming from Python. If you're coming from Java to look almost exactly the same. But if you're coming from Python have to look a little bit strange.
+
+322
+00:49:30.600 --> 00:49:41.100
+Nick Bowman: And the general syntax or something like this. And every for loop will have these three sort of statements or expressions that come at the beginning as part of the condition for
+
+323
+00:49:42.450 --> 00:49:51.390
+Nick Bowman: The first is called initialization statement. It's it always happens exactly once. And it always happens right before we begin, so usually use this to initialize a variable.
+
+324
+00:49:52.410 --> 00:50:03.120
+Nick Bowman: And the second part is an expression and which you can evaluate and it evaluates after each one of the loop. If the expression is true in the loop continues going. If the expression is false stops.
+
+325
+00:50:04.140 --> 00:50:09.810
+Nick Bowman: And then there's an update statement which basically says, How do you update your variables from one iteration of the for loop to the next.
+
+326
+00:50:11.640 --> 00:50:24.570
+Nick Bowman: And so kind of the canonical example and you'll see this this foreclosure have a lot which is a safe you just say for it i equals zero semi colon, for I have less than three semi colon i plus
+
+327
+00:50:25.050 --> 00:50:32.040
+Nick Bowman: And and then what that will produce for you is that others generate the values of i am starting at zero, going to a one and going to
+
+328
+00:50:32.760 --> 00:50:43.590
+Nick Bowman: Notice that we are living until less than three. So the loop will as soon as the condition returns false. So three less than three returns false and the loop will start executing and we don't actually see the value three
+
+329
+00:50:47.130 --> 00:50:47.670
+Nick Bowman: Cool, so we
+
+330
+00:50:48.930 --> 00:50:53.730
+Nick Bowman: Just read about out of time. So I want to show you all something really quick before we leave today.
+
+331
+00:50:53.970 --> 00:51:05.430
+Nick Bowman: And so I was hoping for you all to do sort of a group work and kind of five minute activity together, but we are we are out of time, unfortunately. But what I want to show you is actually how this activity was not work and
+
+332
+00:51:06.630 --> 00:51:09.030
+Nick Bowman: And to do so.
+
+333
+00:51:10.230 --> 00:51:12.270
+Nick Bowman: Let's go to
+
+334
+00:51:17.040 --> 00:51:24.120
+Nick Bowman: If you guys if you guys need to head out to get an extra, feel free to to hang out at this point. But I just want to show you a quick demo of what this exercise.
+
+335
+00:51:25.200 --> 00:51:26.730
+Nick Bowman: And so. While this is loading.
+
+336
+00:51:27.240 --> 00:51:35.040
+Nick Bowman: The problem here is so some of you if you actually might remember from when I say, and we've had this little sand castle program for you all to do, which was
+
+337
+00:51:35.250 --> 00:51:43.560
+Nick Bowman: printing out the value of its kind of launch that countdown sequence special place in my heart as a self proclaimed space nerd and but
+
+338
+00:51:44.610 --> 00:51:50.400
+Nick Bowman: This sort of kind of a simple looping example that allows you to kind of go through
+
+339
+00:51:50.820 --> 00:52:00.330
+Nick Bowman: In depth practice before loops and and what would the task was going to be is a lot of you have probably seen the Python version of this code. And what we're going to have him do is actually
+
+340
+00:52:00.690 --> 00:52:09.900
+Nick Bowman: Use the Python version of the code and then try to implement the same thing in c++ and the way that we were going to do that is actually using this really cool feature on Ed called
+
+341
+00:52:11.550 --> 00:52:16.740
+Nick Bowman: Called workspaces. And so if you go to Edit. It's the second tab huddled workspaces.
+
+342
+00:52:17.070 --> 00:52:22.500
+Nick Bowman: And during and we'll do this in class, for sure. And one of the next two days, but we'll split up into breakout rooms.
+
+343
+00:52:22.740 --> 00:52:35.250
+Nick Bowman: And then each breakout room has an associated workspace. So for example, if I ended up in breakout room before I can come to this workspace. And what I would find in this workspace is actually some code files. So I would find a c++ file.
+
+344
+00:52:35.730 --> 00:52:41.850
+Nick Bowman: A Python file and and what I could see is I can actually open up and I can edit these files.
+
+345
+00:52:42.690 --> 00:52:56.790
+Nick Bowman: So it's actually someone if anyone wants to join me. If you want to hop into workspace 44 and you can even come see what this is all about. And it's a it's basically think of it as Google docs for code. And so you can. Hey, hey, we just necessarily today. Nice to see you.
+
+346
+00:52:58.440 --> 00:53:11.790
+Nick Bowman: And so what this allows you to do. And it actually allows you to collaborate with other people and try to write some code, right. So, if I write some code here and you guys can actually see me write this code live. You can see the fact that I can't. So
+
+347
+00:53:13.680 --> 00:53:28.050
+Nick Bowman: And not only does it let you write the code, but it actually lets you run the code as well. And so using this little terminal feature and there's instructions on how to do this in the folder itself and but we can actually take this command called me.
+
+348
+00:53:30.960 --> 00:53:31.320
+Nick Bowman: Man.
+
+349
+00:53:33.690 --> 00:53:36.690
+Nick Bowman: I think someone was unhappy because someone is reading a comment.
+
+350
+00:53:37.710 --> 00:53:45.150
+Nick Bowman: Is that what's happening. Oh boy. Alright, well this is never gonna work anyway you can you can run the code with the maker on
+
+351
+00:53:46.380 --> 00:53:57.480
+Nick Bowman: And and you can see, see the output of what's happening there. And so what I would recommend you all to do. And you can see that having more than four or five people in our workspace. That's a little bit chaotic.
+
+352
+00:53:57.780 --> 00:54:02.040
+Nick Bowman: And but I would recommend if you're interested in going happen to any one of these public workspaces.
+
+353
+00:54:02.790 --> 00:54:10.590
+Nick Bowman: Right after we wrap up here, and hopefully you'll, you'll get one or two friends in there as well. And then just try working through this exercise, try actually making
+
+354
+00:54:10.800 --> 00:54:15.240
+Nick Bowman: Taking use of this others collaborative that space. And it's something that we're going to, we're going to move back to
+
+355
+00:54:15.630 --> 00:54:24.120
+Nick Bowman: And use in lectures, a sort of interactive exercises in the future and and we sort of hope you'll find that kind of a valuable exercise.
+
+356
+00:54:24.510 --> 00:54:29.880
+Nick Bowman: And so with that I'll wrap this up for today. I know we already ran a little bit late, so my, my apologies for that.
+
+357
+00:54:30.180 --> 00:54:42.990
+Nick Bowman: And but as always feel free to stick around if you have any questions and we'll be happy to answer those right afterwards. And if you have an opportunity, definitely go and check out those those workspaces, and hopefully you'll find three people.
+
+358
+00:54:44.400 --> 00:54:46.710
+Nick Bowman: Cool, alright. Have a good day, everybody.
+
+359
+00:54:49.320 --> 00:54:50.040
+catherine deng: Thank you.
+

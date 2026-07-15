@@ -1,0 +1,1982 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:00.539
+Nick Bowman: Yeah.
+
+2
+00:00:02.850 --> 00:00:04.799
+kylie jue: Let's try again take two. Alright, cool.
+
+3
+00:00:05.790 --> 00:00:14.639
+Nick Bowman: Alright. Awesome. So let's go ahead and do that. Alright so today we're going to talk about. So we've been talking all week about data structures and algorithms.
+
+4
+00:00:15.299 --> 00:00:22.500
+Nick Bowman: Kind of been hinting at this idea that there are some better and worse data structures and algorithms in terms of how fast or how slow they don't
+
+5
+00:00:23.280 --> 00:00:33.510
+Nick Bowman: So why don't you go ahead and type into the chat. What do you think makes some algorithms and data structures faster or better than others, and then we'll go ahead and get started I'm
+
+6
+00:00:34.080 --> 00:00:35.190
+Nick Bowman: Just excited just to
+
+7
+00:00:35.190 --> 00:00:39.120
+kylie jue: Answer real quick that I said before, I know there's gonna be a flood of responses in the chat.
+
+8
+00:00:39.330 --> 00:00:48.660
+kylie jue: There was a question about the Python file that you're downloading for the next assignment. It is fine to copy paste it. And as long as your name the file. The same thing and put it in the right folder. Yeah.
+
+9
+00:00:51.870 --> 00:00:52.590
+Nick Bowman: Can we
+
+10
+00:00:53.040 --> 00:00:53.790
+Nick Bowman: Yeah, absolutely.
+
+11
+00:00:54.870 --> 00:00:55.170
+Nick Bowman: Okay.
+
+12
+00:00:58.860 --> 00:01:00.510
+Nick Bowman: Okay, can you still hear me.
+
+13
+00:01:00.660 --> 00:01:03.210
+kylie jue: Yeah, I won't be able to answer anything in the chat, though.
+
+14
+00:01:03.900 --> 00:01:06.180
+kylie jue: Oh, remote controlling my screen, which is fine.
+
+15
+00:01:07.410 --> 00:01:11.130
+kylie jue: If folks are okay with that you can save your questions for the end of lecture today.
+
+16
+00:01:11.220 --> 00:01:11.580
+kylie jue: Okay.
+
+17
+00:01:11.880 --> 00:01:13.200
+Nick Bowman: Yeah, let's, let's do that.
+
+18
+00:01:13.530 --> 00:01:15.720
+Nick Bowman: Yeah, I'm sorry. Yeah, sorry about that.
+
+19
+00:01:16.350 --> 00:01:18.150
+Nick Bowman: I've never giving a lecture from home ever again.
+
+20
+00:01:19.170 --> 00:01:23.340
+Nick Bowman: So, okay. Yeah. So I mean, I'll be controlling Kylie's computer remotely to go over the slides.
+
+21
+00:01:23.790 --> 00:01:32.160
+Nick Bowman: Which means we can't answer the questions in the chat. Unfortunately today and feel free to still leave them there and we can answer them at the end of class if that's helpful.
+
+22
+00:01:33.570 --> 00:01:43.890
+Nick Bowman: Okay, awesome. So we're going to be talking about algorithmic analysis today and it's sort of the next step on our roadmap and it's going to be kind of giving us a
+
+23
+00:01:44.430 --> 00:01:51.450
+Nick Bowman: Kind of really powerful tool that we're going to be using all throughout the rest of the quarter and and so let's go ahead and get started.
+
+24
+00:01:52.290 --> 00:01:56.940
+Nick Bowman: So today's question is going to be how can we formalize the notion of efficiency for outcomes.
+
+25
+00:01:57.750 --> 00:02:06.960
+Nick Bowman: And and in order to talk about that. We're going to do a little bit of review ish. So we're going to introduce a little bit of a new topic in our view as well.
+
+26
+00:02:07.320 --> 00:02:17.070
+Nick Bowman: And all spend most of our time defining what big O notation is and at the end will come all together, and we'll talk about algorithm that kind of code analysis and will actually apply big limitation to code.
+
+27
+00:02:18.420 --> 00:02:30.810
+Nick Bowman: And so our view for today and the review of data structures that we've seen over the last three days and. But before we start the review. It's actually wanted to make a note about yesterday's lecture. So just to note that
+
+28
+00:02:32.520 --> 00:02:39.240
+Nick Bowman: For what we covered yesterday we covered a lot. So we covered the intuition and breadth first search, we covered data structure choices pseudo code.
+
+29
+00:02:39.570 --> 00:02:44.220
+Nick Bowman: And in like the last seven eight minutes of class, we actually like coded up and we made a working program.
+
+30
+00:02:44.670 --> 00:02:54.630
+Nick Bowman: And this was a lot that's going on and and so it's kind of mentioned the beginning of the quarter we sort of want to normalize the fact that, like struggle is a good thing and not like like struggling in this class.
+
+31
+00:02:55.350 --> 00:03:02.790
+Nick Bowman: Is something that actually demonstrates that you're learning along the way, I'm kind of due to the necessity of the summer schedule and 50 week lecture or the 15
+
+32
+00:03:03.180 --> 00:03:11.520
+Nick Bowman: minute lectures we cover content. Very, very quickly, and specifically in lecture overall over the course of the class. But specifically, make sure we cover content really quickly.
+
+33
+00:03:12.060 --> 00:03:17.130
+Nick Bowman: And so if you leave lecture feeling like you didn't understand the algorithm with the concept that was covered that day.
+
+34
+00:03:17.880 --> 00:03:25.320
+Nick Bowman: We kind of want to be very explicit that we don't. That's not a bad thing lecture is always going to be sort of your first exposure to content.
+
+35
+00:03:25.680 --> 00:03:33.420
+Nick Bowman: And very, very few people can see a topic for the very first time and completely understand that right away or even partially understand it right away.
+
+36
+00:03:34.260 --> 00:03:39.870
+Nick Bowman: It's very natural to like learn a new topic, computer science, and be like, I have absolutely no idea how or why that works.
+
+37
+00:03:40.410 --> 00:03:51.270
+Nick Bowman: And and so via the assignments and your sections and the office hours and the layer and talking to us right these are all your chances to review practice and like really learn the concepts.
+
+38
+00:03:51.540 --> 00:03:54.450
+Nick Bowman: And that's why we have all of those components of the class.
+
+39
+00:03:55.050 --> 00:04:01.620
+Nick Bowman: So I just wanted to let you know that, like if you're struggling along the way. And you're coming out of these lectures and your heads kind of swimming, a little bit. That's totally normal.
+
+40
+00:04:02.520 --> 00:04:09.420
+Nick Bowman: And like, there's lots of other resources out there to supplement what you already seen in lecture and to help you to sort of build that understand
+
+41
+00:04:11.370 --> 00:04:16.200
+Nick Bowman: Cool. So then jumping into our review for today. So we are going to talk about nested data structures.
+
+42
+00:04:16.650 --> 00:04:25.740
+Nick Bowman: And we've actually already seen one example, Vanessa data structure. So if you remember, yesterday we used a queue of stack of strings to keep track of our search during but first search for word matters.
+
+43
+00:04:27.060 --> 00:04:35.220
+Nick Bowman: Nesting data structures just generally means taking one container type or ADT and storing it as the data type inside of another ADT
+
+44
+00:04:35.460 --> 00:04:44.040
+Nick Bowman: And you can do this to however many levels that you want. Normally we stick to this two or three levels of that nesting. But it's a really great way to organize data with complex structure.
+
+45
+00:04:45.870 --> 00:04:53.610
+Nick Bowman: And it's really powerful in terms of what you're able to do with it. And so you will be thoroughly exploring master data structures.
+
+46
+00:04:54.150 --> 00:05:03.420
+Nick Bowman: In throughout all of assignment to and you get practice again with the queue of stack of strings for the first part of the assignment, as well as nested sets in knots and the second part of it.
+
+47
+00:05:05.370 --> 00:05:12.420
+Nick Bowman: Um, but I want to show you a little bit of an example of nested data structures in c++ because there's a little bit of nuance that you need to know about.
+
+48
+00:05:13.350 --> 00:05:17.190
+Nick Bowman: So let's imagine that we're designing a system to keep track of feeding times for animals at the zoo.
+
+49
+00:05:17.820 --> 00:05:29.520
+Nick Bowman: And we want to be able to quickly look at the feeding times for certain animal. We need to be able to store multiple feeding times for each animal and in the feeding time should be stored obviously in order in order in which they should happen throughout the day.
+
+50
+00:05:30.810 --> 00:05:38.970
+Nick Bowman: And so if we think about what data structure might be sort of useful to represent this maybe a map of strings to vectors of strings of useful.
+
+51
+00:05:39.360 --> 00:05:47.430
+Nick Bowman: So the key type would be our name of the animal our vector of strings would be our data type that storing all the feeding times in order for each channel.
+
+52
+00:05:49.530 --> 00:05:59.040
+Nick Bowman: So that gives us quick look up by animal name and it gives us to store multiple ordered feeding times for every animal. So kind of gives us the some justification that we've chosen the right data structure here.
+
+53
+00:06:00.420 --> 00:06:06.300
+Nick Bowman: So this is what an example of this data structure might look like. And I'm in. So, this this example data structure is actually taken from
+
+54
+00:06:06.750 --> 00:06:09.330
+Nick Bowman: Current I was co instructor last quarter. So when you're done to you.
+
+55
+00:06:10.080 --> 00:06:23.400
+Nick Bowman: So these if you notice these names. These are actually all names of famous elephants. So I highly recommend Googling them all afterwards. They'll have very kind of interesting stories behind them. But we see our keys on the left and our vectors of feeding times on the right.
+
+56
+00:06:25.350 --> 00:06:31.920
+Nick Bowman: And the tricky part of message data structures and is thinking about how can you modify the internal values of the map.
+
+57
+00:06:33.300 --> 00:06:42.660
+Nick Bowman: And so what we're going to see here is, let's say that we wanted to add a second time for our elephant lumpy. And we wanted to add them, give them a second feeding time of 4pm
+
+58
+00:06:44.340 --> 00:06:49.590
+Nick Bowman: And the question that I have for you all is which are this following snippets of code. So there's three snippets of code.
+
+59
+00:06:51.360 --> 00:07:00.570
+Nick Bowman: Which of these is actually going to successfully accomplish what we see on the right hand side which is adding this time of four o'clock to lump us list a few times.
+
+60
+00:07:00.960 --> 00:07:07.800
+Nick Bowman: And so let me open up the pole really quickly. And so you have three options. It can be choose all that apply. So
+
+61
+00:07:08.280 --> 00:07:20.190
+Nick Bowman: It's going to be either 123 of them, or none of them and to go ahead and take a look at that and then type in your answers are put in your answers. And we'll see
+
+62
+00:07:21.090 --> 00:07:30.240
+Nick Bowman: What you all think and and while you're looking through that I'll briefly summarize the snippets. And the first one directly accesses the map and then calls out on the results.
+
+63
+00:07:30.630 --> 00:07:42.000
+Nick Bowman: And the second one accesses the map stores that value in a variable and then adds to that variable. And then the last one, does the same thing. But at the very end does a reassignment into the map of this new
+
+64
+00:07:43.410 --> 00:07:44.250
+Nick Bowman: Of this new variable.
+
+65
+00:07:46.440 --> 00:07:47.550
+Nick Bowman: So we have
+
+66
+00:07:49.050 --> 00:07:57.060
+Nick Bowman: Things coming in. Alright, so it looks like we're at about 80% so I'm gonna go ahead and end the poll and share the results and so
+
+67
+00:07:57.840 --> 00:08:11.520
+Nick Bowman: Looks like you guys got a pretty solid initial intuition of this, which is that the first and the third options actually work. But the second one does not. And, and so let's see why that is.
+
+68
+00:08:12.510 --> 00:08:17.700
+Nick Bowman: So a note about the bracket operator and when you use the bracket operator to act as an element from the map.
+
+69
+00:08:18.240 --> 00:08:24.450
+Nick Bowman: You're actually getting a reference to the value that you got out of the map, which means if you make any changes directly to that reference
+
+70
+00:08:24.840 --> 00:08:35.640
+Nick Bowman: Remember we learned about references. They sort of give you an opportunity to look at and sort of have direct access to the data structure. So if you directly modify the reference, you're going to get your persistent change that you want.
+
+71
+00:08:37.260 --> 00:08:43.350
+Nick Bowman: So then you might ask, well, why does the second one, not work if we're still getting a reference. Well, we're destroying that reference in the variable. So it gives
+
+72
+00:08:44.280 --> 00:08:56.040
+Nick Bowman: The tricky thing in c++ is when you use the equals operator to do assignment intro variable, you always get a copy. It doesn't matter what's on the right hand side. If it's a copy itself or a reference or whatever it is.
+
+73
+00:08:56.370 --> 00:09:07.230
+Nick Bowman: The use of the equal sign to assigned to a variable always creates a copy and so on that first line when we create this variable called times we actually get a copy of the internal data structure.
+
+74
+00:09:07.770 --> 00:09:17.730
+Nick Bowman: On the next line we modify the copy but that's it, we've modified the copy and we haven't actually modified the famous inside the data structure so that doesn't actually give us the persistent change that we want.
+
+75
+00:09:20.550 --> 00:09:30.810
+Nick Bowman: So, but why the last one works is the last one is the exact same thing. It makes a copy and modifies the copy but then the very last line of code, which does reassignment into the map.
+
+76
+00:09:31.200 --> 00:09:35.340
+Nick Bowman: overwrites the they're the data structure that's stored in the map with the modified copy
+
+77
+00:09:35.880 --> 00:09:46.560
+Nick Bowman: And so this is my hopefully my takeaway from this is if you choose to store the internal data structure in a variable, you have to do an explicit assignment to get your changes to persist. So if you're going to choose.
+
+78
+00:09:47.070 --> 00:09:54.720
+Nick Bowman: To store things not temporary variable, make sure that you reassign it to the map over to the set or whatever it is, once you're done.
+
+79
+00:09:55.980 --> 00:09:57.810
+kylie jue: Just a couple sorry Nick, just
+
+80
+00:09:57.870 --> 00:09:58.350
+To interrupt.
+
+81
+00:09:59.370 --> 00:10:07.410
+kylie jue: I just want to know, we have a couple section leaders, thankfully, in the call. So Lauren and calling her volunteer to answer any questions if you do throw anything in the chat.
+
+82
+00:10:08.070 --> 00:10:16.080
+Nick Bowman: Oh, awesome. Okay, perfect. And Lauren con, feel free to interrupt me too if you if you want me to answer something live to finish jumping. Thank you. Thank you so much for
+
+83
+00:10:17.700 --> 00:10:20.400
+Nick Bowman: Making it making it work. Um, alright,
+
+84
+00:10:22.080 --> 00:10:27.180
+Nick Bowman: So necessary to you. So kind of the summary right there, they can express highly structured and complex data.
+
+85
+00:10:27.810 --> 00:10:31.140
+Nick Bowman: They're used in a lot of real world systems, as you'll see an assignment to
+
+86
+00:10:31.830 --> 00:10:38.580
+Nick Bowman: But they're also tricky, right, there's some cognitive load in differentiating between what information you're storing at each sort of level of the nesting.
+
+87
+00:10:39.240 --> 00:10:54.330
+Nick Bowman: And but and also specifically in c++ rate references and copies control at different points in time. So following really understanding where you get references and where you get copies as is really important to making sure that you stay on track when modifying the instructors.
+
+88
+00:10:55.920 --> 00:11:05.970
+Nick Bowman: Okay, and then one last final quick note and you may have remembered in lecture on Tuesday I when Kelly was doing the live coding example we actually introduced this idea of constant
+
+89
+00:11:07.170 --> 00:11:12.360
+Nick Bowman: So remember we pass large objects around by reference because we want to avoid making a copy
+
+90
+00:11:13.380 --> 00:11:21.900
+Nick Bowman: But references also give this sometimes helpful and sometimes a little bit dangerous property that you can also modify exactly what it is that you're given.
+
+91
+00:11:23.100 --> 00:11:34.890
+Nick Bowman: And so the question is, can we sort of have one of those properties without having the other. And the answer is, actually, yes. So if we want to pass something by reference because it is very large and we don't want to make a copy
+
+92
+00:11:36.120 --> 00:11:44.490
+Nick Bowman: But if we don't want to give the function or the whoever's calling the function, the ability to change the data structure, we can pass by this thing called console preference.
+
+93
+00:11:45.090 --> 00:11:53.130
+Nick Bowman: All that involves putting the keyword constant front of your parameter name, and that gives you the ability, like in this proofreading as a function to
+
+94
+00:11:53.430 --> 00:11:58.830
+Nick Bowman: Get the essay, which is very large by value. So you don't have to make by reference so that you don't have to make a copy
+
+95
+00:11:59.340 --> 00:12:06.000
+Nick Bowman: But it won't let you make any changes. And if you actually try to make changes to the thing do you pass by reference, you'll actually get an error.
+
+96
+00:12:06.540 --> 00:12:17.550
+Nick Bowman: And so that's a helpful thing to know. It's not going to show up a ton in this class, but we didn't mention it during a coding example on Tuesday. So I wanted to sort of formalize that
+
+97
+00:12:19.770 --> 00:12:20.100
+Nick Bowman: Okay.
+
+98
+00:12:21.120 --> 00:12:28.410
+Nick Bowman: Awesome. So now let's get to our main question for the day, which is how can we formalize the notion of efficiency for outcomes.
+
+99
+00:12:29.460 --> 00:12:42.930
+Nick Bowman: And I kind of want to give you kind of a motivation of why you should even care about this. And this is kind of just a funny X KC D comic, which is that oftentimes we spend so long, analyzing, which option is better that we actually waste a lot of time in the process.
+
+100
+00:12:44.040 --> 00:12:49.680
+Nick Bowman: And so why why is it actually important to be able to do analysis and to do it well.
+
+101
+00:12:51.030 --> 00:12:53.640
+Nick Bowman: So why do we care about efficiency. Well, if you implement
+
+102
+00:12:54.090 --> 00:13:06.420
+Nick Bowman: Things computer programs or even if you just do life in an efficient way sometimes it'll make solving certain tasks impossible that really should just be very feasible. Right. So if I'm doing a ways and it tells me they take the super long
+
+103
+00:13:07.470 --> 00:13:13.050
+Nick Bowman: You know securitas route to get from point A to point B. Maybe I don't have enough gas to travel. Hundred and 20 kilometers.
+
+104
+00:13:13.410 --> 00:13:21.030
+Nick Bowman: Maybe I only have enough gas estimated 50 kilometers. And so if they told me this first option instead of the second option, I just wouldn't even be able to make it to where I wanted to go
+
+105
+00:13:22.200 --> 00:13:31.680
+Nick Bowman: And so inefficient algorithms can be a problem and the flip side of that is if you implement things efficiently you can solve really important problems, even if you have limited resources.
+
+106
+00:13:32.190 --> 00:13:39.420
+Nick Bowman: So this is a famous picture of Margaret Hamilton, who is actually one of the software engineers and that develop some of the software to take people to the moon.
+
+107
+00:13:39.750 --> 00:13:45.660
+Nick Bowman: And these computers that they're writing software for to do this had way, way, way less computing power than what you have in your phone.
+
+108
+00:13:46.170 --> 00:13:58.950
+Nick Bowman: And and yet they were still able to implement all of these crazy navigation and sort of way finding algorithms to get people from here to the moon. And so if you do things efficiently you can solve really interesting problems.
+
+109
+00:14:00.060 --> 00:14:08.040
+Nick Bowman: And and if you can also do things efficiently and be able to reason about it, you can and really understand the behavior of the algorithms that you're
+
+110
+00:14:08.550 --> 00:14:15.150
+Nick Bowman: Coding up and that can be really important when it comes to thinking about the impacts of the algorithms and it's gonna be a common theme in this class. We always want to think about
+
+111
+00:14:15.780 --> 00:14:23.790
+Nick Bowman: The impacts on real people and the ethical impacts of the algorithms redesign and being able to reason about how they work and really formal mentor can help us do that.
+
+112
+00:14:26.190 --> 00:14:37.530
+Nick Bowman: So, um, and another throwback. So we've actually pulled a fast one on you all, and you've already all done algorithmic analysis and some of you may have realized that some of you may not have realized it
+
+113
+00:14:37.980 --> 00:14:42.960
+Nick Bowman: But in Assignment one. We actually had you do this already. And you implemented three versions of
+
+114
+00:14:43.740 --> 00:14:46.800
+Nick Bowman: An algorithm to find perfect numbers and you did one
+
+115
+00:14:47.160 --> 00:14:58.230
+Nick Bowman: Which was exhaustive and you tried to find the fifth perfect number I looked at some of your responses on paperless and you all had really good predictions, but then they were all somewhere between like 25 days to over 100 days to find this number.
+
+116
+00:14:59.250 --> 00:15:06.690
+Nick Bowman: Then you implemented a second version. There was a little bit smarter, and then you runtime predictions got better. You said I could find it within a couple of minutes to maybe an hour.
+
+117
+00:15:07.410 --> 00:15:16.350
+Nick Bowman: And then you implemented this like super turbo fast version of the algorithm. And you were able to actually physically generate that fifth perfect number in less than a couple of seconds.
+
+118
+00:15:17.250 --> 00:15:24.570
+Nick Bowman: And along the way, we had you looking at timing results. We had you're making predictions. I mean, that's actually exactly what algorithmic analysis.
+
+119
+00:15:26.100 --> 00:15:32.490
+Nick Bowman: And what you're able to get out of it at the end is even though you know your timing results may have been slightly different, or maybe even
+
+120
+00:15:33.000 --> 00:15:42.750
+Nick Bowman: majorly different than someone else's. There was a clear distinction here between things that are really fast and really good look this up last algorithm and really slow and inefficient like this first
+
+121
+00:15:43.770 --> 00:15:48.390
+Nick Bowman: And we're going to do today is trying to formalize some of what you have already actually done and see
+
+122
+00:15:50.040 --> 00:16:02.490
+Nick Bowman: And so here's what we're going to do. So we're going to do a breakout room actually while I'm explaining it. I want you all to pull up the slides. These lecture slides on your computer, because we're going to need to reference them during the activity.
+
+123
+00:16:03.660 --> 00:16:10.500
+Nick Bowman: And today's activities can be a little bit different. There's not going to be any code, there's not going to have any pseudo code, there's not really anything that looks like c++
+
+124
+00:16:11.010 --> 00:16:17.130
+Nick Bowman: And you're going to have a set of five slides. Let's start on the next slide. After this one which I believe is slide 40 in the slide deck.
+
+125
+00:16:18.120 --> 00:16:22.650
+Nick Bowman: And you're going to be given five scenarios five sets of objects one smaller one larger
+
+126
+00:16:23.070 --> 00:16:29.310
+Nick Bowman: We're going to give you sort of measurements for the smaller item we're going to ask you to predict with the with the same set of measurements on the larger are going to be
+
+127
+00:16:30.150 --> 00:16:36.120
+Nick Bowman: And and what we want you to do is, you know, look at these next five slides and answer them by discussing with your roommates.
+
+128
+00:16:36.390 --> 00:16:47.670
+Nick Bowman: And open up your workspace like you normally would. There's only one file in there and I'm which has the instructions and a place to write down your answers. So we're going to go ahead and jump right into that and I think
+
+129
+00:16:48.990 --> 00:16:52.440
+Nick Bowman: Curry. Oh, I'll give you control of the human history. Yeah, let me just
+
+130
+00:16:59.550 --> 00:17:03.180
+Nick Bowman: Give me about probably three or four minutes to discuss this.
+
+131
+00:17:08.640 --> 00:17:10.200
+Alright, I think I opened
+
+132
+00:17:13.080 --> 00:17:20.400
+Nick Bowman: Did I offend them or no doesn't look like it looks like people are still here. Oh, here we go. Here. Sorry. Now I've opened
+
+133
+00:17:32.490 --> 00:17:34.140
+I invited myself to breakout room.
+
+134
+00:17:38.910 --> 00:17:45.480
+Nick Bowman: Alright, cool. So for those of you on the recording. I will go over the answers all together when everyone comes back, but just to sort of
+
+135
+00:17:46.230 --> 00:17:53.700
+Nick Bowman: Again as we always do recommend that you pause the recording here actually look at the next five slides and try to answer the questions on your own before
+
+136
+00:17:54.930 --> 00:17:56.460
+Nick Bowman: Before continuing to watch the recording.
+
+137
+00:17:57.750 --> 00:18:12.990
+Nick Bowman: But what we'll see is, or we can see, as we'll see, the five scenarios we have five examples. The first one we have a square played material. We know the mass of it and we know the measurements of it. We want to figure out what's going to be the mass of this larger square
+
+138
+00:18:14.880 --> 00:18:28.470
+Nick Bowman: The second one is we have kind of similar. We have another sheet of maybe you can think of it as metal you've cut out and you know it's approximate measurements and you know its mass and then you try to figure out what the mass of the larger bonus
+
+139
+00:18:30.390 --> 00:18:40.710
+Nick Bowman: For the third example we do kind of a similar thing except now we have cubes material. So you have a cube, you know, the measurements and the mass of it. And now you want to try to figure out the measurements in the mass of this larger view.
+
+140
+00:18:43.080 --> 00:18:48.510
+Nick Bowman: And then we have a statue Susan more real life example, you have a statue.
+
+141
+00:18:49.710 --> 00:18:55.110
+Nick Bowman: Of a certain max and then you have a larger version of the same statue. So can you figure out what the mass of the larger statues.
+
+142
+00:18:56.460 --> 00:19:13.440
+Nick Bowman: And then you're actually having a casa Hadrian, I forget actually exactly how many sides. This has I think it's 112 11 1321 somewhere along the way, but it has a certain number of sockets and we have a smaller version and the larger version and you want to be able to figure out
+
+143
+00:19:14.490 --> 00:19:17.610
+Nick Bowman: What the difference in
+
+144
+00:19:18.900 --> 00:19:21.030
+Nick Bowman: Paint required to cover the surfaces.
+
+145
+00:19:22.110 --> 00:19:29.250
+Nick Bowman: So there's a little introduction, I would recommend pausing here for a couple minutes and give yourself some time to work through these questions and see if you can come
+
+146
+00:19:35.970 --> 00:19:45.150
+kylie jue: Just a heads up for Lauren and call in to the answers, you're putting in there since people aren't breakout rooms are actually not going to see the ones that you just put in so you may want to reassign one
+
+147
+00:19:45.870 --> 00:19:47.700
+Nick Bowman: Or resell see them when they come back for it.
+
+148
+00:19:48.120 --> 00:19:49.320
+Nick Bowman: No, you don't see the
+
+149
+00:19:49.320 --> 00:19:50.820
+kylie jue: Ones that you weren't in the room for
+
+150
+00:19:51.540 --> 00:19:52.470
+Nick Bowman: Oh, yeah.
+
+151
+00:19:55.920 --> 00:19:56.130
+Yeah.
+
+152
+00:19:57.570 --> 00:20:00.750
+kylie jue: So, just type it again and get ready to send when they come back.
+
+153
+00:20:02.970 --> 00:20:06.000
+Nick Bowman: Yeah, thank you, learning, but you're calling you guys there are lifesavers
+
+154
+00:20:07.350 --> 00:20:09.060
+Nick Bowman: I knew this was gonna happen. I totally
+
+155
+00:20:11.010 --> 00:20:12.840
+Nick Bowman: I'm never, never again.
+
+156
+00:20:14.670 --> 00:20:15.240
+Nick Bowman: Never again.
+
+157
+00:20:16.230 --> 00:20:17.700
+kylie jue: You haven't worked before.
+
+158
+00:20:18.180 --> 00:20:31.830
+Nick Bowman: No, it's the VPN. I'm telling you, it's the combination of the VPN and zoom and my computer and the Internet VPN like yeah it was I knew the VPN was gonna cause problems, but I'm gonna talk to it today.
+
+159
+00:20:33.060 --> 00:20:33.840
+Well, hopefully.
+
+160
+00:20:35.190 --> 00:20:41.700
+Nick Bowman: It's all good. Thanks for thanks for the good idea to share your screen. I was about ready to give up. I just like I go home. Everybody I'll record it and I'll post it later.
+
+161
+00:20:43.980 --> 00:20:45.600
+It's fine. We were here.
+
+162
+00:20:47.160 --> 00:20:47.820
+kylie jue: I'm
+
+163
+00:20:48.690 --> 00:20:49.860
+kylie jue: Watching the time. What time do you
+
+164
+00:20:50.250 --> 00:20:52.860
+Nick Bowman: Yeah, you're gonna go ahead and bring bring people back now. Sure.
+
+165
+00:20:53.580 --> 00:20:53.820
+kylie jue: Oh,
+
+166
+00:20:53.880 --> 00:20:54.780
+Nick Bowman: We're actually a
+
+167
+00:20:54.840 --> 00:20:55.260
+Nick Bowman: Man.
+
+168
+00:20:55.320 --> 00:21:00.180
+kylie jue: I'm gonna do that because I think I didn't properly set the time so they probably are going to come back in a minute, anyway.
+
+169
+00:21:00.990 --> 00:21:01.230
+Cool.
+
+170
+00:21:03.180 --> 00:21:04.080
+kylie jue: Yeah 60 seconds.
+
+171
+00:21:10.080 --> 00:21:16.200
+Nick Bowman: I also lost my zoom Options Bar, so I won't be able to do the next poll later on if we ever
+
+172
+00:21:17.010 --> 00:21:18.150
+kylie jue: Do you want me to do it. I can
+
+173
+00:21:18.330 --> 00:21:19.860
+Nick Bowman: Yeah, if you let me have
+
+174
+00:21:20.940 --> 00:21:22.200
+kylie jue: Control. The other thing.
+
+175
+00:21:23.280 --> 00:21:32.040
+kylie jue: I noticed sometimes disappears for me to you have to kind of like, move the cursor and then it reappears. But sometimes it's not always where you want it to be.
+
+176
+00:21:32.130 --> 00:21:36.660
+Nick Bowman: Are expected to be that's fun. Yeah, it seems to sound like completely disappear.
+
+177
+00:21:39.570 --> 00:21:44.460
+Nick Bowman: So all right, so I can't see participants either. So you'll have to tell me one, one to go ahead and
+
+178
+00:21:44.670 --> 00:21:45.960
+kylie jue: Now we have about 20 seconds and
+
+179
+00:21:45.960 --> 00:21:47.040
+Nick Bowman: Folks are still coming back in
+
+180
+00:22:00.810 --> 00:22:02.580
+kylie jue: In about five seconds, everyone.
+
+181
+00:22:02.580 --> 00:22:04.590
+Nick Bowman: Will be back. And I think we
+
+182
+00:22:04.620 --> 00:22:05.220
+Have everyone
+
+183
+00:22:06.240 --> 00:22:10.080
+Nick Bowman: Awesome. Um, so a little bit quick hopefully
+
+184
+00:22:11.760 --> 00:22:22.980
+Nick Bowman: Due to the time constraints of the technical things getting started, we had to cut out a little bit shorter than we look like. But hopefully you had a chance to discuss the agreements come up with some predictions. And so let's go through them and see your predictions.
+
+185
+00:22:24.600 --> 00:22:25.200
+Nick Bowman: So,
+
+186
+00:22:26.370 --> 00:22:31.500
+Nick Bowman: Alright, so for our first example. One thing that we might observe is if our first sheet of
+
+187
+00:22:32.100 --> 00:22:43.140
+Nick Bowman: Metal weighed 100 kilograms. We actually have these nice guidelines that show us, hey, this larger sheet is actually just made up of four copies of the smaller one. And so we can maybe guess that the mass is going to be about 400
+
+188
+00:22:45.240 --> 00:22:48.690
+Nick Bowman: For the second one. It's a little bit trickier but maybe we can leverage some of what we saw.
+
+189
+00:22:49.320 --> 00:22:59.430
+Nick Bowman: In the previous example in the previous example, we had a square, this is you know roughly a square and and the sideline for the square increased by a factor of two.
+
+190
+00:22:59.880 --> 00:23:14.400
+Nick Bowman: And but our area, our overall amount of mass actually increased by a factor of four. And so in this one will we say, All right, well, if you started off at 60 kilograms. Maybe again we increased by roughly a factor of four. So let's say about 240 kilograms.
+
+191
+00:23:16.650 --> 00:23:20.040
+Nick Bowman: For the next one a little bit trickier. So now we're dealing with cubes.
+
+192
+00:23:20.760 --> 00:23:27.840
+Nick Bowman: But if you can visualize the 3D of the queue. You might see that. Oh, the larger pubes actually made up of each copies of the smaller cube.
+
+193
+00:23:28.410 --> 00:23:39.510
+Nick Bowman: And so we can see that our size our side length went up by a factor of two. But our overall mass or volume went up by a factor of eight. So maybe we'll call this about 800 kilograms.
+
+194
+00:23:40.530 --> 00:23:49.740
+Nick Bowman: And then we get to some real life examples. The statue is kind of tricky and it looks like the width of the statues are different, but let's pretend that they're actually the same. So let's just pretend the statue just increased and wait
+
+195
+00:23:51.000 --> 00:24:03.270
+Nick Bowman: For this one, we might just say, okay, well, it increased three times in height and it's hard for us to tell what the lake other dimensions of it are so with the information that we have available to us. Let's just say it wait about 3000 tokens.
+
+196
+00:24:06.060 --> 00:24:23.460
+Nick Bowman: And then finally, we had the cost of the injury, which is all right well how much paint was required to paint it. And, well, we actually noticed that are each of the sides were triangles and the triangles increased inside length from 10 meters to 14 years
+
+197
+00:24:24.990 --> 00:24:37.530
+Nick Bowman: And so we saw an increase in the factor of four. But again, we're painting area and so area usually involves multiplying side links together. And so that gives you an increase of the factor of 16
+
+198
+00:24:38.460 --> 00:24:45.960
+Nick Bowman: And then in this one, right. So we take our 16 we multiply it by the 90 leaders we initially needed that will say we needed about 1414 years of
+
+199
+00:24:47.640 --> 00:24:53.250
+Nick Bowman: Service. I'm saying about an estimate. Right. The whole point here is you can kind of try to gain intuitive understanding
+
+200
+00:24:54.330 --> 00:24:59.250
+Nick Bowman: Based off of what the the relationship between these two things.
+
+201
+00:24:59.340 --> 00:25:03.660
+kylie jue: And Nick just there's a question in the chat about the statue one
+
+202
+00:25:04.500 --> 00:25:12.600
+kylie jue: So you're saying if we're assuming the statues being scaled without changing the aspect ratio. Don't we need to multiply by 27 since we're dealing with it in 3D.
+
+203
+00:25:13.380 --> 00:25:14.700
+Nick Bowman: Yeah, that's probably right.
+
+204
+00:25:15.480 --> 00:25:19.260
+Nick Bowman: I I'm not super confident about the answer to this one. I trust you guys that. That's right.
+
+205
+00:25:19.920 --> 00:25:27.600
+Nick Bowman: I'll go back and fix it later this one. This one's kind of weird because we don't see it. I think it looks like the aspect ratio fully is being scaled
+
+206
+00:25:28.140 --> 00:25:35.940
+Nick Bowman: We didn't see other measurements on it. And plus, like the thickness and things like that. So that, that sounds. If that was your answer. That sounds like a very reasonable set of assumptions to me.
+
+207
+00:25:39.240 --> 00:25:44.010
+Nick Bowman: Okay, cool. So the key takeaway here is if we knew the
+
+208
+00:25:44.550 --> 00:25:50.970
+Nick Bowman: order quantity scale. So we'd kept talking about this idea of factors and multiplying. I'm from a small quantity to get to a larger quantity
+
+209
+00:25:51.300 --> 00:25:56.190
+Nick Bowman: We can predict the value of those quantities in the future, even if we didn't have an exact formula right
+
+210
+00:25:56.640 --> 00:26:06.000
+Nick Bowman: So for something like that costs 100 right we didn't need to know the exact formula to actually have exactly what the surface area was in order to be able to actually predict the value of the future.
+
+211
+00:26:07.500 --> 00:26:14.760
+Nick Bowman: And, um, and so keep that in mind all stop do refer to pause for announcements and then we'll formalize exactly that that reasoning that we just had
+
+212
+00:26:16.320 --> 00:26:21.390
+Nick Bowman: So the announcements for today. We released assignment to last night, and it's going to be do next Wednesday, July 8
+
+213
+00:26:21.960 --> 00:26:31.980
+Nick Bowman: And after some feedback that we got from students. The, the deadlines for this assignment and for the remainder of the quarter are all going to be 11:59pm Pacific time instead of the local timezone
+
+214
+00:26:32.550 --> 00:26:36.870
+Nick Bowman: So just keep that in mind that shouldn't base off of our time zone results survey.
+
+215
+00:26:37.170 --> 00:26:43.830
+Nick Bowman: And that should not give anybody any less time it should give people more time relative to their local time zone but it shouldn't give anybody last time.
+
+216
+00:26:44.220 --> 00:26:49.710
+Nick Bowman: And if you feel like it is. Let us know, but we feel good about this, this new this new deadline.
+
+217
+00:26:50.640 --> 00:26:55.980
+Nick Bowman: And remember that there yeah hours on trips going to host them today at 7pm on the zoom info is on the website.
+
+218
+00:26:56.730 --> 00:27:04.230
+Nick Bowman: And there is a portion of the warm up for this exercise that actually allows you to customize the Qt debugger to work with the Stanford c++ collections.
+
+219
+00:27:04.830 --> 00:27:09.120
+Nick Bowman: Highly recommend checking that out and following the instructions before you start on the assignment.
+
+220
+00:27:09.750 --> 00:27:15.300
+Nick Bowman: And then just a brief reminder this assignment is definitely a step up and complexity compared to Assignment one
+
+221
+00:27:15.630 --> 00:27:23.580
+Nick Bowman: And so really get started early and you're going to be implementing more complex algorithms using more complex data structures. And so really, really get started.
+
+222
+00:27:24.420 --> 00:27:32.730
+Nick Bowman: And if you haven't already come visit me in trip and Kylie our office hours and they've been relatively sparsely attended so far. So we love to come in.
+
+223
+00:27:34.320 --> 00:27:36.780
+Nick Bowman: Okay, so back to our content. So back to
+
+224
+00:27:37.830 --> 00:27:40.290
+Nick Bowman: Now we're going to introduce this idea of big O notation.
+
+225
+00:27:42.450 --> 00:27:53.790
+Nick Bowman: So before we talk about are so basically what big O notation is it's a exactly what we did in the previous example, going to be a formalized way of quantifying the rate at which some quantity. Gross.
+
+226
+00:27:55.980 --> 00:28:10.770
+Nick Bowman: So for example, when you have a square and it has decided, like our. I mentioned earlier that the area of the square grows or the area of the square grows as the square of the sideline so that we represent that as this. Oh, with parentheses r squared.
+
+227
+00:28:13.200 --> 00:28:21.600
+Nick Bowman: In yeah basically representing that and because and then over in this case stands for on the order of so that is the OH and big. Oh.
+
+228
+00:28:21.990 --> 00:28:34.830
+Nick Bowman: Remember, this is a growth prediction right it's a it's a rough not rough, but it's, it's an estimate. And it's a qualitative description of how the thing will grow. I'm not an exact formula. So I really want to, to think that
+
+229
+00:28:36.450 --> 00:28:43.560
+Nick Bowman: So for example, if we look at a square right so if it initially starts out radius r and area. Hey, if we increase the radius by
+
+230
+00:28:44.250 --> 00:28:51.900
+Nick Bowman: By a factor of two, our area increases by a factor of four three increase the radius by a factor of three, our area increases by a factor of night.
+
+231
+00:28:52.440 --> 00:28:55.080
+Nick Bowman: And you can see this represented both visually and automatically
+
+232
+00:28:55.530 --> 00:29:08.550
+Nick Bowman: And so it's this idea that if you double the radius, you increase the area by a factor for triple the radius increase the factor by a factor of nine. So whatever factor you increase the input size by the output size grows by a square
+
+233
+00:29:10.290 --> 00:29:18.930
+Nick Bowman: And you can see the same thing for circles. So a circle of radius are has area of r squared also so similar to a square
+
+234
+00:29:19.440 --> 00:29:27.690
+Nick Bowman: You can see this if we look at some diagrams of circles. So again, with radius. Are we have an area a problem with radius to our ready, we have area for a prime
+
+235
+00:29:28.170 --> 00:29:40.170
+Nick Bowman: And with radius three our area 90 and again we see exactly the same pattern that we saw with the squares doubling the are increased area by a factor for tripling the are increased by the area by a factor of nine.
+
+236
+00:29:40.980 --> 00:29:52.530
+Nick Bowman: And so you might think to yourself, How can these both have the exact same big O notation. When clearly their actual areas are at their actual values aren't the same. And that's actually
+
+237
+00:29:54.060 --> 00:29:54.570
+Nick Bowman: I miss
+
+238
+00:29:56.460 --> 00:30:03.270
+Nick Bowman: Area and so that's actually exactly the point of bingo, it's telling you these quantities are growing at the same relative rates.
+
+239
+00:30:03.630 --> 00:30:12.960
+Nick Bowman: And it doesn't tell you that there that there exactly equal. It just tells you the growing on the order of the input side squared. Right. And so
+
+240
+00:30:13.530 --> 00:30:23.520
+Nick Bowman: The squares and circles. They're both growing at a similar rate. And that's going to be this idea of growth and relative growth is sort of really crucial to the whole concept of vigor.
+
+241
+00:30:25.650 --> 00:30:30.870
+Nick Bowman: And so now let's try to apply bigger to the real world and we have
+
+242
+00:30:31.560 --> 00:30:39.750
+Nick Bowman: This idea of network value. And so there's a lot called Metcalfe's Law and that actually tells us that the value of communications network.
+
+243
+00:30:40.140 --> 00:30:49.440
+Nick Bowman: So you can think of this as an internet network or social network that has end users is also this big of n squared. So grows with the rate of n squared.
+
+244
+00:30:50.550 --> 00:31:08.280
+Nick Bowman: And. And so imagine the own social network that has 10 million users. And it's worth $10 million. And so the question is, how many users do you think following this law. Do you think it'll take you worth $1 billion. And so, kind of, if you could pull up the pole.
+
+245
+00:31:11.040 --> 00:31:25.380
+Nick Bowman: For options. And this time, it's just, just one of the options will be correct. So think about this. Think about the way and that we've seen this relative growth. Think about what we've learned, we've seen so far with how the n squared bigger relationship works so
+
+246
+00:31:29.250 --> 00:31:30.210
+Yeah yeah
+
+247
+00:31:31.230 --> 00:31:39.660
+Nick Bowman: Yeah, and so go ahead and put in, what, how many users, it'll think to grow the worth up to $1 billion from work currently
+
+248
+00:31:44.370 --> 00:31:47.070
+kylie jue: Focusing I'm still seeing zero percent of folks.
+
+249
+00:31:48.120 --> 00:31:48.570
+Nick Bowman: Yeah.
+
+250
+00:31:49.830 --> 00:31:51.150
+Nick Bowman: Yeah, I'm seeing 35%
+
+251
+00:31:52.560 --> 00:31:54.810
+Nick Bowman: Maybe it's just not updating that strange
+
+252
+00:31:56.190 --> 00:31:58.590
+kylie jue: I can't see how many people are answering then
+
+253
+00:32:02.190 --> 00:32:04.350
+Nick Bowman: I actually have the ability to end it so
+
+254
+00:32:05.490 --> 00:32:05.700
+Great.
+
+255
+00:32:09.690 --> 00:32:16.770
+Nick Bowman: Looks like about. Yeah, looks like about 80% of you have filled it out. So I'm gonna go ahead and end it and share the results.
+
+256
+00:32:17.250 --> 00:32:28.110
+Nick Bowman: So it looks like we have a tight here are roughly a tie with a little bit of preference for option three between 100 million users and 1 billion users. And so the correct answer here is actually going to be
+
+257
+00:32:30.150 --> 00:32:30.750
+I can
+
+258
+00:32:32.790 --> 00:32:40.530
+Nick Bowman: So let's, let's make a guess at this so we need our network to grow the value by a factor of 100 right so that's from $10 million to 1 billion.
+
+259
+00:32:41.190 --> 00:32:53.880
+Nick Bowman: We know that the value grows quite radically or as on the order of the square of the size. So we only actually need to grow the user base by a factor of 10 in order to get a factor of 10 square or 100
+
+260
+00:32:54.360 --> 00:33:03.960
+Nick Bowman: Increase in our value. And so in this case if we grow our user base by a factor of 10 that means we actually only need 100 million hundred million users to get the value
+
+261
+00:33:05.910 --> 00:33:09.840
+Nick Bowman: And so there's sort of another example of the relationship between the input size.
+
+262
+00:33:11.520 --> 00:33:15.270
+Nick Bowman: The gap between the input factor growth and the output factor.
+
+263
+00:33:17.760 --> 00:33:22.710
+Nick Bowman: In the order of size. I'm actually going to skip this example on small size, I do recommend going back and checking it out.
+
+264
+00:33:23.700 --> 00:33:30.240
+Nick Bowman: After, after lecture. But there's a third example that I wanted to talk about, which is this idea of manufacturing
+
+265
+00:33:30.690 --> 00:33:45.510
+Nick Bowman: And so, say you're working in a company that produces cat toys. I'm actually getting cat relatively soon. So this is on the mind and it cost you to some amount of money to produce that toy. And there was also some sort of one time cost to set up the factory.
+
+266
+00:33:47.460 --> 00:33:58.740
+Nick Bowman: And so the question I have is, well, what data would you need to know or to gather to sort of make an estimate for the cost of producing 10 million capital, maybe you want to become sort of the capital of the world.
+
+267
+00:34:00.570 --> 00:34:04.350
+Nick Bowman: And so let's think about, well, the cost of producing those toys.
+
+268
+00:34:04.710 --> 00:34:17.310
+Nick Bowman: So there's going to be if we want to produce an toys. So, and in this case is 10 million, but we're going to try to generalize and we're going to use this variable and a lot. You're going to see this idea of n is a variable. It's often used to represent our input size.
+
+269
+00:34:18.420 --> 00:34:24.210
+Nick Bowman: So we're going to have to multiply the number of things that we want to produce by the cost per that says widget should say cost per toy.
+
+270
+00:34:25.050 --> 00:34:32.160
+Nick Bowman: And then we're also going to have to add on the startup costs. So whatever it was that we paid to create our factory. We're going to have to add on that as well.
+
+271
+00:34:33.720 --> 00:34:45.120
+Nick Bowman: What's interesting to see is the left hand term is always going to increase as and increases. And so if we want to make more toys or cost is going to go up because each toy cars amount of money.
+
+272
+00:34:46.470 --> 00:34:50.130
+Nick Bowman: But the right hand side actually doesn't grow at all the startup costs is fixed.
+
+273
+00:34:51.180 --> 00:34:57.150
+Nick Bowman: And so regardless of how many toys. We want to produce we're gonna have to pay a kind of this one time upfront startup costs.
+
+274
+00:34:57.930 --> 00:35:07.320
+Nick Bowman: And so if we wanted to represent this what the cost was in big O notation, we can actually just ignore most of the information here and we can say that this is on the order of
+
+275
+00:35:07.890 --> 00:35:21.570
+Nick Bowman: So to produce and toys. But cost is going to be on the order of the number of toys that I want to produce. So as the number of toys that I want to produce increases, I should see a linear increase in the number of in the cost of producing those toys.
+
+276
+00:35:24.150 --> 00:35:30.330
+Nick Bowman: And so what was specifically what I wanted you to notice there is we can actually drop out some information we dropped out the cost
+
+277
+00:35:30.690 --> 00:35:41.640
+Nick Bowman: Per 20 we dropped out the startup costs and bingo kind of allowed us to efficiently represent what what the relationship was going to be between the number of toys. We wanted to produce and the cost of producing those toys.
+
+278
+00:35:43.200 --> 00:35:48.270
+Nick Bowman: And so again, I'm going to keep saying this big O is all about the rate at which things grow.
+
+279
+00:35:48.810 --> 00:35:58.110
+Nick Bowman: Right, it's not going to tell you anything exact right it doesn't have any idea about leading coefficients. So this is the idea that our square or circle have the boat same
+
+280
+00:35:59.100 --> 00:36:05.310
+Nick Bowman: Growth, the same growth rate and the same bingo, but obviously not the same size or area.
+
+281
+00:36:06.300 --> 00:36:17.280
+Nick Bowman: And also, what are the myths is anything that we call sort of lower order. So things that don't contribute to the growth that we can actually kind of just ignore so like our startup costs in the in the manufacturing example.
+
+282
+00:36:18.210 --> 00:36:22.710
+Nick Bowman: Is you might as well if bingo kind of toss out all this information, like, why is it useful.
+
+283
+00:36:23.610 --> 00:36:30.480
+Nick Bowman: And it's useful because it's going to give us the ability to generalize performance and algorithms and data structures.
+
+284
+00:36:30.930 --> 00:36:43.440
+Nick Bowman: Beyond specifics that might vary from computer to computer or situation to situation and allow us to generally talk about algorithms and generally talk about data structures and compare them and make decisions about which ones are better.
+
+285
+00:36:44.430 --> 00:36:47.190
+Nick Bowman: And so in that, in that sense, bigger is a very powerful tool.
+
+286
+00:36:50.250 --> 00:37:01.080
+Nick Bowman: And so then we'll spend the last 10 minutes today I'm talking about actually applying big go to code. What does it mean to actually look algorithm or data structure and decide upon
+
+287
+00:37:04.680 --> 00:37:07.080
+Nick Bowman: The question of how can we apply bigger computer science.
+
+288
+00:37:09.600 --> 00:37:15.300
+Nick Bowman: Natural sort of way of thinking about the goodness of algorithms of the goodness of data structures or how fast they are
+
+289
+00:37:15.900 --> 00:37:25.740
+Nick Bowman: Might be to just ask yourself, well, how fast is it run. And so you can ask yourself what the runtime is generally we just refer to run time as the amount of real like on the clock wall time
+
+290
+00:37:26.250 --> 00:37:35.070
+Nick Bowman: That it takes for program to run and. But why isn't that good enough. Why do we need this sort of abstract, you know, mathematical representation
+
+291
+00:37:36.180 --> 00:37:45.480
+Nick Bowman: Well, let's think about it this way. I took the exact same code. So I wrote a function to find the maximum value in a vector, and I ran it on a vector of 10 million elements and I timed it.
+
+292
+00:37:45.960 --> 00:37:55.590
+Nick Bowman: And on my computer took about point three seconds to run around the exact same code on the ED computers on the network space. It took point one eight seconds to run
+
+293
+00:37:56.940 --> 00:38:09.930
+Nick Bowman: And I ran the exact same code with the exact same inputs with the exact same sizes and yet I got to kind of wildly varying sizes right now. One is almost like 50% greater than the other one.
+
+294
+00:38:11.010 --> 00:38:18.150
+Nick Bowman: And also within on each computer I ran the same code three times and I didn't get the same result. I got different timing results for each time.
+
+295
+00:38:19.740 --> 00:38:26.370
+Nick Bowman: And so the rent what we, in this case, are we sort of see that runtime is what we call quote unquote noisy.
+
+296
+00:38:26.820 --> 00:38:33.660
+Nick Bowman: And so if you go from computer to computer or even if you go from second to second on on your own computer on the same device.
+
+297
+00:38:33.810 --> 00:38:39.060
+Nick Bowman: You'll get all these variances and runtime that make it harder to reason about. Well, it's the exact same algorithm.
+
+298
+00:38:39.240 --> 00:38:49.770
+Nick Bowman: Is it fast is it slow. I don't know, you might run it on my ancient computer and think that it's slow, you might run it on someone else's really fast computer and think that it's fast, it's not really helpful to try and compare those exact same run
+
+299
+00:38:51.150 --> 00:39:02.250
+Nick Bowman: And and so this is just a summary right just measuring the time on the clock depends on the computer, you're running. Who else is using the computer, whether or not it's plugged in there just like all these factors and like confound what's going on.
+
+300
+00:39:03.030 --> 00:39:09.660
+Nick Bowman: And also, you can't make accurate predictions, right, because the predictions that you make dependent. All of these factors that you don't really have control.
+
+301
+00:39:11.730 --> 00:39:21.870
+Nick Bowman: So let's let's apply to go and let's make an independence and efficiency metric that that applies to code, but doesn't actually depend on the specifics of the computer that we're running
+
+302
+00:39:23.280 --> 00:39:31.590
+Nick Bowman: And we're going to use this example of vector, Max, actually. And so here's a little snippet of code, hopefully after everything that we talked about in the last week and a half.
+
+303
+00:39:32.220 --> 00:39:42.150
+Nick Bowman: Everything here. Looks pretty familiar to you. We have a vector, you have some variables. We have a for loop and overall. We're just trying to figure out what the maximum value in the vectors.
+
+304
+00:39:43.200 --> 00:39:52.020
+Nick Bowman: And if we got to analyze how much time this code takes to run and in a way that's sort of independent of the computer. That's the underlying
+
+305
+00:39:52.770 --> 00:40:03.330
+Nick Bowman: And running this code, let's just say that any individual statement, you see. So, any, any there's a line of code that gets executed takes one unit of time to execute. Don't worry about what this unit is
+
+306
+00:40:04.020 --> 00:40:08.460
+Nick Bowman: It's actually not important for the problem I'm Alicia say it takes one unit of time to run
+
+307
+00:40:09.750 --> 00:40:15.810
+Nick Bowman: And let's say that our input vector again has n elements like I said you're going to keep seeing this value and come back.
+
+308
+00:40:16.440 --> 00:40:24.960
+Nick Bowman: In this case it's referring to the number of elements in the vector. So, if we have an elements in our vector. How many time units is running this code going to take
+
+309
+00:40:25.560 --> 00:40:35.880
+Nick Bowman: And let's analyze. Let's just go line by line, so creating a variable. Well, that takes one year at a time. That's one statement and creating another variable takes another time unit. So that's one more.
+
+310
+00:40:37.050 --> 00:40:45.570
+Nick Bowman: And then we get to our for loop. Remember for a for loop the initialization Stephen always runs once so that line of code will also run for one time unit.
+
+311
+00:40:46.710 --> 00:40:51.270
+Nick Bowman: And then we get to something a little bit more interesting. This is our comparison statement for the wild.
+
+312
+00:40:51.930 --> 00:41:03.390
+Nick Bowman: And we actually know that this comparison statement is going to run once for every value of i, up until I reaches the number of elements in our factor and it will actually run once more, as well.
+
+313
+00:41:04.410 --> 00:41:09.270
+Nick Bowman: To make sure that our father actually now it's done. So we get n plus one time units there.
+
+314
+00:41:10.380 --> 00:41:14.100
+Nick Bowman: We got another n time units from needing to increment our variable I every time.
+
+315
+00:41:16.020 --> 00:41:22.710
+Nick Bowman: Then we need to do comparisons, we need to actually every time along the way. You need to compare to see if we've encountered in your maximum number not
+
+316
+00:41:23.940 --> 00:41:31.770
+Nick Bowman: Well, when we do this, we don't know exactly how many times is going to happen. So this is where, again, I want to bring up the fact that this is kind of an estimate.
+
+317
+00:41:32.310 --> 00:41:43.770
+Nick Bowman: And we don't know. It depends on the structure of the array, maybe the on the doctor. Maybe the largest element is at the front. Maybe it's at the very back. Maybe it's somewhere in the middle, depending on where it is, we might need to run the statement.
+
+318
+00:41:44.880 --> 00:41:54.600
+Nick Bowman: Actually, sorry, I take that back. I'm gonna let that go 30 seconds in the future. The comparison needs to happen for every element right we need to compare this maximum value that were happening.
+
+319
+00:41:55.980 --> 00:42:00.420
+Nick Bowman: Every single time. And we So we run this statement comparison also
+
+320
+00:42:01.830 --> 00:42:08.370
+Nick Bowman: The tricky part is inside. So we only update the maximum value if we've just seen something that's bigger than what we currently have.
+
+321
+00:42:10.470 --> 00:42:16.770
+Nick Bowman: So this is where we say, oh, we don't know exactly how many times it's going to run, but we can estimate and we can say,
+
+322
+00:42:17.280 --> 00:42:25.800
+Nick Bowman: Most it's gonna run n times, at most, we have to update our maximum element once for every element that we visit, it's likely going to be a lot less
+
+323
+00:42:26.580 --> 00:42:35.700
+Nick Bowman: But, at most, and sort of in the worst case, and we'll talk about this worst case later on in the class and in the worst case, we have to run this line of code up 10 times
+
+324
+00:42:36.840 --> 00:42:42.510
+Nick Bowman: And then we finish up with a for loop and then we want to return the value. And so that's one more statement. And so we say that one more time.
+
+325
+00:42:44.490 --> 00:42:59.760
+Nick Bowman: So if we tell you the solo and we say okay this line of code this implementation of vector Max has efficiency for n plus five. You look at before and you look at the five and you're like, Well, what does that really telling us
+
+326
+00:43:00.810 --> 00:43:13.590
+Nick Bowman: And the answer is what, like what is this telling us, is this a useful representation. Is this something that I can tell another computer scientists. Hey, I wrote a vector max that is foreign plus five and then are they going to be able to understand what I mean by that.
+
+327
+00:43:15.270 --> 00:43:23.700
+Nick Bowman: And the answer is no, not really. And this is where our notion of big O notation comes in and we can say that, rather than X exactly saying my
+
+328
+00:43:24.330 --> 00:43:39.630
+Nick Bowman: Function does exactly this many operations, I can just say, hey, my function runs on the order of n. So is and increases the number of operations that I have to do you know roughly increases linearly. So if I double the size them. Yeah, I'm so sorry.
+
+329
+00:43:40.230 --> 00:43:50.700
+kylie jue: Just a couple quick clarification that someone said, oh, it's not an it's n minus one. That's correct. It should. I should be initialized to zero there that's on us.
+
+330
+00:43:50.970 --> 00:43:57.420
+Nick Bowman: Well, you don't you don't actually need to initialize the i to zero because you're already looking at them because you're starting your current maps element.
+
+331
+00:43:57.720 --> 00:43:59.040
+kylie jue: Right, but then
+
+332
+00:43:59.100 --> 00:43:59.760
+Nick Bowman: Yeah, it would be
+
+333
+00:44:01.200 --> 00:44:07.110
+kylie jue: The other question we had just to clarify what those that column on the right hand is the number of times you repeat
+
+334
+00:44:07.350 --> 00:44:17.370
+kylie jue: That operation. It is not the runtime of that operation. Someone was asking shouldn't be comparison happened in constant time. And that is true, but you're getting it and times. Yeah.
+
+335
+00:44:17.460 --> 00:44:30.300
+Nick Bowman: Exactly. Yeah. That's a good observation. So yeah the the thing or telling up on the right is the total amount of times, you end up repeating operation. So our comparison happens, we have to compare for every single element in the list. And so that'll happen and
+
+336
+00:44:33.240 --> 00:44:43.890
+Nick Bowman: Cool. And so, you know, we can introduce this notion of big own to actually say, okay, our input, which is our size of the vector and our runtime, which is however long it takes to execute
+
+337
+00:44:44.220 --> 00:44:56.760
+Nick Bowman: Have a linear or on the order of n or n is the number of inputs elements relationship. And so if we double the size of our input will double the size of our runtime roughly right and that's the, that's the key part
+
+338
+00:44:58.860 --> 00:45:10.260
+Nick Bowman: And so, oh, then generally a good runtime. If we can get things to run an open we're generally pretty happy and I'll touch on that a little bit later on, but we like over. We say, oh, it's pretty cool.
+
+339
+00:45:12.900 --> 00:45:16.260
+Nick Bowman: So now let's look at a different time. So this is a kind of just have fun.
+
+340
+00:45:17.550 --> 00:45:23.280
+Nick Bowman: To play around with, um, it's called print stores. So this one can actually have tubes. So it has one loop.
+
+341
+00:45:23.790 --> 00:45:30.210
+Nick Bowman: going from zero to end and then a second loop going from also going from zero to 10 and then inside the loop we just print out a star.
+
+342
+00:45:30.990 --> 00:45:35.760
+Nick Bowman: And the question is, well, how much time is it gonna take for this code to run as a function of them.
+
+343
+00:45:36.660 --> 00:45:44.880
+Nick Bowman: And we're going to try to answer again and Big O notation, we've we've just previously established that exactly calculating how many operations, we do not super useful.
+
+344
+00:45:45.210 --> 00:45:51.990
+Nick Bowman: But being able to establish a rough estimate and and on the order of estimation using big O notation pretty helpful for us.
+
+345
+00:45:52.800 --> 00:45:59.520
+Nick Bowman: So let's break it down and let's actually go from inside out. So it's going to look a little bit different than how we approach the last one. But let's work from inside out.
+
+346
+00:46:00.690 --> 00:46:12.930
+Nick Bowman: So the first line of code. Well, that just prints out one asterisk to the console. And so we can say, all right, that's just like one small amount of work. That'll be kind of our unit of of operation in this innocence.
+
+347
+00:46:14.730 --> 00:46:22.230
+Nick Bowman: Well, well then repeat that operation and times right the for loop runs from zero, n and so that runs
+
+348
+00:46:22.770 --> 00:46:36.330
+Nick Bowman: Again, on the order of an as an increases and we'll do more will print out more and more stars. So we can actually collapse and completely replace this for them with just saying, Oh, we're doing on the order of n 10 minutes of work here.
+
+349
+00:46:37.500 --> 00:46:45.270
+Nick Bowman: And then we see, oh, well, that line that amount of work actually also gets repeated and times. And so we run a second for loop.
+
+350
+00:46:45.840 --> 00:46:57.090
+Nick Bowman: That runs are over 1010 minutes of work and times. And so we do. And so what we see there is we actually then end up multiplying. So now we're doing O n squared 10 years of work.
+
+351
+00:46:58.980 --> 00:47:07.410
+Nick Bowman: And then we've collapsed everything that we started off with them the function. And we see that the overall Big O notation of this function is open squared.
+
+352
+00:47:08.040 --> 00:47:17.130
+Nick Bowman: And and so whenever you see nested loops nested loops are usually a very good indicator of n squared behavior because oftentimes you need to go over all of the elements
+
+353
+00:47:17.310 --> 00:47:29.970
+Nick Bowman: In your outer loop and in your inner loop, you're also going over all of the elements and so that that multiplication that confounding of the open work inside the loop, followed by the repeating on the outside of another n times gives you your events.
+
+354
+00:47:32.640 --> 00:47:42.810
+Nick Bowman: And you'll get you'll actually have a section exercise that takes you through four or five examples of code to look at the end. So you'll get some practice with with figuring out these times on your own.
+
+355
+00:47:44.040 --> 00:47:52.260
+Nick Bowman: So right at the end. Now, I have one last example and then we'll let you go. My apologies. I know we started a little bit because of the technical difficulties.
+
+356
+00:47:54.330 --> 00:48:01.050
+Nick Bowman: So here's the summary. When you have a nested for loops, like this, and both for loops run to the value in your overall runtime becomes both ends.
+
+357
+00:48:03.270 --> 00:48:11.040
+Nick Bowman: So let's do one final example. And we have a function called hmm That's strange. It also takes in this value added as a parameter
+
+358
+00:48:11.490 --> 00:48:18.240
+Nick Bowman: Um, but all it does is actually just print out the string mirth and Wednesday and then it prints out the value of and that was passed in.
+
+359
+00:48:18.990 --> 00:48:35.220
+Nick Bowman: And the interesting thing to note here is that the amount of times the code in our function executes actually is completely independent of the value of that, like, yes, we print out the value, then, but we don't repeat the code and times are n squared times or anything like that.
+
+360
+00:48:37.110 --> 00:48:44.640
+Nick Bowman: And so the right time is actually completely independent of this value. And so how can we express. We actually haven't seen a notation, a way of expressing this. Yeah.
+
+361
+00:48:45.150 --> 00:48:54.660
+Nick Bowman: And what we say is we say that some code like this is over one and and another common term you'll hear this referred to as is Constantine behavior.
+
+362
+00:48:55.320 --> 00:49:10.590
+Nick Bowman: So over one is constant runtime. That means that no longer, no matter what value of and I pass into this function I function is always going to take roughly the same amount of time text. And in this case, kind of exactly the same amount of time to execute. And so this was sort of our final
+
+363
+00:49:11.760 --> 00:49:17.280
+Nick Bowman: Big oh specification and remember I said earlier, hey, we like, oh man, oh man was pretty good.
+
+364
+00:49:18.300 --> 00:49:22.170
+Nick Bowman: Oh man squared can get kind of hairy. If you're doing operations that are open square
+
+365
+00:49:22.800 --> 00:49:35.430
+Nick Bowman: Actually the we mentioned this in the handout, but the exhausted algorithm for finding perfect numbers was actually open square and you saw how that algorithm got really unreal, the really quick. You know, taking 100 days to find the perfect number
+
+366
+00:49:36.510 --> 00:49:49.830
+Nick Bowman: Oh, one is totally the opposite. We love oh one any operation that has constant runtime. We love it a lot. And so when we think of things as being fast really the fastest that we can get in terms of bingo, is this constant front.
+
+367
+00:49:52.740 --> 00:49:58.140
+Nick Bowman: And so I'll skip this part. It's actually just a table. So you can kind of look through it and
+
+368
+00:49:58.590 --> 00:50:03.930
+Nick Bowman: Basically what it is that we put together. And as we so we've talked about constant time, and your time and quadratic time
+
+369
+00:50:04.290 --> 00:50:08.760
+Nick Bowman: And then you can see what their relative growth rates look like I'm in this function on the right.
+
+370
+00:50:09.420 --> 00:50:16.200
+Nick Bowman: And but it's also helpful to know with all of these ETS that we've looked at so far, you know, what are their run times
+
+371
+00:50:16.650 --> 00:50:21.630
+Nick Bowman: How we've been calling things fast and we've been calling things slow and why we've been able to do that.
+
+372
+00:50:21.990 --> 00:50:29.730
+Nick Bowman: And so there's a lot more that's that's even feasible to go over, but I recommend looking at each of these operations and seeing if you can convince yourself why why this is all true.
+
+373
+00:50:30.720 --> 00:50:38.880
+Nick Bowman: But what you might notice is on the right hand side for sets and maps. I went to quotation marks and for kind of the key methods for add, remove, and
+
+374
+00:50:38.880 --> 00:50:51.060
+Nick Bowman: Contains and and we haven't yet told you what the runtime is we've told you that it's fast, but apparently it's not over one and it's apparently not over, then. So what is it
+
+375
+00:50:51.840 --> 00:50:59.310
+Nick Bowman: Without kind of be the suspense for the weekend, and we're going to tell you, we can achieve faster than open runtime. When storing and looking up elements.
+
+376
+00:51:00.420 --> 00:51:07.080
+Nick Bowman: But we're not going to tell you what it is yet. And we're actually gonna have to learn a new problem solving technique in order to be able to actually understand what that means.
+
+377
+00:51:07.680 --> 00:51:18.720
+Nick Bowman: And so that will be our topic for all of next week, we're going to talk about this idea of recursive problem solving and that will get us to really awesome really fast really efficient algorithms and really powerful as well.
+
+378
+00:51:20.010 --> 00:51:27.540
+Nick Bowman: So awesome. So thanks again for everyone for sticking around. My apologies for running a little bit late, and I will never give lecture from home ever again.
+
+379
+00:51:28.950 --> 00:51:43.320
+Nick Bowman: And as always, if you have questions that either didn't get answered in the chat or just want to hang around and talk with us afterwards, feel free to do so. And for those of you watching asynchronously. This is the quote unquote official and the lecture. So feel free to finish here.
+
+380
+00:51:43.380 --> 00:51:43.830
+Jihe He: If you're ready.
+
+381
+00:51:44.910 --> 00:51:45.330
+Jihe He: Thank you.
+
+382
+00:51:47.160 --> 00:51:47.580
+Jihe He: Thank you.
+
+383
+00:51:49.530 --> 00:51:49.980
+Weiqi Yu: Thank you.
+
+384
+00:51:50.340 --> 00:51:51.540
+Elena Williams: Thank you.
+
+385
+00:51:52.170 --> 00:51:53.970
+Angela Zhang: Thank you. Yeah.
+
+386
+00:51:54.930 --> 00:52:00.900
+Nick Bowman: Yeah, it's okay. I have like I have no way to either look at participants or look at chat. So if you want to just
+
+387
+00:52:01.440 --> 00:52:02.610
+kylie jue: stop sharing my screen.
+
+388
+00:52:03.090 --> 00:52:03.690
+Nick Bowman: Okay, cool.
+
+389
+00:52:04.740 --> 00:52:06.420
+Nick Bowman: Oh, I came back. There we go.
+
+390
+00:52:10.890 --> 00:52:12.120
+Nick Bowman: Yeah. How many have a question.
+
+391
+00:52:12.150 --> 00:52:12.600
+Yeah.
+
+392
+00:52:13.620 --> 00:52:15.690
+haoming li: The last example, you should ask.
+
+393
+00:52:16.950 --> 00:52:36.630
+haoming li: Oh, one because that one only print one so I'm thinking. The one is like represent representation or if you like see out the first I see out one thing and see our second thing they will be like to see out there, right there, that go to, or that still
+
+394
+00:52:37.500 --> 00:52:49.140
+Nick Bowman: Yeah, that's a great question. I'm the one of one is a little bit misleading because the one is the same way that, for example, like n generalize is foreign plus five.
+
+395
+00:52:49.650 --> 00:53:02.160
+Nick Bowman: Over one generalize is any number that is constant. So like exactly like you said, if you have to print operations, you would still say oh, have one because that's kind of like constant time. Right, even though you're doing to to is still a constant.
+
+396
+00:53:02.700 --> 00:53:09.270
+Nick Bowman: And if you're doing three or four or five or whatever it is, even if you had like a really big constant number, like say you
+
+397
+00:53:09.960 --> 00:53:19.350
+Nick Bowman: Took in a vector that had an elements and but your function was really silly and all it did was just always print out 100,000 numbers, right. That's all it did.
+
+398
+00:53:20.340 --> 00:53:28.710
+Nick Bowman: Interestingly enough, the runtime is still constant because it's always printing out 100,000 numbers, right, it just completely ignores the vector right doesn't do anything useful with it.
+
+399
+00:53:29.010 --> 00:53:42.450
+Nick Bowman: And so even though your, your, your size of the vector into the function could change. You're always just like printing out 100,000 numbers. And so the constant can get really, really big. But as long as it's constant and it doesn't depend on and you would still represent it with us. Oh.
+
+400
+00:53:43.500 --> 00:53:43.740
+Nick Bowman: Yeah.
+
+401
+00:53:44.610 --> 00:53:45.120
+haoming li: Thank you.
+
+402
+00:53:45.330 --> 00:53:45.510
+Yeah.
+
+403
+00:53:47.490 --> 00:53:49.890
+Ali Mahdi: Can I ask a quick question about assignment to please
+
+404
+00:53:51.390 --> 00:53:52.830
+Nick Bowman: Sure you know it's a
+
+405
+00:53:53.160 --> 00:54:05.400
+Ali Mahdi: It was just about getting the debugger, a little, I guess, like the zeros part of the of the first problem is there any way that I could like check that I did that correctly. Before I move on to the harder problems, just to make sure that
+
+406
+00:54:05.460 --> 00:54:05.850
+Nick Bowman: I'm
+
+407
+00:54:06.000 --> 00:54:12.300
+Nick Bowman: Actually correctly. Yeah, you can check by doing part one of the warm up. So part one of the warm up will tell you to run
+
+408
+00:54:12.720 --> 00:54:17.250
+Nick Bowman: A portion of code and then it will show you a screenshot of what we expect the debugger to look like.
+
+409
+00:54:17.610 --> 00:54:27.450
+Nick Bowman: And so if you just follow the instructions in part one of the warm up exercise and if your screenshot. Once you're done looks similar to what the screenshot that we posted and then you should be good to go.
+
+410
+00:54:27.750 --> 00:54:28.590
+Ali Mahdi: Cool. All right, make it
+
+411
+00:54:28.860 --> 00:54:35.340
+Nick Bowman: Yeah, just in general, if you're able to look in the debugger and see the contents of a data structure, then you're probably good to go.
+
+412
+00:54:35.550 --> 00:54:43.620
+Nick Bowman: And the way that this would fail. Is it would either completely crushed a blogger, or you wouldn't be able to see anything. So it'd be kind of obvious that if if something is going on.
+
+413
+00:54:43.800 --> 00:54:48.630
+Ali Mahdi: Okay. And this, in this case, you're referring to, like, the queue. Right. That little screenshot that you guys should, yeah.
+
+414
+00:54:48.720 --> 00:54:54.360
+Nick Bowman: Exactly. Yeah. So there's little screenshot of a queue. So if you just do the first one on exercise in your queue looks like that in the debugger, then you should be good to go.
+
+415
+00:54:54.540 --> 00:54:55.470
+Ali Mahdi: Alright, don't think
+
+416
+00:54:56.040 --> 00:54:56.730
+Nick Bowman: Yeah, first
+
+417
+00:54:59.040 --> 00:55:00.840
+kylie jue: In chat. But I want to address probably
+
+418
+00:55:00.930 --> 00:55:01.290
+Yeah.
+
+419
+00:55:02.550 --> 00:55:16.590
+kathleen bryan: I can actually go last. If there's other people minds just about moving the submission time because I'm in New York and I work full time and that's very difficult one, the submissions, like right at 830 in New York.
+
+420
+00:55:18.480 --> 00:55:25.350
+Nick Bowman: Sorry. So, so this is this goes the opposite direction. Like it would be the new submission deadline for you would be like in the middle of the night.
+
+421
+00:55:26.250 --> 00:55:28.350
+kathleen bryan: Or no, I'm three hours.
+
+422
+00:55:29.040 --> 00:55:30.870
+kathleen bryan: I'm three hours later.
+
+423
+00:55:32.220 --> 00:55:36.450
+Nick Bowman: Um, no. So like 11:59pm Pacific time
+
+424
+00:55:36.930 --> 00:55:46.620
+Nick Bowman: And it's like 3:30am. The next day in New York. So like this, this only gives you more time than you would have had if you submitted it at 11:59pm locally.
+
+425
+00:55:47.130 --> 00:55:50.130
+kathleen bryan: Okay, so I can still like submit at like nine or 10 o'clock.
+
+426
+00:55:50.520 --> 00:56:06.720
+Nick Bowman: Yeah yeah yeah but like I said it. If the probably the easiest way to think about it is if you still plan to submit by 11:59pm where you are like looking at your computer clock, you will be totally you the new deadline will only give you more time on top of that.
+
+427
+00:56:07.350 --> 00:56:11.490
+kathleen bryan: Okay, yeah, then there's no problem. I just like pathologic problem. I guess no.
+
+428
+00:56:11.580 --> 00:56:13.470
+Nick Bowman: No. No, you're good time zones are hurt. Yeah.
+
+429
+00:56:15.210 --> 00:56:16.800
+kathleen bryan: Thank you so
+
+430
+00:56:16.830 --> 00:56:27.120
+kylie jue: So the question in the chat that was asked. I'm Tom john asked for. So if you have this snippet of code, which is a nested for loops, where the outer for loop goes from zero to end.
+
+431
+00:56:27.630 --> 00:56:28.710
+kylie jue: And then the inner for loop.
+
+432
+00:56:28.710 --> 00:56:35.280
+kylie jue: Goes from Jay to I would that be considered oh of n squared or of n factorial
+
+433
+00:56:35.940 --> 00:56:38.160
+Nick Bowman: Yeah, that's a great question. Um,
+
+434
+00:56:39.270 --> 00:56:39.780
+Let's see it.
+
+435
+00:56:41.880 --> 00:56:43.260
+Nick Bowman: Wasn't showing up. Yeah.
+
+436
+00:56:46.170 --> 00:56:49.950
+kylie jue: Yeah, your audio gets a lot quieter, but oh
+
+437
+00:56:51.930 --> 00:56:52.080
+Nick Bowman: No.
+
+438
+00:56:52.530 --> 00:56:56.430
+Nick Bowman: Sorry, everything out. Yeah, yeah, sure, if you're trying to like write it up.
+
+439
+00:56:57.450 --> 00:57:07.020
+Nick Bowman: So the idea here is that, remember when in the vector max example we tried to make an estimation and we said
+
+440
+00:57:08.610 --> 00:57:21.480
+Nick Bowman: The inside of the statement. So we didn't know exactly how many times if statement was gonna run or sorry, we do the comparison in the estimate was always going to run the end times, but we didn't know how many times inside the the
+
+441
+00:57:22.680 --> 00:57:28.230
+Nick Bowman: The code inside of it would run but we kind of just estimated we said okay, at most, it's going to run a total of 10 times
+
+442
+00:57:29.190 --> 00:57:47.760
+Nick Bowman: And you can even apply a very similar kind of line of reasoning here. So let's think about the inner for loop, the inner for loop is going to run i times, but we don't really know what i is right. Like I changes from iteration iteration. So it's not really helpful to think about it.
+
+443
+00:57:48.870 --> 00:57:55.590
+Nick Bowman: But what you do know is I is always going to be less than end. Right. And so if we approximate
+
+444
+00:57:56.310 --> 00:58:05.910
+Nick Bowman: And we say the inner for loop will run and times, at most, right, like in the worst case, at most, it's going to run and time is gonna run up to end times.
+
+445
+00:58:06.330 --> 00:58:13.350
+Nick Bowman: And then we can just abstract away that in there for loop, and we can say, okay, well, it's just doing over and work at most.
+
+446
+00:58:13.830 --> 00:58:22.350
+Nick Bowman: Right, because it's going to the amount of work that the for loop does will scale with i and i skills with em. And so we can sort of do an approximation.
+
+447
+00:58:22.590 --> 00:58:33.720
+Nick Bowman: And say that, oh, well, the inner for that, because actually just going to run end times. And then at that point you have open work inside of announcer outer for loop that runs and times. And so then, overall, the combines to be squared.
+
+448
+00:58:34.950 --> 00:58:47.070
+Nick Bowman: And in general, it's very, very hard to have factorial runtime with for loops and we will, once we talked about recursion, you will see a very easy way to have factorial runtime.
+
+449
+00:58:47.670 --> 00:59:00.180
+Nick Bowman: Is one of the the recursion can be both very efficient and very inefficient. And so we will we will see examples of factorial runtime and in addition to the the fast runtime that I'm to that at the end of today.
+
+450
+00:59:01.290 --> 00:59:02.550
+Nick Bowman: Does that answer the question.
+
+451
+00:59:07.320 --> 00:59:09.210
+kylie jue: Is that clear on the diagram here.
+
+452
+00:59:10.380 --> 00:59:12.720
+Nick Bowman: I can't see anything. Oh, you can't
+
+453
+00:59:13.890 --> 00:59:14.340
+Nick Bowman: It says
+
+454
+00:59:16.170 --> 00:59:20.790
+Nick Bowman: It says you started sharing. Oh yeah, there we go. Yeah, I'm sharing the wrong screen.
+
+455
+00:59:24.390 --> 00:59:24.600
+kylie jue: Yeah.
+
+456
+00:59:24.900 --> 00:59:26.010
+Nick Bowman: Does that make it looks great.
+
+457
+00:59:29.310 --> 00:59:37.950
+Nick Bowman: And then analyze it answer your question. That's a great idea. That's a great thought it was, what if we have more than one variable that describes the size of our input.
+
+458
+00:59:38.250 --> 00:59:44.430
+Nick Bowman: And totally possible. Right. If you think about like a grid. For example, a grid might have, like, a number of rows and a number of columns.
+
+459
+00:59:44.700 --> 00:59:51.930
+Nick Bowman: And so oftentimes will generalize and will assume that the number of rows and the number of columns are the same. So we'll just use like an to refer to both
+
+460
+00:59:52.410 --> 00:59:56.010
+Nick Bowman: And which gets us run times like open square to traverse the grid.
+
+461
+00:59:56.520 --> 01:00:06.000
+Nick Bowman: But you're totally right. If you want it to be a little bit more specific. You could use one variable, maybe are to represent the number of rows and one variable, maybe see to represent the number of columns.
+
+462
+01:00:06.390 --> 01:00:18.450
+Nick Bowman: And and then your big old maybe, for example, like looking at all the elements you could represented as of our time. See, right. You can you can choose. You get to choose what the variables are and you get to choose what the variable names are
+
+463
+01:00:19.470 --> 01:00:25.890
+Nick Bowman: As long as you're clear about it. And so you would say, Okay, if I'm using a grid to represent maybe like a map.
+
+464
+01:00:26.820 --> 01:00:30.270
+Nick Bowman: Or something else. And I'm going to be very clear about what
+
+465
+01:00:30.750 --> 01:00:40.860
+Nick Bowman: What my variables represent and then you can express your runtime for different operations. And so you can totally have multiple variables and you can have as many as you want. We won't really go
+
+466
+01:00:41.670 --> 01:00:48.480
+Nick Bowman: Probably much at all past one this quarter we may see some that have to. We definitely won't go past you.
+
+467
+01:00:49.770 --> 01:00:54.570
+Nick Bowman: And most of the times we you'll, you'll notice a common trend here where we
+
+468
+01:00:54.960 --> 01:01:02.910
+Nick Bowman: Simplify and approximate. And so if we don't want to express something complex we say assume it's the same. So, you know, for a grid just assume the width and the height of the same
+
+469
+01:01:03.270 --> 01:01:07.560
+Nick Bowman: And and generally those assumptions are accurate enough for our purposes.
+
+470
+01:01:08.130 --> 01:01:19.110
+Nick Bowman: And so it's like the same thing we did before. Look right we assume that the inner folio always ran and times are ran on the order of times, and we were still able to get the correct answer and get a good enough approximate with you at all times.
+
+471
+01:01:19.950 --> 01:01:35.670
+kylie jue: Yeah, loser in general we we would do the worst case. And often that's just because like for for real life purposes it's often telling us what is the amount of like processing power our computer needs to be able to do this. And so having an upper bound this was helpful. Yeah.
+
+472
+01:01:36.090 --> 01:01:40.230
+Nick Bowman: Yeah and we we are. We also generally think about the worst case because
+
+473
+01:01:41.640 --> 01:01:48.030
+Nick Bowman: The thing. The same way that we always design our code to try to be bug free and robust when it comes to testing.
+
+474
+01:01:48.420 --> 01:01:54.630
+Nick Bowman: You kind of have to think about runtime in the same way you have absolutely no guarantees about what inputs, someone's going to put into your function.
+
+475
+01:01:54.960 --> 01:02:05.940
+Nick Bowman: And so you kind of just have to assume that it's going to be the worst possible case. And if you're going to make a guarantee about how good or how efficient or how well your program works, you better make sure that it's true for the worst case input.
+
+476
+01:02:07.020 --> 01:02:08.010
+Nick Bowman: Because
+
+477
+01:02:09.360 --> 01:02:14.820
+Nick Bowman: People will find a way to put the worst case is kind of another. The summary there.
+
+478
+01:02:15.120 --> 01:02:15.780
+Yeah, exactly.
+
+479
+01:02:17.160 --> 01:02:19.140
+Nick Bowman: Yeah, that's a good, a good doctor.
+
+480
+01:02:20.460 --> 01:02:22.140
+Nick Bowman: Dummy, did you have a question. Oh,
+
+481
+01:02:22.200 --> 01:02:44.010
+Demi Lei: Yeah, so I was just looking at the the big O for the A DTS, and then I'm just the, the question mark ones. I'm like, you know, four sets to add is like Question Marks like I'm just not quite sure like cuz I was thinking that it probably should be like one like it's a constant. But, you know,
+
+482
+01:02:44.040 --> 01:02:48.840
+Nick Bowman: Yeah. Yeah, that's a great question. Um, we would love it if it was over one, right.
+
+483
+01:02:49.800 --> 01:02:59.310
+Nick Bowman: One, right, it would be super fast right and and and the little kind of the little kind of teasers that at the very end of the quarter will find a way to make it open.
+
+484
+01:02:59.610 --> 01:03:13.080
+Nick Bowman: And but right now it's not and but it's something that's not Oban and it's not all of them, but it's still very fast, it's like kind of something that lives in that in that in between space and and until we learn about sort of
+
+485
+01:03:13.710 --> 01:03:18.630
+Nick Bowman: Recursive ways of solving problems. It won't be necessarily clear how we can even achieve that.
+
+486
+01:03:18.990 --> 01:03:27.720
+Nick Bowman: So we'll learn about recursion for a couple of days and then we'll revisit those data structures and those run times and we will see exactly like will see one, how to express the runtime.
+
+487
+01:03:28.050 --> 01:03:31.620
+Nick Bowman: And will actually start to understand why it's where that's even possible.
+
+488
+01:03:32.310 --> 01:03:45.420
+Nick Bowman: So right now, just think of it as something that's pretty good, right, we've been telling you hey that's an absurd. Good. And so it's. Think of it as a good runtime, but it's slightly worse, the new one, but not as bad as open and so it's going to exist somewhere between those two.
+
+489
+01:03:46.560 --> 01:03:49.650
+Nick Bowman: And we will we will come back to that on Tuesday.
+
+490
+01:03:50.400 --> 01:03:58.440
+Demi Lei: So we know like kind of where it lies on like why in terms of the, you know, the big O notation like later on.
+
+491
+01:04:01.440 --> 01:04:01.770
+Yeah.
+
+492
+01:04:06.870 --> 01:04:07.830
+Nick Bowman: Any other questions.
+
+493
+01:04:14.670 --> 01:04:20.580
+Nick Bowman: Cool. All right. Well, it looks like it's it. Everyone has a great weekend. And we'll see you on Monday.
+
+494
+01:04:21.900 --> 01:04:22.590
+Demi Lei: Thank you.
+
+495
+01:04:24.120 --> 01:04:26.010
+Liza George: You too. Bye. Thank you.
+

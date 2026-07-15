@@ -1,0 +1,39 @@
+# Zoom
+*.m4a
+*.mp4
+
+# Build files
+build/
+cmake-build-*/
+
+# Qt Creator
+*.pro.user
+*.user
+*.user.*
+
+# Compiled binaries
+*.app
+
+# Object files
+*.o
+*.obj
+
+# Debug symbols
+*.dSYM/
+
+
+
+# macOS
+.DS_Store
+._*
+
+# Qt Creator temporary files
+*.autosave
+
+# Vim / FakeVim temporary files
+*.swp
+*.swo
+*~
+
+# Miscellaneous temporary files
+*.log

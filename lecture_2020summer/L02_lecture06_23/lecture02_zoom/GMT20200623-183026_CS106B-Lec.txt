@@ -1,0 +1,425 @@
+00:08:53	Jennifer Anna Bonello:	Python
+00:08:53	Guozhen Miao:	java
+00:08:56	Kenneth W.K. Wang:	*C++ followed by Python
+00:08:58	Nadia Palar:	Java
+00:08:59	zachary alon:	javascript
+00:09:00	shreyas ravi:	python
+00:09:00	Sachin Montgomery Kaul:	Java
+00:09:00	Karime Maria Laborin:	Python and Java
+00:09:00	isabel salovaara:	python
+00:09:00	shirley li:	Java
+00:09:01	akhil iyer:	java
+00:09:02	radu ilia:	C++
+00:09:02	Kyle Booker:	java
+00:09:02	klaus cerny:	C++
+00:09:03	Dima Timofeev:	Python
+00:09:03	Ryan Gabel:	Python
+00:09:03	Akash Bhargava:	c++
+00:09:07	Kenneth Fischer:	C Sharp
+00:09:07	Thomas Christopher Beck:	python
+00:09:08	Jihe He:	Java
+00:09:08	Rohan N Chowla:	Java
+00:09:08	Samuel Lynn Ledden:	Java
+00:09:08	Weiqi Yu:	Swift
+00:09:09	runze yu:	c++ and matlab
+00:09:09	Humaid Alzaabi:	Javascript
+00:09:11	Edward Chung Yik Yeung:	java
+00:09:12	Julia L Wang:	java and c++
+00:09:12	Liza George:	java and js
+00:09:13	max chou:	Java python and some swift
+00:09:14	ogite04@stanford.edu:	C++
+00:09:14	Siddharth Balaji:	Java, swift, and python.
+00:09:16	kathleen bryan:	Javascript
+00:09:17	Siew Ting Melissa Tan:	Python
+00:09:17	Michelle Katherine Drews:	Matlab, python
+00:09:17	Kuan Heng Lin:	Python
+00:09:18	Junhao Wang:	Java
+00:09:18	hunter ruebsamen:	Java
+00:09:18	Joy W Ying:	java
+00:09:19	Breea Toomey:	Java
+00:09:19	Brandon James Kier:	python
+00:09:19	Anatoly Aseev:	Python
+00:09:19	Harry Yu:	java
+00:09:19	Marcela Simone De los Rios:	java
+00:09:19	Ethan Krish Ramchandani:	pthon
+00:09:19	Demi Lei:	python
+00:09:19	Eugene Yucheng Tang:	python
+00:09:19	gavin gee:	python & C#
+00:09:20	Nikita Nitin Khapre:	Java
+00:09:20	yifei ding:	C and  python
+00:09:20	Hemant Chaudhary:	Python!
+00:09:21	Gautham Rajesh:	js and python
+00:09:21	Hanna Mofid:	Java
+00:09:21	Ryan Bernstein:	oh and HTML
+00:09:21	remy kartzman:	JavaScript
+00:09:22	Jaelyn N Kelly:	java
+00:09:23	Thomas Bourne:	Python
+00:09:23	Elan Smolar EIsenberg:	Java, Python
+00:09:23	Magdalena Warren:	Python, R
+00:09:23	Melissa Zirps:	python
+00:09:23	Ryan Gabel:	Either Python or Java
+00:09:23	Sedef Emekli:	C and python(mostly object detection)
+00:09:23	I. Lemhadri:	python
+00:09:24	Hriday Sanjay Chhabria:	Java
+00:09:25	pranaavn@stanford.edu:	Python and Java
+00:09:26	hunter ruebsamen:	C#
+00:09:26	sanjit juneja:	Java, Python
+00:09:26	Shreyas Sriram:	python
+00:09:26	edouard des:	JS
+00:09:26	yukun yang:	Python
+00:09:27	Dylan Jeffrey Britt:	python
+00:09:27	BoSen Xu:	Python
+00:09:27	ian rundle:	Python and js
+00:09:28	tiantong li:	python
+00:09:28	Faith Aing Okamoto:	Java or python
+00:09:29	brianzhg@stanford.edu:	Java
+00:09:30	Shifeng Hong:	Java
+00:09:32	catherine deng:	java
+00:09:32	chitra mukherjee:	python
+00:09:33	Evan F Davis:	Java or Python are my most comfortable
+00:09:33	zac00@stanford.edu:	Python/JS
+00:09:35	david huang:	Python. Golang. Java
+00:09:35	rayjohns@stanford.edu:	Python, c
+00:09:36	Huanyi Jiang:	js
+00:09:37	Jonathan Yang Chen:	python
+00:09:38	Daryl Justine Dorch:	java & ocaml
+00:09:41	Rigel Cupido Wafford:	Java, C#, C++. Typescript, in order of most comfortable to least
+00:09:42	Aadi Rane:	python, java
+00:09:44	lydiaa@stanford.edu:	Python, java
+00:09:44	dyson ye:	Python, MATLAB, a bit of java/scheme
+00:09:44	paul gialis:	Javascript/python
+00:10:17	Evan F Davis:	Python is easier but I've done more Java as of recent
+00:10:57	Kenneth W.K. Wang:	everyone java because apcs or something?
+00:11:05	tomhal@stanford.edu:	Pretty much
+00:11:07	shirley li:	Pretty much.
+00:11:08	kylie jue:	CS106A also used to be taught in Java
+00:11:09	Liza George:	yeah I think so
+00:11:12	tongjun zhang:	APCS for me
+00:11:15	Kuan Heng Lin:	Just a quick suggestion, maybe we can try using Zoom's poll feature in the future for these types of questions (e.g. programming languages), since we can see fun statistics of the 'demographics' of this class :)
+00:11:26	Kenneth W.K. Wang:	huh okay I see
+00:11:26	kylie jue:	We have some fun polls coming up! :)
+00:11:28	tomhal@stanford.edu:	I think a lot of ppl here have both java and python
+00:11:43	tomhal@stanford.edu:	Since intro courses like python and ap cs likes java
+00:11:53	karan parikh:	is the recorded lesson from yesterday going to be posted in canvas?
+00:12:06	tomhal@stanford.edu:	It should be
+00:12:07	kylie jue:	The recording is posted under Zoom > Cloud Recordings
+00:12:15	tomhal@stanford.edu:	I’m going to ask in ed later
+00:12:37	karan parikh:	oh ok found it thanks
+00:12:57	tomhal@stanford.edu:	Oh wait that’s where it is
+00:14:04	tomhal@stanford.edu:	Really?
+00:14:12	tomhal@stanford.edu:	Java and python is around 2nd and 1st
+00:14:31	Kuan Heng Lin:	C++ is the language that appears in places you don't expect it to
+00:14:34	Dima Timofeev:	SQL?
+00:14:47	tomhal@stanford.edu:	Sql I think is a web language
+00:14:53	tomhal@stanford.edu:	I don’t exactly remember
+00:14:53	Weiqi Yu:	Isn't SQL a DSL?
+00:14:54	Kuan Heng Lin:	Isn't it a database language?
+00:14:57	kylie jue:	SQL is a database management language
+00:14:57	ian rundle:	It’s a database thing yeah
+00:14:57	dyson ye:	I think SQL is a database lang
+00:14:57	Samuel Lynn Ledden:	it helps with databases
+00:15:00	Samuel Lynn Ledden:	and traversing them
+00:15:00	Nadia Palar:	sql is for databases i think
+00:15:01	Sedef Emekli:	isn’t it from data interpretation?
+00:15:04	Sedef Emekli:	for*
+00:15:08	Sedef Emekli:	yeah
+00:15:10	tongjun zhang:	^
+00:15:18	Dima Timofeev:	I am not sure SQL is a programming language.
+00:15:23	Kenneth Fischer:	SQL = structured query language
+00:15:24	Lukas Fullner:	SQL is a language for databases
+00:15:27	Samuel Lynn Ledden:	secure query language
+00:15:29	tomhal@stanford.edu:	Ive never done SQL so
+00:15:38	Rohan N Chowla:	Im surprised swift isn’t on there
+00:15:47	Samuel Lynn Ledden:	actually structured not secure
+00:15:49	Dima Timofeev:	Not yet :D
+00:15:56	Siddharth Balaji:	Swift is relatively newer so it makes sense its not up there
+00:15:58	Elan Smolar EIsenberg:	Is java both a compiled language and an interpretive language?
+00:15:58	Samuel Lynn Ledden:	so I guess it defines itself as a language
+00:16:03	dyson ye:	it will SWIFTLY be on there
+00:16:06	Samuel Lynn Ledden:	Java is compiled I believe
+00:16:12	tomhal@stanford.edu:	No obviously ArnoldC is the best language~
+00:16:14	Siddharth Balaji:	Yeah java is compiled
+00:16:16	kylie jue:	Java is a compiled programming language
+00:16:17	Kenny Wang:	afaik java is compiled
+00:16:17	Weiqi Yu:	They'll need to show Swift 1 2 3 4 5 if they want since it changes significantly lol
+00:16:24	Dima Timofeev:	Java compiles to byte-code. Where C++ into machine-code.
+00:16:30	scott nelson:	Is C# related to both C and C++ ?
+00:16:32	david huang:	yes ArnoldC is the best
+00:16:40	Dima Timofeev:	Java code executes on JVM - Java Virtual Machine.
+00:16:41	Elan Smolar EIsenberg:	But I though the byte-code could be interpreted or compiled
+00:16:48	tomhal@stanford.edu:	I think C# was the Microsoft derivative of C or something
+00:16:51	Dima Timofeev:	Hence Java code is platform-agnostic.
+00:16:53	tomhal@stanford.edu:	idk
+00:17:02	Dima Timofeev:	If JVM for the platform exists.
+00:17:15	Samuel Lynn Ledden:	interpreted means that the code is translated as it goes rather than all at once I believe
+00:17:19	kylie jue:	Yes C# was Microsoft-oriented and also built on top of C
+00:17:30	Kenny Wang:	it is not hard to learn especially if you have java experience
+00:17:39	Kenneth Fischer:	And C came from Java
+00:17:47	dyson ye:	C# and Java have really similar basic syntax
+00:17:55	tomhal@stanford.edu:	The only reason why I know anything about C# was cuz my dad mentioned it one time
+00:18:19	ogite04@stanford.edu:	c is older than java by a few decades
+00:18:28	Kenny Wang:	I got okay at C++ in just a few days with java experience
+00:18:30	Elan Smolar EIsenberg:	C++ is also older than python
+00:18:33	Elan Smolar EIsenberg:	*java
+00:18:33	kylie jue:	Java was derived from C, rather than the other way around
+00:18:37	shreyas ravi:	I think c# is used a lot for game development but I’m not sure
+00:18:43	Lydia Berger:	Unity uses it
+00:18:45	Kuan Heng Lin:	C# is much newer
+00:18:51	tomhal@stanford.edu:	I know c++ was used for SMB but idk what else?
+00:18:52	Kuan Heng Lin:	So it's a bit nicer to work with
+00:18:54	Dima Timofeev:	C# is popular in gamed because of Unity.
+00:18:59	tomhal@stanford.edu:	Or was it C#???
+00:19:03	Dima Timofeev:	However Unity has C++ interface.
+00:19:16	Daniel A Vayman:	Unreal Engine uses C++, C# is definitely more user friendly
+00:19:18	kylie jue:	Friends – since I know the chat can be pretty distracting for folks, please keep its use for questions + direct answers to questions rather than sidechats!  Happy to start a thread on Ed about programming languages if that’s of interest to folks
+00:19:25	tomhal@stanford.edu:	Very well!
+00:22:12	Kenneth Fischer:	Is there a specific format to follow for comments in this class?
+00:22:35	Dima Timofeev:	Do you suggest to put function prototypes into header files?
+00:22:57	kylie jue:	You’ll see in Assignment 1 there are some example comments that have comment styling what we use, as well as info on the style guide on our website:
+00:22:57	kylie jue:	http://web.stanford.edu/class/cs106b/style_guide
+00:23:13	tomhal@stanford.edu:	Probably best to use comments to describe something, or describe where you got the code from. Would also be best to make the comments interesting as well, after all, our TAs have to go thru a ton of code
+00:23:33	kylie jue:	@Dima, we’ll get more into header files later this week.  It’s going to depend on the assignment/situation
+00:23:43	shreyas ravi:	do you only include the header file or also the cpp file?
+00:23:52	kylie jue:	You only include the header file
+00:24:28	Elan Smolar EIsenberg:	So you can mix ints and strings?
+00:25:02	I. Lemhadri:	why is end1 printed in the first line ?
+00:25:07	Kuan Heng Lin:	Yes, <iostream> takes char, strings, and integers
+00:25:17	kylie jue:	Yes you can mix ints and strings when using cout
+00:25:18	Aadi Rane:	cause its in quotes
+00:25:19	Samuel Lynn Ledden:	endl is in the string as well
+00:25:44	Elan Smolar EIsenberg:	Do you need to define cout? What do you put in front of it?
+00:25:45	kylie jue:	It’s “endl” (the lowercase letter L instead of 1) —> it’s a keyword in C++ for ending the line
+00:26:01	Kenny Wang:	your code might immediately cough up an error if you forget a semicolon though thankfully :P
+00:26:07	tomhal@stanford.edu:	So ending keywords are used a lot in C++?
+00:26:23	Kuan Heng Lin:	It's basically nicer to use than having to type "\n"
+00:26:35	kylie jue:	This is specific fo just printing statements
+00:26:35	yukun yang:	Question: In which way could we separate the command into two lines if one line is too long?
+00:26:38	Elizabeth Vasquez:	So the console was made in the Stanford library right? So cout would be specific to this class and the Stanford library?
+00:26:45	shreyas ravi:	In some code I looked at, they had std: cout instead of cout. what’s the difference?
+00:26:49	kylie jue:	yes the console we’ll be using is specific to the Stanford libraries
+00:26:52	Usman Iqbal Hanif:	What is difference between printf and cout?
+00:26:55	Kuan Heng Lin:	In C++, as long as you don't have a semicolon, the line continues
+00:27:02	Kenny Wang:	Yukun, I think you can just split it into multiple lines but I'm not too sure
+00:27:08	kylie jue:	cout is a standard function in C++ but we’ve routed it to print in the Stanford console
+00:27:09	Kenny Wang:	yeah okay Jordan got it
+00:27:14	tomhal@stanford.edu:	Where is the documentation for Stanford-specific C++?
+00:27:16	Samuel Lynn Ledden:	you use std::cout if you don't say include namespace std at the beginning of the code
+00:27:24	Samuel Lynn Ledden:	you have to say using namespace std
+00:27:26	Kenny Wang:	always use namespace std
+00:27:36	Kenny Wang:	it saves you so much typing
+00:28:15	kylie jue:	printf is technically a function and cout is an output stream that allows us to direct where the output is being printed to
+00:28:33	kylie jue:	There are other differences, but we’ll be using cout in this class
+00:28:33	Usman Iqbal Hanif:	Thanks!
+00:28:38	david huang:	What does std stand for
+00:28:42	Kenny Wang:	standard
+00:28:52	Kenny Wang:	afaik
+00:28:52	david huang:	oh thanks
+00:29:04	kylie jue:	Stanford C++ documentation is here:
+00:29:05	kylie jue:	https://en.cppreference.com/w/
+00:29:11	tomhal@stanford.edu:	thanks
+00:29:21	kylie jue:	^that is also linked on the homepage of our website
+00:29:24	kylie jue:	Yes std stands for standard
+00:29:25	Kenny Wang:	printf is substantially more annoying to use than cout, feel glad
+00:29:57	Sedef Emekli:	actually, i’d prefer printf :/
+00:30:24	Kenny Wang:	how come?
+00:30:40	Samuel Lynn Ledden:	printf is specifically for formatting your output
+00:30:44	kylie jue:	@yukun - it depends on the line you’re trying to split into two lines.  But whitespace in C++ actually doesn’t matter like it does in Python so you can often just insert a line break. (Did that answer your question?)
+00:30:44	Kenny Wang:	printf allows accuracy that is unnecessary in 99% of situations and otherwise it's just more complicated
+00:30:54	Weiqi Yu:	probably because it's faster
+00:31:03	Kenny Wang:	especially for a not-too-complicated course like this
+00:31:27	yukun yang:	Got it. Thank you Kylie!
+00:31:47	Kenny Wang:	is it "cars" or "chars"?
+00:31:51	Kenny Wang:	like in pronunciation
+00:32:08	Elan Smolar EIsenberg:	I think that’s a personal thing
+00:32:08	kylie jue:	^pronunciation is technically up for debate :) But we’ll say “cars” like character
+00:32:20	rayjohns@stanford.edu:	i was confused about why the types worked in the nameHash function, because it didn’t look like there was an explicit type conversion from char to int
+00:32:27	edouard des:	Is there no casting in C++?
+00:32:29	kathleen bryan:	At what point does an int become a long?
+00:32:54	Kenny Wang:	I believe chars store the integer Unicode value of a character or something
+00:32:58	Siddharth Balaji:	Oh yeah can you cast in C++?
+00:33:03	Samuel Lynn Ledden:	ascii value
+00:33:03	Liza George:	^^
+00:33:06	kylie jue:	^will ask the cast question out loud
+00:33:12	sosie yorki:	If you define a variable as a string, do you need to put "" around the string?
+00:33:13	Elan Smolar EIsenberg:	Does C++ have the same annoyances with char functions vs. string functions that Java has?
+00:33:19	Ryan Gabel:	Are int signed?
+00:33:21	Ryan Gabel:	*ints
+00:33:26	kylie jue:	Yes you do need to use “” around strings
+00:33:46	kylie jue:	Yes - you’ll see some char and string conversion in your first assignment
+00:33:48	rayjohns@stanford.edu:	https://docs.microsoft.com/en-us/cpp/cpp/data-type-ranges?view=vs-2019
+00:33:58	haoming li:	For variables names, the very first leter cannot be cap?
+00:34:04	shreyas ravi:	are there no booleans?
+00:34:11	kylie jue:	Yes integers are signed
+00:34:14	Pablo Manjon Gamez:	Do variables use memory pointers?
+00:34:14	Dima Timofeev:	Can I access declared but not defined var?
+00:34:19	Kenny Wang:	it can be capital @haoming but it's just convention to decapitalize the first letter
+00:34:21	Dima Timofeev:	What will be inside?
+00:34:28	Elena Williams:	can you declare an unsigned int type and get more range?
+00:34:42	Aadi Rane:	can you write int a = 5; ?
+00:34:44	Kenny Wang:	yes, Elena
+00:34:44	kylie jue:	For variables names, camelCase style means the first letter of the variable name is lowercase - you can see more of the style conventions in the style guide on the website!
+00:34:48	Kenny Wang:	although generally you don't have to
+00:34:58	Elena Williams:	@kenny thanks!
+00:35:06	Kenny Wang:	int a = 5; is perfectly valid
+00:35:10	Hemant Chaudhary:	Can we declare and initialize a variable in a single line? Like int a = 5; ?
+00:35:16	kylie jue:	There are boolean types as well yes - they just weren’t in the slide (the slide wasn’t all-encompassing!)
+00:35:19	Hemant Chaudhary:	Oh ok great 
+00:35:21	Kenny Wang:	yup that's usually how you'll do it
+00:35:29	shreyas ravi:	ah ok thanks!
+00:35:38	kylie jue:	We’ll talk more about memory pointers + variables later in the quarter when we move to the other side of the abstraction boundary!
+00:35:50	Dima Timofeev:	What if I declared a variable, but not initialized it, and try to use later in the code?
+00:36:01	Kuan Heng Lin:	An error will occur
+00:36:10	Kenny Wang:	will it be an error or some random value
+00:36:11	Kuan Heng Lin:	Most IDEs actually won't let you even past the compiling stage if that's the case
+00:36:12	Kenny Wang:	I forget
+00:36:13	Dima Timofeev:	Compile or execution level?
+00:36:19	kylie jue:	Yes you can access a declared but not defined var (if I’m understanding the question correctly) - it will often just contain a junk value if you haven’t assigned it to any value yet
+00:36:19	Edward Chung Yik Yeung:	Compile
+00:36:26	Edward Chung Yik Yeung:	compile
+00:36:50	tongjun zhang:	does static_cast<type>(variable) change the type of the variable or its the same as casting by  (type)variable?
+00:36:56	tomhal@stanford.edu:	Usually it should contain a NULL value, but I’m not sure if the same holds true for C++
+00:36:56	kylie jue:	yes you can write int a = 5;
+00:36:58	Liza George:	does it matter if we use single or double quotes for chars and strings?
+00:37:19	kylie jue:	To declare and initialize in one line (like Nick did with the character)
+00:37:20	runze yu:	Do we need to #include <string> for strings?
+00:37:25	nicole koch:	a + 7 = a;
+00:37:26	Kuan Heng Lin:	Single quote usually specifies that it is a character
+00:37:35	Dima Timofeev:	Ok. Lesson learned. Do not declare var without initializing.
+00:37:51	Brenna Marie Wakefield:	So, there are no local variables here vs. python where variables could be changed locally?
+00:37:57	Kuan Heng Lin:	If you use single quotes for a single-letter-long-string, when you try to compare it to a double quote string, C++ actually gives you an error
+00:38:00	kylie jue:	^ yes you would get a compiler error from trying to use an initialized variable
+00:38:03	tomhal@stanford.edu:	Are there also a++ and a— conventions with C++?
+00:38:05	shirley li:	@Liza: Single quotes = characters while double quotes = strings.
+00:38:14	Liza George:	oh ok. but will it not compile if we mess that up?
+00:38:14	nicole koch:	yes
+00:38:17	Oz Gitelson:	yes
+00:38:17	Kuan Heng Lin:	yes
+00:38:23	Kuan Heng Lin:	You can also do a+=value
+00:38:45	Oz Gitelson:	you can do a[any operator]=
+00:38:46	louise marzolf:	Are there modifiers like final in c++?
+00:39:31	shreyas ravi:	can you have methods with the same name but different return values?
+00:39:37	kylie jue:	Yes you should use single quotes for characters and double quotes for strings
+00:39:47	Liza George:	ok, thank you!
+00:39:52	Elan Smolar EIsenberg:	Are chars also primitive?
+00:39:58	Aadi Rane:	yes
+00:39:59	Kuan Heng Lin:	yes
+00:40:01	Oz Gitelson:	yes
+00:40:16	Elena Williams:	@louise I think there’s a “const” for constant in c++, could be wrong tho
+00:40:23	Kuan Heng Lin:	yes there is
+00:40:33	Aadi Rane:	usually primitive types are lowercase
+00:40:36	louise marzolf:	perfect thanks!
+00:41:03	Elena Williams:	So you can do “const int PI = 3/14”
+00:41:09	Elena Williams:	You’re welcome!
+00:41:19	Elena Williams:	3.14*
+00:41:38	kylie jue:	@Brenna I’m not sure I understand your question about local variables - there are local variables in C++ that you can change depending on their scope (where you’ve defined them and where they exist)
+00:41:44	runze yu:	@Elena just pointing out 3.14 is not an int ;)
+00:42:00	Jaelyn N Kelly:	Are variables not assigned default values if not assigned a value like in java?
+00:42:06	Elena Williams:	Oh haha yeah, thanks! Would be double
+00:42:10	kylie jue:	Yes you can use x++; and  x- -;  in C++
+00:42:28	kylie jue:	No variables are not assigned default values in C++
+00:42:40	Sachin Montgomery Kaul:	Are there void functions in c++?
+00:42:53	radu ilia:	yes
+00:42:55	Kenny Wang:	yes there are voids
+00:42:59	Sachin Montgomery Kaul:	Thanks
+00:43:02	kathleen bryan:	can you have optional parameters ?
+00:43:22	runze yu:	Do we need to #include <string> to declare strings?
+00:43:24	Chloe Su:	What does returnType do?
+00:43:24	Brenna Marie Wakefield:	@ Kylie, I guess I’m just trying to make a comparison as to what I have already been exposed to (python and Matlab) - Matlab you can’t redefine variables, but in python you can (locally or return a new value)
+00:43:24	Ryan Bernstein:	Is the prototype required? Or can you just state <type> function(params){
+00:43:30	tomhal@stanford.edu:	You can have parameters you don’t use
+00:43:40	Kuan Heng Lin:	Yes those are called templates
+00:43:46	Kuan Heng Lin:	Where you don't specify a type
+00:43:48	kylie jue:	Ah I see - yes you can reassign them in C++
+00:43:53	kylie jue:	More like Python
+00:44:02	Brenna Marie Wakefield:	Thanks :)
+00:44:26	Kenny Wang:	you do not need a prototype
+00:44:31	Ryan Bernstein:	thanks
+00:44:32	Kenny Wang:	frankly I rarely ever use prototypes
+00:44:36	Ryan Bernstein:	yeah me too
+00:44:39	Kenny Wang:	they have uses though
+00:44:44	sanjit juneja:	Why isn’t the main function in C++ a void so that it doesn’t have to return 0?
+00:44:47	kylie jue:	You don’t have to have a prototype for the function to work, but order in which you declare your function matters.  We have some guidelines in the style guide about why/when to use prototypes
+00:44:53	Ryan Bernstein:	Ok great!
+00:45:00	tomhal@stanford.edu:	I’m guessing, like in Java, with classes you can have a two functions with the same name but with different return types or parameter types?
+00:45:06	kylie jue:	The compiler requires the main() function to return an int to verify the successful completion of the progrma
+00:45:17	Weiqi Yu:	I think it's because the return value of the main function can indicate the result of execution
+00:45:52	kylie jue:	I’ll have to check about functions with the same name but different return types!  I think you can do that but I’m not 100 percent sure.
+00:46:17	kylie jue:	@Chloe returnType is just a placeholder there for a real type
+00:46:31	Elan Smolar EIsenberg:	What day is A1 released? It doesn’t say on the calendar.
+00:46:33	Elizabeth Vasquez:	If you put the prototype at the top do you still need define the functions in the order that they appear?
+00:46:41	kylie jue:	You do need #include <string> to use strings
+00:46:51	Hriday Sanjay Chhabria:	What is the point of a function prototype
+00:46:53	tomhal@stanford.edu:	A1 should be released today I think?
+00:46:57	kylie jue:	A1 will be released later today - we have announcements coming mid-lecture
+00:46:59	louise marzolf:	So for writing programs, should we write the main method at the end to call methods in it from earlier?
+00:47:33	kylie jue:	@louise yes!  You’ll see some examples where we also separate the files
+00:47:49	Wen Zhang:	what if you want to return more than one variable type?
+00:48:11	kylie jue:	You can’t return multiple variable types in C++
+00:48:36	kylie jue:	But we’ll learn about something called structs later in the quarter (as well as classes) which will help us package together data that requires multiple types
+00:48:49	Wen Zhang:	okay, thanks!
+00:49:04	tomhal@stanford.edu:	But can you can return a list with different variable types? I know you can in Java
+00:49:19	kylie jue:	C++ requires lists to contain all one type of info
+00:49:32	kylie jue:	So no you can’t have a list with different variable types
+00:51:42	karan parikh:	so there is one assignment for every week?
+00:51:47	tomhal@stanford.edu:	yes
+00:51:51	I. Lemhadri:	Will the YEAH session be recorded ?
+00:51:58	mike doane:	will YEAH be recoreded?
+00:52:01	tomhal@stanford.edu:	Seems to be a standard with Stanford Summer Session
+00:52:07	kylie jue:	YEAH will be recorded
+00:52:11	Humaid Alzaabi:	What does LaIR stand for?
+00:52:20	kylie jue:	Yes approximately one assignment per week (usually a week and a day)
+00:52:24	kylie jue:	Library and Information Resources
+00:52:29	kylie jue:	But office hours really
+00:52:34	kathleen bryan:	do we sign up for YEAH? Where do we go to join?
+00:52:47	Rohan N Chowla:	When is assignment 1 due?
+00:52:54	kylie jue:	You’ll be able to just jump on the Zoom call
+00:53:01	kylie jue:	We’ll release those details soon
+00:53:13	kylie jue:	Assignment 1 is due next Tuesday
+00:53:27	karan parikh:	which compiler do we use? is that the qt thing?
+00:53:33	Jennifer Anna Bonello:	Why is it 11:59 local time? Isnt it unfair that some students have more tiem?
+00:53:44	Kenny Wang:	we're using Qt Creator with MinGW
+00:53:47	kylie jue:	Qt Creator is the code editor that will also compile your code
+00:53:54	Elan Smolar EIsenberg:	Wait is the YEAH tonight not for minors or is the one tomorrow not for minors?
+00:54:28	tomhal@stanford.edu:	What?
+00:54:29	Kenny Wang:	some students have more time but also some students will need to be in class at 3 AM so it can't be perfectly fair
+00:54:32	kylie jue:	We have 11:59 local time since 11:59 in PDT would be in the middle of the night/workday for some folks.
+00:54:40	tomhal@stanford.edu:	You mean the different sections?
+00:55:08	tomhal@stanford.edu:	The YEAH seems to pretty much be just special office hours for help with the assignment
+00:55:10	kylie jue:	YEAH hours is not for minors live but is recorded.  But LaIR hours have specific minors vs. non-minors schedules
+00:55:30	tomhal@stanford.edu:	huh
+00:55:55	Junhao Wang:	if there is only one line then do we still need the braces?
+00:56:13	tomhal@stanford.edu:	Would still recommend it, helps you parse the code better
+00:56:14	kylie jue:	If there is only one line, you technically don’t need the braces, no
+00:56:15	Kenny Wang:	best to use braces
+00:56:20	kylie jue:	but stylistically we would like you to use them
+00:56:27	kylie jue:	For readability and bug purposes
+00:56:35	Kenny Wang:	I've heard like "Think like a dentist - whether you really need them or not, always braces"
+00:57:26	kylie jue:	I think I’ve covered the questions above (or they’ve been discussed verbally) but if not, feel free to stick around after lecture is over to ask anything I missed@
+00:57:28	kylie jue:	*!
+00:57:54	tomhal@stanford.edu:	If I have anything ill probably ask in ed, if it isn’t too troubling
+00:58:09	catherine deng:	How does I++ differ from ++I?
+00:58:16	kylie jue:	No that’s even better!  Then the question persists in case others have the same question - you can tag the question with “lecture” as a category
+00:58:59	kylie jue:	I++ vs. ++I matters if you’re using the expression within a larger line of code.  If the expression is standalone on a line, it doesn’t make a difference
+00:59:10	Elan Smolar EIsenberg:	Can you use a variable name that might fall somewhere else in the code in your for loop.
+00:59:14	Dima Timofeev:	Does update happen if testExpression is false?
+00:59:25	kylie jue:	(One will increment I before the rest of the line happens, and the other increments I after the rest of the line happens I believe - would need to double check exact order of operations)
+00:59:27	Dima Timofeev:	On some stage.
+00:59:34	Evan F Davis:	then the loop should end
+00:59:40	tomhal@stanford.edu:	Dima, no
+00:59:52	Dima Timofeev:	Thx!
+00:59:54	kylie jue:	you can reuse a variable name but it depends on where else in your code that variable name is being used
+01:00:30	kylie jue:	No the update won’t happen if testExpression is false
+01:01:30	tomhal@stanford.edu:	Sweet, I call 42!
+01:02:50	nicole koch:	chaos mode
+01:03:20	Kenny Wang:	https://discord.gg/fvvvXu
+01:03:27	Siddharth Balaji:	Thank you! Have a good day!
+01:03:29	Kenny Wang:	hop into the discord if you like
+01:03:35	tomhal@stanford.edu:	69 members
+01:03:37	tomhal@stanford.edu:	nice
+01:03:37	nicole koch:	Thank you!
+01:03:37	Kenny Wang:	thanks!
+01:03:39	Julia L Wang:	Thank you!
+01:03:39	dyson ye:	Thank you!
+01:03:40	I. Lemhadri:	Thanks !
+01:03:40	gavin gee:	Thank you!!
+01:03:40	Edward Chung Yik Yeung:	thank you

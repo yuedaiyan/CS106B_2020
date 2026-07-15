@@ -1,0 +1,1754 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.140
+Nick Bowman: Be an activity.
+
+2
+00:00:02.429 --> 00:00:03.179
+Nick Bowman: Thank you, Katie.
+
+3
+00:00:04.200 --> 00:00:04.680
+Nick Bowman: Thank you.
+
+4
+00:00:06.120 --> 00:00:09.179
+Nick Bowman: We will, we will not one of these days. We're going to do that.
+
+5
+00:00:10.080 --> 00:00:16.410
+Nick Bowman: So for those of you that are destroying and I haven't covered much to today's lecture. This basically will be a review of what we've covered in the last couple days.
+
+6
+00:00:17.279 --> 00:00:31.800
+Nick Bowman: So we're going to review some sets of maps things. And we're going to spend most of today and implementing the Bradford search algorithm. And then if we have time, we'll talk about some master data structures at the end, but we may move in.
+
+7
+00:00:33.690 --> 00:00:45.600
+Nick Bowman: So review for today and sets a map. So remember sets where these interesting data structures that are presented a collection of elements and they had a nice property that they didn't allow any duplicates.
+
+8
+00:00:46.050 --> 00:00:52.710
+Nick Bowman: And they have this other nice property that they were faster than things like vectors for looking up elements. So basically,
+
+9
+00:00:52.800 --> 00:00:54.990
+Nick Bowman: Looking up to see if something exists or something is
+
+10
+00:00:54.990 --> 00:01:05.460
+Nick Bowman: Contained in this collection, and there were a lot faster. And we'll talk about what this faster means actually tomorrow and but for now we can kind of just assume that they're they're good for storing an order to collection of objects.
+
+11
+00:01:05.940 --> 00:01:08.880
+Nick Bowman: And sets didn't have indices which was an important thing.
+
+12
+00:01:10.080 --> 00:01:19.170
+Nick Bowman: We also talked about maps maps for collections of key value pairs. We could use the key to quickly look up the value. And these are similar to dictionaries or
+
+13
+00:01:19.680 --> 00:01:21.660
+Nick Bowman: Things that they're also called maps in Java.
+
+14
+00:01:22.320 --> 00:01:34.530
+Nick Bowman: And maps for another alternative to order data structures where we were no longer constrained to the fact that, like our indices, or the ways in which we looked at data had to be strictly numbers, starting from zero and increasing by one
+
+15
+00:01:35.130 --> 00:01:38.310
+Nick Bowman: Now we'd be able to look up data to any way that we want to do.
+
+16
+00:01:39.990 --> 00:01:45.930
+Nick Bowman: And we have this sort of nice summary of this is, this is kind of over the last three days we've covered all of these data structures. So we had
+
+17
+00:01:46.710 --> 00:01:57.420
+Nick Bowman: Elements or data structures of indices which was vectors and grids elements that were ordered but didn't have indices which was stacks and Q's, and then we had our on our data structures for sets and keys.
+
+18
+00:01:58.230 --> 00:02:05.250
+Nick Bowman: Which had this nice uniqueness properties and they were useful when the, when numerical ordering of the data. Didn't make sense or sort of wasn't
+
+19
+00:02:07.440 --> 00:02:11.910
+Nick Bowman: And so today's warm up activity, we're going to do is we're going to implement this algorithm called counting sort.
+
+20
+00:02:12.570 --> 00:02:23.880
+Nick Bowman: Of sorting is actually a very fundamental topic and computer science. We're going to revisit it in more depth. A lot later this quarter. And we'll talk a lot a lot about it from an algorithmic analysis perspective as well.
+
+21
+00:02:24.570 --> 00:02:29.820
+Nick Bowman: But for now, let's just consider kind of a simplified sorting problem which is if I give you a word.
+
+22
+00:02:30.270 --> 00:02:42.870
+Nick Bowman: And I asked you to just sort all the letters in the word. So what I mean by that is, basically, I give you a word and I want you to give me a new string and that has all the a's and the word first, followed by all to be followed by the seas, so on and so
+
+23
+00:02:47.280 --> 00:02:47.730
+Nick Bowman: Yes.
+
+24
+00:02:52.470 --> 00:02:53.940
+Nick Bowman: Yes. Cool.
+
+25
+00:02:55.830 --> 00:03:07.650
+Nick Bowman: And so what we're going to ask ourselves is, can we figure out a way to take advantage of some of the data structures we recently learned about to meaningfully structure, the data in the string in a way that allows us to do this sorting really quickly.
+
+26
+00:03:08.490 --> 00:03:20.280
+Nick Bowman: And sort of the cool idea what the idea is here is that if we can tell you how many times each of the letters from A to Z shows up. So we know we have like two a's and three B's and no seas.
+
+27
+00:03:21.060 --> 00:03:30.480
+Nick Bowman: We can then just build up a new string. That's correct. That's composed of exactly the correct number of is followed by exactly the correct number of P is for very exactly the correct numbers. He's consultants on
+
+28
+00:03:31.170 --> 00:03:37.440
+Nick Bowman: And let's let's walk through an example just sort of clarify how this works to say we want to sort the string, BANANA.
+
+29
+00:03:37.980 --> 00:03:43.110
+Nick Bowman: And so our first step of our algorithm was to build up a map that story, the Council each of these letters.
+
+30
+00:03:43.650 --> 00:03:54.600
+Nick Bowman: So if you remember from yesterday and the way that we build up sort of this counts map. And as we look at our letters. If we haven't seen it before we inserted into the map of the count of one
+
+31
+00:03:55.740 --> 00:04:02.580
+Nick Bowman: So be we enter the kind of one aliens over the counter one and we interview the counter form was the first time we've seen all of them.
+
+32
+00:04:03.000 --> 00:04:11.400
+Nick Bowman: And then the next time we see a letter. We just increment count. So we say increment is counter to increment ends counter to you. And then finally, increment a discount
+
+33
+00:04:12.420 --> 00:04:22.860
+Nick Bowman: And so this is sort of exactly the same thing that we saw yesterday and Academy live coded when it came to counting all the words that showed up in a file is very similar. We're just counting all the letters that show up in a word.
+
+34
+00:04:24.960 --> 00:04:32.130
+Nick Bowman: The interesting part of the algorithm is the second part. So what does that say, well, that says let's let's loop over all the letters from A to Z.
+
+35
+00:04:32.670 --> 00:04:39.870
+Nick Bowman: So starting with a and we know that in our sorted string, all of the A's have to come first. And so we have to kind of ask ourselves the question.
+
+36
+00:04:40.440 --> 00:04:49.200
+Nick Bowman: Okay, well, how many as we need to put into our string. Well, our map tells us exactly how many a map tells us. Okay, three A's need to go into your, your string.
+
+37
+00:04:50.640 --> 00:04:57.720
+Nick Bowman: And then we say, okay, great. We're done with the A's. So now we need to put all the BS. Well, our map tells us we have one v. So we put one be in, and then we're done.
+
+38
+00:04:58.770 --> 00:05:06.570
+Nick Bowman: Then for see our map actually tells us, hey, there is no season original word, so we don't need to put any season to our board. And you can do the same thing for d
+
+39
+00:05:06.990 --> 00:05:25.800
+Nick Bowman: Sort of all the letters, all the way up until the end so that none of those exist, but then we get to n, we realized that there's two ends in our string. And so we can add those on. And then we finish off, so we go o p q r s and others. I'll spare you from hearing me singing alphabet.
+
+40
+00:05:27.300 --> 00:05:33.840
+Nick Bowman: But we get to the end and we realize okay great. We've accomplished exactly what we wanted to and which will be sorted all the letters in our original stream.
+
+41
+00:05:36.180 --> 00:05:41.640
+Nick Bowman: And so, summarizing what we did here. We moved over the word we built the frequency map of all the letters that appear in the string.
+
+42
+00:05:42.180 --> 00:05:50.340
+Nick Bowman: And we lived through all the letters from A to Z, and we built up a new string that had exactly the right amount of each letter in exactly the right order because we were going from A to Z.
+
+43
+00:05:52.020 --> 00:06:00.060
+Nick Bowman: And so like I said, the interesting part of this algorithm is actually the second part here, which is how do you use the information the map to build up a new string with the right amount of each lesson.
+
+44
+00:06:01.380 --> 00:06:09.780
+Nick Bowman: And so if we were to start writing this code, everything that I provided here should look very similar. And the first couple of lines build up the map.
+
+45
+00:06:10.020 --> 00:06:24.540
+Nick Bowman: As we saw in lecture yesterday so declaring a map and then going through and counting up all the characters in the stream. And then the second part here is this loop that goes over all the letters, starting from A to Z and tries to build up this new string called sorted string.
+
+46
+00:06:25.770 --> 00:06:32.010
+Nick Bowman: And your goal is here. And what you're going to do in today's warm up activity is you're going to generate pseudo code to complete this algorithm.
+
+47
+00:06:33.840 --> 00:06:37.650
+Nick Bowman: And specifically, the reason why I say that you're going to generate pseudo code to complete the algorithm.
+
+48
+00:06:38.370 --> 00:06:44.070
+Nick Bowman: Is that the next assignment is challenging. It's challenging assignment. It's going to be a step up in complexity from what you did on the first assignment.
+
+49
+00:06:44.580 --> 00:06:52.170
+Nick Bowman: And being able to plan your code out in advance, and it's a really critical component in order to be able to like successfully approach assignments that are more complex.
+
+50
+00:06:52.680 --> 00:06:59.430
+Nick Bowman: And we really think that the value of like these breakout rooms with other people in the class as to be able to discuss, you know, generate
+
+51
+00:06:59.640 --> 00:07:08.700
+Nick Bowman: Ideas and approaches and sort of see how different people might approach the same problem and then be able to formalize that into an actual sort of a concrete approach.
+
+52
+00:07:09.450 --> 00:07:15.000
+Nick Bowman: So we're going to do. So if you go to, once we put you in breakout rooms, you can go to the workspace.
+
+53
+00:07:15.690 --> 00:07:19.890
+Nick Bowman: You don't need to. There's nothing too interesting in the instructions here for the first breakout session.
+
+54
+00:07:20.430 --> 00:07:25.110
+Nick Bowman: But you can open up the main dot cpp file. And you can see the code that I just displayed on the science.
+
+55
+00:07:25.590 --> 00:07:34.830
+Nick Bowman: And basically what your goal is focused on the discussion with your group minutes and then generate pseudo code to complete the algorithm and then write it down in this comment.
+
+56
+00:07:35.280 --> 00:07:41.520
+Nick Bowman: The pseudo code should be detailed, it should be very, very specific about exactly what you're going to need to do in order to correctly built up in a string.
+
+57
+00:07:42.240 --> 00:07:50.280
+Nick Bowman: And then if you do have time. We don't expect you to get to this part. But if you do have time. And you do want to start translating into code, you can do that as well.
+
+58
+00:07:50.850 --> 00:08:00.720
+Nick Bowman: But do you remember the value of the breakout rooms to discuss with your classmates and really make sure that everyone in the group sort of is happy and understands the pseudo code before you start moving on to do
+
+59
+00:08:02.070 --> 00:08:06.480
+Nick Bowman: And so with that, I will send you off Kevin's gonna
+
+60
+00:08:07.560 --> 00:08:08.970
+Nick Bowman: Open up the breakout rooms.
+
+61
+00:08:13.800 --> 00:08:43.980
+Nick Bowman: And then we'll give you about four or five minutes. So we'll bring you back around 1144
+
+62
+00:08:45.270 --> 00:08:54.000
+Nick Bowman: And for those of you watching asynchronously. And I'll work through the the pseudo code here on the recording.
+
+63
+00:08:55.230 --> 00:09:06.540
+Nick Bowman: And so as we're as we're thinking about our approach here and we want to think about the fact of, like, Okay, well, we know this for loop is going to go over all the letters from A to Z.
+
+64
+00:09:07.590 --> 00:09:17.130
+Nick Bowman: And the idea is how can we leverage the information that we have in our map. So remember this map has already been built up for us. So this map of character frequencies.
+
+65
+00:09:17.520 --> 00:09:22.080
+Nick Bowman: And so how can we build up the information that's stored in this map or use the information that's stored in this map.
+
+66
+00:09:23.310 --> 00:09:34.860
+Nick Bowman: To build up this new string. And so the first thing that we're going to probably want to make a decision about is we're going to make need to make a decision about what do we actually need to add this letter to a strict or not.
+
+67
+00:09:36.030 --> 00:09:51.600
+Nick Bowman: Right. So if we don't, if we never even saw the original letter or the letter in our original string and then we probably don't want to include it. Right. So the way that I would express that in pseudo code is, I would say, all right, we only want to only want to
+
+68
+00:09:54.720 --> 00:09:55.830
+Nick Bowman: Enter to sorted
+
+69
+00:09:57.870 --> 00:10:00.330
+Nick Bowman: If it exists as he
+
+70
+00:10:02.130 --> 00:10:12.360
+Nick Bowman: Okay. And, and then we can say okay so now we've decided, so we can assume that you know once we're in this indentation, we decided that the key does exist, and
+
+71
+00:10:13.710 --> 00:10:20.310
+Nick Bowman: So now we want to figure out, okay, well how many instances of the specific character dealing with the reaction need to add them up.
+
+72
+00:10:21.480 --> 00:10:34.500
+Nick Bowman: So in this case, right. I'm kind of the hopefully the critical observation is we can we can extract exactly how many copies of character.
+
+73
+00:10:35.700 --> 00:10:49.320
+Nick Bowman: From Matt and so we can look in the map and we can say, okay, the characters. The key into the map. What is the assertion about you what what what tells me exactly how many times I wanna I'm going to copy that want to
+
+74
+00:10:51.300 --> 00:11:00.000
+Nick Bowman: So great. So we've we've extracted and so now that we know how many copies of the character that we want to add, we need to actually figure out how we're going to do this.
+
+75
+00:11:00.810 --> 00:11:15.240
+Nick Bowman: So no going back to our fundamentals for me one oftentimes if we know exactly how many times we want to repeat a certain process a for loop is probably pretty helpful. And so we can maybe say a for loop for number of copies
+
+76
+00:11:17.310 --> 00:11:20.250
+Nick Bowman: Or value extracted
+
+77
+00:11:22.980 --> 00:11:27.060
+Nick Bowman: And then the last question is okay. Once we've decided that we want to
+
+78
+00:11:28.830 --> 00:11:39.510
+Nick Bowman: Do a for loop for this many times we can then we need to ask ourselves, okay, what is the action that we actually want to do over and over again repeatedly. And so in this case the action that we want to do.
+
+79
+00:11:40.800 --> 00:11:44.670
+Nick Bowman: Is probably want to add a single copy
+
+80
+00:11:49.620 --> 00:11:59.490
+Nick Bowman: To strengthen and so we know if we repeat that action of adding a single copy of the current character before that will allow us to add exactly the correct number
+
+81
+00:12:01.980 --> 00:12:12.900
+Nick Bowman: So I'll so the nice thing about writing pseudo code that is this detailed is that hopefully if you do a good job of really thinking through developing your pseudo code.
+
+82
+00:12:13.470 --> 00:12:20.520
+Nick Bowman: Translating into code is actually not the hard part, or I shouldn't say not the hard part. But it's not the the thinking intensive part
+
+83
+00:12:21.060 --> 00:12:29.520
+Nick Bowman: It's it's challenging, because you have to think through the syntax and figure out exactly how to express what you want to do, but the actual like algorithmic thinking part is captured in the pseudo code generation process.
+
+84
+00:12:31.380 --> 00:12:38.640
+Nick Bowman: So to code this up so we want to say we only want to add a letter, if it exists. A key is a key in the map. So remember we have a helpful.
+
+85
+00:12:40.350 --> 00:12:42.420
+Nick Bowman: Contains key method.
+
+86
+00:12:44.970 --> 00:12:56.190
+Nick Bowman: And our map. So say I only if it's a key and a map. It is a key in the map and then we can extract the number of copies and store them in a variable frequency
+
+87
+00:12:57.510 --> 00:12:58.260
+Nick Bowman: Ch.
+
+88
+00:12:59.850 --> 00:13:05.160
+Nick Bowman: And then we want to have a for loop that goes over the number of copies to make some are our typical syntax.
+
+89
+00:13:06.540 --> 00:13:07.380
+Nick Bowman: Looks like that.
+
+90
+00:13:09.750 --> 00:13:15.510
+Nick Bowman: And then inside the for loop we go ahead and add on to sort of string.
+
+91
+00:13:18.030 --> 00:13:18.900
+Nick Bowman: We're always have to do
+
+92
+00:13:19.920 --> 00:13:21.720
+Nick Bowman: Or not to Carter Carter string.
+
+93
+00:13:24.630 --> 00:13:25.320
+Nick Bowman: Then we add on.
+
+94
+00:13:27.510 --> 00:13:33.810
+Nick Bowman: If you want to bring people back I think she'll get to go and run this really quickly and hopefully what we see.
+
+95
+00:13:35.970 --> 00:13:36.510
+Nick Bowman: We see
+
+96
+00:13:48.720 --> 00:13:56.400
+Nick Bowman: Be back. Okay, awesome. So hopefully those of you that are in the workspaces got a chance to work through the pseudo code.
+
+97
+00:13:57.000 --> 00:14:01.020
+Nick Bowman: If you want to see the pseudo code that I generated. I'll be making my personal
+
+98
+00:14:01.320 --> 00:14:06.810
+Nick Bowman: Workspace public after the classes over. You can see sort of an example of a pseudo code that I generated here.
+
+99
+00:14:08.250 --> 00:14:09.030
+Nick Bowman: And then
+
+100
+00:14:10.140 --> 00:14:14.520
+Nick Bowman: The I also did. I'll go back to the slides and
+
+101
+00:14:16.170 --> 00:14:19.980
+Nick Bowman: And so, yeah. And so what we can see on the slides is the completed code.
+
+102
+00:14:20.340 --> 00:14:29.220
+Nick Bowman: And remember, we didn't expect you to get to the completed code in the breakout room. So if you do have time after lecture recommend going back to your group pseudo code and seeing if you can actually develop it.
+
+103
+00:14:29.670 --> 00:14:36.420
+Nick Bowman: Into a fully fleshed out solution, but doing that takes a lot longer than than five minutes. We wanted to sort of keep the scope reasonable, but we asked you to do.
+
+104
+00:14:37.560 --> 00:14:50.520
+Nick Bowman: As a brief note and the check that we did here isn't strictly required, but it does avoid adding unnecessary things into the map via the ultimate insertion and there's actually a section problem on that. So some of you may reach and kind of districts
+
+105
+00:14:52.200 --> 00:14:58.980
+Nick Bowman: Cool. So hopefully that was a good warm up review for folks. And so now we're going to jump into kind of the main part of what we're talking about today.
+
+106
+00:14:59.310 --> 00:15:03.990
+Nick Bowman: Which is this question of, how can we use the properties of different instructions to solve problems.
+
+107
+00:15:04.620 --> 00:15:09.090
+Nick Bowman: And what I mean when I solve problems. I mean, there's lots of different problems that we can solve
+
+108
+00:15:09.510 --> 00:15:16.410
+Nick Bowman: And these are all examples of problems that by the end of this class you'll be able to solve. And I encourage you to go home and think about how you might solve some of these problems.
+
+109
+00:15:17.130 --> 00:15:25.710
+Nick Bowman: So you can simulate impacts of flooding, you can generate some limited texts in the style of certain author, you can build spell check and autocomplete tools.
+
+110
+00:15:26.190 --> 00:15:29.880
+Nick Bowman: You can manage information about tourism resources in a different state.
+
+111
+00:15:30.300 --> 00:15:37.980
+Nick Bowman: And you can develop ticketing managing systems for sports stadiums and you can aggregate and analyze reviews for online shopping websites.
+
+112
+00:15:38.370 --> 00:15:46.140
+Nick Bowman: And the last one seems a little bit less serious but you can solve puzzles and the reason the sign here last. So that's exactly what we're going to do today. We're actually going to develop
+
+113
+00:15:47.460 --> 00:15:55.470
+Nick Bowman: A very powerful algorithm to solve a kind of simple fun puzzle, but hopefully it'll, it'll get you introduced to this cool idea of algorithmic thinking
+
+114
+00:15:56.820 --> 00:16:05.340
+Nick Bowman: And so this puzzle that we're going to solve is called a word ladder. And so some of you may have encountered this before, but we're not going to assume that you've seen it before. So I'll explain what a word ladder is
+
+115
+00:16:06.210 --> 00:16:14.430
+Nick Bowman: A word that is a puzzle and it's based on a starting word and a target word and to solve this puzzle. You have to start at the starting word
+
+116
+00:16:14.820 --> 00:16:25.560
+Nick Bowman: And then generate a sequence of intermediate words by changing one letter at a time, starting from the original work and but you have to do so in such a way that every word along the way is a valid English word
+
+117
+00:16:26.940 --> 00:16:38.100
+Nick Bowman: And then your eventual goal is to reach the target word. And this is actually a really common tool for teaching kids English vocabulary, because it really forces you to explore the space for your cat vocabulary and be creative and the words that you generate
+
+118
+00:16:39.120 --> 00:16:46.950
+Nick Bowman: And and worth Otter would look something like this. So this is actually a fun you know worksheet from an elementary school exercise.
+
+119
+00:16:47.730 --> 00:16:54.150
+Nick Bowman: But, you know, we're given a start word rug were given a destination where it hat and we want to find a sequence of words along the way.
+
+120
+00:16:54.930 --> 00:17:00.870
+Nick Bowman: That can exist. And so this one is really nice because they give us most of the letters and they give us pictures as well.
+
+121
+00:17:01.500 --> 00:17:09.240
+Nick Bowman: But we might start from rug and go to bug by changing the first letter from an art to it. Be and we go from bug to bag by changing the second letter today.
+
+122
+00:17:09.720 --> 00:17:20.280
+Nick Bowman: We go from back to back by changing the last letter to a tee and then we go from bad rap. But, you know, the first letter to an hour and then we get from right to our destination or by changing the art.
+
+123
+00:17:21.690 --> 00:17:29.730
+Nick Bowman: And so this is kind of just a fun little puzzle that you know you might give to a small child and, you know, they would have fun playing with the pictures and
+
+124
+00:17:30.270 --> 00:17:33.120
+Nick Bowman: Filling in the word ladder and stuff like that and
+
+125
+00:17:33.870 --> 00:17:43.230
+Nick Bowman: But you might ask, well, why is this relevant to this class, and it's relevant to this class because when I asked you the question of how can we come up with an algorithm to actually generate these words letters.
+
+126
+00:17:43.620 --> 00:17:52.200
+Nick Bowman: And that might seem like kind of a simple question, because it's like, oh, it's relatively easy to do by hand and but you'll find a common theme in this class is that
+
+127
+00:17:52.860 --> 00:17:59.730
+Nick Bowman: Even though it can be easy to do something by hand with like a human intuition coating that up into an algorithm is actually not necessarily that simple.
+
+128
+00:18:00.450 --> 00:18:10.950
+Nick Bowman: So similarly, this this algorithm can't rely on the pictures. Its algorithm doesn't have any intuition about one which word might be next. And so it has to be able to sort of kind of figure this all out.
+
+129
+00:18:12.870 --> 00:18:18.780
+Nick Bowman: And so let's think about what a what a what a first attempt might look like based off of the way that the human mind solve the problem.
+
+130
+00:18:19.350 --> 00:18:28.050
+Nick Bowman: So kind of what we did. And in the example. Well, okay, we started at the starting work and then maybe we can make an educated guess. So I think we started rug.
+
+131
+00:18:28.350 --> 00:18:36.540
+Nick Bowman: We're like, Okay, well, I could change the first letter to a, b and get book. And so we make an educated guess we modify the letter that we think is going to be fruitful.
+
+132
+00:18:37.050 --> 00:18:43.710
+Nick Bowman: And then we just repeat that process. And then we make another educated guess we say, oh, from bug. Maybe I'll go to big like a big book.
+
+133
+00:18:44.250 --> 00:18:52.230
+Nick Bowman: Okay, and then you just kind of keep repeating this process, trying to, like, use your intuition or hints them even doing to you to like figure out what's right.
+
+134
+00:18:54.000 --> 00:19:00.870
+Nick Bowman: Unfortunately, you kind of have to keep repeating this until you either find the target word which is kind of unlikely that you kind of get lucky and hit it.
+
+135
+00:19:01.320 --> 00:19:13.410
+Nick Bowman: Whether you hit a dead end. You kind of get to a point where you're like, Oh man, I can't make any more progress towards finding the word that I want. And so if you hit the dead end. You just start over again maybe take a different first step and kind of repeat that process.
+
+136
+00:19:14.640 --> 00:19:18.930
+Nick Bowman: And so what's the issues with this. Well, it requires some intuition.
+
+137
+00:19:19.170 --> 00:19:29.490
+Nick Bowman: Right. It requires your human intuition about well I'm going from rug to hat. So what letters. Might I need to change, like, what, what might be a fruitful direction to go.
+
+138
+00:19:29.730 --> 00:19:34.860
+Nick Bowman: And a computer doesn't really have this intuition. It kind of has to just make a decision and go with it.
+
+139
+00:19:35.760 --> 00:19:46.260
+Nick Bowman: And the other part is this approach is kind of unorganized right we kind of were just randomly trying things and hoping that we eventually found the answer, but we didn't really organize our search at all.
+
+140
+00:19:47.880 --> 00:19:52.860
+Nick Bowman: And because of this, there is no guarantee that we never even find the solution, which is kind of the tricky part.
+
+141
+00:19:53.790 --> 00:20:09.750
+Nick Bowman: And to solve all these issues we're going to introduce this concept of this very, very well known sort of famous powerful algorithm called breakfast search and it's going to allow us to sort of organize our approach to this problem. And hopefully it can formalize exactly what we want.
+
+142
+00:20:12.270 --> 00:20:20.040
+Nick Bowman: So what's, what was the problem with our previous approach, it was very unstructured. And so what Brett through search is going to allow us to do is to find
+
+143
+00:20:20.340 --> 00:20:32.040
+Nick Bowman: Kind of a structured way to explore word. So to look at words that are going to use this word adjacent to one another adjacent just means two words that are one letter, different from one another. So just one of the letters between the two words has been changed.
+
+144
+00:20:33.810 --> 00:20:41.280
+Nick Bowman: And if we think about generating word ladders right ask ourselves, well, what is like the simplest word ladder that we could have
+
+145
+00:20:41.700 --> 00:20:55.860
+Nick Bowman: And and perhaps the simplest word letter. We could have is if the words are actually just one letter, different from one another. So if I asked you to find the word ladder between pig and fig. You would just say, oh, well, there's change. The first key and in pig to be an F, and the United
+
+146
+00:20:57.090 --> 00:21:06.630
+Nick Bowman: And so be relatively easy to actually find that word letter we just look at all the words that are one letter away from where we are and if we find our destination somewhere, they're good to go.
+
+147
+00:21:08.580 --> 00:21:14.550
+Nick Bowman: And okay, but what if we, what if it's not so simple. What if the word is a little bit more complicated than just taking one step.
+
+148
+00:21:15.570 --> 00:21:19.470
+Nick Bowman: Well, if it requires taking two steps then let's break down the problem a little bit
+
+149
+00:21:19.890 --> 00:21:30.360
+Nick Bowman: We can think of taking two steps as like looking at everything that is one step away from where we originally were and then just taking one additional step from each of those possible places that we got to
+
+150
+00:21:32.370 --> 00:21:39.930
+Nick Bowman: And really the like he observation here and and the thing that I that that we're going to illustrate with an example in a second.
+
+151
+00:21:40.440 --> 00:21:51.750
+Nick Bowman: Is that the core organization in our search is that we always look at everything that's exactly one letter away from us before we look at anything that's that's two letters away from us.
+
+152
+00:21:52.560 --> 00:21:59.700
+Nick Bowman: And this sort of organizes our search and are really structured way and allows us to sort of formula to find an algorithm to find a solution.
+
+153
+00:22:00.600 --> 00:22:07.020
+Nick Bowman: And if if this all makes is not making any sense at a high level, based off his description. Don't worry, we're gonna we're going to walk through an example. Right.
+
+154
+00:22:08.940 --> 00:22:14.970
+Nick Bowman: So here's, here's our example say that we're looking for a word ladder between map and the word way.
+
+155
+00:22:15.690 --> 00:22:20.610
+Nick Bowman: And so you can think about it in your heads right now. See if you can think of a word ladder between those two words.
+
+156
+00:22:21.150 --> 00:22:29.220
+Nick Bowman: But while you're doing that right. I'm going to try to illustrate this breadth first search process for you and I'm going to show you sort of how we might write a format to do this.
+
+157
+00:22:30.150 --> 00:22:36.360
+Nick Bowman: So we're going to start is we're going to start it and I'm using these, you'll see these circles show up on the diagram.
+
+158
+00:22:37.500 --> 00:22:46.470
+Nick Bowman: Although the the words that are zero steps away from map is just map itself. So that's, that's all the words that are that are don't require any better changes from that.
+
+159
+00:22:48.420 --> 00:22:56.310
+Nick Bowman: So now we want to think about, okay, what are words that are one step away from that. So for example, if I change the first letter from em to our rap.
+
+160
+00:22:57.000 --> 00:23:11.190
+Nick Bowman: To change the last letter from Pete n, man. If I change the middle letter from 805 change the last letter from Peter why I would get may and if I change the first letter from end and getting
+
+161
+00:23:12.660 --> 00:23:19.620
+Nick Bowman: The note, I want you to make is, there's obviously way more words here there's a you can think of probably 60 more words that I'm missing here.
+
+162
+00:23:19.950 --> 00:23:25.740
+Nick Bowman: And just for the sake of the fact that I had to fit this whole entire thing. And we're not going to enumerate all the possible words that are one step away.
+
+163
+00:23:26.790 --> 00:23:35.670
+Nick Bowman: But hopefully you you kind of see this idea that the the first set of neighbors that we explore is sort of words that are all one letter away from that.
+
+164
+00:23:36.360 --> 00:23:43.290
+Nick Bowman: And notice what I want you to notice in the diagram is we're keeping track of via these arrows, how we got to each individual work.
+
+165
+00:23:43.470 --> 00:23:50.820
+Nick Bowman: So we want it. We actually in order to generate our funnel, where the latter. We're going to need to keep track of everything along the way, and specifically the order in which we got there.
+
+166
+00:23:51.120 --> 00:23:59.310
+Nick Bowman: And so keep that in mind as we work through the rest of us. Yeah, so that was a question earlier in the chat about how can you tell if a word is a valid word
+
+167
+00:24:00.690 --> 00:24:08.310
+Nick Bowman: Yes, that's it. That's an that's an awesome question. And so when we say valid word. In this case, we just mean words that are English words.
+
+168
+00:24:09.060 --> 00:24:16.710
+Nick Bowman: That is a kind of subjective determination. There are lots of English dictionary is around the world, and some of them may include some words and others.
+
+169
+00:24:17.250 --> 00:24:20.370
+Nick Bowman: You'll see when we get to coating this up that actually
+
+170
+00:24:20.970 --> 00:24:30.930
+Nick Bowman: We have a formal way like we will give you literally a file of words that count as English words. And basically if if a word shows up in that file, it's valid. And if it doesn't, it's not valid.
+
+171
+00:24:31.530 --> 00:24:47.520
+Nick Bowman: So for now, I'm just assuming that everything I'm putting up on the screen as a valid English word but, for example, like if I changed the middle letter of map to like in and like an MMP that's probably not an English word. So that's, that's why we're not, I'm sure. Yeah.
+
+172
+00:24:49.590 --> 00:25:01.500
+Nick Bowman: Okay, awesome. And so you can imagine there's a lot more words the trope in this blue circle but but particularly which word does not show up in the blue circle is a way. Right. There's no way
+
+173
+00:25:02.610 --> 00:25:14.220
+Nick Bowman: Didn't even find that there is no way to get from map to re by changing just one letter. Right. And so you can convince yourself that way, does not show up anywhere in this blue circle. And that's kind of important.
+
+174
+00:25:14.880 --> 00:25:27.390
+Nick Bowman: And because we know that we haven't found the destination anywhere in this blue circle, then we need to expand a little bit further. And so this green circle is going to represent things that are two steps away from where we started.
+
+175
+00:25:28.500 --> 00:25:43.050
+Nick Bowman: But by breaking down the previous problem. Remember two steps away from map is really just one step away from any of its immediate neighbors. So, for example, two steps away from map is one step away from up so I could change the M to an L to get to lock.
+
+176
+00:25:45.210 --> 00:25:54.930
+Nick Bowman: One other thing that you notice I could do is I could change the OH and mop back to an A to get to map. And so you might say, Oh, that's a little weird. Is that something we want to do.
+
+177
+00:25:55.590 --> 00:26:03.150
+Nick Bowman: And absolutely not right because if you think about it like the whole process of searching is this idea of making progress towards the destination.
+
+178
+00:26:03.810 --> 00:26:17.220
+Nick Bowman: And if you visit a word that you've already seen before. That's like going backwards, right, that's like making negative progress. That's really, really bad. And so we want to avoid that at all costs. We never want to revisit a word that we've already seen before.
+
+179
+00:26:18.930 --> 00:26:31.140
+Nick Bowman: And so an idea again something that to stash away in your mind when we get to formalizing this algorithm is that keeping track of a collection of visited words is going to be really important to make sure that we don't double visit. Anything along
+
+180
+00:26:32.460 --> 00:26:35.430
+Nick Bowman: Okay, so we got rid of a map that was, that was a bad neighbor.
+
+181
+00:26:36.510 --> 00:26:47.490
+Nick Bowman: But then we had mo by changing the pw again, there's a lot more neighbors here that I'm not going to new Maria, but then say we start trying to find the inverse of May we go for me to re
+
+182
+00:26:49.200 --> 00:26:58.050
+Nick Bowman: Again, so we could go from May to man. But again, we don't want to make backwards progress. Notice that we've already gotten to man earlier up in our diagram.
+
+183
+00:26:58.380 --> 00:27:04.530
+Nick Bowman: So again, don't want to search that and that's something that's shown up before. And so we we don't want to explore it again.
+
+184
+00:27:05.520 --> 00:27:14.880
+Nick Bowman: And so we get rid of that. And then we say, oh, look, if I change them to a W. I actually get away and then we say, oh look awesome. We found a path.
+
+185
+00:27:15.180 --> 00:27:26.940
+Nick Bowman: Right, we found this valid word ladder that starts at map goes to me and goes, and then finishes that way. And remember, these arrows that we saved along the way, are very important because they told us the exact word ladder that we could generate along the way.
+
+186
+00:27:29.160 --> 00:27:40.950
+Nick Bowman: Okay, so there was a lot that was going on there and we are going to take a second to formalize that. And so before we do that is I don't have any questions about specifically what we did in this example.
+
+187
+00:27:42.300 --> 00:27:47.970
+Nick Bowman: There was a question in the chat says, should we avoid changing the same word costs.
+
+188
+00:27:49.710 --> 00:27:56.220
+Nick Bowman: And so it's what basically what you want to avoid is you just never want to explore something so
+
+189
+00:27:56.580 --> 00:28:00.750
+Nick Bowman: There's a, there's a process of generating neighbors that we're not going to explore much depth here.
+
+190
+00:28:01.050 --> 00:28:11.430
+Nick Bowman: And it's just the idea of, if you look at all of your possible neighbors, you only want to continue visiting one of them. If you haven't visited before I guess is the important part. So it doesn't matter if you
+
+191
+00:28:11.610 --> 00:28:23.700
+Nick Bowman: Do generate like you. You think about doing it and you generate map again or man again or something like that. That's fun. It's just, you don't want to. You don't want to add it to this green circle if you've already seen before, if that makes sense.
+
+192
+00:28:26.700 --> 00:28:27.660
+Does that answer the question.
+
+193
+00:28:33.330 --> 00:28:42.780
+yukun yang: So what I mean. Instead, so we also avoid like changing from nab to May, and then to another word that only changes the last letter, for example, to match, for example.
+
+194
+00:28:44.400 --> 00:28:47.940
+Nick Bowman: Yeah. And so, so that's that's what's going on here, right, like the reason
+
+195
+00:28:48.480 --> 00:28:58.230
+Nick Bowman: So we tried going from a two man. Right. Yeah. So sometimes changing. So it's not like you shouldn't just avoid changing the last letter right changing the last letter might still be fruitful.
+
+196
+00:28:58.470 --> 00:29:07.680
+Nick Bowman: It's just specifically changing it to something that you've already visited before. So like, man, in this case, right. It was bad, because we'd already explored it earlier on, right in our circle.
+
+197
+00:29:08.460 --> 00:29:09.600
+yukun yang: Okay, yeah.
+
+198
+00:29:12.390 --> 00:29:25.320
+George Halal: Isn't it faster to go to, for example, change the last letter of the start to the last letter of the destination and see if that's the word yes, take it into account like
+
+199
+00:29:25.470 --> 00:29:26.130
+George Halal: Yeah, so
+
+200
+00:29:26.970 --> 00:29:32.400
+Nick Bowman: So that's a good thought. So the, you know, you could think of a lot of different ways you might optimize this approach.
+
+201
+00:29:32.910 --> 00:29:38.820
+Nick Bowman: So by kind of trying to take your, your knowledge of the problem and saying, Oh, well,
+
+202
+00:29:39.300 --> 00:29:47.700
+Nick Bowman: You know, if I I know I eventually need one of those letters. And then, you know, maybe I should just directly change it to something. And the last word.
+
+203
+00:29:48.540 --> 00:29:55.140
+Nick Bowman: It doesn't show up. Well, in this example because it's example is relatively short but if you think about actually
+
+204
+00:29:55.830 --> 00:30:05.040
+Nick Bowman: Okay, I'm not going to try going all the way back. But if you think about the the example that we work to at the very first one it was pretty long. I think it had like five or six steps in it.
+
+205
+00:30:05.400 --> 00:30:16.020
+Nick Bowman: And you'll notice that that just changing the letters to the last words initially wouldn't have resulted in an English word. And because of that, you can't just assume that you can directly start changing
+
+206
+00:30:17.160 --> 00:30:20.700
+Nick Bowman: To those letters there. This is kind of a more structured
+
+207
+00:30:21.870 --> 00:30:32.490
+Nick Bowman: Almost exhaustive approach to make sure you try all your possible options because you don't know that just changing and the last letter is gonna get you something fruitful right away. So then to the question.
+
+208
+00:30:33.240 --> 00:30:35.220
+Nick Bowman: Thanks. Yeah, first
+
+209
+00:30:36.480 --> 00:30:36.930
+Question.
+
+210
+00:30:38.460 --> 00:30:46.620
+kathleen bryan: Yeah, I'm, I'm going to try to explain this, I guess, clearly, but in the case, I think it's that we ran in when we're going
+
+211
+00:30:47.760 --> 00:30:55.920
+kathleen bryan: From map we also like looked at the case that it would be, man. Right. And we're like, well, we've already. We've already seen that before. And in that case,
+
+212
+00:30:56.160 --> 00:31:09.390
+kathleen bryan: Instead of just like evaluating whether or not that would be like a one way path forward, we would have to loop back through everything has been evaluated previously. So like, wouldn't that be more efficient than just checking that one letter.
+
+213
+00:31:10.230 --> 00:31:19.830
+Nick Bowman: Yes, that is an awesome question. And like we will, I will ask you to answer that question in like five minutes. There is a way that we can keep track of.
+
+214
+00:31:20.400 --> 00:31:31.200
+Nick Bowman: The things that we've seen before in a way that's very efficient and doesn't require like actually moving back through everything. So that's an awesome question. And you're actually going to answer it in a couple minutes.
+
+215
+00:31:31.500 --> 00:31:34.050
+Nick Bowman: So, so keep, keep that in mind. Okay.
+
+216
+00:31:34.620 --> 00:31:35.340
+Nick Bowman: Yeah, thanks.
+
+217
+00:31:38.460 --> 00:31:44.280
+Nick Bowman: OK, cool. So just for the sake of time, if you have any other questions, feel free to to drop them in the chat, but
+
+218
+00:31:44.790 --> 00:31:54.750
+Nick Bowman: We're going to move on. So I'll stop for pause for announcements really quick. So remember for announcements, the assignment one grace period is tonight.
+
+219
+00:31:55.380 --> 00:32:02.610
+Nick Bowman: Just remember that after the grace period expires. We can't accept any more submissions. So if you have any like extenuating circumstances, let us know.
+
+220
+00:32:03.120 --> 00:32:11.550
+Nick Bowman: But other than that, just make sure you have the assignment and we'll be releasing the assignment out by the end of the day today, it may come out sometime this evening.
+
+221
+00:32:12.450 --> 00:32:19.350
+Nick Bowman: But the session is going to be tomorrow night at 7pm PDT and the zoom info is posted on the zoom details page of the course website.
+
+222
+00:32:19.890 --> 00:32:26.490
+Nick Bowman: And then the last thing is we've mentioned this a couple of times in different forums, but we highly recommend checking out the c++ survey follow up there.
+
+223
+00:32:26.910 --> 00:32:34.590
+Nick Bowman: And we put a lot of effort into answering all of your questions in c++ survey that we didn't get a chance to answer during class on Wednesday or during class last Wednesday.
+
+224
+00:32:36.060 --> 00:32:40.920
+Nick Bowman: Is if you have any questions or want answered be strongly recommend checking out that post on it.
+
+225
+00:32:42.540 --> 00:32:50.640
+Nick Bowman: Okay, awesome. So now let's think about how to formalize what we just did. So we just work through an example and and so
+
+226
+00:32:51.090 --> 00:32:57.570
+Nick Bowman: That working through an example, should always be your first step when you're developing algorithm. But your second step when you're developing an algorithm.
+
+227
+00:32:58.170 --> 00:33:09.720
+Nick Bowman: Is going to be sort of formalizing and trying to write pseudo code. So pseudo code is kind of like English that represents your code or sort of texts that that concretely like formalizes your thoughts and your process.
+
+228
+00:33:10.740 --> 00:33:15.330
+Nick Bowman: But does so in a way that allows you, it is a stepping stone to actually writing code.
+
+229
+00:33:17.760 --> 00:33:25.590
+Nick Bowman: And so we're going to do first is we're going to need to decide which data structures to use and and so there's three sort of things that we need to represent along the way.
+
+230
+00:33:26.070 --> 00:33:29.130
+Nick Bowman: And so we're going to need a data structure to represent partial word ladders.
+
+231
+00:33:29.520 --> 00:33:35.850
+Nick Bowman: And the desired characteristics of this data structures. We want to be able to easily access the most recent word that was added to the ladder.
+
+232
+00:33:36.210 --> 00:33:40.260
+Nick Bowman: And when I say a ladder, like a partial word ladder in the in the diagram that would be like
+
+233
+00:33:40.500 --> 00:33:54.690
+Nick Bowman: One path that you follow it with arrows. So like map to man would be a partial path and map to wrap would be a partial path and map to me to wait would be a partial time but we always want to we really only ever care about the most recently added work to the webinar.
+
+234
+00:33:56.430 --> 00:34:02.880
+Nick Bowman: We're going to need a data structure to store everything right. So I represented, these, these kind of weird circles of paths, but
+
+235
+00:34:03.390 --> 00:34:09.720
+Nick Bowman: We're going to need to formalize that so we need a data structure to store all the partial word ladders that we've generated. So far, and that we have yet to explore
+
+236
+00:34:10.260 --> 00:34:20.610
+Nick Bowman: And we want to important characteristic. Here we want to maintain an ordering of these ladders so that all ladders have a certain length get explored before ladders have a longer length get explored and
+
+237
+00:34:21.330 --> 00:34:28.380
+Nick Bowman: And then as Kathleen brought up we're going to need a data structure to keep track of all the words that we've explored so far, or seen so far.
+
+238
+00:34:28.950 --> 00:34:38.310
+Nick Bowman: That's gonna sort of avoid us getting stuck in loops. But the really important characteristic here is we need to be able to really quickly decide whether or not a word has been seen before.
+
+239
+00:34:38.580 --> 00:34:50.370
+Nick Bowman: And so that was exactly Kathy's question was, well, how do we do that and I'm going to reflect that question back on all of you, how can what's data structure. Can you use to actually store that information and guarantees characteristic
+
+240
+00:34:51.420 --> 00:34:58.350
+Nick Bowman: And so we're gonna do we're gonna have another quick activity. So we're going to send you back into your breakout rooms. If your group.
+
+241
+00:34:58.890 --> 00:35:05.580
+Nick Bowman: This time, you'll want to open up the instructions dot txt file I replicated the info from the slides there. So you can see all that there
+
+242
+00:35:06.030 --> 00:35:13.110
+Nick Bowman: And what your task is going to be is again discuss and just decide which data structure, you're going to want to use for each of these three tasks.
+
+243
+00:35:13.440 --> 00:35:25.380
+Nick Bowman: And and once you've discussed and decided on an answer just replace the to do comments with the type declaration, the data structure that you want us. And so I'll give you about three, four minutes to do that. So if you want to reopen the breakout rooms.
+
+244
+00:35:28.410 --> 00:35:35.880
+Nick Bowman: For those of you that are watching asynchronously. I'm going to talk through the choices. Once everyone gets back together. And so if you're watching asynchronously.
+
+245
+00:35:36.720 --> 00:35:47.610
+Nick Bowman: Highly recommend taking the time to actually go through. So like, pause the recording here and go to the workspace. Or you can just even have the slides up and
+
+246
+00:35:47.940 --> 00:35:56.280
+Nick Bowman: And and and think about which data structure, you'd actually want to choose for each of these and and in order to be able to hopefully do that.
+
+247
+00:35:58.320 --> 00:36:06.420
+Nick Bowman: Or once you once you've done that, then you can just pause the recording here and fast forward, maybe about three minutes and won't get get back together around 12
+
+248
+00:36:17.940 --> 00:36:20.040
+Nick Bowman: Earlier I should have just assigned you to
+
+249
+00:36:30.210 --> 00:36:33.450
+Return a question about using the chat.
+
+250
+00:36:38.670 --> 00:36:43.800
+Nick Bowman: Is there anything I should I should emphasize when I'm trying to pseudo code just based off of questions from the example.
+
+251
+00:36:45.210 --> 00:36:52.650
+Nick Bowman: Of someone asked me about why isn't there multiple ways to get to the same word, and some will be longer than others.
+
+252
+00:36:53.760 --> 00:37:02.100
+Nick Bowman: Yeah. So yeah, so I guess I'll just emphasize the fact that that shouldn't be true. Right. You should never be visiting the same place, and why that is because
+
+253
+00:37:08.580 --> 00:37:09.540
+For questions.
+
+254
+00:37:15.150 --> 00:37:17.520
+Nick Bowman: One copy up, you can just say this.
+
+255
+00:37:18.780 --> 00:37:18.960
+Nick Bowman: Word.
+
+256
+00:37:21.120 --> 00:37:21.420
+Again,
+
+257
+00:37:24.390 --> 00:37:31.110
+Nick Bowman: Emitted a lot of energy. So, because you're also supposed to check. Initially, they're like an old English
+
+258
+00:37:32.310 --> 00:37:34.530
+Nick Bowman: Saying, not the same word.
+
+259
+00:37:41.670 --> 00:37:53.850
+Nick Bowman: One question that came up very early with relation to the first example problem was, if I know this is not in the documentation. But we asked them to use it on the first assignments vector dot sort
+
+260
+00:37:55.290 --> 00:38:02.550
+Nick Bowman: Of like basically an ultimate solution that we use factored out. Sorry. So asking about how that works. We can I ask you though.
+
+261
+00:38:04.530 --> 00:38:06.060
+But just design so
+
+262
+00:38:07.110 --> 00:38:08.370
+I didn't realize that that was
+
+263
+00:38:10.230 --> 00:38:11.100
+That was in Africa.
+
+264
+00:38:19.560 --> 00:38:19.980
+Nick Bowman: Yes.
+
+265
+00:38:36.780 --> 00:38:37.020
+Nick Bowman: Alright.
+
+266
+00:38:37.050 --> 00:38:40.830
+Nick Bowman: So it looks like people are rejoining so I'll go ahead and
+
+267
+00:38:40.860 --> 00:38:50.880
+Nick Bowman: Go through the three answers here. And so if what I've decided, here's a little bit different from what you and your group decided on. And that may be totally fine. There's oftentimes different approaches to the same problem.
+
+268
+00:38:51.390 --> 00:38:51.690
+yifei ding: But
+
+269
+00:38:51.960 --> 00:38:53.670
+Nick Bowman: What I would recommend still
+
+270
+00:38:54.780 --> 00:38:56.280
+yifei ding: So that's quick
+
+271
+00:38:58.110 --> 00:38:58.740
+See you.
+
+272
+00:39:00.390 --> 00:39:00.720
+Nick Bowman: Okay.
+
+273
+00:39:01.380 --> 00:39:12.120
+Nick Bowman: So yeah, so the first one. So we want a data structure to represent partial work letters. And the key here is this important characteristic that we wanted the most recent word that was added to the word ladder.
+
+274
+00:39:12.540 --> 00:39:24.720
+Nick Bowman: To be able to easily access that. And so to me that screams stack right stack gives us this awesome capability that the last thing that was added is the first thing that we're going to see if we look at the stack and so that seems to be really helpful characteristic here.
+
+275
+00:39:25.800 --> 00:39:35.970
+Nick Bowman: I'm sorry, I don't give away the answer there. We want a data structure also to store all these word ladders and sort of maintain an ordering that guarantees that everything
+
+276
+00:39:36.390 --> 00:39:39.720
+Nick Bowman: That is a blank one will get explored before everything that isn't like to
+
+277
+00:39:39.990 --> 00:39:43.230
+Nick Bowman: Know, it could be a number of possible different answers here. But I decided to go with Q
+
+278
+00:39:43.440 --> 00:39:54.030
+Nick Bowman: Q is really nice because it maintains the fact that if I add something to the Q i won't see it again until I've gone through everything else that was already in the queue. And so that gives us that that nice property that we want.
+
+279
+00:39:54.690 --> 00:40:03.270
+Nick Bowman: And then tanzer Kathleen's question, how can we really efficiently keep track of everywhere that we've been before, and be able to see whether or not something was visited or not.
+
+280
+00:40:03.570 --> 00:40:11.310
+Nick Bowman: Well, to me, that says set right set is really great for keeping track of things and being able to really quickly. Look up. Have I seen this word before, or have I not seeing this
+
+281
+00:40:12.150 --> 00:40:21.360
+Nick Bowman: And and so that's what we want us there. And so now that we've decided on these data structures we can finally come up with our pseudo code. And so what's, what's our pseudo code gonna look like.
+
+282
+00:40:21.870 --> 00:40:26.280
+Nick Bowman: Well, first we need to initialize our data structures. So create an empty queue and an empty set.
+
+283
+00:40:26.940 --> 00:40:33.750
+Nick Bowman: And then we want to start off with our very first word ladder right our very first word letter obviously starts off with the starting word
+
+284
+00:40:34.260 --> 00:40:46.350
+Nick Bowman: And we'll add this first word ladder to the queue. So you can think of this as a word ladder in our example containing the word map and not partial ladder gets added to our queue, which you can think of it as like the center of the circle.
+
+285
+00:40:47.940 --> 00:40:53.700
+Nick Bowman: Well then what do we do. Alright, so while we still have things to explore. We keep looping and we say, all right,
+
+286
+00:40:54.150 --> 00:41:03.150
+Nick Bowman: Let's take off. The next thing from the queue. So the next thing from the Q represents a partial ladder so represents one possible option that we could have explored.
+
+287
+00:41:04.050 --> 00:41:12.240
+Nick Bowman: And then we look at the word that's on top of the ladder. And remember, that's why we chose a stack because we wanted to see, okay, what was the most recently visited work in this ladder.
+
+288
+00:41:13.200 --> 00:41:26.220
+Nick Bowman: And if most recently visited word is the destination. So remember when we got to weigh in our example I'm going great. We're done. We can stop our search exit out of our return the current Otter, because it means we found something successful
+
+289
+00:41:28.200 --> 00:41:32.130
+Nick Bowman: But what if it's not okay, how do we how do we continue the explanation here.
+
+290
+00:41:33.390 --> 00:41:39.690
+Nick Bowman: Well we generate all the neighboring words again remember these are things that are valid English words and our one letter away from the current work.
+
+291
+00:41:40.350 --> 00:41:45.990
+Nick Bowman: We're not going to go super into detail and how to do this. It is an interesting problem in and of itself. And in terms of how you can generate these
+
+292
+00:41:46.410 --> 00:41:55.860
+Nick Bowman: But let's just assume we we have the ability to generate all these words. And then what do we do, okay, well, we say, All right, well, we want to try exploring each of these neighboring words.
+
+293
+00:41:56.910 --> 00:42:07.260
+Nick Bowman: But the really critical component is we only want to visit these words if they haven't been visited yet. So this is probably going to require doing some sort of look up in our set
+
+294
+00:42:08.730 --> 00:42:18.720
+Nick Bowman: And then what do we do, well we create a copy of our current ladder. And the reason we need to create a copy is because remember that every time in our diagram we added a new arrow.
+
+295
+00:42:19.020 --> 00:42:29.130
+Nick Bowman: Well, a single path through all the arrows would be representing sort of a kind of a unique ladder there. And so we want to make sure that we don't sort of muddle with any of the other existing ladders that already exists.
+
+296
+00:42:29.760 --> 00:42:35.610
+Nick Bowman: So we want to we want to just create a copy. And then when we can do is we add the neighbor to the top of that ladder.
+
+297
+00:42:36.030 --> 00:42:42.090
+Nick Bowman: We mark that neighbor has visited. So that probably requires adding it to the set somehow to make sure that we don't we don't ever visited again.
+
+298
+00:42:42.720 --> 00:42:49.830
+Nick Bowman: This also gives us the nice property that we know will never have to ladders visiting the same word, which is a really nice property.
+
+299
+00:42:50.370 --> 00:42:56.910
+Nick Bowman: And then the last sort of critical stuff. And the thing that takes advantage of the fact that we're using a queue is you take this letter.
+
+300
+00:42:57.240 --> 00:43:09.600
+Nick Bowman: And you added on to the end of the queue. And what does that mean well that means that we won't visit that louder again and we won't try to continue exploration from that ladder until we've explored everything else that already exists in the queue.
+
+301
+00:43:10.320 --> 00:43:15.390
+Nick Bowman: Okay. And so this is a lot of the the pseudo code here is is relatively complex
+
+302
+00:43:15.990 --> 00:43:31.080
+Nick Bowman: But what we're going to do is I'm actually going to take this pseudo code and show you that if you go through the effort to actually generate pseudo code that is this detail the process of actually writing the code to implement the algorithm. Hopefully becomes a lot easier.
+
+303
+00:43:32.220 --> 00:43:41.040
+Nick Bowman: So what we're gonna do is we're going to hop on over kitty treats. And so this is the lecture starter Code project for today and the starter code that I provided for you.
+
+304
+00:43:41.400 --> 00:43:50.070
+Nick Bowman: Has a little bit of sort of Schiller code to, you know, just generate a little bit of a console program that takes input from the user and and prints out the results and stuff like that.
+
+305
+00:43:50.730 --> 00:43:55.020
+Nick Bowman: Someone was asking about how do we keep track of what's a valid English word
+
+306
+00:43:55.590 --> 00:44:03.120
+Nick Bowman: You can see the information and how to do that here as well. That's kind of just all been provided. And we've also provided a function to generate the neighboring words.
+
+307
+00:44:03.510 --> 00:44:10.350
+Nick Bowman: Like I said, it's an interesting algorithmic challenge to think about how to do it on your own, but it's not really critical to kind of the breadth first search algorithm itself.
+
+308
+00:44:11.910 --> 00:44:21.150
+Nick Bowman: But what we can see here is this is basically the pseudo code that we generate in the slides. I mean, so we're going to do in the last five minutes here is we're actually just going to translate this to code and see what the
+
+309
+00:44:22.560 --> 00:44:35.310
+Nick Bowman: And so what I'm gonna do is I'm actually going to take one line of a pseudo code at a time. And I'm going to translate it one letter time. So this says Create an interview and create an empty set. Okay, so I create an empty to
+
+310
+00:44:36.570 --> 00:44:39.030
+Nick Bowman: Using the data type, but I decided on earlier.
+
+311
+00:44:41.730 --> 00:44:42.420
+Nick Bowman: Correctly.
+
+312
+00:44:47.670 --> 00:44:50.820
+Nick Bowman: And so this is visited workers.
+
+313
+00:44:51.840 --> 00:44:52.710
+Nick Bowman: That's the first line.
+
+314
+00:44:54.150 --> 00:45:08.220
+Nick Bowman: So then the next line tells us, okay, we actually want to create our initial word ladder and continuing to starting word and then add that to the queue. So the way that I can do that is I want you can call this night.
+
+315
+00:45:10.500 --> 00:45:10.950
+Nick Bowman: And I
+
+316
+00:45:12.660 --> 00:45:13.530
+Nick Bowman: Figure, okay.
+
+317
+00:45:15.120 --> 00:45:15.660
+Nick Bowman: Yeah, there we go.
+
+318
+00:45:17.880 --> 00:45:29.820
+Nick Bowman: So the nice thing about stack. You can also initialize them with this bracket initial. Is there some text so I can actually just directly my start word there are, I think it's called starting with her.
+
+319
+00:45:31.980 --> 00:45:36.120
+Nick Bowman: And then I'm remember I want to add this latter
+
+320
+00:45:37.380 --> 00:45:39.000
+Nick Bowman: Two back up.
+
+321
+00:45:44.760 --> 00:45:49.020
+Nick Bowman: And so now what's next. Say, while the queue is not empty.
+
+322
+00:45:50.670 --> 00:45:54.390
+Nick Bowman: So wow this really nicely. It's like, well,
+
+323
+00:45:57.360 --> 00:46:00.180
+Nick Bowman: Well, not all fighters that is
+
+324
+00:46:03.330 --> 00:46:07.500
+Nick Bowman: Right. And then what happened. So we say, remove the next partial ladder.
+
+325
+00:46:11.040 --> 00:46:21.150
+Nick Bowman: So remove the next partial ladder. Well, how do we do that. And remember, moving from accuse the process of doing so if I want to say that my current latter
+
+326
+00:46:24.420 --> 00:46:27.810
+Nick Bowman: Is the one that is in the queue.
+
+327
+00:46:28.980 --> 00:46:29.880
+Nick Bowman: You
+
+328
+00:46:31.980 --> 00:46:37.560
+Nick Bowman: I'm great. And then we say, set the current word that we're looking at the what's at the top of the queue.
+
+329
+00:46:38.640 --> 00:46:48.600
+Nick Bowman: So that we can just pull up. So remember, we want to look at the word that's on the top of the stack, but we don't actually want to remove it. And so the command is going to be really helpful here.
+
+330
+00:46:49.230 --> 00:46:57.570
+Nick Bowman: And so we just want to peek at the top of the queue and see what the most recent where it is, but we don't actually want to remove it. If we removed it we would lose all of our progress.
+
+331
+00:46:58.080 --> 00:47:02.070
+Nick Bowman: Because remember this ladder is keeping track of our progress over time. And so if we removed from that.
+
+332
+00:47:04.470 --> 00:47:09.360
+Nick Bowman: I mean, what's next. So if the current word is the destination.
+
+333
+00:47:11.820 --> 00:47:18.000
+Nick Bowman: Then we want, then we know that we're done means if the current. Where is equal to the destination word
+
+334
+00:47:19.380 --> 00:47:20.580
+Nick Bowman: Everything is returned.
+
+335
+00:47:21.600 --> 00:47:21.990
+Nick Bowman: Mater.
+
+336
+00:47:23.190 --> 00:47:27.090
+Nick Bowman: Let me be a good stylistic programmer and
+
+337
+00:47:33.330 --> 00:47:36.150
+Nick Bowman: So that tells us that we're done. So that's our way of finishing a loop.
+
+338
+00:47:37.350 --> 00:47:50.580
+Nick Bowman: And then what's the next step. So the next step is to generate all the neighboring words and remember that I actually told you we provided a helper function to do that. And so we can actually this is gonna be very nice great part about decomposition is you can actually
+
+339
+00:47:51.630 --> 00:47:57.600
+Nick Bowman: Just all your helper functions. And so we want to generate all of the neighbors of our current word
+
+340
+00:47:58.380 --> 00:48:09.900
+Nick Bowman: Again, we also have to pass in the dictionary into this functions that we know what is and what isn't development which word and don't worry too much about how that works. We'll, we'll go a little bit more in depth into that in some lectures next week.
+
+341
+00:48:11.010 --> 00:48:16.140
+Nick Bowman: And so now we have all of our neighbors. And so now we're sort of at the last key.
+
+342
+00:48:17.160 --> 00:48:22.110
+Nick Bowman: Blast. And so let me say loop over all the neighbors. Okay.
+
+343
+00:48:23.220 --> 00:48:28.830
+Nick Bowman: And we want to loop over all the neighbors and they can do that by saying for
+
+344
+00:48:30.270 --> 00:48:31.950
+Nick Bowman: Neighbors neighbors.
+
+345
+00:48:33.510 --> 00:48:38.130
+Nick Bowman: And then what do you want to do inside the loop on this can actually copy all this at once.
+
+346
+00:48:44.520 --> 00:48:56.490
+Nick Bowman: What do we do, so we want to say if the neighbor hasn't been visited yet. So remember we have this visited word set that actually contains everything that we've seen so far. So we want to make sure that we haven't yet see man.
+
+347
+00:48:57.660 --> 00:49:09.450
+Nick Bowman: And if we haven't seen it, then we want to create a copy of where we're currently at. Remember, creating a copy in c++ is actually relatively simple anytime you use that equals operator, you're actually getting a copy of your data structure.
+
+348
+00:49:10.860 --> 00:49:15.600
+Nick Bowman: So if we generate a new letter and we decided, people who are currently up
+
+349
+00:49:19.290 --> 00:49:26.880
+Nick Bowman: And then we want to actually take this new word that we have and we push it onto the top of this new ladder.
+
+350
+00:49:27.210 --> 00:49:33.990
+Nick Bowman: Right. So that's basically saying, Take this new word that we generated and now this is what's going to be on top of the world water because it's kind of our
+
+351
+00:49:34.110 --> 00:49:43.980
+Nick Bowman: single step of exploration. You can think of this as when we were in the in the green circle in the diagram and we explored out the blue circle that kind of takes one step towards finding the next one.
+
+352
+00:49:45.060 --> 00:49:49.770
+Nick Bowman: And super important. Very, very, very common. A lot of you are going to forget to do this on the assignment.
+
+353
+00:49:50.190 --> 00:50:02.850
+Nick Bowman: We have to keep track of the fact that we just visited this word, remember we're keeping track of this set. And so it's super important that we actually make sure to add this new word the set once we added it onto a ladder.
+
+354
+00:50:03.900 --> 00:50:13.650
+Nick Bowman: And then the very last step is we take this new ladder that we've created and we add it to the back of our Q. And so let's say all letters, don't you know
+
+355
+00:50:16.380 --> 00:50:24.240
+Nick Bowman: And and hopefully what you see here is that actually all of the lines of pseudo code that we generated and had a corresponding
+
+356
+00:50:25.230 --> 00:50:30.810
+Nick Bowman: Lines of code themselves. And so when we write code that that that is that detail or pseudo code that is that that that
+
+357
+00:50:31.320 --> 00:50:36.480
+Nick Bowman: That is that details and we are able to actually generate the code itself really easily.
+
+358
+00:50:37.020 --> 00:50:48.090
+Nick Bowman: And so we are just out of time. And so I just want to show you. Hopefully that this works. And so for example if we wanted to find our word ladder in our example between master mapped and when
+
+359
+00:50:48.600 --> 00:50:53.700
+Nick Bowman: We are able to find that we're going to find maybe word ladder between cat and dog.
+
+360
+00:50:54.120 --> 00:51:04.860
+Nick Bowman: We find that. And so the where the real power of this is comes into really long word. So if I wanted to find a word ladder between whale and hello it or not to wear that seemed very easy to find the word ladder between
+
+361
+00:51:05.640 --> 00:51:19.830
+Nick Bowman: In just a matter of a couple of seconds, our algorithm actually find this really long word ladder and that shows us that we can get people as well in that way and cool. So I know that was a little quick at the end, but I hope that you'll actually
+
+362
+00:51:20.880 --> 00:51:28.320
+Nick Bowman: Go to the slides from the last takeaway, and which is that we really hope that this is a helpful resource for you when you're working on the second assignment.
+
+363
+00:51:28.710 --> 00:51:33.900
+Nick Bowman: And which is you're going to be implementing your own version of breath research actually solve amaze
+
+364
+00:51:34.770 --> 00:51:41.670
+Nick Bowman: However, we don't encourage trying to just copy this code that we written so far. And for that reason, I'm actually not going to be posting the completed code.
+
+365
+00:51:42.330 --> 00:51:45.090
+Nick Bowman: The problems are distinctly different and you're going to benefit a lot
+
+366
+00:51:45.540 --> 00:51:56.640
+Nick Bowman: From explicitly developing your own examples and your own pseudo code and your own code from that pseudo code, rather than just trying to sort of copy where we had here today for the code and then just make minor changes to it.
+
+367
+00:51:57.570 --> 00:52:00.180
+Nick Bowman: So really, just keep that in mind when you're working through the assignment.
+
+368
+00:52:00.990 --> 00:52:11.400
+Nick Bowman: That don't try to just watch this lecture and you type in exactly what I typed and start from the pseudo code stage generate really explicit pseudo code for what you want to do and then work on translating that to code.
+
+369
+00:52:12.510 --> 00:52:17.550
+Nick Bowman: And we're going to skip them so data structures throughout a time and and so
+
+370
+00:52:18.330 --> 00:52:24.270
+Nick Bowman: We'll talk about that at the beginning of tomorrow's class, but most of tomorrow's class is going to be about the topic of algorithmic analysis.
+
+371
+00:52:24.480 --> 00:52:30.030
+Nick Bowman: I'm going to talk about this thing called Big Oh, we're going to analyze these colorful glass look at seen shown here.
+
+372
+00:52:30.510 --> 00:52:42.480
+Nick Bowman: And and yet so that's all we have for today. And thanks everyone for sticking past a couple minutes so appreciate you hanging around. And as always, if you have any other questions will be here to answer them after the lectures over
+
+373
+00:52:43.620 --> 00:52:45.030
+Nick Bowman: And yeah, hope you have a good day.
+
+374
+00:52:45.690 --> 00:52:46.980
+Siddharth Balaji: Thank you.
+
+375
+00:52:47.460 --> 00:52:47.760
+Elena Williams: For
+
+376
+00:52:47.790 --> 00:52:59.010
+Nick Bowman: For those who don't have watching asynchronously. This is the official end of the lecture, we're going to keep the the tape rolling to record any questions that people have, but if you're watching asynchronously. You can feel free to turn off recording here.
+
+377
+00:53:02.280 --> 00:53:04.890
+Nick Bowman: And what questions that people have
+
+378
+00:53:09.990 --> 00:53:10.830
+Nick Bowman: Is there anything in the
+
+379
+00:53:10.860 --> 00:53:12.090
+Nick Bowman: Chat that didn't get answered. Okay.
+
+380
+00:53:15.360 --> 00:53:15.960
+kylie jue: Oh,
+
+381
+00:53:17.040 --> 00:53:17.400
+kylie jue: No.
+
+382
+00:53:18.630 --> 00:53:19.560
+kylie jue: He answered, Yes.
+
+383
+00:53:21.030 --> 00:53:23.220
+Nick Bowman: It looks like Edward, you have your hand raised. Yeah.
+
+384
+00:53:23.580 --> 00:53:28.860
+edouard des: It's more procedural question, if I may, um, these elements that are put in and as well as the
+
+385
+00:53:29.970 --> 00:53:36.900
+edouard des: The other Astana like when you're just to now are those to be submitted or those sort of to help us understand we will be doing for the understanding that we're going to be doing tomorrow.
+
+386
+00:53:37.980 --> 00:53:42.060
+Nick Bowman: And everything that we do during lecture doesn't have to be submitted, it's all for your
+
+387
+00:53:42.060 --> 00:53:44.670
+Nick Bowman: Own your own benefit, through working through
+
+388
+00:53:51.780 --> 00:53:52.650
+edouard des: The documentation.
+
+389
+00:53:53.400 --> 00:53:54.660
+Nick Bowman: Okay, yeah, sorry. So there was a
+
+390
+00:53:57.120 --> 00:54:02.460
+Nick Bowman: So, I think. Yeah. So sounds like someone has a question about why the vector Knutsford function is not in the documentation.
+
+391
+00:54:03.330 --> 00:54:10.080
+Nick Bowman: The real answer is that the documentation is about likes while we're in 2020 the documentation is about six years old.
+
+392
+00:54:10.380 --> 00:54:14.940
+Nick Bowman: And there have been changes to the library that have happened since the documentation was last generated
+
+393
+00:54:15.300 --> 00:54:22.590
+Nick Bowman: And we currently have a group of a couple of Section leaders actually working on fixing that up and it is accurate and most of the time.
+
+394
+00:54:23.160 --> 00:54:28.290
+Nick Bowman: But there are just some things that will not show up in the documentation and when when there are situations like this will
+
+395
+00:54:28.770 --> 00:54:37.380
+Nick Bowman: Be really explicit about telling you like what to use. So like, so on the assignment. We like told you there is back that sort like just call it just run it and
+
+396
+00:54:37.980 --> 00:54:44.700
+Nick Bowman: But yeah, the documentation is just a little bit out of date. So some of the things that actually exist in the library aren't reflected in the in the documentation.
+
+397
+00:54:49.500 --> 00:54:50.940
+Nick Bowman: Yeah. Do you have a question.
+
+398
+00:54:51.870 --> 00:55:01.470
+tongjun zhang: Yes. Can we use maps for this like for recording everything instead of using stacks inside. Inside, of course.
+
+399
+00:55:02.820 --> 00:55:08.310
+Nick Bowman: And so you're saying do you can you use a map to keep track of the partial ladders, rather than a stack.
+
+400
+00:55:08.940 --> 00:55:21.660
+tongjun zhang: A light or no. I mean, use a map to record everything every letters like the first two key of the map would be a string representing the current world.
+
+401
+00:55:22.110 --> 00:55:36.540
+tongjun zhang: And the value store in the map would be this a string representing did last words where we came from the last step on the ladder. So I think that a single mapper would hold like everything
+
+402
+00:55:37.680 --> 00:55:38.790
+Nick Bowman: And yeah, I mean,
+
+403
+00:55:38.970 --> 00:55:43.770
+Nick Bowman: I think, yeah, I think I see what you're saying there. And I think I can liken it to
+
+404
+00:55:45.540 --> 00:55:49.140
+Nick Bowman: An A a way of seeing breath first search before that.
+
+405
+00:55:50.460 --> 00:55:56.310
+Nick Bowman: Rather than keeping track of all the individual paths just sort of as you're mentioning keeps track of this like single backwards link.
+
+406
+00:55:56.670 --> 00:56:06.420
+Nick Bowman: And I think it actually is possible to do it that way. And I recommend if you if you think that way makes more sense to to take, take the starter kit that we have and try it implementing it in that way.
+
+407
+00:56:06.840 --> 00:56:10.590
+Nick Bowman: There's nothing in the starter code that requires you to implement it with stacks and Q's and sets.
+
+408
+00:56:11.070 --> 00:56:25.380
+Nick Bowman: And the thing that the the reason that I would justify that we do actually break that information apart into multiple different data structures for the approach that we talked about here is that the there's often a trade off when it comes to like
+
+409
+00:56:26.700 --> 00:56:33.690
+Nick Bowman: Efficiency and number of data structures used and like understand ability and like clarity to people reading your code and
+
+410
+00:56:34.200 --> 00:56:45.060
+Nick Bowman: Clarity and teaching and explaining the algorithm and in a situation like this actually breaking it apart into these three different data structures that each keep track of their own different piece of information.
+
+411
+00:56:45.780 --> 00:56:55.050
+Nick Bowman: Can result in a little bit more clarity and which is to say that like it accomplishes the same goal, but it doesn't try to contain all the information in one data structure.
+
+412
+00:56:55.770 --> 00:57:02.940
+Nick Bowman: So your approach me, actually, you know, use less space. Be a little bit quicker and but maybe it's a little bit just more dense and a little bit harder to understand
+
+413
+00:57:04.230 --> 00:57:14.070
+Nick Bowman: And I mean that like generally right like when when we're teaching and explaining, but if it makes more sense to you. Like I would highly recommend. Like I said, just try implementing it and see if you can get it to work that way. I think what you're suggesting
+
+414
+00:57:14.400 --> 00:57:19.230
+Nick Bowman: There's a way to get that to work. So I think you're on a on a on a reasonable path.
+
+415
+00:57:20.610 --> 00:57:20.850
+Okay.
+
+416
+00:57:24.810 --> 00:57:25.230
+Nick Bowman: Looks like yeah
+
+417
+00:57:26.340 --> 00:57:33.090
+karan parikh: Yeah. So if we're a little confused about a certain topic. Do we sign up for office hours. Just get some clarification on it.
+
+418
+00:57:34.140 --> 00:57:34.650
+karan parikh: Yes, it's not
+
+419
+00:57:34.980 --> 00:57:35.880
+karan parikh: To say that question.
+
+420
+00:57:36.480 --> 00:57:41.220
+Nick Bowman: Yeah, you don't. You don't have to have a specific question to come to office hours and not not at all. You can
+
+421
+00:57:41.520 --> 00:57:53.370
+Nick Bowman: You can come by and you can just say, Hey, like, go over these slides in the lecture again because I didn't understand it the first time, like that's a, that's a totally reasonable way they use officers. Okay. And there's a conceptual view.
+
+422
+00:57:54.480 --> 00:57:58.830
+Nick Bowman: Every night as well, specifically for costs contact questions that are not specific to code.
+
+423
+00:58:01.200 --> 00:58:02.460
+karan parikh: For the layer thing.
+
+424
+00:58:05.610 --> 00:58:11.010
+Nick Bowman: Sorry. The question is, are you, are you. Do you attend the miners layer or the adult there.
+
+425
+00:58:14.460 --> 00:58:16.230
+karan parikh: Well, I would be going to the minors one
+
+426
+00:58:16.740 --> 00:58:18.870
+Nick Bowman: Okay, yeah. So in the minors one. There's no
+
+427
+00:58:20.190 --> 00:58:29.070
+Nick Bowman: Yeah, so for the layer you again. You can also go to Layer that you don't have to just use layer for debugging and like you can actually just go and talk to the section leader about conceptual stuff as well.
+
+428
+00:58:29.760 --> 00:58:32.190
+Nick Bowman: But yeah, you can also come to my office hours are Kylie's
+
+429
+00:58:32.430 --> 00:58:44.550
+Nick Bowman: And like I said, even just coming and saying, Hey, like I just didn't get this part of the lecture coming just go over it again. Right. I didn't get this code example can be like cluttered up together that's that's a totally a great way to use officers. Okay.
+
+430
+00:58:44.670 --> 00:58:46.410
+karan parikh: And then we find out about on the website.
+
+431
+00:58:47.520 --> 00:58:57.120
+Nick Bowman: Yeah and there's two hours of our officers that are just dropping every week and the zoom link is the schedule the zoom link on the on the website.
+
+432
+00:58:57.360 --> 00:59:07.620
+Nick Bowman: There's also two hours that are that are 15 minute appointment. Sign up based and you can also find a link for that on the website. So, just depending on which day you go you either sign up in advance or you just come and drop in
+
+433
+00:59:08.700 --> 00:59:09.030
+karan parikh: All right.
+
+434
+00:59:14.400 --> 00:59:16.710
+Nick Bowman: Anyone else have any other questions about what we talked about today.
+
+435
+00:59:20.640 --> 00:59:21.510
+edouard des: Thank you very much.
+
+436
+00:59:29.130 --> 00:59:31.530
+Nick Bowman: Last call for questions.
+
+437
+00:59:37.590 --> 00:59:40.830
+Nick Bowman: Never looks like it's it well, have a good rest your day everyone.
+
+438
+00:59:43.980 --> 00:59:46.590
+Jordan Lin: I do want to stop recording
+

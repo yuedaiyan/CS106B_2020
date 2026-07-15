@@ -1,0 +1,251 @@
+00:12:57	runze yu:	Is there any way we can add the playlist to our own computer? 😂
+00:13:02	Thomas Tao Hale:	WeChat is a bit asian mom for me, not to mention it kills the battery
+00:13:10	kylie jue:	The playlist is on the homepage of the website!
+00:13:11	Kenneth W.K. Wang:	the playlist is on the course website
+00:13:15	Kenneth W.K. Wang:	wechat is very Asian mom yes
+00:13:33	shirley li:	Big O...
+00:13:33	Dima Timofeev:	graphs
+00:13:34	Ryan Gabel:	A lot of data organized in a certain way
+00:13:35	Kyle Booker:	aRRAYS
+00:13:36	Thomas Christopher Beck:	dictionary
+00:13:36	Thomas Tao Hale:	objecgt
+00:13:36	Ryan Bernstein:	Organization of data
+00:13:37	dyson ye:	lists
+00:13:38	Nadia Palar:	hash tables :0
+00:13:38	Samuel Lynn Ledden:	an array 
+00:13:39	Gautham Rajesh:	array
+00:13:40	Hriday Sanjay Chhabria:	Hash Map
+00:13:40	Sanjit Juneja:	arrays
+00:13:41	Breea Toomey:	array
+00:13:42	Lukas Fullner:	Code to store data
+00:13:42	Hanna Mofid:	array
+00:13:42	Guozhen Miao:	array
+00:13:42	Arul Saxena:	organized data storaged
+00:13:43	Marcela Simone De los Rios:	organization of info
+00:13:43	Akash Bhargava:	arrays
+00:13:44	Oz Gitelson:	array
+00:13:44	Nikita Nitin Khapre:	Array/list
+00:13:44	Kuan Heng Lin:	Organizational methods
+00:13:45	christopher cooper:	Tools in a toolbox
+00:13:45	Siddharth Balaji:	Any sort of structure or framework that stores various types of data in an organized fashion that allows for easy recollection and adaptation of the data
+00:13:45	alan hu:	dict
+00:13:46	shreyas ravi:	arrays
+00:13:46	gavin gee:	arrays
+00:13:46	Kenny Wang:	some type of thing that stores a bunch of data
+00:13:47	catherine deng:	array
+00:13:48	kevin yang:	Data structure is data that is organized
+00:13:48	Nate Hedgecock:	List
+00:13:50	Zachary Alon:	Large tables/graphs or any organization of infomation
+00:13:51	Jaelyn N Kelly:	A way of grouping pieces of information together
+00:13:52	Kenneth Fischer:	Arrays and lists
+00:13:54	Faith Aing Okamoto:	organizational stuff
+00:13:57	Elan Tal Smolar Eisenberg:	grouping
+00:13:57	Humaid Alzaabi:	Organization of data
+00:13:58	alz1022@stanford.edu:	something that organizes data
+00:13:58	edouard des:	Mapping out information so that it can be retrieved
+00:13:59	Magdalena Warren:	Vectors and matrixes
+00:14:01	nicole koch:	anything that holds a lot of data in an organized manner, such as graphs and arrays
+00:17:42	Thomas Tao Hale:	Especially translating between different language families, for example Basque to mandarin to farsi back to English or something
+00:20:31	Kenny Wang:	just 5 mins?
+00:20:37	Kenny Wang:	hmm okay
+00:21:28	kylie jue:	You don’t have to finish the problem - just get as far as you can (the value of the breakout rooms is discussion and trying things out yourself, not completing the problem!)
+00:23:42	shreyas sriram:	Hi, I'm having trouble accessing ed.
+00:24:11	kylie jue:	Did you try going to this link:
+00:24:12	kylie jue:	https://us.edstem.org/courses/640/workspaces/
+00:24:35	Liza George:	I was sent to the break out room (#41) but no-one else was there
+00:24:43	Liza George:	I'm not sure if it was a zoom bug?
+00:25:01	Liza George:	I think there's someone else on my ed file
+00:25:04	Liza George:	ok thanks!
+00:25:40	Liza George:	sorry, I'm not getting sent to another room
+00:27:56	Kenny Wang:	hey room 29 teammate (I forgot your name) we did it
+00:31:59	Dima Timofeev:	Why cin does not work for us?
+00:32:02	Kenny Wang:	^
+00:32:05	Oz Gitelson:	^
+00:32:08	Kuan Heng Lin:	^
+00:32:12	Kenny Wang:	I don't like getline
+00:32:22	Aadi M Rane:	im used to cin
+00:32:24	Francesco Crivelli:	And cin?
+00:32:28	nicole koch:	same
+00:32:29	Francesco Crivelli:	Same
+00:32:31	kylie jue:	It has to do with how the Stanford console library works
+00:32:34	kevin yang:	Why not can?
+00:32:36	kevin yang:	*cin?
+00:32:38	Kenny Wang:	interesting
+00:32:52	shreyas ravi:	can you use the same method but pass a text file as a parameter to read?
+00:32:54	Thomas Tao Hale:	Cin you do the cin cin?
+00:33:00	Francesco Crivelli:	So getLine is to get info from the user right?
+00:33:04	kathleen bryan:	Can you make that window larger?
+00:33:04	Rohan N Chowla:	what is the difference between cin and getLine()?
+00:33:12	kylie jue:	Remember we’re not teaching standard C++ so we’ve designed these functions to work well for folks just starting off with console programs/transitioning from Python or Java
+00:33:23	christopher cooper:	https://web.stanford.edu/dept/cs_edu/cppdoc/simpio.html
+00:33:25	Kenny Wang:	the text is tiny
+00:33:33	Regina Ta:	Does getLine only accept strings? What about other types, or can we convert what we get from getLine into a different type?
+00:33:34	Kenny Wang:	better
+00:33:42	Faith Aing Okamoto:	Please make font bigger
+00:34:29	Siddharth Balaji:	So if we wanted a user to input say an integer for example, it would still need to be stored in a string variable and then converted to an integer later on?
+00:34:58	christopher cooper:	You can use getInteger for that
+00:35:08	Liza George:	Can the user input multi-line inputs with escape sequence /n in the middle of the string like in java?
+00:35:08	kylie jue:	If you’re using getLine(), yes - you would need to convert from string to int.  Nick will mention this shortly, but there are a couple of other simpio functions that allow you to read in different types as well
+00:35:21	Siddharth Balaji:	Sounds good thank you
+00:36:43	Kenny Wang:	remind me how to mass comment/uncomment like that? ctrl+slash?
+00:36:47	kylie jue:	@Liza - I’m actually not sure without trying that out.  But that’s a good question to test out by writing a quick piece of code!
+00:37:07	shreyas ravi:	Kenny I think it’s control / or command / on Mac
+00:37:08	kylie jue:	@Kenny - yup control+slash or command+slash (depending on your OS)
+00:37:21	Kenny Wang:	got it, thanks
+00:37:44	Thomas Tao Hale:	Eh honestly I just prefer using /* … */
+00:38:01	Matt Presson:	This was probably already answered, but does getLine belong to a specific Stanford Library?
+00:38:18	kylie jue:	Yes getLine is part of the simpio Stanford library
+00:38:25	Matt Presson:	Thank you
+00:38:59	Thomas Tao Hale:	So getint is also Stanford?
+00:39:05	Kenny Wang:	is it typical to say something like "if (inputs == "") break;" in one line or should we use curly braces?
+00:39:17	Regina Ta:	In Nick’s code, he just wrote if(…) break; without any curly braces, so does that mean we can forego curly braces when we have a short if statement?
+00:39:22	Kenny Wang:	^
+00:39:25	Siddharth Balaji:	Is it more efficient to use this while(true) and break structure in this case or asking the user to type in “STOP” or something to end the loop?
+00:40:23	kylie jue:	@Siddharth This just depends on how you want the user to end the program (it’s easier for the user to just hit enter than typing something) - but totally dependent on what type of console program you’re designing
+00:40:43	kylie jue:	@Thomas, getInteger is in the Stanford simpio library
+00:40:48	kylie jue:	https://web.stanford.edu/dept/cs_edu/cppdoc/simpio.html
+00:41:00	Kenny Wang:	inb4 simpio jokes
+00:41:01	kylie jue:	^for folks who are interested in what other functions exist
+00:41:14	nicole koch:	lol
+00:42:12	Kuan Heng Lin:	Is there a way to directly manipulate what is shown in the console?
+00:42:20	Kuan Heng Lin:	For instance, you print "Hello!"
+00:42:31	Kuan Heng Lin:	And you decided on another line of code you want to get rid of the "!"
+00:42:55	kylie jue:	@Kuan do you mean to edit something that’s already printed?
+00:42:59	Kuan Heng Lin:	Yes
+00:43:26	Kenneth Fischer:	Will all YEAH sessions be hosted by Trip, or will there be some sessions that minors can also attend?
+00:43:27	kylie jue:	once something has been outputted with cout <<, there’s not a way to change it (besides clearing everything I believ)
+00:43:37	Kuan Heng Lin:	Ok thanks :)
+00:43:44	kylie jue:	YEAH sessions will likely always be hosted by Trip
+00:45:29	Thomas Tao Hale:	O no
+00:45:43	Hemant Chaudhary:	He's back now I think
+00:45:49	Thomas Tao Hale:	It cut out for about 7 seconds
+00:48:21	chitra mukherjee:	Are vectors kind of like arraylists in java?
+00:48:32	kylie jue:	Yes! Wait for the next bullet
+00:48:43	kylie jue:	:)
+00:49:42	Liza George:	wait so do the import statements have to be in an entirely different file?
+00:49:57	Kuan Heng Lin:	The capital V thing is a Stanford library feature right
+00:50:04	kylie jue:	The #include statements are including function prototypes from a different file
+00:50:12	kylie jue:	but the #include statements themselves are at the top of your file
+00:50:23	kylie jue:	Yes the capital V helps specify it’s a Stanford library Vector
+00:50:41	Siddharth Balaji:	Can you specify a starting size of a vector on creation?
+00:50:59	Kenny Wang:	a vector starts as empty so I don't think so
+00:51:02	kylie jue:	You can specify elements inside a vector
+00:51:08	kylie jue:	when it’s initialized
+00:51:28	Kenny Wang:	okay yeah ^
+00:51:42	Dima Timofeev:	Does Vector has a default initializer?
+00:52:07	kylie jue:	When it’s initialized, if you haven’t defined anything it will be garbage values
+00:52:18	Elan Tal Smolar Eisenberg:	How do you check if a value is in a vector/array?
+00:52:43	kylie jue:	We have a slide coming up shortly with Vector functions
+00:52:47	Pablo Manjon Gamez:	Can you do vec[-1] like in Python?
+00:52:55	kylie jue:	No you can’t do vec[-1]
+00:53:06	Elan Tal Smolar Eisenberg:	What’s the difference between a vector and an array?
+00:53:07	kylie jue:	negative indices is very specific to Python :)
+00:53:19	Emily Sturman:	Can you set the values of a vector (i.e. saying vec = {x, y, z}) after initializing?
+00:53:19	Kuan Heng Lin:	oh :(
+00:53:25	Hemant Chaudhary:	Is there a way to combine two vectors together? (like left and right)
+00:53:35	kylie jue:	Arrays are lower level data structures that deal directly with the memory in your computer (we’ll learn about them later in the course when we move to the other side of the abstraction boundary)
+00:53:44	louise marzolf:	Is there try-catch-finally method in c++ like in java?
+00:53:55	kathleen bryan:	can you search for a value to find what index it is at w/I the vector
+00:53:56	shreyas ravi:	if the size can be changed then why doesn’t the vector just return a null value if you try to access a value outside of the bounds?
+00:53:58	kylie jue:	@Emily yes
+00:55:20	kylie jue:	@Hemant yes you can concatenate vectors like vec1 + vec2
+00:55:21	kylie jue:	https://web.stanford.edu/dept/cs_edu/cppdoc/Vector-class.html
+00:55:31	kylie jue:	^ for folks with more vector function questions
+00:55:34	Hemant Chaudhary:	Great thanks!
+00:56:01	ethan ramchandani:	if you vectorized.sort a vector of strings, will it sort by the askii vals of the first letter of each string?
+00:56:02	kylie jue:	@kathleen what do you mean by w/l?
+00:56:25	kathleen bryan:	within
+00:56:42	kathleen bryan:	So if I know a value is 18 can I find what index it is at within the  vector
+00:56:43	kylie jue:	@shreyas, it has to do with the way C++ moves forward in memory behind the scenes when trying to access elements inside the vector
+00:57:59	kylie jue:	@Kathleen you would have to loop over the vector to find the element
+00:58:07	kathleen bryan:	Got it
+00:58:28	Hemant Chaudhary:	Can we pass by reference?
+00:58:57	Kuan Heng Lin:	Can we print C++ STL vectors with cout?
+00:59:01	kylie jue:	@Ethan I believe the answer to that question is yes, but I’m not sure you can apply the sort function to the Stanford Vector data structure - would have to try that myself (but in general sort functions on strings typically sort by ASCII values)
+00:59:18	Kuan Heng Lin:	I remember it throwing errors in the past when I tried doing so
+00:59:36	kylie jue:	@Kuan I’m not sure - would need to look at the documentation for the C++ STL vectors, but we won’t be using those in this class
+00:59:51	Kuan Heng Lin:	I see :)
+00:59:58	kylie jue:	@Hemant - question is being answered :)
+01:01:13	Sedef Emekli:	Shouldn’t the code (we just answered a poll about) give an error as we cannot traverse a vector by just writing cout<<nums<<endl out of a loop
+01:01:15	Samuel Lynn Ledden:	Can you also assign the vector a new Vector value returned by the method?
+01:01:46	Ali Mahdi:	do references apply to any data type?
+01:01:49	Dima Timofeev:	How does it work in Python? Is everything a reference in Python?
+01:01:58	kylie jue:	@Samuel yes you can - Nick is talking about that now (why you wouldn’t do that)
+01:02:01	kylie jue:	@Ali yes
+01:02:30	kylie jue:	@ Dima - sort of.  Python decides for you if you’re passing by reference or value depending on the underlying data type
+01:02:48	alan hu:	Does c++ by default pass *everything* by value?
+01:02:57	kylie jue:	@Sedef - stick around after lecture to ask if you can.  I’m not 100 percent sure I follow your question
+01:03:11	kylie jue:	@Alan yes
+01:03:28	Elan Tal Smolar Eisenberg:	How do you get an index of an element in a vector? Say you have the element, how do you get the index?
+01:03:40	Kuan Heng Lin:	@Sedef The Stanford vector can just be printed, unlike C++ STL vectors, which is pretty cool.
+01:03:51	kylie jue:	@Elan - you would have to loop through the vector and check
+01:03:54	Siddharth Balaji:	Is there a keyboard shortcut to build in qt, like I know in some development environments like sublime you could build by using command B or something
+01:03:56	radu ilia:	Couldn't we just declare the vector globally instead of using a reference?
+01:04:05	Francesco Crivelli:	How do we comment and uncomment a whole selection
+01:04:06	Kuan Heng Lin:	@Siddharth Control+R
+01:04:06	Francesco Crivelli:	?
+01:04:12	Kyle Booker:	Scope?
+01:04:14	Ryan Gabel:	On Windows you can do Ctrl-R
+01:04:18	Siddharth Balaji:	thanks
+01:04:19	Ryan Gabel:	To build and run
+01:04:24	Kyle Booker:	@radu I think it has to do with scope
+01:04:25	Francesco Crivelli:	tnks
+01:04:33	Zelin (James) Li:	command + /
+01:04:35	Zelin (James) Li:	on mac
+01:04:41	kylie jue:	@Radu we want to avoid global variables whenever possible in our code, for the same reason we don’t pass everything by reference everywhere (to restrict what functions can access certain data)
+01:04:56	radu ilia:	got it, thanks!
+01:05:06	kylie jue:	@Francesco highlight and cmd + / or ctrl + .
+01:05:08	kylie jue:	*oops
+01:05:10	kylie jue:	Ctrl + /
+01:05:21	Zelin (James) Li:	is this possible to only use reference for one input instead of making the function use reference
+01:05:24	isabel salovaara:	Why is weight_ref a literal?
+01:05:34	alan hu:	Could we go over returning multiple values w/ references again?
+01:05:35	nicole koch:	thank you bye!
+01:05:35	kathleen bryan:	What’s the command for formatting in QT again? (The auto indent)
+01:05:40	shreyas ravi:	what happens if the reference is a null value?
+01:05:42	Akash Bhargava:	Thanks
+01:05:52	Harry Yu:	thank you
+01:06:05	Francesco Crivelli:	Thanks
+01:07:00	Elan Tal Smolar Eisenberg:	Thank you
+01:07:23	Zelin (James) Li:	thanks!
+01:07:35	Guozhen Miao:	Thank you
+01:07:57	alan hu:	c++ is function or block scoped?
+01:08:09	Kenny Wang:	thanks!
+01:08:17	Hanna Mofid:	why is weight_ref a literal?
+01:08:25	kathleen bryan:	Is the main representative of the global scope. So whatever the value is within main, is that always the global value
+01:08:34	kathleen bryan:	?
+01:09:09	Kuan Heng Lin:	A literal is just a constant right?
+01:09:43	isabel salovaara:	(Why is weight ref a literal refers to the “don’t do this” comment)
+01:10:05	Rafael Vila:	Are global constants written in camel case?
+01:10:12	kylie jue:	All caps #Rafael
+01:10:20	Rafael Vila:	ty
+01:12:14	kylie jue:	@Shreyas - I believe it depends on the data type you’re dealing with.  Whether C++ would give an error or just work with a garbage value
+01:12:22	max chou:	Would you normally use references with void functions?
+01:12:50	kylie jue:	@Max you can!  But we’ll see references used later in the quarter with non-void functions for multiple return as well
+01:13:03	max chou:	Ok that makes sense ty
+01:13:35	Liza George:	so this is the equivalent of having the eliminateNegativity function return an int with the count and storing that in the main function?
+01:13:51	Liza George:	oh ok then
+01:15:29	Hanna Mofid:	what do you mean by multiple return values?
+01:15:48	kylie jue:	@Hanna the idea is that you get get multiple different pieces of information from the function
+01:15:54	kylie jue:	So in the example of eliminateNegativity
+01:16:06	kylie jue:	you’re both getting the number of negatives and also getting a vector of the numbers
+01:16:18	kylie jue:	So there are two things being “returned” back to the caller function
+01:16:18	Liza George:	so if we called a pass-by-reference function in another (non-main) function, the variable in the scope of that function will still change as needed right?
+01:16:26	Hanna Mofid:	ok I understand, thank you
+01:16:43	kylie jue:	@Liza yes - you can use pass by reference between any two functions
+01:16:45	kylie jue:	Doesn’t have to be main
+01:16:55	alan hu:	Just now when numEliminated was passed as a reference to eliminateNegativity, did we have to change numEliminated into a pointer, or can it just be a regular variable?
+01:17:06	Shifeng Hong:	Can you explain the top section of the program？I mean the “include《iostream》etc
+01:17:14	Shifeng Hong:	and namespace std
+01:17:37	kylie jue:	@Alan no references are different from pointers
+01:17:40	Demi Lei:	do we have to use namespace std for this course?
+01:17:43	kylie jue:	We’ll discuss pointers more later in the quarter
+01:18:03	Liza George:	do we need to know what those header files are now?
+01:18:12	kylie jue:	@Demi pretty much yes - it avoids needing to write std::cout and generally putting std:: in front a lot of built in commands
+01:18:23	kylie jue:	@Liza no not yet
+01:18:32	Shifeng Hong:	Thank you
+01:18:34	kylie jue:	We’ll go over them in more depth once you need to look at them
+01:18:40	Demi Lei:	thank you!
+01:19:01	alan hu:	Thanks guys!
+01:19:22	Thomas Tao Hale:	Alright imma go now, see ya guys
+01:19:40	Liza George:	so the namespace std part only referes to one library?

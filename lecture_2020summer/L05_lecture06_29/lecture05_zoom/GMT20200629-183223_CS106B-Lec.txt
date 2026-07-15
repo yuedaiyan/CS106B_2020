@@ -1,0 +1,154 @@
+00:11:40	Thomas Tao Hale:	hah
+00:12:47	Thomas Tao Hale:	Time to bookmark the Stanford C++ documentation page I guess
+00:13:36	brianzhg@stanford.edu:	if you have some vector a and another vector b, and then you write a = b, does a become a reference for b or does it create a copy?
+00:13:56	Nick Bowman:	The equal sign for assignment will always make a copy!
+00:14:08	brianzhg@stanford.edu:	Ok thanks!
+00:14:11	Nick Bowman:	References can only be created by explicitly including the & indicator
+00:14:23	Nick Bowman:	So if you have Vector<int>a = {1,2,3};
+00:14:34	Nick Bowman:	Vector<int> b = a; creates a copy of the whole data structure
+00:14:36	Francesco Crivelli:	Sorr
+00:14:50	Nick Bowman:	but Vector<int>& b = a; makes a reference to the original data structure and does not make a copy
+00:15:30	Francesco Crivelli:	By the Assignment, someone else can’t post it in paperless??
+00:21:08	john meshinsky:	I got kicked out of my breakout room
+00:22:13	Elan Smolar Eisenberg:	So vectors will be printed as a list instead of their place in memory?
+00:22:19	Nick Bowman:	Sorry to hear about that, if this happens again in the future, feel free to DM me with the info about which room you were in and I can re-add you.
+00:22:28	john meshinsky:	Sorry for my breakout room members! I got kicked out of zoom.
+00:22:35	Nick Bowman:	Yes, when you print a vector, you will get a nicely formatted list of values.
+00:22:45	Jihe He:	That's nicer than Java
+00:22:48	Usman Iqbal Hanif:	Do you have to do toString()?
+00:22:57	Kenny Wang:	it's not nicer than Java lol
+00:23:04	Nick Bowman:	No, the << operator is defined for Stanford collections to take care of that for you
+00:23:04	Kenny Wang:	it's because we have the Stanford vector stuff
+00:23:07	Elan Smolar Eisenberg:	Is there any includes that you need for that to happen?
+00:23:14	Usman Iqbal Hanif:	Ok thanks!
+00:23:15	Kenny Wang:	the normal standard vector is sad
+00:23:30	Elena Williams:	Since the saki function is supposed to return a vector<int>, why does it accept the statement saki(a) without any return assignment?
+00:23:36	Rohan Chowla:	^
+00:23:37	Nick Bowman:	This is all enabled because of the #include “vector.h” at the beginning of the file
+00:24:00	Nick Bowman:	C++ doesn’t enforce that you need to do anything with return values! It’s probably a bug to ignore th value but it’s your job as the programmer to realize that
+00:24:14	Elena Williams:	Ok, thanks!
+00:24:35	Elan Smolar Eisenberg:	So a grid is an array and not a vector? Is there some sort of Venn diagram for this?
+00:24:57	Kenny Wang:	what happens if you resize a full grid smaller than it used to be
+00:25:16	Kenny Wang:	are some values just chopped off?
+00:25:30	Nick Bowman:	@Elan Neither, Grid is its own type of data strcuture that provides different properties than arrays or vectors
+00:25:46	Kelly L. Boles:	A grid is a matrix?
+00:25:53	Nick Bowman:	@Kenny I think you have the right idea, but the best way to get answers to questions like this is to code up an example and see what happens!
+00:25:56	hriday chhabria:	Yes @kelly
+00:26:05	Nick Bowman:	@Kelly A Gird is very similar to a matrix in math, yes
+00:26:13	runze yu:	Is Grid part of Stanford cpp library?
+00:26:29	Nick Bowman:	Yes, accessible with the #include “grid.h” heade
+00:26:37	Kelly L. Boles:	matrix is the call in R, too
+00:26:48	Hemant Chaudhary:	When we write board[0][1] does 0 correspond to the row or column?
+00:27:01	Nick Bowman:	The order is always row, column so 0 is the row
+00:27:20	Hemant Chaudhary:	Great thanks Nick!
+00:27:33	Nate Hedgecock:	Which library are these grid methods in Nick?
+00:28:04	Nick Bowman:	The Grid data structure is part of the Stanford C++ libraries (as are all the ADTs that we talk about)
+00:31:15	Thomas Tao Hale:	Is  Grid<Vector> possible>
+00:31:16	kathleen bryan:	do grids all have to be of one data type ?
+00:31:47	Nick Bowman:	Yes, grids have to be all of one data type (just like vectors) and yes you can nest structures inside of one another so it is possible to have Grid<Vector>
+00:31:50	Kuan Heng Lin:	yay numpy
+00:32:05	Weiqi Yu:	I wonder how is the subscript syntax implemented
+00:32:10	Pablo Manjon Gamez:	Can you declare a grid of type “object”?
+00:32:16	Kelly L. Boles:	That’s not convenient. So grid[0,] doesn’t work?
+00:32:33	Kyle Booker:	Is there a corresponding type for C++ std
+00:33:13	Nick Bowman:	@Pablo I’m not sure, let’s chat after class
+00:33:25	Nick Bowman:	@Kelly No, grid[0,] does not work
+00:33:27	Elan Smolar Eisenberg:	Is capitalization important in the .h includes?
+00:33:49	David Huang:	what does .h stand for in stanford libraries like “grid.h”?
+00:34:16	Kenny Wang:	.h refers to like header file
+00:34:32	Kenny Wang:	let's take a moment to appreciate how dumb it was for Hasbro to replace the destroyer with the PT boat (ship of length 2)
+00:34:38	Nick Bowman:	@Elan I’m not sure but you can easily test that out in Qt Creator!
+00:34:52	Thomas Tao Hale:	H1
+00:35:05	Nick Bowman:	@David .h files are things called header files, and we will talk more in depth about them on Wednesday
+00:35:13	Kyle Booker:	Is there a corresponding data type for the C++ std lib
+00:35:16	Kenny Wang:	PT boats are typically 80 feet long while a battleship can be 800 feet long
+00:35:19	David Huang:	Ok thanks
+00:35:31	Nick Bowman:	Folks, let’s keep the chat on topic and only used for questions, please.
+00:35:37	Kenny Wang:	okay my bad
+00:35:55	George Halal:	what commands do you run in the Ed terminal to run the main.cpp code
+00:36:35	Kuan Heng Lin:	This means that you can create things like, 3D grids?
+00:36:35	Nick Bowman:	@Kyle not that I know of, but you can use lower level memory management to emulate the behavior of a grid, which we’ll talk about later in the course
+00:36:45	Thomas Tao Hale:	Do you have a constructer in C++ like you have in Java?
+00:36:50	Nick Bowman:	@George you just type in “make run” into the terminal
+00:37:03	Siddharth Balaji:	My stream cut out for a second what’s the definition of a struct and what is it used for again?
+00:37:03	Arul Saxena:	are structs objects?
+00:37:09	Nick Bowman:	@Kuan yes you can nest things inside one another to make a 3D data structure
+00:37:25	Regina Ta:	For origin.row/col, do you need to specify the type, like int?
+00:37:26	Nick Bowman:	@Thomas, yes but we won’t talk about constructors in depth until Week 4
+00:37:28	Kyle Booker:	GridLocation is an object?
+00:37:49	Nick Bowman:	@Arul @Kyle Yes structs are “objects” in the sense that they define new types
+00:37:59	michael hu:	Is one way more efficient than the other, or is it a stylistic improvement?
+00:38:27	Nick Bowman:	@michel the main benefit here is improved organization of code, but there can be some efficiency gains as wel. Happy to talk further after class.
+00:38:37	Kyle Booker:	Can you nest structs?
+00:38:45	Nick Bowman:	@Siddharth here’s the definition of a struct from the slides: A way to bundle different types of information in C++ – like creating a custom data structure.
+00:39:24	Nick Bowman:	@Kyle yes, you can include any type of data that you want in a struct, including other structs (but not the same struct that you’re defining, because that wouldn’t make sense)
+00:39:42	Kyle Booker:	Can grids hold a type of struct since they are 'objects'
+00:39:56	Kenny Wang:	how would you use a GridLocation in order to fetch data from a certain cell in the grid? would you need to do grid[loc.row][loc.col] or is there a nicer way?
+00:40:09	Brenna Marie Wakefield:	With the assignment grace period mentioned on the course site, does that mean 24 hour grace period without penalty?
+00:40:24	Nick Bowman:	@Kyle, yes Grids can hold any type, and since structs just define new types, they can be stored in a grid
+00:40:31	Jordan Lin:	Are there any data structures in the Stanford C++ library that functions like a python dictionary? Grids come close, but you cannot just add an extra column or something at will.
+00:40:43	Nick Bowman:	@Kenny You can do grid[loc] as shorthand o access the info at a certain grid location
+00:40:50	Kenny Wang:	awesome, thanks
+00:40:53	paul gialis:	So the assignment is due Tuesday night and not tonight, right?
+00:41:02	Nick Bowman:	@brenna correct
+00:41:03	kathleen bryan:	how would you overwrite a gridLocation? Just re-assign it?
+00:41:07	Humaid Alzaabi:	Will the assignments also be sent by timezone?
+00:41:09	Nick Bowman:	@Paul the assignment is due tuesday night, yes
+00:41:26	Nick Bowman:	@Katheleen, correct, just like overwriting any other variable
+00:41:36	Weiqi Yu:	is there an initializer for a struct?
+00:41:46	Nick Bowman:	@Humaid no assignments will be released at one point in time on the course website
+00:41:56	Nick Bowman:	@Weiqi let’s talk more about that after class
+00:42:00	Aadi M Rane:	Are structs primitive?
+00:42:20	Nick Bowman:	@Jordan coming soon, in tomorrow’s lectur!
+00:42:45	Nick Bowman:	@Aadi no not quite, but we can talk abut the details after class
+00:42:53	Kyle Booker:	Can you create a struct w/o assigning values to all variable; if so does that mean if you call that variable without assigning youll get garbage like with normal vars
+00:44:24	Nick Bowman:	@Kyle correct, the members of a struct behave exactly like normal variables – if you don’t initialize them, you will get garbage
+00:44:39	Jordan Lin:	@Nick Can you tell me the name of the dictionary-like class? I want to implement it in Assignment 1, and due to timezones the lecture tomorrow for me is already past Tuesday 11:59PM
+00:45:22	Nick Bowman:	@Jordan You don’t need it for the assignment, but if you want you can look at the documentation for the Stanford Map
+00:45:26	Weiqi Yu:	I guess you want to use dictionary for the letter-digit conversion lol
+00:45:46	Kevin H Fan:	So a queue is also a struct?
+00:45:54	Jordan Lin:	It is even more helpful for the extension, where the digits are much weirder
+00:46:06	Nick Bowman:	No, a Queue is a class – we will talk much more in depth about the distinction during Week 4
+00:46:17	Usman Iqbal Hanif:	Can you remove from a queue at a specific index?
+00:46:20	Aadi M Rane:	can you get a specific element of a queue? not necessarily the front
+00:46:24	shreyas ravi:	what’s the difference between a queue and a vector
+00:46:29	kathleen bryan:	Are the either or for the calls ? Are peak() and front() both valid and doing the same thing
+00:46:34	Nick Bowman:	No, you are only allowed to access the front of a queue – this is a purposeful constraint
+00:46:46	Nick Bowman:	You cannot access an arbitrary element since there is no concept of an index into a queue
+00:46:54	Nick Bowman:	@kathleen yes
+00:47:01	Kyle Booker:	Magnitude = pop(pop())
+00:47:03	karan parikh:	where are the recordings being stored?
+00:47:13	Rohan Chowla:	what are advantages to using this as opposed to a vector
+00:47:32	Nick Bowman:	@karan the recordings are on Canvas > Zoom > cloud recordings
+00:47:42	Elan Smolar Eisenberg:	By top, do you mean right?
+00:47:57	catherine deng:	When would it be better to choose vector over stack/queue
+00:48:03	Wen Zhang:	do stacks and queues need to be passed by reference?
+00:48:07	Nick Bowman:	@shreyas @rohan we will cover the comparison and benefits and a couple slides
+00:48:22	Nick Bowman:	@Elan yes the top of the stack is at the right of the representation here
+00:48:47	Siddharth Balaji:	Can you dequeue from the middle or can you never access items in the middle of a queue?
+00:48:48	Nick Bowman:	@Wen stacks and queues can be passed both by value and by reference just like any other ADT – it is up to you to decide when each is appropriate
+00:49:15	Nick Bowman:	@Siddharth no, you can only access elements at the front of a queue – this is the whole defining point of how a queue is structured
+00:49:29	Siddharth Balaji:	Gotchu thank you
+00:49:35	Wen Zhang:	thanks
+00:51:01	Pablo Manjon Gamez:	So “duqueue” returns and removes the value at the same time?
+00:51:08	Nick Bowman:	@Pablo correct
+00:51:44	Harry Yu:	do we need to include those libs? if so, what are the header?
+00:51:56	shreyas ravi:	can you put methods into a stack or queue and then call them in the order they were put in
+00:52:00	Nick Bowman:	The related includes are #include “stack.h” and #include “queue.h”
+00:52:31	Nick Bowman:	@shreyas That is beyond the scope of this class, for this class we will work under the assumption that we can’t store functions in a data structure
+00:52:42	shreyas ravi:	oh ok
+00:52:54	Kenneth Fischer:	Couldn't you say "for (int I = stack.size(); I > 0; --I)"?
+00:53:16	Francesco Crivelli:	Can we transform a stack in a queue?
+00:53:17	Nick Bowman:	@Kenneth, yes this would also be a feasible workaround
+00:53:39	Nick Bowman:	@Francesco I’m not entirely sure what you mean, would you be able to rephrase the question?
+00:54:32	Kenny Wang:	hmmm you'd probably put the head element at the end, so when you pop you don't need to shuffle each element
+00:55:04	Francesco Crivelli:	We save values in a variable through  a stack and then manipulated as a queque?
+00:56:36	Nick Bowman:	@Francesco you can save values and manipulate them using both stacks and queues
+00:58:40	Kenny Wang:	vector because you need to cancel certain elements
+01:00:14	ethan ramchandani:	when will the recording be posted?
+01:00:21	Nick Bowman:	Shortly after class
+01:00:27	ethan ramchandani:	thank you
+01:00:29	Kelly L. Boles:	What did she say the printer jobs were?
+01:00:34	Ryan Gabel:	Vector
+01:00:35	Siddharth Balaji:	vector
+01:00:39	Kenny Wang:	yay

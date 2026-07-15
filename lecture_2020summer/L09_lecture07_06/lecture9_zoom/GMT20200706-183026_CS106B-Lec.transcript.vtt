@@ -1,0 +1,1930 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:00.930
+kylie jue: Everyone
+
+2
+00:00:02.370 --> 00:00:02.970
+kylie jue: Thank you Nick.
+
+3
+00:00:04.200 --> 00:00:18.540
+kylie jue: Today we're going to be talking about a topic that is very exciting. If you haven't seen it before called recursion. While we introduce that if people could throw in the chat. What's been the most challenging part of assignment to for you so far. Again, we
+
+4
+00:00:20.160 --> 00:00:33.420
+kylie jue: We want to emphasize that struggling is good in this class. So if there's a particular aspect or problem that you found difficult. It's always great to hear how other people are struggling with you. So yeah, what's been the most challenging part of assignment to
+
+5
+00:00:35.310 --> 00:00:41.520
+kylie jue: A little bit about where we are. So we are going to be talking about recursive problem solving for about the next five or six days.
+
+6
+00:00:41.880 --> 00:00:49.920
+kylie jue: And so it's a really core part of this class, and they're really core tool that we're going to be using across assignments and topics. Later in the quarter as well.
+
+7
+00:00:51.690 --> 00:01:00.420
+kylie jue: So today's question is how can we take advantage of self similarity within a problem to solve it more elegantly. And we'll talk a little bit about what that means. What is self similarity
+
+8
+00:01:00.840 --> 00:01:08.490
+kylie jue: As we go forward in the lecture today in general. We're going to start by defining what recursion is and then we're going to talk a little bit about how it works on
+
+9
+00:01:09.210 --> 00:01:18.960
+kylie jue: A computer memory level with doctrines and then we're going to go through an actual problem and all model what it looks like to solve a recursive problem, excuse me with a string reversal problem.
+
+10
+00:01:19.980 --> 00:01:26.850
+kylie jue: Alright, just a quick review of what Nick covered last week on Thursday, you learned about big oh and big. Oh, again, as a notation.
+
+11
+00:01:27.840 --> 00:01:44.100
+kylie jue: That qualifies the rate at which your quantity grows. So if you imagine these two areas. The both of the areas grow at a rate of o r squared. And all it says is that these quantities grow at relatively the same weights with respect to
+
+12
+00:01:45.180 --> 00:01:46.680
+kylie jue: The radius here or
+
+13
+00:01:48.270 --> 00:01:50.430
+kylie jue: The width in terms of the square.
+
+14
+00:01:51.180 --> 00:01:54.420
+kylie jue: But it does not say that the quantities are actually equal
+
+15
+00:01:54.600 --> 00:02:05.790
+kylie jue: The areas of the area of the square in the area of the circle are not necessarily equal. So really important to note that big O notation just gives you the rate at which some quantity grows with respect to some given input.
+
+16
+00:02:06.000 --> 00:02:11.040
+kylie jue: Variable again the input here being the width of the square and the input here being the radius of the circle.
+
+17
+00:02:12.870 --> 00:02:20.610
+kylie jue: So we so if you actually look at the different types of big oh they're sort of three that we've seen so far there's constant time, which is super fast of one
+
+18
+00:02:21.210 --> 00:02:30.900
+kylie jue: That was what euclid algorithm was in your first assignment. There's linear time of n. And that's okay. We can live with that. This is the linear time. And then there's quadratic time open squared.
+
+19
+00:02:31.200 --> 00:02:38.100
+kylie jue: And that's when things can start to slow down really quickly and your exhaustive search for perfect numbers on the first assignment was an example of quadratic time
+
+20
+00:02:38.790 --> 00:02:47.970
+kylie jue: We also talked about how the at the data structure operations fall into these categories as well, where a lot of them are oh one of n.
+
+21
+00:02:48.450 --> 00:02:55.980
+kylie jue: And we haven't really learned what the some of these functions for sets and maps are and we're going to learn about it more, this week as we
+
+22
+00:02:56.670 --> 00:03:05.550
+kylie jue: get deeper into recursion. So not quite today, but later this week, we'll talk about what exactly is the big, the big oh runtime for these operations and sets in Maps.
+
+23
+00:03:06.870 --> 00:03:18.060
+kylie jue: Alright, so let's jump into the new material with talking about what is recursion. And so I want to go through an activity with you just to before we even talk about c++ code before we talk about recursion.
+
+24
+00:03:18.720 --> 00:03:28.290
+kylie jue: More deeply. Let's do this activity to warm up. So this is an example of code from scratch. And I'll show you it and how it works in a second. But this is a program called be
+
+25
+00:03:28.950 --> 00:03:37.950
+kylie jue: The way it works is it creates a V with random colors and how does that happen. So you are this small ball down here. You turn 20 degrees.
+
+26
+00:03:38.280 --> 00:03:47.520
+kylie jue: Counterclockwise you move 25 steps and you draw a branch and what is drawing a branch. So in Scratch. This looks like defining a function so drawing a branch is just picking a random color.
+
+27
+00:03:47.790 --> 00:03:52.260
+kylie jue: Switching your costume to that color and then making a stamp so drawing a circle of that random color.
+
+28
+00:03:52.560 --> 00:04:06.960
+kylie jue: And then you come back 25 steps you turn 40 degrees in the other direction. Move 25 draw another branch and then come back and face forward. So that's what this code is doing. And if I actually show you how it's working on scratch here if I hit the play button.
+
+29
+00:04:09.810 --> 00:04:15.750
+kylie jue: You'll see that it actually continues to change colors to random things. Alright, so that's what this V code is doing.
+
+30
+00:04:16.170 --> 00:04:22.590
+kylie jue: Now, what we're gonna do is we're going to put you in breakout rooms and I wanted to discuss what will this code do I notice the differences here.
+
+31
+00:04:23.070 --> 00:04:32.850
+kylie jue: We've added an if statement underneath the draw a branch function. And we've changed what the random number can be instead of between one in three, it's going to be between one and five.
+
+32
+00:04:33.900 --> 00:04:42.780
+kylie jue: And so I want you in your breakout rooms to discuss what's going to be different. What's going to happen differently when you have this if L statement underneath, draw a branch.
+
+33
+00:04:44.040 --> 00:04:52.800
+kylie jue: And I'll show you the demo. When we come back, if you want to use this workspace. Today you can you totally don't have to. We're going to put you into breakout rooms and we just want you to discuss
+
+34
+00:04:53.010 --> 00:04:59.910
+kylie jue: If it's helpful for you to drop down notes or communicate with typing. You can use this today. But mostly, this is just so you have the instructions in at today.
+
+35
+00:05:00.300 --> 00:05:05.190
+kylie jue: And I put the links to the programs here, please don't run the second one until you've talked about it first.
+
+36
+00:05:05.730 --> 00:05:14.790
+kylie jue: But you can run it after you've talked about it and you have some guesses on what you think it will do and I'll come back and show that when you get back. Alright, so go ahead and talk about what do you think this code is going to do.
+
+37
+00:05:15.900 --> 00:05:17.130
+kylie jue: It could you open up the breakout rooms.
+
+38
+00:05:18.690 --> 00:05:19.170
+Perfect.
+
+39
+00:05:35.880 --> 00:05:44.490
+kylie jue: Alright, and I think people are heading over now. So let's go ahead and do these breakout rooms for about
+
+40
+00:05:45.870 --> 00:05:49.560
+kylie jue: Let's do, what do you think next three to four minutes.
+
+41
+00:05:50.730 --> 00:05:51.030
+Nick Bowman: Sounds
+
+42
+00:05:52.230 --> 00:05:52.830
+Nick Bowman: Cool, so
+
+43
+00:05:52.890 --> 00:05:55.260
+kylie jue: At 1140 will bring folks back
+
+44
+00:05:57.540 --> 00:06:06.690
+kylie jue: And just for those of you who are watching at home. Here is the example code. And again, you are this little ball down here.
+
+45
+00:06:08.460 --> 00:06:13.530
+kylie jue: And this code for V looks exactly the same where you're turning and then moving backwards then going back
+
+46
+00:06:13.950 --> 00:06:25.170
+kylie jue: But the difference. Here's your draw branch function now has an NFL statement. And if you are watching at home, go ahead and pause the video and check. Try to try to guess yourself. What do you think is going to happen with this code.
+
+47
+00:06:49.470 --> 00:06:53.460
+Nick Bowman: People in the chat for excited but scratch very similar to what it looked like years ago.
+
+48
+00:06:54.180 --> 00:06:54.720
+kylie jue: That it does
+
+49
+00:06:55.200 --> 00:06:55.440
+Yeah.
+
+50
+00:07:01.290 --> 00:07:04.620
+kylie jue: I might jump into a breakout room Nick and see how the discussion is going
+
+51
+00:07:06.930 --> 00:07:09.030
+kylie jue: And I'll just pop back out in a minute or two.
+
+52
+00:07:10.500 --> 00:07:12.600
+kylie jue: Actually that might screw up my
+
+53
+00:07:14.280 --> 00:07:16.980
+Nick Bowman: Screen right yourself. Oh, yeah.
+
+54
+00:07:22.740 --> 00:07:26.790
+kylie jue: That's okay. I won't do it right now, since the beginning of lecture, but maybe at the end when it's less
+
+55
+00:07:29.520 --> 00:07:29.760
+Nick Bowman: Yeah.
+
+56
+00:08:20.070 --> 00:08:23.550
+Nick Bowman: Well I hope you get a couple of good runs
+
+57
+00:08:25.500 --> 00:08:27.000
+Nick Bowman: Just like a couple of good runs
+
+58
+00:08:28.020 --> 00:08:30.210
+Nick Bowman: Yeah, I got it. I got a really good one this morning.
+
+59
+00:08:30.360 --> 00:08:34.470
+kylie jue: Did you give folks, an announcement that will pull him back in one minute. Yeah.
+
+60
+00:08:38.640 --> 00:08:40.110
+kylie jue: I think I hit the flag enough
+
+61
+00:09:13.440 --> 00:09:14.700
+Nick Bowman: Button. Sounds good.
+
+62
+00:09:20.460 --> 00:09:21.630
+kylie jue: Do you have it set for 10 seconds.
+
+63
+00:09:22.740 --> 00:09:24.270
+Nick Bowman: Okay, cool. Yeah.
+
+64
+00:09:25.800 --> 00:09:44.700
+kylie jue: So sweet. Alright, so as folks are trickling back. And let's go ahead and run this and see what happens. So you may have tried this out in your rooms. Oh wow, that was already a nice one. Okay, so if I keep running this, you'll see that with some random probability
+
+65
+00:09:45.810 --> 00:09:47.220
+kylie jue: It continues to branch.
+
+66
+00:09:49.080 --> 00:10:02.850
+kylie jue: And in fact, that probability specifically is going to be. So if the color is less than four. So if you get a number between one and three we're going to end up actually doing a stamp and then just stopping. But if we get
+
+67
+00:10:04.470 --> 00:10:10.080
+kylie jue: If we get a number that is four, five, then we're going to call the again or we're going to do V again.
+
+68
+00:10:10.410 --> 00:10:21.360
+kylie jue: And that's when you continue branching. So one thing to note, this one looks a little weird up, it does get a little bit clunky. If it hits the edge because scratch doesn't know what to do once you hit the edge. But if you don't hit the edge look great.
+
+69
+00:10:23.520 --> 00:10:29.400
+kylie jue: But yeah, so hopefully you enjoyed just playing around with this and if you would like at home. So you have the links to this now.
+
+70
+00:10:29.640 --> 00:10:39.240
+kylie jue: Feel free to change these probabilities and these numbers to see how that affects the tree and how it grows, or how often you get a really large tree versus a really small tree.
+
+71
+00:10:40.860 --> 00:10:42.690
+kylie jue: Alright, so
+
+72
+00:10:43.800 --> 00:10:51.690
+kylie jue: That's just sort of a, just to give you a sort of visual of what recursion is all about and an idea of what we're going to be talking about
+
+73
+00:10:52.470 --> 00:10:57.180
+kylie jue: So now I want to talk about what actually is recursion. Let's define the term itself.
+
+74
+00:10:57.390 --> 00:11:08.670
+kylie jue: So according to Wikipedia recursion occurs when a thing is defined in terms of itself. So just like you saw how V actually will end up calling may end up calling v. Again, it's something that is defined in terms of itself.
+
+75
+00:11:09.060 --> 00:11:15.720
+kylie jue: And Google does this fun trick if you search for recursion and actually asked, Did you mean recursion and you can just keep clicking on. Did you mean recursion.
+
+76
+00:11:16.380 --> 00:11:32.520
+kylie jue: Go back in the loop forever. Um, but, so for our purposes, we're going to defined recursion. This way for this class, and in computer science. So recursion is a problem solving technique in which tasks are completed by reducing them into repeated smaller tasks of the same form as a lot their
+
+77
+00:11:33.570 --> 00:11:42.420
+kylie jue: key idea problem solving technique. And then this idea of reducing a task down into repeated smaller tasks, but take on the same form. And we'll see an example, a few examples of this today.
+
+78
+00:11:42.810 --> 00:11:51.420
+kylie jue: So what is recursion. Again, a little bit more. It's a powerful substitution for iteration or loops, because again, you might use a loop to repeat something over and over
+
+79
+00:11:51.690 --> 00:11:56.160
+kylie jue: recursion is another way to do that. And we'll start seeing the difference between
+
+80
+00:11:56.460 --> 00:12:00.660
+kylie jue: Will start seeing the differences between iterative and recursion recursive solutions and today's examples.
+
+81
+00:12:00.900 --> 00:12:10.800
+kylie jue: Later in this week, we're actually going to see problems and tasks that can only be solved using recursion, but we're going to start off with some parallels where you can solve the task with either iteration or with loops or recursion.
+
+82
+00:12:13.380 --> 00:12:25.500
+kylie jue: It also results in often elegant or shorter code when recursion is used well and you can apply it to certain problems like sorting and searching. That's where you commonly see it in the real world and it can be used to express patterns in nature.
+
+83
+00:12:26.460 --> 00:12:30.870
+kylie jue: And we're going to be using it from multiple of the assignments, as we go forward in this quarter as well.
+
+84
+00:12:32.850 --> 00:12:36.210
+kylie jue: Alright, so I want to do just to really
+
+85
+00:12:36.510 --> 00:12:48.300
+kylie jue: Get you to understand recursion even better. I want to use an analogy of counting how many students are in a lecture hall and this will be a non code analogy. So you're going to have to imagine that we're sitting all together in a lecture hall in person.
+
+86
+00:12:48.600 --> 00:12:53.640
+kylie jue: Not over zoom. There's no participants list that I can just look at and see how many people are in this zoom call
+
+87
+00:12:55.200 --> 00:13:00.450
+kylie jue: So we're going to try to figure out how many students are in the lecture hall. So this is one of those big lecture halls. If you've been
+
+88
+00:13:00.960 --> 00:13:04.410
+kylie jue: At Stanford before imagine like what 200 are in video
+
+89
+00:13:05.040 --> 00:13:09.900
+kylie jue: But let's suppose that I want to figure out how many people are at lecture today, but I don't want to walk around and count each person.
+
+90
+00:13:10.170 --> 00:13:18.960
+kylie jue: I want to recruit your help. So I want to get a little bit of help from everyone. But I also want to minimize each individual's amount of work. So we can actually solve this problem recursive Lee. So how do we do that.
+
+91
+00:13:19.530 --> 00:13:24.720
+kylie jue: We're going to focus on solving this problem first for just a single column of students and you'll see that the solution is going to generalize.
+
+92
+00:13:25.080 --> 00:13:34.770
+kylie jue: But let's suppose I'm walk up to a single column of students and I go to the first person in the column right there at the front and ask how many people are sitting directly behind you in your column.
+
+93
+00:13:35.220 --> 00:13:47.280
+kylie jue: And you also don't want to get up and count all of the individual people in your column. So instead, you have this algorithm that everyone in your column is going to follow if there is no one behind you in the column, you're just going to answer zero
+
+94
+00:13:47.970 --> 00:13:55.560
+kylie jue: But if there is someone sitting behind you. You're going to turn around and ask that person. How many people are sitting directly behind you in your column. So the same question that I just asked
+
+95
+00:13:56.550 --> 00:14:06.600
+kylie jue: And then when they give you back a number, you're going to respond with that number plus one to the person who asked you. So let's walk through how this is going to work in practice so that the person at the very back
+
+96
+00:14:08.070 --> 00:14:15.690
+kylie jue: Who's going to answer zero and then for everyone else, they're going to fall into this case of someone is sitting behind them. So they're going to have to do these other two steps.
+
+97
+00:14:15.960 --> 00:14:21.660
+kylie jue: So at the very beginning, I go to the first person in the front row and ask how many people are sitting directly behind you in your column.
+
+98
+00:14:22.290 --> 00:14:27.330
+kylie jue: And so, that person falls into the second case, so they're going to turn around and ask the person behind them.
+
+99
+00:14:27.930 --> 00:14:36.510
+kylie jue: How many people are sitting directly behind you and that person doesn't have an answer yet. So they're going to turn around and we're going to keep having this happen until you get all the way up to the top.
+
+100
+00:14:37.350 --> 00:14:42.270
+kylie jue: And they're all waiting for answers. And then the last person turns around, there's no one behind them and they say zero
+
+101
+00:14:42.810 --> 00:14:46.560
+kylie jue: And so then that person. They say that to the person in front of them that person gets one
+
+102
+00:14:46.920 --> 00:14:53.130
+kylie jue: And then the next person gets to because they're adding one to the value and then you can come all the way back down. Imagine that this person got 57
+
+103
+00:14:53.400 --> 00:15:06.660
+kylie jue: This one said 58 and then we end up with the final person or the first person actually who says 59 and that was the original person I asked so me as the lecture actually now has a number 59 of how many people are sitting in that column.
+
+104
+00:15:07.530 --> 00:15:17.520
+kylie jue: And you can imagine that this solution would generalize to the entire lecture hall, as long as you were really careful about who's asking, Who in the room and you put some sort of ordering on who asks, who
+
+105
+00:15:18.900 --> 00:15:27.060
+kylie jue: Alright, so again recursion is a problem solving technique in which tasks are completed by reducing them into repeated smaller tasks of the same form. So what was going on in the past example.
+
+106
+00:15:27.330 --> 00:15:38.130
+kylie jue: We had the same question being asked over and over again. So again, the task on the same form, but it was smaller than the original task of saying, how many people are in the room right we broke it down into a smaller question which is
+
+107
+00:15:38.430 --> 00:15:42.300
+kylie jue: How many people are sitting behind you and it kept going until the answer was zero.
+
+108
+00:15:43.200 --> 00:15:49.620
+kylie jue: So in recursion. There are two main cases are two main components. There's the base case, which is sort of the simplest version of the problem.
+
+109
+00:15:49.860 --> 00:15:59.520
+kylie jue: But all other cases can reduce to and it's an occurrence or it's a question, potentially, that can be answered directly. So in that case, it was the person who had no one sitting behind them and could directly answer zero
+
+110
+00:15:59.850 --> 00:16:05.670
+kylie jue: Notice that the other people didn't have a answer immediately. So they actually would fall into this case, which is called the recursive case.
+
+111
+00:16:06.000 --> 00:16:13.800
+kylie jue: The recursive cases, the step at which you can break down the complex version into a smaller task. You can't give an answer directly and there's this idea which you'll hear
+
+112
+00:16:14.250 --> 00:16:21.390
+kylie jue: You'll hear us come back to throughout the quarter of this recursive leap of faith, which just means that you have to trust the smaller tests to solve the problem for you.
+
+113
+00:16:21.630 --> 00:16:28.140
+kylie jue: The person who didn't have an answer directly had to turn around behind that to the person behind them and trust that they will eventually give them the right answer.
+
+114
+00:16:28.890 --> 00:16:36.390
+kylie jue: So that's sort of held this example which is a very physical in person example would illustrate the example of the two cases of recursion.
+
+115
+00:16:37.980 --> 00:16:45.180
+kylie jue: Alright, so that's a quick whirlwind of just an introduction to recursion. I'm going to pause for announcements and then we're going to dive into a couple of actual coding examples with recursion.
+
+116
+00:16:45.690 --> 00:16:52.350
+kylie jue: So a couple of a few announcements assignment to do. Wednesday this Wednesday on July 8
+
+117
+00:16:53.010 --> 00:17:03.270
+kylie jue: Remember that we have changed the deadlines to 1159 in Pacific Daylight Time, no matter what time zone, you're in. And that's just to help accommodate folks who might be getting these lectures of day later in their time zone.
+
+118
+00:17:03.810 --> 00:17:07.020
+kylie jue: And assignment three will be released by the end of the day, on Thursday.
+
+119
+00:17:07.350 --> 00:17:16.290
+kylie jue: And then as a note the mid quarter diagnostic is not at the end of this week, but coming up at the end of next week, but the material that will cover will only go through the end of this week. So the first three weeks of the course.
+
+120
+00:17:16.500 --> 00:17:21.780
+kylie jue: Thursday will be the last day of content covered and then something we've just been getting notes from people about
+
+121
+00:17:22.560 --> 00:17:29.490
+kylie jue: It through different mess two different forums is just, we wanted to remind everyone to please only ask questions in the chat that are necessary for your immediate understanding
+
+122
+00:17:29.670 --> 00:17:34.410
+kylie jue: We've had folks who are still telling us, hey, it's still kind of hard to concentrate when the cat is going off constantly
+
+123
+00:17:35.220 --> 00:17:48.090
+kylie jue: If it's just chatter, or if it's questions that aren't that could be answered. Maybe after a section or in office hours. So just a note. Remember, please to to keep chat to the questions that are necessary if you don't understand anything immediately.
+
+124
+00:17:49.440 --> 00:17:57.750
+kylie jue: All right before I move on to a new example. Any questions about announcements or about the lecture hall and what that means in terms of recursion.
+
+125
+00:17:59.310 --> 00:18:01.770
+kylie jue: Nick. Is there anything in the chat that I should address out loud.
+
+126
+00:18:03.300 --> 00:18:04.950
+Nick Bowman: No. Okay, great.
+
+127
+00:18:05.490 --> 00:18:08.430
+kylie jue: So let's walk into a more
+
+128
+00:18:09.870 --> 00:18:11.370
+kylie jue: Code based example.
+
+129
+00:18:12.750 --> 00:18:19.470
+kylie jue: One that is going to use factorial. And it's going to give us a little bit of a deeper understanding of how recursion works at the computers systems level.
+
+130
+00:18:20.160 --> 00:18:27.030
+kylie jue: So first, let's just talk about what is the factorial. So if you've learned about factorial before you might have seen it to note it as an exclamation point.
+
+131
+00:18:27.390 --> 00:18:36.000
+kylie jue: Where and is a number. And what it means is you're taking that number and multiplying it by the number of minus one, the number minus two all the way until you get back down to one.
+
+132
+00:18:36.630 --> 00:18:46.890
+kylie jue: So, for example, three would be three times two times one for would be four times three, four factorial is four times three times two times one, and etc. And then by definition zero factorial is just going to be one.
+
+133
+00:18:47.940 --> 00:18:58.110
+kylie jue: So factorial is, in general, show up and pretty unexpected places will actually see them later in the quarter when we're talking about sorting algorithms. So it's sort of a useful notation and concept to understand
+
+134
+00:18:58.410 --> 00:19:01.620
+kylie jue: And we're going to actually let's go ahead and implement a function to compute factorial
+
+135
+00:19:02.730 --> 00:19:09.150
+kylie jue: So look, look at five factorial is our example. So we have five factorial, which is five times four times three times two times one
+
+136
+00:19:10.200 --> 00:19:16.830
+kylie jue: If we look at this inside by factorial is this four times three times two times one which we can actually write as for factorial
+
+137
+00:19:18.180 --> 00:19:21.600
+kylie jue: So we can write it like this, five factorial equals five times for factorial
+
+138
+00:19:22.140 --> 00:19:29.490
+kylie jue: And if we look at how we define for factorial. You could do the same thing, right, we can look at that, say, four times three factorial, which is one less than four.
+
+139
+00:19:29.940 --> 00:19:37.950
+kylie jue: And you'll see this pattern repeat as you go down all the way until you get to zero factorial. Again, which we've defined is equal to one.
+
+140
+00:19:38.910 --> 00:19:46.140
+kylie jue: So you'll, you'll start to see a pattern here. And this is a common thing and recursion is when you're solving your problems. If you see a pattern that's repeating
+
+141
+00:19:46.590 --> 00:19:48.690
+kylie jue: Often a signal that we might want to use recursion.
+
+142
+00:19:49.530 --> 00:19:57.360
+kylie jue: So let's actually define this pattern, a little more concretely of what we're seeing. We're going to generalize and define the pattern. So when we have n factorial
+
+143
+00:19:57.630 --> 00:20:05.550
+kylie jue: What this says what this notation is saying is if and is equal to zero, then n factorial is just equal to one. That's how we define zero factorial
+
+144
+00:20:05.880 --> 00:20:15.870
+kylie jue: Otherwise n factorial is equal to end the number itself times n minus one factorial. So if this were five, five factorial is five times for factorial
+
+145
+00:20:16.860 --> 00:20:22.380
+kylie jue: Alright, so that's how we're going to define the pattern that we're seeing. And then we can actually translate this pretty nicely into code.
+
+146
+00:20:22.710 --> 00:20:34.260
+kylie jue: If you have a factorial function that's going to give you an integer output if you're given an if any zero return one, which is our first case, otherwise return n times factorial and minus one.
+
+147
+00:20:34.650 --> 00:20:48.300
+kylie jue: And this is an example of a recursive function. So I want to go ahead and walk through what is going to happen to on a computer side like in the memory when you actually call factorial with the number five. So this is our code.
+
+148
+00:20:49.920 --> 00:20:56.520
+kylie jue: And let's suppose our main function calls the factorial with the number five, and then it see out or prints the result.
+
+149
+00:20:56.940 --> 00:21:04.770
+kylie jue: So just as a note on some vocabulary. We're going to draw these boxes around the functions and this is called a stack frame a stack frame.
+
+150
+00:21:05.340 --> 00:21:09.750
+kylie jue: Is something that gets created in memory. Each time a function in your code is called
+
+151
+00:21:10.560 --> 00:21:18.030
+kylie jue: Why is it called a stack frame the stack is specifically where in your computer's memory, the information is stored and the frame is what stores all of the data.
+
+152
+00:21:18.300 --> 00:21:26.310
+kylie jue: For that particular function call. So this box represents the frame and the data, the variables within this box stay within that stack.
+
+153
+00:21:27.240 --> 00:21:32.280
+kylie jue: So it has a lot to do with what we've talked about with scoping and variables as well, specifically for functions.
+
+154
+00:21:32.760 --> 00:21:41.610
+kylie jue: Alright, so we're going into main we're calling our factorial function. And again, this is a function call. So we're going to create another stack for him again. When a function gets called a new stack friend gets created.
+
+155
+00:21:41.970 --> 00:21:53.610
+kylie jue: And this is how we defined our factorial function. And we've passed in the value five into our factorial function here. So we go into our first if and is not equal to zero. It's equal to five. So we go into our else
+
+156
+00:21:55.140 --> 00:22:03.240
+kylie jue: And then we're going to get to this return statement of n times n factorial and minus one. So, and is five and then we're going to call factorial with the number four.
+
+157
+00:22:03.570 --> 00:22:11.670
+kylie jue: And notice we have to go into this function first before we do anything else with the stack frame. So what we're going to do is we're actually going to create another stack for him.
+
+158
+00:22:12.330 --> 00:22:15.060
+kylie jue: So again, every time we call a factorial, we get a new copy
+
+159
+00:22:15.330 --> 00:22:26.040
+kylie jue: Of n as well that's independent from the previous values of them. So you'll notice this little suitcase here for this stack frame and is equal to four. It doesn't know about the end that was equal to five from the previous stack frame.
+
+160
+00:22:26.220 --> 00:22:31.890
+kylie jue: All it knows is I've created a new stack frame where and is equal to four. And I'm going to go through this function exactly like we did
+
+161
+00:22:32.400 --> 00:22:42.330
+kylie jue: So again, and it's not zero, we're going to go into the else and you'll see the same pattern. Right. And here is for. And we're going to call factorial. Now with n minus one which is three and this is going to repeat
+
+162
+00:22:43.410 --> 00:22:54.210
+kylie jue: We're going to keep going until we have two. Here we have one. And then last, we're finally going to get to n equals to zero. And now, in this case.
+
+163
+00:22:54.570 --> 00:22:59.490
+kylie jue: We're actually going to hit this return. Right, we're going to hit return equals one. There's no function call here.
+
+164
+00:22:59.820 --> 00:23:10.260
+kylie jue: And when you hit the return and you're ready to go. The stack frame is going to get go away. It's going to get cleared from memory. Once this function actually returns. Remember these haven't returned yet because it's waiting for this.
+
+165
+00:23:10.920 --> 00:23:20.490
+kylie jue: Function to actually finish. So now we've returned the number. And so we've returned one backup to this stack frame, right, which called that function.
+
+166
+00:23:20.850 --> 00:23:27.300
+kylie jue: And now what we can do is calculate this return value which is also going to be equal to one. And again, this doctrine is going to go away.
+
+167
+00:23:27.540 --> 00:23:37.890
+kylie jue: And then we're going to go here. We're get we're going to get two times one and then this one's going to go away and then you'll see this pattern right we're going to keep returning the value and it's going to propagate back up to the original call
+
+168
+00:23:39.420 --> 00:23:40.860
+kylie jue: Until we finally get
+
+169
+00:23:42.030 --> 00:23:51.510
+kylie jue: Five factorial. So we'll actually get an printed out or an over here stored as 120 and then we'll actually print out the five factorial is equal to 120
+
+170
+00:23:52.470 --> 00:23:58.440
+kylie jue: So again, that's just sort of the idea of what's happening in memory when you call a function over and over and over within itself.
+
+171
+00:23:58.770 --> 00:24:09.750
+kylie jue: And noting that the variables like n which are defined within that function are only known in the specific stack frame for which they are defined. And then again, the value is going to go.
+
+172
+00:24:10.320 --> 00:24:17.940
+kylie jue: Propagate back up. Once the final function once the base case actually returns. So let's go ahead and look at this in code. I'm not going to
+
+173
+00:24:18.510 --> 00:24:25.110
+kylie jue: Run it here. But what I want to do here is actually compare the factorial. That is recursive to the factorial. That's iterative
+
+174
+00:24:25.380 --> 00:24:33.480
+kylie jue: And again, just as a reminder, again, of our two cases inside of recursion. We have our base case which where we return an actual value. So that's when n is equal to zero.
+
+175
+00:24:33.870 --> 00:24:41.700
+kylie jue: Our simplest form of the problem. And then this is a recursive case right it's the case where we call ourselves and make the problem a little bit smaller by subtracting one from n
+
+176
+00:24:42.900 --> 00:24:56.250
+kylie jue: Something else I want to note here is again like this value of n. If we look back at sort of our stack frames. Here the five was getting stored in this specific stack frame but this this stack frame that was one down.
+
+177
+00:24:57.480 --> 00:25:08.280
+kylie jue: did not need to know about five. So the other thing you really want to think about is what information is getting stored in each stack frame but the others don't need to know about because that's a really crucial part of recursion.
+
+178
+00:25:09.990 --> 00:25:20.070
+kylie jue: And so this is, again, this is what the recursive one looks like. And then in an iterative function, we would just do this with a loop right you're given. And there's no call to itself, you're going to store result.
+
+179
+00:25:20.370 --> 00:25:24.240
+kylie jue: And you're going to start results equal to one and then you're just going to multiply the number
+
+180
+00:25:25.110 --> 00:25:33.300
+kylie jue: And as you go up or sorry, the number I as you go from one to five or whatever, n is in store inside of results so
+
+181
+00:25:34.050 --> 00:25:40.740
+kylie jue: Again, as we're starting out here you'll look at these two and some people may find this one more intuitive and some people may find this one more intuitive.
+
+182
+00:25:41.370 --> 00:25:47.040
+kylie jue: These initial recursion problems, you're going to be able to see and compare and figure out which one you personally prefer
+
+183
+00:25:47.880 --> 00:25:56.820
+kylie jue: But as we get more advanced into recursion will actually see some problems that you can only solve using recursive techniques. But this is just sort of two parallel. This is how recursion works.
+
+184
+00:25:58.020 --> 00:26:00.810
+kylie jue: In comparison to the iterative version of the function
+
+185
+00:26:01.950 --> 00:26:20.850
+kylie jue: Alright, any questions on that before I move on to the next example. So again, this is recursive vs vs. This is the recursive versus iterative versions of factorial, um, any questions also about stack frames and how that is working with recursive functions.
+
+186
+00:26:22.320 --> 00:26:26.340
+Nick Bowman: Um, can you. A question from the chat. Can you just talk about what a stock framers again.
+
+187
+00:26:26.520 --> 00:26:34.740
+kylie jue: Yeah, sure. Um, it's a lot of me. I'm not going to put the definition backup because it's like 50 slides back
+
+188
+00:26:35.370 --> 00:26:46.560
+kylie jue: But a stack frame, you can think about it as this box and a stack frame gets created. Each time a function gets called. So if I go, so there's a stack right here just for the main function.
+
+189
+00:26:47.520 --> 00:27:04.140
+kylie jue: And the stock frame is also containing all the data you need for that specific function. So in particular, and is stored in here. And then when you call a new function and a new stack frame gets created. So this is the stack frame for factorial. And it has its own values of n.
+
+190
+00:27:05.790 --> 00:27:18.990
+kylie jue: And the stock rooms go away once this call for your function returns. So it's sort of like an, an area in memory that is containing all the information you need for that specific function call. So not just for the function itself, but for that call of that function.
+
+191
+00:27:19.500 --> 00:27:22.470
+kylie jue: Yeah, I saw hand go up as well. Does that answer the question.
+
+192
+00:27:26.640 --> 00:27:27.570
+Nick Bowman: Yeah, Evan said
+
+193
+00:27:29.070 --> 00:27:30.900
+Nick Bowman: Good con. You have a question.
+
+194
+00:27:31.650 --> 00:27:44.130
+Kaan Alp Yay: Yeah, I had a question. So now we're looking at recursion and comparing it to iterative algorithms and for Inner development as we usually know if for each for loop that you have that that's contains the number and
+
+195
+00:27:44.580 --> 00:27:55.350
+Kaan Alp Yay: That gives you a power, if any, or Big O notation. Is there a general, in this case the recursion. Seems like it's also open to calculate this, but is there sort of a general idea as to how the
+
+196
+00:27:56.370 --> 00:28:03.600
+Kaan Alp Yay: Sort of the, the time, the resource scale of of recursive algorithms grow.
+
+197
+00:28:06.000 --> 00:28:22.920
+kylie jue: Yeah, we're gonna actually talk a little bit more about the big O of recursion tomorrow and on Wednesday, I think maybe Wednesday is when we'll get into it a little bit more, um, Nick is this one also. This one is also is this bingo for this version of factorial, or sorry, pig of an
+
+198
+00:28:23.580 --> 00:28:32.970
+Nick Bowman: Yeah, yeah. They both have both of these versions because if you think about it like in terms of how many operations, they need to do if you think in terms of like multiplication operations.
+
+199
+00:28:33.270 --> 00:28:37.530
+Nick Bowman: And they're both like yeah, they're both just required to do and multiplication operations.
+
+200
+00:28:38.280 --> 00:28:44.460
+Nick Bowman: There are some underlying differences. So I mean code has been talking a lot about stacked rooms and there are
+
+201
+00:28:45.240 --> 00:28:52.380
+Nick Bowman: Consequences of using stack Rams to do the recursion and you know actually explored that on the assignment and sort of learn more about
+
+202
+00:28:53.070 --> 00:28:58.950
+Nick Bowman: Kind of these trade offs of, like, what's powerful about recursion. But there are also things that are dangerous about it. And so we'll talk more about that.
+
+203
+00:28:59.910 --> 00:29:08.580
+kylie jue: Yeah, we'll see some examples later where it's not just the same runtime and that you can't actually solve it intuitively efficiently for the problems that we'll get to later.
+
+204
+00:29:12.870 --> 00:29:14.040
+Any other questions.
+
+205
+00:29:17.370 --> 00:29:18.960
+Nick Bowman: That's all from the chat. Okay.
+
+206
+00:29:20.100 --> 00:29:20.430
+Kaan Alp Yay: Great.
+
+207
+00:29:21.300 --> 00:29:26.700
+kylie jue: So let's go ahead, go ahead and move on to our next example. And with this example specifically
+
+208
+00:29:27.390 --> 00:29:31.770
+kylie jue: Rather than just showing you what's happening at the memory level or the stack frame level.
+
+209
+00:29:32.280 --> 00:29:40.530
+kylie jue: With the recursive problem. I want to show you how would you actually approach one of these problems. If I were to tell you. Here's a problem, you need to solve it recursive Lee.
+
+210
+00:29:41.010 --> 00:29:46.650
+kylie jue: How would you come up with the base case the recursive case, that sort of thing. So in this one we're going to actually try to reverse a string.
+
+211
+00:29:47.340 --> 00:29:57.780
+kylie jue: So suppose we want to reverse strings like in the following examples were given the string on the left, and as outputs. You would want the ones on the right. So God dog would become God stressed would become desserts.
+
+212
+00:29:58.170 --> 00:30:07.110
+kylie jue: This is an actual word level would become level and then he would become a so it doesn't matter what string your past and it doesn't have to be a word, but it just reverses the order of the letters.
+
+213
+00:30:08.880 --> 00:30:14.820
+kylie jue: And here's some strategies that we would want you to use when you're approaching recursive problems, things that might actually help you with
+
+214
+00:30:15.120 --> 00:30:20.460
+kylie jue: Breaking down the problem a little bit. So you want to look for self similarity. So we talked about self similarity is
+
+215
+00:30:21.420 --> 00:30:28.320
+kylie jue: like we saw with the lecture hall problem where you can break it into a smaller problem where you can sort of ask the same question or a similar question every time.
+
+216
+00:30:29.130 --> 00:30:39.300
+kylie jue: Specifically in your recursive call. And then if you're stuck. It's often helpful to try out an example to work through a simple example like dog to God and then increase the complexity.
+
+217
+00:30:40.140 --> 00:30:44.550
+kylie jue: You can even go simpler. Right. You could go to one of the single letter or the empty string cases first
+
+218
+00:30:45.360 --> 00:30:55.860
+kylie jue: And then think about what information needs to get stored at each step. So just like we talked about with the factorial problem where the current value of n sort of gets stored and then you multiply and then
+
+219
+00:30:56.160 --> 00:31:06.930
+kylie jue: The new function call only knows the smaller value event. What is that information that's getting stored in each stack frame that can help reduce the problem.
+
+220
+00:31:07.680 --> 00:31:09.360
+kylie jue: As you go forward with the recursion.
+
+221
+00:31:09.750 --> 00:31:20.220
+kylie jue: And then ask yourself, what is the base case. So what would the simplest case potentially be and then what is the recursive case and you don't have to answer these two in this order, you can flip them depending on whatever makes sense to you.
+
+222
+00:31:20.880 --> 00:31:30.720
+kylie jue: But hopefully going through these strategies can help you think about how would you approach a recursive problem. So we're going to go ahead and have you tried to do that in your breakout rooms. Let's go ahead and give them
+
+223
+00:31:31.560 --> 00:31:32.430
+Nick Bowman: About
+
+224
+00:31:32.640 --> 00:31:43.320
+kylie jue: I think five minutes or so, should be good. Maybe a little bit longer, um, to discuss what are the base and recursive cases for this string reversal problem.
+
+225
+00:31:43.800 --> 00:31:45.570
+kylie jue: You're not gonna, I'm not asking you to code it.
+
+226
+00:31:45.750 --> 00:31:55.050
+kylie jue: I just want you to think about what would be the base case. And what would be the recursive case and just think about the general algorithm. When you get to your breakout rooms and we'll give you a warning when we're going to bring you back.
+
+227
+00:31:55.590 --> 00:31:58.620
+kylie jue: But we're gonna have you do that and then we'll come back and discuss them as a group.
+
+228
+00:32:25.980 --> 00:32:26.220
+Alright.
+
+229
+00:32:28.890 --> 00:32:30.810
+kylie jue: We're actually pretty good on time here.
+
+230
+00:32:33.270 --> 00:32:37.950
+kylie jue: Um, how long do you think we should leave. Maybe it will do you think 1210 is too long.
+
+231
+00:32:39.600 --> 00:32:42.930
+Nick Bowman: 12 times too long. I mean, probably at some seems fine.
+
+232
+00:32:44.220 --> 00:32:45.990
+Nick Bowman: I'm just assigning some of the strikers to
+
+233
+00:33:00.510 --> 00:33:02.760
+kylie jue: Jump in a room and we will see how this goes.
+
+234
+00:33:04.260 --> 00:33:04.680
+Nick Bowman: Sounds for
+
+235
+00:33:16.290 --> 00:33:22.260
+Nick Bowman: Those of you watching asynchronously. Again, as always, we recommend. Feel free to pause the video right here.
+
+236
+00:33:23.160 --> 00:33:28.980
+Nick Bowman: The other slides are up anymore, but you can you can pause it back a little bit. One, the size of the problem definition rep.
+
+237
+00:33:29.370 --> 00:33:45.360
+Nick Bowman: And if you go into the lecture nine public breakout room on Ed, which will set up right after classes over and you'll be able to see the instructions for this one. It's pretty simple. You just want to think about how would you define the base case in the recursive cases for the
+
+238
+00:33:47.040 --> 00:33:56.700
+Nick Bowman: For the string universal function and, in particular, what you want to think about is for the base case, you know, what's the simplest possible problem you can solve here. We got a good question in the chat earlier.
+
+239
+00:33:57.330 --> 00:34:07.410
+Nick Bowman: Sort of asking about why on factorial example you we stopped at zero, rather than stopping at one, which seemed like another reasonable place that we get stuck.
+
+240
+00:34:07.920 --> 00:34:13.950
+Nick Bowman: And so just think about sort of what's the, what's the simplest possible problem and you could solve that in the base case of your phone.
+
+241
+00:34:15.840 --> 00:34:26.580
+Nick Bowman: Yeah, and so feel free to go ahead and pause right now. And once you're done, you can fast forward about three minutes from where you are and that will get you to the reason was that there was a lecture.
+
+242
+00:34:30.720 --> 00:34:39.990
+Nick Bowman: And if anyone that's still here you ran into technical issues that you want to let me know about in terms of joining breakout rooms or if you have any questions, just feel free to speak up.
+
+243
+00:37:04.050 --> 00:37:10.440
+Nick Bowman: For those of you that are coming back. Welcome back. Just hold tight for a quick minute or two will bring will bring everyone back
+
+244
+00:37:54.690 --> 00:38:00.390
+kylie jue: Okay, there we go. Sorry, hopefully you got a chance to discuss the base in recursive cases and just the general algorithm.
+
+245
+00:38:01.110 --> 00:38:08.550
+kylie jue: I think honestly if you got in a sentence for this is how I might solve the problem, but you didn't quite get to exactly defining the base and recursive case.
+
+246
+00:38:08.790 --> 00:38:12.030
+kylie jue: Totally fine. These problems are tricky, especially when you're first looking at them.
+
+247
+00:38:12.420 --> 00:38:20.280
+kylie jue: And getting that initial algorithm is going to be the first really important step. And then once you get practice with defining more specifically how to
+
+248
+00:38:20.610 --> 00:38:24.930
+kylie jue: Get the recursive and bass cases. It'll come, it'll be easier with practice. So
+
+249
+00:38:25.590 --> 00:38:38.310
+kylie jue: Let's go ahead and I'm going to walk through how I thought through this problem when I was coming up with a solution. So if we break it down. We want to first look for self similarity. I'm going to use the example of stressed desserts. So
+
+250
+00:38:38.730 --> 00:38:45.810
+kylie jue: We're starting with stressed and just to sort of like think about what is the step I would take as a human being to sort of reverse the string.
+
+251
+00:38:46.860 --> 00:38:49.800
+kylie jue: In my head, I said, take the S and put it at the end of the string.
+
+252
+00:38:50.100 --> 00:38:57.510
+kylie jue: And if you thought the other way. If you were like, oh, take the D and put at the beginning of the string that's also totally valid. I'm going to do it this way first. And I'll actually show you that either one.
+
+253
+00:38:57.720 --> 00:39:03.540
+kylie jue: Will give you sort of the same solution. It'll just look slightly different but let's say I took the so I'm going to put it at the end of the string.
+
+254
+00:39:04.650 --> 00:39:08.640
+kylie jue: And then now what I have is, I have trust and I need to reverse trust. Right.
+
+255
+00:39:09.150 --> 00:39:15.960
+kylie jue: So this is we're starting to see some of the self similarity. Now what I want to do to reverse trust, I take the tea and I put it at the end of this string.
+
+256
+00:39:16.290 --> 00:39:17.760
+kylie jue: And then I need to reverse rest.
+
+257
+00:39:18.090 --> 00:39:30.300
+kylie jue: Right, and so you can keep going like this, where you're seeing. I'm taking the last letter or sorry, the first letter and putting at the end of my string and then reversing the remainder of the string. And this is where we're starting to see self similarity and the problem appear
+
+258
+00:39:31.830 --> 00:39:34.350
+kylie jue: So at the very end when I just have a D left
+
+259
+00:39:35.160 --> 00:39:49.440
+kylie jue: I'm going to take the D and put it at the end of the string which is just putting the D. And then I get the empty string and the reverse of the empty string is the empty string. So now I can't really do anything. This has actually given me an answer. This is going to be my base case.
+
+260
+00:39:50.490 --> 00:39:51.210
+kylie jue: So,
+
+261
+00:39:52.980 --> 00:40:00.510
+kylie jue: How can we now express the recursive case we sort of got to the smallest version of it where if you have the empty string. The reverse of it is the empty string.
+
+262
+00:40:01.050 --> 00:40:08.910
+kylie jue: Now I want to try to formalize just like we did with factorial and generalized sort of what the recursive his look like I want to do the same thing here for this problem.
+
+263
+00:40:09.780 --> 00:40:17.790
+kylie jue: So let's take one step or like one pair once we're looking at the word stressed and figure out how can we express this as a recursive case more gentle
+
+264
+00:40:18.180 --> 00:40:21.030
+kylie jue: Not in a zoom with generally but express this as a recursive case.
+
+265
+00:40:21.450 --> 00:40:30.750
+kylie jue: So the reverse of stressed, kind of just to summarize those two things that I said, is equal to the reverse of trust, plus s right. I put the first letter at the end and then I'm reversing the string.
+
+266
+00:40:31.500 --> 00:40:39.450
+kylie jue: That remains and I can do that again for each of these steps. The reverse now of trust, which is this bullet is going to be t plus the reverse suppressed.
+
+267
+00:40:39.780 --> 00:40:48.750
+kylie jue: And I can keep doing that and you'll sort of see again, this is a very clear self similarity, as I'm going down and these would be different stack frames or different recursive calls.
+
+268
+00:40:49.500 --> 00:40:53.130
+kylie jue: all the way till I get the bottom where the reverse of the empty string is the empty string.
+
+269
+00:40:53.970 --> 00:41:01.530
+kylie jue: So, more generally, we can define it this way, the reverse of a string is going to be equal to the reverse of the string without the first letter.
+
+270
+00:41:01.860 --> 00:41:09.570
+kylie jue: Plus the first letter of that string. And that's sort of our general form for our reverse function and then our base case we're going to say, okay,
+
+271
+00:41:10.440 --> 00:41:17.430
+kylie jue: Reversing the empty string is just going to be equal to the empty string. And that's how we define it. That's where we can get an answer directly from the simplest case.
+
+272
+00:41:18.240 --> 00:41:22.050
+kylie jue: And again, depending on how you thought of the problem. You may have also come up with this.
+
+273
+00:41:22.410 --> 00:41:34.410
+kylie jue: The reverse of the string is the last letter of the string, plus the reverse of the string without the last letter. Right. Totally fine. Depending on what made sense to you and you're looking at the strings and changing the order of the letters. These are equally valid.
+
+274
+00:41:34.860 --> 00:41:42.570
+kylie jue: And about the and pretty much the same efficiency, we'll just see how the code looks different. When I actually caught up a solution. So I'm going to go ahead and live code this solution for you.
+
+275
+00:41:43.710 --> 00:41:49.740
+kylie jue: So I'm going to put this to the side, just so we can sort of see it while I'm working through the code.
+
+276
+00:41:50.790 --> 00:41:51.450
+Let me
+
+277
+00:41:53.580 --> 00:41:56.880
+kylie jue: Maybe the size of my screen doesn't let me. Okay, there you go. Um,
+
+278
+00:41:57.900 --> 00:41:59.850
+kylie jue: So I'm going to go down here.
+
+279
+00:42:00.330 --> 00:42:14.310
+kylie jue: To my reverse function. And I'm going to fill this out and just as a reference. I've put the reverse order, new version where I'm sort of going backwards through a string and adding it back into a string. We'll talk about that one in a little bit. But let's focus for a second on this reverse
+
+280
+00:42:15.540 --> 00:42:23.910
+kylie jue: This recursive reverse function. So as a base case we want to say if the string, excuse me, if x is equal to be empty string.
+
+281
+00:42:25.680 --> 00:42:31.170
+kylie jue: Then what we want to do is we're just going to return the empty string. And that is our base case and how we're going to express it.
+
+282
+00:42:31.650 --> 00:42:40.260
+kylie jue: Otherwise, what we're going to do is what we want to return and I'm going to do this one first. The string without the first letter. So that is going to be
+
+283
+00:42:41.430 --> 00:42:47.430
+kylie jue: S dot sub string one right so starting at the first index and then going to the end of the string.
+
+284
+00:42:48.960 --> 00:42:50.460
+kylie jue: plus S zero
+
+285
+00:42:52.080 --> 00:43:01.020
+kylie jue: And what that's going to do right is it's going to take. Again, all of the string without the first letter and then just add the first letter to the end. And if I go ahead and run this.
+
+286
+00:43:02.700 --> 00:43:07.980
+kylie jue: I have some tests down here that are checking to see if this is going to actually reverse my string.
+
+287
+00:43:12.600 --> 00:43:13.290
+You
+
+288
+00:43:14.820 --> 00:43:18.690
+kylie jue: Here's my console. And if I do
+
+289
+00:43:24.000 --> 00:43:26.640
+We did not get it quite. Let's see.
+
+290
+00:43:33.240 --> 00:43:35.610
+christopher cooper: You want to return. So instead of that empty string.
+
+291
+00:43:36.540 --> 00:43:39.450
+kylie jue: You want to return. So instead of the empty string.
+
+292
+00:43:39.870 --> 00:43:43.980
+Demi Lei: Like, I think you need to reverse the S dot sub string right
+
+293
+00:43:45.270 --> 00:43:45.900
+kylie jue: Um,
+
+294
+00:43:46.920 --> 00:43:49.200
+kylie jue: Well, I think. Hold on, I'm looking at
+
+295
+00:43:51.090 --> 00:43:54.150
+Nick Bowman: Why, because it's just it's missing the recursive call.
+
+296
+00:43:54.990 --> 00:43:57.240
+kylie jue: Oh, it's great, great, good. Sorry.
+
+297
+00:43:59.580 --> 00:43:59.880
+kylie jue: Okay.
+
+298
+00:44:01.230 --> 00:44:01.560
+Thanks.
+
+299
+00:44:02.580 --> 00:44:08.520
+kylie jue: Whoops. Yes. Don't forget to actually call it on the part that is being recursive. All right, let's try this again.
+
+300
+00:44:22.710 --> 00:44:24.630
+kylie jue: All right. Yeah, there we go. So
+
+301
+00:44:25.950 --> 00:44:36.090
+kylie jue: Again, what we're doing here is we're calling the function on the remainder of the string and then just taking the first letter and putting it at the end. So again, this sort of first letter is what you can think about as being stored
+
+302
+00:44:36.690 --> 00:44:40.380
+kylie jue: In each stack frame on that. The, the new calls don't have to worry about.
+
+303
+00:44:41.850 --> 00:44:52.950
+kylie jue: And then just to show you what this one would look like if I did, if you want it to just have it so that you're putting the last letter at the end, you could do string.
+
+304
+00:44:54.420 --> 00:45:02.670
+kylie jue: Stop length, right, because that's going to get you to the end of the string minus one because the last letter is going to be at the index of the length of the string minus one. Whoops.
+
+305
+00:45:03.120 --> 00:45:05.640
+kylie jue: And then I'm going to again make sure to call reverse here.
+
+306
+00:45:06.060 --> 00:45:15.720
+kylie jue: And then this one. The only thing here is that it will be a little bit more of a tricky. Use of the sub string function because now what you want to do is you want to go zero
+
+307
+00:45:16.020 --> 00:45:20.520
+kylie jue: Up until the last letter or not until up until the last letter.
+
+308
+00:45:21.090 --> 00:45:32.670
+kylie jue: But excluding the last letter. So what you want to do is you want to get the full length of the string again but minus one. I think that should be the correct indexing. Because again, remember that the second
+
+309
+00:45:33.270 --> 00:45:40.350
+kylie jue: Parameter to your assumption command is how many letters you want to or how many characters you want to include so I want one minus the full length of the string.
+
+310
+00:45:48.540 --> 00:45:57.240
+kylie jue: And I have this here. Yeah. And so these will do the exact same thing. One is just building it up from the back and ones building it up from the front. All right.
+
+311
+00:46:00.120 --> 00:46:03.180
+kylie jue: Any questions on this.
+
+312
+00:46:05.310 --> 00:46:12.300
+kylie jue: And then, again, this is the iterative version and you can sort of look at the two and compare them and see which one you find to be more
+
+313
+00:46:12.660 --> 00:46:22.950
+kylie jue: Intuitive I think particularly with this for loop going backwards to the string, some folks may see this one is more intuitive, but if you're used to loops definitely like this is the first thing you might think of for now.
+
+314
+00:46:23.940 --> 00:46:36.150
+kylie jue: So it'll get some it'll just take some getting used to, to think about how do you reframe these intuitive problems into recursive problems or recursive solutions, um, any questions about this in the chat. Nick, or anyone who has their hand raised.
+
+315
+00:46:39.630 --> 00:46:42.750
+Nick Bowman: Um, no, there's nothing outstanding. Okay.
+
+316
+00:46:44.220 --> 00:46:47.670
+kylie jue: Cool. Um, so I'm going to go ahead and
+
+317
+00:46:48.570 --> 00:47:01.020
+kylie jue: Move forward. So we coded that. So here's our quick summary of all the things about recursion. We have learned today. So recursion again is a problem solving technique in which tasks are completed by reducing them into repeated smaller tasks of the same form.
+
+318
+00:47:02.730 --> 00:47:09.570
+kylie jue: And then a recursive operation or function is defined in terms of itself, so it will call itself in that recursive call.
+
+319
+00:47:09.930 --> 00:47:21.630
+kylie jue: And recursion has two main parts. It has a base case and it has a recursive case where the base case is the simplest form of the problem and has a direct answer and then the recursive cases, the step where you break the problem into smaller tasks.
+
+320
+00:47:23.370 --> 00:47:31.170
+kylie jue: The solution again is going to get built up as you come back up the call stack, which means that the base case. Right. It's the finding the base of the solution you're building up, which is why
+
+321
+00:47:31.500 --> 00:47:35.730
+kylie jue: In our reverse example you're returning the empty string which is sort of the base of your solution.
+
+322
+00:47:35.970 --> 00:47:45.870
+kylie jue: And then each previous recursive call is going to contribute a little bit to the final solution. It's going to add a letter and then add another letter and then add another letter until you finally get to the original recursive call.
+
+323
+00:47:46.260 --> 00:47:55.440
+kylie jue: The initial call is what's going to return the completely constructed answer. So if it's helpful for you. I recommend trying out maybe at home to really grasp that
+
+324
+00:47:56.370 --> 00:48:04.860
+kylie jue: Do what we did for factorial. But with this reverse function and try to understand how that value is changing as you go back up the call stack to get the final answer.
+
+325
+00:48:06.240 --> 00:48:14.430
+kylie jue: And then when solving problems are critically, you really want to look for self similarity. And again, think about what's useful to store in terms of information at each stack frame.
+
+326
+00:48:15.030 --> 00:48:22.410
+kylie jue: And using those techniques that we showed a few several slides back will help you with developing okay how can I solve this problem recursive Lee.
+
+327
+00:48:23.730 --> 00:48:33.870
+kylie jue: All right, in terms of what's next. So we're going to continue with recursive problem solving tomorrow, specifically Nick is going to talk about one use case of basic recursion, which is fractals.
+
+328
+00:48:34.950 --> 00:48:41.670
+kylie jue: Which V is actually a form of a fractal but we'll get to that tomorrow. But this is sort of a very visual way of understanding
+
+329
+00:48:42.450 --> 00:48:53.580
+kylie jue: Recursion and hopefully it'll give you sort of a mental model visually of how we can think about it. Alright, for once, we actually finished early, so I will Nick and I will stick around for any questions.
+
+330
+00:48:54.600 --> 00:48:56.340
+kylie jue: But we'll see you all tomorrow. Thanks.
+
+331
+00:48:57.360 --> 00:48:57.720
+Siddharth Balaji: Thank you.
+
+332
+00:48:58.260 --> 00:48:58.740
+Jihe He: Thank you.
+
+333
+00:48:59.250 --> 00:49:00.660
+Sachin Montgomery Kaul: Thank you. Appreciate it.
+
+334
+00:49:00.690 --> 00:49:01.890
+Arul Saxena: Thanks. Thank you.
+
+335
+00:49:02.310 --> 00:49:02.820
+christopher cooper: Thank you.
+
+336
+00:49:03.180 --> 00:49:03.600
+Kevin H Fan: Thank you.
+
+337
+00:49:04.080 --> 00:49:04.950
+Thomas Tao Hale: Thank you.
+
+338
+00:49:13.020 --> 00:49:14.370
+Nick Bowman: Yeah, good question.
+
+339
+00:49:15.270 --> 00:49:28.380
+karan parikh: Yeah, I was wondering about the diagnostic which is happening next week. I just want to, is there anything you can say about the format like should we start studying right now is it can be complicated, or is it straightforward. If you've been paying attention lectures or what
+
+340
+00:49:30.570 --> 00:49:38.250
+kylie jue: Yeah. Well, we hope it will be straightforward. If you've been paying attention in lecture and really it'll look similar to section problems.
+
+341
+00:49:38.820 --> 00:49:52.290
+kylie jue: The types of questions will release some example diagnostics as well. Later this week or early next week, so that you can get some practice so you won't be going in with no practice. But in general, it'll look very similar to like section problems in terms of format. Yeah.
+
+342
+00:49:56.790 --> 00:49:58.260
+Shifeng Hong: Um, I have a question.
+
+343
+00:49:59.760 --> 00:50:10.440
+Shifeng Hong: Um, you mentioned that window function is quality create a stack frame and and the wearable wearable has been store in each step friend right
+
+344
+00:50:11.550 --> 00:50:19.680
+Shifeng Hong: Yes and yes, in that case, like let's say other wearable n as an example in class.
+
+345
+00:50:20.790 --> 00:50:24.960
+Shifeng Hong: So there's actually two and exist in the memory together right
+
+346
+00:50:25.680 --> 00:50:33.570
+kylie jue: Yes, exactly. Yeah, I think, I think, let me try to summarize and make sure I understood the question right so if you have a bunch of factorial calls right and
+
+347
+00:50:33.600 --> 00:50:39.180
+kylie jue: Each one has a copy of n. So there's a lot of different variables and being stored in memory.
+
+348
+00:50:39.390 --> 00:50:45.750
+kylie jue: But the way it sort of distinguishes between which is which is it stores it inside of a staff room and says this, and belongs to this function call.
+
+349
+00:50:45.870 --> 00:50:53.190
+kylie jue: This end belongs to this function call. But you're right, you'll have an end that storing five you'll have an end storage for you'll have an end and storing three etc. Yeah.
+
+350
+00:50:54.540 --> 00:50:54.930
+Yeah.
+
+351
+00:50:58.470 --> 00:50:59.850
+kylie jue: Yeah. JOHN
+
+352
+00:51:06.180 --> 00:51:07.170
+John Meshinsky: Okay, I got it working.
+
+353
+00:51:08.220 --> 00:51:09.900
+John Meshinsky: Is this is just a question about the homework.
+
+354
+00:51:12.240 --> 00:51:26.970
+John Meshinsky: In the final like search in the search engine. It said that I didn't get the exact like a mountain. Um, I got like 500 305,338 something like that like unique words.
+
+355
+00:51:27.450 --> 00:51:28.050
+John Meshinsky: Is that
+
+356
+00:51:28.140 --> 00:51:30.210
+John Meshinsky: Is that a big issue I'm
+
+357
+00:51:30.810 --> 00:51:43.380
+kylie jue: Usually what's happening there. I'd have to look exactly a number difference usually what's happening there is you might not be doing something around like is it a higher number than what's expected or lower
+
+358
+00:51:44.190 --> 00:51:45.270
+John Meshinsky: It's a little bit lower.
+
+359
+00:51:45.570 --> 00:51:47.790
+kylie jue: What's lower interesting
+
+360
+00:51:49.410 --> 00:51:55.740
+John Meshinsky: It still works fine. It's I've been running the the test searches and this still works the same.
+
+361
+00:51:55.890 --> 00:51:57.900
+John Meshinsky: That's, that's why I'm just wondering
+
+362
+00:51:59.130 --> 00:52:06.000
+kylie jue: Yeah, I haven't seen Nick. Have you seen lower I've seen higher where you're not like trimming, or sorry, doing things like
+
+363
+00:52:06.750 --> 00:52:22.500
+kylie jue: Case convert like a capital A lowercase conversion or you're not returning to empty string when like you have something that is has no letters. But if it's a lower number I'm not 100% I don't know off the top of my head. What common bug might be causing that Nick. Have you heard of that.
+
+364
+00:52:23.040 --> 00:52:33.270
+Nick Bowman: Yeah, lower is definitely possible. You should be getting the exact number if you're following the the cleaning rules correctly and that is one of the things we'll be checking for so it is worth figuring out
+
+365
+00:52:34.020 --> 00:52:41.040
+Nick Bowman: Lower can be caused by basically the opposite of what you described Kylie, like a higher number of terms means you're not aggressively cleaning enough
+
+366
+00:52:41.370 --> 00:52:48.270
+Nick Bowman: So you're leaving things hanging or you're not converting the lowercase or things like that where you're not ignoring things that don't have letters.
+
+367
+00:52:49.620 --> 00:52:54.840
+Nick Bowman: Look a lower number means you're probably trimming to aggressively. So you're either getting rid of
+
+368
+00:52:55.980 --> 00:53:05.400
+Nick Bowman: Things that shouldn't be gotten rid of or you know there's there's some issues that can come up with that in terms of like edge cases of how you're you're trimming.
+
+369
+00:53:06.930 --> 00:53:18.180
+Nick Bowman: Probably so. Higher is a little bit easier to debug because you can print out all the list of tokens that you found and you can look you can kind of like look at them and see if there's anything that looks out of place.
+
+370
+00:53:18.840 --> 00:53:22.830
+Nick Bowman: lowers a little bit trickier because you don't actually know what's missing. So I would recommend
+
+371
+00:53:23.850 --> 00:53:24.870
+Nick Bowman: Trying to test what you're
+
+372
+00:53:24.870 --> 00:53:26.310
+John Meshinsky: Accidentally cutting out
+
+373
+00:53:27.690 --> 00:53:29.280
+John Meshinsky: Sorry. It was like
+
+374
+00:53:30.390 --> 00:53:33.630
+John Meshinsky: Like you don't know where you exactly what you're cutting out of the
+
+375
+00:53:34.680 --> 00:53:35.370
+Nick Bowman: Yeah.
+
+376
+00:53:35.580 --> 00:53:41.880
+Nick Bowman: Like so. I would recommend doing it with like starting from a unit test base level or you sort of try to come up with
+
+377
+00:53:42.180 --> 00:53:56.730
+Nick Bowman: Like what are all the different ways you can imagine punctuation and letters and numbers for example showing up in a word and and making sure that the token function is working properly because I bet that's, that's where the that's where the issue is going to show up now.
+
+378
+00:53:56.760 --> 00:54:02.700
+kylie jue: Lisa, give us a suggestion that maybe you're cutting out punctuation inside of a word when you actually don't want to be doing that.
+
+379
+00:54:03.240 --> 00:54:11.370
+kylie jue: But definitely looking at that clean token function and making sure it's matching all of those bullets that we put in the handout would be the way to check that.
+
+380
+00:54:12.780 --> 00:54:17.280
+John Meshinsky: Um, do you mind if I explain like cow. I have my pseudo code was kind of
+
+381
+00:54:18.330 --> 00:54:20.220
+John Meshinsky: What was my process for the clean token.
+
+382
+00:54:21.870 --> 00:54:25.020
+Nick Bowman: Probably not. Not right now. Not doing. I mean, we're recording
+
+383
+00:54:26.220 --> 00:54:36.000
+Nick Bowman: Yeah, if you feel like you'll need help with sort of figuring that out the best options are either I have officers today. There's also later tonight and then
+
+384
+00:54:36.270 --> 00:54:38.520
+John Meshinsky: Kind of goes off sometimes office hours, by the way.
+
+385
+00:54:39.540 --> 00:54:43.080
+Nick Bowman: my honor to to for today and on the layer is five to nine tonight.
+
+386
+00:54:47.190 --> 00:55:01.230
+John Meshinsky: Because I want to, I want to come like to nurse office hours. But that's, I would have a class and little that too. So I have a course. So I have to, maybe, can I come in at the last 30 minutes. Would you still be there.
+
+387
+00:55:02.310 --> 00:55:02.640
+kylie jue: Yeah.
+
+388
+00:55:02.670 --> 00:55:08.310
+Nick Bowman: I mean the whole time. And there was also there to me for for two hours tonight so
+
+389
+00:55:09.900 --> 00:55:16.260
+John Meshinsky: I mean with this is this system issue might maybe from the queen token, or is this might be an issue from like
+
+390
+00:55:17.340 --> 00:55:18.540
+John Meshinsky: The Redux
+
+391
+00:55:20.280 --> 00:55:28.140
+kylie jue: It's hard to say without seeing it's more likely clean token in terms of where we've generally seen bugs. But again, it's hard to say without knowing exactly what you're doing.
+
+392
+00:55:30.240 --> 00:55:36.090
+John Meshinsky: Because I'm with my clean token. It's kind of like, I don't know how it's being too aggressive because it doesn't really
+
+393
+00:55:38.010 --> 00:55:39.900
+John Meshinsky: It kind of looks in the Pacific Area.
+
+394
+00:55:42.030 --> 00:55:55.530
+John Meshinsky: For some it looks in the Pacific Area and doesn't really touch anything when it reaches like it's like the looking for parameters and it kind of doesn't touch anything. And within those within the parameters and outside kind of gets rid of
+
+395
+00:55:56.730 --> 00:56:02.400
+kylie jue: Yeah, why don't you bring it into office hours, like you mentioned in the last half hour and then they can help you there.
+
+396
+00:56:03.420 --> 00:56:03.960
+John Meshinsky: Yeah.
+
+397
+00:56:05.250 --> 00:56:08.610
+kylie jue: Um, I think, Catherine had a question.
+
+398
+00:56:09.660 --> 00:56:12.930
+catherine deng: Um, yeah, I just had like a really quick question about
+
+399
+00:56:14.160 --> 00:56:22.890
+catherine deng: About the search engine code. So, um, you know, like how for some parts. There's a plus right before word or a minus
+
+400
+00:56:24.330 --> 00:56:39.420
+catherine deng: Will that plus stay say there's like a space and then just a word that that word has punctuation. Well that plus be like always be the first character in that chunk.
+
+401
+00:56:41.640 --> 00:56:46.410
+catherine deng: So if there's like punctuation. It wouldn't be in the middle of the country around those words.
+
+402
+00:56:47.490 --> 00:56:58.440
+kylie jue: Well, the punctuation can punctuation can exist in the middle of the word, but specifically if you're trying to understand, like, if the plus or minus is meant to help you like when you're combining the sets.
+
+403
+00:56:59.460 --> 00:57:05.430
+kylie jue: Like for the purposes of combining the sets the plus or minus that you care about will always be the first letter in the chart.
+
+404
+00:57:06.360 --> 00:57:14.670
+catherine deng: What else, it's like I'm like $1 sign and then an exclamation mark and then a plus. And then the word
+
+405
+00:57:15.930 --> 00:57:18.480
+kylie jue: Then you wouldn't treat it like a plus at the beginning of the word.
+
+406
+00:57:19.230 --> 00:57:19.770
+Okay.
+
+407
+00:57:20.790 --> 00:57:21.390
+catherine deng: Thank you.
+
+408
+00:57:26.460 --> 00:57:27.390
+kylie jue: Sure, yeah.
+
+409
+00:57:28.200 --> 00:57:38.460
+haoming li: For the recursion. Today's one is how many able to make the pace pace now empty string, but only one letter. Yeah.
+
+410
+00:57:38.490 --> 00:57:40.770
+kylie jue: So that is actually something you can do.
+
+411
+00:57:41.610 --> 00:57:49.890
+kylie jue: We, we haven't talked about it yet, but one thing is sort of like when you're thinking about the base case. You really want it to be as a simplest possible case.
+
+412
+00:57:50.190 --> 00:57:58.830
+kylie jue: And so the reason we say, oh, if you're terminating you're returning when you just get one letter, it's a little less simple because you're having to check the length of the string.
+
+413
+00:57:59.400 --> 00:58:02.250
+kylie jue: So even though functionally that would do the same thing, it would work.
+
+414
+00:58:03.210 --> 00:58:08.580
+kylie jue: We sort of like to go all the way to, like, oh, it's just the empty string. Because that's really like the simplest simplest case you could have
+
+415
+00:58:09.030 --> 00:58:16.050
+kylie jue: Because suppose someone actually entered the empty string into your function right then you'd have a special case that function for that case right
+
+416
+00:58:16.740 --> 00:58:22.500
+haoming li: Yeah, those empty string looks simpler than the one
+
+417
+00:58:23.760 --> 00:58:24.630
+kylie jue: Yeah, exactly.
+
+418
+00:58:25.980 --> 00:58:34.500
+haoming li: What we're trying to get the last character string using the index are able to use that one or have to the last month.
+
+419
+00:58:34.980 --> 00:58:35.910
+kylie jue: You have to use the link
+
+420
+00:58:36.990 --> 00:58:41.850
+kylie jue: Yeah, that's a Python thing. Unfortunately, as great as it is in Python. It doesn't exist in c++
+
+421
+00:58:43.020 --> 00:58:43.770
+haoming li: Okay, good to know.
+
+422
+00:58:44.100 --> 00:58:45.420
+haoming li: Yeah, thank you.
+
+423
+00:58:46.800 --> 00:58:48.300
+kylie jue: Yeah, Edward
+
+424
+00:58:49.980 --> 00:58:57.180
+edouard des: Question. Now this perhaps out to take it to an office hours. And I think about about him. I ran into a problem with UT creator and don't know if this is an incredibly common
+
+425
+00:58:57.930 --> 00:59:05.130
+edouard des: But it's not. When I launched it it would like only open on like an app, but it wouldn't like star and it wouldn't open the URL and we're just open that like Mac.
+
+426
+00:59:05.550 --> 00:59:11.640
+edouard des: App symbol, which is like a little paint brush a little piece of paper and then the application output would come out, but I couldn't interact with it.
+
+427
+00:59:12.270 --> 00:59:22.290
+edouard des: I'm I'm product to them. Yesterday to a, what's it called to layer and what they suggested was that I'm with the directory like we we tried a bunch of things didn't work. I just changed the directory that worked.
+
+428
+00:59:22.800 --> 00:59:34.860
+edouard des: So I'm not sure if like, and I tried installing it on another another computer, and it also did the same problem. So, uh, I'm not sure what's wrong, but it works. Now should I, this is a common problem versus like a very specific thing.
+
+429
+00:59:35.610 --> 00:59:38.010
+kylie jue: It worked. When you move to the directory
+
+430
+00:59:38.490 --> 00:59:47.820
+edouard des: Yeah, it did. But it's like it's weird because I'm like, it was working fine before and then it just stopped working and my director doesn't have any like parentheses or special characters or anything like that.
+
+431
+00:59:48.960 --> 00:59:58.680
+kylie jue: Yeah, it's it is something we've seen before. I don't know that I've seen it specifically not work after it's been working, although maybe Nick has because he's had more experience with cutie creator books, then I have
+
+432
+00:59:59.010 --> 01:00:09.210
+kylie jue: Oh, we have seen the case for, like, depending on if you specifically put it on the desktop or in downloads on a Mac. It will sometimes just like break the build for your
+
+433
+01:00:09.720 --> 01:00:17.790
+edouard des: Okay, it's not gonna lie, I suppose. In my, in my husband's name a name did something that was close to nose and a bit cutie can be specific about what the directory names are correct.
+
+434
+01:00:18.330 --> 01:00:20.640
+kylie jue: Yeah. Nick, do you have more insight into why
+
+435
+01:00:21.900 --> 01:00:26.820
+Nick Bowman: Um, do you happen to be running. Do you have any like backing up your computer on iCloud.
+
+436
+01:00:27.900 --> 01:00:33.150
+edouard des: And as far as I know, no, I'm good. I don't know what my Mac does sometimes
+
+437
+01:00:33.450 --> 01:00:42.090
+Nick Bowman: It's okay, just, just because yeah yeah so. So to answer your first question, yes, Qt can be routed director names. You can be weird with were on your computer. So, kid.
+
+438
+01:00:43.050 --> 01:00:51.000
+Nick Bowman: Cudi can be weird if you have like a cloud, like a lot of people on Windows machines that I felt recently like their whole computer is backed by OneDrive.
+
+439
+01:00:51.390 --> 01:00:55.080
+Nick Bowman: And the like one drives thinking of files can cause issues sometimes
+
+440
+01:00:55.500 --> 01:01:04.740
+Nick Bowman: And so there's just a lot of things that can cause issues and often I'm like, I'm glad that you were able to figure it out just by moving it somewhere else that's oftentimes like the easiest solution is
+
+441
+01:01:05.070 --> 01:01:15.750
+Nick Bowman: Just completely like delete all the build folder, the build folder and like auxiliary information like never delete your code. Like if you see things like this. Like, it's not your code that's causing problems.
+
+442
+01:01:16.290 --> 01:01:30.330
+Nick Bowman: And but then yeah like moving it somewhere else or just trying with a fresh download somewhere else in your computer honestly the best things that you can do. And there's just a long exhaustive list of things that will make you happy.
+
+443
+01:01:31.440 --> 01:01:31.830
+edouard des: Okay.
+
+444
+01:01:32.340 --> 01:01:39.810
+edouard des: Yeah, so, so just like your assessment you for should I bring the center like if it's working now. It's not worth it to him credit, I guess.
+
+445
+01:01:40.320 --> 01:01:47.880
+Nick Bowman: If I'm working now. I would say don't worry about it. If you run into the same issue. Definitely let us know and we can
+
+446
+01:01:48.810 --> 01:01:49.170
+Okay.
+
+447
+01:01:51.420 --> 01:01:51.600
+edouard des: Yeah.
+
+448
+01:01:53.430 --> 01:01:54.210
+edouard des: Yeah. Yep. So
+
+449
+01:01:57.300 --> 01:02:00.480
+kylie jue: Any questions in the chat. Nick, that I should reiterate verbally for the recording.
+
+450
+01:02:04.320 --> 01:02:08.910
+Nick Bowman: Know, we got a good question. I think she's got a good question about
+
+451
+01:02:09.930 --> 01:02:16.920
+Nick Bowman: His recursion or how is recruiting different from breath for search which actually really interesting because it's actually kind of completely different.
+
+452
+01:02:17.310 --> 01:02:24.810
+Nick Bowman: But I would take kind of a, an illustration to show that. So I'm we might try to incorporate that later in the week or just revisit it near the end of the class.
+
+453
+01:02:25.320 --> 01:02:31.410
+Nick Bowman: It is for, for those of you listening, it is there it is actually distinctly different there's actually kind of two main ways to search
+
+454
+01:02:31.710 --> 01:02:47.160
+Nick Bowman: And breadth first is the one we've learned so far. And that's almost always done intuitively, it's, it's actually very hard to do. Brett first search recursive Lee and and there's something called depth for search, which is actually exactly what recursion does
+
+455
+01:02:48.360 --> 01:03:00.450
+Nick Bowman: And is very hard to do interactively so it's actually an interesting class of problems that one as well so well suited to iteration ones will sue to recursion and we might try to do a comparison of the two sometime later.
+
+456
+01:03:02.490 --> 01:03:05.460
+kylie jue: All right, any other questions from the folks who are here.
+
+457
+01:03:08.010 --> 01:03:14.370
+Edward Chung Yik Yeung: This is like kind of unrelated, but if I'll try to reset my zoom scan for about a you password. Is there any way I could
+
+458
+01:03:15.660 --> 01:03:23.100
+kylie jue: A good question. Are you you should just be using. So, so right. The single sign on to sign in.
+
+459
+01:03:24.690 --> 01:03:31.200
+kylie jue: Like, it should be the same mechanism that you use to sign into like a Stanford email or any Stanford things
+
+460
+01:03:31.920 --> 01:03:39.090
+Nick Bowman: Yeah, like you can't change your password, just for Stanford zoom like you, the password isn't that's used for your whole Stanford account. Yeah.
+
+461
+01:03:39.930 --> 01:03:49.920
+Edward Chung Yik Yeung: Okay. Whenever entering the password like zoom app, it doesn't seem to work. And then when I request for a password change. It says the old one.
+
+462
+01:03:50.970 --> 01:03:51.690
+kylie jue: Yeah, so
+
+463
+01:03:53.400 --> 01:03:54.240
+kylie jue: You have to click
+
+464
+01:03:54.540 --> 01:03:55.290
+Edward Chung Yik Yeung: A little
+
+465
+01:03:56.190 --> 01:03:56.910
+kylie jue: Sorry, go ahead.
+
+466
+01:03:57.870 --> 01:03:59.070
+Edward Chung Yik Yeung: No, good, good, good.
+
+467
+01:03:59.280 --> 01:04:12.150
+kylie jue: Oh, I was just gonna say um if you when you sign into zoom. I think the way Stanford has done it. Now, as you have to use. There's a button that says sign in with SSO as opposed to sign in with email and password.
+
+468
+01:04:13.320 --> 01:04:28.410
+kylie jue: And when you sign in with SSO what it does is it should open up actually a web page that asks you to sign in using your SEO ID and your password for your Stanford like account like separate from the zoom app. And that's the way you would sign in, instead of
+
+469
+01:04:28.470 --> 01:04:30.540
+kylie jue: So it actually, that's why it will reject when you try
+
+470
+01:04:30.540 --> 01:04:32.310
+kylie jue: To input, just like email and password.
+
+471
+01:04:35.130 --> 01:04:36.720
+Edward Chung Yik Yeung: Okay, but
+
+472
+01:04:36.780 --> 01:04:44.220
+Nick Bowman: Yeah, the fact that you're here tells me you have done that. Like you would not be able to be here if you had not done that. So you've, you've done it.
+
+473
+01:04:48.780 --> 01:04:50.700
+Edward Chung Yik Yeung: You know, another zoom out.
+
+474
+01:04:51.180 --> 01:04:52.470
+Edward Chung Yik Yeung: Doesn't work so
+
+475
+01:04:52.530 --> 01:04:53.970
+Nick Bowman: I see. Yeah, though, if you do it.
+
+476
+01:04:54.000 --> 01:04:55.320
+Edward Chung Yik Yeung: Originally through their webpage that
+
+477
+01:04:55.320 --> 01:04:56.970
+Nick Bowman: Also works, but yeah.
+
+478
+01:04:57.330 --> 01:05:04.770
+Nick Bowman: Guys right if. Okay. Basically, you should never be entering your username and password directly into the zoom app because that that's not how
+
+479
+01:05:05.340 --> 01:05:06.450
+Edward Chung Yik Yeung: I set it up taxes.
+
+480
+01:05:07.740 --> 01:05:12.840
+Nick Bowman: Yeah, you should be using the sign in with us. So, which takes you to like a Stanford branded page where you enter your
+
+481
+01:05:13.950 --> 01:05:14.400
+Credentials.
+
+482
+01:05:25.980 --> 01:05:30.180
+kylie jue: Nothing else. I think we can go ahead and close the lecture, Nick, your
+

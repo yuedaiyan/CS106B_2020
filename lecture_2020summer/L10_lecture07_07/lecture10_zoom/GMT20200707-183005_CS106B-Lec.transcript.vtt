@@ -1,0 +1,1594 @@
+WEBVTT
+
+1
+00:00:01.380 --> 00:00:05.310
+Nick Bowman: There we go. Alright. Awesome. Um, is my screen sharing oppressed.
+
+2
+00:00:07.859 --> 00:00:18.900
+Nick Bowman: Cool. So let's go ahead and get started. So today, we're going to continue our discussion of recursion and we're going to do that by exploring this idea of recursive fractals.
+
+3
+00:00:20.640 --> 00:00:29.760
+Nick Bowman: And so once the slide comes up. You can see the question for today. Okay, awesome. So the question for today is what after discussion of recursion yesterday.
+
+4
+00:00:30.540 --> 00:00:43.980
+Nick Bowman: Can you think of any examples of recursion that you've encountered in your day to day life, and they don't all have to be programming with it mostly just like, as I've been things you've seen in your day to day life and sort of remind you of the recursive patterns we saw yesterday.
+
+5
+00:00:46.410 --> 00:00:54.210
+Nick Bowman: So today we're going to continue with our journey we're going to be on this.of the curse of problem solving for almost a week and a half. So today's sort of our second and
+
+6
+00:00:54.960 --> 00:01:09.180
+Nick Bowman: Sort of pass through talking about recursion and the questions for today is we're going to think about how we can use visual representations to understand recursion. And then we're also going to ask ourselves the question of how can we use recursion to then make art.
+
+7
+00:01:10.320 --> 00:01:16.410
+Nick Bowman: And so we're going to do some review and then we're going to define recursion in the context of these things called fractals.
+
+8
+00:01:16.860 --> 00:01:28.770
+Nick Bowman: And then we'll do two examples of fractals called the cantor set and the serpent's be carpet and then we'll, we'll code those up and actually get the demos of them, and then we'll revisit the top of the funnel actually at the very end.
+
+9
+00:01:30.510 --> 00:01:43.890
+Nick Bowman: So for today's review. So remember, yesterday we define this idea of recursion and I'm which is a problem solving technique and where we break down tasks and complete them but breaking them down into repeated smaller tests have the same form.
+
+10
+00:01:45.180 --> 00:01:51.120
+Nick Bowman: And and so when we define recursive functions and code redefined the functions in terms of themselves.
+
+11
+00:01:52.530 --> 00:01:57.750
+Nick Bowman: The function than just recursion in general, often have two main components. The first component is the base case.
+
+12
+00:01:58.110 --> 00:02:04.050
+Nick Bowman: And this is usually the simplest possible form of the problem that we can answer with a very direct and quick and easy answer.
+
+13
+00:02:04.740 --> 00:02:13.530
+Nick Bowman: And then we have the recursive case, which is the part where we break down the problem into smaller tasks, maybe we do a little bit of work to accomplish our goal is solving a problem.
+
+14
+00:02:15.480 --> 00:02:23.370
+Nick Bowman: And what we saw when we work through recursive functions is we were actually able to build up the solution. So these recursive functions as we worked our way back up the call stack.
+
+15
+00:02:23.880 --> 00:02:30.690
+Nick Bowman: So we introduced this idea of the call stack and the function calls and effect crunch, which will revisit again with today's example.
+
+16
+00:02:31.260 --> 00:02:41.370
+Nick Bowman: And we saw that our answers. Oftentimes a problem gets smaller and smaller as we go down the stack frames and then our answer gets built up or past all the way back up as we work our way.
+
+17
+00:02:42.510 --> 00:02:43.590
+Nick Bowman: Back to the function calls
+
+18
+00:02:45.210 --> 00:02:55.170
+Nick Bowman: And this key idea or you're looking for. And we're going to talk a lot about this today as we were looking for self similarity and problems. And we're also thinking about what information was getting stored in the stack frame.
+
+19
+00:02:55.620 --> 00:03:00.780
+Nick Bowman: Because that was sort of very important to thinking about how we would actually be able to sort of leverage this as a problem.
+
+20
+00:03:06.330 --> 00:03:07.410
+Nick Bowman: Is green
+
+21
+00:03:10.740 --> 00:03:11.520
+Nick Bowman: Is that any better.
+
+22
+00:03:12.870 --> 00:03:17.640
+Nick Bowman: Is that inspires me. Okay. People in people in New York. Okay. Sorry about that.
+
+23
+00:03:19.290 --> 00:03:29.010
+Nick Bowman: Okay, cool. And so that's our that's our sort of overall review recursion. And so let's jump into today's review example, and we're going to write a function called is palindrome.
+
+24
+00:03:29.910 --> 00:03:38.400
+Nick Bowman: And so what this function does is, I guess what, what this function does is it basically just returns true or false, indicating whether or not a given strings of palindrome.
+
+25
+00:03:39.120 --> 00:03:50.280
+Nick Bowman: a palindrome is just any string that when you read it forward and read it backwards reads exactly the same. So something like level is red level but forwards and backwards. That one's
+
+26
+00:03:51.780 --> 00:03:59.040
+Nick Bowman: A little bit of a simpler example then we have race car. So if you read race car forwards and race car backwards. That's also exactly the same.
+
+27
+00:03:59.520 --> 00:04:08.430
+Nick Bowman: And really cool one is step on no pets, which is a good life motto to live by. But if you actually read it backwards, you'll see that it's step on no pets. I'm going backwards as phone
+
+28
+00:04:09.060 --> 00:04:17.490
+Nick Bowman: And then there are things that aren't palindromes right. So things that when you read them forward so backwards aren't the same. So high red backwards. It's like, how good it doesn't really make sense.
+
+29
+00:04:18.000 --> 00:04:26.400
+Nick Bowman: Just like the word high backwards. Is it. Ah, that's not really a palindrome. Unfortunately, the word palindrome itself is not a drunk would have been cool if it was, but it's not
+
+30
+00:04:26.850 --> 00:04:34.290
+Nick Bowman: And then, you know, things like a single letter streaming or the empty string. Those are palindromes because kind of trivial. If you read them follows the same string.
+
+31
+00:04:35.730 --> 00:04:44.400
+Nick Bowman: And so you're going to write a function that is actually determines whether or not you're not going to write the function you're going to brainstorm kind of the idea of how to solve this problem occurs.
+
+32
+00:04:45.510 --> 00:04:48.900
+Nick Bowman: And so remember the reminders from yesterday about how you approach recursive problems.
+
+33
+00:04:49.620 --> 00:04:55.770
+Nick Bowman: You really want to make sure that you try out an example and look for patterns. And so when you're getting started on this in your breakout rooms.
+
+34
+00:04:56.220 --> 00:05:03.420
+Nick Bowman: Really make sure to look for those patterns by working through examples and sort of seeing thinking about how you break down the problem over time.
+
+35
+00:05:04.680 --> 00:05:11.430
+Nick Bowman: And then just think about what information is actually happening and getting stored at each step of the recursive function.
+
+36
+00:05:12.300 --> 00:05:19.260
+Nick Bowman: So we're going to ask you those two questions. So what is the basis for this problem. What is the simplest possible problem that you could solve when you're looking for a palindrome.
+
+37
+00:05:19.890 --> 00:05:28.230
+Nick Bowman: And then what is the recursive case. And if you're not at a simple version of the problem. How can you break it down a little bit, make a little bit of a determination of whether or not something
+
+38
+00:05:28.950 --> 00:05:35.130
+Nick Bowman: Of whether or not you're successfully on track to find the conundrum. And then define it in terms of call
+
+39
+00:05:36.000 --> 00:05:52.140
+Nick Bowman: And so we're going to go ahead and drop you into breakout rooms and there is a Ed workspace, as there is always the instructions are repeated in the workspace text file. So, just feel free to refer to that and you're working through things. And yeah, so let's go ahead and send you a thing.
+
+40
+00:06:01.500 --> 00:06:21.690
+Nick Bowman: Oh, and then for those of you that are that are watching asynchronously. Go ahead and pause here and recommend going to the breakout room and spend about three or four minutes sort of thinking about what the base and recursive cases was probably and we've actually provided and will
+
+41
+00:06:22.740 --> 00:06:28.230
+Nick Bowman: Making a mental note to make a public version of a workspace and after lecture that you guys can look at
+
+42
+00:06:28.770 --> 00:06:38.280
+Nick Bowman: But we included some examples and instructions in the text file yet workspace as well. So if you're watching asynchronously right now. Go ahead and pause the video and go
+
+43
+00:06:38.760 --> 00:06:46.560
+Nick Bowman: try that out for a couple minutes, and then we will, and then you can just skip ahead to about three minutes from now when you come back.
+
+44
+00:06:50.880 --> 00:06:51.570
+Nick Bowman: So,
+
+45
+00:06:52.890 --> 00:07:07.590
+Nick Bowman: I should do this at the end of the speaker on these headphones sucks. And when so I just changed it to be your internal computer microphone and it's weird because when I use the speaker and microphone on this at the same time.
+
+46
+00:07:08.760 --> 00:07:18.690
+Nick Bowman: I get the feedback to like it sounds super like I don't hear myself, but I hear like a bunch of static sounds like it makes audio quality. So I don't know. So like when I'm at home I always use like my monitor
+
+47
+00:07:20.340 --> 00:07:22.110
+Nick Bowman: Microphone and then my headphones.
+
+48
+00:07:23.730 --> 00:07:23.910
+Yeah.
+
+49
+00:07:42.420 --> 00:07:50.820
+There's a question that didn't get answered. I got thrown in my chat right before when it was can you just put this during the mill and then check
+
+50
+00:07:54.540 --> 00:07:55.830
+Nick Bowman: It will you have to reset.
+
+51
+00:07:57.210 --> 00:08:05.220
+Nick Bowman: That yeah but you'd also versus you mean you could technically you could just call them reverse function on the whole string and see, you know, what
+
+52
+00:08:06.600 --> 00:08:07.050
+Nick Bowman: I mean, yeah.
+
+53
+00:08:08.880 --> 00:08:10.920
+Nick Bowman: If you have a reverse direction. You can eat salad.
+
+54
+00:08:19.170 --> 00:08:23.970
+Nick Bowman: 1139 yeah in like 30 seconds and be good. Yeah.
+
+55
+00:08:41.250 --> 00:08:42.720
+Sample palindromes getting
+
+56
+00:08:43.980 --> 00:08:44.280
+Started
+
+57
+00:09:13.020 --> 00:09:13.290
+Alright.
+
+58
+00:09:16.260 --> 00:09:25.980
+Nick Bowman: So we had a chance to talk about that. So let's, let's see what the process is. Let's see what what a good sort of thought process of approaching a recursive look like
+
+59
+00:09:27.090 --> 00:09:35.550
+Nick Bowman: So we then I would approach this right is, you know, like I said, Start off with an example and look for self similarity. So if we wanted to determine whether or not race car was a problem or not.
+
+60
+00:09:36.600 --> 00:09:40.440
+Nick Bowman: One thing that we might realize is that the first and the last letter are the same.
+
+61
+00:09:40.830 --> 00:09:45.540
+Nick Bowman: And if you think about it, like if you're reading the string forwards the first letter is the first time you encounter.
+
+62
+00:09:45.750 --> 00:09:53.580
+Nick Bowman: If you read the string backwards. The last letters. The first time you encounter. So if you if you want it to be a palindrome. Those better natural, but those don't match up your kind of out of luck.
+
+63
+00:09:55.470 --> 00:10:07.800
+Nick Bowman: And then we were left with a smaller string. So as a CCA and and, well, what do we want to determine about that string. Well, if it's a palindrome, then we know that the rest of them that are overall racecar strings.
+
+64
+00:10:09.030 --> 00:10:18.390
+Nick Bowman: And so then we would look at the first letters that they're both a going look at the remaining letters which are CPC the beginning in the undergo see
+
+65
+00:10:18.870 --> 00:10:22.440
+Nick Bowman: And then we get to the point where we ask ourselves, oh well, as he a palindrome.
+
+66
+00:10:22.680 --> 00:10:30.570
+Nick Bowman: Well, he doesn't actually have a first and last letter. They actually just only has one letter. So we wrote it forward. So we get that letter. And if we read it backwards. We get that letter.
+
+67
+00:10:31.260 --> 00:10:42.000
+Nick Bowman: So this kind of seems to fulfill our conditions for face case, right. It's a really simple problem to solve. Someone asked me, Is this one letter string a palindrome. And I can very easily say yes, without even caring about what letter.
+
+68
+00:10:44.100 --> 00:10:49.200
+Nick Bowman: But what about if we're looking for a palindrome. And it's unsuccessful. So maybe like the word high
+
+69
+00:10:49.860 --> 00:10:55.230
+Nick Bowman: And we would still repeat the same process, we would look at the first letter last letter. Okay, they're both each
+
+70
+00:10:56.130 --> 00:11:04.440
+Nick Bowman: But then we will get to the point where we're looking to see if i n g is a palindrome. And then we realize, oh, well, the first letter I. And the last letter G are not equal.
+
+71
+00:11:05.220 --> 00:11:13.770
+Nick Bowman: So then we can go ahead and return false. And what's interesting, and you see this on the slides we labeled as a base case. There's actually a second base case.
+
+72
+00:11:14.700 --> 00:11:23.550
+Nick Bowman: And it's actually totally possible to have more than one base case in a recursive function, because remember, basically it's just means a really simple problem that you can solve directly
+
+73
+00:11:24.720 --> 00:11:31.860
+Nick Bowman: And in this case, right, if the first and the last letter not equal. It's a really easy problem to solve. It can't be a palindrome. If the first and the last letters don't matter.
+
+74
+00:11:34.110 --> 00:11:37.110
+Nick Bowman: And so if we wanted to formalize this, we would have
+
+75
+00:11:38.640 --> 00:11:45.630
+Nick Bowman: A couple of bass cases. So if we have the empty string that then you can return true. We have a string of length one. We can also return true.
+
+76
+00:11:46.110 --> 00:11:49.470
+Nick Bowman: But then if the first and the last letters are not equal, then you can return false.
+
+77
+00:11:50.100 --> 00:11:54.720
+Nick Bowman: And then our recursive insane. It was basically that like as long as the first and the last letters are equal.
+
+78
+00:11:54.960 --> 00:12:04.830
+Nick Bowman: The palindrome. This of our original string is just the equivalent to checking whether or not the middle portion which is the string without the first and the last letter are palindromes themselves.
+
+79
+00:12:06.210 --> 00:12:16.530
+Nick Bowman: And so one thing that's different from what we saw yesterday. That's actually totally possible. And oftentimes necessary to have multiple based cases and we have also or recursive cases in here today.
+
+80
+00:12:17.160 --> 00:12:22.410
+Nick Bowman: Multiple recursive cases is a little bit trickier to think about, but that's kind of going to be the whole topic of overtime.
+
+81
+00:12:24.390 --> 00:12:36.810
+Nick Bowman: So here's the same pseudo code and code. Basically, if the strings. Zero or one character is your turn. True. Otherwise, you check to see if the first time last character or equal and then you have your recursive call on the middle contents.
+
+82
+00:12:38.640 --> 00:12:45.300
+Nick Bowman: And the last thing that we wanted to just quickly show off here is again the reminder about what the stack frames look like when you call this function.
+
+83
+00:12:46.080 --> 00:12:53.490
+Nick Bowman: So remember when we make our is palindrome call we get a brand new staff frame that contains sort of a new copy of the execution of the code.
+
+84
+00:12:53.880 --> 00:13:00.810
+Nick Bowman: And the parameter. So that gets passed in this race car then we just go through and execute the function and
+
+85
+00:13:01.530 --> 00:13:06.060
+Nick Bowman: We check to see if the first and last that are equal, since they are we move on to the recursive call.
+
+86
+00:13:06.480 --> 00:13:17.640
+Nick Bowman: And remember, when we move on to this next recursive call, we get a brand new stack frame with a brand new copy of the code and a brand new copy of the variables. And so the variables in this case is a CCA
+
+87
+00:13:18.480 --> 00:13:24.510
+Nick Bowman: And then this process just repeats and done the same sort of problem breakdown that we saw before, until we get to the base case.
+
+88
+00:13:24.900 --> 00:13:30.510
+Nick Bowman: And when we get to the base case, we actually then realize that we can we've solved our problem and we can return true.
+
+89
+00:13:30.870 --> 00:13:36.660
+Nick Bowman: And then the last key component of these recursive solutions because you can watch the true value actually get
+
+90
+00:13:37.230 --> 00:13:45.300
+Nick Bowman: Past all the way back up the call stack as you work your way backwards until you get to the very end and you print out true
+
+91
+00:13:46.260 --> 00:13:53.970
+Nick Bowman: And so is palindrome is a really awesome example of how to sort of use recursion to define a problem in terms of a smaller version of itself.
+
+92
+00:13:54.420 --> 00:14:02.820
+Nick Bowman: And if you want to get some practice with actually implementing yourself the section starter code has some tests and a test harness and to go ahead and get started.
+
+93
+00:14:04.470 --> 00:14:08.490
+Nick Bowman: Cool. So that's sort of our view of what we talked about regarding recursion yesterday.
+
+94
+00:14:09.750 --> 00:14:21.420
+Nick Bowman: So to move on so certain now sort of our main question for the day, or one of our two main questions for the day, which is how can we sort of use visual representations to understand recruitment.
+
+95
+00:14:22.830 --> 00:14:31.950
+Nick Bowman: And order to do that we have to talk about self singularity. First, we've talked about this notion of self similarity a lot already. And we talked about in terms of solving problems.
+
+96
+00:14:32.490 --> 00:14:40.110
+Nick Bowman: But today, we're going to focus on actually analyzing recursive phenomenon and and and trying to identify sort of notions of self similarity
+
+97
+00:14:40.860 --> 00:14:46.350
+Nick Bowman: And we, in reality, and object itself similar is just if it contains a smaller copy of itself.
+
+98
+00:14:46.770 --> 00:14:57.450
+Nick Bowman: And so for those of you that like to cook. If you know Romanesque a cauliflower. And if you look at the overall cauliflower. It contains these sort of cones and each cone is composed of smaller cones and you smaller code is composed
+
+99
+00:14:57.780 --> 00:15:09.060
+Nick Bowman: Of copies of us even smaller ones. So that's a great example. And this was an example we saw yesterday, so I'm animals, we have the sea shells that are composed of smaller and smaller copies of themselves.
+
+100
+00:15:10.500 --> 00:15:13.560
+Nick Bowman: If you study erosion actually coastal erosion follows
+
+101
+00:15:14.940 --> 00:15:31.260
+Nick Bowman: Follows fractal patterns. So if you studied sort of environmental and environmental field fractal show or self similarity shows up there and if you study things like geology and you look at mountains and earthquake fault lines you actually see patterns of self similarity there as well.
+
+102
+00:15:32.610 --> 00:15:47.460
+Nick Bowman: So it shows up all over the place and it's super key to actually kind of truly understanding the formation and the existence of these real life phenomena that that probably a lot of you studying in some aspect or seen or have cooked with or have encountered in your data.
+
+103
+00:15:49.680 --> 00:15:53.820
+Nick Bowman: And in order to understand this self similarity. We're going to focus on graphical representations
+
+104
+00:15:55.170 --> 00:16:00.420
+Nick Bowman: And we actually you've already had exposure to this your first exposure to recursion was actually graphical in nature.
+
+105
+00:16:00.870 --> 00:16:13.140
+Nick Bowman: And we had we dealt with this recursive program called V and the drought. Some of these funky trees. I just generated some examples yesterday and took some screenshots and this little sprite, which was cleared up and swift at minus 50 G's.
+
+106
+00:16:13.980 --> 00:16:22.620
+Nick Bowman: That's the language called SCRATCH Oh yeah, what's left that's called scratch, but the spray would kind of just walk around and it would draw this very interesting tree like patty.
+
+107
+00:16:23.700 --> 00:16:30.630
+Nick Bowman: And and then you're going to hear me use the words tree and the words of branching a lot. And the reason why is a graphical representations of recursion.
+
+108
+00:16:30.930 --> 00:16:44.220
+Nick Bowman: Allow us to explore what it means to have multiple recursive calls, and have multiple self similar components, making up that phenomenon or problem. And so this branching and this tree like structures and be really critical to understanding
+
+109
+00:16:45.480 --> 00:16:57.510
+Nick Bowman: This notion is powerful notion of multiple recursive calls, and then tomorrow and Thursday and Monday and Tuesday. We're going to use that branching ensure recursion to solve problems that we can't solve interactively
+
+110
+00:16:59.760 --> 00:17:09.000
+Nick Bowman: So let's talk about fractals so fractals is kind of the, the main motivating factor electric today. I'm kind of simply put a fractal just any graphical pattern that's repeated.
+
+111
+00:17:09.840 --> 00:17:20.550
+Nick Bowman: And and a fractal generally is composed of repeated instances of the same shape or pattern and it should sound really similar to what we just talked about. This is exactly the notion of self similarity
+
+112
+00:17:21.000 --> 00:17:32.850
+Nick Bowman: And the other critical component of fractals is these structures are usually arranged in some structured way and the structured arrangement usually creates really beautiful and really cool looking pattern.
+
+113
+00:17:34.590 --> 00:17:46.590
+Nick Bowman: So these are some examples of fractals to see some trees, some stars and triangles, squares. There's some snowflakes. On the right hand side just made out of repeated triangles and
+
+114
+00:17:47.370 --> 00:17:52.410
+Nick Bowman: There's some even cool ones, either. These are the ones from lecture yesterday. So you can have spirals, and repeating colors.
+
+115
+00:17:52.800 --> 00:18:04.200
+Nick Bowman: And the one on the ratio look familiar. That's actually the cover photo for our class playlist. That's called a Mandelbrot set. Since these actually repeated circles in this really cool like general like patterns.
+
+116
+00:18:06.810 --> 00:18:11.970
+Nick Bowman: And so, so let's actually try to understand this, this fractal structure and try to see what's what's going on here.
+
+117
+00:18:13.110 --> 00:18:20.220
+Nick Bowman: So here's an example of fractal it's a tree are going to, like I said, we're going to talk about trees, a lot of trees are really important. And they're not really
+
+118
+00:18:20.490 --> 00:18:31.320
+Nick Bowman: They're not only an important graphical component. But actually, when we talk about solving problems with recursion. We're going to draw trees and all these things called decision trees that sort of track our way of solving problems.
+
+119
+00:18:32.370 --> 00:18:38.130
+Nick Bowman: And so if you look at this tree and you look at the left hand side of the tree. Well, it's actually just a smaller recursive tree.
+
+120
+00:18:38.310 --> 00:18:44.550
+Nick Bowman: And if you look at left hand side of that tree. It's another smaller recursive tree, you look at the left hand side of that and other smaller recursive tree.
+
+121
+00:18:45.210 --> 00:18:51.570
+Nick Bowman: And so the question is like what differentiates each of these smaller trees from kind of the larger overall treatment they make up
+
+122
+00:18:52.890 --> 00:18:57.600
+Nick Bowman: Well, the first thing is their positions. Right. So each tree is kind of rooted at a different starting location.
+
+123
+00:18:58.710 --> 00:19:13.080
+Nick Bowman: The next is the science. Obviously, the smaller trees or a smaller size and the bigger ones. The next of the orientation, right, the smaller the smaller trees are rotated and sort of increasing angles kind of radio outwards gives us this nice kind of branching view.
+
+124
+00:19:14.610 --> 00:19:20.070
+Nick Bowman: And then there are different order. And this is the one that the terminology might not be super familiar for you all.
+
+125
+00:19:21.150 --> 00:19:29.310
+Nick Bowman: Order is just a way for us to describe complexity. So things that are fractals things that are self similar are oftentimes in terms of this parameter called order.
+
+126
+00:19:29.820 --> 00:19:39.450
+Nick Bowman: Which just indicates the overall complexity of the overall structure so that way you can think of it as you work your way down to the smaller and smaller trees. You'll see it there are less and less complex
+
+127
+00:19:40.080 --> 00:19:49.560
+Nick Bowman: So they're composed of US branches, they have their less deep in their structure or is our overall truth super complex right it's sort of define that has this really interesting kind of branching patterns.
+
+128
+00:19:51.810 --> 00:20:06.660
+Nick Bowman: And so when we talk about order we use integers to describe the order. So in order zero tree or an order zero fractal is oftentimes just like seems kind of counterintuitive, or you define it that way, but we'll see why that that's valuable when we, when we put up some practice later on.
+
+129
+00:20:08.040 --> 00:20:14.430
+Nick Bowman: In order one tree might just either treat the trunk of the tree. And so that sort of just the, the very base component
+
+130
+00:20:15.630 --> 00:20:21.030
+Nick Bowman: In order to tree would be two branches branching out of the order one tree.
+
+131
+00:20:21.870 --> 00:20:28.500
+Nick Bowman: The order three tree would be two more branches branching out from each of the, the basis of the differential that which were previously.
+
+132
+00:20:29.280 --> 00:20:42.840
+Nick Bowman: And in order for would continue that branching patterns. So you can see us adding layers of complexity and layers of self similarity. As we increase an order. And then, you know, you go all the way up to order 11 you keep repeating this process. And that's when you get this overall diagram.
+
+133
+00:20:45.840 --> 00:20:53.100
+Nick Bowman: And so when we look at an order three tree, we can actually just think about, we can try to generalize how we might define this tree overall
+
+134
+00:20:53.850 --> 00:21:02.040
+Nick Bowman: So an order zero tree would actually just be nothing at all right. We talked about that order earlier and an order entry is just a single line.
+
+135
+00:21:02.670 --> 00:21:12.840
+Nick Bowman: With to order n minus one trees that branch out from the end of that line so that changes their orientation, they change their location and they draw to smaller order trees.
+
+136
+00:21:14.340 --> 00:21:28.350
+Nick Bowman: And I'm not going to actually going to draw the full trees, but you can think of, you know, if you want it to go from order three to order for you would have to draw these eight smaller order to trees branching outwards from the, from the starting points.
+
+137
+00:21:30.120 --> 00:21:37.290
+Nick Bowman: And sort of to summarize what we saw here right we're drawing the overall tree recursive Lee. But what does that actually mean
+
+138
+00:21:37.860 --> 00:21:44.670
+Nick Bowman: Well, each recursive call is just drawing a single. You can think of it as a tree trunk or a tree branch right it's drawing a single line.
+
+139
+00:21:45.570 --> 00:21:48.840
+Nick Bowman: But yet the sum total of all the recursive calls that we make.
+
+140
+00:21:49.260 --> 00:22:06.150
+Nick Bowman: Actually allows us to draw this entire tree to generate all of these branches. Overall, and it's the individual component branches that actually make up the entire structure that we see. And so we'll keep that in mind as we as we transition into actually generating these structures ourselves.
+
+141
+00:22:07.740 --> 00:22:19.920
+Nick Bowman: And so this is a really great website. I'd recommend you all to to check it out. And it lets you play around with creating your own fractals and and this is a really cool way to sort of visualize and the things we talked about today.
+
+142
+00:22:21.540 --> 00:22:30.510
+Nick Bowman: And so that was sort of our introduction to fractals and to graphical representations of repression and we can take a quick break for questions, concerns anything in the chat, Richard.
+
+143
+00:22:32.040 --> 00:22:34.170
+Nick Bowman: Well, on the trees. Okay.
+
+144
+00:22:35.700 --> 00:22:39.150
+Nick Bowman: Awesome. So then we'll make a quick break for announcements for today.
+
+145
+00:22:39.630 --> 00:22:52.290
+Nick Bowman: And so we have announcements related to actually three assignments. And so the grades and commented feedback for your first assignment should be out by the end of the day to day on people this and you should get an email from your section here when its rainy
+
+146
+00:22:53.460 --> 00:23:00.180
+Nick Bowman: Remember that assignment to IS DUE TOMORROW NIGHT AT 1159 Pacific time. Remember the new time zone for the deadline.
+
+147
+00:23:00.780 --> 00:23:07.200
+Nick Bowman: And then the third assignment is going to be released by the end of the day, Thursday, and this third assignment, as you can probably guess will be all about recursion.
+
+148
+00:23:08.100 --> 00:23:16.920
+Nick Bowman: And then the last few things are just remember to keep an eye on our weekly announcement posts on ed and they'll show up on ed and you also should get an email.
+
+149
+00:23:17.220 --> 00:23:26.670
+Nick Bowman: Notification about them when we post them. And there's lots of important info critically important info like the fact that we added all of your song recommendations to our class playlist over the weekend.
+
+150
+00:23:27.660 --> 00:23:36.390
+Nick Bowman: So check out. Check out the announcements and check out the playlist. It now has all your all your favorite songs on. And then the last thing is
+
+151
+00:23:36.900 --> 00:23:41.790
+Nick Bowman: This will be our last call. Please make sure to send us your academic accommodation letters. If you haven't already.
+
+152
+00:23:42.180 --> 00:23:49.680
+Nick Bowman: If you don't know what this means is probably doesn't apply to you. And if you haven't. Oh, a letter and you haven't explicitly sent it to us this quarter. Please make sure it's
+
+153
+00:23:51.840 --> 00:24:01.020
+Nick Bowman: Cool. Alright, so let's answer our second main question for the day. So we've just seen how we can use fractals. And we can use graphical representations of recursion.
+
+154
+00:24:01.260 --> 00:24:07.710
+Nick Bowman: To visualize recursive processes to actually see what happens when we recursive we define structures in terms of themselves.
+
+155
+00:24:08.400 --> 00:24:17.730
+Nick Bowman: So now we're going to flip the question on on its head. And I'm going to ask, how can we actually use recursion to make art, and we're going to talk about kind of art and an artistic representation for the rest of the class today.
+
+156
+00:24:19.350 --> 00:24:25.140
+Nick Bowman: In order to do that we have to do a brief side note, a side tangent on talking about the Stanford c++ graphics libraries.
+
+157
+00:24:26.250 --> 00:24:35.940
+Nick Bowman: So for graphics and he has one and 60. This is kind of the disclaimer, like the main focus. It is not a main focus of this class to teach you all how to make graphical programs.
+
+158
+00:24:36.840 --> 00:24:49.380
+Nick Bowman: So if you are confused about how you do that in c++ that's totally fine. We're going to ask a very, very limited to you for you to use and know very, very limited set of things in order to be able to draw these fractals and to work on the assignment.
+
+159
+00:24:50.430 --> 00:24:55.290
+Nick Bowman: The Stanford c++ libraries actually provide a really powerful and comprehensive way to make graphical programs.
+
+160
+00:24:55.830 --> 00:25:03.600
+Nick Bowman: But we're going to abstract away almost all of that for you all. And we're just going to provide helper functions and a couple of helpful classes and types that you can use.
+
+161
+00:25:04.080 --> 00:25:09.930
+Nick Bowman: And so, specifically the two that you're going to want to know about are called G window and g point. And I'll talk about those really quickly right now.
+
+162
+00:25:11.250 --> 00:25:21.180
+Nick Bowman: G window is an obstruction for the graphical window, upon which you can draw things. And so when you have a blank Ji window in a program. It'll just show up as a blank window like this.
+
+163
+00:25:22.860 --> 00:25:32.220
+Nick Bowman: This window defines a coordinate system of x, y values and the x values. So they all start at 00. So the top left corner is 00
+
+164
+00:25:32.580 --> 00:25:42.810
+Nick Bowman: And then the x values increase to the right and the y value increase as you go downwards, which means the bottom right corner is whatever the width is common, whatever the height is your window.
+
+165
+00:25:44.610 --> 00:25:55.500
+Nick Bowman: And everything that you draw in this window so you can draw shapes ovals squares lions triangle you can draw lots of different things again will provide you with helper functions to actually do all of that.
+
+166
+00:25:56.070 --> 00:26:09.120
+Nick Bowman: But the key thing that you need to know is anything you draw on the canvas or on the window is defined by their x, y coordinates. So if I wanted to draw a square, I would have to tell it 200 100 is the top left corner and 400 comments to 50 as the bottom
+
+167
+00:26:11.340 --> 00:26:22.650
+Nick Bowman: And so naturally this kind of leads to the introduction of what a G point is. So the way that you can think about it is a G point is just a handy way to bundle up the x, y coordinates for a specific point in the in the window.
+
+168
+00:26:23.340 --> 00:26:29.100
+Nick Bowman: This would probably ring some bells for you, right, this is actually almost exactly what we saw with grid locations. When it came to grits.
+
+169
+00:26:29.460 --> 00:26:37.620
+Nick Bowman: will only have two pieces of information and we want to bundle them up and together into one package. So the point is is relatively similar to what you saw good locations.
+
+170
+00:26:38.400 --> 00:26:47.370
+Nick Bowman: And this is just a quick snippet of code. It shows you kind of the important operations you can do with G points and you can create them with explicit coordinates.
+
+171
+00:26:47.910 --> 00:26:52.290
+Nick Bowman: You can pass them in as parameters to graphics helper functions to define how to draw
+
+172
+00:26:52.770 --> 00:27:01.710
+Nick Bowman: Certain shapes and then probably the most important really the only methods. You need to know that you can call on points is get x and y. And that will
+
+173
+00:27:01.920 --> 00:27:06.150
+Nick Bowman: They're pretty self explanatory, they will give you the x component and the live component of a certain point.
+
+174
+00:27:06.900 --> 00:27:15.450
+Nick Bowman: And I do want to make a distinction. What's different about these are secret locations, is that these are methods. So you do have to say get X parentheses.
+
+175
+00:27:15.960 --> 00:27:25.470
+Nick Bowman: As opposed to like dot row or call with no parentheses, and we'll talk about why that's necessary and what the distinction is between that and actually some time next week.
+
+176
+00:27:27.720 --> 00:27:38.610
+Nick Bowman: Cool. So now we're sort of equipped with with some tools to be able to kind of actually put together graphical programs. And so the first sort of piece of art or fractal that we're going to talk about is thing called a cancer center.
+
+177
+00:27:40.320 --> 00:27:48.570
+Nick Bowman: And so you can see an example of a camper set in the top right corner here and it was developed by a German mathematician last name Cantor
+
+178
+00:27:49.200 --> 00:28:03.780
+Nick Bowman: And it's defined as follows. It's just a set of lines and there's always one main line at the very top and below that main line. There's sort of three thirds, you can think of. It's three thirds. There's a third on the left, there's a middle third and there's a viper.
+
+179
+00:28:05.190 --> 00:28:14.190
+Nick Bowman: The left third then also has a main line drawn in the middle third is always left empty and then the right third has a as a main line drawn it as well.
+
+180
+00:28:14.790 --> 00:28:22.650
+Nick Bowman: And then to continue drawing these lines you keep repeating this pattern. You go to the left there and you draw a line. You go to the right. Third, and you draw a line.
+
+181
+00:28:23.130 --> 00:28:33.150
+Nick Bowman: And you keep repeating this pattern technically for the cancer. Set the true cancer set you keep repeating this until the lines are actually no longer physical kind of just keep repeating it over and over again until your lines get really, really small.
+
+182
+00:28:34.800 --> 00:28:41.610
+Nick Bowman: And so again, when we define fractals. It's super important to define them in terms of their order or their complexity.
+
+183
+00:28:42.270 --> 00:28:53.970
+Nick Bowman: And so our order zero cancer set again kind of counter to really not really clear why yet, we need to define this. But in order to zero tender set is just nothing, it's just kind of a blank screen.
+
+184
+00:28:55.260 --> 00:29:00.180
+Nick Bowman: The order one cancer set is one main line so trauma across the screen.
+
+185
+00:29:01.380 --> 00:29:08.100
+Nick Bowman: In order to canter set is this one main line with then another thick line drawn them left and one on the right thing.
+
+186
+00:29:09.120 --> 00:29:16.140
+Nick Bowman: And then you can repeat this process right so in order six candor set has six levels of this sort of messed up line drawn process.
+
+187
+00:29:17.820 --> 00:29:25.950
+Nick Bowman: And what I want you to see what you're what you should be seeing hopefully in what's what's kind of going off in your head right now is like okay there's self similarity in this the
+
+188
+00:29:26.460 --> 00:29:40.230
+Nick Bowman: overall structure that I end up drawing on the left hand side is just another cancer set and it's a simpler cancer set right. It only has five levels, instead of six. And the thing that I'm drawing on the right is also another cancer site. So it also has five loans, instead of six.
+
+189
+00:29:41.400 --> 00:29:53.700
+Nick Bowman: And so what that hopefully motivates for us right as we think about this is this idea of, okay, how can we actually if we wanted to draw an order and counter set. What will we do
+
+190
+00:29:54.510 --> 00:29:59.940
+Nick Bowman: Well, and these kids are sets are always going to be defined by a start point and an end point.
+
+191
+00:30:00.450 --> 00:30:05.730
+Nick Bowman: You can think of that as just the left hand side of the the main the top left corner and the top right corner.
+
+192
+00:30:06.540 --> 00:30:12.900
+Nick Bowman: And so if we wanted to draw an order and cancer set we could start by drawing a line from beginning to end, from the start to the end.
+
+193
+00:30:13.590 --> 00:30:22.380
+Nick Bowman: Which in the code that we're going to write are going to just can be defined by G points. Remember G points just define kind of the locations in that window where we want to drop things
+
+194
+00:30:23.610 --> 00:30:30.120
+Nick Bowman: And then where do we go from there. Well, the next thing that we do is underneath the left hand side we draw candor set of order n minus one.
+
+195
+00:30:30.870 --> 00:30:37.800
+Nick Bowman: And underneath the right hand. Third, we draw tender set another camera set of order n minus one. And that's where our recursive definition comes in.
+
+196
+00:30:38.550 --> 00:30:50.520
+Nick Bowman: So we do a little bit of work which is drawing the main line and then we sort of relegate the rest of the work back to another call to ourselves, which is to say, draw smaller counter set on my left hand side and draw smaller countries on earth.
+
+197
+00:30:53.190 --> 00:31:01.260
+Nick Bowman: And our base case here. And the reason I've been. I've been hinting at this idea of an order zero fractal and why it's actually important.
+
+198
+00:31:01.950 --> 00:31:12.150
+Nick Bowman: Is the simplest possible Cantor set that we can draw. I think the most, the most natural intuition here and what actually came up yesterday and lecture is, you know,
+
+199
+00:31:12.660 --> 00:31:18.240
+Nick Bowman: Just drawing a single line, for example, that seems relatively simple. That sounds like something that you could do very easily.
+
+200
+00:31:18.960 --> 00:31:30.390
+Nick Bowman: But we always want to ask ourselves, Is there a simpler possible problem that we can solve. And interestingly enough for most fractals. And it depends on how the Fractals are defined for most fractals that actually just involves
+
+201
+00:31:31.320 --> 00:31:38.310
+Nick Bowman: Drawing nothing at all, or maybe just drawing a single shape, but in this case it's actually just trying nothing at all for the order of zero.
+
+202
+00:31:39.720 --> 00:31:48.570
+Nick Bowman: And so let's actually code this stuff. So we're going to go ahead into the Qt co star code product and
+
+203
+00:31:49.170 --> 00:31:53.280
+Nick Bowman: As always, this provider on the website for you and we recommend playing around with it and checking it out.
+
+204
+00:31:53.760 --> 00:31:59.910
+Nick Bowman: And what you'll notice is we've provided a, like I said, a lot of helper functions that might be useful as we work through this problem.
+
+205
+00:32:00.210 --> 00:32:08.370
+Nick Bowman: So there's a helper function to get appointed between two points based on certain fraction, there is a function to actually draw a line.
+
+206
+00:32:08.820 --> 00:32:17.460
+Nick Bowman: And then there's a function to get a lower point. So our character sets sort of growth downwards vertically. And so just allows us to get the points that are lower and lower.
+
+207
+00:32:18.720 --> 00:32:26.220
+Nick Bowman: question earlier about, if there's specific library, you have to do for graphics. Yes, there is. But we will always include it for you.
+
+208
+00:32:26.400 --> 00:32:35.400
+Nick Bowman: And it's composed of a lot more files than most of the things that we tell you, like, usually it's easy, it's like, hey, if you want to use a vector include vector. If you want to use this include that.
+
+209
+00:32:36.090 --> 00:32:44.250
+Nick Bowman: For a graphic. There's just a little more complicated, and that'll be one of the things that we extracted way for you and you can look at them, you'll be able to see the includes files, the beginning of your file.
+
+210
+00:32:44.730 --> 00:32:55.080
+Nick Bowman: But, and you can see them here, but it's just kind of a lot. I mean, we have G window we have G objects we don't point. So just kind of a lot of things that you have to include in order to be able to get to work. Yeah, that's a good question.
+
+211
+00:32:56.700 --> 00:33:08.310
+Nick Bowman: Okay. And so let's see if we can code. So remember our base case basically said was that orders zero means draw nothing
+
+212
+00:33:09.390 --> 00:33:22.110
+Nick Bowman: So let's go ahead and and that's we can say orders zero. So this is going to look a little bit weird, because you're going to ask, why can you return from a function that has returned type void.
+
+213
+00:33:22.890 --> 00:33:35.940
+Nick Bowman: You can use return as a keyword to actually just stop the logical execution flow of your program. And notice that I'm not specifying a value. I'm not saying return something. I'm just saying return and that just allows us to just stop the execution of the program.
+
+214
+00:33:37.470 --> 00:33:41.160
+Nick Bowman: So okay, so for zero that we want to draw. So what happens if or not.
+
+215
+00:33:42.630 --> 00:33:51.930
+Nick Bowman: And so then I recursive case. So remember, step one of our recursive case was to draw the main line.
+
+216
+00:33:53.370 --> 00:34:02.550
+Nick Bowman: So we're going to take advantage of some helper functions to do this. So we're going to call them draw thick line. I'm going to draw in the window from the left point to the right place.
+
+217
+00:34:05.010 --> 00:34:06.780
+Nick Bowman: So that's made really nice, but
+
+218
+00:34:08.610 --> 00:34:16.350
+Nick Bowman: Then we do the second step which is to draw a order and minus one Cantor set on the left, third
+
+219
+00:34:19.230 --> 00:34:29.550
+Nick Bowman: Branch. So in order to do that we actually need to define where that left third starts. And so we're going to define a new G point
+
+220
+00:34:31.110 --> 00:34:34.650
+Nick Bowman: The point when I call it maybe left third
+
+221
+00:34:35.820 --> 00:34:38.370
+Nick Bowman: Let's call it yeah let's just call it one third.
+
+222
+00:34:39.420 --> 00:34:43.410
+Nick Bowman: And the way that we're going to define this and we're going to say it's going to be the point between
+
+223
+00:34:45.660 --> 00:34:58.530
+Nick Bowman: Going to be the point between our left hand side and our right hand side and then this point between function allows us to specify a fraction. So a natural thing I might want to use just say, all right, I want to point this one third of the way through.
+
+224
+00:34:59.850 --> 00:35:05.520
+Nick Bowman: Be super, super careful integer division in c++ if you try to divide two integers.
+
+225
+00:35:06.540 --> 00:35:20.760
+Nick Bowman: Will give you an integer. And so if I divide one by three both is integers. I will actually get the value zero. So super tricky thing. So I do actually need to specify that it's a like double or a floating point value 1.0 divided by three.
+
+226
+00:35:21.840 --> 00:35:27.420
+Nick Bowman: So just keep, keep that in mind. And then we can say, All right, so let's draw our cancer set
+
+227
+00:35:28.050 --> 00:35:34.680
+Nick Bowman: And it's gonna be drawn in the same window and it's going to be drawn with order minus one, right. So we need to make a little bit of progress towards our base case.
+
+228
+00:35:35.280 --> 00:35:42.570
+Nick Bowman: And then what are the two points that it's drawn between. So we need to draw it lower and I mean if you draw from the original start point until one third of the way
+
+229
+00:35:43.320 --> 00:35:53.430
+Nick Bowman: And luckily we have this nice function called get lower point. And so we can say everything that the lower version of our left hand side and lower version of our one third.
+
+230
+00:35:54.780 --> 00:36:07.590
+Nick Bowman: And then that defines where our next country. So again, don't worry about how this point between and get lowered functions actually work. These are the kind of things that we'd give you an assignment as helper functions, which is why I'm sort of dismissing them without too much explanation.
+
+231
+00:36:09.780 --> 00:36:16.800
+Nick Bowman: Cool. And then our last step would be to say, all right, let's draw order n minus one cancer set
+
+232
+00:36:18.030 --> 00:36:18.510
+Nick Bowman: On
+
+233
+00:36:20.790 --> 00:36:32.160
+Nick Bowman: And to do that, will follow a very similar process for the final two thirds point that's the point between the left and the rates with fractions users.
+
+234
+00:36:33.960 --> 00:36:40.770
+Nick Bowman: And then I records of Paul looks very similar. So we'll draw a cantor set in the same window with a slightly lower order.
+
+235
+00:36:43.170 --> 00:36:48.330
+Nick Bowman: And then won't get our points of the two thirds
+
+236
+00:36:53.430 --> 00:36:53.700
+Right.
+
+237
+00:36:55.980 --> 00:37:03.000
+Nick Bowman: In the chat as well, why don't we took one divided by three and store today very well that was a quote or double
+
+238
+00:37:04.080 --> 00:37:17.940
+Nick Bowman: Yeah, that's a great question. So unfortunately, that wouldn't solve the issue because it would first calculate the answer is an integer and then do the type conversions with double so it would calculate the integer zero as the results and then store 0.0 in your answer.
+
+239
+00:37:18.390 --> 00:37:27.990
+Nick Bowman: So if you want to force double division. You need to make sure that one of your to one or both of the operations on the on division are tight. Yeah, that's a great question.
+
+240
+00:37:29.490 --> 00:37:34.110
+Nick Bowman: Um, so let's go ahead and run this. And oh, and the one thing
+
+241
+00:37:34.890 --> 00:37:46.560
+Nick Bowman: Stop this really quick. And the one thing I'm going to add here. You don't have to understand why this is necessary, but I'm going to add a little bit of a pause here that will actually allow us to see the animation of the cancer set over time.
+
+242
+00:37:47.910 --> 00:37:52.050
+Nick Bowman: And I will try to pull the window up as quickly as it comes up.
+
+243
+00:37:54.960 --> 00:38:04.710
+Nick Bowman: Okay, cool. Alright. And so hopefully what you see here. And as you see the cancer set being drawn over time. And the reason I added that pause there is you can actually see this animation happening.
+
+244
+00:38:05.400 --> 00:38:14.250
+Nick Bowman: And what I want you to notice. And I'm just going to briefly mentioned in passing. Now, and it will make a lot more sense in the next couple of days is look at the way the recursion happens
+
+245
+00:38:14.730 --> 00:38:25.020
+Nick Bowman: Look, notice that it goes all the way down to drawing the smallest line first on sort of always going left before it comes back and it draws the things on the right.
+
+246
+00:38:25.560 --> 00:38:30.690
+Nick Bowman: And if you think about that in terms of the order of execution of our recursive function calls right
+
+247
+00:38:31.020 --> 00:38:43.410
+Nick Bowman: This is basically telling you this whole set of recursive function calls that keep going left left left left left left of drawing our Kendra said have to complete before we ever draw a single thing on the right and
+
+248
+00:38:44.550 --> 00:38:49.050
+Nick Bowman: The, the thing that I'll mention briefly in passing, and someone actually a good question about this yesterday and lecture.
+
+249
+00:38:50.100 --> 00:39:01.740
+Nick Bowman: When we did means solutions on assignment to and then lecture last Thursday we talked about breath first search to sort of starting from a certain location and sort of searching and concentric rings outwards.
+
+250
+00:39:02.190 --> 00:39:13.650
+Nick Bowman: What recursion gets you is this thing called the depth for search and you can literally see it happening in this animation, but it will go all the way down until a base case first before it comes back up and start searching a different path.
+
+251
+00:39:14.280 --> 00:39:21.750
+Nick Bowman: And that's all I'm going to say about it for now we're going to see a lot more examples of that over the next couple of lectures but just keep that in mind and keep this animation.
+
+252
+00:39:21.900 --> 00:39:29.460
+Nick Bowman: When you're thinking about the way that a recursive function executes. Keep in mind this cancer set animation, it should actually be really helpful in in thinking about the way it works.
+
+253
+00:39:31.470 --> 00:39:39.150
+Nick Bowman: Well, and so we'll end I have to deliver this joke very well we'll end with a very important real life application of cancer sets.
+
+254
+00:39:39.990 --> 00:39:48.990
+Nick Bowman: Which is that you can totally get tattoos of these things. So the lecture from last quarter found this picture. So you ever want to know I Fractals are important in real life. Well, so you can get really cool tattoos.
+
+255
+00:39:51.630 --> 00:39:57.090
+Nick Bowman: OK, cool. So moving on. So our sort of last example for the day. And we're going to talk about this thing called a stroke Pinsky carpet.
+
+256
+00:39:58.860 --> 00:40:05.550
+Nick Bowman: And so what does it look like well so Pinsky carpet looks like this. It's kind of crazy looking but very, very cool.
+
+257
+00:40:07.200 --> 00:40:14.250
+Nick Bowman: So, what is it, it was actually first described by this Polish mathematician and last name, sir. Kentucky in 1916
+
+258
+00:40:14.910 --> 00:40:25.950
+Nick Bowman: Interestingly enough, and it may be hard to see why this is true, but it's actually a generalization of the Kansas up to two dimensions, and maybe when we start defining it when we started personally defining it will we'll see why that's true.
+
+259
+00:40:27.420 --> 00:40:35.100
+Nick Bowman: But this fractal is basically just defined by taking an overall square and sub dividing it into smaller copies of itself.
+
+260
+00:40:35.790 --> 00:40:45.750
+Nick Bowman: And sort of defining noticing that this overall square is actually really made up of eight different smaller squares or Ranger on the border, and we'll see
+
+261
+00:40:46.590 --> 00:40:56.460
+Nick Bowman: More clear example that in a second. But if you apply the same pattern to a triangle. Actually, you can you can make this practical the serpent's the triangle and you'll actually go about up on your next assignment.
+
+262
+00:40:57.810 --> 00:41:03.720
+Nick Bowman: But let's talk about us opens the carpet. So the order zero is always sort of the most important place to start for
+
+263
+00:41:04.860 --> 00:41:18.300
+Nick Bowman: For a fractal and in this case the order zero is not just blink. In this case, the order zero is actually defined as a single filled in square. So we're going to use purple in this case. So single filled in purple square
+
+264
+00:41:20.460 --> 00:41:30.600
+Nick Bowman: The order one carpet is then device defined like this to draw the order one carpet you subdivide the, the overall area into nine squares.
+
+265
+00:41:31.110 --> 00:41:39.750
+Nick Bowman: And then you arrange eight orders zero carpets around this grid and around the somebody grid and you leave the middle empty. So the middle is left empty.
+
+266
+00:41:40.680 --> 00:41:42.900
+Nick Bowman: And what's really interesting to note here.
+
+267
+00:41:43.500 --> 00:41:50.910
+Nick Bowman: Is that there's no drawing happening in the recursive case. So in this recursive definition, none of the drawing actually happens.
+
+268
+00:41:51.180 --> 00:41:59.010
+Nick Bowman: You only ever draw in the base case right so you draw you end up drawing your squares. When you draw sort of these eight order zeros arranged around the border.
+
+269
+00:41:59.760 --> 00:42:09.060
+Nick Bowman: And that's really important. You've actually just defined the fractal pattern with this interesting concept of even negative space in the middle right space rather than nothing has drawn
+
+270
+00:42:09.750 --> 00:42:20.790
+Nick Bowman: But by only doing some work at the base case. And so it's this little tiny amounts of work at the base case that actually end up building this overall large pattern. So keep that in mind as we as we work through this in this example.
+
+271
+00:42:22.320 --> 00:42:29.370
+Nick Bowman: So then the question is, what is an order to certainty carpet actually look like and will actually flip this question. Are you all so
+
+272
+00:42:29.760 --> 00:42:32.880
+Nick Bowman: We're going to send you back to the breakout rooms for about another three, three and a half minutes.
+
+273
+00:42:33.360 --> 00:42:36.960
+Nick Bowman: And we're going to ask you to just try and draw on the order to serpents, the carpet.
+
+274
+00:42:37.230 --> 00:42:46.410
+Nick Bowman: And you can either use the zoom whiteboard breakout rooms or if you go back to the AdWords pieces. We've included a link to this really awesome collaborative online drawing tool. So you can use either one.
+
+275
+00:42:47.400 --> 00:42:57.930
+Nick Bowman: The main thing we want you to do is just try drawing the carpet and if you have extra time tried to finding the base in the recursive cases, the fractal and see if see if drawing the fractal actually gives you a better insight into that.
+
+276
+00:42:59.070 --> 00:43:03.090
+Nick Bowman: Yeah, good question in the chat is in the case of the certainty carpet.
+
+277
+00:43:03.930 --> 00:43:13.590
+Nick Bowman: Are you drawing parts are you removing parts. Yeah, that's a great question. And so you're always drawing parts and so like the way that I said this, this negative space. This white in the middle.
+
+278
+00:43:13.800 --> 00:43:21.810
+Nick Bowman: Is just defined by the fact that it hasn't been drawn in. It's not that you started out, right, it kind of may look that you started off here and you remove the middle
+
+279
+00:43:22.050 --> 00:43:38.520
+Nick Bowman: But that's not what happening to draw this overall order one carpet. You've just drawn eight order zeros around the borders and now you've you've actually created a negative empty space in the middle, just by by the virtue of not trying anything but yeah that's that's a great question.
+
+280
+00:43:40.650 --> 00:43:44.940
+Nick Bowman: OK, cool. So let's send you off into the breakout rooms and I'll bring you back in about three minutes.
+
+281
+00:43:49.980 --> 00:43:51.360
+aren't seeing an invitation.
+
+282
+00:43:52.650 --> 00:43:53.700
+On sign up right now.
+
+283
+00:44:06.030 --> 00:44:07.410
+Sometimes it doesn't always
+
+284
+00:44:10.770 --> 00:44:15.060
+Nick Bowman: Cool. And then for those in the recording. I'm actually just going to try drawing this by hand.
+
+285
+00:44:16.140 --> 00:44:27.090
+Nick Bowman: So I would recommend doing this on your own person for this one. You don't even need to go anywhere. Just, just grab a sheet of paper and a pencil and try drawing out this this structure, but actually going to try drawing this
+
+286
+00:44:28.140 --> 00:44:30.870
+Nick Bowman: So let's see. Let's
+
+287
+00:44:32.040 --> 00:44:32.820
+Let me go.
+
+288
+00:44:35.220 --> 00:44:52.320
+Nick Bowman: Let me go back here and let me try. Try trying this triangle. So alright, so our order to avoid really neat. Okay, so our order to carpet. Right. It started off by kind of defining this grid.
+
+289
+00:44:54.030 --> 00:44:57.030
+Nick Bowman: this three by three grid of subdivisions right
+
+290
+00:44:58.290 --> 00:44:58.710
+Nick Bowman: And
+
+291
+00:45:00.060 --> 00:45:01.950
+Nick Bowman: Yeah, it's bad. Okay.
+
+292
+00:45:03.600 --> 00:45:17.460
+Nick Bowman: Okay, so we divided this order to carpet into into migrants and based on another definition, we know that we're going to need to draw an order n minus one. And each of these eight things around the border. Well, how do I draw an order one.
+
+293
+00:45:18.300 --> 00:45:22.920
+Nick Bowman: Well, to draw an order one. Right. I also subdivided into the grid.
+
+294
+00:45:23.940 --> 00:45:29.910
+Nick Bowman: Right. And then I would have this is definitely it's not going to happen. But I would color it in like that.
+
+295
+00:45:31.380 --> 00:45:34.350
+Nick Bowman: The world's greatest fractal it's a W for class.
+
+296
+00:45:35.490 --> 00:45:38.010
+Nick Bowman: But I would color it in right
+
+297
+00:45:42.270 --> 00:45:43.980
+Nick Bowman: And colored in what
+
+298
+00:45:46.020 --> 00:45:47.160
+Nick Bowman: No, it's not anymore.
+
+299
+00:45:48.240 --> 00:45:59.460
+Nick Bowman: But then I would have my order one drawn in the top left corner. And the way that I did that was just by drawing filled squares. Remember, which are order zero around the edges of the smallest grid that are defined here.
+
+300
+00:46:00.000 --> 00:46:11.940
+Nick Bowman: And if you repeat this process for all of the remaining eight kids, you should hopefully be able to generate i'm not i'm not even attempt to do it, but you should be able to generate and see actually what what the overall
+
+301
+00:46:15.210 --> 00:46:20.250
+Nick Bowman: Okay, let's clear this out to about its seed and the posterity of recording for
+
+302
+00:46:27.240 --> 00:46:29.160
+Nick Bowman: Around 12 1730 more seconds.
+
+303
+00:47:08.220 --> 00:47:14.160
+Nick Bowman: Okay, cool. So welcome back everyone. So let's go ahead and investigate what hopefully
+
+304
+00:47:15.840 --> 00:47:22.860
+Nick Bowman: So this is what the order to carpet looks like. And again, the way that we would define it as we would break it up into a three by three grid.
+
+305
+00:47:23.250 --> 00:47:32.130
+Nick Bowman: And then each of the eight boundaries squares you would draw an order one carpet and we've seen what an order one CARPET LOOKS LIKE and and so that's what the overall pattern.
+
+306
+00:47:34.140 --> 00:47:38.760
+Nick Bowman: And so if we wanted to formalize this process right here's how we could think about drawing this fancy carpet.
+
+307
+00:47:39.180 --> 00:47:47.070
+Nick Bowman: Our base case, which is the order zero, we just be drawing a field square at the right location. We're going to really gloss over what the right location means in this case.
+
+308
+00:47:47.760 --> 00:47:58.020
+Nick Bowman: And even the code demo, you'll see it's kind of abstracting away how you actually figure out exactly where like were on the window to draw these, but let's just say it's the right location, location specific time
+
+309
+00:47:59.070 --> 00:48:04.320
+Nick Bowman: And for the recursive case you would draw these eight carpets sort of a range in this grid.
+
+310
+00:48:05.340 --> 00:48:11.760
+Nick Bowman: And you know, when we write code. We have to be pretty pretty specific and pretty sort of precise about what we want to happen.
+
+311
+00:48:12.270 --> 00:48:19.170
+Nick Bowman: So we might want to actually like label these, so we can just label them with a row and call them indices in this kind of overall great that we've drawn
+
+312
+00:48:19.980 --> 00:48:31.260
+Nick Bowman: And so, you know, the way that you can think about defining the overall order n is you drawn n minus one and 00 you drawn n minus one and 01 and then you just do that for for all of eight cases.
+
+313
+00:48:33.000 --> 00:48:44.640
+Nick Bowman: And so if we took a first shot at this. At just writing this, and this is pseudo code like there's lots of just assumptions and things that I met him here but I kind of just want to show you what the overall pseudo code of drawings fractal might look like.
+
+314
+00:48:45.300 --> 00:48:54.930
+Nick Bowman: And so in the order zero right we draw square like okay, great. And we draw that whatever X and Y location was specified and it has some sort of fixed base size.
+
+315
+00:48:56.850 --> 00:49:08.130
+Nick Bowman: But then the carpet is defined by eight recursive calls, where we calculate some new X and some new why dependent on the row and column where that that fractal sort of sub portion appears
+
+316
+00:49:08.430 --> 00:49:20.940
+Nick Bowman: So we'd have one the periods of 00 and 0102 and 101220 to one to two, like, all right, wow, this is a really kind of annoying fractal that fine like I have to write eight separate recursive calls.
+
+317
+00:49:21.270 --> 00:49:27.660
+Nick Bowman: Like yesterday we saw one recursive call. Now we're seeing a like our whole world is just kind of like exploding and and
+
+318
+00:49:28.770 --> 00:49:37.980
+Nick Bowman: But whenever you see code like this, you should always ask yourself like can we do better, right, like, this isn't a really clean expression of code and and i think we can do better.
+
+319
+00:49:38.610 --> 00:49:48.210
+Nick Bowman: And that sort of last thing that will see today is, oh, we can actually use for loops to generate the row and the column of where these things need to go.
+
+320
+00:49:48.570 --> 00:49:55.320
+Nick Bowman: So if we use a double for loop and one loops generating the rows from zero to two and one loops generating the columns from zero to two.
+
+321
+00:49:56.160 --> 00:50:01.980
+Nick Bowman: As long as we ignore the center location. So that's what this statement is doing, as long as we ignore the thing in the very center.
+
+322
+00:50:02.250 --> 00:50:08.550
+Nick Bowman: We can programmatically use this for loop to to actually define each of these eight records of calls
+
+323
+00:50:09.000 --> 00:50:21.780
+Nick Bowman: And this is kind of a huge step right like we had an introduced recursion. As an alternative, problem solving strategy that was kind of on par with iteration before and now I'm telling you, you can put iteration and recursion. So it's like what gives
+
+324
+00:50:23.490 --> 00:50:31.170
+Nick Bowman: And the interesting thing is, is it's it's completely reasonable and often very necessary to mix iteration recursion and the same function.
+
+325
+00:50:31.740 --> 00:50:39.810
+Nick Bowman: If you think about it, all we were trying to accomplish in this problem was to shoot off a recursive calls, right, we need to define eight recursive calls, all in the appropriate locations.
+
+326
+00:50:41.190 --> 00:50:47.430
+Nick Bowman: And the easiest way to do that is what the double for loop right double for loops defined grids very nicely. So why not take advantage of them.
+
+327
+00:50:48.270 --> 00:51:00.300
+Nick Bowman: And so in this case recursion does not mean absence of iteration right recursion means solving a problem by identifying self similarity and using smaller copies of that same problem to solve the problem.
+
+328
+00:51:01.830 --> 00:51:08.430
+Nick Bowman: We will see iteration, combined with recursion and recursion is often at its most powerful when it actually is combined with Federation.
+
+329
+00:51:08.850 --> 00:51:18.720
+Nick Bowman: And and and don't worry if that like just like kind of blows your mind right now that's possible, like our examples over the next three days are going to sort of really focus on actually seeing how we can leverage that as a as a problem solving.
+
+330
+00:51:20.730 --> 00:51:29.580
+Nick Bowman: And so then, so right at the very end now. So the last thing that I'll say is actually give you all a very quick fun hopefully fun homework assignment before next lecture.
+
+331
+00:51:30.090 --> 00:51:37.950
+Nick Bowman: And so remember last week when we talked about stacks. We visited this this game called the towers of noise we develop the solution for three discs.
+
+332
+00:51:39.240 --> 00:51:48.600
+Nick Bowman: Your homework is go and play this game literally just like sit down and play it for like 1520 minutes. It's a lot of fun play it with like for this and five days and to see if you can win.
+
+333
+00:51:49.380 --> 00:52:00.600
+Nick Bowman: And look for and write down patterns about how you like solve the game and how you won the game and try to get to at least five this the patterns don't become super clear until you're actually working with with a higher number of this
+
+334
+00:52:01.140 --> 00:52:08.640
+Nick Bowman: And just look for patterns as you solve this game. If you want an extra challenge. Think about why these patterns might be recursive
+
+335
+00:52:09.960 --> 00:52:22.680
+Nick Bowman: And see if you can identify sort of some interesting recursive structure in this game. We're going to spend some time tomorrow exploring that. And, but it will be a lot more fruitful. If you all have like played the game and look for those patterns on your own first.
+
+336
+00:52:23.910 --> 00:52:26.760
+Nick Bowman: So cool. So a little bit over but that's all we have for today.
+
+337
+00:52:27.060 --> 00:52:38.310
+Nick Bowman: And so like I said, Tomorrow we're going to focus on some advanced recursion example. So we'll talk about the terms of annoyed. We'll talk about this algorithm called binary search and also talk about a brand new, very fast runtime.
+
+338
+00:52:38.970 --> 00:52:51.450
+Nick Bowman: That will come as a result of recursion. Cool. So that's all we have for today. And as always, if you have any questions, feel free to stick around and Kelly says officers right after lecture so you can also go there.
+
+339
+00:52:53.100 --> 00:52:55.200
+Nick Bowman: Cool. Thanks, everyone. Thank you.
+
+340
+00:52:55.770 --> 00:52:56.070
+Jihe He: Thank you.
+
+341
+00:52:56.430 --> 00:52:57.480
+kevin yang: Thank you. Thank you. Thank
+
+342
+00:52:57.870 --> 00:52:58.140
+You
+
+343
+00:53:00.750 --> 00:53:01.440
+tongjun zhang: Stalking
+
+344
+00:53:06.390 --> 00:53:06.720
+edouard des: Questions.
+
+345
+00:53:07.890 --> 00:53:09.390
+Nick Bowman: No. Okay.
+
+346
+00:53:10.440 --> 00:53:12.630
+Nick Bowman: I just saw Elena you raise your hand, you have a question.
+
+347
+00:53:13.770 --> 00:53:22.440
+Elena Williams: Yeah, um, this might not be like, I guess, super relevant, but if you wanted to do. Like if you wanted to code a fractal where you had
+
+348
+00:53:23.160 --> 00:53:35.700
+Elena Williams: Where you did the breath. First, is there a way to do that with recursion, like you do like the base like the first order one layer and then like add orders after it and make it like more complex.
+
+349
+00:53:36.390 --> 00:53:37.440
+Nick Bowman: Yeah, so
+
+350
+00:53:37.920 --> 00:53:51.390
+Nick Bowman: Brett for searches very hard to do with recursion. So it's actually one of the interesting components. Is that like iteration is very well suited to breath through search and recruitment is very well suited to that first search. And if you try to cry if they like try to cross over into
+
+351
+00:53:51.660 --> 00:53:52.890
+Nick Bowman: Domains, it doesn't work very
+
+352
+00:53:52.920 --> 00:53:57.210
+Nick Bowman: Well, so that's to say you could absolutely define a fractal
+
+353
+00:53:58.290 --> 00:54:05.130
+Nick Bowman: Using using maybe like an iterative breath first search approach right and sort of kind of try to define it that way.
+
+354
+00:54:06.180 --> 00:54:17.940
+Nick Bowman: But the, the actual concept of breath first search is like very tailored to using recursion and the concept of death first search. And the way that you like to see it.
+
+355
+00:54:19.530 --> 00:54:27.780
+Nick Bowman: Is is very tailored to recursion. But the nice thing is anything that can be searched or generated by either one like should be
+
+356
+00:54:28.140 --> 00:54:37.230
+Nick Bowman: Able to search are generated by both like their, their end condition is kind of the same. It's just the way in which they go about like the way you would visually see the search happening will be different.
+
+357
+00:54:37.710 --> 00:54:45.360
+Nick Bowman: And so they are they are equally powerful in the sense, they can accomplish very similar things. It's just like literally how they go about accomplishing here.
+
+358
+00:54:46.740 --> 00:54:47.790
+Elena Williams: Yeah, thank you.
+
+359
+00:54:54.930 --> 00:54:55.230
+Nick Bowman: Yeah.
+
+360
+00:54:56.280 --> 00:55:01.380
+Qing Lin: Yeah, so I'm wondering, like what defines the smallest element that we can draw
+
+361
+00:55:01.500 --> 00:55:13.170
+Qing Lin: Like investor Pinsky carpet example my dream because essentially we can draw like squares as small as possible. But how do we define the smallest
+
+362
+00:55:15.390 --> 00:55:29.070
+Nick Bowman: Um, yeah, that's, that's a good question. Um, interestingly enough, the idea, and I'm just gonna, I want this on the record and I forgot to to show I really wanted to show this carpet demo. I'll pull it up and let it run in the background will answer this
+
+363
+00:55:31.980 --> 00:55:32.910
+Please give me
+
+364
+00:55:34.890 --> 00:55:43.860
+Nick Bowman: Um, yeah. So, I mean, that's a great question about like what actually defines what is the smallest problem that we can solve and like how, like, how would you
+
+365
+00:55:44.610 --> 00:55:54.870
+Nick Bowman: Sort of determine what that is. Because sometimes like for the cantor set. It's nothing. Right. And sometimes, like for the serpent's the carpet right it's, it has to be something
+
+366
+00:55:55.350 --> 00:56:11.160
+Nick Bowman: And the determination actually kind of is intrinsically tied to the recursive case definition because if you remember for a cantor set the recursive case was defined as draw a line and then draw to smaller
+
+367
+00:56:11.880 --> 00:56:13.530
+Nick Bowman: Sub center sets.
+
+368
+00:56:14.250 --> 00:56:28.650
+Nick Bowman: Whereas for Sir Pinsky carpet the recursive case was just defined as draw a recursive carpets and so there was no drawing happening in the recursive case. And so if you actually wanted to like display content on the screen. It had to happen in the base kicks.
+
+369
+00:56:29.520 --> 00:56:41.610
+Nick Bowman: And so there are some fractals that like when you break them down, you'll find that the drawing happens in this case there are some in which the drawing happens in the reverse of case and somehow both usually it's one or the other.
+
+370
+00:56:43.500 --> 00:56:50.550
+Nick Bowman: But kind of like what the smallest problem to solve is and what the like smallest order fractal is and depends on the practical
+
+371
+00:56:50.580 --> 00:56:53.550
+Nick Bowman: I guess what I'm trying to say here, so it
+
+372
+00:56:53.760 --> 00:56:54.810
+Nick Bowman: depends a lot on the
+
+373
+00:56:54.810 --> 00:56:55.290
+Definition
+
+374
+00:56:57.540 --> 00:57:01.950
+Nick Bowman: And so just for the to the resort. Today we saw one rather the smallest problem is
+
+375
+00:57:01.950 --> 00:57:02.700
+Qing Lin: Actually the to drop
+
+376
+00:57:02.730 --> 00:57:03.060
+Nick Bowman: Nothing.
+
+377
+00:57:03.480 --> 00:57:07.710
+Nick Bowman: And then we saw one where the smallest one small problem, we can solve it actually just like drop
+
+378
+00:57:09.180 --> 00:57:10.140
+Nick Bowman: That into the question.
+
+379
+00:57:11.220 --> 00:57:19.830
+Qing Lin: And so, is there like preferred way of like do the perform the action in the base case versus perform the action in the recursive case.
+
+380
+00:57:20.670 --> 00:57:29.580
+Nick Bowman: Yeah, I think I wouldn't say that necessarily preferred way. That's a good question. But I wouldn't say that they're necessary with preferred way I would just say that like the
+
+381
+00:57:30.750 --> 00:57:35.130
+Nick Bowman: Way in which you have to do it depends on the way that the fractal is defined right
+
+382
+00:57:36.540 --> 00:57:46.500
+Nick Bowman: So like, you'll notice that like for a cantor set the order zero was defined as empty like that. Like, literally, by definition, in order zero campus is nothing
+
+383
+00:57:47.040 --> 00:57:54.630
+Nick Bowman: Whereas first or Pinsky triangle or first carpet the order zero fractal was defined to be one square
+
+384
+00:57:55.080 --> 00:58:01.770
+Nick Bowman: Right, so from those two like literally from the way that the fractal is defined and that that has nothing to do with how we caught it up. That's like literally the people that like
+
+385
+00:58:02.190 --> 00:58:12.420
+Nick Bowman: develop these fractals. That's how they defined it from that definition we realized, Okay, and one of them. The simplest thing to do is to draw nothing, and one of them. The simplest thing to do is to draw single square
+
+386
+00:58:12.960 --> 00:58:23.280
+Nick Bowman: And so it your code kind of has to reflect that intuition, rather than like making a distinction in your code, about how to like where they should go.
+
+387
+00:58:25.020 --> 00:58:29.610
+Qing Lin: Okay. And one final follow up question will be, well, this
+
+388
+00:58:30.630 --> 00:58:37.380
+Qing Lin: Is a prince can carpet program run forever as what you're showing us to small squares, just keep getting the small ones.
+
+389
+00:58:38.250 --> 00:58:45.180
+Nick Bowman: Yeah, that's a great question is I've set it to cap out of order five. So what you see right now is slowly drawing an order five
+
+390
+00:58:45.960 --> 00:58:48.810
+Nick Bowman: serpents, the carpet and that's the, that's the very first example that we saw.
+
+391
+00:58:49.170 --> 00:59:00.210
+Nick Bowman: And at a certain point, you can't really go much smaller because there's actually a limit on how small of a square, you can draw and so it won't go infinitely. I mean, it's just a parameter that's configurable for the demo.
+
+392
+00:59:01.860 --> 00:59:03.720
+Nick Bowman: Yeah, so this is the smallest that it'll
+
+393
+00:59:03.720 --> 00:59:07.050
+Nick Bowman: Go, even now, like the the squares that you're drawing are really, really tiny.
+
+394
+00:59:07.050 --> 00:59:15.720
+Nick Bowman: So I don't think you could go much smaller than order five. You could try, you can try it. You can download the source code and try running the order six and see what happens. But yeah.
+
+395
+00:59:16.950 --> 00:59:18.270
+Nick Bowman: Thank you. Yeah, first
+
+396
+00:59:22.530 --> 00:59:23.610
+Nick Bowman: So any other questions.
+
+397
+00:59:30.570 --> 00:59:30.750
+Well,
+
+398
+00:59:34.110 --> 00:59:35.940
+Nick Bowman: Yeah, go ahead and stop the recording.
+

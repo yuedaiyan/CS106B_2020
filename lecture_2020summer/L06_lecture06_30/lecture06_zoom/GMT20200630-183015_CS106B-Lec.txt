@@ -1,0 +1,201 @@
+00:09:54	Ryan Bernstein:	math function
+00:09:59	Jordan Lin:	sets
+00:10:05	Kenneth W.K. Wang:	unordered data: my memory
+00:10:09	shreyasravi:	deck of cards after shuffled
+00:10:09	Elan Smolar Eisenberg:	Lists
+00:10:12	Arul Saxena:	trees
+00:10:15	Kenneth W.K. Wang:	unordered data: my room
+00:10:15	Junhao Wang:	sets
+00:10:16	yukun yang:	GIS data rasters
+00:10:17	Thomas Tao Hale:	College lists
+00:10:17	Zachary Alon:	Lists without numebrs
+00:10:18	Samuel Lynn Ledden:	team
+00:10:18	Elena Williams:	Shopping list, bullet points
+00:10:20	Rohan N Chowla:	cards
+00:10:26	Ryan J Gabel:	membership lists
+00:10:34	alz1022@stanford.edu:	unordered data: my backpack
+00:10:39	nicole koch:	my room
+00:10:53	Kenneth W.K. Wang:	unordered data: my life
+00:10:57	Faith Aing Okamoto:	students in a class
+00:11:09	Aadi M Rane:	coin collections
+00:11:47	Lukas Fullner:	can structs be used in other structs?
+00:11:57	nicole koch:	structceptiom
+00:12:01	Nick Bowman:	Yes, structs can contain any data, including other structs.
+00:18:08	Elan Smolar Eisenberg:	This is just a quick comment: I always feel in breakout rooms that we don’t have enough time to even address the problems. Ik we have limited time but I just wanted to mention that
+00:18:25	Nick Bowman:	Thanks for the heads up, we’ll try to give as much time as possible in the future.
+00:18:44	Matt Presson:	And the number of moves was 2^n - 1, right?
+00:19:00	edouard des:	Yeah! It’s a Mersenne prime!
+00:19:06	Thomas Tao Hale:	Wait you can skip over?
+00:19:06	ian rundle:	Whoa that’s epic
+00:19:12	Ryan Gabel:	Mersenne number, not a Mersenne prime
+00:19:50	Kenny Wang:	do we need an algorithm?
+00:19:53	Kenny Wang:	or just a bunch of commands?
+00:20:08	Nick Bowman:	A bunch of commands is fine.
+00:25:06	Catherine Deng:	If you say a.push(b.pop()), would that also pop from b?
+00:25:40	Catherine Deng:	Oh nvm
+00:25:54	Jihe He:	Do we need to finish our code
+00:25:55	Aadi M Rane:	yes
+00:26:12	Jihe He:	Like do we need to finish our breakout section room's challenge
+00:26:29	Nick Bowman:	Correct, that one line of code will both remove from b and add to a
+00:26:44	Kenneth Fischer:	Would there still be three pegs?
+00:26:49	Nick Bowman:	Not required, just an interesting challenege if you wanst more practice with stacks
+00:26:50	Ryan Gabel:	Yes, still 3 pegs
+00:26:54	Jihe He:	ty
+00:27:02	Nick Bowman:	Yes, the game always has 3 pegs, but variable number of disks.
+00:27:04	Remy Shearer Kartzman:	for the generalized solution does it have to be a multiple of 3 ?
+00:27:15	Nick Bowman:	No, it can be any number of disks
+00:27:17	Ryan Gabel:	It works with any number of disks
+00:27:30	Remy Shearer Kartzman:	cool thanks
+00:29:54	karan parikh:	so sets are like array lists?
+00:30:01	Aadi M Rane:	not really
+00:30:11	Nick Bowman:	No, Vectors are similar to Java ArrayLists
+00:30:37	karan parikh:	is there any reflection of a set in java?
+00:31:00	Nick Bowman:	Yes, there is a Java Set class
+00:31:07	edouard des:	Is the order they are outputted in the console completely random?
+00:31:19	Nick Bowman:	Not exactly, but it will take until the end of the quarter to see why!
+00:31:22	dyson ye:	Can you iterate over a set?
+00:31:25	Oz Gitelson:	im getting flashbacks to 103
+00:31:35	Nick Bowman:	Yes, you can iterate over a set with a foreach loop, that’s coming soon in the slides
+00:31:35	Elan Smolar Eisenberg:	same
+00:31:47	Ryan Gabel:	it's all coming together
+00:32:43	Pablo Manjon Gamez:	Are these sort of liked dunder/magic methods from Python?
+00:32:46	Sedef Emekli:	How could sets be implemented in a lower level language, what is the back end of this abstract data type?
+00:32:59	Siddharth Balaji:	Since there is no numerical order in a set when you parse through the set in a loop how does the program know which elements are accessed first?
+00:33:00	Rohan N Chowla:	Is there any way to access elements of a set without using a for each loop?
+00:33:12	Jordan Lin:	You can use an iterator
+00:33:12	Nick Bowman:	@Sedef we will learn about the backend data organization of sets later this quarter
+00:33:46	Nick Bowman:	@Siddharth similar answer to above, sets do internally maintains structure of the data, and we will learn what structure that is later in the quarter
+00:34:05	Nick Bowman:	@Pablo I’m not exactly sure, that might be a question best discussed after class
+00:34:52	Nick Bowman:	@Rohan you can use the .contains() method to see if things exists in a set or not. If for some reason you want to get a single random element out of the set you can use the .first() method, but that is not a super common usage pattern
+00:35:29	Aadi M Rane:	why declare as a const? why can't you just not change it?
+00:35:55	Kenny Wang:	I believe they said it was a style thing
+00:35:55	Nick Bowman:	Declaring things as const is extra protection against accidentally changing it, and is a good semantic sign to other programmers that might be reading or modifying your code
+00:36:02	Jordan Lin:	Changing a Vector while iterating over it is not that good of an idea
+00:37:04	Kenny Wang:	can you pass a non-constant vector to be "lines"
+00:37:07	Kenny Wang:	*?
+00:37:27	Nick Bowman:	Yes, you can. The const here is mostly used for stylistic messaging that the structure should not be changed.
+00:37:59	Marcela Simone De los Rios:	Could you explain again why it won’t add duplicates?
+00:38:24	Nick Bowman:	The set internally guarantees that there are no duplicates. So if you try to add two exact same things to a set, only the first add will result in a change to the structure.
+00:38:48	kathleen bryan:	I don’t really understand adding sets together
+00:38:59	Siddharth Balaji:	I cut out of the feed for a second, why is the vector “lines
+00:39:05	Siddharth Balaji:	“ Passed into the function as a const
+00:39:06	kathleen bryan:	Like how would a set that had strings add to another set of strings?
+00:39:24	Ali Mahdi:	why pass something as a reference if it is not modified?
+00:39:27	Jordan Lin:	Are there any 'caveats' to sets than Vectors? For instance, if the purpose of your data structure is just to iterate over it, and order does not matter, then is a set always better than a vector?
+00:39:31	Nate Hedgecock:	How does that program handle punctuation? Is a word with punctuation considered different than a word without?
+00:39:41	Nick Bowman:	I you have two sets a = {“hello”} and b = {“world”} then a + b would yield the set {“hello”, “world”}
+00:39:59	Nick Bowman:	@Nate good catch, it doesn’t! you will learn how to better punctuation on the assignment!
+00:39:59	kathleen bryan:	but what about a set with many strings added with another set of many strings
+00:40:06	kathleen bryan:	They are not ordered so how is the addition determined
+00:40:17	Nick Bowman:	@Kathleen it will just take the full union of the two sets (union operation described on the slides)
+00:40:29	Chloe Su:	What happens to the empty lines in between each worded line?
+00:40:34	Nick Bowman:	the resulting set from the addition will just contain all the values from the two sets that are being added together
+00:40:36	kathleen bryan:	ok I will look back at that
+00:40:41	Nick Bowman:	The empty lines get stripped away
+00:41:07	Nick Bowman:	@Ali you would pass something by reference that isn’t going to be changes because it is very large, and copying it would be very expensive
+00:41:20	Ali Mahdi:	thanks
+00:41:43	Dominic Yong Yi Lo:	where are YEAH sessions posted?
+00:41:44	Nick Bowman:	@Jordan if you don’t care about the order in which things are maintained and you don’t care about being able to store duplicates, then a set is probably the way to go
+00:41:49	Chloe Su:	Does the empty lines get stripped away by the for line function or the .strip(“ “) ?
+00:41:50	Liza George:	(not about the content but) when assign two due?
+00:41:52	Chloe Su:	Just to clarify!
+00:41:57	Nick Bowman:	@Dominic under the course videos section of the Canvas page
+00:42:08	Nick Bowman:	@Chloe it gets stripped away by the stringSplit function
+00:42:17	Nick Bowman:	@Liza Assignment 2 will be due next wednesday
+00:42:30	Nick Bowman:	(a week from tomorrow)
+00:43:23	Nick Bowman:	@Siddharth we passed in lines to the function by const reference because we wanted to pass it by reference (since it is large and we don’t want to copy it) and with const to indicate that we won’t be modifying it (important since passing by reference gives us the ability to modify it)
+00:44:35	Samuel Lynn Ledden:	is there a way to set a map equal to something?
+00:44:44	Samuel Lynn Ledden:	instead of having to use .put of indices
+00:45:02	Nick Bowman:	Yes, you can do it but the syntax is a little tricky. If you stick around after class I can type up an example in Ed/
+00:45:25	Nick Bowman:	(its just got a lot of curly braces and I don’t want to mess it up here without the benefit of a compiler)
+00:45:37	hunter ruebsamen:	Can you have a map within a map?
+00:45:50	Nick Bowman:	Yes! You can nest any data structures within one another that you want
+00:46:26	Nick Bowman:	Although for clarity (and other purposes) it is good to keep the key type to be something straighforward (string/int/stc)
+00:46:31	Nick Bowman:	*etc
+00:46:55	Matt Presson:	So a vector is basically a map with integer keys
+00:47:08	Nick Bowman:	Yeah, that is an interesting way to think about a vector!
+00:47:31	Nick Bowman:	There are some difference, but at a a baseline level, vectors do associate numerical indexes with values
+00:48:50	david huang:	will .get() do auto insert as well?
+00:49:14	Nick Bowman:	Tricky tricky question! I don’t believe it will, which is why i always stick with using the [] accessing syntax
+00:49:34	david huang:	Ok thanks
+00:50:38	Emily Sturman:	On the documentation online it says the .get won’t auto insert
+00:51:00	Nick Bowman:	Yeah our documentation is sometimes out of date – let me try this out and I’ll report back
+00:51:01	Jordan Lin:	Maybe m.constainsKey(key) works better for the purpose of checking if a key is in a map
+00:51:06	Kenneth Fischer:	What headers do we include for strings and maps?
+00:51:26	Nick Bowman:	Strings is #include <string> and maps is #include “map.h”
+00:52:35	Liza George:	When auto-insert creates a new key-value pair and leaves the value empty, what is actually stored for value? like in that cout statement from earlier, what would print out if the key that was searched for didn't exist before?
+00:52:39	Elan Smolar Eisenberg:	Does sets have an include?
+00:52:54	Nick Bowman:	yes, to use sets you to #include “set.h”
+00:53:17	kevin yang:	Can you use wordCounts[word]++
+00:53:21	Nick Bowman:	@Liza what is stored is the default value for the type. So if the value type is int, the value stored will be 0, if the value type is string the value stored will be “”
+00:53:21	Kyle Booker:	^
+00:53:35	Nick Bowman:	Yes, ++ and += 1 are equivalent
+00:54:43	Liza George:	is either algorithm more efficient than the other? (using a set vs. using a map)
+00:55:09	Nick Bowman:	We’ll talk about this more on Thursday, but the access times for set and map are equivalent
+00:55:26	Liza George:	ok, thanks!
+00:56:36	Jaelyn N Kelly:	Are maps a useful tool for histograms?
+00:57:22	Nick Bowman:	Yes, absolutely!
+00:57:36	Jordan Lin:	You can replace all double spaces by single spaces at the beginning of the code
+00:57:36	Aadi M Rane:	how do you add a key by itself again?
+00:57:54	Nick Bowman:	@Aadi can you clairfy what you mean by adding a key by itself?
+00:58:05	Kyle Booker:	What are the default values for vectors?
+00:58:13	Aadi M Rane:	Add a key but not attach it to anything
+00:58:30	Aadi M Rane:	or will that be a bug?
+00:59:20	Nick Bowman:	@Kyle emtpy vector i would guess
+00:59:24	max chou:	Is the YEAH zoom on the course page or a separate email
+00:59:31	Nick Bowman:	@Aadi you can’t do that, all keys must have associated values
+00:59:42	Nick Bowman:	the YEAH zoom info is on the Zoom details page
+01:00:52	harry yu:	thank you
+01:00:54	kevin yang:	thank you!
+01:00:55	nicole koch:	Thank you!
+01:00:58	alz1022@stanford.edu:	thank you!
+01:00:58	Kevin H Fan:	Thank you
+01:01:00	Aadi M Rane:	thank you
+01:01:01	Weiqi Yu:	thank you
+01:01:03	Rohan N Chowla:	thanks guys!
+01:01:04	paul gialis:	Thank you
+01:01:05	Kaelyn O:	Thank you!
+01:01:07	Lawrence Li:	thank you
+01:01:12	Guozhen Miao:	thank you
+01:01:12	Shifeng Hong:	Thank you
+01:01:13	Gautham Rajesh:	thank you!
+01:01:42	hriday chhabria:	Gracias
+01:01:55	Aadi M Rane:	In a map, does a key have only one value attached to it?
+01:02:15	Liza George:	I think when you were going over iterating over maps with a foreach loop, you had mentioned a way to still iterate through a map while editing it, but I had missed it. Could you go over that again?
+01:03:24	Nick Bowman:	Yes there is exactly one value associated with each key
+01:03:48	Nick Bowman:	If you want to edit a map while iterating over it, the for loop should make use of the keys() function like this
+01:03:57	Nick Bowman:	for(string key: map.keys() { }
+01:04:13	Nick Bowman:	This way, you are iterating over a copy of the keys of the map, so that any changes you make don’t cause issues
+01:04:58	Emily Sturman:	I think you mentioned earlier that it’s possible to declare the contents of a map when declaring the map… how would you do that?
+01:05:00	Liza George:	oh ok, thanks! and I can still edit the values in either foreach loop right?
+01:05:17	christopher cooper:	When we submit Assignment 1, should we comment out the slow running tests for findPerfects?
+01:05:34	Aadi M Rane:	What's the difference between using a Map and using two Vectors with the keys and the values at the same indices?
+01:05:34	Nick Bowman:	@christopher, sure that might be a good idea. Now worries if not though
+01:06:34	christopher cooper:	Cool, any suggestions for the program comments at the top of the file for perfect.cpp and soundex.cpp?
+01:07:20	Nick Bowman:	@Aadi a map is better fo that purpose because then you don’t have to manually keep track of the indices and make sur ethey match up
+01:07:37	Nick Bowman:	Just desxcribing what you did in the files and giving a general overview is good
+01:07:51	christopher cooper:	OK, Thanks
+01:08:01	karan parikh:	I don’t have a mic right now so I’ll type my question here: where can I find associated reading with keys and maps? I remember there being a textbook we can use to catch up on lecture topics
+01:08:16	Junhao Wang:	would it be printing an empty string?
+01:08:17	Liza George:	wouldn't it give "", the default value for strings?
+01:08:29	Nick Bowman:	@Liza is correct, it is giving you the default value
+01:08:29	Nick Bowman:	which is ""
+01:08:54	Chloe Su:	Did Nick say also that .get() will return the value also?
+01:09:24	Liza George:	yes, .get() will return the default value, but will not change the map itself
+01:09:33	Nick Bowman:	@Karan the textbook is lonked on the sidebar of the course website and the schedule has associated readings for each lecture
+01:09:38	Chloe Su:	Oh so since get(“Nick”) is not in the map, in here it is returning nothing as default?
+01:09:39	Nick Bowman:	*linked
+01:10:09	Liza George:	@chloe yeah, I think so
+01:10:22	Chloe Su:	Thanks!
+01:10:25	Nick Bowman:	To be clear it is returning something, it is returning the empty string “”
+01:10:46	Liza George:	oh woops yeah, mb
+01:11:43	Liza George:	bye, thanks!
+01:11:44	scott nelson:	Can map values be data structures? Like maps or vectors or sets?
+01:11:48	Michael M Hu:	Thanks!
+01:14:28	scott nelson:	Thanks Nick!
+01:14:37	karan parikh:	how does grace period for assignments work?
+01:15:58	Nick Bowman:	@Karan if you need it, you have an extra penalty-free 24 hours to submit the assignment
+01:18:26	Nick Bowman:	Map<string, string> friends = {{"Nick", "Hello"}, {"Kylie", "World"}};
+01:21:44	Demi Lei:	Thank you!
+01:22:06	Jennifer Anna Bonello:	Thanks!
+01:22:21	Junhao Wang:	thank you

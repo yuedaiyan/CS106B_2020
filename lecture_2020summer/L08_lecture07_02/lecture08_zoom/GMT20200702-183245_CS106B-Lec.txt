@@ -1,0 +1,168 @@
+00:13:02	nicole koch:	~~Technical Difficulties!!
+00:13:06	Kenneth Fischer:	The number of operations that the algorithm performs.
+00:13:08	Ryan Bernstein:	speed
+00:13:08	Aadi M Rane:	too much looping
+00:13:09	shreyas ravi:	more memory efficient makes an algorithm better in my opinion
+00:13:09	Hemant Chaudhary:	More lines of code!
+00:13:10	hriday chhabria:	Siz
+00:13:11	Siddharth Balaji:	The least amount of calculations is what makes an algorithm faster than another
+00:13:12	Pepe Bolorinos:	Memory acces
+00:13:14	Oz Gitelson:	number of operations
+00:13:15	Michael M Hu:	Speed and memory space
+00:13:16	kevin yang:	More efficient computing
+00:13:16	Rohan N Chowla:	Less operations makes an algorithm better
+00:13:16	Jaelyn N Kelly:	iterations
+00:13:17	scott nelson:	Style and runtime/capabilities
+00:13:17	Junhao Wang:	number of iterations
+00:13:17	ian rundle:	Less unnecessary copying
+00:13:17	Weiqi Yu:	nestes loops
+00:13:17	Rigel Cupido Wafford:	amount of operations
+00:13:18	Lukas Fullner:	The amount of computations needed to do their task
+00:13:18	Kyle Booker:	Using less clock cycles to complete the algorithm.
+00:13:19	Kenneth W.K. Wang:	less operations
+00:13:20	Zachary Alon:	It requires less lines to run if it’s faster
+00:13:24	Angela Zhang:	less unecessary operations
+00:13:25	sachinmk@stanford.edu:	An algorithm that is more efficient performs less operations and is more streamlined
+00:13:27	Aadi M Rane:	looping and operations
+00:13:27	kathleen bryan:	Doing less iterations / less / no repetition in code
+00:13:29	yukun yang:	Fewer codes in one function
+00:13:30	ian rundle:	Lots of big boi loops
+00:13:30	Evan Baldonado:	Less loops/total lines that get run?
+00:13:34	Jordan Lin:	Memory access
+00:13:34	Hanna Mofid:	the amount of nested loops
+00:13:38	edouard des:	The amount of information through which the computer must search
+00:13:41	Aadi M Rane:	or loops in general
+00:13:42	gavin gee:	less unnecessary lines of code / iterations
+00:13:49	nicole koch:	The more streamlined the algorithm the more efficient it is
+00:13:50	Humaid Alzaabi:	Does the same job with less work/memory
+00:13:53	Elena Williams:	Uses less memory and performs fewer computations
+00:14:06	Kenneth W.K. Wang:	where did trip go then o.O
+00:14:15	Humaid Alzaabi:	rip
+00:14:20	Kyle Booker:	rip trip
+00:14:21	Emily Sturman:	Faster = fewer computations in relation to the size of the input, slower = more computations in relation to the  size of the input
+00:18:15	kylie jue:	Trip works a full time job besides head TAing so he can’t always make it to lecture :)
+00:19:00	colin schultz:	I’m an SL and I can try to answer chat questions if that would help
+00:19:22	kylie jue:	that would be great Colin! I’m chatting from my phone but typing is definitely a lot slower
+00:19:31	colin schultz:	Sure!
+00:19:38	Thomas Tao Hale:	What is an SL?
+00:19:38	kylie jue:	thanks!
+00:19:44	kylie jue:	section leader
+00:19:47	Thomas Tao Hale:	k
+00:19:48	colin schultz:	Section leader
+00:20:34	Lauren Saue- Fletcher:	I can also help answer questions for the next 20 min!   (Also a section leader)
+00:20:52	kylie jue:	thank you! :)
+00:22:39	Michael M Hu:	Which option would be the best stylistically?
+00:23:11	colin schultz:	The first option is certainly better in performance because it doesn’t make multiple copies
+00:24:46	Thomas Tao Hale:	Who is this Keith Schwarz guy?
+00:24:58	Eline Annette Margarete van den Haak:	so if you pass something by reference, do you create a copy that you can edit? and it doesn't adjust the original... or does it adjust the original as well?
+00:25:07	colin schultz:	@Thomas He’s a Stanford professor
+00:25:15	Kenneth W.K. Wang:	is this an xkcd
+00:25:26	Kenneth Fischer:	So const is more of a safeguard against accidentally changing parameters?
+00:25:43	kylie jue:	@Kenneth F. yes
+00:25:46	Lauren Saue- Fletcher:	@Eline passing by reference doesn’t make a copy and lets you adjust the original structure
+00:25:48	colin schultz:	@Eline passing by reference does not create a copy, it lets you modify the original variable unless it is const
+00:26:10	colin schultz:	@Kenneth yes that is a good way to look at it
+00:28:29	Siddharth Balaji:	What part of the computer leads to varied runtimes for the same algorithm on different devices?
+00:29:25	Lauren Saue- Fletcher:	There’s a lot of factors even whether the computer is plugged in or not will affect it, how many other programs you have open
+00:29:30	colin schultz:	@Siddarth there are a lot of factors in the hardware such as the processor speed, disk speed (if accessing disk storage) etc.
+00:29:49	Elan Smolar Eisenberg:	Is there any way to predict it using those variables?
+00:31:46	colin schultz:	@Elan that’s a great question. I don’t know of an easy and accurate way, and I imagine this is an open problem
+00:32:07	Lauren Saue- Fletcher:	I’m sure there is to some extent there will also be some randomness that will be hard to account for- we can also predict how long something will take based on how long a similar task takes. For ex. We can predict how long adding 100 elements to a vector will take is we know the runtime for adding to a vector and how long adding 10 elements to a vector takes
+00:34:41	Lauren Saue- Fletcher:	We can also predict how long something will take based on how long a similar task takes. For ex. We can predict how long adding 100 elements to a vector will take is we know the runtime for adding to a vector and how long adding 10 elements to a vector takes on our machine
+00:36:34	Jordan Lin:	If we are assuming that the statue is being scaled without changing its 'aspect ratio' (no stretching), don't we have to multiply it by 27 as we are dealing with 3D?
+00:36:38	Kenny Wang:	wait whaaat
+00:36:39	Kevin H Fan:	I feel cheated by the diagram. Where was my not drawn to scale
+00:36:41	Elan Smolar Eisenberg:	Yeah that’s what we did
+00:36:43	Kenny Wang:	I thought we needed to multiply by 27
+00:37:00	Kevin H Fan:	^
+00:37:02	Dominic Yong Yi Lo:	yeah, the width was really misleading
+00:37:04	Elan Smolar Eisenberg:	Even if you don’t know the width, because they are similar figures, it will increase by a factor of three
+00:37:09	Kenny Wang:	^^^^^
+00:37:11	Lauren Saue- Fletcher:	We’re dealing with surface area
+00:37:26	Elan Smolar Eisenberg:	But mass is not based on surface area
+00:37:30	Humaid Alzaabi:	Might've worked better if the statue looked stretched
+00:37:36	Kenny Wang:	problem 4 is mass, not surface area
+00:38:02	Lauren Saue- Fletcher:	(Oh never mind, I was looking at the paint one )
+00:38:24	Thomas Tao Hale:	You can’t really assume that everything is to scale tho, so those width measurements are very valuable
+00:38:53	Kenny Wang:	it looks precisely to scale though
+00:39:06	Thomas Tao Hale:	Yes even still
+00:39:15	Thomas Tao Hale:	No assuming
+00:39:28	Jordan Lin:	True, empirical results are still the most reliable
+00:39:52	colin schultz:	Whether you answered 3 or 27, the point is we can estimate the amount by which a quantity would change based on the change in known measurements
+00:40:20	Elan Smolar Eisenberg:	But the only way to even estimate is to assume they are similar figures. Otherwise, the values could be anything
+00:40:21	kylie jue:	yes thanks Colin! please remember to keep the chatting to a minimum besides asking questions!
+00:40:41	Kevin H Fan:	Ok though shouldn’t the burden be on the question maker to state it’s not drawn to scale?
+00:41:05	Aadi M Rane:	Is O a function?
+00:41:38	colin schultz:	O is more of a notation than a function
+00:42:19	colin schultz:	Read it as “On the order of”
+00:42:36	colin schultz:	“On the order of n squared”
+00:42:39	Elan Smolar Eisenberg:	Is O omicron?
+00:43:33	colin schultz:	I don’t think so
+00:43:49	colin schultz:	There are multiple ways to write similar notations
+00:44:19	Thomas Tao Hale:	Fractional )
+00:44:40	Thomas Tao Hale:	Fractional O’s are also used with fractals, interestingly enough
+00:47:22	Eline Annette Margarete van den Haak:	this looks similar to fixed and variable cost right?
+00:47:42	Sedef Emekli:	it’s what it is
+00:47:49	edouard des:	y=ax+b (or y=mx+b) no?
+00:48:17	colin schultz:	@Eline Yes! Although that is more of an economics term which is relevant to this particular example
+00:52:19	Siddharth Balaji:	Is it possible to predict runtimes taking into account all the variables of what the computer is doing in the background?
+00:53:36	colin schultz:	Maybe theoretically, but it’s not really practical
+00:54:18	Liza George:	wait is the unit for the initialization of I included in this list so far?
+00:54:36	Kevin H Fan:	Wait why isn’t it N-1 because doesn’t the loop start at 1 but goes until less than N, so wouldn’t the loop only run n-1 times?
+00:54:41	Liza George:	( i )**
+00:55:17	Jordan Lin:	Shouldn't comparisons theoretically only take a constant time unit? Since all you need is two subtraction lines to check whether one number is larger than another
+00:56:05	hriday chhabria:	I have the same question as @Kevin
+00:56:11	colin schultz:	@Kevin That sounds right to me. There might be a typo. Either way, the point is these exact numbers aren’t that useful
+00:56:56	Kevin H Fan:	Got it
+00:56:56	colin schultz:	@Jordan that’s correct, but the comparison is repeated ~N times
+01:00:21	Elena Williams:	If you had an algorithm that did (N^2 + N) time units, would you drop the N and just write it as O(n^2) or include both and write it as O(n^2 + n)
+01:00:41	colin schultz:	@Elena its just O(n^2)
+01:00:48	Elena Williams:	Ok, thanks!
+01:00:51	Weiqi Yu:	O(1)
+01:00:55	Kenny Wang:	^
+01:00:56	colin schultz:	The n term becomes negligible as n gets very large
+01:01:06	Humaid Alzaabi:	How would a function with multiple inputs be represented in Big O?
+01:01:26	colin schultz:	You need to decide what variable “n” refers to
+01:01:49	colin schultz:	Just like how n sometimes refers to a number input and sometimes refers to the size of an input
+01:02:10	Humaid Alzaabi:	thx
+01:03:39	christopher cooper:	Thank You
+01:04:09	Eline Annette Margarete van den Haak:	thanks!
+01:04:11	Kevin H Fan:	Thank you!
+01:04:14	Lawrence Li:	thank you!
+01:04:15	paul gialis:	Thank you
+01:04:16	Aadi M Rane:	thanks
+01:04:16	Weiqi Yu:	Thank you!
+01:04:16	gavin gee:	Thank you!!
+01:04:17	Pranav Nair:	Thank You
+01:04:17	Jordan Lin:	Thank you :)
+01:04:17	Akash Bhargava:	Thanks!
+01:04:18	Kenneth Fischer:	Thank you!
+01:04:19	Zachary Alon:	Thank you!
+01:04:20	Michael M Hu:	Thank you nick!
+01:04:22	Thomas Tao Hale:	Xie xie
+01:04:22	Angela Zhang:	Thank you!
+01:04:23	Guozhen Miao:	thank you
+01:04:25	Magdalena Warren:	Thank you!
+01:04:26	Shifeng Hong:	Thank you!
+01:04:27	John Meshinsky:	Thank you
+01:04:27	Rohan N Chowla:	thanks
+01:04:29	tongjun zhang:	Is   for(int i=0;i<n;i++){ for(int j=0;j<i;j++){ //do something} }   considered O(n^2) or O(n!) ?
+01:04:31	shirley li:	Thank you!
+01:04:32	marcus forst:	Aw sh** recursion
+01:04:33	Nikita Nitin Khapre:	Thank you !!
+01:04:38	Weiqi Yu:	Nice recursion  meme
+01:05:10	colin schultz:	@tongjun That would be O(n^2)
+01:05:31	tongjun zhang:	got it, thanks!
+01:06:22	Shifeng Hong:	@colin hi, I am curious why that would be n^2, would you explain a bit more?
+01:06:27	ian rundle:	Thanks! Also 10/10 meme
+01:08:33	Jennifer Anna Bonello:	Thank you
+01:08:46	Hanna Mofid:	thank you
+01:11:16	Liza George:	so what would we do if we had two completely independent variables? like for example the nested for loops we use to iterate through a matrix of x rows and y columns, what would the big-O notation for that look like?
+01:11:34	Shifeng Hong:	would it be that the inner loop O(n-1) and that 1 become negligible
+01:11:50	Kenneth Fischer:	I don't see anything
+01:11:58	tongjun zhang:	Got it, thanks
+01:12:37	Shifeng Hong:	Thanks
+01:13:44	Liza George:	and do we just generally always assume the worst-case scenario?
+01:14:09	Liza George:	ok, thank you!
+01:14:38	Jordan Lin:	I remember reading this somewhere: your code is only as efficient as your most inefficient line of code
+01:14:54	edouard des:	Thank you so much! Have a great day!
