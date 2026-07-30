@@ -1,30 +1,29 @@
-#include <iostream>
 #include "console.h"
-#include "testing/SimpleTest.h"
 #include "maze.h"
 #include "search.h"
+#include "testing/SimpleTest.h"
+#include <iostream>
 using namespace std;
 
 // You are free to edit the main in any way that works
 // for your testing/debugging purposes.
 // We will supply our main() during grading
 
-int main()
-{
+int main() {
     if (runSimpleTests(SELECTED_TESTS)) {
         return 0;
     }
 
-    Grid<bool> maze;
-    readMazeFile("res/21x23.maze", maze);
-    solveMaze(maze);
+    // Grid<bool> maze;
+    // readMazeFile("res/21x23.maze", maze);
+    // solveMaze(maze);
 
     searchEngine("res/website.txt");
 
-    cout << endl << "All done!" << endl;
+    cout << endl
+         << "All done!" << endl;
     return 0;
 }
-
 
 // Do not remove or edit below this line. It is here to confirm that your code
 // conforms to the expected function prototypes needed for grading

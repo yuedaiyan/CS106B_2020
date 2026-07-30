@@ -1,56 +1,123 @@
-// TODO: remove and replace this file header comment
+// 迷宫游戏
 // This is a .cpp file you will edit and turn in.
 // Remove starter comments and add your own
 // comments on each function and on complex code sections.
-#include <iostream>
-#include <fstream>
+#include "maze.h"
 #include "error.h"
 #include "filelib.h"
 #include "grid.h"
-#include "maze.h"
 #include "mazegraphics.h"
 #include "queue.h"
 #include "set.h"
 #include "stack.h"
-#include "vector.h"
 #include "testing/SimpleTest.h"
+#include "vector.h"
+#include <fstream>
+#include <iostream>
 using namespace std;
 
-
-/* TODO: Replace this comment with a descriptive function
- * header comment.
- */
+// 查找可移动相邻格程序（上下左右四个方向）
+// 返回 Set<GridLocation> neighbors 集合
 Set<GridLocation> generateValidMoves(Grid<bool>& maze, GridLocation cur) {
     Set<GridLocation> neighbors;
-    /* TODO: Fill in the remainder of this function. */
+
+    // 如果本身传入的点就不再迷宫中,直接返回空集合
+    if (!maze.inBounds(cur)) {
+        return neighbors;
+    }
+
+    int curRow = cur.row;
+    int curCol = cur.col;
+
+    // 分别四个点的移动以(cur为出发点)
+    GridLocation curN = { curRow + 1, curCol };
+    if (maze.inBounds(curN) && maze.get(curN) == true) {
+        neighbors.add(curN);
+    }
+    GridLocation curS = { curRow - 1, curCol };
+    if (maze.inBounds(curS) && maze.get(curS) == true) {
+        neighbors.add(curS);
+    }
+    GridLocation curW = { curRow, curCol - 1 };
+    if (maze.inBounds(curW) && maze.get(curW) == true) {
+        neighbors.add(curW);
+    }
+    GridLocation curE = { curRow, curCol + 1 };
+    if (maze.inBounds(curE) && maze.get(curE) == true) {
+        neighbors.add(curE);
+    }
+
     return neighbors;
 }
 
-/* TODO: Replace this comment with a descriptive function
- * header comment.
- */
+// 测试 答案路线 和 迷宫 是否匹配
+// 正确不返回失败, 失败弹出 error
 void validatePath(Grid<bool>& maze, Stack<GridLocation> path) {
-    GridLocation mazeExit = {maze.numRows()-1,  maze.numCols()-1};
-
+    GridLocation mazeExit = { maze.numRows() - 1, maze.numCols() - 1 };
+    // The path must end at the exit (lower right corner) of the maze
     if (path.peek() != mazeExit) {
         error("Path does not end at maze exit");
     }
-    /* TODO: Fill in the remainder of this function. */
+    GridLocation glCurr;
+    GridLocation glNext;
+    Set<GridLocation> allPrev;
+    int pathSize = path.size();
+    glCurr = path.pop();
 
-    /* If you find a problem with the path, call error() to report it.
-     * If the path is a valid solution, then this function should run to completion
-     * without throwing any errors.
-     */
+    for (int i = 0; i < pathSize - 1; i++) {
+        glNext = path.pop();
+        // Each location in the path is a valid move from the previous location in the path
+        if (!generateValidMoves(maze, glCurr).contains(glNext)) {
+            error(" Error:\n" + glNext.toString() + " location in the path is not valid move from the maze");
+        }
+        // The path must not contain a loop, i.e. the same location cannot appear more than once in the path
+        if (allPrev.contains(glCurr)) {
+            error(" Error:\n"
+                + glCurr.toString() + " same location appear more than once in the path\nallPrev set: "
+                + allPrev.toString());
+        }
+        allPrev.add(glCurr);
+        glCurr = glNext;
+    }
+    // The path must start at the entry (upper left corner) of the maze
+    GridLocation mazeStart = { 0, 0 };
+    if (glCurr != mazeStart) {
+        error("Path does not start at {0 , 0}\nglCurr: " + glCurr.toString() + "\npathSize: " + to_string(pathSize));
+    }
 }
 
-/* TODO: Replace this comment with a descriptive function
- * header comment.
- */
+// 寻找迷宫最短路径函数(BFS)
+// 输入: 迷宫
+// 输出: 最短路经
 Stack<GridLocation> solveMaze(Grid<bool>& maze) {
+
+    GridLocation mazeExit = { maze.numRows() - 1, maze.numCols() - 1 };
     MazeGraphics::drawGrid(maze);
-    Stack<GridLocation> path;
-    /* TODO: Fill in the remainder of this function. */
-    return path;
+    Stack<GridLocation> path = { { 0, 0 } };
+    Queue<Stack<GridLocation>> paths = { path };
+    Set<GridLocation> prev;
+
+    while (true) {
+        Stack<GridLocation> path = paths.dequeue();
+        GridLocation curr = path.peek();
+        MazeGraphics::highlightPath(path, "blue", 2);
+        if (curr == mazeExit) {
+            return path;
+        } else {
+            Set<GridLocation> validMoves = generateValidMoves(maze, curr);
+            Set<GridLocation> newMoves = validMoves - prev;
+
+            for (GridLocation move : newMoves) {
+                Stack<GridLocation> newPath = path;
+                newPath.push(move);
+                prev.add(move);
+                paths.enqueue(newPath);
+            }
+        }
+    }
+
+    cout << "solveMaze(): can't find valid path" << endl;
+    return { { 0, 0 } };
 }
 
 /*
@@ -75,9 +142,9 @@ void readMazeFile(string filename, Grid<bool>& maze) {
     /* Now that the file data has been read into the Vector, populate
      * the maze grid.
      */
-    int numRows = lines.size();        // rows is count of lines
-    int numCols = lines[0].length();   // cols is length of line
-    maze.resize(numRows, numCols);     // resize grid dimensions
+    int numRows = lines.size(); // rows is count of lines
+    int numCols = lines[0].length(); // cols is length of line
+    maze.resize(numRows, numCols); // resize grid dimensions
 
     for (int r = 0; r < numRows; r++) {
         if (lines[r].length() != numCols) {
@@ -85,7 +152,7 @@ void readMazeFile(string filename, Grid<bool>& maze) {
         }
         for (int c = 0; c < numCols; c++) {
             char ch = lines[r][c];
-            if (ch == '@') {        // wall
+            if (ch == '@') { // wall
                 maze[r][c] = false;
             } else if (ch == '-') { // corridor
                 maze[r][c] = true;
@@ -108,47 +175,81 @@ void readSolutionFile(string filename, Stack<GridLocation>& soln) {
         error("Cannot open file named " + filename);
     }
 
-    if (!(in >> soln)) {// if not successfully read
+    if (!(in >> soln)) { // if not successfully read
         error("Maze solution did not have the correct format.");
     }
 }
 
-
 /* * * * * * Test Cases * * * * * */
+STUDENT_TEST("generateValidMoves: 测试传入点不在迷宫中") {
+    Grid<bool> maze = { { true, true, true },
+        { true, true, true },
+        { true, true, true } };
+    GridLocation center = { 9, 9 };
+    Set<GridLocation> expected = { };
+    EXPECT_EQUAL(generateValidMoves(maze, center), expected);
+}
+
+STUDENT_TEST("generateValidMoves: 测试点周围都不可以走 ") {
+    Grid<bool> maze = { { false, false, false },
+        { false, false, false },
+        { false, false, false } };
+    GridLocation center = { 1, 1 };
+    Set<GridLocation> expected = { };
+    EXPECT_EQUAL(generateValidMoves(maze, center), expected);
+}
+
+STUDENT_TEST("generateValidMoves: 普通测试用例") {
+    Grid<bool> maze = { { true, false, true },
+        { true, true, false },
+        { false, true, true } };
+    GridLocation center = { 1, 1 };
+    Set<GridLocation> expected = { { 1, 0 }, { 2, 1 } };
+    EXPECT_EQUAL(generateValidMoves(maze, center), expected);
+}
+
+STUDENT_TEST("generateValidMoves: 出发点在墙面上") {
+    Grid<bool> maze = { { true, false, true },
+        { true, true, false },
+        { true, false, true } };
+    GridLocation center = { 0, 1 };
+    Set<GridLocation> expected = { { 0, 0 }, { 0, 2 }, { 1, 1 } };
+    EXPECT_EQUAL(generateValidMoves(maze, center), expected);
+}
 
 PROVIDED_TEST("generateValidMoves on location in the center of 3x3 grid with no walls") {
-    Grid<bool> maze = {{true, true, true},
-                       {true, true, true},
-                       {true, true, true}};
-    GridLocation center = {1, 1};
-    Set<GridLocation> expected = {{0, 1}, {1, 0}, {1, 2}, {2, 1}};
+    Grid<bool> maze = { { true, true, true },
+        { true, true, true },
+        { true, true, true } };
+    GridLocation center = { 1, 1 };
+    Set<GridLocation> expected = { { 0, 1 }, { 1, 0 }, { 1, 2 }, { 2, 1 } };
 
     EXPECT_EQUAL(generateValidMoves(maze, center), expected);
 }
 
 PROVIDED_TEST("generateValidMoves on location on the side of 3x3 grid with no walls") {
-    Grid<bool> maze = {{true, true, true},
-                       {true, true, true},
-                       {true, true, true}};
-    GridLocation side = {0, 1};
-    Set<GridLocation> expected = {{0,0}, {0,2}, {1, 1}};
+    Grid<bool> maze = { { true, true, true },
+        { true, true, true },
+        { true, true, true } };
+    GridLocation side = { 0, 1 };
+    Set<GridLocation> expected = { { 0, 0 }, { 0, 2 }, { 1, 1 } };
 
     EXPECT_EQUAL(generateValidMoves(maze, side), expected);
 }
 
 PROVIDED_TEST("generateValidMoves on corner of 2x2 grid with walls") {
-    Grid<bool> maze = {{true, false},
-                       {true, true}};
-    GridLocation corner = {0, 0};
-    Set<GridLocation> expected = {{1, 0}};
+    Grid<bool> maze = { { true, false },
+        { true, true } };
+    GridLocation corner = { 0, 0 };
+    Set<GridLocation> expected = { { 1, 0 } };
 
     EXPECT_EQUAL(generateValidMoves(maze, corner), expected);
 }
 
 PROVIDED_TEST("validatePath on correct solution") {
-    Grid<bool> maze = {{true, false},
-                       {true, true}};
-    Stack<GridLocation> soln = { {0 ,0}, {1, 0}, {1, 1} };
+    Grid<bool> maze = { { true, false },
+        { true, true } };
+    Stack<GridLocation> soln = { { 0, 0 }, { 1, 0 }, { 1, 1 } };
 
     EXPECT_NO_ERROR(validatePath(maze, soln));
 }
@@ -172,19 +273,56 @@ PROVIDED_TEST("validatePath on correct solution loaded from file for large maze"
 }
 
 PROVIDED_TEST("validatePath on invalid path should raise error") {
-    Grid<bool> maze = {{true, false},
-                       {true, true}};
-    Stack<GridLocation> not_end_at_exit = { {1, 0}, {0, 0} };
-    Stack<GridLocation> not_begin_at_entry = { {1, 0}, {1, 1} };
-    Stack<GridLocation> go_through_wall = { {0 ,0}, {0, 1}, {1, 1} };
-    Stack<GridLocation> teleport = { {0 ,0}, {1, 1} };
-    Stack<GridLocation> revisit = { {0 ,0}, {1, 0}, {0, 0}, {1, 0}, {1, 1} };
+    Grid<bool> maze = { { true, false },
+        { true, true } };
+    Stack<GridLocation> not_end_at_exit = { { 1, 0 }, { 0, 0 } };
+    Stack<GridLocation> not_begin_at_entry = { { 1, 0 }, { 1, 1 } };
+    Stack<GridLocation> go_through_wall = { { 0, 0 }, { 0, 1 }, { 1, 1 } };
+    Stack<GridLocation> teleport = { { 0, 0 }, { 1, 1 } };
+    Stack<GridLocation> revisit = { { 0, 0 }, { 1, 0 }, { 0, 0 }, { 1, 0 }, { 1, 1 } };
 
     EXPECT_ERROR(validatePath(maze, not_end_at_exit));
     EXPECT_ERROR(validatePath(maze, not_begin_at_entry));
     EXPECT_ERROR(validatePath(maze, go_through_wall));
     EXPECT_ERROR(validatePath(maze, teleport));
     EXPECT_ERROR(validatePath(maze, revisit));
+}
+
+STUDENT_TEST("validatePath on correct solution") {
+    Grid<bool> maze = { { true, true, true },
+        { false, true, false },
+        { true, true, false },
+        { false, true, true } };
+    Stack<GridLocation> soln = { { 0, 0 }, { 0, 1 }, { 1, 1 }, { 2, 1 }, { 3, 1 }, { 3, 2 } };
+
+    EXPECT_NO_ERROR(validatePath(maze, soln));
+}
+
+STUDENT_TEST("validatePath on correct solution") {
+    Grid<bool> maze = { { true, true },
+        { false, true } };
+    Stack<GridLocation> soln = { { 0, 0 }, { 0, 1 }, { 1, 1 } };
+
+    EXPECT_NO_ERROR(validatePath(maze, soln));
+}
+
+STUDENT_TEST("validatePath on invalid path should raise error") {
+    Grid<bool> maze = { { true, true },
+        { false, true } };
+    // Stack<GridLocation> valide_soln = { { 0, 0 }, { 0, 1 }, { 1, 1 } };
+    Stack<GridLocation> short_soln = { { 1, 0 }, { 1, 1 } };
+    Stack<GridLocation> long_soln = { { 0, 0 }, { 1, 0 }, { 1, 0 }, { 1, 1 } };
+    Stack<GridLocation> revisit_soln = { { 1, 1 }, { 0, 1 }, { 1, 1 } };
+    Stack<GridLocation> visit_the_wall_soln = { { 0, 0 }, { 1, 0 }, { 1, 1 } };
+    Stack<GridLocation> error_exit_soln = { { 0, 0 }, { 0, 1 }, { 1, 2 } };
+    Stack<GridLocation> error_start_soln = { { 0, 1 }, { 0, 1 }, { 1, 1 } };
+
+    EXPECT_ERROR(validatePath(maze, short_soln));
+    EXPECT_ERROR(validatePath(maze, long_soln));
+    EXPECT_ERROR(validatePath(maze, revisit_soln));
+    EXPECT_ERROR(validatePath(maze, visit_the_wall_soln));
+    EXPECT_ERROR(validatePath(maze, error_exit_soln));
+    EXPECT_ERROR(validatePath(maze, error_start_soln));
 }
 
 PROVIDED_TEST("solveMaze on file 5x7") {
@@ -203,4 +341,26 @@ PROVIDED_TEST("solveMaze on file 21x23") {
     EXPECT_NO_ERROR(validatePath(maze, soln));
 }
 
-// TODO: add your test cases here
+STUDENT_TEST("solveMaze on file 33x41") {
+    Grid<bool> maze;
+    readMazeFile("res/33x41.maze", maze);
+    Stack<GridLocation> soln = solveMaze(maze);
+
+    EXPECT_NO_ERROR(validatePath(maze, soln));
+}
+
+// STUDENT_TEST("solveMaze on file 100x100") {
+//     Grid<bool> maze;
+//     readMazeFile("res/100x100.maze", maze);
+//     Stack<GridLocation> soln = solveMaze(maze);
+
+//     EXPECT_NO_ERROR(validatePath(maze, soln));
+// }
+
+// STUDENT_TEST("solveMaze on file 200x200") {
+//     Grid<bool> maze;
+//     readMazeFile("res/200x200.maze", maze);
+//     Stack<GridLocation> soln = solveMaze(maze);
+
+//     EXPECT_NO_ERROR(validatePath(maze, soln));
+// }
