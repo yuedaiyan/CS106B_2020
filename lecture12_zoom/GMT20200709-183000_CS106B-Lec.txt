@@ -1,0 +1,111 @@
+00:10:36	Kenneth Fischer:	Chess
+00:10:37	Samuel Lynn Ledden:	chess
+00:10:39	Akash Bhargava:	chess
+00:10:44	Nate Hedgecock:	Candy Crush
+00:10:47	Aadi M Rane:	chess
+00:10:47	Kenny Wang:	literally any game
+00:10:48	Yukun Yang:	chess
+00:10:49	Zachary Alon:	chess
+00:10:49	Kyle Thomas Booker:	Chess
+00:10:54	Nadia Palar:	chess / sudoku
+00:10:54	Liza George:	tic tac tow
+00:10:57	Humaid Alzaabi:	Life
+00:10:58	Ryan Gabel:	chess
+00:10:58	klaus cerny:	chess
+00:10:59	kathleen bryan:	Scrabble
+00:10:59	Liza George:	toe toops
+00:10:59	Matt Presson:	mancala
+00:11:03	Evan Baldonado:	suduko
+00:11:08	Kenny Wang:	Minecraft
+00:11:11	Kyle Thomas Booker:	Magic
+00:11:15	Kenneth Fischer:	Mancala!
+00:11:18	ian rundle:	Pong
+00:11:45	edouard des:	Any type of impartial computational game (though those tend to be pretty easy if you know what you are doing)
+00:12:06	Elan Smolar Eisenberg:	chess
+00:35:03	Jordan Lin:	Shouldn't i be string::size_type?
+00:35:31	kylie jue:	The warning is due to the unlatching types but C++ will still be okay if you use an integer for i instead
+00:35:40	kylie jue:	*unmatching
+00:35:44	Jordan Lin:	Ah I see
+00:37:43	kathleen bryan:	I am a little confused about returning specific values for an individual Stack within recursion and mapping that with what stack it was associated with. 
+
+How do we keep track of those individual stack values?
+00:38:11	kylie jue:	By stack do you mean each stack frame (function call)?
+00:38:33	kathleen bryan:	Yes the individual stack frames , sorry so getting the value that was produced at that frame
+00:38:49	kathleen bryan:	keeping track of it if that makes sense
+00:38:51	kylie jue:	got it - in this case, since the function is void, we’re not actually returning any values for each call
+00:39:02	kylie jue:	We’re just printing out our results in our base case
+00:39:21	kylie jue:	so that’s our way of outputting our results in this particular problem
+00:39:36	kathleen bryan:	got it- But generally, we would do that with a return? How would we keep track of what stack frame
+00:39:53	Aadi M Rane:	how do you come up with the specific strategy to store info and creating helper?
+00:41:00	kylie jue:	@Kathleen: Yeah that’s a great question.  IT depends on the problem – some backtracking problems we’ll want to return our results and in others we just want to print them out.  But sometimes we “Return” using parameters that the different calls have access to instead of just returning the value.  We’ll see an example of this in a later problem today
+00:41:29	kylie jue:	So for example with “keeping track” of what letters you’ve chosen so far for permutations, we use a function parameter
+00:41:36	hriday chhabria:	Is the number of branches the main difference between yesterday’s example and today’s example
+00:41:38	hriday chhabria:	?
+00:42:08	kylie jue:	@Aadi It’s often thinking about what information you need to keep track of at each step that is not already present in the provided function prototype parameters
+00:42:26	kathleen bryan:	Ok , thank you. So we’d keep track of the parameter it’s called with. I think that makes sense
+00:42:45	kylie jue:	@Hriday Yes exactly.  And as a result we use a for loop to determine how many branches based on how many letters are left
+00:42:57	kylie jue:	@Kathleen yup that sounds right!  It will become a little clearer as we see more examples
+00:43:06	Ryan Gabel:	Froze
+00:43:12	hriday chhabria:	Great! Thanks so much! That makes a lot of sense:)
+00:43:25	kathleen bryan:	It’s frozen
+00:43:32	Hemant Chaudhary:	Nick looks frozen to me
+00:43:37	ian rundle:	rip
+00:43:48	Ryan Gabel:	Nick's frozen for me too
+00:45:04	Ryan Gabel:	You're frozen again
+00:45:07	Michael M Hu:	Oh no
+00:45:08	Hemant Chaudhary:	^
+00:45:08	Evan F Davis:	bruh
+00:45:09	Rafael Vila:	rip
+00:45:10	hriday chhabria:	:(
+00:45:31	Kenneth Fischer:	Sounds fine!
+00:49:31	rayjohns@stanford.edu:	did you mean any single letter word is NOT shrinkable?
+00:49:44	Demi Lei:	^
+00:50:02	kylie jue:	Will answer out loud
+00:50:08	rayjohns@stanford.edu:	cheers
+00:50:18	Elan Smolar Eisenberg:	If a word when shrunk to one letter is still valid, then the overall word is shrinkable, not just the letter
+00:51:04	rayjohns@stanford.edu:	but all are valid because letters are words
+00:51:23	kylie jue:	we mean a word in the English dictionary when we say "Valid"
+00:51:24	edouard des:	So O is a one-letter word but it’s not shrinkable, correct?
+00:51:53	Evan F Davis:	Is there a way to view the entire lexicon set of words
+00:51:56	rayjohns@stanford.edu:	all letters are in the dictionary, so i guess they are valid, assuming you are using a normal dictionary. but it depends on the file you read in
+00:52:06	rayjohns@stanford.edu:	@evan it would depend on the file you read in as the lexicon
+00:52:06	Demi Lei:	for the base case, how do we determine if a words is not shrinkable? I thought we need to go through a recursive process to determine if it's shrinkable
+00:52:17	rayjohns@stanford.edu:	@demi you'd need an explicit lookup
+00:52:28	kylie jue:	Yes it will depend on the lexicon file you use - the file will be under “other files”
+00:53:14	kylie jue:	@Demi does the base case here make sense?
+00:54:06	Demi Lei:	so basically we need to check it everytime?
+00:54:14	kylie jue:	Yes
+00:54:16	Demi Lei:	is that why is in the base case
+00:54:20	Demi Lei:	ok got it, thx!
+00:54:32	kylie jue:	We have to check if the single letter remaining is a valid word
+00:55:00	hriday chhabria:	Is that the main function or did we have to create a helper function?
+00:56:53	hriday chhabria:	Ohh, since we don’t need to keep track of the removed characters/words essentially?
+00:56:58	kylie jue:	exactly
+00:57:03	hriday chhabria:	Got it! Thanks!
+00:57:16	Kyle Thomas Booker:	If we wanted to return the shrinked word in order could we use a stack?
+00:57:27	Aadi M Rane:	so when do you need to store one thing vs to store two things?
+00:57:38	kylie jue:	@Kyle yes you could store them in a stack parameter along the way
+00:58:10	kylie jue:	@Aadi it depends on what the problem is asking you to output and often if you’re being asked to store the “path” along the way
+00:58:48	kylie jue:	if you look at each slide where we define the decision tree, that’s often when you’ll be able to identify whether or not you need to store more things (and use a helper)
+00:59:19	Aadi M Rane:	so if you wanted to actually output the shrinking path, you need to store two things?
+01:00:06	kylie jue:	Yes that would be the cleanest way to store and output the path
+01:05:28	Kevin H Fan:	Thank you!
+01:05:29	Guozhen Miao:	thank you
+01:05:32	Zachary Alon:	Thank you!
+01:05:32	julia wang:	Thank you!
+01:05:35	hriday chhabria:	Thank you!
+01:05:36	Jennifer Anna Bonello:	Thank you
+01:05:36	Hanna Mofid:	Thank you!
+01:05:36	louise marzolf:	thank you bye!
+01:05:36	Demi Lei:	thank you!
+01:05:37	Kenneth Fischer:	Thank you!
+01:05:38	Gautham Rajesh:	thanks
+01:05:38	Chenlan / Yu:	Thank you
+01:05:41	Shifeng Hong:	Thank you
+01:05:42	Tongjun (Albert) Zhang:	thank you!
+01:05:48	Liza George:	bye, thank you~
+01:05:51	Lawrence Li:	Thank you!
+01:05:58	Kenny Wang:	*resisting the urge to make a "Tripping up" joke*
+01:06:44	Ethan Krish Ramchandani:	was the permutation finding algorithm an example of bfs of dfs?
+01:06:54	kylie jue:	DFS
+01:07:00	Ethan Krish Ramchandani:	thank you
