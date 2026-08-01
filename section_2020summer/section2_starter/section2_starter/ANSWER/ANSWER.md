@@ -1,4 +1,4 @@
-**1. Collection Mystery**
+**1) Collection Mystery**
 
 {1, 2, 3, 4, 5, 6}
 
