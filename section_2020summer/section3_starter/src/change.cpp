@@ -27,21 +27,33 @@ using namespace std;
  * minimum number of coins required to make change for that total.
  */
 
-int fewestCoinsFor(int cents, Set<int>& coins) {
-    // TODO: Your code here
-    return 0;
+int fewestCoinsForHelp(int cents, Set<int>& coins) {
+    if (cents == 0) {
+        return 0;
+    } else {
+        int currMin = cents + 1;
+        for (int coin : coins) {
+            if (coin <= cents) {
+                // count++;
+                currMin = min(currMin, fewestCoinsForHelp(cents - coin, coins) + 1);
+            }
+        }
+        return currMin;
+    }
 }
 
+int fewestCoinsFor(int cents, Set<int>& coins) {
+    return fewestCoinsForHelp(cents, coins);
+}
 
 /* * * * * Provided Tests Below This Point * * * * */
 
 PROVIDED_TEST("Provided Test: US Currency System") {
-    Set<int> coins = {1, 5, 10, 25, 50};
+    Set<int> coins = { 1, 5, 10, 25, 50 };
     EXPECT_EQUAL(fewestCoinsFor(31, coins), 3);
 }
 
 PROVIDED_TEST("Provided Test: Recursia Currency System") {
-    Set<int> coins = {1, 12, 14, 63};
+    Set<int> coins = { 1, 12, 14, 63 };
     EXPECT_EQUAL(fewestCoinsFor(24, coins), 2);
 }
-

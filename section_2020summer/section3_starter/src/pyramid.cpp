@@ -25,6 +25,12 @@ using namespace std;
 
 int peopleInPyramidOfHeight(int n){
     // TODO: Your code here
+    if (n == 1) {
+        return 1;
+    } else {
+        return peopleInPyramidOfHeight(n - 1) + n;
+    }
+
     return 0;
 }
 
@@ -35,3 +41,6 @@ PROVIDED_TEST("Provided Test: Example from handout.") {
     EXPECT_EQUAL(peopleInPyramidOfHeight(3), 6);
 }
 
+STUDENT_TEST("Provided Test: Example from handout.") {
+    EXPECT_EQUAL(peopleInPyramidOfHeight(4), 10);
+}

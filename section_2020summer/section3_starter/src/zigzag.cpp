@@ -27,8 +27,21 @@ using namespace std;
  */
 
 string zigzag(int n){
-    // TODO: Your code here
-    return "";
+    // error case
+    if (n < 0) {
+        error("Error: n is not postive");
+    }
+
+    // basic case
+    if (n == 1) {
+        return "*";
+    } else if (n == 2) {
+        return "**";
+    }
+    // ecursive case
+    else {
+        return "<" + zigzag(n - 2) + ">";
+    }
 }
 
 

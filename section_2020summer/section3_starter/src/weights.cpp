@@ -26,11 +26,27 @@ using namespace std;
  * weights.
  */
 
-bool isMeasurable(int target, Vector<int>& weights){
-    // TODO: Your code here
+bool isMeasurableHelp(int target, Vector<int> weights) {
+
+    if (weights.isEmpty()) {
+        return target == 0;
+    } else {
+        for (int i = 0; i < weights.size(); i++) {
+            int curr = weights[i];
+            Vector<int> newWeights = weights;
+            newWeights.remove(i);
+            if (isMeasurableHelp(target - curr, newWeights) || isMeasurableHelp(target + curr, newWeights) || isMeasurableHelp(target, newWeights)) {
+                return true;
+            }
+        }
+    }
     return false;
 }
 
+bool isMeasurable(int target, Vector<int>& weights) {
+    weights.sort();
+    return isMeasurableHelp(target, weights);
+}
 
 /* * * * * Provided Tests Below This Point * * * * */
 

@@ -24,7 +24,13 @@ using namespace std;
  */
 
 int sumOfSquares(int n){
-    // TODO: Your code here
+    if (n < 0) {
+        error("Error: input less than 0");
+    } else if (n == 1) {
+        return 1;
+    } else {
+        return n * n + sumOfSquares(n - 1);
+    }
     return 0;
 }
 

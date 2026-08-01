@@ -26,18 +26,37 @@ using namespace std;
  */
 
 bool canMakeSum(Vector<int>& values, int target) {
-    // TODO: Your code here
+    // basic case
+    if (values.size() == 0) {
+        return false;
+    } else if (target == 0) {
+        return true;
+    } else if (target < 0) {
+        return false;
+    }
+    // recursive case
+    else {
+        int valuesSize = values.size();
+        for (int i = 0; i < valuesSize; i++) {
+            int curr = values.get(i);
+            Vector<int> newValues = values;
+            newValues.remove(i);
+            if (canMakeSum(newValues, target - curr)) {
+                return true;
+            }
+        }
+    }
     return false;
 }
 
 /* * * * * Provided Tests Below This Point * * * * */
 
 PROVIDED_TEST("Provided Test: Positive example from handout.") {
-    Vector<int> nums = {1,1,2,3,5};
+    Vector<int> nums = { 1, 1, 2, 3, 5 };
     EXPECT(canMakeSum(nums, 9));
 }
 
-PROVIDED_TEST("Provided Test: Negative example from handout"){
-    Vector<int> nums = {1,4,5,6};
+PROVIDED_TEST("Provided Test: Negative example from handout") {
+    Vector<int> nums = { 1, 4, 5, 6 };
     EXPECT(!canMakeSum(nums, 8));
 }

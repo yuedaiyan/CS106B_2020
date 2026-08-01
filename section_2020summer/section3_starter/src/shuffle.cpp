@@ -35,11 +35,15 @@ using namespace std;
  */
 
 string randomShuffle(string input){
-    // TODO: Your code here
-    return "";
+    if (input.length() == 1) {
+        return input;
+    } else {
+        int ri = randomInteger(0, input.length() - 1);
+        char pickChar = input[ri];
+        string rest = input.substr(0, ri) + input.substr(ri + 1);
+        return pickChar + randomShuffle(rest);
+    }
 }
-
-
 
 /* * * * * Provided Tests Below This Point * * * * */
 
