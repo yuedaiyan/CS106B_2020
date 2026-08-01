@@ -4,9 +4,9 @@ CS106B-other-raw-assets/CS_Crouse-main/
 CS106B-other-raw-assets/cs106B-2020summer-master/
 
 
-# Zoom
-*.m4a
-*.mp4
+# Zoom 改为使用 lfs 管理
+# *.m4a
+# *.mp4
 
 # Build files
 build/
