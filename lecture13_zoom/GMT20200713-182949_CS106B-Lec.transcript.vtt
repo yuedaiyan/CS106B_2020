@@ -1,0 +1,2554 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:00.870
+Topic is
+
+2
+00:00:02.370 --> 00:00:11.910
+Nick Bowman: Recorded because we love recording our lectures and so today's topic is going to be basically a revisiting of the recursive backtrack. You know, we started talking about on Thursday.
+
+3
+00:00:12.330 --> 00:00:18.060
+Nick Bowman: And we had a little bit of technical difficulties on Thursday and ran a little short on time at the end. And so we wanted to make sure we're sort of
+
+4
+00:00:18.900 --> 00:00:23.520
+Nick Bowman: Doing kind of full due diligence and justice to kind of have this really cool problem solving technique.
+
+5
+00:00:24.330 --> 00:00:32.940
+Nick Bowman: So we're gonna we're going to revisit a fair portion of Thursdays lecture and then introduce some new content as well. But before we get started.
+
+6
+00:00:33.600 --> 00:00:40.470
+Nick Bowman: Today's question is kind of more of a fun one to just what has been your favorite part of the course over the first three weeks of the quarter so far.
+
+7
+00:00:41.670 --> 00:00:42.900
+Nick Bowman: You put your answers in the chat.
+
+8
+00:00:44.310 --> 00:00:45.090
+Nick Bowman: Oh, so
+
+9
+00:00:46.560 --> 00:00:55.410
+Nick Bowman: As you may know, we're still in the land of recursive, problem solving, we will be for today and Tuesday. Today, tomorrow is going to be sort of our last day.
+
+10
+00:00:55.890 --> 00:01:04.920
+Nick Bowman: Exploration of recursive problem solving. And so it's been kind of a along and kind of end up, certainly there so far. But hopefully, kind of a few phone
+
+11
+00:01:05.820 --> 00:01:12.480
+Nick Bowman: And and so today's question and is we're going to slightly reframe reframe Thursday's question about recursive backtracking.
+
+12
+00:01:13.080 --> 00:01:22.830
+Nick Bowman: But we're going to really focus on how backtracking solutions look different. And when we're dealing with data structures. So most of our examples on Thursday when we were doing permutations and drinkable words.
+
+13
+00:01:23.280 --> 00:01:31.590
+Nick Bowman: Dealt with strings and sort of just small sort of primitive data types, but today we're going to be doing recursive backtracking with data structures and we're going to see how that actually looks different.
+
+14
+00:01:32.910 --> 00:01:41.430
+Nick Bowman: And to do that, we'll do some quick review, and we'll spend a decent amount of time revisiting subsets and actually implementing the code to generate subsets.
+
+15
+00:01:41.880 --> 00:01:51.120
+Nick Bowman: And we'll talk quickly about selecting unbiased juries, and then we'll finish the day by actually revisiting this idea solving mazes and interesting idea of depth research.
+
+16
+00:01:52.410 --> 00:02:05.850
+Nick Bowman: And so our review from Thursday. So we talked about early last week about this idea out there are two types of recursion basic recursion and backtracking incursion and it's sort of different properties and different ways in which they build up solutions over time.
+
+17
+00:02:06.930 --> 00:02:13.470
+Nick Bowman: And specifically, when we talked about using backtracking recursion, we thought of sort of solving three very general categories of problems.
+
+18
+00:02:14.040 --> 00:02:20.730
+Nick Bowman: We could either generate all solutions to a problem. We could generate a specific solution to a problem or just show that one exists.
+
+19
+00:02:21.360 --> 00:02:27.330
+Nick Bowman: Or we could find the best one. And when we talked about the first two on Thursday. And what we'll be talking also about those first two today.
+
+20
+00:02:27.780 --> 00:02:30.150
+Nick Bowman: will visit that last one tomorrow as part of our wrap up.
+
+21
+00:02:30.900 --> 00:02:41.130
+Nick Bowman: And then when we were actually like sort of thinking about these many possible solutions are many possible realities that we could explore, there was many different ways that we could combine decisions and combine options.
+
+22
+00:02:41.790 --> 00:02:50.130
+Nick Bowman: To create those things. So we could do things like generate permutations or subsets or combinations and many met in so many other problems as well.
+
+23
+00:02:51.630 --> 00:03:00.000
+Nick Bowman: So the first one we talked about was permutations and we had this idea of applying now decision trees to sort of real problems.
+
+24
+00:03:00.270 --> 00:03:07.140
+Nick Bowman: And there's always these sort of three questions that we asked ourselves, and we hope that these questions you ask yourself as you work on backtracking problems in the future.
+
+25
+00:03:07.800 --> 00:03:13.260
+Nick Bowman: And so we always had our decision and each step, which for permutations was figuring out which was the next letter we were going to add
+
+26
+00:03:13.650 --> 00:03:18.420
+Nick Bowman: And then we talked about our options for permutations. WE HAVE ONE OPTION FOR EVERY REMAINING letter.
+
+27
+00:03:19.140 --> 00:03:31.470
+Nick Bowman: Which was very interesting, because we actually noted in our decision tree that we have different number of options that each step. And we have this idea that we need to store multiple pieces of information along the way, which kind of motivated our discussion of recursive functions.
+
+28
+00:03:32.700 --> 00:03:43.680
+Nick Bowman: This was our decision tree for generating permutations. Again, I want you to note the fact that every level of our tree here actually has a different branch and factor because we have different number of decisions that we can make
+
+29
+00:03:44.160 --> 00:03:51.600
+Nick Bowman: Or possible decisions that we can make at every sort of level along the way, which was kind of interesting and new thing that we saw.
+
+30
+00:03:52.650 --> 00:03:55.740
+Nick Bowman: And then we wrote the permutations code. And so we had
+
+31
+00:03:56.460 --> 00:04:04.170
+Nick Bowman: We've we thought about it and kind of the general structure of recursive backtracking code which is thinking of our base case is when we don't have any more decisions left to make
+
+32
+00:04:04.440 --> 00:04:18.060
+Nick Bowman: Thinking about a recursive case as when we can try all of our options for our next decision and then always keeping track of at least two pieces of information one about the decisions that we've made so far and one about the decisions that we have yet to make
+
+33
+00:04:20.250 --> 00:04:27.900
+Nick Bowman: And so we had some takeaways. We saw this idea of copy editor curse being a specific application of our choose explore and choose pattern.
+
+34
+00:04:29.130 --> 00:04:39.930
+Nick Bowman: Again we have solid idea of keeping track of multiple pieces of information and this idea variable branching factors and you support function. So all the things that we sort of got practice, but from writing a permutations
+
+35
+00:04:41.070 --> 00:04:48.270
+Nick Bowman: And then we applied it to shrink about words. Again, we had a very similar process of asking ourselves, sort of questions about
+
+36
+00:04:48.840 --> 00:04:50.790
+Nick Bowman: What our decisions and what our options were
+
+37
+00:04:51.510 --> 00:04:58.080
+Nick Bowman: And we have generated a tree that look like this. And it actually showed a little bit of a different structure where we started off with a large solution.
+
+38
+00:04:58.350 --> 00:05:02.040
+Nick Bowman: And we sort of shrunk it down over time and looking for certain properties along the way.
+
+39
+00:05:02.790 --> 00:05:14.910
+Nick Bowman: But still, still it had recursive backtracking involved because there were sort of these different variable number of decisions at every point in time. And we were just looking for one possible solution. So this is our first application and looking for just one solution to a problem.
+
+40
+00:05:16.260 --> 00:05:25.380
+Nick Bowman: And it was another example of copy editor curse. Right. Again, we were dealing with strings. So every recursive stack for him, got its own copy of the string to edit and change. However, it's off it.
+
+41
+00:05:25.860 --> 00:05:29.280
+Nick Bowman: And this will be the main point of difference that will see today.
+
+42
+00:05:29.880 --> 00:05:40.170
+Nick Bowman: And and we also saw this idea of using backtracking to find if a solution exists. So using this idea of actually returning a true false value to indicate whether we found a solution so far.
+
+43
+00:05:40.470 --> 00:05:50.820
+Nick Bowman: And if we ever encountered a recursive call it return true. Then we are self just stop searching and we return true right away. And we'll revisit that pattern at the end of the lecture today when we, when we do our baseball
+
+44
+00:05:53.700 --> 00:05:59.760
+Nick Bowman: So then, kind of, so that was a review of the main core components and be kind of fleshed out in full detail on Thursday.
+
+45
+00:06:00.870 --> 00:06:07.380
+Nick Bowman: And then we until we started talking about this idea of doing recursive backtracking on data structures on sets, for example.
+
+46
+00:06:07.830 --> 00:06:15.360
+Nick Bowman: And so kind of the core question for today is going to be how do these solutions look different. When data structures are involved because they're going to look distinctly different in a way
+
+47
+00:06:16.860 --> 00:06:25.770
+Nick Bowman: And we're going to continue talking about this in the context of subsets and this first part that I'm going to talk about is review. So I'm going to go through it a little bit quicker than I normally would.
+
+48
+00:06:26.760 --> 00:06:32.100
+Nick Bowman: But if you remember our subsets problem dealt with this idea of given a group of people or group of things.
+
+49
+00:06:32.310 --> 00:06:40.620
+Nick Bowman: We wanted to select all possible sort of ways of choosing some some collection of those people. So if you have the teaching team and you wanted to make up different sub teams of us.
+
+50
+00:06:41.340 --> 00:06:50.730
+Nick Bowman: Sort of, what were the different ways that you can do that. And in general, I want to make a note and we'll see this today subsets don't necessarily have to apply to set you can take a subset of any collection.
+
+51
+00:06:51.180 --> 00:06:55.290
+Nick Bowman: Just we'll talk about them in the context of sets that like data structure today.
+
+52
+00:06:57.000 --> 00:07:00.210
+Nick Bowman: So these are things like the empty subset, which was a valid subset
+
+53
+00:07:00.900 --> 00:07:13.200
+Nick Bowman: We thought about subsets that had one thing and I'm subsets that had two things. And then, and then subsets of all three things in. And so by that way, we were able to generate all possible subsets of different sort of sub collections of the teaching team.
+
+54
+00:07:14.490 --> 00:07:21.990
+Nick Bowman: And this was just another sort of example of our of our problem solving strategy of sort of generating and counting all solutions using backtracking.
+
+55
+00:07:23.340 --> 00:07:27.900
+Nick Bowman: And then the activity that I wanted to do on Thursday that we didn't get a chance to do and that I want to revisit today.
+
+56
+00:07:28.920 --> 00:07:38.430
+Nick Bowman: And some of you may remember from Thursday, some of the insights that we've gleaned so if you do that's totally fine. Just make sure to discuss with your roommates and sort of make sure everyone is on the same page.
+
+57
+00:07:39.210 --> 00:07:46.800
+Nick Bowman: But I want you also to discuss in breakout rooms and to think about, you know, how you might generate subsets. First off,
+
+58
+00:07:47.310 --> 00:07:51.600
+Nick Bowman: And then what recursive insights you might find when you're working on generating subsets.
+
+59
+00:07:51.960 --> 00:07:59.310
+Nick Bowman: And if you can think about generating maybe even a base case and a recursive case for generating these subsets of insights as permutations, but it should say subsets.
+
+60
+00:08:00.240 --> 00:08:11.010
+Nick Bowman: Then that would be interesting to discuss as well. So we'll go ahead and put you in breakout rooms for about three, four minutes and then when we come back we'll sort of formalize the our intuitions again and then we'll
+
+61
+00:08:39.540 --> 00:08:48.750
+Nick Bowman: And for those of you watching asynchronously. Feel free to go ahead and pause the recording here. And if you didn't get a chance to catch the end of Thursdays lecture because I know we ran a little bit late.
+
+62
+00:08:49.290 --> 00:08:55.380
+Nick Bowman: This is a great activity to do. And even if you did and you sort of heard me talk about a little bit about the recursive inside fine subsets.
+
+63
+00:08:55.830 --> 00:09:10.230
+Nick Bowman: It's still good to work through this example in your own and see if you can actually sort of formalize that that sort of intuition and notion that we we briefly introduced on Thursday, and then we will we will revisit it all together in a couple minutes.
+
+64
+00:09:17.190 --> 00:09:18.210
+Nick Bowman: Wow, shockingly
+
+65
+00:09:31.530 --> 00:09:32.310
+Break everything
+
+66
+00:09:34.980 --> 00:09:35.460
+Nick Bowman: Yeah.
+
+67
+00:09:45.150 --> 00:09:48.210
+Nick Bowman: I'm surprised how many people said recursion was their favorite thing so far.
+
+68
+00:09:50.220 --> 00:09:50.700
+Nick Bowman: Yeah.
+
+69
+00:09:53.160 --> 00:09:53.550
+Cool.
+
+70
+00:09:54.720 --> 00:09:56.250
+Nick Bowman: Chris like Boggle boggles fun
+
+71
+00:09:59.670 --> 00:10:00.300
+People
+
+72
+00:10:02.760 --> 00:10:03.240
+Nick Bowman: Cool.
+
+73
+00:10:04.560 --> 00:10:05.880
+Change from last quarter.
+
+74
+00:10:10.080 --> 00:10:12.300
+Nick Bowman: We can bring people back at like 41 so like
+
+75
+00:10:27.840 --> 00:10:28.470
+The flashing
+
+76
+00:11:27.180 --> 00:11:33.570
+Nick Bowman: Cool. So welcome back everyone. So hopefully, hopefully, you had a chance to discuss with the people in your breakout rooms.
+
+77
+00:11:34.410 --> 00:11:40.890
+Nick Bowman: And again, sort of, regardless of how much you're able to stick around for on Thursday. Hopefully, it was still kind of a valuable exercise.
+
+78
+00:11:41.730 --> 00:11:49.500
+Nick Bowman: So let's try to see if we can formalize what we started to do on Thursday and kind of rush through it a little bit. So I'm going to take some more time to revisit it
+
+79
+00:11:50.970 --> 00:12:00.060
+Nick Bowman: So when we're looking at these subsets we might start noticing and interesting pattern and whenever you're solving problems like this. Looking for patterns and an example that you've worked through yourself.
+
+80
+00:12:00.540 --> 00:12:03.300
+Nick Bowman: Is always a great way to try to figure out how to break down the problem in person.
+
+81
+00:12:04.380 --> 00:12:11.160
+Nick Bowman: And so the first thing that we noticed is that half of the subsets contain my name and half of the subsets and didn't contain my name.
+
+82
+00:12:11.850 --> 00:12:18.540
+Nick Bowman: Which is an interesting observation. The same was also true for Kylie's man half the subsets contain Kylie's name, half of them didn't.
+
+83
+00:12:19.440 --> 00:12:32.190
+Nick Bowman: What's interesting is if you look at those two halves. And you'll notice that the house if you ignore Kylie's name in the ones that she is included in the rest of the contents look exactly the same as the half that she's not included.
+
+84
+00:12:32.610 --> 00:12:44.340
+Nick Bowman: And so we can see a little bit of recursive similarity there where we can express all of our subsets as ones that Kylie is in, and then we generate the rest of the subsets or ones that kind of is not and then regenerate all sets.
+
+85
+00:12:45.240 --> 00:12:52.920
+Nick Bowman: And so we can see that that's true for all the original choices that we have. It's true for trip as well. And it's also true on a on
+
+86
+00:12:57.150 --> 00:12:57.780
+Nick Bowman: Delayed
+
+87
+00:13:00.630 --> 00:13:15.450
+Nick Bowman: Sorry. Um, yeah, so that's true. So for for all each of our original elements. So it's true for Kylie and trip ending. And it's also true, as we work down into more and more developed subsets as well. So half of the ones that containing trip also contain me the other half did it.
+
+88
+00:13:16.680 --> 00:13:21.990
+Nick Bowman: And then, you know, once you get to the one that has all of us half of the ones that contain both trippin trippin Nick container as well.
+
+89
+00:13:23.610 --> 00:13:28.110
+Nick Bowman: So that got us thinking and sort of thinking about how are we going to define our success decision tree.
+
+90
+00:13:29.670 --> 00:13:41.940
+Nick Bowman: And so we thought about this idea of, well, our decision at each step is just for one person deciding if we're going to include them in our deficit or not because we know that we have half of our solutions that include them and half of them.
+
+91
+00:13:44.070 --> 00:13:48.090
+Nick Bowman: So those are our options for for that different person. We can include them or not include
+
+92
+00:13:49.140 --> 00:13:59.640
+Nick Bowman: And then as we go along the way, we not only need to. It's very similar to the permutations problem we have to keep track of the set. We built so far. So the subset the decisions we've made so far and the remaining elements that we have
+
+93
+00:14:00.120 --> 00:14:03.810
+Nick Bowman: That are left to my original set because those are the ones that we have still have to make decisions about
+
+94
+00:14:05.220 --> 00:14:15.570
+Nick Bowman: And so when we formalize this in a decision tree. And so we always started out with the empty set. And we first said all right let's consider Nick. So it's considered a path or we include him. And when we don't include it.
+
+95
+00:14:16.230 --> 00:14:22.440
+Nick Bowman: And if we were to go to the path are included and then let's on the next level. Let's make a decision about Kylie whether or not we include Kylie or not.
+
+96
+00:14:22.920 --> 00:14:30.660
+Nick Bowman: And then on the very last level we make a decision on whether or not you include trip or not. And if we repeat this sort of decision making process.
+
+97
+00:14:31.350 --> 00:14:46.680
+Nick Bowman: At every step, all the way down the tree. After we've asked ourselves three questions of include Nick or not include Kylie or not and include trip or not our notes at the very bottom of the tree and sort of define pictorial at least all those subsets three we saw earlier.
+
+98
+00:14:48.930 --> 00:15:04.740
+Nick Bowman: And so we have this. We also wanted to. Yeah, we go back to the tree. And so we can see that are subsets get built up over time as we go down the tree and all we have to do is add a given level ask ourselves the question of do we include this person, or do we not
+
+99
+00:15:07.110 --> 00:15:18.030
+Nick Bowman: As we're doing that, obviously we need to keep track of the remaining elements. I mean, original set. And there's some interesting parallel structure that we see here, which is when we first started out, we have all three of us remaining ethnic kind of intro
+
+100
+00:15:19.410 --> 00:15:23.250
+Nick Bowman: Since the first stage, we ask ourselves the question about whether to include Nick or not.
+
+101
+00:15:24.030 --> 00:15:34.410
+Nick Bowman: Once we get to the next level, we should not we should no longer include my name and the list of possibilities. So at the next level. We are only asking ourselves right between Kylie and trip. Who did we choose. And who do we not choose
+
+102
+00:15:35.460 --> 00:15:41.310
+Nick Bowman: And then we repeat that process down to taking Kylie away after we made a decision about her.
+
+103
+00:15:41.910 --> 00:15:50.130
+Nick Bowman: And at the end, we know that we're done, we know that we've formed subsets. Only when we've made a decision about all all people. Right. So once there's no I mean
+
+104
+00:15:50.700 --> 00:15:58.920
+Nick Bowman: It might be tempting to say, oh, well, we had already generated the empty subset here. Why couldn't we just start there. Like, why do we have to wait until we get all the way to the bottom.
+
+105
+00:15:59.370 --> 00:16:13.380
+Nick Bowman: And that's because at this point we hadn't yet made all of our decisions yet. And so when you're generating a subset. It's important that you ask yourself this include exclude question about every single person or every single element before you say okay I found something that looks
+
+106
+00:16:15.090 --> 00:16:19.740
+Nick Bowman: And so that means that our base case is defined by not having anybody left to choose from.
+
+107
+00:16:20.700 --> 00:16:26.820
+Nick Bowman: And our recursive case is just defined by picking someone in the set, doesn't really matter who the order in which we did this didn't really matter.
+
+108
+00:16:27.360 --> 00:16:36.870
+Nick Bowman: And then we ask ourselves the question of do we include this person, or do we not, and we do to recursive calls, one in the reality of where we include this person in the set and one in the reality where we talked
+
+109
+00:16:38.880 --> 00:16:43.200
+Nick Bowman: And so let's code, this and this is the part that we we didn't get a chance to do
+
+110
+00:16:43.800 --> 00:16:50.400
+Nick Bowman: On Thursday. And so hopefully we're going to finally see kind of how this is going to look a little bit different now that we're doing data structures.
+
+111
+00:16:51.330 --> 00:16:58.410
+Nick Bowman: And so we're going to cut up this function called the subsets. It's given a set of choices and we want to be able to select everything from it.
+
+112
+00:16:59.340 --> 00:17:05.250
+Nick Bowman: And so the very first thing that we should think of when solving this problem is what information do we need to keep track of.
+
+113
+00:17:06.000 --> 00:17:16.650
+Nick Bowman: Remember we talked about earlier, there's two pieces of information we need to keep track of because our original function only ever defines one that kind of sets off those notes for us in our head that's like, okay, we need a recursive
+
+114
+00:17:18.780 --> 00:17:33.990
+Nick Bowman: So let's define a helper function. And remember the two things that we wanted to keep track of as we wanted to keep track of the remaining things that we had to choose from. And we also wanted to keep track of the things that we had chosen so far.
+
+115
+00:17:35.100 --> 00:17:44.610
+Nick Bowman: Right, and so our original recursive call is going to be just defined like we saw before starting off with an empty subset
+
+116
+00:17:47.550 --> 00:17:54.240
+Nick Bowman: tracker and then passing it to our helper function. So starting off with all of our choices originally
+
+117
+00:17:55.560 --> 00:17:55.890
+Nick Bowman: And
+
+118
+00:17:56.970 --> 00:18:00.030
+Nick Bowman: This year set that's going to keep track of our subsets over time.
+
+119
+00:18:01.980 --> 00:18:13.620
+Nick Bowman: Then, so now we're in there now that we're in the actual function, we can think about our base case or base case told us. All right. When you don't have any choices left we stop.
+
+120
+00:18:15.390 --> 00:18:20.550
+Nick Bowman: So the easiest way to probably express that is to just ask ourselves well is the remaining set empty.
+
+121
+00:18:21.780 --> 00:18:26.610
+Nick Bowman: And if it is, then we can just print out this subset. And we built up over time.
+
+122
+00:18:28.140 --> 00:18:38.010
+Nick Bowman: And so in this case the base case is pretty simple. We'll see another example where the base case is a little bit more complicated, right after we finish here for an hour based cases. Just listen, print it up.
+
+123
+00:18:40.260 --> 00:18:48.090
+Nick Bowman: So now on the recursive case. Right. And so in the recursive case, right, because this is a recursive backtracking. We're going to have a two step which is to select
+
+124
+00:18:49.740 --> 00:18:49.860
+Nick Bowman: Your
+
+125
+00:18:52.050 --> 00:18:52.620
+Nick Bowman: Decision.
+
+126
+00:18:56.340 --> 00:19:06.570
+Nick Bowman: Our explorer step which is Nick to recursive falls on with the person and one without them.
+
+127
+00:19:09.600 --> 00:19:14.610
+Nick Bowman: And then we're gonna have our step which is make sure
+
+128
+00:19:16.860 --> 00:19:18.780
+Nick Bowman: Recursive parameters.
+
+129
+00:19:20.730 --> 00:19:24.000
+Nick Bowman: Are restored to their original
+
+130
+00:19:25.560 --> 00:19:27.930
+Nick Bowman: And so let's see if we can fill out all these things.
+
+131
+00:19:28.260 --> 00:19:33.030
+Nick Bowman: And before we start filling this out I want I meant to emphasize this earlier, but one thing I want to point out
+
+132
+00:19:33.240 --> 00:19:37.260
+Nick Bowman: Is because we're now writing a recursive backtracking problem that deals with data structures.
+
+133
+00:19:37.410 --> 00:19:46.920
+Nick Bowman: You're going to see that our data structures or pass by reference. Right. This is a common theme that we've seen so far, anytime they were almost anytime that we're writing functions that work with data structures we pass them by reference.
+
+134
+00:19:47.490 --> 00:19:55.800
+Nick Bowman: Because it's important that we don't want to make lots of copies of them. And so what makes this problem distinctly different is unlike the string problems that we did before.
+
+135
+00:19:56.430 --> 00:20:12.570
+Nick Bowman: We don't have the luxury of having our brand new very own copy every single time. And so we'll see that difference come into play when we get to the untrue stuff, but for now let's just do let's just do our first two steps. And so let's just choose someone to make a decision about
+
+136
+00:20:13.680 --> 00:20:22.320
+Nick Bowman: We want to just be able to select some arbitrary element out of the set. And we haven't seen this function before, but there is a function called top first that you can call an asset.
+
+137
+00:20:22.950 --> 00:20:31.470
+Nick Bowman: What it returns. I'm not going to go into detail, but just think of it is, it gives me some element from the set. And again, I don't care about the order in which they're in. I just need something
+
+138
+00:20:34.080 --> 00:20:43.740
+Nick Bowman: And then I want to say, All right, well, because we're going to make a decision about this person we want to remove them from our list of things that are
+
+139
+00:20:44.880 --> 00:20:51.900
+Nick Bowman: So great. We've chosen someone and we said, all right, LM this thing the string column in the person is the thing. Everything separately.
+
+140
+00:20:53.790 --> 00:21:02.370
+Nick Bowman: And so then we can sort of break down our explore stuff right into two different faces. So the first case is we're going to not include
+
+141
+00:21:05.820 --> 00:21:17.760
+Nick Bowman: Person. And so what that means is we just want to continue listening subsets with this newly modified senator meaning things right, so we've gone ahead and remove this person from the remaining time
+
+142
+00:21:18.660 --> 00:21:30.600
+Nick Bowman: And and our choice chosen subset also remains untouched basically says, remove this person from the list of things that is available to us, but don't add them to the subset, because this is the this is the recursive case where we where we don't think
+
+143
+00:21:32.310 --> 00:21:38.400
+Nick Bowman: So that one's pretty straightforward. But then we have our second case. And our second case says, all right, we do want to include
+
+144
+00:21:40.410 --> 00:21:43.470
+Nick Bowman: The selected person in subset
+
+145
+00:21:46.830 --> 00:21:59.310
+Nick Bowman: And so what that means is we want to go ahead and say, All right, well, why don't we add this person that we're considering to our chosen sense there's actually includes them in the subset
+
+146
+00:22:00.240 --> 00:22:11.550
+Nick Bowman: And then our recursive call itself is actually exactly the same thing. We say all right with this set of remaining elements and this newly updated chosen say, right. So notice that
+
+147
+00:22:11.970 --> 00:22:23.160
+Nick Bowman: Even though these two lines of code look the same. They are encapsulating different sort of situations because we've actually gone ahead and chosen someone to add for some site here and then go ahead and list the rest of your substance.
+
+148
+00:22:25.050 --> 00:22:32.220
+Nick Bowman: And so at this point, we might think that we're done, we're like, All right, we've been doing rated R to recursive cases, things are looking good.
+
+149
+00:22:33.480 --> 00:22:36.600
+Nick Bowman: But now we sort of moved back to this point that I was making earlier.
+
+150
+00:22:37.440 --> 00:22:47.280
+Nick Bowman: Which is because we're dealing with data structures by reference. Right. It's very important, right, that we when we untruth, and when we're when we're done when our function finishes running
+
+151
+00:22:47.700 --> 00:22:56.700
+Nick Bowman: We haven't permanently made any changes to the data structures because other paths down the tree and other locations in the whole decision space need those.
+
+152
+00:22:57.270 --> 00:23:05.220
+Nick Bowman: Those parameters to be unchanged. And so what that means is we actually have to explicitly undo the changes that we made to our data structures.
+
+153
+00:23:06.060 --> 00:23:16.320
+Nick Bowman: So what does that mean, well, we had added something to chosen. So we need to go ahead and do that. And we also remove something from remaining and so we need to go ahead and add that
+
+154
+00:23:17.430 --> 00:23:17.670
+Back.
+
+155
+00:23:19.350 --> 00:23:33.270
+Nick Bowman: And so now we know that after our function finishes it will be the data structures in exactly the same state that they were before it started running. And that's really, really important. And we're actually going to see that visualized American example here today.
+
+156
+00:23:34.380 --> 00:23:37.350
+Nick Bowman: But if we go ahead and run that hopefully what you see
+
+157
+00:23:38.520 --> 00:23:39.510
+Nick Bowman: Is we see
+
+158
+00:23:41.730 --> 00:23:45.180
+Nick Bowman: I just have this running on a small example for Nick trip and kindly
+
+159
+00:23:46.260 --> 00:23:46.710
+Nick Bowman: And
+
+160
+00:23:48.030 --> 00:23:57.180
+Nick Bowman: So for for the console up here, what we should see is we get all the subsets of people and and so and that is going to sort of be
+
+161
+00:23:58.260 --> 00:24:00.750
+Nick Bowman: Our sort of core logic for what it means to generate
+
+162
+00:24:03.180 --> 00:24:13.680
+Nick Bowman: So if we go back to the slides sort of some takeaways that I want you to again and I'm really emphasizing this idea, this is our first time seeing what we call an explicit on shoe stuff.
+
+163
+00:24:14.400 --> 00:24:21.300
+Nick Bowman: Because we're passing the sets by reference. And because we're editing them we needed to make sure that the undid those changes. By the time we finish.
+
+164
+00:24:22.110 --> 00:24:32.400
+Nick Bowman: And so here's, here's the code that we just wrote with a little bit of commentary. And what we saw is, again, we had our choose and our true step modified on the provided data structures.
+
+165
+00:24:33.450 --> 00:24:47.310
+Nick Bowman: We had the first part of our exploration. We have the second part of our exploration. But the most critical part to make sure that we were able to generate all the solutions properly is at the very at the very end we explicitly undid the changes to get me to the substance.
+
+166
+00:24:49.080 --> 00:24:58.050
+Nick Bowman: And so this is kind of our second flavor of recursive backtracking. If we thought of copy edit recursive our previous one for every recursive stack friend gets a copy of the things of interest.
+
+167
+00:24:58.500 --> 00:25:08.340
+Nick Bowman: This is sort of our, what we were going to call choose explore Undo. Undo is really telling you, make sure that you undo any changes to data structures that you made.
+
+168
+00:25:11.700 --> 00:25:22.770
+Nick Bowman: And the reason this is important. And this is actually a great exercise to walk through on your own is go back to the subsets decision tree and see what happens if you don't include these two lines of code.
+
+169
+00:25:23.220 --> 00:25:30.450
+Nick Bowman: And what you'll see is the whole right side of the tree becomes unexplainable because we lose information about the choices that we have available to us.
+
+170
+00:25:31.290 --> 00:25:38.700
+Nick Bowman: It's not super intuitive why that's true. And so I really encourage you to actually walk through that example and sort of convince yourself that the steps necessary.
+
+171
+00:25:39.750 --> 00:25:45.090
+Nick Bowman: So the chat about why couldn't we just make copies of the data structures.
+
+172
+00:25:47.070 --> 00:25:51.630
+Nick Bowman: Yeah, yeah. So that's a great question. So there is nothing stopping us from doing that.
+
+173
+00:25:52.020 --> 00:26:01.650
+Nick Bowman: And say, for example, we just decided to remove those pesky little ampersand right that seem to be causing so many problems and we just said, All right, let's just pass all of our sets by by value. Right.
+
+174
+00:26:02.070 --> 00:26:10.290
+Nick Bowman: Unfortunately, what you're going to see there is making copies of sets and especially if you're working on a larger problem, right, if you're trying to find the subsets of more than just three people.
+
+175
+00:26:11.100 --> 00:26:20.760
+Nick Bowman: making copies of those data structures for every single recursive call. There's going to be so many recursive calls. Remember that the number of recursive calls grows exponentially in this case.
+
+176
+00:26:21.090 --> 00:26:32.190
+Nick Bowman: That. Yeah, you could do it. And you could get the same results. And you could get the same functionality, but it would be so slow. It would be so much slower because you're having to copy and copy the data structures over and over and over again.
+
+177
+00:26:33.180 --> 00:26:39.900
+Nick Bowman: So I would encourage you to sure, try, try out solving this problem using copy. I don't rehearse and see if it makes more sense to you.
+
+178
+00:26:40.530 --> 00:26:53.700
+Nick Bowman: Maybe it does, maybe that's a good way to start thinking about solving problems for you. But in the end, if you want to build an efficient sort of good solution when we're dealing with data structures, making those copies is not really. Not really the way to go. Yeah.
+
+179
+00:26:55.650 --> 00:27:05.790
+Nick Bowman: Cool. Yeah, that's a great question. And that's why we introduced the second paradigm is sort of really because when we're solving our problems. We need to be really cognizant about like sort of the efficiency of our
+
+180
+00:27:07.950 --> 00:27:19.380
+Nick Bowman: Cool. And so another takeaway right again, similar to what we saw permutations. We kept track about the decisions and our options. And so we have those two different collections to keep track of things.
+
+181
+00:27:20.280 --> 00:27:27.300
+Nick Bowman: And and the steps that problem had very similar themes to what we saw before we built up solutions as we went down the decision tree.
+
+182
+00:27:27.630 --> 00:27:42.900
+Nick Bowman: We used a helper function to both abstract away implementation details, but also to give ourselves more information to work with as we solve the problem. And so the subsets and the permutation problems together make up kind of your really core examples of what it means to solve rehearsal.
+
+183
+00:27:45.510 --> 00:27:48.420
+Nick Bowman: And so what I want to do in the last sort of
+
+184
+00:27:49.500 --> 00:27:56.010
+Nick Bowman: My last section with you today is I want to talk about this idea of applying this and this idea of choosing an unbiased jury.
+
+185
+00:27:57.480 --> 00:28:09.630
+Nick Bowman: And I'll explain what that means. And so, you know, the process of jury selection. And usually, you know, you get a lot of people called in for jury duty everyone kind of hates it and dreads it but there's this very large pool of candidates.
+
+186
+00:28:10.740 --> 00:28:18.840
+Nick Bowman: That have been called in and they'll come in with their own personal biases. Right. So you might have cases on certain topics that people are more bias or less biased on
+
+187
+00:28:19.440 --> 00:28:30.030
+Nick Bowman: Almost nobody has ever unbiased when it comes to anything. And so people are going to have biases in different directions and you want to be able to select some subset of people to actually serve on the jury for your case.
+
+188
+00:28:31.530 --> 00:28:37.620
+Nick Bowman: And you have to kind of take into account that when you're doing that, like I said, each person is going to come in with our own biases.
+
+189
+00:28:38.160 --> 00:28:51.570
+Nick Bowman: And sort of you as members of certain the judiciary and the people sort of doing the case you want to, you know, it's ideal for you to have a group of people for maximum fairness to that at least they balance each other out in their biases.
+
+190
+00:28:53.400 --> 00:28:56.070
+Nick Bowman: So we like to select a jury, for example, that is unbiased.
+
+191
+00:28:57.450 --> 00:29:09.660
+Nick Bowman: In as simple as in in a sort of simplification of things will say that at all. People have this magical integer associated with them and it's either positive or negative indicating their bias on a certain topic in a certain direction.
+
+192
+00:29:10.500 --> 00:29:15.420
+Nick Bowman: So we want to select a jury that's unbiased to all their all their sort of biases somewhat to zero.
+
+193
+00:29:17.490 --> 00:29:27.780
+Nick Bowman: And kind of the key thing to note here is, well, what is this problem, asking us to do well it's asking us to find a subset were given a large pool of people and we want to find some smaller collection of them.
+
+194
+00:29:28.680 --> 00:29:41.160
+Nick Bowman: And now it just has a special property before we were looking for things that just all subsets and now we're looking for all subsets of the special property. So let's see if we can actually apply the code that we just wrote
+
+195
+00:29:43.260 --> 00:29:55.920
+Nick Bowman: And so when we were writing our subsets decision tree right we had this set of decisions. And what I want you to see is that our jury selection decision tree is defined almost exactly the same way with a little bit of extra information.
+
+196
+00:29:56.970 --> 00:30:05.310
+Nick Bowman: Our decision as to whether or not to included a candidate in maturity or not. We still have our two options, including the candidate in the jury or not, including them.
+
+197
+00:30:06.180 --> 00:30:14.010
+Nick Bowman: We still have our two core pieces of information to keep track of which is the candidates that we've chosen to make up the jury so far and the remaining candidates to consider.
+
+198
+00:30:14.760 --> 00:30:29.070
+Nick Bowman: But we do have this one extra piece of information which is we also want to keep track of the sort of total some of the biases of the people that we selected so far. And this will sort of allow us to make a decision about when our unbiased property has been met or not.
+
+199
+00:30:30.960 --> 00:30:34.830
+Nick Bowman: And so if you think about the pseudo code for this problem and
+
+200
+00:30:35.220 --> 00:30:46.470
+Nick Bowman: We're going to, I don't want you to the specifics of this problem trip people up, let's just assume we have this little struck that packages together someone's name and their bias. So they have a string that represents them to him integer represents their bias.
+
+201
+00:30:47.340 --> 00:30:53.850
+Nick Bowman: And. And what's also different about this problem is because you can imagine in such a large pool of people that get called in.
+
+202
+00:30:54.420 --> 00:31:02.340
+Nick Bowman: You might have people with the same name, you might have people with the same bias. And so using a set to represent these people doesn't make a ton of sense because you might actually have duplicates.
+
+203
+00:31:02.880 --> 00:31:10.230
+Nick Bowman: And so we're actually going to represent our original collection of candidates as a vector. And that just gives us the ability to potentially have duplicates.
+
+204
+00:31:10.710 --> 00:31:24.270
+Nick Bowman: And as I mentioned earlier, even though the idea of subsets has been the upset if I literally this definition of a subset can be defined for any collection. So if you have a vector of things, a subset of that vector would just be some sub collection of the elements and
+
+205
+00:31:26.220 --> 00:31:29.490
+Nick Bowman: And so we want to just print out all unbiased theories that can be found.
+
+206
+00:31:31.020 --> 00:31:37.560
+Nick Bowman: If we think about a recursive case it's going to look very similar to the recursive case, we just had so we select a candidate that hasn't been considered yet.
+
+207
+00:31:37.770 --> 00:31:44.520
+Nick Bowman: We try including them in the jury and then we recursive we find the rest of the juries. And then we also try the same thing with including
+
+208
+00:31:45.660 --> 00:31:55.710
+Nick Bowman: And what our peace cases our base case looks a little bit different. And it still says once rather candidates to consider. Then we then we look at the bias of the current jury that we've actually form.
+
+209
+00:31:56.760 --> 00:32:08.160
+Nick Bowman: And then we say if our extra parameter for extra pieces of information tells us that the sum of all of them that we've collected so far as zero, then great, let's let's print them out and not store that let's display that information.
+
+210
+00:32:10.260 --> 00:32:16.770
+Nick Bowman: And so this is this is the code to do that. And really what I want to point out, I'll highlight a couple of things right now.
+
+211
+00:32:17.550 --> 00:32:22.410
+Nick Bowman: Is that the code to do this should look almost identical to the code that we're just wrapping up trader.
+
+212
+00:32:23.250 --> 00:32:31.560
+Nick Bowman: So flash this up here, right, you know, obviously we're dealing with vectors, instead of sets. Now, but we still have our true stuff. We still have our explorer stuff.
+
+213
+00:32:32.010 --> 00:32:45.930
+Nick Bowman: We still have our second explorer stuff and we have our untrue stuff and everything there is repeated in this code, right. So we have our helper function. And in this case it's keeping track of just one extra variable like we mentioned to keep track of that total fires.
+
+214
+00:32:46.950 --> 00:32:53.640
+Nick Bowman: But we have the same base case with that using that little piece of information to only display the jury's that have no total bikes.
+
+215
+00:32:54.630 --> 00:33:04.770
+Nick Bowman: And then a recursive case looks almost identical, right, we're just looking at juries, both with and without that person and sort of trying to making sure that again any changes that we make.
+
+216
+00:33:06.030 --> 00:33:09.360
+Nick Bowman: Like in this line when we remove and then we have to sort of
+
+217
+00:33:10.410 --> 00:33:13.050
+Nick Bowman: Make sure that gets undone with a corresponding insertion
+
+218
+00:33:14.070 --> 00:33:23.430
+Nick Bowman: But other than that, sort of the recursive case itself. So look very similar. Obviously, we have to update this last parameters we go correctly. But the core sort of recursive logic.
+
+219
+00:33:25.320 --> 00:33:31.860
+Nick Bowman: And this is cool, this would work. And if we had a little more time I run a couple demos for you in sort of show you that this does indeed work.
+
+220
+00:33:32.520 --> 00:33:38.220
+Nick Bowman: But it's so similar to the code that we previously wrote doing sort of just take it on face value like this seems like a reasonable way to solve problems.
+
+221
+00:33:40.590 --> 00:33:49.620
+Nick Bowman: But one thing and that I mentioned earlier is well we do this idea of passing data structures I reference because with so many recursive calls that kept me
+
+222
+00:33:50.670 --> 00:33:54.780
+Nick Bowman: If we want to avoid copying things so avoiding copying things is very important.
+
+223
+00:33:56.160 --> 00:34:07.170
+Nick Bowman: But that also applies to other operations that might be inefficient and sort of what I want to point out is, there's actually some hidden relatively expensive and inefficient operations here.
+
+224
+00:34:07.710 --> 00:34:19.290
+Nick Bowman: And notice that every time we select a candidate, we remove them from the front of the vector, which we know is an open operation. And then we're done with them, we insert them into the front of the vector which we also known as an open operation.
+
+225
+00:34:20.730 --> 00:34:29.160
+Nick Bowman: And oh, then applied over all recursive function calls over which there are very, very many doesn't sound too great. Right. That doesn't sound like
+
+226
+00:34:29.940 --> 00:34:42.450
+Nick Bowman: You know, something that's super ideal. And so we revisit this question of can we do better sort of this question we always ask ourselves can we do better. And the answer is yes. And we can actually do better in a very clever way. Yeah.
+
+227
+00:34:44.460 --> 00:34:49.980
+Nick Bowman: Yeah, over one more time. Why does explicit on shoes. Why is explicit and choose necessary.
+
+228
+00:34:50.610 --> 00:34:59.910
+Nick Bowman: Yeah. So again, in this case the explicit on choose is necessary because in this line we make a modification to a data structure that we've been passed by reference.
+
+229
+00:35:00.270 --> 00:35:07.710
+Nick Bowman: So we know by the way the passing by reference works is that means that will directly modify the vector that was provided in this case, right, we can think of.
+
+230
+00:35:08.490 --> 00:35:12.330
+Nick Bowman: The original sort of all candidates will be passed in. That's the thing, getting modified
+
+231
+00:35:13.290 --> 00:35:19.440
+Nick Bowman: But if you remember from our decision tree there was many possible ways that we could explore right there's many possible branches of the recursive tree.
+
+232
+00:35:20.430 --> 00:35:31.620
+Nick Bowman: And as we make these modifications. We're going down one very specific branch. And if we don't undo those changes right if we don't add back the possible choices that we have sort of higher up the decision tree.
+
+233
+00:35:32.880 --> 00:35:43.890
+Nick Bowman: All other recursive paths sort of elsewhere in our tree will become effective right will become permanently affected because they're also trying to access this data structure, who's state has now been kind of permanently modified
+
+234
+00:35:44.520 --> 00:35:58.230
+Nick Bowman: And so it's important that we undo whatever explicit modifications we did to this thing that we were getting by reference before our reverse of our specific like recursive staph infections, if that makes sense. Does that answer the question.
+
+235
+00:36:04.380 --> 00:36:05.310
+A raised hand.
+
+236
+00:36:08.130 --> 00:36:24.090
+Kaan Alp Yay: Yeah, I want to ask, why is vector. This removal expensive because in the documentation is just off one so I don't. I know it's probably sets implementation makes like addition and removal faster. But why is the case with specters makes it difficult to just
+
+237
+00:36:24.090 --> 00:36:25.650
+Kaan Alp Yay: Using the first thing first element.
+
+238
+00:36:26.670 --> 00:36:34.350
+Nick Bowman: Yeah, that's a good question. So it's the fact that you're removing the first element and everything else has to get shifted over one index right
+
+239
+00:36:34.800 --> 00:36:45.600
+Nick Bowman: Vector. Everything is associated with an index. And so if you remove the thing at the very front or even like somewhere in the middle right most places where you remove from you're going to have to shift over a bunch of elements to sort of fill that empty space.
+
+240
+00:36:46.080 --> 00:36:52.650
+Nick Bowman: And the same version into the front right if you try to insert something to the zero index. Everything else has to get shifted to the right. Sure.
+
+241
+00:36:52.650 --> 00:36:57.120
+Kaan Alp Yay: Sure, I, I looked at it incorrectly removes actually open. Yes, your
+
+242
+00:36:57.210 --> 00:36:58.890
+Nick Bowman: Yeah, yeah, that's a good question.
+
+243
+00:36:58.980 --> 00:36:59.370
+Thank you.
+
+244
+00:37:00.840 --> 00:37:11.790
+Nick Bowman: Cool. Alright, so, so one of the students from the time. Um, let's let's keep moving. So we want to ask ourselves this question of can we do is better, can we avoid this expensive vector operation.
+
+245
+00:37:13.050 --> 00:37:24.630
+Nick Bowman: And the answer is yes. And let's motivate why so when we're doing subset creation kind of our core component involves visiting each element once and then just making some decision about whether to include it or not.
+
+246
+00:37:26.460 --> 00:37:33.270
+Nick Bowman: Previously we did this, but kind of just picking arbitrary elements, so like the thing that was first removing it and then adding it back in later.
+
+247
+00:37:34.650 --> 00:37:40.050
+Nick Bowman: But what if instead of removing and adding and stuff like this. What if we just kept track of the location we are
+
+248
+00:37:40.500 --> 00:37:43.740
+Nick Bowman: Right, we just kept track of the current element that we were considering
+
+249
+00:37:44.220 --> 00:37:55.530
+Nick Bowman: And in this case, because we have vectors we can use an index to do that. And we just said, okay, like, I'm just going to remember the element that I'm making decision about and once I'm done making decision about that one. I'm going to move on to making a decision about the thing
+
+250
+00:37:56.730 --> 00:38:01.050
+Nick Bowman: So as I said, You have keeping track of an index of elements Korean consideration.
+
+251
+00:38:02.220 --> 00:38:06.720
+Nick Bowman: And so let's see if we can modify the code that we have here to incorporate that idea.
+
+252
+00:38:07.500 --> 00:38:16.620
+Nick Bowman: And so the first thing that we would do is we would add even an additional parameters and I just like, wow, we have all these parameters. Yes, we have lots of parameters and but they all help us accomplish something so they're all they're all pretty important.
+
+253
+00:38:17.610 --> 00:38:23.790
+Nick Bowman: So obviously it would start out at zero, you know, seems like a pretty natural place to start. And we start up considering the very first element vector
+
+254
+00:38:24.990 --> 00:38:38.700
+Nick Bowman: And now, right, because are all candidates doctor isn't going to be shrinking in size. We can't just say like, Oh, when it's empty, we know that we're done. But we do know that once the index reaches the end of the collection, then we know that the restart.
+
+255
+00:38:39.840 --> 00:38:49.560
+Nick Bowman: So that changes a little bit and then the critical part that lets us get rid of these out of renewables is that now we just consider the candidate at the specified index.
+
+256
+00:38:50.340 --> 00:38:54.330
+Nick Bowman: And when we make our recursive calls we increment the index like one
+
+257
+00:38:54.900 --> 00:39:04.020
+Nick Bowman: Right. And what I mean by that is, once we move on to the next recursive call. We just say, Okay, I've finished making my decision about the person at the current index.
+
+258
+00:39:04.230 --> 00:39:15.720
+Nick Bowman: Go ahead and continue the recursive process by making a decision about the person at the next index. And now we can see that we have code with equivalent functionality. We've actually gotten rid of that expensive factor operation.
+
+259
+00:39:17.310 --> 00:39:21.660
+Nick Bowman: And so that's sort of our takeaway is we don't have that expensive addition and removal
+
+260
+00:39:23.430 --> 00:39:36.990
+Nick Bowman: And so the takeaway here is that I'll summarize really quickly is that, you know, being able to enumerate all possible subsets and success with certain constraints is a really powerful problem solving tool can better solve interesting problems like this idea of jury selection.
+
+261
+00:39:38.280 --> 00:39:44.520
+Nick Bowman: Men and the second takeaway from this example is that maintaining an index of the current element that you're considering when you're generating subsets.
+
+262
+00:39:44.730 --> 00:39:50.340
+Nick Bowman: Is the most efficient way that you keep track of the decisions that you've made so far and the decisions to make.
+
+263
+00:39:50.940 --> 00:40:04.860
+Nick Bowman: And then the reason that I wanted to bring this up is for those of you that choose to do the backtracking challenge problem on assignment three this technique, you'll find to be very useful. So I would recommend if you decide to work on that challenge problem and that you revisit this
+
+264
+00:40:07.170 --> 00:40:12.660
+Nick Bowman: Question on the previous slide. Yeah, I shouldn't be all candidates not size minus one.
+
+265
+00:40:14.460 --> 00:40:20.160
+Nick Bowman: Um, it should not because you still want to consider the person that
+
+266
+00:40:20.790 --> 00:40:28.230
+Nick Bowman: Size minus one, right, like they're the last person that you would consider. And once your index goes beyond that, like, once your index goes beyond the last valid index.
+
+267
+00:40:28.710 --> 00:40:37.980
+Nick Bowman: Then you know that you're at the right location like you know that you've considered everyone. And then the other question was why for maximum efficiency, we have the index.
+
+268
+00:40:39.660 --> 00:40:50.700
+Nick Bowman: That's a good question and editors are so small that we can actually like the time to copy them is like, quite literally, like negligible. And I think theoretically
+
+269
+00:40:51.390 --> 00:41:01.680
+Nick Bowman: Actually but yeah like theoretically it would be like a little bit quicker but it's actually like the time to copy and editors so marginally small that we actually, we just, yeah.
+
+270
+00:41:03.660 --> 00:41:18.210
+Nick Bowman: OK, cool. So let's do all the announcements really quick and lunch to hand it over to Kylie to finish up our last example today. And so they just the announcements for today. We released assignment three on Thursday evening. It's do this upcoming Thursday night, July 16
+
+271
+00:41:19.320 --> 00:41:26.340
+Nick Bowman: Section leaders going to be working on greeting providing feedback on your assignment to submissions. Hopefully should get that feedback back out by Wednesday night.
+
+272
+00:41:27.000 --> 00:41:32.250
+Nick Bowman: And then the biggest new announcement is that the just remember that the mid core diagnostic is coming up at the end of this week.
+
+273
+00:41:33.120 --> 00:41:39.210
+Nick Bowman: If you follow the link on these slides. There's a whole page full of logistical information and highly recommend checking it out.
+
+274
+00:41:39.930 --> 00:41:44.760
+Nick Bowman: But the most important things is that you have anytime between Friday and Sunday to take it.
+
+275
+00:41:45.480 --> 00:41:57.300
+Nick Bowman: We've designed it to be completed within an hour and a half. But in order to remove time pressure, you can take up to three hours to work on it, but you can't take any longer than that will be administering it digitally using an exam software called to book.
+
+276
+00:41:58.410 --> 00:42:06.150
+Nick Bowman: And we've also posted a bunch of practice materials and review stuff on this diagnostic page so highly recommend checking those out before
+
+277
+00:42:07.650 --> 00:42:10.080
+Nick Bowman: And as you prepare for this stuff.
+
+278
+00:42:11.250 --> 00:42:23.460
+Nick Bowman: So cool. So then what we'll finish up with today is actually actually handed over to Kylie and we're going to talk about revisiting this idea of solving mieses. There are some questions in the chat. So Nick, will answer those started yeah haha
+
+279
+00:42:27.270 --> 00:42:28.740
+Alright. These are too big for my head.
+
+280
+00:42:31.110 --> 00:42:38.940
+Nick Bowman: But that's like it. Alright, so we're going to revisit Mesa, so hopefully those of you who found the main problem really exciting. On the last assignment.
+
+281
+00:42:39.510 --> 00:42:45.390
+Nick Bowman: Will like seeing this use of backtracking specifically for that problem. Alright, so
+
+282
+00:42:45.870 --> 00:42:51.120
+Nick Bowman: In the assignment, what you did is you solve mazes with breath for search. And I'm going to go ahead and skip this video for now because you
+
+283
+00:42:51.330 --> 00:42:57.000
+Nick Bowman: Hopefully were able to see it when you implemented the assignment, just for the sake of time, I will see a comparison at the end.
+
+284
+00:42:57.480 --> 00:43:06.510
+Nick Bowman: But what we want to do now is we want to actually use recursion to solve basis. And so I'm going to outline a strategy. And then I'm going to show you the code and we're going to do a comparison at the end.
+
+285
+00:43:07.980 --> 00:43:12.150
+Nick Bowman: Well, the big idea here for solving basis for corrosively is that we want to start at the entrance
+
+286
+00:43:12.330 --> 00:43:23.100
+Nick Bowman: And then we're going to take one step, north, south, east or west and repeat that process until we're at the end of the May. So you kind of see the self similarity here. We're at each step, we are deciding which direction to go in
+
+287
+00:43:23.490 --> 00:43:28.920
+Nick Bowman: Until we find a solution. And remember, in our perfect mazes from the assignment. There is exactly one solution.
+
+288
+00:43:29.700 --> 00:43:38.730
+Nick Bowman: So let's do an example. We're going to start at the entrance, and then we need to take a step, north, south, east or west. And if you think about this as backtracking, you're going to try each one
+
+289
+00:43:39.720 --> 00:43:47.940
+Nick Bowman: So we're going to start with North and we're going to try each one unless we find the end. So we're going to start with North, you can't go north in this example because there is no North
+
+290
+00:43:48.420 --> 00:43:54.090
+Nick Bowman: So we're going to go south and then again we have to repeat until we're at the end of the maze. So we're refreshing. We're now at this
+
+291
+00:43:54.450 --> 00:43:58.710
+Nick Bowman: Cell right here and we're going to decide do we take a step, north, south, east or west.
+
+292
+00:43:59.550 --> 00:44:06.270
+Nick Bowman: We've already gone North right we started one north. So we don't want to go backwards again just like in our breath first search.
+
+293
+00:44:06.570 --> 00:44:14.370
+Nick Bowman: Solution. We don't want to make loops and continue going back. So we don't want to go north, but we can go south. So we're going to go ahead and go south and repeat.
+
+294
+00:44:15.300 --> 00:44:20.190
+Nick Bowman: But this case. In this case, we've actually hit a dead end. We cannot go north, south, east or west.
+
+295
+00:44:20.700 --> 00:44:27.510
+Nick Bowman: So in the cases where you can't take a step in any of the directions, right, we've been north, there is no south or west and you can't go east
+
+296
+00:44:28.380 --> 00:44:39.480
+Nick Bowman: We're gonna have to go back and so this is where our backtracking comes in. We actually need to go back a step and say, okay, we tried, we didn't. We couldn't do north, we just tried south and it didn't work. So now let's try
+
+297
+00:44:40.950 --> 00:44:44.700
+Nick Bowman: And so you'll start seeing a pattern here. Again, we're going to repeat until we're at the end of the maze.
+
+298
+00:44:45.060 --> 00:44:52.920
+Nick Bowman: You can't go north or south here. So we're going to go east. Again, you're going to repeat we try north and we hit another dead end. And so again we take one step back.
+
+299
+00:44:53.430 --> 00:45:03.420
+Nick Bowman: And then, now we've tried north. So we can cross it out and then we're going to try itself. And at this point, we found the end of armies. So that's a general example with a pretty small three by three example.
+
+300
+00:45:04.620 --> 00:45:05.190
+Nick Bowman: Um,
+
+301
+00:45:07.680 --> 00:45:19.560
+Nick Bowman: And so now we can sort of formally define our base case and recursive case our base case is if we're at the end of them is we're going to stop and then our recursive case we're going to explore in north, south, east and then west.
+
+302
+00:45:20.850 --> 00:45:27.810
+Nick Bowman: And so what defines our main decision tree. I'm not going to draw it out because it would be huge, because there are four different options that each decision you're making
+
+303
+00:45:28.260 --> 00:45:38.430
+Nick Bowman: But the decision you're making it each step is what valid move. Are you going to take inside of the maze and we were an emphasis on valid here, right, because without the valid, we would have been trying things that you couldn't do.
+
+304
+00:45:38.820 --> 00:45:44.970
+Nick Bowman: And the options that each decision are the North, South, East, and West, depending on if that movements valid.
+
+305
+00:45:45.270 --> 00:45:54.450
+Nick Bowman: And remember how we define valid moves in the actual assignment problem. It needs to be inbounds it can't be a wall, and you don't want to previously visit it. Otherwise, you'll get stuck in these loops.
+
+306
+00:45:54.930 --> 00:46:03.090
+Nick Bowman: And then based on that the information we store along the way is the path. We've taken so far. If you remember from the problem. We actually had a stack that we were building up
+
+307
+00:46:04.020 --> 00:46:14.310
+Nick Bowman: Where we've currently visited because, again, we don't want to go back and make a loop and then our current location so that we know where to go next, we need to know what is north, south, east and west of the current location.
+
+308
+00:46:15.300 --> 00:46:21.510
+Nick Bowman: Um, and as an exercise for home if you would like could try to start drawing the decision tree to sort of make it clear what is
+
+309
+00:46:22.140 --> 00:46:28.710
+Nick Bowman: The process of backtracking recursion process that we're taking for this example. But again, it's pretty big. So I'm going to leave that as an exercise for home.
+
+310
+00:46:29.520 --> 00:46:33.540
+Nick Bowman: Alright, so let's talk about how we would go about generating the pseudo code for this problem.
+
+311
+00:46:34.320 --> 00:46:43.620
+Nick Bowman: So remember in the assignment you have this prototype for solve maze. You need to return a stack of grid locations, which is the actual path that it's going to take to get home.
+
+312
+00:46:44.010 --> 00:46:47.790
+Nick Bowman: And then you are going to get past in the maze itself.
+
+313
+00:46:48.750 --> 00:47:00.000
+Nick Bowman: But remember what we just said, we just said we need to store this information along the way. So this should be a huge clue. Well, we probably are going to need a helper function because this does not have enough parameters to keep track of all those things that we just mentioned.
+
+314
+00:47:01.080 --> 00:47:09.690
+Nick Bowman: Alright, so are helper function is going to have us parameters, those three things. The Maze itself. The path we're building up and the current location. And you might say, well, what about
+
+315
+00:47:10.050 --> 00:47:18.420
+Nick Bowman: That that that parameter that says we need to keep track of where we've gone before. So our idea here is we're actually going to use the Boolean grid. The Maze itself.
+
+316
+00:47:18.780 --> 00:47:28.830
+Nick Bowman: To store information about whether or not a location has been visited and how are we going to do that. Remember the grid is upgraded Julian's is true or false and false are squares when you can't go because it's walls anyway.
+
+317
+00:47:29.730 --> 00:47:36.210
+Nick Bowman: So basically, what we can say is if we've already visited this. So let's flip the Boolean default so that we don't go back there.
+
+318
+00:47:36.630 --> 00:47:44.040
+Nick Bowman: Almost as if it's a wall. Right. And what this allows us to do is allows us to use this helper function which you wrote in the first part of the assignment.
+
+319
+00:47:44.760 --> 00:47:53.370
+Nick Bowman: Generate valid moves that will no longer return places where you've already been so the reason this is a nice solution is it'll work with the existing helper function we already have.
+
+320
+00:47:53.940 --> 00:48:07.230
+Nick Bowman: And then recursive case for our pseudo code. We're going to iterate over all of the valid moves returned by our helper function. And again, it will automatically this helper function, give us North, South, East, and West. That is valid. And then we're going to add it to our path.
+
+321
+00:48:08.280 --> 00:48:12.540
+Nick Bowman: If any of the recursive calls to return true. So remember, we are going to be
+
+322
+00:48:12.930 --> 00:48:20.580
+Nick Bowman: trying everything, but we want to stop as soon as we have a solution, because we know in this maze. There is only one solution. So we don't need to keep rehearsing once we found a solution.
+
+323
+00:48:20.790 --> 00:48:32.310
+Nick Bowman: So if any of these recursive crawls return true and find a solution, then we can just stop, we can say we have our stack. Let's finish. But if all of them fail, then there is no solution for this maze and we're going to return false.
+
+324
+00:48:33.660 --> 00:48:45.030
+Nick Bowman: And then base case we can stop exploring. Basically, when we reach the exit. So how do we do that we need to just return true if the current location that we're at is the exit of the maze in the bottom right corner of the maze.
+
+325
+00:48:46.080 --> 00:48:53.250
+Nick Bowman: So let's go ahead and code it in the interest of time, what I'm going to do here is I
+
+326
+00:48:53.910 --> 00:49:05.130
+Nick Bowman: Right now I have this sort of empty and I'm gonna, I'm going to type out the helper function and explain it step by step before this, the outer function. I'm just going to go ahead and paste in what they should look like.
+
+327
+00:49:06.810 --> 00:49:09.180
+Nick Bowman: And basically what this is doing is the
+
+328
+00:49:09.480 --> 00:49:17.040
+Nick Bowman: Thing I really want to point out here is that because we're going to be editing this maze and we don't want to change the maze itself with its walls and pathways.
+
+329
+00:49:17.250 --> 00:49:23.220
+Nick Bowman: We're going to make a copy of the maze. Once again, this is only once, so that we can mark whether or not something has been visited
+
+330
+00:49:23.730 --> 00:49:31.350
+Nick Bowman: Where we're flipping those billions to false when we've already gone somewhere. So we're making a copy of the maze, we're getting our start location and putting it into our path.
+
+331
+00:49:32.010 --> 00:49:37.380
+Nick Bowman: Then we're going to set the path starts to false, right, just like we talked about marketing as visited
+
+332
+00:49:37.710 --> 00:49:46.470
+Nick Bowman: And then we're going to call our helper with a copy of the maze, the beginning of our path and the current location. We're starting out, which is the start location. So that's just the beginning there.
+
+333
+00:49:47.310 --> 00:49:54.150
+Nick Bowman: And then I'm going to go ahead and code up this. So this is our helper. We're taking in the maze. We have our path and we're starting at a current location.
+
+334
+00:49:54.450 --> 00:50:00.960
+Nick Bowman: And we're going to remember our recursive and base cases here. So first, what I'm gonna do is I'm going to go ahead and get the
+
+335
+00:50:01.650 --> 00:50:11.970
+Nick Bowman: Exit location or the last thing inside of the maze. And if you remember how we do this, we take the number of rows and we take the number of columns and we subtract one, and that's going to give us our bottom right corner.
+
+336
+00:50:13.500 --> 00:50:20.370
+Nick Bowman: Homes minus one. Um, and then that's our base case again we want to check if the current location is our exit.
+
+337
+00:50:22.020 --> 00:50:29.370
+Nick Bowman: I'm just for this. I'm going to go ahead and say we're going to highlight this green when we find our end and we're going to return to
+
+338
+00:50:30.120 --> 00:50:42.480
+Nick Bowman: Our bass guitar, bass cases relatively straightforward. Now, we really want to think about what are we doing in our recursive case. So when I recursive case we're going to use that helper function that I mentioned, to get the neighbors are the valid moves basically
+
+339
+00:50:44.460 --> 00:50:48.780
+Nick Bowman: And how do we do that. Remember, you wrote this function up here that is generating valid moves.
+
+340
+00:50:49.260 --> 00:50:55.890
+Nick Bowman: So we're going to call generate followed moves which returns a set of red locations. And what we're gonna do is we're going to pass in the maze itself.
+
+341
+00:50:56.190 --> 00:51:04.650
+Nick Bowman: And we're going to pass in the current location because we just need to get the belt, the valid moves from the current location and then we're going to iterate overall
+
+342
+00:51:08.400 --> 00:51:11.370
+Nick Bowman: So for for each valid neighbor.
+
+343
+00:51:13.140 --> 00:51:17.070
+Nick Bowman: We want to make a recursive call. And remember, as part of our recursive call.
+
+344
+00:51:18.300 --> 00:51:24.630
+Nick Bowman: We are going to push the new location into our path because we're going to say tried taking a direct a step in that direction.
+
+345
+00:51:24.960 --> 00:51:29.400
+Nick Bowman: And then remember we have to mark this as false in our grid. So we don't revisit it
+
+346
+00:51:29.790 --> 00:51:39.750
+Nick Bowman: And then we're going to say this is where our personal call actually happens. We're going to say if solve maze health are on the same maze, which was just been updated the new path.
+
+347
+00:51:40.230 --> 00:51:47.190
+Nick Bowman: And this current location returns true. In other words, you can find the path by going a step in that direction, then we're going to return true.
+
+348
+00:51:48.480 --> 00:51:52.410
+Nick Bowman: And then, otherwise we need to untrue. So this is our explicit
+
+349
+00:51:52.950 --> 00:52:06.240
+Nick Bowman: On shoes step we need to pop that what we just put on the path off because we're going to try a different direction, either south east or west instead. And then we also need to unmarked this location because it means we have not actually visited
+
+350
+00:52:07.680 --> 00:52:14.460
+Nick Bowman: And just for the interest of time, I'm not going to do this but I encourage you to see what happens if you actually remove forget to actually either on pop
+
+351
+00:52:14.730 --> 00:52:20.970
+Nick Bowman: Or to mark. Both of these as true and false and you'll see how it actually failed, and that is that's a common bug you might run into
+
+352
+00:52:22.680 --> 00:52:24.450
+Nick Bowman: The last thing we're just going to return false.
+
+353
+00:52:25.920 --> 00:52:29.100
+Nick Bowman: If you've tried all the moves in it. So let's go ahead and just
+
+354
+00:52:31.470 --> 00:52:37.230
+Nick Bowman: That's okay. So what we're going to do, I'm going to show you how it runs actually just by doing this. Um, so
+
+355
+00:52:38.340 --> 00:52:45.960
+Nick Bowman: Know recursion is actually depth first search, we talked about the assignment being breath first search. So the recursion is depth for search and I want to actually do a comparison.
+
+356
+00:52:47.040 --> 00:52:50.490
+Nick Bowman: And if you'd like Nick. Go ahead and launch the poll, but I'm just going to play these now.
+
+357
+00:52:51.600 --> 00:52:57.240
+Nick Bowman: Which one do you think will be faster. So I'm going to go ahead and click play on both of these
+
+358
+00:52:59.520 --> 00:53:12.060
+Nick Bowman: Depth for searches on the right and breath for searches on the left and you can actually see how they look different. You can see the backtracking happening in depth for search and in breath, how it sort of checking all of the paths of the same length. Before moving on.
+
+359
+00:53:15.030 --> 00:53:23.340
+Nick Bowman: So, and notice I even started. The one on the right a little bit later. And it actually just ended first. Not a lot, but it did get it was a little bit faster.
+
+360
+00:53:24.420 --> 00:53:30.300
+Nick Bowman: So I know we're running a little over time. So I'm going to speed through this quick comparison breath. First is normally done with
+
+361
+00:53:31.080 --> 00:53:40.920
+Nick Bowman: An iterative solution versus step. First is expressed recursive Lee and usually in although DFS is faster. In this particular case, it really depends on the problem that you're solving
+
+362
+00:53:41.400 --> 00:53:50.250
+Nick Bowman: Breath first search is really good for looking at path of a particular length before moving on which you saw on the word ladder example. So it's actually guaranteed to find the shortest path.
+
+363
+00:53:50.490 --> 00:54:03.690
+Nick Bowman: And so if that's what you're looking for. Definitely use breath for search, but DFS does actually has a smaller memory footprint. So it actually doesn't store all those partial pass along the way inside of Q1, or Q2 of stacks. So it's a little more memory efficient.
+
+364
+00:54:05.190 --> 00:54:12.030
+Nick Bowman: And so in summary, I'll let you look back at the slide. This is the same one we've been seeing you've now learned about two ways of doing backtracking.
+
+365
+00:54:12.300 --> 00:54:17.460
+Nick Bowman: And tomorrow are actually going to do is cover this last use case of backtracking, which is pick one best solution.
+
+366
+00:54:17.790 --> 00:54:23.940
+Nick Bowman: And this is sort of a list of questions you've seen lots of different backtracking strategies. So hopefully, as you're working on the assignment.
+
+367
+00:54:24.060 --> 00:54:31.800
+Nick Bowman: Thinking through these questions that are posed on this slide will help you with deciding what parameters. Am I going to have what is my base case going to be what's my recursive case.
+
+368
+00:54:32.010 --> 00:54:45.690
+Nick Bowman: There are sort of lots of small moving parts, and we'll dive a little bit more deep more deeply into further examples about tomorrow. Alright, thank you will stick around for questions. Oh, I guess I didn't, did you share the results of the fall
+
+369
+00:54:47.880 --> 00:54:48.900
+Nick Bowman: Okay, no worries.
+
+370
+00:54:55.980 --> 00:54:56.280
+Siddharth Balaji: Thank you.
+
+371
+00:54:56.550 --> 00:54:57.870
+Elena Williams: Thanks. Thank you.
+
+372
+00:54:58.410 --> 00:54:59.190
+christopher cooper: Thank you.
+
+373
+00:54:59.310 --> 00:54:59.640
+shirley li: Thank you.
+
+374
+00:55:00.210 --> 00:55:00.870
+Thank you.
+
+375
+00:55:01.890 --> 00:55:02.310
+Gautham Rajesh: Thank you.
+
+376
+00:55:05.760 --> 00:55:07.230
+edouard des: Have a question. I mean,
+
+377
+00:55:09.270 --> 00:55:25.110
+edouard des: When we did the thing where we have the and i actually think the subsets and we're trying to align them or is it a good way to think of it that we're trying to find them permutations of a set like we're but but we have an equivalent amount of blanks. So in this sense that if we have
+
+378
+00:55:26.940 --> 00:55:27.810
+edouard des: Like a group of
+
+379
+00:55:28.920 --> 00:55:39.210
+edouard des: Three values ABC and we're trying to find all subsets of ABC, in a way, we're effectively trying to find all subsets of ABC all permutations of ABC plus another three blank values.
+
+380
+00:55:40.140 --> 00:55:47.460
+edouard des: And because the the blank with the blank set we get at the end is basically just could be seen as three blank values. No.
+
+381
+00:55:48.900 --> 00:55:50.970
+edouard des: It's not not going to like, kind of, you
+
+382
+00:55:52.020 --> 00:55:57.780
+Nick Bowman: Yeah, you want to answer was a you could think of it that way. But then you get a lot of duplicates. Right.
+
+383
+00:55:59.070 --> 00:56:00.210
+edouard des: Blake's right would
+
+384
+00:56:00.840 --> 00:56:11.100
+Nick Bowman: Would like give me the same answer in a lot of different ways. And you have to explore a much larger set of possible states to get the same number of answers.
+
+385
+00:56:11.550 --> 00:56:18.540
+Nick Bowman: So I would say that I think you I think I get what you're saying. And I think you could think of it that way. But if you actually implement it that way.
+
+386
+00:56:18.750 --> 00:56:25.020
+Nick Bowman: You'd be kind of doing yourself a disservice. Because of you, much less efficient and you've been doing a lot of extra work that you don't need to be
+
+387
+00:56:31.920 --> 00:56:32.160
+edouard des: Hey,
+
+388
+00:56:32.490 --> 00:56:33.510
+Nick Bowman: I saw Michaels here.
+
+389
+00:56:36.240 --> 00:56:44.070
+Michael M Hu: I would it be possible for you to show what it would look like if we forgotten choose like
+
+390
+00:56:44.850 --> 00:56:45.210
+Nick Bowman: Yeah.
+
+391
+00:56:45.240 --> 00:56:46.080
+Michael M Hu: And that one example.
+
+392
+00:56:46.260 --> 00:56:57.990
+Nick Bowman: So yeah, so let's go ahead and just. Yeah, it's a great question. So I'm going to go ahead and say, What if we didn't pop something back off the stack that we're building up. What would that look like. So let me pull up
+
+393
+00:57:00.420 --> 00:57:06.480
+Nick Bowman: Oh, Nick, can you say you might have commented out. Yes. Okay. So let's do that. I'm not saying no.
+
+394
+00:57:07.560 --> 00:57:08.550
+Nick Bowman: Let's try this again.
+
+395
+00:57:25.620 --> 00:57:25.920
+Here we go.
+
+396
+00:57:27.750 --> 00:57:33.870
+Nick Bowman: here in a second. Here we go. So you can see what's happening. Since it's not removing anything from the
+
+397
+00:57:33.870 --> 00:57:34.380
+Michael M Hu: Staff
+
+398
+00:57:34.440 --> 00:57:48.120
+Nick Bowman: Is just including everything it's visited before it will actually find the solution and it's going in the same order that it would. It's just not removing anything from your final stack. So the thing you'll get at the end has so many extra steps that you don't actually want
+
+399
+00:57:49.530 --> 00:57:51.210
+edouard des: With there's some plastic shop doing
+
+400
+00:57:52.590 --> 00:57:57.480
+Nick Bowman: There are some passes not doing because it sort of is again going to be breath for search. So all of the
+
+401
+00:57:57.990 --> 00:58:06.630
+Nick Bowman: depth research. So the one that it does eventually go down and sort of it goes down all of these other paths first and then it the one that it finds is not like the last
+
+402
+00:58:07.320 --> 00:58:15.090
+Nick Bowman: Far this down branch of the tree, if that makes sense. So you can think about these is like other branches along the tree that it just didn't get to depth first yet.
+
+403
+00:58:16.560 --> 00:58:18.330
+Nick Bowman: And so those are the ones that it didn't look
+
+404
+00:58:18.390 --> 00:58:28.740
+edouard des: Can we just because like his cases this is peeling off a bit of probability. So that it depends on which branch of the tree decides to go or are these branches. Yeah.
+
+405
+00:58:28.740 --> 00:58:40.020
+Nick Bowman: There's, there's some of that and it would actually matter right like depending on like I talked about doing North, South, East, West, like in some cases it might be faster to do, like, south, east, west, north or something like
+
+406
+00:58:40.020 --> 00:58:40.170
+edouard des: That
+
+407
+00:58:40.380 --> 00:58:42.120
+Nick Bowman: So yeah, there is a little bit of that involved.
+
+408
+00:58:43.260 --> 00:58:51.900
+Nick Bowman: And then just to be complete here. I'm going to go ahead and show what happens if you don't, if we forget because this is another one is only forget we have to data structures we actually need to do here. What happens if you
+
+409
+00:58:52.290 --> 00:58:57.060
+Nick Bowman: don't edit the maze at all because that's sort of the extra one where you're marking visited I'm
+
+410
+00:58:58.500 --> 00:58:58.800
+edouard des: Talking
+
+411
+00:59:00.570 --> 00:59:02.460
+Nick Bowman: Yeah, exactly. It's going to end up getting stuck.
+
+412
+00:59:04.170 --> 00:59:06.270
+Nick Bowman: Because it sort of will continue living forever.
+
+413
+00:59:08.040 --> 00:59:14.910
+Nick Bowman: If I show it, it will actually eventually Stack Overflow, but it's just getting stuck here like going back and forth, um,
+
+414
+00:59:15.930 --> 00:59:23.010
+Nick Bowman: And so, yeah, it eventually will Stack Overflow. But that's sort of why we need to know which ones we've already visited so we can move forward. Yeah.
+
+415
+00:59:26.670 --> 00:59:27.450
+edouard des: A question about that.
+
+416
+00:59:28.620 --> 00:59:28.980
+Nick Bowman: Sure.
+
+417
+00:59:29.430 --> 00:59:42.840
+edouard des: I would imagine that we'd and shoes everything in the base case now like that sense that when we but but because like when we get when we get to the bottom of the branch is that base case or is that the, um, I guess, I guess it as the British
+
+418
+00:59:42.870 --> 00:59:46.890
+Nick Bowman: Well, yeah. So you could think about you only get to the base case.
+
+419
+00:59:48.330 --> 00:59:52.260
+Nick Bowman: If you have what's a good way to explain this. I'm
+
+420
+00:59:54.060 --> 00:59:59.820
+Nick Bowman: In some of these cases, right, if you aren't keeping track of.
+
+421
+01:00:02.400 --> 01:00:02.970
+edouard des: How it works.
+
+422
+01:00:03.300 --> 01:00:11.460
+Nick Bowman: It's sort of like if you how you wouldn't know in the base case exactly how much to and shoes are you would choose just the thing that you are adding the base case.
+
+423
+01:00:11.670 --> 01:00:19.140
+Nick Bowman: But if you imagine you're going down a path. And then you have to come back up one step and then go down the next path that's at the very end there. Um,
+
+424
+01:00:20.340 --> 01:00:21.030
+Nick Bowman: And I'm not explain
+
+425
+01:00:21.060 --> 01:00:23.010
+edouard des: Why, but but because like
+
+426
+01:00:24.120 --> 01:00:33.030
+edouard des: I feel like it's it's not like if you're going backwards. It's like if we're walking and we're like making copies of ourselves. We're going backwards. I guess like it doesn't mean you get to our destination that at that point. We'd like for move
+
+427
+01:00:33.390 --> 01:00:46.200
+edouard des: Copies of ourselves. We can't really do that, unfortunately, but but the thing is that, like, how does it know that it's already been through a path if it's deleted the instances of it going down. That is it me. Is it because it's gone down that branch already so it doesn't know. Yeah.
+
+428
+01:00:46.770 --> 01:00:48.030
+Nick Bowman: Because it's a for loop, right.
+
+429
+01:00:48.390 --> 01:00:50.970
+Nick Bowman: Okay, I'm gonna go back and recheck something it's already
+
+430
+01:00:51.720 --> 01:01:03.360
+edouard des: So, so it's like it doesn't know what values. It was all knows that that does not work. Yes, you can. Okay. Well, the other one iterative one kind of like remembers all the values and the fact that it doesn't work.
+
+431
+01:01:04.110 --> 01:01:07.050
+Yes, yeah. Okay. Yeah. That's a good point.
+
+432
+01:01:09.120 --> 01:01:09.420
+edouard des: I thought
+
+433
+01:01:09.480 --> 01:01:11.820
+Nick Bowman: It was another hand, can you see who it is.
+
+434
+01:01:14.610 --> 01:01:14.910
+Yeah.
+
+435
+01:01:16.110 --> 01:01:18.810
+Michael Jordan I see Michael
+
+436
+01:01:22.830 --> 01:01:23.160
+You guys
+
+437
+01:01:27.420 --> 01:01:27.690
+Usman Iqbal Hanif: Are
+
+438
+01:01:31.980 --> 01:01:40.800
+Usman Iqbal Hanif: I'll try to keep it short. Sorry, I see there's a lot of people. I just have a question on the list. So Rick close problem, um,
+
+439
+01:01:42.360 --> 01:01:47.640
+Usman Iqbal Hanif: So like I just really if you really mind if you just quickly like go over
+
+440
+01:01:48.870 --> 01:01:54.600
+Usman Iqbal Hanif: If you have the example on the slide, just so I can get that. Yeah, right here. So in. Oh.
+
+441
+01:01:55.950 --> 01:01:56.100
+Usman Iqbal Hanif: Oh,
+
+442
+01:01:57.630 --> 01:02:10.350
+Usman Iqbal Hanif: Perfect. Yes, over here, I just wanted to check. So like, okay, we go down and we enter into our recursive case. And let's just say we're starting off fresh so like we have Nick highly and trip in this set.
+
+443
+01:02:10.770 --> 01:02:16.440
+Usman Iqbal Hanif: And then we take out one person say we take out Nick and then the first thing we do is we want to
+
+444
+01:02:16.920 --> 01:02:34.470
+Usman Iqbal Hanif: Kind of recourse through this decision tree with Nick taken out of remaining and nothing and chosen. Right. So once that's done, we'll come back up again and now take out will take out Kylie and then we'll go again. We'll take out trip. So we've been reform the entire empty.
+
+445
+01:02:34.500 --> 01:02:35.400
+Nick Bowman: Subset right
+
+446
+01:02:36.120 --> 01:02:51.480
+Usman Iqbal Hanif: So, but now when we go and we printed out. And then when we go back this stack frame. The next thing we go to his chosen add red or like we go the case to but in this case.
+
+447
+01:02:52.710 --> 01:02:57.900
+Usman Iqbal Hanif: This case to hold like trip was like the last person that was
+
+448
+01:02:59.430 --> 01:03:01.230
+Usman Iqbal Hanif: Selected in our staff. Right.
+
+449
+01:03:01.440 --> 01:03:04.260
+Nick Bowman: Ah, let's do this. Can I
+
+450
+01:03:06.450 --> 01:03:09.060
+Nick Bowman: If I go back to this tree.
+
+451
+01:03:12.510 --> 01:03:14.490
+We look at it on the side here.
+
+452
+01:03:18.240 --> 01:03:29.490
+Nick Bowman: Right. And you can imagine. So like if we go okay we're going and we're doing and remember every, every backtracking Christian is actually depth first, so what's going to happen is you're going to have all these
+
+453
+01:03:29.940 --> 01:03:36.960
+Nick Bowman: It'll get all of these first calls to subset helper where you don't choose anyone fresh right so it goes down here.
+
+454
+01:03:37.620 --> 01:03:42.870
+Nick Bowman: Right, and then you're right, it goes back up one level. And the last thing that you decided wasn't in there was trip.
+
+455
+01:03:43.380 --> 01:03:53.970
+Nick Bowman: Um, so that's why trip will be the next thing that gets printed and that's what's happening here, right, you're adding the element that you chose, which was trip. And then you're going down the path and you're immediately hitting your base so it'll be trip.
+
+456
+01:03:54.330 --> 01:03:56.250
+Nick Bowman: And then it goes back up another recursive
+
+457
+01:03:56.250 --> 01:03:57.960
+Nick Bowman: Call to, kind of, does that make sense.
+
+458
+01:03:58.410 --> 01:04:06.570
+Usman Iqbal Hanif: Yeah, it does all of that and then the reason why we have to choose is because once you hit the empty say you want to put everything back in
+
+459
+01:04:12.270 --> 01:04:12.660
+Nick Bowman: Here.
+
+460
+01:04:12.930 --> 01:04:21.510
+Usman Iqbal Hanif: Yeah, like so. Once we've added trip. And we've returned this case, you know, it goes back up one and we add back highly
+
+461
+01:04:22.590 --> 01:04:27.300
+Usman Iqbal Hanif: And then we back in. We add back in Nick right so
+
+462
+01:04:27.720 --> 01:04:28.560
+Nick Bowman: It's okay.
+
+463
+01:04:28.650 --> 01:04:33.810
+Usman Iqbal Hanif: Though through and we get like I just get confused. Like, then what's the ring at this point.
+
+464
+01:04:34.380 --> 01:04:38.100
+Nick Bowman: Because, like, Yeah, so I mean if you think about it, even at the lowest level here, right.
+
+465
+01:04:38.370 --> 01:04:42.870
+Nick Bowman: If you're here right and then you pick a trip. So you've removed trip from the set right
+
+466
+01:04:43.620 --> 01:04:58.830
+Nick Bowman: Um, of remaining right the remaining is empty here and then we need to go back up to this stuff and we need to be able to pick both Kylie and trip and the previous call but if you never added trip back in down here, right. I won't be able to pick trip. Once you get to this step.
+
+467
+01:05:00.390 --> 01:05:04.230
+Usman Iqbal Hanif: Oh sounds meaning has trip in in we do the same thing down here.
+
+468
+01:05:04.290 --> 01:05:09.660
+Usman Iqbal Hanif: Okay, yeah, yeah, yeah, that makes me. Thank you. It's just going to take a little bit. Yeah.
+
+469
+01:05:10.920 --> 01:05:17.040
+Nick Bowman: Yeah, no, it's definitely it's tricky to wrap your head around. But if you think about it, just like it goes down this path on this path and comes back up.
+
+470
+01:05:17.250 --> 01:05:22.440
+Nick Bowman: And you can sort of see, oh, as we're making these decisions we're going to be making the like no Kylie know trip decisions.
+
+471
+01:05:22.800 --> 01:05:33.060
+Nick Bowman: Both here and over here. So you have to at some point. Add me and trip back into the set when you get all the way back up to adding up before you get all the way back up to adding Nick Thank you.
+
+472
+01:05:38.820 --> 01:05:49.290
+Pablo Manjon Gamez: Yeah, I wanted to ask if you guys would recommend any workspaces for, you know, computer science intensive studies, specifically. Oh, students like which workspaces, do you guys recommend it.
+
+473
+01:05:51.690 --> 01:05:52.260
+Pablo Manjon Gamez: If you know what
+
+474
+01:05:52.290 --> 01:05:53.160
+Nick Bowman: Do you mean on Ed.
+
+475
+01:05:54.000 --> 01:05:58.590
+Pablo Manjon Gamez: Though we know not workspaces like events that are required for instance of studies.
+
+476
+01:06:00.870 --> 01:06:03.750
+Nick Bowman: I'm not sure I follow the flash
+
+477
+01:06:05.370 --> 01:06:11.130
+Pablo Manjon Gamez: You know there's events, you need to do to complete them types of studies requirement. I don't forget what they're called, but you know
+
+478
+01:06:13.470 --> 01:06:15.960
+edouard des: They're not really an intensive. Yeah.
+
+479
+01:06:17.520 --> 01:06:20.790
+edouard des: From what understand their talks newsletter, though, can you just go into any of those
+
+480
+01:06:21.900 --> 01:06:22.140
+Pablo Manjon Gamez: Okay.
+
+481
+01:06:22.170 --> 01:06:27.750
+edouard des: Like the, the ones that say intensive qualifying event. I mean, they're kind of fun anyway but it doesn't necessarily with computer science.
+
+482
+01:06:29.370 --> 01:06:30.060
+Jordan Lin: So,
+
+483
+01:06:32.190 --> 01:06:33.210
+Nick Bowman: I don't think we're familiar
+
+484
+01:06:33.210 --> 01:06:33.360
+With
+
+485
+01:06:34.530 --> 01:06:34.800
+Nick Bowman: Me.
+
+486
+01:06:35.880 --> 01:06:49.620
+Jordan Lin: Oh there is actually like, um, you have to be added to the Slack channel for computer science intensive and then they do post. I'm not regularly, but they do post on workshop events on zoom where you can sign up. So that's where you can find it.
+
+487
+01:06:50.430 --> 01:06:51.150
+Pablo Manjon Gamez: Alright, thanks.
+
+488
+01:06:57.600 --> 01:06:58.020
+Harry W: Oh,
+
+489
+01:06:58.080 --> 01:07:01.890
+Harry W: So I just have a question for the maze question.
+
+490
+01:07:04.020 --> 01:07:09.810
+Harry W: So what will happen if we just comment out like where we like send it back to true like maze lock.
+
+491
+01:07:09.930 --> 01:07:11.130
+Nick Bowman: Goes just comment. Yes.
+
+492
+01:07:11.700 --> 01:07:15.180
+Harry W: Yeah, like, Well, what happened because I'm not getting
+
+493
+01:07:17.190 --> 01:07:28.290
+Nick Bowman: Yeah, it actually will complete still in this case I'm Nick, do you want to talk a little bit more about. Yeah. Yeah. So this is actually
+
+494
+01:07:33.840 --> 01:07:34.230
+Can you say
+
+495
+01:07:37.530 --> 01:07:41.100
+Nick Bowman: So in this case is kind of funny.
+
+496
+01:07:42.420 --> 01:08:00.660
+Nick Bowman: It was not a great example for this. You always need to backtrack. But you know, it's super important can be changing to me because of whatever cable shows this actually will compete and specifically for this problem and you can get away with that you can kind of get lucky because no
+
+497
+01:08:02.520 --> 01:08:18.060
+Nick Bowman: Like no valid path and we'll try to go down the same like what basically, you won't try to go down the same pathways for any reason. And that's visibility for trying to find like one possible solution to the needs and also because there is only one solution.
+
+498
+01:08:19.170 --> 01:08:25.710
+Nick Bowman: And if for example you wanted to find like if you have too many solutions and you want it to like finding all of them.
+
+499
+01:08:26.070 --> 01:08:42.570
+Nick Bowman: And if you didn't correctly sort of reset the state of them is after you made a decision and you were sort of ruin the head of state of like find like of what's been visited so far for like multiple different paths and so yeah we get kind of lucky here.
+
+500
+01:08:44.520 --> 01:08:51.570
+Nick Bowman: And yeah, so it's not technically necessary but we asked her what we want to push and what you should be looking for your hundred percent back
+
+501
+01:08:52.680 --> 01:09:01.770
+Nick Bowman: Is like you always want to make sure that this parallel structure of whatever changes you need to be the structures before you did the reverse and call are sort of on done
+
+502
+01:09:06.450 --> 01:09:06.780
+Harry W: Okay.
+
+503
+01:09:09.060 --> 01:09:11.430
+Harry W: And one more question for the assignment.
+
+504
+01:09:12.750 --> 01:09:14.970
+Harry W: Like so. It's like the Merge Sort one
+
+505
+01:09:16.560 --> 01:09:26.940
+Harry W: And and for like the recursive like implementation is supposed to be all oh of n times log of k, but like for mine code.
+
+506
+01:09:27.450 --> 01:09:41.970
+Harry W: Like I did everything on like the assignment page like every I follow every procedure, but somehow if like cake is too large and doesn't fall a log of k anymore. It's not like like like some like
+
+507
+01:09:43.470 --> 01:09:49.620
+Harry W: Raw implementation or like maybe like if I like it, or is it just the way it is.
+
+508
+01:09:50.490 --> 01:09:51.480
+Nick Bowman: Yeah, it's hard to
+
+509
+01:09:55.440 --> 01:10:02.280
+Nick Bowman: Sort of, what is it that you're using that question might be better addressing it officers or they're just going to have to like
+
+510
+01:10:03.750 --> 01:10:05.190
+Harry W: Okay, thank you.
+
+511
+01:10:17.100 --> 01:10:18.060
+Tommy. Do you have a question.
+
+512
+01:10:25.860 --> 01:10:26.640
+We can't hear you.
+
+513
+01:10:30.270 --> 01:10:32.460
+Nick Bowman: Maybe if you try typing in the chat. Yeah.
+
+514
+01:10:39.840 --> 01:10:40.680
+edouard des: Yeah, actually.
+
+515
+01:10:41.700 --> 01:10:42.330
+edouard des: Oh, sorry.
+
+516
+01:10:44.220 --> 01:10:46.740
+Michael M Hu: Oh, just not related to
+
+517
+01:10:47.790 --> 01:10:54.720
+Michael M Hu: Any code or anything, but is there any way we can see our current grades for the class before, there it goes on the transcript.
+
+518
+01:10:57.780 --> 01:10:59.400
+Nick Bowman: Not officially
+
+519
+01:11:01.080 --> 01:11:04.350
+Nick Bowman: You, we don't really make those determinations until
+
+520
+01:11:06.750 --> 01:11:13.860
+Nick Bowman: You talk to us like individually, like we're trying to get your general overview, but it's not like a live in thing because
+
+521
+01:11:18.180 --> 01:11:21.480
+Nick Bowman: Yeah, if you're ever concerned about like whether or not
+
+522
+01:11:23.070 --> 01:11:24.930
+Nick Bowman: You're going to pass or something like that or you
+
+523
+01:11:24.930 --> 01:11:26.190
+Nick Bowman: Can always shoot us an email and
+
+524
+01:11:26.190 --> 01:11:27.210
+haoming li: We'll do our best to try to
+
+525
+01:11:27.210 --> 01:11:35.760
+Nick Bowman: Estimate. But again, it's, it won't be like a definitive. This is what you're going to get until like you factor in final assessments and whatnot.
+
+526
+01:11:36.960 --> 01:11:38.880
+Michael M Hu: Got it. Alright, thanks.
+
+527
+01:11:40.590 --> 01:11:41.160
+Everyone
+
+528
+01:11:44.610 --> 01:11:59.370
+edouard des: About the other, not the main one, but the but the other function on, sir. Another function with the with the names and the subsets there. There is no looped in that in that on record recursive functions, how does it remember that it's gone down a branch already
+
+529
+01:12:00.570 --> 01:12:04.710
+Nick Bowman: Yeah, so remember what this one. It's just too right like so you can imagine you could write a loop.
+
+530
+01:12:04.920 --> 01:12:06.150
+Nick Bowman: But it would be a loop of like
+
+531
+01:12:06.210 --> 01:12:10.020
+Nick Bowman: Choose or don't choose right so that's why there's two recursive calls here.
+
+532
+01:12:12.720 --> 01:12:13.380
+Nick Bowman: And so like
+
+533
+01:12:14.460 --> 01:12:22.680
+Nick Bowman: Yeah, so it's sort of like this one would be the tree on the left, and this one would be the tree on the right, versus in the maze problem, you would have like
+
+534
+01:12:22.680 --> 01:12:24.120
+Nick Bowman: Four trees. And so that's why we're
+
+535
+01:12:24.120 --> 01:12:25.500
+Nick Bowman: just looping overall for
+
+536
+01:12:25.560 --> 01:12:26.760
+edouard des: The sub trees as opposed to
+
+537
+01:12:26.760 --> 01:12:28.230
+Nick Bowman: Explicitly calling
+
+538
+01:12:29.070 --> 01:12:34.350
+edouard des: So, so it's kind of like if we could make a loop, where we would have we, we don't really need to
+
+539
+01:12:35.790 --> 01:12:38.940
+Nick Bowman: Yeah, and and and i think it's the other thing with the
+
+540
+01:12:39.390 --> 01:12:40.800
+Nick Bowman: Weird thing that would happen with
+
+541
+01:12:40.800 --> 01:12:42.540
+Nick Bowman: Looping is it's sort of like what would you loop.
+
+542
+01:12:42.540 --> 01:12:45.660
+Nick Bowman: Over YouTube over like you just have a for loop from
+
+543
+01:12:45.780 --> 01:12:48.390
+Nick Bowman: Zero to one and then
+
+544
+01:12:48.600 --> 01:12:58.650
+Nick Bowman: If it's one you add and if it's not one you don't right like so there's not something explicit to loop over versus in the other ones. The options are more explicit things like an actual set that you could move over but
+
+545
+01:12:58.710 --> 01:13:03.540
+edouard des: So in this case, it was sort of like because when I guess the first one, so it'll, it'll say, Okay, I'm gonna make a branch on the left.
+
+546
+01:13:03.900 --> 01:13:14.610
+edouard des: And then when he gets the but so but it'll keep because the for the program will hang so long as it doesn't get a return. Right. So even if the next one is theoretically next he won't do it until it gets overturned from the first one. Correct.
+
+547
+01:13:15.300 --> 01:13:19.980
+Nick Bowman: Yeah, and that's the depth first nature, right, like in this example, it will go
+
+548
+01:13:20.220 --> 01:13:23.460
+haoming li: Left, left, left, left, left, left until it hits a base case or it
+
+549
+01:13:23.460 --> 01:13:29.520
+Nick Bowman: Will not consider any other options right until your until like one of them actually finishes right
+
+550
+01:13:31.170 --> 01:13:34.140
+Nick Bowman: And it will consider. OK, now I'm going to trip. Right.
+
+551
+01:13:36.900 --> 01:13:44.610
+edouard des: So, so it's not going to do like left right left icelander like first next. First thing is going to do, it's going to do that one until it's done. And it's going to go on to the next. The next few lines.
+
+552
+01:13:44.670 --> 01:13:45.150
+Yeah.
+
+553
+01:13:48.180 --> 01:13:48.420
+edouard des: Yeah.
+
+554
+01:13:53.250 --> 01:13:53.880
+I see.
+
+555
+01:13:55.470 --> 01:14:02.640
+haoming li: Yeah, I think, calling is that working. Yeah. Yeah, we can hear that. Thank you.
+
+556
+01:14:03.660 --> 01:14:10.590
+haoming li: My question is a lot of both similar. What's this one chart here, but it's about the amazed that pop
+
+557
+01:14:11.640 --> 01:14:20.460
+haoming li: I see the pop will on to the last cell visit and the last
+
+558
+01:14:22.440 --> 01:14:26.970
+haoming li: The last cell will become true so
+
+559
+01:14:28.050 --> 01:14:33.570
+haoming li: How does that go back until all the way, if they are like
+
+560
+01:14:36.180 --> 01:14:42.480
+haoming li: It's nice to go back to self instead of one was the loop to just
+
+561
+01:14:43.620 --> 01:14:48.360
+haoming li: Go back one step and the previous cell is that
+
+562
+01:14:50.250 --> 01:14:50.850
+haoming li: Make sense
+
+563
+01:14:53.130 --> 01:14:59.220
+Nick Bowman: I mean, correct me if I'm misunderstanding the question, but you're sort of asking like, what if you need to take two steps backwards, right.
+
+564
+01:15:00.330 --> 01:15:00.960
+haoming li: Right.
+
+565
+01:15:01.110 --> 01:15:03.720
+Nick Bowman: And I think what you want to think about is
+
+566
+01:15:05.220 --> 01:15:08.970
+Nick Bowman: It would basically mean that you're going up to recursive called right
+
+567
+01:15:09.300 --> 01:15:22.110
+Nick Bowman: And so I lost where I wasn't here we go. So if we look at this one, right, we have to go back a step because we hit a dead end like suppose, for some reason the finish, we're over here and we hadn't explored that yet. And so we'd also need to go back here, right.
+
+568
+01:15:22.380 --> 01:15:24.780
+Nick Bowman: So when you so this sort of says okay
+
+569
+01:15:25.890 --> 01:15:35.880
+Nick Bowman: On mark this one and then we get to this state. Right. And imagine like oh we've checked this. We've checked this. We've checked this and they are so this one is now actually start
+
+570
+01:15:36.180 --> 01:15:45.870
+Nick Bowman: Take a step back. We're now here again and we're in this for loop, where we just went over North and now we need to check, South, East, and West. So that's one iteration of this four
+
+571
+01:15:46.140 --> 01:15:55.890
+Nick Bowman: Iterations of this for loop you check all of them and you say, oh, none of them also return all of them also returned false, right. So we need to pop back up to this one.
+
+572
+01:15:56.760 --> 01:16:08.790
+Nick Bowman: And so what would happen is it's the, it's the call above that actually does the. Okay, I need to pop off what is currently there, which is this and then go back to this step so you aren't
+
+573
+01:16:09.240 --> 01:16:16.410
+Nick Bowman: In any like one recursive call, you will never need to pop twice the popping will happen. I'm from the previous
+
+574
+01:16:18.030 --> 01:16:20.010
+Nick Bowman: From the previous call that makes sense.
+
+575
+01:16:23.820 --> 01:16:35.550
+haoming li: Like a pop one and it go back one step, then just like this example here from
+
+576
+01:16:36.630 --> 01:16:40.980
+haoming li: Right up corner that back to one to the current one.
+
+577
+01:16:42.420 --> 01:16:46.770
+haoming li: It will also go the for loop to check for directions.
+
+578
+01:16:47.790 --> 01:16:49.740
+haoming li: Yeah, no return false.
+
+579
+01:16:50.160 --> 01:16:57.720
+Nick Bowman: And then once it returns false, you're back up to the call that mark this one and you're you're in here right having checked.
+
+580
+01:16:58.770 --> 01:16:59.340
+Nick Bowman: East
+
+581
+01:17:00.480 --> 01:17:01.830
+Nick Bowman: Right for this one.
+
+582
+01:17:03.270 --> 01:17:05.460
+Nick Bowman: And then you're saying, oh, this Eastern work.
+
+583
+01:17:05.520 --> 01:17:15.900
+Nick Bowman: I'm going to check, even though that's not what the order, but I'm gonna check West now. Right. And so what happens is it's the call for this one that's popping this
+
+584
+01:17:17.370 --> 01:17:18.150
+Nick Bowman: Does that make sense.
+
+585
+01:17:19.650 --> 01:17:29.370
+haoming li: Yeah, I see it pop off here. But with that the warm. We just visited to choose.
+
+586
+01:17:30.420 --> 01:17:34.980
+haoming li: Again, whoa way revisit that later.
+
+587
+01:17:36.000 --> 01:17:38.130
+Nick Bowman: Yeah, so it's a pencil.
+
+588
+01:17:38.880 --> 01:17:42.600
+Nick Bowman: That's a good question. It goes back to what we have been saying before about
+
+589
+01:17:44.130 --> 01:17:44.610
+Nick Bowman: This
+
+590
+01:17:44.790 --> 01:17:45.570
+haoming li: Where did it go
+
+591
+01:17:45.930 --> 01:18:01.890
+Nick Bowman: Oh, this line is actually only necessary if you have multiple solutions to your me so if in this case, technically. No, you will not come back to the square because of the nature of the for loops here and the fact that there's only one solution to the maze, um,
+
+592
+01:18:02.250 --> 01:18:06.720
+Nick Bowman: But if there were like multiple solutions to the maze and you want to generate all solutions to the maze.
+
+593
+01:18:07.440 --> 01:18:22.530
+Nick Bowman: We would want to actually potentially revisit the square if there were two solutions that went through it, if that makes sense. Yeah. And the thing I just realized this, now it's if there's even the more general way to frame it is if there's multiple ways to get to the same location and
+
+594
+01:18:23.280 --> 01:18:24.840
+Nick Bowman: If you could take two paths.
+
+595
+01:18:25.110 --> 01:18:29.820
+Nick Bowman: To get to the same location for me is it's very important to unmarked it because you might potentially
+
+596
+01:18:31.320 --> 01:18:41.610
+Nick Bowman: But because we're dealing with perfect uses the, like, by definition, one there, isn't there is exactly one path from any possible spot in the movies do any other possible
+
+597
+01:18:42.690 --> 01:18:56.100
+Nick Bowman: And so yeah and so that general it like like you can specify that from the solution. Like there's only one path between the entry and exit. But if you were just a designer isn't another way. And there was multiple possible ways to get there. It's very important to
+
+598
+01:18:56.100 --> 01:18:57.150
+haoming li: Do online marketing.
+
+599
+01:18:57.330 --> 01:19:00.570
+Nick Bowman: Because you might revisit that same location and you might like.
+
+600
+01:19:03.600 --> 01:19:03.960
+This is
+
+601
+01:19:07.560 --> 01:19:11.700
+haoming li: Perfect, perfect made only one
+
+602
+01:19:12.870 --> 01:19:17.550
+haoming li: Then it will not matter if we said at the
+
+603
+01:19:22.170 --> 01:19:23.790
+haoming li: Same time like this.
+
+604
+01:19:23.880 --> 01:19:29.280
+Nick Bowman: Code that we wrote the reason we do it is because this code will solve anything. Right, like this.
+
+605
+01:19:29.490 --> 01:19:30.390
+Is not specific.
+
+606
+01:19:31.860 --> 01:19:32.160
+haoming li: Right.
+
+607
+01:19:32.280 --> 01:19:34.320
+Nick Bowman: Like it just so happens that all of the examples.
+
+608
+01:19:35.760 --> 01:19:45.720
+Nick Bowman: Also like a reason for this, like all in that category. But the code that we've written. And the reason we include really true is like this code generalize it
+
+609
+01:19:47.160 --> 01:19:48.900
+Nick Bowman: So even though it's
+
+610
+01:19:48.990 --> 01:19:51.120
+haoming li: Not technically necessary for example.
+
+611
+01:19:52.140 --> 01:19:52.350
+haoming li: If
+
+612
+01:19:58.140 --> 01:19:58.680
+haoming li: I say
+
+613
+01:20:01.800 --> 01:20:02.340
+Thank you.
+
+614
+01:20:03.810 --> 01:20:04.020
+haoming li: Know,
+
+615
+01:20:04.140 --> 01:20:12.300
+edouard des: If there were multiple solutions. This would not find the fastest one right they would find a solution and the solution in terms of finding depends on the order I wish it checks the North
+
+616
+01:20:12.300 --> 01:20:13.590
+edouard des: south, east, west, east, west.
+
+617
+01:20:14.940 --> 01:20:20.700
+edouard des: If I wanted to find the fastest solution, then we'd want to have to memorize all perfect solutions and try to find the one with the least amount of
+
+618
+01:20:20.700 --> 01:20:21.120
+haoming li: Moves
+
+619
+01:20:21.330 --> 01:20:21.900
+edouard des: In this time.
+
+620
+01:20:23.910 --> 01:20:24.060
+edouard des: You
+
+621
+01:20:24.870 --> 01:20:27.960
+Nick Bowman: Are perfect there because perfect implies there is only one solution. Yeah.
+
+622
+01:20:29.730 --> 01:20:37.530
+edouard des: So yeah, we're trying to find like the most optimal path will be the stack with the least amount of don't have to memorize all the different stacks account.
+
+623
+01:20:40.230 --> 01:20:42.300
+Nick Bowman: Yes, but the whole point of
+
+624
+01:20:43.350 --> 01:20:54.360
+Nick Bowman: Comparison with Fred first search, is it that's the problem you want to solve for search on the algorithm. Right. Yeah. Because it because it won't. It doesn't have to find all solutions and then
+
+625
+01:20:54.930 --> 01:20:56.730
+edouard des: This one, which is which is
+
+626
+01:20:56.970 --> 01:21:01.620
+Nick Bowman: It just one way to do it by definition of how I find, same as soon as I find something
+
+627
+01:21:02.670 --> 01:21:06.630
+edouard des: Yeah, okay. Yeah, so this will just not be the type of thing that you use to find them.
+
+628
+01:21:07.860 --> 01:21:10.080
+edouard des: Like to, to, to find the most optimal solution.
+
+629
+01:21:13.890 --> 01:21:24.390
+edouard des: And also sign up for helper functions. Is there like a convention like as I've seen functions with underscore and the functions name or this is their convention to put underscore in front of helper functions are so different than
+
+630
+01:21:25.890 --> 01:21:27.270
+Nick Bowman: That might be Python specific
+
+631
+01:21:27.930 --> 01:21:28.320
+edouard des: Okay.
+
+632
+01:21:28.530 --> 01:21:31.980
+Nick Bowman: I might be wrong. I've never seen underscores used in any c++
+
+633
+01:21:32.610 --> 01:21:38.490
+edouard des: Function. Okay. That might be getting confused. And I guess it's really the function name and you put helper at the end. And that's how you function.
+
+634
+01:21:38.850 --> 01:21:52.530
+Nick Bowman: Yeah, I mean, you can name it if and if it's doing something that it's not just helping that function or some more specific tasks you can give it a more specific name like this isn't a good example, but like a. Yeah. Basically, it doesn't have to be called helper. But if it's like
+
+635
+01:21:52.800 --> 01:21:55.830
+haoming li: But often it's helpful for you to find if you use that
+
+636
+01:21:57.600 --> 01:21:57.960
+haoming li: Thank you.
+
+637
+01:22:01.470 --> 01:22:03.780
+edouard des: Have a great day. Thank you so much. Yeah.
+
+638
+01:22:07.140 --> 01:22:09.030
+haoming li: Any other questions before we jump off.
+

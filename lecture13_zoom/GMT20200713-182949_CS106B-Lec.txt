@@ -1,0 +1,132 @@
+00:10:16	Kylie Jue:	thanks!
+00:10:20	Siddharth Balaji:	Np!
+00:10:29	Ryan Gabel:	Recursion has been simultaneously my favorite and least favorite part of this course.
+00:10:41	Jordan Lin:	Agreed :)
+00:10:44	Kenneth Fischer:	The first assignment and its math theory!
+00:10:46	Aadi M Rane:	recursion is amazing!
+00:10:47	Kenny Wang:	favorite part of the first 3 weeks … so far, the search engine
+00:10:50	Aadi M Rane:	whats not to like
+00:10:52	Jordan Lin:	When it works it feels like magic
+00:10:55	Kenny Wang:	recursion will prolly be cooler tho
+00:10:56	alan hu:	Recursion!
+00:10:57	karan parikh:	the weekend
+00:10:59	Dima Timofeev:	Queues!
+00:11:00	Hemant Chaudhary:	Recursion for sure!
+00:11:01	Siddharth Balaji:	My favorite part was the maze part of assignment 2
+00:11:03	Rigel Cupido Wafford:	Recursion, even though it's difficult to learn
+00:11:03	Tongjun (Albert) Zhang:	recursion!
+00:11:03	Jacob Knego:	sets
+00:11:03	kathleen bryan:	I liked the maze
+00:11:07	Rohan Chowla:	When you finally turn in your assignment
+00:11:08	alz1022@stanford.edu:	the search engine was fun
+00:11:10	yukun yang:	Search engine
+00:11:10	radu ilia:	the search engine
+00:11:15	alz1022@stanford.edu:	so was the last name thing
+00:11:17	christopher cooper:	boggle
+00:11:21	louise marzolf:	Assignment 0 and 1
+00:11:21	sachinmk@stanford.edu:	When the program works
+00:11:28	Zarek Meherally:	assign 0 😁
+00:12:04	edouard des:	Towers of Hanoi, Mersenne Primes, and the connection between the latter and perfect numbers (though recursively is quite as interesting a well –– everything is special in its own way in cs :) )!
+00:33:58	Nate Hedgecock:	Is there a reason we can’t use const in this case?
+00:34:07	Usman Iqbal Hanif:	So do we do this for basic recursion examples too, if we had passed by reference?
+00:34:08	Dima Timofeev:	Do we need it only because we have no such luxury as set copies?
+00:34:15	Kylie Jue:	If you use const, you actually wouldn’t be able to edit the data structure at all inside the function
+00:34:21	Jordan Lin:	Is it suggested to pass by reference and explicitly undo the changes, or should we just pass by value and not have to worry about undoing?
+00:34:25	Hanna Mofid:	What does chosen represent?
+00:34:35	Jordan Lin:	Or does it depend on how large the data structures we're dealing with are
+00:35:40	Kylie Jue:	@Usman - if you have multiple recursive calls and you have a data structure as your parameter, then yes.  it depends on how you’re using the data structures/what your recursive stack frame calls look like
+00:36:04	Weiqi Yu:	Performance issues
+00:36:20	Kylie Jue:	@Hanna chosen represents the current subset you’re building up
+00:36:35	Kylie Jue:	@Dima and Jordan - being answered right now out loud
+00:36:36	Hanna Mofid:	Ohhh ok got it
+00:37:19	Usman Iqbal Hanif:	Ok thank you! So is the rule of thumb that if you have data structures you use choose/explore/unchoose, however, for non-data structure we can use copy/edit/recurse?
+00:38:06	Kylie Jue:	@Usman yup!  there are some occasions with data structures where you’ll use copy edit recurse if you’re not having to make a lot of large copies.  so you’ll want to consider the data you’re working with and the problem you’re solving.  but usually you’ll use choose/explore/unchoose with data structures as params
+00:38:38	Usman Iqbal Hanif:	Ok great thank you!!
+00:41:15	Siddharth Balaji:	How are bias values applied to a specific juror, for the sake of this exercise is it just a random int?
+00:41:44	Kylie Jue:	it will just be -1 or 1
+00:42:57	Kylie Jue:	but technically you can also have integers with absolute values > 1; the solution will still work since you’re just summing at the end!
+00:43:03	Elan Smolar Eisenberg:	Wouldn’t that just make it a balanced jury? Each person still has a bias but combining them doesn’t get rid of the bias
+00:43:16	Kylie Jue:	@Elan yes
+00:44:35	ethan ramchandani:	I am still not entirely understanding why explicit unchoose is necessary
+00:46:19	ethan ramchandani:	Ye thank you
+00:49:05	Kevin H Fan:	Wouldn’t that be allCanidates.size()-1?
+00:49:24	Kylie Jue:	@Kevin what are you referring to for “that”?
+00:49:30	Kyle Thomas Booker:	Does this make many copies of the index
+00:49:31	Kevin H Fan:	In the base case
+00:49:53	Kylie Jue:	@Kyle - yes but since it’s an integer, it’s still efficient and doesn’t take up a lot of space
+00:50:11	Kylie Jue:	@Kevin i’ll have Nick go back - I didn’t have a chance to look before he switched slides
+00:50:16	Elena Williams:	If vector adding/removal is costly when removing/adding to the beginning of the vector, why wouldn’t it be easiest to add/remove from the end where things don’t need to be shifted over?
+00:50:22	Kyle Thomas Booker:	Could we in theory pass the index by reference and explicitly choose and unchoose it for maximum efficiency. 
+00:50:45	Kevin H Fan:	Ohh ok thank you
+00:50:56	Hemant Chaudhary:	By challenge problem are we talking about voting.cpp?
+00:51:02	Kylie Jue:	@Hemant yes
+00:51:05	Hanna Mofid:	Why is elem added back into remaining during unchoose? Wasn't that elem decision explored already so you don't want it to be remaining anymore? In the first subset problem
+00:51:52	alan hu:	Mid-quarter already??
+00:51:52	Samuel Lynn Ledden:	why do you remove the last person from currentJury again?
+00:52:20	Kenny Wang:	what is bluebook like
+00:52:43	hriday chhabria:	Its like an environment where you can see code in code format but not run it per se
+00:53:28	kathleen bryan:	What is faster for solving the maze problem we did? Recursive or iteration?
+00:53:53	Kyle Thomas Booker:	Do we need to keep track of the stacks
+00:54:22	Kylie Jue:	@Hanna Remember that there are multiple possible paths through the decision tree that need to make a decision about whether to include elem or not. If we didn’t add elem back to remaining, then we would completely destroy remaining during one specific path down the tree, and all other paths through the tree would be out of luck
+00:55:01	Kylie Jue:	@Samuel we’ll see why in the maze example actually – the idea is that if we’re using a data structure to keep track of our current “state”, it is important that we remove a person/element after we have generated all subsets including them
+00:55:17	Kylie Jue:	@Kathleen, we’ll summarize that at the end of this example
+00:55:48	Kylie Jue:	@Kyle Yes, when we code it up, you’ll see that we’re going to be keeping track of a stack to represent the solution through the maze
+00:56:47	Kylie Jue:	@Elena great point – I chose to insert/remove from the beginning in my example to make a clear point about the inefficiency of that operation. You are correct that adding/removing from th end of the vector would be a much better choice. However, adding/removing from the end is still more costly than updating a simple integer from recursive call to recursive call.
+00:58:31	Kyle Thomas Booker:	So when we change the grid we have to "unchoose" correct? 
+00:58:46	Kylie Jue:	@Kyle correct, we will see that in the code in a second
+01:04:02	Kenny Wang:	is BFS more consistent?
+01:04:09	hriday chhabria:	Would DFS just have infinite world ladder stacks for the word ladder?
+01:04:10	Kenny Wang:	it feels that way
+01:04:13	Kylie Jue:	What do you mean by more consistent?
+01:04:27	Kenny Wang:	as in will the runtime be more consistent based on the complexity of the maze
+01:04:48	Kylie Jue:	@Hriday yeah, DFS wouldn’t work as well for word ladders, because the branching factor is much higher and because there is no clear “Dead end” like there is in a maze that tells you it time to turn back and backtrack
+01:05:00	Kevin H Fan:	Thank you!
+01:05:01	hyy:	Thank you
+01:05:05	Samuel Lynn Ledden:	Thanks
+01:05:06	julia wang:	Thank you!
+01:05:09	alan hu:	thanks!
+01:05:10	hriday chhabria:	Thank You!
+01:05:12	Lawrence Li:	thank you
+01:05:12	paul gialis:	thank you
+01:05:12	louise marzolf:	Thank you
+01:05:14	Guozhen Miao:	Thank you
+01:05:15	Kenneth Fischer:	Thank you!
+01:05:16	Kylie Jue:	@Kenny It’s hard to generalize – BFS and DFS are both good for different types of problems
+01:05:17	Weiqi Yu:	Thank you!
+01:05:18	Angela Zhang:	Thank you!
+01:05:20	Edward Chung Yik Yeung:	thank you
+01:05:24	Kenny Wang:	hmmm, alright
+01:05:26	Kylie Jue:	I wouldn’t say one is always better or more consistent than the other
+01:05:36	Kenny Wang:	thanks
+01:06:06	Shifeng Hong:	Thank you
+01:06:22	Jennifer Anna Bonello:	Thank you
+01:06:39	Weiqi Yu:	Is there any way in C++ to pass values using value semantics while at the same time having efficiency similar to passing references?
+01:07:06	Kylie Jue:	@Weiqi It depends on what you mean by “value semantics”?
+01:07:13	Jordan Lin:	Like pointers, perhaps?
+01:07:39	Jordan Lin:	You kind of just have this variable you define, and for every recursive call you point to it
+01:08:19	Kylie Jue:	@jordan, sure that could work. We’ll start talking about pointers at the end of this week
+01:08:46	Weiqi Yu:	What if "value semantics" means modifying the variable would not affect the value in outside scopes?
+01:09:19	Weiqi Yu:	I know it's possible in Swift
+01:09:26	Kylie Jue:	No, I don’t think that is inherently possible. The only way you can modify a variable without having impacts elsewhere is if you’re operating on your own copy of the variable
+01:10:01	Weiqi Yu:	I wonder if we can wrap a reference within a value
+01:10:05	Kylie Jue:	Yea sorry I’m not super familiar with that concept in other languages, but I would say as far as I know, such a possibility is not supported in C++
+01:10:18	Kylie Jue:	What do you mean?
+01:11:12	Liza George:	(this is unrelated to the lecture but) I was a bit confused about the format of the mid-quarter. is it like a series of content-focused questions? or is it like a practical test where we have to actually code up examples?
+01:11:20	Tongjun (Albert) Zhang:	Will there be any instructions on how to use bluebook for midterm diagnostic? Is there gonna be a link for us to access the test or...
+01:11:22	Weiqi Yu:	Hmm, I'll try to implement that in Swift (and C++ if I can)
+01:12:30	Kylie Jue:	@Liza The format of the diagnostic is explained in depth on the website page  that I linked, but the summary is that there will be 4 questions, 1 involving reading/interpreting code and 3 involving coding up solutions to small problems (like section problems)
+01:12:57	Kylie Jue:	The practice diagnostic we published has that structure, and is your best resource for thinking about what the overall format is
+01:13:24	Kylie Jue:	@Tongjun All the information about BlueBook that you need is also on the Diagnostic website page that we published
+01:13:28	Liza George:	ooh ok, that makes sense. I thought it would have like very vague/abstract content questions like the apcs test. thank you!
+01:13:47	Tongjun (Albert) Zhang:	Ok, got it, thanks!
+01:13:48	Jordan Lin:	@Weiqi Maybe the reason why it is possible in Swift is that it is a high level language, and C++ is a lower level language than Swift (apparently it is still considered a high level language). So maybe Swift is just making a copy of whatever you a passing in behind the scenes.
+01:13:57	Kylie Jue:	There will be a live link published not he website from Friday-Sunday where you would be able to download the diagnostic and access the password
+01:13:58	Weiqi Yu:	Here's how to do that "magic" in Swift FYI: https://www.youtube.com/watch?time_continue=1081&v=iLDldae64xE&feature=emb_title
+01:14:25	Kylie Jue:	@Liza yeah the questions won’t be suer abstract – like it won’t be questions like “compare BFS vs DFS”
+01:14:39	Kylie Jue:	It will be more like look at a piece of code and analyze the output/big O
+01:14:55	Kylie Jue:	Or given a problem definition, write a function to solve the problem
+01:15:23	Liza George:	ok, that seems more doable too ^^;. Thank you!
+01:16:10	Liza George:	oh workshops?
+01:16:16	Liza George:	or like the speaker events?
+01:17:57	Weiqi Yu:	@Jordan Actually you'll need to manually do something to make that "magic" and it's not so handled by default in Swift. You may watch the video in the link above if you are interested.
+01:19:27	Weiqi Yu:	That's done by wrapping a class within a struct
