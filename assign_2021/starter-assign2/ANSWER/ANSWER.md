@@ -66,16 +66,22 @@ void duplicateNegatives(Queue<int>& q) {
 
 ```txt
 
+学校的花名册系统.伴随着学生数量的线性增长,我们应该控制时间复杂度以对数关系增长.
+对于如何判断能否优化代码:我们应该先仔细识别这段代码具体要解决的问题和需求,之后在设计代码的时候,严格实现需求.同时在权衡时间复杂度和空间复杂度的问题时,需要考虑实际中,储存制造的排放和散热的排放之间的对比关系.
 ```
 
 **Q9. According to the contract that IBM struck with the state of Indiana, the criteria for optimization were improving efficiency of the overall welfare system and reducing fraud. Criteria for reducing wait times and wrongful denials were not included. However, wrongfully denying benefits has a huge negative impact on the citizens who rely on the system. If criteria like minimizing wrongful denials were not included in the contract, should engineers have included them in their optimization algorithm? Why or why not?**
 
 ```txt
-
+理论上不用考虑,但是实际上应该考虑.
+毕竟将这类"常见的特殊情况"考虑在其中并没有显著增加工程开发的成本,几个工程师的加班费用和整个州的相关损失微不足道.
+不过,即便如此,鉴于合同的确没有包括,所处理论上还是IBM胜诉.现实的解决办法是以后处理类似合同时,应该将常见的失败和欺诈情况的处理,包含在条款中.
 ```
 
 **Q10. Imagine that after completing CS106B you are hired at IBM as an engineer working on this system. How might you have approached designing and setting the goals of this system? How might you apply algorithmic analysis tools to build a system that achieved the desired goals? Could you do so in a way that avoids the severe negative impacts on users of the system that are outlined in the case study?**
 
 ```txt
-
+将这些"常见的特殊情况"作为测试案例,放入函数的一般测试中.
+评估复杂度的时候,不紧要评估合法输入的复杂度,也要评估非法输入的复杂度.
+通俗的解决办法还是写大量可能的测试案例(比如参考历史上的输入数据,甚至考虑系统会遭受到何种攻击)
 ```
