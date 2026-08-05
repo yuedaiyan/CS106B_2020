@@ -16,13 +16,11 @@ void displayJury(Vector<juror>& jury){
     cout << endl;
 }
 
-
-void findAllUnbiasedJuries(Vector<juror>& allCandidates){
+void findAllUnbiasedJuries(Vector<juror>& allCandidates) {
     /* TODO: Fill me in! */
 }
 
-
-PROVIDED_TEST("Show jury selection process"){
+PROVIDED_TEST("Show jury selection process") {
     cout << endl;
     Vector<juror> allCandidates = {{"Nick", -3}, {"Kylie", 3}, {"Trip", 0}};
     findAllUnbiasedJuries(allCandidates);

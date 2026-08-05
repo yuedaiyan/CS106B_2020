@@ -35,12 +35,14 @@ Set<GridLocation> generateValidMoves(Grid<bool>& maze, GridLocation cur) {
 /* Helper function for finding the solution to a maze using depth-first search.
  */
 bool solveMazeHelper(Grid<bool>& maze, Stack<GridLocation>& path, GridLocation cur) {
+    MazeGraphics::highlightPath(path, "blue");
+    cerr << maze << endl;
+
     /* TODO: Fill me in! */
     return false;
 }
 
-/* Solve the maze using depth first search
- */
+/* Solve the maze using depth first search */
 Stack<GridLocation> solveMaze(Grid<bool>& maze) {
     MazeGraphics::drawGrid(maze);
     Grid<bool> mazeCopy = maze;
@@ -71,7 +73,6 @@ void readMazeFile(string filename, Grid<bool>& maze) {
      * understand what is going on here.
      */
     ifstream in;
-
     if (!openFile(in, filename))
         error("Cannot open file named " + filename);
 
