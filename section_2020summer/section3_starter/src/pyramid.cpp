@@ -10,7 +10,6 @@
  * for creating an amazing testing harness!
  */
 
-#include <iostream>
 #include "testing/SimpleTest.h"
 #include "testing/TextUtils.h"
 using namespace std;
@@ -23,8 +22,7 @@ using namespace std;
  * the number of people in that pyramid.
  */
 
-int peopleInPyramidOfHeight(int n){
-    // TODO: Your code here
+int peopleInPyramidOfHeight(int n) {
     if (n == 1) {
         return 1;
     } else {
@@ -33,7 +31,6 @@ int peopleInPyramidOfHeight(int n){
 
     return 0;
 }
-
 
 /* * * * * Provided Tests Below This Point * * * * */
 
