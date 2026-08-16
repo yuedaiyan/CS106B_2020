@@ -12,10 +12,7 @@
 #include "testing/SimpleTest.h"
 using namespace std;
 
-
-/* Returns a set of valid North, South, East, and West moves from the current
- * GridLocation.
- */
+/* Returns a set of valid North, South, East, and West moves from the current GridLocation. */
 Set<GridLocation> generateValidMoves(Grid<bool>& maze, GridLocation cur) {
     Set<GridLocation> moves;
     for (int dr = -1; dr <= 1; dr++) {
@@ -32,13 +29,27 @@ Set<GridLocation> generateValidMoves(Grid<bool>& maze, GridLocation cur) {
     return moves;
 }
 
-/* Helper function for finding the solution to a maze using depth-first search.
- */
+/* Helper function for finding the solution to a maze using depth-first search. */
 bool solveMazeHelper(Grid<bool>& maze, Stack<GridLocation>& path, GridLocation cur) {
     MazeGraphics::highlightPath(path, "blue");
-    cerr << maze << endl;
+    GridLocation exit = { maze.numRows() - 1, maze.numCols() - 1 };
+    if (cur == exit) {
+        MazeGraphics::highlightPath(path, "green");
+        return true;
+    } else {
+        Set<GridLocation> validMoves = generateValidMoves(maze, cur);
+        // 对于三种可能性情况
+        for (GridLocation tryLoc : validMoves) {
+            path.add(tryLoc);
+            maze[cur] = false;
+            if (solveMazeHelper(maze, path, tryLoc)) {
+                return true;
+            }
+            path.pop();
+            maze[cur] = true;
+        }
+    }
 
-    /* TODO: Fill me in! */
     return false;
 }
 
@@ -56,6 +67,7 @@ Stack<GridLocation> solveMaze(Grid<bool>& maze) {
 }
 
 /*
+ * TODO:
  * The given readMazeFile function correctly reads a well-formed
  * maze from a file.
  *

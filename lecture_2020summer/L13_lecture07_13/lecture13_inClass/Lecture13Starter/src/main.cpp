@@ -12,9 +12,9 @@ int main() {
         return 0;
     }
 
-    Set<string> teachingTeam = {"Nick", "Kylie", "Trip"};
+    Set<string> teachingTeam = { "Nick", "Kylie", "Trip" };
+    // Set<string> teachingTeam = { "A", "B", "C", "D" };
     listSubsets(teachingTeam);
-
 
     Grid<bool> maze;
     readMazeFile("res/33x41.maze", maze);
