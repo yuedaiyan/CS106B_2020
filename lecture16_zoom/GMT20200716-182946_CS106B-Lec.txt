@@ -1,0 +1,171 @@
+00:08:38	Hemant Chaudhary:	Is there a link to Trip's review session today?
+00:08:41	I. Lemhadri:	We have two kylies today
+00:09:23	Kylie Jue:	@Hemant I think it’s on the announcements
+00:09:29	Ryan Bernstein:	search engines
+00:09:32	catherine deng:	Schedules
+00:09:33	Kylie Jue:	if not we’ll get it up after lecture
+00:09:34	Hemant Chaudhary:	great thanks!
+00:09:37	Lukas Fullner:	Tensor Flow
+00:09:54	Aadi M Rane:	websites
+00:10:10	Kyle Thomas Booker:	Databases
+00:11:07	edouard des:	Everything is an object which has attributes, I think. A table has a color, a shape, and also has an array of items on top of it, each with different classes. You may have a cup on top of it that contains a certain amount of another object that is an instance of water… it’s nested objects all the way down!
+00:15:15	Elan Smolar Eisenberg:	Is nick breaking up for anyone else?
+00:15:27	Lukas Fullner:	Only that one time
+00:15:28	Kenny Wang:	it's not too bad
+00:15:39	max chou:	Do we #include in the cpp file as well?
+00:15:46	Kylie Jue:	no just the header file
+00:17:19	Michael M Hu:	If there are multiple member variables in a class (say multiple vectors), how do you specify which one you’re calling to edit?
+00:17:59	Kylie Jue:	@Michael the member variables should have different names, so you can just refer to them by name
+00:21:00	Tongjun (Albert) Zhang:	do we need to #include the libraries in the header file?
+00:21:11	Lukas Fullner:	Structs cannot contain methods correct?
+00:21:36	Kylie Jue:	@Tongjun we have to include string here since we refer to the string type.  so only if you really explicitly need the library in the header file (otherwise the implementation file is fine)
+00:21:57	Kylie Jue:	@Lukas technically structs can contain methods, but we’re not going to deal with structs with functions in this class
+00:22:57	Kenny Wang:	is it fine to fully define the functions in the header file? or is this considered bad style?
+00:23:22	Kenny Wang:	so like defining these in BankAccount.h instead of BankAccount.cpp
+00:24:05	Kylie Jue:	@Kenny it’s considered bad style even though you could technically do it.  we talked more extensively about that in the Q&A at the end of the class yesterday but the short reason is that if others are looking at the header file to understand what they can do with your class, you don’t want them to see the implementation part (since it’s meant to abstract that away)
+00:24:38	Kenny Wang:	ahh, I seethanks
+00:25:08	kevin yang:	use m_<name> for member variables?
+00:25:35	Ryan Bernstein:	couldn't one just use different param names?
+00:25:58	Liza George:	does this work the same way in c++ as it does in java?
+00:26:04	Liza George:	** the this keyword
+00:26:15	Kylie Jue:	@Ryan yes that would work as well!  some folks like this style better so it’s super clear what you’re passing into the constructor as well, but you can do what makes more sense for you
+00:26:21	Oz Gitelson:	can we use this. instead of this->
+00:26:29	Ryan Bernstein:	Ok, tahnks!
+00:26:39	Kylie Jue:	@Liza - I’m not super familiar with how this works in Java so I’d have to look into that
+00:26:39	Sedef Emekli:	Can we show as this.name or is -> crucial
+00:27:09	Kylie Jue:	@Oz you have to use this->.  this. means something different
+00:29:59	Junhao Wang:	can we use this-> here for the withdrawal
+00:30:03	edouard des:	Out of curiosity, could you do this->withdraw(amount) or BankAccount::withdraw(amount) or this.withdraw(amount)?
+00:30:32	Kylie Jue:	@Edouard I’m not sure off the top of my head - we can try those at the end of lecture during Q&A
+00:30:52	Kylie Jue:	@Junhao what do you mean by “here”?
+00:31:01	edouard des:	Okay perfect!
+00:31:06	Elan Smolar Eisenberg:	Why are you calling them in a function? Would it work outside a function?
+00:31:22	Kylie Jue:	@Elan What do you mean by "them"?
+00:31:24	Kyle Thomas Booker:	>=?
+00:31:42	Kylie Jue:	@Kyle yes it should be >=
+00:31:57	Junhao Wang:	like this->withdraw
+00:32:17	Elan Smolar Eisenberg:	“kylie.withdraw” could I call that outside the function if I properly define Kyle?
+00:32:19	Elan Smolar Eisenberg:	Kylie
+00:32:49	Kylie Jue:	@Elan - the bankDemoClasses() is just a function we’re calling in main.  you could do that directly inside main, but all of our code in main.cpp should be in some function
+00:32:51	Liza George:	will we learn more about what "gracefully" handling an error means latter in the course
+00:32:58	Liza George:	*?
+00:33:30	alan hu:	When is this-> absolutely necessary?
+00:34:25	Kenny Wang:	I'm still kind of confused on -> vs .
+00:34:27	Tongjun (Albert) Zhang:	Can different objects of the same class access each other's private variables?
+00:34:28	Kylie Jue:	@Liza not beyond our error handling library
+00:34:52	Kylie Jue:	@Tongjun no
+00:35:34	Aadi M Rane:	is there a toString method (like in java) that just allows you to just cout the account? (for example, cout << nick << endl)
+00:36:17	shreyas ravi:	is the implicit constructor how casting works?
+00:36:37	Kylie Jue:	@Aadi there is a way to override cout in C++ but it’s not as clean as just overriding a method like toString in Java (we won’t go over this but you can see how to do it online/we can go over t during OH if you’er curious)
+00:37:01	Qing Lin:	Why is the constructor and the methods in the .cpp file not the header file?
+00:37:04	Kenny Wang:	how do we submit it exactly?
+00:37:08	Kylie Jue:	@Shreyas I don’t think so. Casting works differently
+00:37:40	ian rundle:	Will Trip’s review session be recorded and posted as well afterwards?
+00:38:04	Kylie Jue:	@Kenny submission happens through bluebook
+00:38:05	Kylie Jue:	@Ian yes
+00:38:07	Kyle Thomas Booker:	Are we going to be getting a reference sheet?
+00:38:13	Kylie Jue:	@Kyle everything is open notes
+00:38:15	Kenny Wang:	where do I find bluebook?
+00:38:27	Kylie Jue:	@Kenny read the assessment page on the website
+00:38:32	Kenny Wang:	got it
+00:39:05	Kyle Thomas Booker:	So we have to compile our own reference sheet, I'm just asking because I know for 106A they gave us the reference sheet we were supposed to use.
+00:39:19	Kylie Jue:	@Qing it’s considered bad style even though you could technically do it.  we talked more extensively about that in the Q&A at the end of class yesterday if you want to take a look there, but short answer is that if others are looking at the header file to understand what they can do with your class, you don’t want them to see the implementation part (sine thats meant to be abstracted away)
+00:40:10	runze yu:	Can we define more than one classes in one header file?
+00:41:00	Kylie Jue:	@Kyle I see - I’ll talk to Nick afterward about if we think it would be beneficial to put together a reference sheet.  Our initial reasoning was that it’s beneficial to have students to study by compiling your own references
+00:41:01	Kenneth Fischer:	Is it possible for C++ to refuse to give you storage space? I guess the program would crash in that case?
+00:41:18	Kylie Jue:	@runze yes you could
+00:42:13	Kylie Jue:	@Kenneth yes that would only be if you ran out of memory I believe
+00:42:35	runze yu:	How do we use the class and member functions in other files? Do we just #include the header file?
+00:42:45	Kylie Jue:	@runze yes
+00:43:21	Kylie Jue:	you can see an example of that in today’s main.cpp using the bank account class
+00:44:14	Nadia Palar:	Is it possible to have nested includes/header files? As in one header file that includes other header files?
+00:44:58	Kylie Jue:	@Nadia - yes you can include other header files in your header file.  we did that yesterday when we used the vector to define random bag
+00:47:53	Oz Gitelson:	how do these differ from the dataType& variables we pass through functions
+00:48:45	Kylie Jue:	@Oz references are very similar to pointers in that they use memory addresses, but we can use references like normal variables of that type.  you’ll see that we have to operate on pointers to that data type a little differently
+00:49:03	alan hu:	1. Does a pointer know how long its array is?
+00:49:10	Kylie Jue:	@Alan no
+00:49:18	Usman Iqbal Hanif:	If arr is declared to hold a memory location, how can we just do arr[i]? Is that even a thing?
+00:49:18	alan hu:	Are the sizes of the boxes the same for diff data types?
+00:49:28	kevin yang:	Does a point store the location for all locations in the array
+00:49:35	kevin yang:	or only the location for the first index
+00:50:06	Kylie Jue:	@Alan no the size of the boxes will be different depending on the type
+00:50:11	alan hu:	thanks
+00:50:20	Kylie Jue:	@Kevin just the first location
+00:50:40	Liza George:	does the type of the pointer have to match the type of the array?
+00:50:44	Usman Iqbal Hanif:	Do we not need to dereference? This may be out the scope, or we may discuss later?
+00:50:46	Kylie Jue:	@Liza yes
+00:50:55	Kylie Jue:	@Usman we’ll discuss that later!
+00:51:06	Usman Iqbal Hanif:	Oh nvm just heard Nck’s answer. So we should just assume its good!
+00:51:13	Usman Iqbal Hanif:	Ok thanks!
+00:51:19	Shifeng Hong:	what do the keyword “new” does？
+00:51:39	Hanna Mofid:	are pointers only used with creating and using arrays?
+00:51:41	Kylie Jue:	@Shifeng that’s what’s allocating dynamic memory for us - we’ll talk about it more in a bit
+00:51:53	Kylie Jue:	@Hanna so far yes.  we’ll talk more about pointers next week
+00:51:55	Shifeng Hong:	ok thanks
+00:52:12	Hanna Mofid:	Ok got it
+00:52:20	Hemant Chaudhary:	How is using an array different than using a vector?
+00:52:28	Kylie Jue:	@Hemant we have a slide on that coming up :)
+00:52:40	Hemant Chaudhary:	Great!
+00:52:51	Oz Gitelson:	could we have used a foreach loop in the previous example?
+00:53:20	Kylie Jue:	@Oz will answer out loud in a second
+00:53:26	Oz Gitelson:	great
+00:54:08	Elizabeth Vasquez:	Once you allocate program memory (using the pointer)  for a certain variable, can you give back the program memory and delete the variable?
+00:54:31	Kylie Jue:	@Elizabeth yes!  we’ll talk about deleting later in this lecture
+00:54:46	dyson ye:	Can you sort an array?
+00:55:06	Evan Baldonado:	Is there any risk to other files on our computers if we forget bounds-checking while completing the assignment?
+00:55:13	Kylie Jue:	@dyson you can write code to do that but you’d have to do it manually by moving things around
+00:55:34	ian rundle:	Could you interfere with the memory of other programs that are running too?
+00:55:45	Kylie Jue:	@Evan C++ will make sure files on your computer don’t get damaged due to out-of-bounds issues
+00:56:06	Evan Baldonado:	Thanks!
+00:56:41	Kylie Jue:	@Ian - depends on what you’re doing (e.g. this news example).  for the things we’re doing in this class, that won’t happen
+00:59:08	Liza George:	wait so is the pointer itself stored on the heap or stack?
+00:59:49	Kylie Jue:	@Liza - good question, will answer out loud
+01:00:53	runze yu:	Does memory leak persist after the program ends or is terminated?
+01:02:05	Shifeng Hong:	I don‘t understand the concept of “Stack”， isn't it a concept of the order of how computer execute code？
+01:02:38	Kenny Wang:	do you need the [] behind the delete?
+01:03:36	Kylie Jue:	@Shifeng - when we refer to the memory space “the stack”, it’s an area of memory on the computer.  there’s also an ADT called a Stack, but this is just an abstract way of describing how the computer stores particular info.  the reason we call the memory space of “the stack” a stack is actually that variables/functions in memory get stored like the stack data structure.
+01:03:40	Kylie Jue:	@Kenny yes
+01:03:44	Siddharth Balaji:	How do we get rid of the pointer?
+01:04:23	paul gialis:	thank you
+01:04:24	Kevin H Fan:	Thank you!
+01:04:26	Zachary Alon:	Thank you
+01:04:27	Guozhen Miao:	Thank you
+01:04:27	Kenneth Fischer:	Thank you!
+01:04:28	julia wang:	Thank you!
+01:04:30	runze yu:	Thank you
+01:04:34	Angela Zhang:	Thank you!
+01:04:37	Liza George:	@siddarth I think it'll just go out of scope
+01:04:41	alan hu:	Could we go over -> vs .
+01:04:52	Kylie Jue:	sure
+01:06:31	alan hu:	Aww ok
+01:07:24	runze yu:	Can you go over memory leak after program ends?
+01:07:28	alan hu:	Thanks!
+01:07:42	Hanna Mofid:	So, where would we delete[] the arr? Like in the main function at the end? or..
+01:08:05	karan parikh:	Can we start the exam at any time tomorrow?
+01:08:17	karan parikh:	And will there be today’s lecture content on the exam?
+01:08:19	Kylie Jue:	@Hanna we’ll see it’s used in class in a function called a “destructor” that gets called for  classes. but you can also call it in other places depending on when it’s appropriate for your code
+01:08:35	Hanna Mofid:	Ohh ok thanks
+01:08:57	Kylie Jue:	@Karan yes you can start it any time starting tomorrow.  the content only goes up to the end of last week (last Thursday is the last lecture included in terms of content)
+01:09:12	karan parikh:	gotcha thx
+01:10:24	Liza George:	is there any relationship between the stack we talked abt today and the stack ADT?
+01:10:29	max chou:	How come when initializing an instance of BankAccount we used (“a name”, “amount”) but other classes like Vectors use = { }
+01:11:53	Kylie Jue:	@Liza yes this is actually because information like variables/functions on the stack are stored like a stack!
+01:12:01	Kylie Jue:	which is why we looked at stack frames for recursion the way we did
+01:13:12	Liza George:	so like it's FIFO and you can't like
+01:13:15	David Huang:	If I forget to delete a array and  ran the program. That creates memory leak right? If I realized that after running the program, is there any I can go back and delete that array to stop the memory leak?
+01:13:24	Liza George:	access parts of the stack by index, like for the stack ADT?
+01:13:41	Shifeng Hong:	^Thanks！I understand function call are like stack but how come variables are store in stack？seens like we csn access a variable at any point of the program
+01:14:18	Kylie Jue:	@Liza i’m not sure if it’s totally like a stack (no indices), but it orders things using FIFO for sure
+01:14:39	Junhao Wang:	whats the difference between the pointer way vs just declaring an array like string arr[n]? Is it to allocate memory better or something?
+01:17:09	Kylie Jue:	@Junhao will answer out loud
+01:17:18	Junhao Wang:	Thank you!
+01:17:42	Shifeng Hong:	oh so variable is part of function，so since function is store in stack then variable is store in stack too
+01:17:51	Kylie Jue:	@Shifeng - so the stack part is more to do with the functions being stacked (variables that exist within that function are not literally stacked)
+01:18:06	Shifeng Hong:	I see
+01:18:09	Shifeng Hong:	Thank you
+01:19:21	Liza George:	so when the stack frame is ..deleted?? idk how you'd say it but when the fuction returns and the last stack frame is run instead, how are the frames separated? like how does the program now when the old frame ends and the new one begins?
+01:19:29	Liza George:	sorry idk if I'm being very clear
+01:20:25	Liza George:	sorry my audio cut out, was I supposed to say something?
+01:20:57	Kylie Jue:	go ahead and ask out loud after Edouard!
+01:21:06	Liza George:	oh cool ok
+01:24:58	Kenneth Fischer:	Thank you!

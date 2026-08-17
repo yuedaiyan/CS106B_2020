@@ -1,0 +1,66 @@
+00:11:02	Sedef Emekli:	applications of the structures we learned in the actual industrial use
+00:11:06	Kenny Wang:	what are we typically expected to know in order to get a j o b in cs?
+00:11:15	kathleen bryan:	Best class to take directly after this one
+00:11:16	louise marzolf:	algorithms used in real life
+00:11:17	Kenneth Fischer:	What classes would you recommend next?
+00:16:15	Kenny Wang:	wasn't our binary heap sort of a tree?
+00:16:49	kylie jue:	@Kenny Yes! We’ll actually briefly reference that later :) The difference with today’s trees is that they’ll actually form a tree structure instead of an array
+00:16:56	Angela Zhang:	happy, healthy lungs
+00:17:07	tomhal@stanford.edu:	No smokers here
+00:17:14	Kenny Wang:	don't smoke, kids
+00:17:51	Aadi M Rane:	how are these trees different from those recursive trees we covered all the way back when did recursion?'
+00:18:22	kylie jue:	@Aadi - they’re conceptually the same!  Today we’re going to talk about how to actually implement trees as a way of storing information
+00:19:51	tomhal@stanford.edu:	So tries?
+00:20:15	Demi Lei:	is that similar to DOM?
+00:20:41	kylie jue:	@Thomas Tries are a type of tree but we won’t cover them as an ADT in this class
+00:20:48	kylie jue:	@Demi yes!
+00:24:13	Kenneth Fischer:	Does the tree have to fill from left to right?
+00:24:38	kylie jue:	@Kenneth no they don’t have to
+00:28:03	Kenny Wang:	is there anything wrong with say … linking both directions? (parent to child and child to parent)
+00:28:31	kylie jue:	@Kenny - not necessarily.  It mostly has to do with efficiency of how much information you’ll end up storing (and if you want to actually constrain how people traverse the information)
+00:28:41	Kenny Wang:	gotcha
+00:29:07	tomhal@stanford.edu:	You know I think I might want to cover tries for my final project...
+00:29:48	kylie jue:	@Thomas you definitely could!  as long as you’re also incorporating concepts we’ve covered in this class as well
+00:30:26	Shifeng Hong:	Is there a restriction on number of subnodes？
+00:30:53	kylie jue:	@Shifeng not in generally defined trees, no.  we’ll see trees where we’ll constrain the number of child nodes later
+00:31:19	Shifeng Hong:	@Kylie got it thx
+00:31:24	tomhal@stanford.edu:	What is the most common use for trees?
+00:32:00	kylie jue:	@Thomas - there are lots.  I’m not sure if there would be one that’s considered the “most common.”  But we’ll learn tomorrow that data structures like sets and maps are actually backed by trees
+00:32:14	tomhal@stanford.edu:	neat
+00:32:36	Kelly L. Boles:	So if depth = height, you’re traversing a path with a max # of nodes for a given path in the tree?
+00:34:14	kylie jue:	@Kelly depth is the length of a given path and height is basically the maximum depth (from root to farthest down leaf) - so I think the answer to the question is yes (if I’m understanding your question correctly)
+00:34:42	Kevin H Fan:	Does this assignment have a grace period?
+00:34:57	kylie jue:	@Kevin assignment 5 does yes.  Assignment 6 doesn’t
+00:37:42	Demi Lei:	what is the difference between a binary tree and a binary heap? they look really similar
+00:37:50	Aadi M Rane:	do binary trees have to be filled from left to right?
+00:38:15	kylie jue:	@Demi - they are very similar!  You could technically implement a binary heap as a tree.  A binary heap just has more constraints around how the information is stored/ordered
+00:38:30	Demi Lei:	thank you!
+00:38:33	kylie jue:	@Aadi no they don’t have to be
+00:39:37	Hemant Chaudhary:	So it is similar to the MazeCell from Assign 4 with multiple links 
+00:40:13	kylie jue:	@Hemant - yes. The MazeCell had more links than a tree would though, and we’re not able to have cycles with TreeNodes
+00:40:31	Hemant Chaudhary:	Ah right- thanks
+00:47:17	louise marzolf:	Is that Node referencing used only in c++ or does it work for most languages?
+00:48:00	Elan Smolar Eisenberg:	What’s the main difference between a binary heap and a tree?
+00:48:33	kylie jue:	@Louise The node struct is something we defined for the purposes of creating trees/linked lists/etc (and you can find the definition in the header files we provide).  I’m not sure what other languages have structs, but “Node”s specifically are just a struct we’ve defined
+00:49:12	kylie jue:	@Elan A binary heap has more constraints on the order/way that the data is stored (e.g. completeness), but you could use a binary tree to implement a binary heap!
+01:01:38	Jennifer Anna Bonello:	Thank you
+01:01:39	Kevin H Fan:	Thank you
+01:01:40	Kenneth Fischer:	Thank you!
+01:01:42	Michael M Hu:	Thanks!!
+01:01:44	Lawrence Li:	thanks!
+01:01:45	Angela Zhang:	Thank you!
+01:03:44	Liza George:	I'm not sure if this was asked before, but how would we specify the big-oh of tree traversal? is it like O(height)?
+01:04:24	kylie jue:	@Liza Yes, the big-O would be O(height)!  Which is O(log n) where n is the number of items in the tree since that’s how many levels exist in the tre
+01:04:35	kylie jue:	*tree
+01:04:55	Liza George:	oh ok, thanks!
+01:05:08	Liza George:	...wait how did you get to the log? is that only for binary trees?
+01:05:39	Liza George:	oh wait I should have asked big-oh of finding any specific node
+01:05:43	Liza George:	not traversal
+01:05:46	kylie jue:	Ah yes - sorry that’s specifically for searching in binary trees
+01:06:20	kylie jue:	*what I said in the chat
+01:08:07	Demi Lei:	Thank you!
+01:08:11	Liza George:	oh that lookup where you knew which child node to go to at each level, does that only work on a 'sorted' tree?
+01:08:34	kylie jue:	Yes! We’ll cover that in more depth tomorrow (which is why we call them search trees) :)
+01:08:59	kylie jue:	if the elements were sort of randomly sorted/unstructured, we couldn’t guarantee the O(log n) search behavior
+01:09:08	Liza George:	ooh ok. thank you!
+01:09:56	Shifeng Hong:	Thank you

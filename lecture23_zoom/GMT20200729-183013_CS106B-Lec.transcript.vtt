@@ -1,0 +1,1962 @@
+WEBVTT
+
+1
+00:00:05.040 --> 00:00:13.740
+Nick Bowman: All right. Hello everyone. Let's go ahead and get started. So today we're going to be talking about yesterday, we started that sort of like discussion about
+
+2
+00:00:14.130 --> 00:00:21.030
+Nick Bowman: sorting algorithms and today we're going to be finishing that up by talking about a sort of a new class of sorting algorithms called divide and conquer algorithm.
+
+3
+00:00:21.630 --> 00:00:34.140
+Nick Bowman: And so you can kind of start to get a little bit of adjustment of what they might look like just based off the name. And so, this question is what is an example of something that you have to do in the real world. And that's made a lot easier if you do 50 divided up across
+
+4
+00:00:35.160 --> 00:00:37.590
+Nick Bowman: And so start thinking about that and put your answers in the chat.
+
+5
+00:00:39.090 --> 00:00:42.150
+Nick Bowman: And so we're going to be today, right, so we're still going to be in
+
+6
+00:00:42.330 --> 00:00:50.610
+Nick Bowman: The land of talking about through a real world sorting algorithms. And we're actually going to talk about to sorting algorithms that are actually used a lot in practice we recovered to yesterday that are
+
+7
+00:00:50.760 --> 00:00:56.400
+Nick Bowman: Sort of good learning tools, but today we're actually gonna be talking about sorting algorithms that are really used in the real world.
+
+8
+00:00:57.510 --> 00:01:03.330
+Nick Bowman: And so what we're going to talk about is we're going to answer this question of just how can we design better and more efficient.
+
+9
+00:01:05.010 --> 00:01:18.810
+Nick Bowman: And to do that, we'll talk about a little bit of review from yesterday with Let's wrap up and insurance sorting and then the two sorts will learn about are called merge sort, and quick and you're both of these in your assignment and so on. We'll talk about those.
+
+10
+00:01:20.400 --> 00:01:21.120
+kylie jue: Hey, Nick, real quick.
+
+11
+00:01:21.750 --> 00:01:22.080
+Nick Bowman: Yeah.
+
+12
+00:01:22.140 --> 00:01:24.120
+kylie jue: People are saying it's a little hard to hear you.
+
+13
+00:01:27.360 --> 00:01:29.100
+kylie jue: I don't know if you're using a different microphone.
+
+14
+00:01:29.610 --> 00:01:30.180
+Nick Bowman: Is that better.
+
+15
+00:01:30.870 --> 00:01:31.860
+kylie jue: That is better. Yes.
+
+16
+00:01:31.980 --> 00:01:32.190
+Okay.
+
+17
+00:01:33.330 --> 00:01:41.670
+Nick Bowman: Um, yeah, so. So just to start off with. So we'll have a review of this wrap up from yesterday's on the interesting
+
+18
+00:01:42.900 --> 00:01:47.940
+Nick Bowman: So basically what we finished up with Lucas yesterday was talking about this idea of
+
+19
+00:01:50.400 --> 00:02:04.200
+Nick Bowman: Detects got to read it there anyway. We talked about this idea of operations that involve rewind multiple nodes in the cluster. This is what I should say, and I will, I will fix that. And we also talked about sort of kept reinforcing this idea passing by reference.
+
+20
+00:02:06.000 --> 00:02:14.850
+Nick Bowman: And sort of putting that all together to be sort of more complex operations and and in doing so we sort of finished talking about all four classes of our
+
+21
+00:02:15.480 --> 00:02:24.090
+Nick Bowman: Quest operations and and so specifically we talked about Rewind insertion, deletion from the middle of linked lists. Right. And so what we saw with that.
+
+22
+00:02:24.810 --> 00:02:40.080
+Nick Bowman: Is sort of what we needed to do in order to manage rewiring of multiple nodes in the weakness was to just introduce more partners. Right. And so we sort of as the complexity of operations increases. We have to keep tracking or information. We got to keep track of more different nodes.
+
+23
+00:02:41.370 --> 00:02:46.950
+Nick Bowman: And so we introduced this idea of, in addition to a current pointer which we saw when we were doing commercials.
+
+24
+00:02:47.280 --> 00:02:58.680
+Nick Bowman: On Monday we also have this idea of a previous point right because we need to keep track to the previous element blessed in order to be able to do either insertion or Moodle or just whatever rewiring operations.
+
+25
+00:03:00.060 --> 00:03:07.710
+Nick Bowman: But obviously, introduce more edge cases really cognizant about not to reference and know pointers and handling edge cases when inserting into the beginning of a list.
+
+26
+00:03:08.400 --> 00:03:19.020
+Nick Bowman: So make things a little bit more complex, but it also increased sort of the capacity of what we're to do and we saw cool things like removing from linked lists and also sort of inserting and sorted order, which is another interesting
+
+27
+00:03:20.430 --> 00:03:20.970
+Nick Bowman: Application.
+
+28
+00:03:22.110 --> 00:03:29.580
+Nick Bowman: And so what you see now, right, you've seen all these different ways of manipulating this and you've seen list for inside and outside of classes.
+
+29
+00:03:30.330 --> 00:03:36.750
+Nick Bowman: In pointers pass by value and by reference. And so our advice as you go on to assignment five, and really practice all these skills.
+
+30
+00:03:37.110 --> 00:03:43.380
+Nick Bowman: And is as always right to draw out the pictures and sort of be very cognizant, okay, what sort of operations and they doing
+
+31
+00:03:43.950 --> 00:03:53.370
+Nick Bowman: What pointers or need to keep track of, you know, what are those pointers different kinds of time and also make sure to test test really sort of on Thursday and test your individual operations.
+
+32
+00:03:54.360 --> 00:03:59.220
+Nick Bowman: And I'll revisit and what that means in the context of implementing sort of at the end of today's
+
+33
+00:04:01.770 --> 00:04:12.540
+Nick Bowman: And then we also talked about sorting. So we had an introduction to starting we defined it as this task, but we want to sort of sort data points into ascending or descending order by some quantity and so it gave us a way to organize that data.
+
+34
+00:04:13.920 --> 00:04:23.700
+Nick Bowman: We talked about selection sort, which was an open squared algorithm and, as implied by the name it sort of involved. This idea of repeatedly selecting the smallest for meaning Elena can list.
+
+35
+00:04:24.030 --> 00:04:28.680
+Nick Bowman: And then just putting into the front. And so if we kept doing that we could eventually build up a sort of list.
+
+36
+00:04:29.760 --> 00:04:35.880
+Nick Bowman: And we saw the selections for, you know, simple and relatively straightforward to understand, but not the most efficient algorithm.
+
+37
+00:04:36.870 --> 00:04:43.980
+Nick Bowman: And then we saw in certain sort which was this idea of sort of repeatedly inserting an element into a small sort of sequence that we go back
+
+38
+00:04:44.460 --> 00:04:53.610
+Nick Bowman: And so we start off with a sequence or one element. And then we sort of insert when I'm at the time that the correct location and then over time we sort of build up this large sorted sequence.
+
+39
+00:04:55.290 --> 00:05:01.800
+Nick Bowman: And we saw that insurgent sort of got a little bit better. So, in the worst case insertion. So it was still opens for which is not great.
+
+40
+00:05:02.820 --> 00:05:15.210
+Nick Bowman: But we saw that there was actually certain scenarios, about how the data could have been sort of presented in the original list that actually makes insertion sort of lot better and actually get all the way down to around in the best case scenario, different kind of get lucky.
+
+41
+00:05:16.320 --> 00:05:21.660
+Nick Bowman: And and so because compared to select which was always oh and square there was at least you know somewhat of
+
+42
+00:05:23.310 --> 00:05:29.160
+Nick Bowman: That we still ran into this barrier that even on average, and certain sort for just generate random values is still going to take over.
+
+43
+00:05:29.610 --> 00:05:38.790
+Nick Bowman: So we, we had sort of gotten a little bit of improvement, but that improvement banked on kind of getting lucky about the Input Form that sort of being sorted. And so we still wanting to sort of do better.
+
+44
+00:05:40.050 --> 00:05:44.070
+Nick Bowman: And so that's what we're going to talk about today is basically how can we do better than open switch
+
+45
+00:05:46.020 --> 00:05:51.450
+Nick Bowman: And so to answer that question. We're going to sort of design and look at sort of to more efficiently.
+
+46
+00:05:53.070 --> 00:05:57.390
+Nick Bowman: But before we do that I want to talk about this general category of algorithms that recall divided
+
+47
+00:05:58.800 --> 00:06:08.520
+Nick Bowman: And we've seen this in some form are ready and when we were sort of approaching or personal problems. And we sort of broke things down and retrain yourself solid smaller version of the problem.
+
+48
+00:06:09.450 --> 00:06:21.450
+Nick Bowman: But it wasn't actually motivate why why such a strategy why actually sort of dividing up a problem and sort of solving a bunch of smaller problems in parallel connection was improved efficiency. It's not abundantly clear why that
+
+49
+00:06:22.110 --> 00:06:27.780
+Nick Bowman: We know that it is a problem solving strategy and it's one that we know how to do. But why does it actually sort of work.
+
+50
+00:06:29.010 --> 00:06:34.830
+Nick Bowman: And so if you think about it, we've seen a couple of open squared sorting so far. And we want to start getting better.
+
+51
+00:06:36.450 --> 00:06:51.180
+Nick Bowman: So imagine the scenario. So you have sort of this sorted list or sorry, the unsorted lists right here and I tell you that that if you run in search and sort on the following last. It takes about two seconds to run. So keep teams are some value, looking up today.
+
+52
+00:06:52.800 --> 00:07:04.260
+Nick Bowman: And the question that I'm asking you is in via pole format is look at look at these two arrays. Right, so they're, they're exactly the same input, but just split into two. So it's not to individually.
+
+53
+00:07:05.910 --> 00:07:13.230
+Nick Bowman: So my question is, how many seconds, will it take to sort one of these two right so. So how long will it take to sort each one of these
+
+54
+00:07:13.740 --> 00:07:25.770
+Nick Bowman: In terms of teas over 30 seconds to sort the overall large one. How many seconds, is it going to take approximately two to sort using the same sorting through using insurgents work for both
+
+55
+00:07:27.750 --> 00:07:29.310
+Nick Bowman: What is that what is that
+
+56
+00:07:43.950 --> 00:07:54.900
+Nick Bowman: Alright, cool. So let's go ahead and share the results. And so it seems we kind of have obviously two main front runners here right outside of tea over to second or two before I was sort of 132 30 split
+
+57
+00:07:55.590 --> 00:08:04.620
+Nick Bowman: And the answer is actually t over four seconds. Right. So each of these two arrays right individually right it's going to take about two over four seconds.
+
+58
+00:08:05.730 --> 00:08:15.780
+Nick Bowman: Now why is that true. Well, we're dealing with an open squared algorithm. So whatever factor we applied to our input size right is going to show up as squared results and in in the program.
+
+59
+00:08:16.350 --> 00:08:22.290
+Nick Bowman: And so in this case because we have. So, you know, normally we talk about factors increasing, but the factors can also decreases.
+
+60
+00:08:23.010 --> 00:08:31.560
+Nick Bowman: So we talked about the factor decreasing by a factor of one half or input size and that actually, it means our runtime is going to decrease by a factor of four.
+
+61
+00:08:32.340 --> 00:08:40.470
+Nick Bowman: And. And so what that means is we saw that we can sort and elements and total elements directly and we want to re with total time t.
+
+62
+00:08:41.070 --> 00:08:52.380
+Nick Bowman: But if we just split them up into two and over two sides elements, right, and they would each take time to your before which means in total we can sort all end of those elements right in time to you over to you.
+
+63
+00:08:52.920 --> 00:08:56.520
+Nick Bowman: And so we somehow got to speed up just by sorting smaller subset elements.
+
+64
+00:08:57.420 --> 00:09:04.530
+Nick Bowman: Now you're going to say, hey, there's one part missing there. Now we have to sorted arrays, rather than one sort of the rain and that's totally right. Mobile was all that in a little bit.
+
+65
+00:09:05.130 --> 00:09:13.590
+Nick Bowman: But just just to show you that that actually the problem of solving of sorting the smaller sets of elements was actually gave us some sort of speed.
+
+66
+00:09:14.670 --> 00:09:19.200
+Nick Bowman: And and so that's going to be the main idea behind dividing conquer. We're going to try to break up the problem.
+
+67
+00:09:19.500 --> 00:09:32.490
+Nick Bowman: Solve the smaller versions, the problems because those are sort of easier and we get a we get a benefit and like sort of a better runtime benefit and sorting those and and then right there's the missing component of how do we put it all back together that will
+
+68
+00:09:35.100 --> 00:09:43.230
+Nick Bowman: And so we're going to see right is we're going to see these two general examples of divide and conquer algorithms and what they're going to look like is always going to have these two steps.
+
+69
+00:09:43.830 --> 00:09:50.940
+Nick Bowman: And the first is going to be the divide step. So if the dividing, dividing conquer and we're going to make the problem smaller by sort of splitting up the input list.
+
+70
+00:09:52.530 --> 00:10:04.440
+Nick Bowman: And then we're gonna have a joint stuff, but he's going to take the sort of things that we sort of found a way to somehow magically sort and then put them back together right to get our final result because we still care about generating for one final result.
+
+71
+00:10:06.180 --> 00:10:14.730
+Nick Bowman: And if this is starting to sound a lot like recursion to you like it should. Right. Like, we're going to implement these algorithms are personally because this divide and conquer approach lends itself very, very well.
+
+72
+00:10:15.210 --> 00:10:24.090
+Nick Bowman: Right, you have some smaller sub problems that you solve personally and then you unify the results we've already seen a ton of examples of doing that. And so we're going to apply this divide and conquer.
+
+73
+00:10:26.760 --> 00:10:29.610
+Nick Bowman: And so the first one I'm going to talk about is this algorithm complementary
+
+74
+00:10:30.510 --> 00:10:43.500
+Nick Bowman: And so like I said Merge Short, I'm just going to give you the definition here and then we'll, we'll walk through an example and revisit the definition. So if, if the definition doesn't sort of forward, we will revisit it but you can think of merge sword as a recursive sort of
+
+75
+00:10:45.420 --> 00:10:52.680
+Nick Bowman: The easiest sort of base simple case for merchants to say, hey, if I'm starting an empty or single element list, you know, by default, it's already going to be serving
+
+76
+00:10:53.640 --> 00:11:07.080
+Nick Bowman: But if I need to sort of larger list I do two steps. So I first. I just break the list and I say, hey, earlier we just noticed that some for some reason, I get a benefit if I just put the two lists in half and sort those right I get some some runtime.
+
+77
+00:11:08.550 --> 00:11:15.450
+Nick Bowman: So we're going to call that the divide step. And we call this an easy divide step right just letting the list and half is sort of very, very straightforward. Doesn't take a ton of work.
+
+78
+00:11:17.190 --> 00:11:20.220
+Nick Bowman: Then we recursive we sort those two lists. Right.
+
+79
+00:11:20.910 --> 00:11:32.520
+Nick Bowman: And then the key part is we use this merge operation. This thing called merge to combine them back into a sort of lives. And so this is our joint step and we call it a hard join and because it's going to be a little bit complex and we'll walk through an example of it.
+
+80
+00:11:33.600 --> 00:11:46.650
+Nick Bowman: But really, like in sort of an expressive terms is all the merge sort algorithm is it says break list and half recursive we apply the sorting algorithm. And then once you're done merge those two sort of halves together. And now you have one overall service.
+
+81
+00:11:48.540 --> 00:11:50.010
+Nick Bowman: So let's see. Let's see how this works.
+
+82
+00:11:51.270 --> 00:11:58.230
+Nick Bowman: And so again, this is our list from before. So let's look at how we might go about sorting this list with emerging
+
+83
+00:11:59.040 --> 00:12:08.790
+Nick Bowman: As we said, the first step is to split right. The first step is always going to be split. This is going to be kind of our divided stuff at the bottom comfort. So say if we want to sort this large list, we have to split it up into
+
+84
+00:12:10.200 --> 00:12:17.550
+Nick Bowman: And then we were curse. Right. We were personally for each of the two humps, which means splitting each of those two halves until their own separate arrays.
+
+85
+00:12:18.150 --> 00:12:21.240
+Nick Bowman: We still haven't reached a base case. So we have to continue recursive the sorting.
+
+86
+00:12:21.810 --> 00:12:30.270
+Nick Bowman: And and we continue the split steps right so we can put seen you sort of splitting up these lists into smaller and smaller suppleness until we get to a point in our tree.
+
+87
+00:12:30.900 --> 00:12:42.570
+Nick Bowman: Where we actually have a bunch of single element. That's right. So at the bottom level. We have a bunch of lists that are by definition sorting right they all just have one element in them. And then we know, sort of, by definition, that means that there
+
+88
+00:12:44.790 --> 00:13:00.780
+Nick Bowman: And so now the question is, right, like what now. Right. Like, how do we take all of these single sort of elements sorted lists and actually sort them right like they don't even show up in any particular order on the screen. So how are we going to sort of generate some sorted out.
+
+89
+00:13:02.160 --> 00:13:12.930
+Nick Bowman: And and the answer here is this idea of the merge operation. And then if there's merge operations starts to sound familiar. It should, because you've actually implemented this already on assignment for on assignment.
+
+90
+00:13:14.220 --> 00:13:24.450
+Nick Bowman: But let's look at what the mode of operation. That's the whole point of the murder operation is it as soon as it takes to sort of sequences and its goal is to produce one larger sort of sequence out of the
+
+91
+00:13:24.450 --> 00:13:24.600
+Two.
+
+92
+00:13:25.650 --> 00:13:25.980
+Nick Bowman: And
+
+93
+00:13:26.040 --> 00:13:30.660
+Nick Bowman: The way that we do that right and hopefully what you ended up doing on your assignment and the insight into that scene.
+
+94
+00:13:31.110 --> 00:13:39.750
+Nick Bowman: Is that you can always just compare the first two elements in both sort of lists and take the smaller of the two and inserted into your final list.
+
+95
+00:13:40.380 --> 00:13:46.830
+Nick Bowman: And by doing so, you know, you're always taking the smallest from any element. And so if you just repeat this process right again compare the two elements.
+
+96
+00:13:47.430 --> 00:13:51.270
+Nick Bowman: Because the two elements at the front of the list. Take the smaller one, take the smaller one.
+
+97
+00:13:51.660 --> 00:14:05.130
+Nick Bowman: And if you just repeat this process of comparing elements at the front of the Miss and taking the smaller one. And over and over and over again. And what you see is by taking the smaller one. You're always sort of building up your list your result list in sort of
+
+98
+00:14:06.450 --> 00:14:19.560
+Nick Bowman: And so we were able to start off with the blue sequence in the purple sequence, both of them individually sorted and by applying this merge operation with this insight that like oh if I just take my elements or if I take my to sequences and I look at the first one, and both
+
+99
+00:14:20.640 --> 00:14:22.650
+Nick Bowman: And take the smaller of the two, then I can build up.
+
+100
+00:14:25.320 --> 00:14:36.930
+Nick Bowman: And so the nice thing is right. This operation is actually open right we we do comparisons and we reduce the number of elements that we need to compare with every single time.
+
+101
+00:14:37.350 --> 00:14:50.010
+Nick Bowman: And so in total we just end up doing and compares right once for every element in our final list. We also do an insertion for once every element on this, but overall, right. We see this sort of nice facet that that merges action.
+
+102
+00:14:53.310 --> 00:15:00.390
+Nick Bowman: And so sort of summarizing what we saw here, right, we had this sort of really nice merge operation, I was able to take this sort of listen
+
+103
+00:15:01.530 --> 00:15:14.100
+Nick Bowman: And while they were on empty us are able to do a comparison between the two and take the smaller the two elements and inserted into the final sequence. And then once once one of them emptied out we were able to use take all those elements from the last story.
+
+104
+00:15:16.500 --> 00:15:25.620
+Nick Bowman: And so the question is, how do we take this diagram. So this is sort of the results of our divided stuff. And how do we actually do something useful with it. How do we apply this merge operate.
+
+105
+00:15:26.970 --> 00:15:37.350
+Nick Bowman: Well, what we see is we can again we assume that everything in the final layer is sorted, because it is right if each one of these sort of boxes is its own separate list each of these separate lists of sorting.
+
+106
+00:15:38.040 --> 00:15:45.120
+Nick Bowman: And because we have sorted lists and we want to join them. We apply the merge operation. And so we can apply the merge operation to just nearby pairs of elements.
+
+107
+00:15:45.630 --> 00:15:55.620
+Nick Bowman: And so we merge those two until now we've got a bunch of like two lists. And now notice the merge operation produces a sort of list to everything on this level is self assertiveness.
+
+108
+00:15:56.340 --> 00:16:01.620
+Nick Bowman: And so you can probably guess what do we do from here we apply the merge operation again and again.
+
+109
+00:16:02.130 --> 00:16:12.210
+Nick Bowman: And again. And what we see is by applying the merge operation of each of those two steps were somehow magically able to sort of organize our data from the bottom up manner and sort of generate a final vector
+
+110
+00:16:13.980 --> 00:16:15.840
+Nick Bowman: And that's kind of a key part of
+
+111
+00:16:17.400 --> 00:16:32.310
+Nick Bowman: Coverage, or do you have this easy divide step or he's just split everything up splitting up until you can't go any further. And then you have this harder join or merge step where you build things back up again and you actually do the sort of his work your way back sort of up the recursive
+
+112
+00:16:34.140 --> 00:16:40.890
+Nick Bowman: And and you can notice that any component of this tree right is very self similar to itself right any component of this tree just resolve.
+
+113
+00:16:41.490 --> 00:16:48.840
+Nick Bowman: Involves assembling a process. So again, this is really telling us that that merged, sort of, sort of a really algorithm is expressive very nicely and
+
+114
+00:16:51.330 --> 00:17:04.710
+Nick Bowman: So now if we revisit our base based on a recursive stuff. Hopefully becomes a little bit clear. You know why this algorithm can be expressed differently when I mean why it actually sort of does when it comes to do which is distort our scorecard.
+
+115
+00:17:06.300 --> 00:17:09.240
+Nick Bowman: And so let's actually go to the creator and that's actually
+
+116
+00:17:10.350 --> 00:17:10.920
+Nick Bowman: Pulled this up.
+
+117
+00:17:12.090 --> 00:17:22.800
+kylie jue: Right before you before you start coding real quick. There was a good question in the chat about when would you actually hit the empty factor or empty list case base case.
+
+118
+00:17:23.790 --> 00:17:25.140
+Nick Bowman: Yeah, um,
+
+119
+00:17:26.250 --> 00:17:28.110
+Nick Bowman: You may not
+
+120
+00:17:29.250 --> 00:17:30.030
+Nick Bowman: Yeah, I guess.
+
+121
+00:17:30.570 --> 00:17:37.290
+Nick Bowman: You mean I mean it's also just like if you were given an empty list, you should be able to do this kind of thing. And yeah, you
+
+122
+00:17:38.700 --> 00:17:44.250
+Nick Bowman: Yeah, if you're handling a single element lives to sort of you probably won't. Yeah, there's no way to split and get like one
+
+123
+00:17:44.670 --> 00:17:54.900
+Nick Bowman: This empty one is not unless you someone who you're splitting your way. But yeah, it's probably just a good, it's just a good idea to handle that as a just as a sort of not even an error handling that doesn't like you should be able to sort
+
+124
+00:17:57.960 --> 00:18:04.620
+Nick Bowman: Cool. And so if we jump on over to Peter creator and so we have sort of emerged sort function here.
+
+125
+00:18:05.160 --> 00:18:10.080
+Nick Bowman: For, for the purposes of this. We're just going to be pretending we're dealing with a vector of innovators and we want to sort that
+
+126
+00:18:10.890 --> 00:18:16.440
+Nick Bowman: And and what you, what I want you to notice here is is before we actually implement the sorting algorithm itself. Right.
+
+127
+00:18:16.800 --> 00:18:23.070
+Nick Bowman: And I want, I want to sort of drill it into and as you're going to work on the assignments that it's always good to implement the
+
+128
+00:18:23.340 --> 00:18:33.540
+Nick Bowman: helper functions for the divide and the join steps of the specific algorithm first and the test those functions and make sure that they work first before you start going to implement the overall
+
+129
+00:18:34.500 --> 00:18:39.840
+Nick Bowman: And so if you look down here. We're not gonna have time to write these together. So I have just provided them.
+
+130
+00:18:40.260 --> 00:18:50.580
+Nick Bowman: And but we actually have tests that first check the functionality of our helper function. Before we worry about writing tests that actually test the correctness of our overall sort
+
+131
+00:18:53.040 --> 00:18:59.850
+Nick Bowman: And so we provided the merge operation already implemented for you because you've you've actually are all already implement this on assignment three
+
+132
+00:19:00.540 --> 00:19:06.720
+Nick Bowman: But let's think about really quickly what the split operation might look like. Remember we said merge sword is nice because it has easy split
+
+133
+00:19:07.170 --> 00:19:16.590
+Nick Bowman: So it kind of just allows us to sort of split the list in half and take one side is the laptop and one side of the right and so we might do you like to say like half the size.
+
+134
+00:19:18.990 --> 00:19:21.360
+Of initially got in.
+
+135
+00:19:22.920 --> 00:19:25.680
+Nick Bowman: And then on the left half is just going to be sort of a sub list.
+
+136
+00:19:26.850 --> 00:19:28.980
+Nick Bowman: Of those elements, starting at zero.
+
+137
+00:19:30.030 --> 00:19:31.470
+Nick Bowman: And then the elements
+
+138
+00:19:32.910 --> 00:19:35.100
+Nick Bowman: And then our right side is going to be
+
+139
+00:19:36.570 --> 00:19:37.710
+Nick Bowman: Starting in half and
+
+140
+00:19:39.060 --> 00:19:43.560
+Nick Bowman: And one thing I want you to notice here is I've actually passed in left and right by reference.
+
+141
+00:19:44.100 --> 00:19:54.000
+Nick Bowman: Because this split function needs to have more than one output right we couldn't just return these vectors, because we need to return values and c++ doesn't let us have to return values.
+
+142
+00:19:54.420 --> 00:20:01.410
+Nick Bowman: And so please notice on the assignment. If you need to write a helper function. You're like, oh, I need to get two pieces of information out of his helper function.
+
+143
+00:20:01.920 --> 00:20:16.140
+Nick Bowman: But I can't return them because I only can return on value passing in parameters by reference right allows you to actually quote unquote have to return back right so that the results of my function is whatever vectors I passed into the split right are going to actually get populated.
+
+144
+00:20:19.050 --> 00:20:29.850
+Nick Bowman: And so now, right. A good testing practices, you're working in the assignment is to run your tests on your helper functions first and make sure those are sort of behaving as you want them to
+
+145
+00:20:31.620 --> 00:20:43.110
+Nick Bowman: Integrate so we see now that at when we run our tests the split and the merge hopper functions both. And so now we want to implement the app from are sort of algorithm itself so that we can cast that that sort of end to end.
+
+146
+00:20:45.720 --> 00:20:55.440
+Nick Bowman: So if we jump back up here, right. So, I pray that sort of provided the the pseudo code for that we had from the slides, which sort of define that based on the person case. So let's just try to see what that looks like.
+
+147
+00:20:56.970 --> 00:21:02.610
+Nick Bowman: So we start off with by saying, hey, if we are basically this is going to be that if we have an element that's
+
+148
+00:21:03.750 --> 00:21:11.580
+Nick Bowman: For a list that has 01 elements in this case, we can just say, hey, just return the stopper cursing. Don't go any further.
+
+149
+00:21:14.460 --> 00:21:18.450
+Nick Bowman: But then if we do have two or more elements. And what we want to do is we want to go ahead and split them.
+
+150
+00:21:20.610 --> 00:21:31.350
+Nick Bowman: So we're going to declare our left and our right hand side variables and know that this is just shorthand, you can actually declare multiple variables of the same type, on one line and c++. I'm just going to do this to
+
+151
+00:21:32.280 --> 00:21:41.940
+Nick Bowman: Work in but then when we want to say right isn't going to call this helper function I say split our initial vector and split it across this new left vector and isn't right.
+
+152
+00:21:43.440 --> 00:21:48.480
+Nick Bowman: And then kind of the key recursive insight is just to say, hey, just just Merge Sort the left half.
+
+153
+00:21:49.380 --> 00:21:56.370
+Nick Bowman: And Merge Sort the right half, and be the power of recursion. Right. And when we saw in the diagram is eventually we can assume those has gets stored
+
+154
+00:21:56.970 --> 00:22:10.230
+Nick Bowman: Right and and and this is kind of, I think what the most powerful part of the algorithm which it says hey recursive we sort them and you know that eventually right there being passed around by reference. So these vectors themselves will eventually end up sorted. Once both of these calls
+
+155
+00:22:11.460 --> 00:22:26.100
+Nick Bowman: And then the last step is just to say, okay, clear out the contents of what I had before, because I don't want the old sort of unsworth contents and then right use the merge hopper function and say, you know, merge the left hand and the right hand side and store the results in this factory.
+
+156
+00:22:28.110 --> 00:22:31.950
+Nick Bowman: And what we see is hopefully with that combination of operations.
+
+157
+00:22:33.630 --> 00:22:36.180
+Nick Bowman: We actually sort of have a successful implementation.
+
+158
+00:22:38.970 --> 00:22:51.990
+Nick Bowman: And so if we run our tests we now see that emerged for test passes, which is great. And now we have control. You can look at some meaningful test results for the merge or two, he left to finish up.
+
+159
+00:22:53.070 --> 00:22:56.940
+Nick Bowman: But one thing, one thing I want to point out, well, that's well that's running as I want to point out that
+
+160
+00:22:58.320 --> 00:23:09.750
+Nick Bowman: If you write these helper functions. Right. So if you delegate the work of dividing and joining into these helper functions. The overall code for the sort itself right is very straightforward. Very easy to be right.
+
+161
+00:23:10.140 --> 00:23:18.240
+Nick Bowman: And so that's what we're going to really recommend. Great, we're not going to require you to write these helper from communion assignment, but we're going to really strongly recommend that you do it doesn't make your lives a lot easier.
+
+162
+00:23:18.690 --> 00:23:30.450
+Nick Bowman: And specifically when dealing with linked lists, right, it'll be helpful to sort of just assume that your helper functions deal with all the messy rewiring and everything that needs to happen there. And so that you're sort algorithm itself can be expressed very, very
+
+163
+00:23:32.490 --> 00:23:37.140
+Nick Bowman: Cool. And so we see here and this is probably a little hard to see.
+
+164
+00:23:38.550 --> 00:23:40.980
+Nick Bowman: But hopefully, if you can see the timing results here.
+
+165
+00:23:41.940 --> 00:23:53.100
+Nick Bowman: What you see is that the the runtime increase from hundred sort is a little bit more than double so it's not quite linear because the factor is is about. I think from a rough calculation, it looks like about 2.3 or 2.4
+
+166
+00:23:53.430 --> 00:24:02.220
+Nick Bowman: And sort of factor in increase every time we've doubled in size and and so what we see here, right, is that we actually are getting
+
+167
+00:24:02.640 --> 00:24:12.750
+Nick Bowman: Better. Better than n squared, right, it's nowhere near as about allensworth there's n squared would expect the input size to sort of increase by a factor for every time. But the runtime itself is actually a lot better than that.
+
+168
+00:24:14.010 --> 00:24:18.360
+Nick Bowman: And so if we jump back to the slides, we can actually formally talk about what the room.
+
+169
+00:24:20.040 --> 00:24:22.710
+Nick Bowman: And so the question is, how, how fast is this is a socket.
+
+170
+00:24:24.060 --> 00:24:29.220
+Nick Bowman: And so if we look at the code that we just wrote right let's let's look to see what the main work that we're doing.
+
+171
+00:24:30.930 --> 00:24:40.230
+Nick Bowman: Well, we know that when we split. We have to do Olin work because we're creating two vectors and in total right that we have to split all and elements across those two vectors. So it open work there.
+
+172
+00:24:40.890 --> 00:24:48.270
+Nick Bowman: And then we also have open work when we do merge. Right. Earlier we showed that the rate of murders implemented as long as you implement it correctly. It's also an overview
+
+173
+00:24:50.340 --> 00:24:59.670
+Nick Bowman: And then. So what do we see here. If we go back to our diagram right we see that we actually have right over then work at each level of this tree right
+
+174
+00:25:00.630 --> 00:25:13.470
+Nick Bowman: And and so we have open work at each level of this tree. And so then, where do we go from there. Well, we ask ourselves, how many levels are there, right, how many levels is this tree going to have as a function of sort of the number of inputs.
+
+175
+00:25:15.540 --> 00:25:22.560
+Nick Bowman: And then so if you think back right back when we talked about recursion back when we talked about bigger with recursive functions.
+
+176
+00:25:23.220 --> 00:25:30.450
+Nick Bowman: How many times. If we start off with elements, how many times we have to divide by two until we're sort of left with just elements of size one.
+
+177
+00:25:31.230 --> 00:25:34.920
+Nick Bowman: And well, that was long right. That was exactly the log in with relationship.
+
+178
+00:25:35.610 --> 00:25:44.430
+Nick Bowman: And so we have actually we're always going to have exactly. Oh. Well, not exactly login but old login level maybe plus one. Maybe minus one, depending on other divisions breakdown
+
+179
+00:25:44.760 --> 00:25:49.920
+Nick Bowman: But in general, right, there's going to be a logarithmic relationship between the number of elements that we started with.
+
+180
+00:25:50.190 --> 00:25:56.310
+Nick Bowman: And the number of times, we need to split or the number of times, we need to join in order to to process all of those elements.
+
+181
+00:25:57.120 --> 00:26:04.710
+Nick Bowman: And so what does that mean, what we're doing over and work at each level and we have old login levels. So what does that tell us about our overall runtime well its own
+
+182
+00:26:05.880 --> 00:26:18.120
+Nick Bowman: Right, and so we now have a sort of that is actually. Oh, and login, which is way, way better than opens. Great. If you plot and login and you plot n squared. You can see n squared just takes off but and login actually follows
+
+183
+00:26:18.420 --> 00:26:30.030
+Nick Bowman: Not aligned, right, because it is it is a little bit worse than linear, but it doesn't grow nearly as fast. So this is kind of a huge increase in a huge speed up over our insertion and selection. So
+
+184
+00:26:32.430 --> 00:26:38.280
+Nick Bowman: And so overall, what we see there right is emerged for takes sort of this idea of code.
+
+185
+00:26:41.670 --> 00:26:42.660
+Nick Bowman: And so
+
+186
+00:26:43.800 --> 00:26:45.720
+Nick Bowman: When we analyze merge sort. Right.
+
+187
+00:26:46.830 --> 00:26:53.820
+Nick Bowman: We sort of think about, you know, can we actually end up doing better than than this. Oh, and Morgan.
+
+188
+00:26:56.130 --> 00:27:05.580
+Nick Bowman: And interestingly enough, we actually can't. And so there's actually a theorem that says any sorting algorithm.
+
+189
+00:27:06.300 --> 00:27:15.420
+Nick Bowman: That relies on comparisons between elements. And so all the, all the algorithms, we've seen so far actually rely on comparison between elements to decide know whether something is less than or greater than
+
+190
+00:27:16.200 --> 00:27:27.780
+Nick Bowman: And what we saw is that there's actually a theorem that you can prove that says there is no way you can write an algorithm that is correct. That has better average case runtime and event log
+
+191
+00:27:28.680 --> 00:27:40.530
+Nick Bowman: And now if you want to figure out how to prove this out, there's a slide on this a little bit later on. And there's actually a full class where you learn how to write this proof called CS 161 which is all about algorithmic analysis and proving actually for me.
+
+192
+00:27:42.270 --> 00:27:49.530
+Nick Bowman: But for now, just take our word for it that you cannot do better than over and login when it comes to sorting and sorting a list.
+
+193
+00:27:51.180 --> 00:27:58.050
+Nick Bowman: And so we were kind of done it right, we've kind of sort of reached the best that we can do at least from from one time.
+
+194
+00:27:59.160 --> 00:28:05.160
+Nick Bowman: And so that's pretty cool right that we have now just sort of express this really nice recursive algorithm that allows us to to achieve that.
+
+195
+00:28:08.010 --> 00:28:16.170
+Nick Bowman: And just a quick historical note that's actually pretty interesting merchant was actually one of the first algorithms developed for sort of what we now consider to be modern computers.
+
+196
+00:28:16.620 --> 00:28:25.560
+Nick Bowman: And so, a guy named john going and actually invented this algorithm to run on some of the very first computers that are getting built and back in the 1940s.
+
+197
+00:28:26.040 --> 00:28:37.800
+Nick Bowman: And so there's actually an article written by one of Stanford professors Don Knuth, it actually talks about how this algorithm was developed and how it was kind of developed in parallel with computers themselves.
+
+198
+00:28:38.310 --> 00:28:43.980
+Nick Bowman: So if you're if you're interested in sort of historical story that history behind computing would recommend
+
+199
+00:28:47.160 --> 00:28:51.930
+Nick Bowman: Okay, of course, also started real quick for question before we want to know anything that
+
+200
+00:28:56.460 --> 00:29:03.720
+Nick Bowman: Cool. And so that's what's so just to what we have for announcements today. I'm pretty much our typical stuff from yesterday.
+
+201
+00:29:04.440 --> 00:29:16.380
+Nick Bowman: We released the assignment yesterday afternoon and it's going to be next Tuesday. So make sure to get her on that as you're getting started the session triple, we have seen that at 6pm today the zoom detail in the in the same place as usual.
+
+202
+00:29:18.030 --> 00:29:24.780
+Nick Bowman: If you have if you haven't checked out your diagnostic radio and you try to do that. The rewards are going to be due tomorrow night at 1159
+
+203
+00:29:25.140 --> 00:29:37.590
+Nick Bowman: We, we have not finalized all great. So we've finished sort of the revisions on the problem for grading, so please recheck your grade on this to sort of introduce no surprises about what happened during that problem for the bidding process.
+
+204
+00:29:38.820 --> 00:29:46.860
+Nick Bowman: And then again, just a reminder, come talk to one of us about your final projects this week for me or Kylie a trip or section leader.
+
+205
+00:29:47.520 --> 00:29:54.270
+Nick Bowman: just dropping by there and just feel free to come talk to us to help you stop the problem. And actually, on that note,
+
+206
+00:29:55.260 --> 00:30:04.920
+Nick Bowman: For lecture tomorrow we're actually going to do something a little bit different. And we really sort of care a lot that you all are staying on track and cons of working on this final project.
+
+207
+00:30:05.760 --> 00:30:12.300
+Nick Bowman: So tomatoes lecture was initially going to be on trees, but we actually have a little bit of leeway in this video. So we're going to push that content actually back to next week.
+
+208
+00:30:13.290 --> 00:30:19.080
+Nick Bowman: And tomorrow we'll still have lecture. It's going to be totally optional will be here from 1130 1230
+
+209
+00:30:19.530 --> 00:30:22.290
+Nick Bowman: And you can basically just come and talk to us about your final project.
+
+210
+00:30:22.590 --> 00:30:29.820
+Nick Bowman: And you can come talk to other students will have breakout rooms that are sort of like topic specific if you want to meet other people and talk about sort of what things you're considering
+
+211
+00:30:30.180 --> 00:30:38.430
+Nick Bowman: And we do actually want this problem sort of this project process to be as collaborative as possible because that's kind of how problems get thought of and solving the real world.
+
+212
+00:30:39.060 --> 00:30:47.460
+Nick Bowman: And so if you haven't yet talked to us about your idea we really recommend coming chatting with us. And even if you just want to work for an hour during lecture tomorrow. Just come by.
+
+213
+00:30:47.730 --> 00:30:51.060
+Nick Bowman: And if you want to hang out with people over there be a little bit of a social experience.
+
+214
+00:30:51.720 --> 00:30:57.390
+Nick Bowman: So just come through for those of you that normally watch recorded. We're not going to record it. There's not really going to be any content presented
+
+215
+00:30:57.900 --> 00:31:09.570
+Nick Bowman: So it's just mostly an hour if you have that time for you and you want to come and hang out with us. And you can work on the final project will be good for that. And then we'll start on trees, and the last of our sort of assignment relevant content.
+
+216
+00:31:12.570 --> 00:31:12.870
+Nick Bowman: Cool.
+
+217
+00:31:13.980 --> 00:31:25.710
+Nick Bowman: Alright, so the last 20 minutes. Today we're going to talk about this algorithm called quick sort of quick sword is going to be another example or dividing conquer sorting algorithm. It's going to be
+
+218
+00:31:26.310 --> 00:31:32.910
+Nick Bowman: A little bit different than merge sort, but it's going to have the same general idea. And so let's let's let's think about how quick sort of
+
+219
+00:31:34.830 --> 00:31:39.300
+Nick Bowman: crooks are the quick sort algorithm has three steps and the steps are as follows.
+
+220
+00:31:39.960 --> 00:31:53.490
+Nick Bowman: So for quick sort. The, the divide step of the divide and conquer. We normally referred to as petition. And so the idea is if you're given a list that you want to sort you pick some Ella, you pick some element in that list and you call it the pity.
+
+221
+00:31:54.690 --> 00:32:00.360
+Nick Bowman: It can be any element. The choice of pivot can actually be very important, what we'll talk about that a little bit later.
+
+222
+00:32:01.080 --> 00:32:05.310
+Nick Bowman: But the choice of that pivot connection be really important, but for now we just say let's randomly pick a pivot.
+
+223
+00:32:06.210 --> 00:32:20.340
+Nick Bowman: And then we divide the list into three subjects we say divide the listen to all of the elements that are smaller all the elements that are equal to the pivot and then all the elements that are larger than that sort of the divide stuff for like a little bit different than the merger.
+
+224
+00:32:21.990 --> 00:32:30.300
+Nick Bowman: And but this is our divide step, but it's a little bit of a harder or more complex to divide Stephen frameworks work. So we call this hard device as opposed to the easy divided
+
+225
+00:32:32.490 --> 00:32:37.020
+Nick Bowman: Then when we say is recursive we sort the smaller petition and the larger petition.
+
+226
+00:32:37.620 --> 00:32:50.130
+Nick Bowman: Right, and so we know that those two are going to not be in sword or yet. So we need to sort those two. But the nice thing is we don't need to sort that that partition that contains all the elements equal to the pivot because they can only have one value. So by default RDP.
+
+227
+00:32:51.570 --> 00:32:53.340
+Nick Bowman: And sweets resort all of our elements.
+
+228
+00:32:54.690 --> 00:32:56.370
+Nick Bowman: In the smaller list and in the larger ones.
+
+229
+00:32:57.570 --> 00:33:10.680
+Nick Bowman: And then all we have to do. We now have a sorted list of elements smaller than the pivot pivot equal to the pivot and then a sorted list of elements that bigger than the pivot. So how do we build up our overall large solution we can literally just concatenate those three of us together.
+
+230
+00:33:12.120 --> 00:33:24.720
+Nick Bowman: And this is actually our joined stuff. We call this an easy joined step because it's really more straightforward than the merge. There's no needing to go step by step and do comparisons me that it's quite as simple as just like add the three vectors together and group with them.
+
+231
+00:33:26.970 --> 00:33:33.180
+Nick Bowman: So let's see what the quick sort algorithm looks like in practice. And so say that we're starting off and we want to sort this list.
+
+232
+00:33:34.530 --> 00:33:39.390
+Nick Bowman: Of six elements. Well, the very first step that we're going to do we're going to need to pick a pivot.
+
+233
+00:33:40.020 --> 00:33:45.600
+Nick Bowman: And I know you'll see this one I implemented and cookie cutter as well, and you're welcome to just do this on your assignment.
+
+234
+00:33:46.170 --> 00:33:51.720
+Nick Bowman: The very sort of baseline sort of vanilla way to choose a pivot pivot is just to pick the very first element.
+
+235
+00:33:52.350 --> 00:34:00.150
+Nick Bowman: Like I said a pivot choice can be very important. And then we'll talk a little bit about why but for the purposes of what you'll need to do all you have to do is just choose the first element.
+
+236
+00:34:01.410 --> 00:34:02.790
+Nick Bowman: So this case we choose for two minutes.
+
+237
+00:34:04.140 --> 00:34:13.920
+Nick Bowman: Then what do we say let's protection, the elements. And so let's put those elements. There's smaller analyst and left all the elements that are people in keeping the middle and then all the elements that are greater and put them on the right.
+
+238
+00:34:14.760 --> 00:34:16.740
+Nick Bowman: And so that's exactly what we see happening here.
+
+239
+00:34:17.850 --> 00:34:24.960
+Nick Bowman: And then right we have to recursive we sort both of these smaller petitions, so that's a recursive we apply the same exact algorithm to both of these
+
+240
+00:34:26.880 --> 00:34:28.860
+Nick Bowman: So again we choose the first element as the pivot.
+
+241
+00:34:29.970 --> 00:34:35.940
+Nick Bowman: We petitioned the elements into those that are smaller than the pivot and those that are greater than the pivot. So you see that show up and fine.
+
+242
+00:34:37.530 --> 00:34:45.990
+Nick Bowman: And now, right, we also have to sort each of these two partitions right so now is generated to market different so we can officially sort them.
+
+243
+00:34:46.740 --> 00:34:54.120
+Nick Bowman: Well, now we have an element with one list in it, or sorry, a list with one element in it. So it's that we know. Super easy to sort because it's already sorted
+
+244
+00:34:55.650 --> 00:34:58.920
+Nick Bowman: And then we can do the same thing on the right side. Oh look, it's already sorted
+
+245
+00:34:59.790 --> 00:35:09.630
+Nick Bowman: And now, right, kind of the key component is how do we put all these three together. Well, we just concatenate the three we concatenate those three sort of sub list and we have exactly the answer.
+
+246
+00:35:10.380 --> 00:35:17.580
+Nick Bowman: Right, which is to say that we've now contaminated with three of these lists and we have a tray of sort of our sort of our left hand side.
+
+247
+00:35:19.620 --> 00:35:29.670
+Nick Bowman: So then we can apply the same reasoning over here on the right hand side. So we're going to recursive the Sort the right hand side. She was the pivot. Position the elements
+
+248
+00:35:30.240 --> 00:35:41.100
+Nick Bowman: Notice that the petitions can sometimes be empty. So in this case, that actually is important that we do have an empty condition as part of our base case because it's actually possible when you generate a petition that it does end up empty.
+
+249
+00:35:42.180 --> 00:35:45.990
+Nick Bowman: Then we go ahead and sort the left hand side, it's one element. So it's already sorted
+
+250
+00:35:47.100 --> 00:35:51.780
+Nick Bowman: Then we reverse the resort, the right hand side. Oh, it's empty. There's nothing sort
+
+251
+00:35:53.250 --> 00:35:59.700
+Nick Bowman: And then we concatenate of our three sort of partitions together so we get 15 and 16
+
+252
+00:36:00.510 --> 00:36:09.180
+Nick Bowman: And then the very last step right so now we have 11 1213 is are sorted initial are sorted left hand position of elements great less than 14
+
+253
+00:36:09.660 --> 00:36:20.670
+Nick Bowman: And then our right hand side, as we've sorted that all the elements that are greater than 14 and sort of put it all together right we concatenate everything related to the original pivot and now we have our sort of funnel sorted
+
+254
+00:36:23.070 --> 00:36:32.760
+Nick Bowman: And so we've sort of accomplished our goal, and it looks somewhat similar to march sword but also distinctly different right so it is a different algorithm. But it sort of still follows us to connect divided
+
+255
+00:36:34.860 --> 00:36:43.020
+Nick Bowman: And so if we revisit our algorithm, right, we can sort of visualize how do we petition. How do we reverse the resort and how do we put those search results back
+
+256
+00:36:45.120 --> 00:36:53.460
+Nick Bowman: And so now let's go ahead and try to put it up. And again, right, as I'm as I'm quoting this I'm kind of going to emphasize that I really want you to focus on
+
+257
+00:36:54.570 --> 00:37:08.490
+Nick Bowman: Implementing the helper functions first right before you jump into implementing that means. So again, our main sort is defined here with with some of the pseudo code from the science. But again, let's focus on implementing the helper functions first before we jump into it.
+
+258
+00:37:10.560 --> 00:37:18.300
+Nick Bowman: So when we're when we're writing up the petition function, we know that we're given our original elements here we have three new list that we want to populate
+
+259
+00:37:19.470 --> 00:37:26.160
+Nick Bowman: That are called less equaling greater and then we're actually given the pit. So we're specify the value that we want to sort of make comparisons to
+
+260
+00:37:27.060 --> 00:37:41.490
+Nick Bowman: And so we can think about this as like, All right, well, we have to go through all elements in the doctor and then we just reason about where these factors are ready to on the school. So if the value is less than the pivot and it goes and the less array or the last factor.
+
+261
+00:37:43.170 --> 00:37:45.420
+Nick Bowman: Otherwise, if the equal
+
+262
+00:37:46.860 --> 00:37:48.810
+Nick Bowman: And it goes into equal value.
+
+263
+00:37:52.170 --> 00:37:52.620
+Nick Bowman: And then
+
+264
+00:37:55.500 --> 00:37:57.180
+Nick Bowman: If this is
+
+265
+00:37:58.980 --> 00:38:04.200
+Nick Bowman: And if so, both of those conditions don't fail them. We know the value is greater. We can add it to our greater nothing
+
+266
+00:38:05.520 --> 00:38:12.840
+Nick Bowman: And again, I'll point this out again because I really wanted to a point of emphasis, I basically use this function to generate three return values now.
+
+267
+00:38:13.830 --> 00:38:27.300
+Nick Bowman: I assume that I'm passing in three empty vectors and bye bye after this function runs, they'll be populated with executive results that I want. And so again I'm taking advantage of reference parameters here to actually have three separate pockets of this one.
+
+268
+00:38:30.810 --> 00:38:38.160
+Nick Bowman: And then we can also think about the CONCATENATE Function really quickly. Like I said, this is actually very straightforward, in the sense that
+
+269
+00:38:39.270 --> 00:38:52.020
+Nick Bowman: The. We know that at this point, less equal and greater are all sorted. And so if we want to put them together, right, we can just say, Hey, this final vector that we want to put together is actually just the concatenation of the CEO.
+
+270
+00:38:53.730 --> 00:38:56.370
+Nick Bowman: And so you can use the plus sign to be concatenation between
+
+271
+00:38:58.350 --> 00:39:08.820
+Nick Bowman: And AND AGAIN WHAT I WANT YOU TO POINT OUT RIGHT IS IS repressing this record by by reference. And so whatever vector we provide to the function will actually get modified
+
+272
+00:39:10.920 --> 00:39:16.410
+Nick Bowman: And again, you might be saying, Hey, Nick, isn't it overkill to, you know, have one line you can pose into a helper function.
+
+273
+00:39:17.040 --> 00:39:23.400
+Nick Bowman: Probably, yes. But again, I kind of want to make the point that each of these sorting algorithms right has a divided step.
+
+274
+00:39:23.700 --> 00:39:31.050
+Nick Bowman: And it has a joint step in your lives will be a lot easier on the assignment. If you take the time to actually define helper functions for each of those two steps.
+
+275
+00:39:31.470 --> 00:39:42.090
+Nick Bowman: And then incrementally test them right. And so what I can do now, right, you'll see down here I have some test defined to test the partition and the competitive functions. And so I can
+
+276
+00:39:43.500 --> 00:39:45.780
+Nick Bowman: run the test and hopefully
+
+277
+00:39:49.170 --> 00:39:53.520
+Nick Bowman: Hopefully, what I see, right, isn't it, we now passed the test. The test.
+
+278
+00:39:57.420 --> 00:40:06.390
+Nick Bowman: And so while that's running. And now we can start to think about, okay, how are we actually going to implement the quick sort function itself, given this
+
+279
+00:40:08.550 --> 00:40:18.420
+Nick Bowman: Definition angry. And so we see what the test results is exactly what we want, which is now a helper function test class. And so now we can focus on the last part, which is how do we sort of put it all together with you.
+
+280
+00:40:20.970 --> 00:40:29.220
+Nick Bowman: And so we do here. Right. What I want you to notice is the overall structure of this will look very similar to the merged. So Robin, which is the point right there. Both divide and conquer algorithms.
+
+281
+00:40:29.580 --> 00:40:36.750
+Nick Bowman: They're both a recursive in the main way that they work and they both rely on these helper functions that do sort of a divided stuff and do stuff.
+
+282
+00:40:38.250 --> 00:40:38.940
+Nick Bowman: At different points.
+
+283
+00:40:40.170 --> 00:40:48.030
+Nick Bowman: So we have the same base basis before, right, so we can just say, Hey, if we have 01 elements. And then we just can go ahead and say return
+
+284
+00:40:52.200 --> 00:40:55.740
+Nick Bowman: Places. And so we can say that's the base case. So we finish that off there.
+
+285
+00:40:57.150 --> 00:41:08.790
+Nick Bowman: Then right when we need to split. There's a little bit of extra work to do for quick story. So we actually need to find our pivot. Remember that we said the easiest way to do that is to just pick the first element in the vector. So we're going to go ahead and do that.
+
+286
+00:41:09.840 --> 00:41:19.320
+Nick Bowman: And then we say, all right, I need to actually define my three vectors that I'm going to populate with the results of the less than or less than, equal to, or greater dependent
+
+287
+00:41:20.370 --> 00:41:27.990
+Nick Bowman: And then right I call my application helper function which says take the elements in the sector split them up into these three
+
+288
+00:41:29.370 --> 00:41:33.780
+Nick Bowman: Smaller vectors and use the specified value of the pivot to do so.
+
+289
+00:41:35.130 --> 00:41:40.830
+Nick Bowman: And so at this point after this one from runs. We know that our values will have been spread across less than equal. I'm going to
+
+290
+00:41:42.330 --> 00:41:48.960
+Nick Bowman: And then again, we can use the same insight from before, which is this is the sort of person that if we just say hey sort the left hand side.
+
+291
+00:41:50.220 --> 00:42:02.940
+Nick Bowman: Or so, yeah, sort of about elements that are less than sort of the elements that are greater than. And again, remember I don't need a call to sort the elements that are equal to, because they're all equal to the pivot and so they have to be inserted.
+
+292
+00:42:04.260 --> 00:42:07.200
+Nick Bowman: And so I have my to reverse of calls, which is worthless.
+
+293
+00:42:08.400 --> 00:42:19.230
+Nick Bowman: And then I do the same thing as before. I say, all right, I don't need my original elements every before. So it's clear out the vector. And then let's concatenate the sort of things that we have. So we say
+
+294
+00:42:20.940 --> 00:42:28.500
+Nick Bowman: Take this sector and then fill it up with the results from the sorted. Now, the sort of versions of less people
+
+295
+00:42:30.030 --> 00:42:31.710
+People and
+
+296
+00:42:34.980 --> 00:42:49.950
+Nick Bowman: And so the algorithm that would cut it up here again looks very similar to the merge sort algorithm. But what I want to emphasize, and it's going to become particularly important on the assignment and I'll revisit this in the slides and the second and the helper functions operate interactively
+
+297
+00:42:51.240 --> 00:42:58.320
+Nick Bowman: The overall sorting algorithm is defined repressive both of those things can be true. And you will need to write like you will need to sort of
+
+298
+00:42:58.980 --> 00:43:01.470
+Nick Bowman: Make sure you're doing both of those things for academic assignment.
+
+299
+00:43:02.460 --> 00:43:11.940
+Nick Bowman: But when we when we're going to caution you in the assignment to not write partitioning and protect me and and split and join on linked list for personally because you will sort of run into this problem where you stand.
+
+300
+00:43:12.870 --> 00:43:22.110
+Nick Bowman: So please make sure the helper functions to do the division and the joining are done internally but the overall algorithm itself, as expressed differently. And so both of those things.
+
+301
+00:43:24.930 --> 00:43:28.170
+Nick Bowman: And so now, hopefully, if we run
+
+302
+00:43:29.430 --> 00:43:34.380
+Nick Bowman: Our tests. Here we will see that the algorithm.
+
+303
+00:43:37.770 --> 00:43:38.070
+Is
+
+304
+00:43:40.560 --> 00:43:46.950
+Nick Bowman: And what we should see right is we should see that both the quick search algorithm works. And again, the timing results will now be meaningful.
+
+305
+00:43:47.520 --> 00:43:51.180
+Nick Bowman: And we'll revisit in the slides are now what the, what the runtime clicks audience.
+
+306
+00:43:51.660 --> 00:44:01.950
+Nick Bowman: You can probably guess that it's going to be over and login and in the sense that what we can do better than over and login. And we've already shown you one algorithm that is over that long. And so I'm not going to show you something worse.
+
+307
+00:44:02.580 --> 00:44:10.230
+Nick Bowman: It's a great sword is indeed over and login and then. So if we look at the timing results. What we should see a similar pattern to what we saw in merge sort.
+
+308
+00:44:10.710 --> 00:44:21.600
+Nick Bowman: Which is that the behavior. The factor increase between between subsequent runs is going to be worse than linear. So it's going to be greater than two, when we double the input size.
+
+309
+00:44:21.930 --> 00:44:28.170
+Nick Bowman: But it's going to be probably less than four or it is going to be less than four, which is what we would have expected if it was open square
+
+310
+00:44:28.740 --> 00:44:40.530
+Nick Bowman: And so because it sort of exists somewhere in that range. And if you look at it and it's, it's, you know, somewhere between like 2.4 2.2 is the input factor increase. And so that is
+
+311
+00:44:41.610 --> 00:44:44.970
+Nick Bowman: So these algorithms work a lot better than than what we saw.
+
+312
+00:44:48.150 --> 00:44:55.830
+Nick Bowman: Cool. So if we jump back to the slides. And so what are the takeaways from quick sort. And so, we saw that are divided step was partitioning the elements, based on the Pinot
+
+313
+00:44:56.670 --> 00:45:07.050
+Nick Bowman: Then we had the reverse of call which was responsible for sort of sorting the elements. Can you to the to me to the participant list and then to join them to simply contaminated the free list.
+
+314
+00:45:08.310 --> 00:45:13.470
+Nick Bowman: And the idea here was unlike emerged sort where most of the sorting work happens in the joint stuff.
+
+315
+00:45:13.980 --> 00:45:27.090
+Nick Bowman: Right. Most of the sorting work in clicks. What happens in the in the petition stuff right we're actually sort of sorting elements into whether they are less than or greater than the pivot and by repeatedly doing that process we eventually end up with the elements
+
+316
+00:45:29.250 --> 00:45:31.440
+Nick Bowman: And so that's sort of the, the key difference between the two.
+
+317
+00:45:33.810 --> 00:45:48.270
+Nick Bowman: And like we said right at this also isn't over, and login algorithm. And you can think about it exactly the same ways merge sort. There's about log and levels. So we have to split about login times and each level with you. Oh, that work to petition, you can tell me
+
+318
+00:45:49.710 --> 00:45:57.990
+Nick Bowman: One thing I'll note, though, is that notice that it says with good choice of pivot and and so unfortunately a quick sort of has this kind of
+
+319
+00:45:58.620 --> 00:46:06.000
+Nick Bowman: Hidden flaw in it. But if you pick up porch voice of pivot and the performance can actually degrade to open square
+
+320
+00:46:06.360 --> 00:46:10.740
+Nick Bowman: And I'll leave it as a challenge for you all to think about, think about what a poor choice of put it to be.
+
+321
+00:46:11.130 --> 00:46:18.750
+Nick Bowman: And and if you if you think of it. Come, come talk to me after class and we can talk about what actually defines the porch was a pivot and
+
+322
+00:46:19.560 --> 00:46:25.500
+Nick Bowman: That being said, you can on the algorithm on the assignment. You don't have to worry about that. So you can always just pick them up to be the first one.
+
+323
+00:46:27.660 --> 00:46:36.450
+Nick Bowman: And so our final question again is always. Can we do better and and we know that from a runtime efficiency perspective, the answer is no.
+
+324
+00:46:36.900 --> 00:46:41.910
+Nick Bowman: And for Myspace efficiency perspective that actually are versions of quick sort that are better than what we did.
+
+325
+00:46:42.210 --> 00:46:53.820
+Nick Bowman: There's a version of Kickstarter actually called in place. But sort that doesn't require creating all of these new list over and over again and actually just has one list and it sort of doesn't clovers swap operations to take that same behavior.
+
+326
+00:46:54.570 --> 00:47:02.460
+Nick Bowman: And, but, and if you're interested about that. You can also come come chat with us after class. But again, I'll emphasize this from a runtime. Perfect.
+
+327
+00:47:03.000 --> 00:47:11.820
+Nick Bowman: Perspective that you cannot be better than this. Right. And so this is again saying we need. We can't do any better than meeting over and login comparisons.
+
+328
+00:47:12.180 --> 00:47:17.100
+Nick Bowman: And I mentioned this earlier, but if someone else sort of learn actually how to prove this, and we can take this 161
+
+329
+00:47:17.580 --> 00:47:22.980
+Nick Bowman: And the proof is actually real interesting because it depends on a decision tree, you can actually define the recursive decision tree.
+
+330
+00:47:23.850 --> 00:47:33.090
+Nick Bowman: And by by reasoning about the properties of the tree, you can actually show that you'll you'll need at least owe them login comparisons to properly support me
+
+331
+00:47:36.030 --> 00:47:41.400
+Nick Bowman: And so again, will emphasize, we can't do better than merged sword and quick story in big old terms.
+
+332
+00:47:43.200 --> 00:47:52.920
+Nick Bowman: But it also all again I'll throw it back to encouraging you to take sequences one they're actually clever ways of sorting the don't involve directly comparing the elements
+
+333
+00:47:54.120 --> 00:47:57.570
+Nick Bowman: That might seem kind of crazy. How can you sort things if you don't prepare them to one another.
+
+334
+00:47:57.930 --> 00:48:10.260
+Nick Bowman: And you can actually take advantage of patterns in data to be sorting without direct comparisons. And if you do that, you can actually get better better sorting algorithms. So again, I would recommend taking systems. If you want to learn more about those things.
+
+335
+00:48:11.880 --> 00:48:14.160
+kylie jue: Before we move on, can I jump in with a quick question in the chat.
+
+336
+00:48:14.160 --> 00:48:20.160
+kylie jue: Yeah, yeah. So there was a question about when would we use Merge Sort over quick sort, or vice versa, then
+
+337
+00:48:21.030 --> 00:48:22.650
+Nick Bowman: Yeah, that's a, that's a great question.
+
+338
+00:48:22.770 --> 00:48:36.300
+Nick Bowman: Um, I think, in practice, and they're kind of us I not like equivalent me but but they're used it like when you when you sort of have via life sorting problems. Both are very prevalent.
+
+339
+00:48:36.810 --> 00:48:45.330
+Nick Bowman: And specifically, sometimes put sword is better because of what I mentioned about this ability to do it in place. So you actually don't need any extra storage.
+
+340
+00:48:46.020 --> 00:48:54.120
+Nick Bowman: To to sort your elements. And so if you're at a premium for creating new list, then we're then Quick Sort might be a little bit better merge sort.
+
+341
+00:48:54.870 --> 00:48:59.820
+Nick Bowman: Most often involves creating sort of these copies at every level of the curse of stuff that we saw.
+
+342
+00:49:00.360 --> 00:49:08.040
+Nick Bowman: And but I would say they're actually relatively interchangeable. Like, I don't have a great answer for you have like are you should always use Kickstarter. In this case are always use much stored in this case.
+
+343
+00:49:08.460 --> 00:49:15.000
+Nick Bowman: And obviously Quick Sort can be better space efficiency wise, but it also has this flaw that if you pick a poor pivot.
+
+344
+00:49:15.870 --> 00:49:20.970
+Nick Bowman: You actually get kind of bad performance. And so there's a lot of research done on how do you pick good pivots.
+
+345
+00:49:21.390 --> 00:49:30.660
+Nick Bowman: And and and so you have to kind of make sure that you're doing that and kind of like with everything there's trade offs. I would say this is a kind of a place where there is no clear answer that why you would want to use one
+
+346
+00:49:31.350 --> 00:49:35.670
+Nick Bowman: Compared to the other and they're kind of just ends up being in practice what what works out very
+
+347
+00:49:39.030 --> 00:49:48.060
+Nick Bowman: Cool. And so I'll just finish off today by by doing some final advice if you go to work on the assignment. These are all things I've mentioned today, but I want to, I want to wrap up by by reiterating
+
+348
+00:49:49.680 --> 00:49:58.830
+Nick Bowman: The first is please write helper functions to do the divided join once the author and on the assignment. You'll, you'll be implementing both of these sorting algorithms on linked lists.
+
+349
+00:49:59.460 --> 00:50:03.180
+Nick Bowman: And so, so please, you know, define these helper functions.
+
+350
+00:50:03.900 --> 00:50:16.920
+Nick Bowman: And again, I'll emphasize the helper functions are implemented effectively, but the overall sorting algorithms express refers to it. So, so please please mind that distinction and keep that in mind when you're when you're working on the assignment.
+
+351
+00:50:17.940 --> 00:50:31.410
+Nick Bowman: And again right has three or helper functions. First, like, make sure that your helper functions work sort of developer testing framework to to verify that that's working as expected. And then finally, you can write your end to end test with sort of liberal
+
+352
+00:50:33.930 --> 00:50:43.530
+Nick Bowman: And so that in summer. Right. What we saw today is we saw a bunch of different sorting algorithms. And if you, for those of you that stick around after class. We did run out of time to show us in the main
+
+353
+00:50:43.530 --> 00:50:44.850
+Nick Bowman: session today and but
+
+354
+00:50:45.330 --> 00:50:55.770
+Nick Bowman: There's actually some cool demos. Actually, the things went really quickly. There's just some cool demos here on this website that show you how different algorithms work on on different sets of data.
+
+355
+00:50:56.190 --> 00:51:09.330
+Nick Bowman: And it's kind of just a fun visualization. You can see sort of how some sorts are just way worse than than others. So I recommend checking out that website and playing analyses innovations to sort of help you, you know, visualize what these sorts of things.
+
+356
+00:51:10.380 --> 00:51:19.290
+Nick Bowman: And but in summary what we saw as we saw four different sorting algorithms, we saw that they all have different worst best an average case one times just sort of summarizing the table.
+
+357
+00:51:20.250 --> 00:51:29.700
+Nick Bowman: And in general, we saw that sorting is a really powerful tool for organizing data and sort of meeting through meaningful organizational structure in some data that you may have.
+
+358
+00:51:30.900 --> 00:51:36.120
+Nick Bowman: We talked about four different sorting algorithms, but there are way, way, way more out there. And so if you're interested in exploring more
+
+359
+00:51:36.720 --> 00:51:44.070
+Nick Bowman: You know, a good extension on on the assignment of the upcoming assignments, just pick a sorting algorithm. We didn't talk about and try to understand it and try to implement
+
+360
+00:51:45.600 --> 00:51:54.510
+Nick Bowman: And kind of the parting step is to say, you know, understanding the different times and the trade offs of these different algorithms is kind of important when you're choosing the right tool for the job.
+
+361
+00:51:55.020 --> 00:52:04.950
+Nick Bowman: And so just being aware of this and being sort of call comfortable and reasoning about the different tools and will sort of help you become kind of a better program when it comes to you.
+
+362
+00:52:06.840 --> 00:52:15.150
+Nick Bowman: And so then what are we going to talk about next will actually jump back to link data structures and remember this is on Monday when we get back to content. We're going to talk about link data structures.
+
+363
+00:52:15.540 --> 00:52:21.300
+Nick Bowman: And we're going to talk about this idea of trees and these are not the tree and we're going to talk about, but I just really wanted to post these photos.
+
+364
+00:52:21.990 --> 00:52:33.600
+Nick Bowman: So we will we will talk all about trees, the data structure. And yeah, so hopefully we'll see you guys tomorrow and to work on final project stuff. And for those who don't know me, my, I'll see you on Monday, Patrice
+
+365
+00:52:35.580 --> 00:52:36.150
+Elan Smolar Eisenberg: I think
+
+366
+00:52:36.660 --> 00:52:37.740
+Evan F Davis: They just don't look you
+
+367
+00:52:38.700 --> 00:52:39.300
+Julia L Wang: Thank you.
+
+368
+00:52:39.930 --> 00:52:41.040
+Oz Gitelson: Thank you. Thank you.
+
+369
+00:52:41.220 --> 00:52:42.660
+Siddharth Balaji: Thank you do
+
+370
+00:52:43.890 --> 00:52:46.140
+kylie jue: There were some requests in the chat if you could
+
+371
+00:52:47.340 --> 00:52:53.910
+kylie jue: Go over again the benefits of quick sort, versus merged sort and if merge soreness more reliable and Quick Sorry.
+
+372
+00:52:55.470 --> 00:52:57.840
+Nick Bowman: Yeah. Um, so
+
+373
+00:52:58.920 --> 00:53:09.660
+Nick Bowman: Merchants, I mean, so looking from this table right like one of the benefits of merge sort, right, is it does not have worst case or I shouldn't say it doesn't have any worst, worst case behavior than it would in the best case.
+
+374
+00:53:10.710 --> 00:53:19.200
+Nick Bowman: Right. And, and so, so it's kind of like, yeah, if you're thinking about this from like a reliability. Like I always want kind of very consistent performance.
+
+375
+00:53:19.830 --> 00:53:31.110
+Nick Bowman: Merge Sort is probably a good choice right because regardless of what order your elements come in, there's no there's no pivot selection like it always does exactly the same thing and exactly the same order and it to have always have the same right
+
+376
+00:53:31.830 --> 00:53:37.320
+Nick Bowman: And so, so from a consulting perspective. Yeah, merge sort is is maybe. Maybe that's why you want to select my short
+
+377
+00:53:38.880 --> 00:53:49.290
+Nick Bowman: And quick sort right 1111 you want to select quick sort of in the way that we've implemented it there probably is not a scenario where you would write like in the sense that
+
+378
+00:53:49.890 --> 00:53:55.650
+Nick Bowman: The way that we implemented this quick sort of is its kind of the naive way that requires creating all these copies of data structures.
+
+379
+00:53:56.460 --> 00:54:00.270
+Nick Bowman: Like I said, though there is sort of if you implement this in place bookstore.
+
+380
+00:54:00.720 --> 00:54:10.230
+Nick Bowman: And that can use less space right less less memory then emerged sort night. And so you might say, Hey, I'm limited on the amount of space or memory my computer has
+
+381
+00:54:10.710 --> 00:54:15.870
+Nick Bowman: So I'm going to take the risk of slowness right if I accidentally get stuck with choosing that pivots.
+
+382
+00:54:16.140 --> 00:54:24.300
+Nick Bowman: But I'm going to choose bookstore, because I don't need to make any copies and I can sort of do with sort in place. And again, it's hard to say that because we didn't implement that version in class today.
+
+383
+00:54:24.990 --> 00:54:35.640
+Nick Bowman: But the the in place version, use it the same sort of core reason apocalypse what works. It just rather than creating three separate lists and sort of explicitly putting elements in those lists.
+
+384
+00:54:36.090 --> 00:54:46.830
+Nick Bowman: It does some clever swaps and it finds pairs of elements that are less than or less than a greater than the pivot and it's swaps them and the original way. And so it actually does like use the
+
+385
+00:54:48.330 --> 00:54:51.000
+Nick Bowman: Use the structure of the original list with something
+
+386
+00:54:52.080 --> 00:54:57.480
+Nick Bowman: So I would say that that's probably why you would use put sort and put sword is actually what underlies
+
+387
+00:54:58.320 --> 00:55:14.550
+Nick Bowman: The interview vector dot sort on like a Stanford vector on a c++ vector. And it actually is quick sword running in the background, a modified version of quick sort. And so it is it is one of the more common places in practice because you can have pretty pretty efficient.
+
+388
+00:55:16.260 --> 00:55:20.970
+Nick Bowman: But obviously, you have to solve this problem, how do I avoid picking, picking back to this.
+
+389
+00:55:21.990 --> 00:55:36.900
+Nick Bowman: Actually, on that note to end on the study of what would make a bad could it go back with back to a quick, for example in this original list. So if we go back to the very beginning of this intervention would be a bad pivot for this example.
+
+390
+00:55:37.800 --> 00:55:49.110
+Elena Williams: Like a value that's either kind of towards the lowest end or like the highest end because then it doesn't tell you much if like all of the other elements are either before and
+
+391
+00:55:50.220 --> 00:55:51.720
+Elena Williams: After and before that element.
+
+392
+00:55:52.290 --> 00:55:59.430
+Nick Bowman: Yeah, exactly right. A bad pivot. We are the worst possible pivot, we could pick in this case would be 11 or 16
+
+393
+00:55:59.700 --> 00:56:06.420
+Nick Bowman: Right, because if we pick 11 then we're not going to petition the list at all really right. We're just gonna have 11 and then the rest of the list.
+
+394
+00:56:06.720 --> 00:56:14.520
+Nick Bowman: Or if we pick 16 we just have 16 and the rest of the list. So picking a bad pivot involves picking the sort of extremes of the array.
+
+395
+00:56:15.030 --> 00:56:26.640
+Nick Bowman: And picking the. A good pivot right means picking the media like if you could pick the median of the list, right, that would always be sort of the optimal pivot, right, because you're know that you would be splitting the elements almost exactly happened.
+
+396
+00:56:27.570 --> 00:56:38.790
+Nick Bowman: And and so there are heuristics that people use to actually try to figure out, oh, what's the likelihood so that the pivot that I'm picking electric and he's good or bad, and they try to try to reason about.
+
+397
+00:56:40.080 --> 00:56:54.330
+Nick Bowman: That yeah that's a that's right online so you know that it is a solvable problem people, people have done it, there are sort of ways you can get out and figure out what good pivots, maybe, but obviously requires a little bit more complexity in
+
+398
+00:56:57.930 --> 00:57:00.660
+kylie jue: There start sorting algorithms that are worse than n squared.
+
+399
+00:57:01.830 --> 00:57:07.110
+Nick Bowman: other search engines and worse. And it's way worse. Yeah, there's some really awful sorting on rooms out there.
+
+400
+00:57:08.310 --> 00:57:14.400
+Nick Bowman: There, there is a sorting algorithm. It's kind of the if you if you know this sorting algorithm, you can use it.
+
+401
+00:57:15.030 --> 00:57:26.730
+Nick Bowman: When you meet other people and studies. Yes, but they're sorting all your in who literally works by saying randomly shuffle all the elements. Is it sorted. All right, done, if not randomly shuffle all the elements. Is it sorted
+
+402
+00:57:27.780 --> 00:57:31.170
+Nick Bowman: Yes. Then, so there's literally an algorithm that you can think of this as a
+
+403
+00:57:31.590 --> 00:57:40.350
+Nick Bowman: If you're trying to shuffle or you're trying to put a deck of cards in order and your, your, your strategy for ordering that deck of cards was to throw them on the air and see if they landed down on the ground in order
+
+404
+00:57:40.890 --> 00:57:51.810
+Nick Bowman: And so that's that's called. It's a Bogo sort and it's, it has runtime that is believe O n factorial and which is just just awful and
+
+405
+00:57:52.680 --> 00:58:00.810
+Nick Bowman: Means ok and then actually be worse than that. But there are. There's people actually explicitly isn't one of the things that never made sense to me. People
+
+406
+00:58:01.320 --> 00:58:04.260
+Nick Bowman: Explicitly writing really terrible sorting algorithms.
+
+407
+00:58:04.560 --> 00:58:15.630
+Nick Bowman: Like people like like it's just kind of like a fun thing people do as a hobby that are defined like sorting columns are just like worse and worse than than previous previously bad sorting algorithms. And I think that people have invented some algorithms that like
+
+408
+00:58:17.220 --> 00:58:24.090
+Nick Bowman: Technically wouldn't even terminate in the like heat death of the universe to like sort an array or sort of list that has like find out
+
+409
+00:58:25.470 --> 00:58:32.490
+Nick Bowman: So I don't know why people do it. But yes, there are certainly options that are worse. None. None, that we are about to actually teach about
+
+410
+00:58:35.100 --> 00:58:47.550
+kylie jue: This goes to a different part of the lecture, but I know causes still in the call and had a question about how are we making sure that the elements that at the same as the pivot and up in the vector, if you don't mind going back over that in the code. Oh.
+
+411
+00:58:49.110 --> 00:59:03.000
+Nick Bowman: Oh yeah, the way that we, yeah. So the way that we we do that. So we're building up the list of elements that are equal to the pivot in the partition function and then the way that we make sure they get included is that the concatenation includes this
+
+412
+00:59:03.570 --> 00:59:04.200
+Nick Bowman: Equal vector
+
+413
+00:59:04.320 --> 00:59:04.950
+Nick Bowman: And then
+
+414
+00:59:05.100 --> 00:59:07.020
+Nick Bowman: That that gets included as part of our funnel.
+
+415
+00:59:07.320 --> 00:59:09.990
+klaus cerny: Yeah, I see it. No, thank you.
+
+416
+00:59:11.910 --> 00:59:12.120
+klaus cerny: Good.
+
+417
+00:59:16.470 --> 00:59:20.820
+kylie jue: Are there other questions, folks. How about sorting. Yeah, Jordan.
+
+418
+00:59:23.340 --> 00:59:25.680
+Jordan Lin: Asked a question that's not necessarily relate to sorting.
+
+419
+00:59:26.730 --> 00:59:38.250
+Jordan Lin: Sure. Okay. So I actually just um I've been wondering this for longer than I should. Remember, as you mentioned it. I'm up a while ago so
+
+420
+00:59:39.180 --> 00:59:54.360
+Jordan Lin: c++ only allows you to return on one thing, like one object at a time and it like and like even if you try to like, you know, go around that. But trying. I'm going to return a vector of things. It has to be the same time can be. It's just how vectors work.
+
+421
+00:59:55.380 --> 01:00:02.280
+Jordan Lin: And how does unlike languages like Python. We literally have this amazing Tupac unpacking. We can just turn a bunch of weird stuff.
+
+422
+01:00:03.600 --> 01:00:08.610
+Jordan Lin: Like how does that really work behind the scenes. What exactly is your language isn't going to do that.
+
+423
+01:00:11.490 --> 01:00:17.460
+Nick Bowman: So, so the question is how does triple unpacking work in Python or why is it not available.
+
+424
+01:00:17.520 --> 01:00:22.410
+Jordan Lin: Yet kind of how they handle like just returning a bunch of whatever
+
+425
+01:00:24.570 --> 01:00:36.990
+Nick Bowman: Um, I mean, I'm not entirely sure how how it's actually sort of implemented underneath the scenes, but I think it's just more of a it's more of a decision that like
+
+426
+01:00:38.580 --> 01:00:40.020
+Nick Bowman: Realistically, right, like
+
+427
+01:00:40.710 --> 01:00:54.090
+Nick Bowman: Python return values right are always just ripples right like so even though we can say right oh we can return multiple things over. Not really, right. We're just returning a tool that happens to contain multiple things. So realistically, there is still one thing being returned
+
+428
+01:00:54.570 --> 01:00:58.320
+Nick Bowman: And I think the main difference is just c++ as has made the decision that like
+
+429
+01:00:58.680 --> 01:01:06.030
+Nick Bowman: You can only return one single value. And sure, you can be creative about what the type of that value is right, like you're saying what you can
+
+430
+01:01:06.240 --> 01:01:10.740
+Nick Bowman: You know, if you wanted to package things up, like in a struct, for example, you'll see this on the last assignment. Right.
+
+431
+01:01:11.610 --> 01:01:17.790
+Nick Bowman: On the on the last assignment assignment six you'll, you'll be asked to write a function that generates, you know, a couple different
+
+432
+01:01:18.180 --> 01:01:22.380
+Nick Bowman: Forms of output. And then the thing that you return is it's just a struct containing all of those pieces.
+
+433
+01:01:23.310 --> 01:01:28.380
+Nick Bowman: And so that's it, that's a common workaround and but I yeah it's hard to say. I mean,
+
+434
+01:01:28.890 --> 01:01:41.640
+Nick Bowman: The, the actual way in which they're both implemented, I don't have a ton of insight into but it but it's sort of a conscious decision, I think, to just in the design of the programming languages to kind of have that happen.
+
+435
+01:01:42.960 --> 01:01:54.570
+Jordan Lin: So you can almost say Python has like a built in objects that allows you to store essentially any type of object within that object which is called simple
+
+436
+01:01:55.140 --> 01:01:56.940
+Nick Bowman: So yeah, I mean, yeah, pretty much.
+
+437
+01:01:58.440 --> 01:01:59.010
+Jordan Lin: Okay, thanks.
+
+438
+01:02:00.930 --> 01:02:10.260
+edouard des: So when they made c++. They were like, let's make it confusing and not make it able to return multiple things or is it because they didn't want like it removes the potential for bugs. If you can only return one specific thing.
+
+439
+01:02:12.480 --> 01:02:20.160
+Nick Bowman: Let me, let us plus was, I mean it right, it was, it was read this derivation of see, you know, dependent on see in a lot of ways.
+
+440
+01:02:21.180 --> 01:02:25.200
+Nick Bowman: And and the way that I can. The way that I can sort of
+
+441
+01:02:27.240 --> 01:02:32.430
+Nick Bowman: The probably again I'm making this up. But the way that I justified as they say, to say that it's c++ was derived from see
+
+442
+01:02:33.150 --> 01:02:38.460
+Nick Bowman: And and see as a programming language is very close to the weight like
+
+443
+01:02:39.240 --> 01:02:46.230
+Nick Bowman: In a lot of ways, the programming language itself and mimics how the computer hardware behaves like that it. That is why it's so prevalent because
+
+444
+01:02:46.530 --> 01:03:02.160
+Nick Bowman: For a lot of programmers like that's the most efficient way to sort of achieve task is to sort of implement them in a language that is that is so close to the way that the computer is working, you can have lots of efficiency gains and but the way that your computer actually works and
+
+445
+01:03:03.210 --> 01:03:11.730
+Nick Bowman: The there is like one specific component of the of the competition or hardware on your computer that that stores.
+
+446
+01:03:12.390 --> 01:03:17.160
+Nick Bowman: Return value from functions, actually there's there's like a single registry that is responsible for
+
+447
+01:03:17.400 --> 01:03:26.910
+Nick Bowman: for storing you know when a function completes it always like like underlying one another and or underlying the the code there one place and computer hardware, where you have to put it
+
+448
+01:03:28.470 --> 01:03:35.340
+Nick Bowman: And so to me it's not that surprising that see sort of made this decision, like you can you can return one value. And that's it, or or nothing. Right.
+
+449
+01:03:36.150 --> 01:03:41.130
+Nick Bowman: But there's quite literally one place and computer hardware, where every function after finishes running
+
+450
+01:03:41.370 --> 01:03:47.010
+Nick Bowman: If it wants to return something to the function called it, it puts it on location because they have to agree on that location. Right.
+
+451
+01:03:47.310 --> 01:03:54.120
+Nick Bowman: Like the function that's calling and the function that's finishing have to agree, where the return value is going to go right otherwise. Like, how are they going to communicate.
+
+452
+01:03:55.230 --> 01:03:55.590
+edouard des: Certainly.
+
+453
+01:03:56.640 --> 01:04:06.900
+edouard des: Isn't a computer destroying data like zeros and ones like isn't a string and like doesn't not care whether it's an integer. Just know that storing things somewhere or like it's an
+
+454
+01:04:07.050 --> 01:04:15.930
+Nick Bowman: Entrepreneur. Yeah, but it, but it's just it's space for one value right again. You're right, it doesn't care what the value is right. That's where you can have different return function types, but it is literally it's
+
+455
+01:04:16.140 --> 01:04:21.180
+Nick Bowman: There's like a slot in in the conditional hardware that is like, this is the place where you put the return
+
+456
+01:04:22.290 --> 01:04:22.590
+edouard des: Okay.
+
+457
+01:04:23.070 --> 01:04:24.000
+Nick Bowman: And and then
+
+458
+01:04:24.120 --> 01:04:27.030
+Nick Bowman: There's space. For one thing, right. So how you interpret that one.
+
+459
+01:04:27.030 --> 01:04:35.850
+Nick Bowman: Thing right you can interpret it as Python doesn't say, oh, it's actually a reference to a tool that could have tons of things in it, right, very good interpreter to see does, which is like, it's an integer.
+
+460
+01:04:36.150 --> 01:04:47.850
+Nick Bowman: Right. Or like it's a it's a pointer. It's a string, right, whatever it is. And yeah, so I there's a lot that goes into sort of design programming languages and what sort of, why not necessarily have to be true.
+
+461
+01:04:50.310 --> 01:04:52.410
+edouard des: Speed. Anyway, so I guess that kind of explains
+
+462
+01:04:54.390 --> 01:04:55.410
+Nick Bowman: quite a surprise on his way.
+
+463
+01:04:56.250 --> 01:04:58.020
+edouard des: And isn't particularly well known for its speed.
+
+464
+01:04:58.260 --> 01:04:59.460
+Nick Bowman: Oh no, my phone is awful.
+
+465
+01:04:59.640 --> 01:05:05.160
+Nick Bowman: I thought is an office. No, no, like, sorry. I love Python but it's so slow. Like if you ever want to do something quickly like
+
+466
+01:05:05.460 --> 01:05:15.120
+Nick Bowman: Sorry if you ever want to do something quickly in terms of your time and time you said writing it Python is great, you're honest and definitely quickly in terms of amount of time that computers and running it by that is not by that is not
+
+467
+01:05:16.860 --> 01:05:18.570
+edouard des: Trying to figure out what you want to return. It's like
+
+468
+01:05:19.950 --> 01:05:21.690
+edouard des: Five minutes. Okay, thank you.
+
+469
+01:05:30.690 --> 01:05:34.620
+kylie jue: Nothing else in the chat. Oh, David.
+
+470
+01:05:35.520 --> 01:05:43.440
+David Huang: I swear on this. No, I'm just curious how to Python do like lists that you can store different types of value.
+
+471
+01:05:44.880 --> 01:05:45.840
+David Huang: How did they implement that.
+
+472
+01:05:46.650 --> 01:05:48.090
+Nick Bowman: Oh, I have, I have no idea.
+
+473
+01:06:03.270 --> 01:06:04.050
+I think
+
+474
+01:06:06.570 --> 01:06:08.250
+kylie jue: Chris. Go ahead, or Christopher, sorry.
+
+475
+01:06:09.840 --> 01:06:13.500
+christopher cooper: I had a question about the assignment for extension.
+
+476
+01:06:15.180 --> 01:06:18.360
+christopher cooper: So this was doing like DQ max.
+
+477
+01:06:21.870 --> 01:06:29.520
+christopher cooper: Basically, I was wondering could you do it with like a tree structure where basically
+
+478
+01:06:30.570 --> 01:06:44.010
+christopher cooper: Like the top of the tree is like the middle, you know, similar to like how like a map would be implemented or whatever so that then you could search down and like you know login. Time to return.
+
+479
+01:06:44.670 --> 01:06:53.910
+christopher cooper: You know, the men or the max, but you'd have to be like kind of sorted from the middle down perfectly and keeping that order. Does that make any sense.
+
+480
+01:06:53.970 --> 01:07:02.520
+kylie jue: Yeah, you can do that if you knew if you then constrained the left and right node, such that the left ones are always smaller than the parent and the right ones were always larger than the parent
+
+481
+01:07:02.910 --> 01:07:03.450
+christopher cooper: Yeah.
+
+482
+01:07:03.600 --> 01:07:04.950
+christopher cooper: And maintain the balance and
+
+483
+01:07:04.950 --> 01:07:05.940
+christopher cooper: All that. Yeah.
+
+484
+01:07:07.920 --> 01:07:08.100
+Nick Bowman: Well,
+
+485
+01:07:08.730 --> 01:07:10.350
+Nick Bowman: We'll talk about that on Tuesday of next week.
+
+486
+01:07:10.620 --> 01:07:12.870
+Nick Bowman: Yeah. And basically what you just described as a tree.
+
+487
+01:07:18.600 --> 01:07:19.230
+christopher cooper: Okay, thanks.
+
+488
+01:07:24.900 --> 01:07:27.780
+Alright, I think we're good.
+
+489
+01:07:30.840 --> 01:07:32.010
+edouard des: Thank you. Have a good day.
+
+490
+01:07:33.870 --> 01:07:34.230
+Jordan Lin: Yeah.
+

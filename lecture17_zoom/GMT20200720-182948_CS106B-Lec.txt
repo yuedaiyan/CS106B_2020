@@ -1,0 +1,156 @@
+00:11:14	Aadi M Rane:	recursion
+00:11:15	Kenny Wang:	recursion
+00:11:19	Dima Timofeev:	Complexity
+00:11:19	Ryan Gabel:	recursion
+00:11:19	Arul Saxena:	big O
+00:11:20	Ryan Bernstein:	recursion
+00:11:20	Sedef Emekli:	backtracking
+00:11:22	Zachary Alon:	recursion
+00:11:26	christopher cooper:	recursion
+00:11:30	Kenneth Fischer:	Recursion
+00:11:35	ian rundle:	Backtracking!!
+00:11:42	Hemant Chaudhary:	Problem Solving 
+00:11:46	edouard des:	Drawing fractals with recursion
+00:11:59	Elan Smolar Eisenberg:	adts
+00:12:29	kathleen bryan:	Won’t know till it’s graded :)
+00:12:40	Humaid Alzaabi:	^ :P
+00:12:48	Liza George:	^ T^T
+00:14:33	Aadi M Rane:	are pointers primitive data types
+00:15:22	Dima Timofeev:	Can OS decline my program request for more memory from heap?
+00:15:32	Kylie Jue:	we technically don’t refer to pointers as primitive types no
+00:16:15	Hemant Chaudhary:	What is the syntax for using delete[] with a pointer?
+00:16:38	Kylie Jue:	@Dima You shouldn’t run into that in a C++ program that we have to write in this class.  I’m not sure if it’s possible since it would depend on the context
+00:17:02	Dima Timofeev:	Gotcha. Thanks!
+00:18:21	Thomas Tao Hale:	So vector<array>?
+00:18:49	Kylie Jue:	@Hemant The syntax will look similar but we won’t be allocating pointers dynamically so you shouldn’t have to delete them (they exist on the stack)
+00:18:55	Shifeng Hong:	^Would that be the idea of ArrayList in java?
+00:19:05	Shifeng Hong:	which can store different data type in one array
+00:19:18	Hemant Chaudhary:	Got it. Thanks!
+00:19:22	Dima Timofeev:	Are we going to learn about templates in this class?
+00:19:23	Kylie Jue:	@Thomas No this will still be a Vector of ints
+00:19:28	Dima Timofeev:	Oh. Never mind. Answered
+00:19:39	Elan Smolar Eisenberg:	What does dynamically adding it mean again?
+00:19:54	Kylie Jue:	@Shifeng ArrayLists in Java also only store a particular type - this vector is just going to store ints
+00:20:13	Kylie Jue:	@Elan Dynamically means allocating memory for it on the heap like we discussed on Thursday
+00:20:14	Shifeng Hong:	ok thanks
+00:22:05	shreyas ravi:	I’d get is an int how will it return values if the vector is a type other than an int
+00:22:28	Kylie Jue:	@Shreyas I’m not sure I understand the question
+00:22:52	shreyas ravi:	is our vector only going to hold ints?
+00:23:00	Kenny Wang:	yes
+00:23:30	Aadi M Rane:	is there anything special about integers? why integers specifically?
+00:24:24	Kylie Jue:	Nothing special - we’re just choosing integers as our type
+00:26:49	Kenny Wang:	does it need to be a pointer to an array instead of just an array?
+00:27:09	Liza George:	is that (the allocatedCapacity var) going to be that maximum size you mentioned earlier?
+00:27:30	Kylie Jue:	yes since we want control over the memory and when it exists inside the class
+00:27:36	Kylie Jue:	@Kenny^
+00:27:44	Kylie Jue:	@Liza yes
+00:27:58	Kenny Wang:	huh okay
+00:28:26	Elan Smolar Eisenberg:	I just want to make sure I understand arrays: you can add things to an array but unless you tell the program that you want to store it, it won’t, right?
+00:29:25	Kylie Jue:	@Elan I’m not sure what you mean by telling the program you want to store it.  You can use the `array[i] = value` syntax to store and add things in an array
+00:30:08	Kenny Wang:	is a destructor needed?
+00:30:16	Kenny Wang:	and same for a constructor
+00:30:23	Kylie Jue:	@Kenny it’s needed to avoid memory leaks if you dynamically allocate memory yes
+00:30:41	Kenny Wang:	got it
+00:30:42	Kylie Jue:	the constructor can be implicit
+00:31:00	alan hu:	Is there any case where you wouldn’t deallocate in the destructor?
+00:31:02	Kylie Jue:	but most classes will want control over setting the default values of their member variables
+00:31:08	Jordan Lin:	So the destructor is essentially a function that tells the class what to do when an object is deleted?
+00:31:44	Kylie Jue:	@Alan you might deallocate not in the constructor if you’re resizing your array (example coming up). but you’d ultimately still want to destroy everything in the destructor still as well
+00:31:50	Kylie Jue:	@Jordan yes
+00:32:06	alan hu:	thanks
+00:34:18	Ryan Bernstein:	Do we have to do anything in destructors other than delete arrays?
+00:35:08	Liza George:	did we have to add the destructor to the header file?
+00:35:14	Kylie Jue:	@Liza yes
+00:35:17	Jordan Lin:	Sorry if I missed this, but why are we assigning INITIAL_CAPACITY to allocatedCapacity?
+00:35:31	Kylie Jue:	@Jordan we want to make the array some small default value when you create it initially
+00:35:34	Liza George:	also, is it possible to call it from another class like the constructor?
+00:35:35	Pepe Bolorinos:	For this class, what about managing pointers? As in, creating arrays and having dangling pointers that we don
+00:35:38	Liza George:	**the destructor
+00:35:41	Kelly L. Boles:	Can someone explain the bracketed syntax for elements?
+00:35:43	Jordan Lin:	Can't we just use INITIAL_CAPACITY when initializing the array?
+00:35:50	Usman Iqbal Hanif:	If memory allocated from the heap is considered fast and ‘dynamic’, then why don’t variables get stored there instead of the stack? This may be out of the scope of class, though it got me curious
+00:36:28	Kelly L. Boles:	no in the constructor
+00:36:43	Kelly L. Boles:	got it. thanks!
+00:36:45	Pepe Bolorinos:	Whoops sorry accidentally pressed enter, wanted to ask, what about managing pointers when creating these classes? How do we ensure we don’t accidentally use a dangling pointer?
+00:36:49	Jordan Lin:	Sorry, I see the answer to my question.
+00:37:10	Kylie Jue:	@Jordan yes you could do that
+00:37:12	Pepe Bolorinos:	Ok thanks!
+00:37:15	Elan Smolar Eisenberg:	So the arrays will just grow despite the constructor?
+00:37:50	Kylie Jue:	@Usman we don’t have control of how long variables on the stack exist (when they go out of scope) so using the heap gives us more control
+00:38:07	Kylie Jue:	@Elan we’ll talk about how to grow the array shortly!  you have to grow it yourself
+00:38:45	Elan Smolar Eisenberg:	So when you say there’s no way to tell it’s size, you actually mean the max it can fit?
+00:39:37	Kylie Jue:	@Elan - you give it an initial max size but when assigning things into the array using the array[i] syntax, there’s no bounds checking (so that’s what we mean when we say it can’t tell its size)
+00:39:40	Kenny Wang:	should it be like about the same difficulty as a section problem?
+00:39:43	Kylie Jue:	@Kenny yup
+00:40:20	Elan Smolar Eisenberg:	Ok got it. Thank you so much. That was really confusing me.
+00:41:33	Elan Smolar Eisenberg:	Why do they store random values? Is it just a part of the constructor or how the language works?
+00:41:49	Kylie Jue:	@Elan yeah it’s what happens in C++ when it gives you memory on the heap
+00:42:09	Liza George:	are those values like what "used" to be stored in that part of the heap?
+00:42:33	Liza George:	like if there was an array whose pointer had delete[] called on it, are the values in that array cleared or are they just like
+00:42:39	Liza George:	used by the next thing in the heap?
+00:43:26	Elan Smolar Eisenberg:	Adding on, if you delete them, will the variables become 0 or the random numbers/values we just saw?
+00:43:42	Kylie Jue:	@Liza - I’m not 100 percent sure since exactly how C++ does the memory handling is beyond the scope of the class. but we can discuss after lecture if you want
+00:44:15	Liza George:	Coolio, thanks!
+00:47:57	Kylie Jue:	@Elan to your question from before breakout rooms, we’ll discuss it in a bit when we talk about expanding the array
+00:52:34	Kenny Wang:	what's that noise
+00:52:37	Thomas Tao Hale:	doggo
+00:52:39	Michael M Hu:	Woof
+00:52:42	alz1022@stanford.edu:	*bark*
+00:52:43	Kylie Jue:	my dog - sorry
+00:52:53	Kyle Thomas Booker:	bork
+00:54:19	Ryan Bernstein:	should there be this -> in the functions, or is it just for constructors?
+00:54:47	Kylie Jue:	`this` isn’t necessary unless you’re using parameters that have the same names as the member variables
+00:55:08	Kylie Jue:	since `this` tells us we’re referring to the member variables and not the local parameters
+00:55:44	Ryan Bernstein:	great, thanks!
+00:57:54	Kenny Wang:	are vectors always sort of "based on" arrays?
+00:58:07	Kylie Jue:	Yes in C++ vectors are built on top of arrays
+00:58:26	alan hu:	Is this why Sets are ordered :P
+00:58:48	Kylie Jue:	@Alan sets actually aren’t built using arrays!  we’ll learn more about them later
+00:59:28	alan hu:	Can’t wait
+01:01:37	Kenny Wang:	would getting a new larger array be expensive?
+01:01:51	Kenny Wang:	since you need to copy everything
+01:02:26	Kylie Jue:	@Kenny it will be O(n) to copy everything over so it’s not terrible but yes there is a cost
+01:02:32	Jordan Lin:	Does that mean for Vectors, there is a certain 'threshold' where, if we +1, it suddenly becomes a lot more expensive to story the Vector?
+01:02:51	Kylie Jue:	@Jordan yes
+01:02:53	Jordan Lin:	Also, does this mean that the .add() function is not necessarily O(1)?
+01:03:30	Kylie Jue:	@Jordan yes but we try to pick when we expand the array to be efficient/to spread out the cost so we don’t usually worry about it
+01:03:43	Jordan Lin:	Ah I see :)
+01:04:42	Demi Lei:	if we try to access a space with data that has been deleted, would c++ throws an error?
+01:04:46	Zachary Alon:	Thank you!!!
+01:04:47	alz1022@stanford.edu:	Thank you!
+01:04:49	julia wang:	Thank you!!
+01:04:51	Kevin H Fan:	Thank you
+01:04:53	Kenneth Fischer:	Thank you!
+01:04:53	Guozhen Miao:	thank you
+01:04:54	alan hu:	Thanks, course material is getting super interesting! :)
+01:04:56	Lawrence Li:	thanks!
+01:05:19	Kenny Wang:	stupid question - who was Andrew Shin and why did it look like he was taking class from inside a clean room with suit and all
+01:05:21	Shifeng Hong:	Can you expand a little bit on when we deallocated memory when "go out of scope" and how we define scope?
+01:06:22	Kylie Jue:	@Shifeng will answer this out loud as a follow up
+01:07:29	Liza George:	oh wait when we're debugging, can we see exactly what's in the heap or just any arrays that we have pointers to?
+01:08:06	Kylie Jue:	@Liza this will be a warmup to the new assignment coming out today :) you’ll only be able to see arrays you have pointers to, but you can often see a little more of the memory than what you’ve technically allocated
+01:08:23	Liza George:	oh ok, thanks!
+01:11:42	Shifeng Hong:	Thanks!
+01:12:26	Liza George:	I wanted to check the insert() function implementation mentioned earlier in the lecture, but the provided files are the starter code without the functions filled in. Will those files be updated later?
+01:12:43	Kylie Jue:	Yes we’ll upload the finished code after this lecture
+01:13:27	Liza George:	amortized? is that how you spell that?
+01:13:34	Kylie Jue:	exactly like that :)
+01:13:47	Liza George:	ok thanks~
+01:16:16	Liza George:	wait I'm  confused about the enqueue logic you just mentioned, how can you add smth to the beginning of a vector without repositioning everything? or would the  "beginning" values be like...on the other end of the vector?
+01:16:29	Liza George:	sorry I don't know much about this problem
+01:16:44	Jordan Lin:	Enqueue adds an item to the end of the function
+01:16:50	Jordan Lin:	So I guess it should be O(1)
+01:16:57	Jordan Lin:	I'm curious how it is O(1) for dequeue though
+01:17:15	Jordan Lin:	*end of the array
+01:17:20	Kylie Jue:	will answer out loud!
+01:17:52	Liza George:	he said there's just one var representing the index of the "last" elem, so they probably just return elements[last] and the decrement  that var
+01:19:15	Liza George:	ooh wait nwm nwm ^ is wrong
+01:23:06	Shifeng Hong:	Sorry I might have missed that, but is the RingBufferQueue exactly how the Queue class achieve a O(1) on dequeue()?
+01:23:49	Kylie Jue:	@Shifeng I’m not super familiar with how the queue class is implemented so it might not be exactly the same, but yes that’s the idea for how we get O(1) on enqueue/dequeue
+01:24:04	Shifeng Hong:	got it, thanks
+01:24:29	Liza George:	so both for my question today about delete[] and last class about the stack, you guys mentioned that that stuff is technically outside the scope of this class. Is there another class in the cs track that covers that? like the lower-level stuff?
+01:24:52	Kylie Jue:	yes! CS107 is all about the lower-level computer systems material :)
+01:25:31	Liza George:	Coolio. hopefully I get to take a class like that wherever I go next year!
+01:26:54	akhil iyer:	If you acess an index that is greater than the size of the array, how is it possible that the pointer will point to a garbage value rather than throw an error?
+01:28:01	akhil iyer:	Okay that makes sense
+01:28:04	akhil iyer:	thank you!

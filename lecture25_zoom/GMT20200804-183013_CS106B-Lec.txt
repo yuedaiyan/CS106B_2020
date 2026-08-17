@@ -1,0 +1,108 @@
+00:09:55	Thomas Tao Hale:	redwoods
+00:10:02	Ryan Gabel:	binary
+00:10:14	Thomas Tao Hale:	0 or 1?
+00:10:15	Lukas Fullner:	binary
+00:10:16	Kenny Wang:	evolutionary tree
+00:10:18	hunter ruebsamen:	mahogony
+00:10:19	Arul Saxena:	redwood
+00:10:20	Kenneth Fischer:	Oaks
+00:10:20	Jacob Knego:	palm
+00:10:23	Kyle Thomas Booker:	redwood for sure
+00:10:29	haoming li:	Oh I like palm trees too
+00:10:30	louise marzolf:	bonsai
+00:10:30	Samuel Lynn Ledden:	palm trees
+00:10:30	Nick Bowman:	definitely redwood
+00:10:33	Aadi M Rane:	oak
+00:10:35	dyson ye:	avl
+00:10:41	Kenny Wang:	lmao we all Stanford people not saying redwood is heresy
+00:10:50	Kyle Thomas Booker:	coast redwood specifically, not to big a fan of the giant sequoia
+00:10:57	Thomas Tao Hale:	Bob the builder
+00:10:59	christopher cooper:	Pomagranate
+00:11:04	paul gialis:	I live in cali so it has to be redwood
+00:11:09	Thomas Tao Hale:	same
+00:11:35	Andy Jaewon Kim:	can the lecture slides be posted please?
+00:11:44	Nick Bowman:	I’m working on it
+00:11:51	Andy Jaewon Kim:	thanks!
+00:12:05	Thomas Tao Hale:	What’s the holdup?
+00:14:17	Nick Bowman:	The slides should be posted now.
+00:15:04	Thomas Tao Hale:	Yes they are
+00:17:05	Elan Smolar Eisenberg:	I don’t have an invite to a breakout room
+00:19:04	Nick Bowman:	Unfortunately on my end it looks like you’ve been assigned so I’m not sure what the issue is.
+00:20:47	Elan Smolar Eisenberg:	nevermind
+00:23:22	Kenny Wang:	it's already the second to last week :(
+00:23:35	Elan Smolar Eisenberg:	It sounds like something’s hitting the mic
+00:23:58	ian rundle:	Yeah I hear that too
+00:27:56	Thomas Tao Hale:	I still here a bit of something
+00:28:03	Liza George:	where would we place values that are equal to the parent?
+00:28:45	Nick Bowman:	@Liza it depends – you can put them on either the left or the right, as long as you’re consistent throughout the tree. For our purposes, we’re going to be using BSTs in the context of sets so we actually won’t have duplicates
+00:29:05	Liza George:	ok, thanks!
+00:30:13	shreyas ravi:	Wait if you have the values 169 and 171 repeating at the end wouldn’t the tree not work?
+00:30:44	Nick Bowman:	@Shreyas I’m not sure I understand the question – what do you mean by having 169 and 171 repeating?
+00:31:29	shreyas ravi:	So like, let’s say you have 169 as a branch and it sends one branch to the right to 171 and that 171 sends a branch to the left to 169 and so on
+00:31:41	Aadi M Rane:	can you use BSTs for sorting due to the special ordering of the elements?
+00:32:09	Nick Bowman:	@Shreyas that wouldn’t be a valid BST because it would not fulfill the BST property that all values in the right hand subtree are greater than the current node
+00:32:21	shreyas ravi:	Oh right I forgot
+00:32:54	Nick Bowman:	@Aadi good observation! One possible sorting algorithm is actually to take all your elements and put them into a BST. Then, if you do an in-order traversal of the nodes, you’ll get them all in sorted order!
+00:36:01	Kenny Wang:	remind me - do we submit the final project report on paperless like the other assignments?
+00:36:15	Nick Bowman:	Yes. There is a “final project” assignment on Paperless.
+00:36:26	Kenny Wang:	alright, thanks
+00:37:36	Thomas Tao Hale:	How do you arrange an LAIR again?
+00:38:13	Aadi M Rane:	can we assume that no duplicate elements exist?
+00:38:26	Nick Bowman:	Visit this link during a time when the LaIR is open for your appropriate situation (minor vs adult)
+00:38:26	Nick Bowman:	https://cs198.stanford.edu/lair/student
+00:38:53	Nick Bowman:	@Aadi Since we’re the ones implementing the set, it will be our job to enforce that
+00:42:32	Michael M Hu:	Could you call freeTree on a non root node to remove part of the tree?
+00:42:39	Nick Bowman:	@Michael yes
+00:43:11	Thomas Tao Hale:	*insert obvious Communism joke here*
+00:55:27	Jordan Lin:	Just wondering, if we add elements in just the right way, we may end up with a tree that is similar to a linked list right? In the sense that every node only has the left or right child filled.
+00:55:35	Thomas Tao Hale:	Um is the LaIR queue full?
+00:56:01	shreyas ravi:	How would the tree work for maps? Like how does it know which key is associated with which value?
+00:56:09	Nick Bowman:	@Jordan Yes, that is what we talked about in the earlier part of the lecture, where insertion order into a BST actually matters. It’s possible to get an unbalanced BST that has poor O(n) performance if you add all the elements in sorted order
+00:56:29	Kenny Wang:	LaIR queue doesn't open until LaIR actually starts
+00:56:32	Kenny Wang:	you can't sign up early
+00:56:36	Nick Bowman:	@Shreyas the code for implementing a map would look very, very similar. To associate keys with values, you could just add a second extra data field to the TreeNode struct
+00:56:45	Demi Lei:	I don't quite understand why the base case is when the pointer == nullptr, is it possible for the newly added element to replace one of the parents?
+00:56:57	Hanna Mofid:	Wait, how did you comment and uncomment all those lines? What are the specific steps you did to do that?
+00:57:22	Aadi M Rane:	Ctrl+/ or command+/ 
+00:57:24	Liza George:	I'm not sure if this was answered before, but how do we find the median of a set to create an optimal tree without a linear runtime?
+00:57:41	Nick Bowman:	@Demi It’s not possible for a newly added element to “replace” a parent. It will always get added as the child of an existing node in the tree
+00:58:12	Hanna Mofid:	@Aadi thanks
+00:58:22	Nick Bowman:	@Liza Great question! That’s actually one of the topics explored in CS161. Finding the median of a collection of values is an interesting algorithmic task
+00:58:52	Nick Bowman:	For our purposes, we’re not going to worry too much about how to do that – since we’re using the BST to implement a set, we don’t really able control over what order the client will add values to the set. So we are at their mercy in that regard
+00:59:24	Nick Bowman:	If we wanted to provide guarantees about the tree staying balanced, we would have to implement a self-balancing tree (red-black or AVL tree) which is also discussed in CS161
+00:59:33	Kenny Wang:	woot woot Huffman trees are cool
+00:59:38	Kevin H Fan:	Thank you!
+00:59:38	Jennifer Anna Bonello:	Thx
+00:59:40	Tongjun (Albert) Zhang:	Thank you
+00:59:41	Kenneth Fischer:	Thank you!
+00:59:59	Liza George:	now I really wish I could just take cs161 next quarter T^T
+01:00:38	Hanna Mofid:	Can you also go over the order of the post-order traversal? Like the path the recursion goes down
+01:01:52	Liza George:	( I think it was traverse(leftChild), traverse(RightChild), doSmth(curNode) btw)
+01:02:18	Shifeng Hong:	Thank you
+01:03:10	Hanna Mofid:	Yes! 
+01:03:14	Hanna Mofid:	Thank you
+01:05:00	Demi Lei:	by the way, this algorithm does not do the self-balance  thing right?
+01:05:08	Nick Bowman:	No, this is not a self-balancing tree.
+01:05:41	Demi Lei:	Thank you!
+01:05:44	Nick Bowman:	If you’re interested in learning more about self-balancing trees, you can do some research on red-black trees and AVL trees. They’re pretty cool in how they operate!
+01:06:38	Liza George:	Wait what was the benefit of using binary heap instead of BST earlier? wouldn't we have not had to do any bubbling up/down if we had used a bst?
+01:07:07	Nick Bowman:	Binary heap and BST provide us with different properties. Binary heap guarantees that smallest element is always at the root of the tree, which is not necessarily true for a BST
+01:07:39	Nick Bowman:	Also, binary heap has the property that it is complete which makes it easy to represent as an array, which is not true for a BST
+01:07:45	Hanna Mofid:	Was the biggest benefit for a BST that it keeps things in a certain order and the paths to each node are shorter?
+01:07:57	Nick Bowman:	@Hanna yup, exactly
+01:08:04	Liza George:	ooh. so it's especially useful for queues where we just pop values?
+01:08:28	Nick Bowman:	@Liza exactly, since for a queue we only care about the importance of one element at a time, binary heap works better
+01:08:30	Liza George:	and adding onto hanna's question, is it more efficient to implement smth like a list with a bst?
+01:08:50	Liza George:	**vector
+01:09:33	Nick Bowman:	No, it wouldn’t really work to implement a vector with a BST because trees don’t have a concept of indices
+01:09:45	Nick Bowman:	So we wouldn’t be able to support access by index if you tried backing a vector with a tree
+01:10:06	Jordan Lin:	Can you use trees to implement binary heaps?
+01:10:13	Jordan Lin:	And do people actually do it?
+01:10:16	Nick Bowman:	@Jordan yeah I don’t see why not
+01:10:25	Nick Bowman:	No, heaps are almost always array-based because that’s simpler to work with
+01:10:32	Jordan Lin:	Ah I see
+01:10:46	Liza George:	ooh ok. and (sorry, final question) are maps implemented with bsts too?
+01:11:14	Nick Bowman:	@Liza yeah, the map implementation would look like almost exactly what we wrote today, with just an extra data component of the node struct
+01:11:27	Liza George:	cool, thanks!
+01:11:34	Nick Bowman:	one of the data values would be the “key” and one would be the “value”
+01:13:47	Hanna Mofid:	Thank you!

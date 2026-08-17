@@ -1,0 +1,154 @@
+00:12:04	Rohan Chowla:	Start your assignments early
+00:12:09	Siddharth Balaji:	Start the assignments on time
+00:12:18	Aadi M Rane:	struggle smartly
+00:12:18	Kenneth Fischer:	Practice coding with the concepts!
+00:12:21	shirley li:	Start the recursion assignment earlyyyyyy
+00:12:24	Lukas Fullner:	Drawing out problems can really help
+00:12:24	Ryan Gabel:	Control-click = right click
+00:12:27	Thomas Tao Hale:	Ask for help from your classmates and teachers
+00:12:27	Lawrence Li:	start the assingment today
+00:12:29	Kenny Wang:	0x3A28213A
+00:12:31	ian rundle:	Procrastinain’t
+00:12:38	Kenny Wang:	and start your assignments early too I guess
+00:12:39	Elena Williams:	Take notes on the concepts as you go
+00:12:46	Elan Smolar Eisenberg:	Look over the assignment the date it’s released
+00:12:46	Liza George:	If you work at night and care about your eyes, figure out how to switch QT to dark mode asap
+00:12:52	Kenny Wang:	^^^^^
+00:12:56	Hemant Chaudhary:	Look at the sample code for each lecture
+00:14:23	Thomas Tao Hale:	Qt has a dark mode?
+00:14:25	edouard des:	Take the time to consider what you are doing before you jump in the code. You may sit there for a few minutes and be like “hey this is literarily 10 lines of code” and only spend a few minutes coding. Computers are fast but they aren’t very intelligent. You are intelligent but are not particularly fast. The computer will not do any of the thinking for you, no matter how hard you try.
+00:15:43	Usman Iqbal Hanif:	On the assignment what would the “priority” parameter be? I thought that we just take in a number, and make a min binary tree
+00:16:02	kylie jue:	On the assignment, you’ll be dealing with structs that contain a priority (int) and data (string)
+00:16:05	Liza George:	@Thomas Tools > Options > Environment > Interface
+00:18:30	Hemant Chaudhary:	In the scenario where we have two DataPoints with the same priority, how do we decide in which order they are enqueued and which one is dequeued first? (for the sorted array)
+00:18:55	kylie jue:	@Hemant - we don’t have any restrictions on DataPoints with the same priority so you can decide their order in that case
+00:19:10	Hemant Chaudhary:	Great!
+00:19:16	Liza George:	I think at some point in the last lecture, we said that the runtime for using a vector in implementing enqueue was O(1) and dequeue was O(n) (if I remember right), but using a binary heap resulted in enqueue and dequeue having O(log n), and that two O(log n) runtimes was better overall than one O(1) and one O(n)
+00:19:41	Liza George:	Could you explain that more? Like how do we compare combinations of runtimes like that?
+00:19:49	Elan Smolar Eisenberg:	There was a mathematical way to find the parent (i-1)/2 but how do you find the child given the child of a child?
+00:20:27	kylie jue:	@Liza - We can think about the fact that enqueue and dequeue get called with about the same frequency and two O(log n) operations = O(2 *log n) so ultimately O(log n) is better than O(n)
+00:20:39	Jordan Lin:	@Elan Left child: (i*2)+1 Right child: (i*2)+2
+00:20:59	Liza George:	ooh ok, thank you!
+00:21:01	kylie jue:	@Elan You can apply the equations Jordan mentioned multiple times to get children of children
+00:21:54	Blake Salvador:	I guess I don't get why the children don't have to be in order of priority, if this is used to build the priority queue - i.e., if the first child has a priority of 3 while the other has a priority of 2, shouldn't the priority of 2 one come first? 
+00:22:20	Usman Iqbal Hanif:	Is recursion allowed for some functions of the assignment? Or would you guys recommend to steer away from it, because it could get messy!
+00:22:40	Demi Lei:	^
+00:22:59	kylie jue:	@Blake - since we only ever dequeue the current highest priority element, our bubble up/down processes ensure that we’ll always have constant time access to the highest priority element (so the order of things stored farther down the tree don’t matter as long as they work with bubble up and bubble down to restore the root of the tree)
+00:23:39	kylie jue:	@Usman You definitely can use recursion for some functions, but you’re right - it can also get messy.  But ultimately you should solve it in the way that makes the most sense for you!
+00:23:44	Ryan Gabel:	I love that joke
+00:23:57	Oz Gitelson:	https://downloadmoreram.com/
+00:24:14	Blake Salvador:	@kylie that makes sense, thanks!
+00:24:19	Harry W:	last time my friend downloaded a graphics card
+00:24:41	kylie jue:	Appreciate the RAM jokes but let’s make sure we’re keeping the chat to questions! :)
+00:29:26	Elan Smolar Eisenberg:	How do u represent 16?
+00:29:30	Demi Lei:	4 bits for each digit?
+00:29:48	kylie jue:	@Elan we actually just go 0-15 for base 16 (just like we only have digits 0-9 for base 10!)
+00:30:06	kylie jue:	@Demi yes I think that’s right
+00:30:21	Demi Lei:	@kylie thx!
+00:30:51	Elan Smolar Eisenberg:	Does 16 then just become 0? Or is it 1f?
+00:31:18	kylie jue:	@Elan 0x10
+00:35:11	Samuel Lynn Ledden:	Why do we use int* array instead of int array?
+00:35:54	kylie jue:	arrays are contiguous blocks of memory located at a particular memory address so to work with arrays we actually have to create a pointer to the data type it’s storing (which points to the first item in the array)
+00:36:46	Kenny Wang:	I've used int array[xxx] before, and it seemed to work
+00:36:50	Kenny Wang:	what would the difference be?
+00:36:54	Thomas Tao Hale:	Why are the pointers reminding me of the game show deal or no deal?
+00:36:58	Jordan Lin:	What are pointers technically stored as? C++ strings? C strings? An integer which is then represented as hexadecimal when printed? Something else?
+00:37:17	kylie jue:	@Kenny that creates an array that’s not on the heap (so not a dynamically allocated array).  We won’t go into statically created arrays in the class though
+00:37:48	kylie jue:	@Jordan they’re their own type!
+00:37:55	kylie jue:	Specifically for memory addresses
+00:38:01	Jordan Lin:	Ah I see
+00:38:26	Thomas Tao Hale:	So you could make a pointer with the location being pointed to having nothing?
+00:38:34	Aadi M Rane:	wait is hexadecimal a string or an integer? there are characters!
+00:38:34	Shifeng Hong:	if I cout petpointer what would we get？
+00:38:39	Liza George:	so why do we have to include a type for pointers again? like the type value before the asterisk
+00:38:49	kylie jue:	@Thomas - yes we’ll see that shortly actually.  How to initialize a pointer that isn’t pointing to anything yet
+00:38:55	hriday chhabria:	I have the same question as @Shifeng
+00:39:02	louise marzolf:	Is it valid to think of pointers and values like maps where the address is the key and the value is the value?
+00:40:03	kylie jue:	@Liza no it will be built into the C++ program
+00:40:48	kylie jue:	@louise sure you could think about it that way.  The one difference is that the type pointer itself is not actually storing the value (it would only be storing the key)
+00:41:12	louise marzolf:	got it thanks!
+00:41:38	Aadi M Rane:	what happens if a pointer points at nothing?
+00:41:45	Aadi M Rane:	is it just like arrays?
+00:42:12	kylie jue:	@Aadi we’ll see that in a bit! Yes it’s similar to what we discussed with arrays where it will be a junk value.
+00:43:43	kathleen bryan:	Does every var automatically have a memory address? I don’t understand how you can retrieve a pointer if you don’t initialize as a pointer?
+00:43:54	Liza George:	I still don't quite understand like what the difference between int* and string* ? are the memory addresses stored differently? Or is it just a way for c++ to type check our work when the pointer is actually used somewhere else?
+00:44:26	kylie jue:	@Kathleen yes - every variable has a memory address for where it’s stored on your computer.
+00:44:53	kylie jue:	@Liza the memory address is not stored differently, but it tells you the size of what’s stored at the address itself
+00:45:48	Thomas Tao Hale:	“It’s not a bug, its a feature! “ - Todd H- I mean Nick Bowman
+00:46:30	Liza George:	ooh ok. so like does an int/char take a different amount of space than a string 
+00:46:37	kylie jue:	@Liza yes exactly
+00:47:46	michael hu:	What does “end of the error” mean
+00:48:09	kylie jue:	@Michael I think that should read “arrow”
+00:48:24	michael hu:	oooh
+00:49:27	Tongjun (Albert) Zhang:	do we need to add the * if we are opreating on a pointer pointing to an object?
+00:50:01	Tongjun (Albert) Zhang:	or just replacing . with -> will do
+00:50:06	kylie jue:	@Tongjun yes - that’s what the string* petPtr is doing
+00:50:46	kylie jue:	@Tongjun actually sorry I’m not sure I understood the question correctly
+00:51:11	kylie jue:	There’s no . or -> here?  We’ll talk more about . and -> in tomorrow’s class with pointers and objects
+00:54:02	Dima Timofeev:	Is nullptr a keyword?
+00:54:06	kylie jue:	@Dima yes
+00:54:07	Kenneth Fischer:	What will pointers be initialized to if you don't use nullptr?
+00:54:24	kylie jue:	@Kenneth garbage / junk values!
+00:55:01	Aadi M Rane:	if you delete a pointer, will it revert to nullptr automatically?
+00:55:23	kylie jue:	@Aadi no it won’t - it becomes garbage (becomes a “dangling pointer”)
+00:57:17	Liza George:	can we still reinitialize a pointer to nullptr after deleting it just in case we forget to not use that pointer later on?
+00:57:28	kylie jue:	@Liza yes you can!
+00:57:34	michael hu:	What’s the difference between a null pointer and a floating pointer?
+00:57:42	Ryan Bernstein:	so *name and &name are basically opposites?
+00:57:47	kylie jue:	@Michael a floating pointer will point to garbage
+00:57:54	kylie jue:	@Ryan yes
+00:58:03	Ryan Bernstein:	thanks
+01:01:24	shreyas ravi:	isn’t the null value for strings just an empty string so why wouldn’t dereferencing a nullptr return the null value for that type?
+01:02:12	kylie jue:	@Shreyas remember that the string type is different from the string* type.  So trying to dereference a string pointer won’t behave the same!  That’s just the way pointers work in C++ unfortunately
+01:02:24	Liza George:	and just to confirm, if we try and derefence  a pointer that was pointing to like garbage values, that would have unpredictable behavior, but if we derefence smth with nullptr value that would have a segmentation error?
+01:02:55	kylie jue:	@Liza yes exactly - for the first case, you might segfault or you might have something else happen (and it may not be the same over multiple runs!)
+01:04:11	Elan Smolar Eisenberg:	Without the star in front of strPtr1, would the answer be goodbye hello?
+01:04:47	kylie jue:	@Elan which line are you referring to for the star?  In the cost?
+01:04:55	kylie jue:	Or in the strPtr1 declaration?
+01:04:59	Elan Smolar Eisenberg:	No, the second to last line
+01:05:18	kylie jue:	In that case, you would get the address of the string s + "goodbye"
+01:05:30	Kevin H Fan:	Thank you!
+01:05:30	Kenneth Fischer:	Thank you!
+01:05:36	Guozhen Miao:	thank you
+01:05:39	Tongjun (Albert) Zhang:	Thank you
+01:05:49	Jihe He:	xDDD
+01:05:55	Kaelyn O:	Nick!!
+01:06:01	scott nelson:	Jimmy G
+01:06:17	Kenny Wang:	twenty one years ago wow
+01:06:29	ian rundle:	This gives me early 2000s vibes
+01:06:32	Liza George:	this video is literally older than most of us omg
+01:06:33	Kenny Wang:	yes
+01:06:38	michael hu:	Boomer video
+01:06:42	Kyle Thomas Booker:	Pre Y2K
+01:06:45	ian rundle:	lmao
+01:07:11	mary fetter:	does a pointer to an array point to the entire array in memeory, and if so can you add pointers that point to individual elements in the array?
+01:07:38	ian rundle:	Rip binky 1999
+01:07:45	Liza George:	hahaha get it
+01:07:46	Rohan Chowla:	lol
+01:07:46	Kyle Thomas Booker:	1999-1999
+01:08:43	kylie jue:	@Mary you could have pointers that point to the individual elements, but a pointer that points to an array knows there’s an array there but it’s actually only pointing to the first element (which is why arrays don’t know their size)
+01:09:15	Kenny Wang:	this belongs in a museum
+01:09:16	david huang:	That was beautiful
+01:09:19	Kenny Wang:	^^^^
+01:09:33	Liza George:	i shed tears for binky 😔
+01:09:50	Kenny Wang:	pay respects to binky's sacrifice
+01:09:56	michael hu:	Justice for binky
+01:09:57	Dominic Lo:	I finally understand pointers
+01:13:55	Liza George:	does anyone know why c++ overloads operators like that? did they literally run out of symbols on the keyboard, or could they not use like named functions?
+01:14:01	Jennifer Anna Bonello:	Why is base-16 more suitable than base-10?
+01:14:23	kylie jue:	@Liza I’m not sure actually - and it may depend on which operator you’re referring to!
+01:16:14	Shifeng Hong:	Shouldn‘t we do strPtr2 = *strPtr1 according to the graphical representation here？
+01:16:43	kylie jue:	@Shifeng that would be setting a pointer (strPtr2) to a string (the value at strPtr1) so it wouldn’t make sense to do that
+01:17:05	christopher cooper:	If only we had 8 fingers, we could understand binary
+01:17:26	kylie jue:	Instead we want to make both pointers store the same address (so we set strPtr2 = strPtr1 [=0xf400])
+01:17:38	Shifeng Hong:	ohhh variable on two side need to be same data type
+01:17:44	Shifeng Hong:	got it thx
+01:17:44	kylie jue:	yes exactly
+01:18:11	Jennifer Anna Bonello:	ok thank you
+01:28:48	Shifeng Hong:	I am curious to what happen when we declare a new variable，is it an integrated step which computer help you create a pointer and specifies the size without letting you do it manually？
+01:28:54	Shifeng Hong:	like an abstraction
+01:30:27	kylie jue:	@Shifeng Yes you can think about it like an abstraction!  Basically the types themselves are abstractions that allow you to request a certain amount of memory on the computer (which handles assigning the memory + choosing the memory address for you)
+01:30:33	kylie jue:	Does that answer the question?
+01:30:56	Shifeng Hong:	Yes！
+01:31:00	Shifeng Hong:	Thank you！
+01:31:09	Demi Lei:	thank you! have a nice day

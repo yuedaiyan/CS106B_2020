@@ -1,0 +1,123 @@
+00:10:32	Kenneth Fischer:	Using ADTs
+00:10:41	Kenny Wang:	explaining my answers within a reasonable timeframe
+00:10:57	Kenneth Fischer:	^ lol
+00:11:06	Thomas Tao Hale:	Kenny and kenneth
+00:11:14	edouard des:	Figuring out which flavour of recursion to use
+00:11:19	Samuel Lynn Ledden:	Recursive backtracking
+00:11:25	Aadi M Rane:	backtracking
+00:11:27	Elan Smolar Eisenberg:	Recursive backtracking
+00:11:33	Aadi M Rane:	and recursion in general
+00:11:56	Thomas Tao Hale:	Yeah backtracking is the most problematic rn
+00:12:06	klaus cerny:	recursive backtracking
+00:12:15	Kenneth Fischer:	Backtracking too
+00:12:18	Usman Iqbal Hanif:	pointers
+00:15:53	Jordan Lin:	Is there a name for this doubling rule?
+00:16:31	kylie jue:	@Jordan not that I’m aware of beyond resizing or expanding the array (which doesn’t have to be doubling)
+00:20:24	Usman Iqbal Hanif:	So when you delete elements, you just delete its content, but not memory location? Elements is just a pointer right?
+00:20:26	shirley li:	Will all expansions be O(n)?
+00:20:35	kylie jue:	@Shirley yes
+00:21:04	mpresson@stanford.edu:	Can you show the expand() implementation again?
+00:21:07	kylie jue:	@Usman yes - you “delete” the contents at that memory location but that memory location exists still on your computer.  You just no longer have access to it because elements won’t be pointing to it
+00:21:22	Aadi M Rane:	if expanding is O(n), why is adding elements usually O(1)?
+00:21:38	Oz Gitelson:	doesn't saying elements=newElements do the same thing as delete
+00:22:00	Usman Iqbal Hanif:	Sorry for being so nit-picky, but if we are deleting it and no longer can access that location, how can we assign that address to newElements.
+00:22:03	kylie jue:	@Aadi Since it only doubles occasionally, you can think about that O(n) cost as being spread across all of the n add operations (so on average it’s still O(1)
+00:22:42	kylie jue:	@Usman elements is a pointer so it stores an address. When we assign it to newElements, we say that the pointer now stores (points to) the new memory address that is also held at the pointer newElements.
+00:22:42	Hemant Chaudhary:	In the insert function, don't we call the expand() function only once? How does it double three times?
+00:23:58	Hemant Chaudhary:	Oh got it- it calls it for each insertion
+00:24:22	Usman Iqbal Hanif:	Ahh ok ok, so elements will still hold the correct memory address even after deletion. I thought it would hold garbage! But makes sense
+00:24:56	Usman Iqbal Hanif:	Because, I assumed the computer would implement delete[] by just taking away pointer access, and does that by just nullifying the pointer elements
+00:25:01	Nick Bowman:	@Oz No, assigning the pointer to a new value doesn’t explicitly free the memory that it was originally pointing to. In fact it does the opposite, leaving the memory floating around with no more pointers referencing it. that’s why its important that we free the array first before doing the reassignment.
+00:25:51	Nick Bowman:	@Usman Yeah not quite. All the delete[] keyword does is it marks the memory as no longer belonging to your program, which means that if you try to access the memory again within your program you’ll run into issyes
+00:27:02	Usman Iqbal Hanif:	Ok and you can just reclaim access by reassigning to a different variable? Or pointer
+00:28:00	Nick Bowman:	You can’t “reclaim” access to the block of memory that you just freed, but yes you can reassign the pointer to point to a new location that represents valid memory for your program
+00:28:19	Nick Bowman:	we’ll talk more about how pointer reassignment and memory addresses work tomorrow!
+00:29:07	Usman Iqbal Hanif:	Ok ok sounds good! Look forward to it
+00:32:02	Kenny Wang:	are we going to be coding 2 different implementations in the homework?
+00:32:50	Nick Bowman:	You’ll be provided with a partially-complete sorted-array backed implementation and then you will write the last function to complete that class.
+00:33:01	Nick Bowman:	And then you’ll code up the binary-heap backed class from scratch
+00:33:17	Kenny Wang:	cool, thanks
+00:33:34	Nick Bowman:	And then you’ll use both as part of some interesting client-side tasks to compare what the tradeoffs of each implementation is
+00:39:58	rayjohns@stanford.edu:	Oh no I mis-clicked
+00:40:23	Usman Iqbal Hanif:	In the first example, the leftmost child at the bottom of the tree was larger than one of the parents. Is that okay?
+00:40:41	Usman Iqbal Hanif:	(Not its parent), but a node parallel to its. parent
+00:40:50	Aadi M Rane:	don't heaps have to have every node have two children?
+00:41:12	Liza George:	so if in heap one b was like diagonal to the right, it wouldn't be valid?
+00:41:55	Elan Smolar Eisenberg:	Could e have a higher priority than d?
+00:41:55	Nick Bowman:	@Usman What do you mean by a node parallel to its parent? In general, we only care about the direct local relationships between parents and their direct children.
+00:42:02	Nick Bowman:	@Liza Correct!
+00:42:03	Zelin (James) Li:	are we not talking about binary heap? i.e. there should be two children per node
+00:42:15	Zelin (James) Li:	heap 1 only has one child for the parent node
+00:42:30	Nick Bowman:	@Elan yes, the data here is arbitrary. The only thing we care about to structure the heap is the integer priority values
+00:42:39	Usman Iqbal Hanif:	Ok ok, I just assumed as you go down the tree, no node that is a level above you (like physically above you in the tree diagram) should be bigger smaller than you
+00:43:30	Usman Iqbal Hanif:	*bigger
+00:43:31	Nick Bowman:	@James The bottom level is allowed to be partially incomplete, as long as you fill in the children from left to right with no gaps
+00:44:01	Nick Bowman:	@Usman no, not quite that would be a much harder property to enforce! Because we don’t have a way of comparing with nodes that aren’t directly our parent.
+00:44:27	Nick Bowman:	The critical component of the heap property here is that it is only locally defined, meaning that the only thing we care about is that a node is less than both of its immediate children (and that’s it)
+00:49:13	Siddharth Balaji:	Does the leftmost child of a parent have to have a smaller priority than the child on the right? Or does it not matter for children
+00:49:23	Nick Bowman:	No, the ordering of the children doesn’t matter.
+00:49:28	Siddharth Balaji:	Ok thank you
+00:50:44	mpresson@stanford.edu:	How does this compare to binary search in terms of runtime?
+00:50:56	Nick Bowman:	Binary search is also an O(log n) operation!
+00:51:36	Kenneth Fischer:	Will this process always result in a properly-formed tree, or are there exceptions?
+00:51:37	Kyle Thomas Booker:	How does this guarantee priority order with elements adjacent?
+00:52:16	Nick Bowman:	@Kenneth this process will always result in a valid heap upon the completion of the bubble up operation. Its pretty cool why, I would recommend working through some examples and convincing yourself that this is true!
+00:52:33	Kenneth Fischer:	I see, thank you!
+00:53:21	Nick Bowman:	@Kyle the way I would think about it is that if you insert an element into a valid heap, and then guarantee that you’re putting in that element in the correct location to satisfy the heap property, then the overall tree will still have the heap property
+00:55:23	Jordan Lin:	Isn't this less efficient than the O(1) for priority queues?
+00:55:27	kathleen bryan:	sorry in that example what replaced the top of the tree?
+00:55:29	Liza George:	Is there a reason we're using a binary tree specifically for the priority queue? Would that optimization be better if we had a tree with more than two children per parent?
+00:56:07	Kenny Wang:	hold on we only do one comparison per level of the tree? would we need to check both children on each level?
+00:56:44	Nick Bowman:	@Jordan The binary heap enables O(log n) for both enqueue and dequeue. The sorted array implementation has quick dequeue (O(1)) but very slow enqueue (O(n)) which is overall worse
+00:57:09	Kyle Thomas Booker:	So the interior of the tree is not guaranteed to be properly sorted but by dequeuing and bubbling down you guaranteed the root will always be the actual highest priority in the queue? Even if interior elements in the array could possibly be out of order.
+00:57:22	Nick Bowman:	@Liza good questions! We’re using a binary heap for simplicity of array representation. If you try to have more than 2 children per node the math for the array representation will get really ahiry!
+00:57:43	Liza George:	oh ok. thanks!
+00:57:50	Nick Bowman:	Additionally, introducing more children technically just changes the base of the logarithm in the O(log n) runtime, and base 2 is good enough for most purposes
+00:58:16	Nick Bowman:	@Kenny Yeah technically 2 compassions per level but we can ignore constant factors when calculating Big O so its still O(log n)
+00:58:22	mpresson@stanford.edu:	In Assignment 4, our priority queue is sorted in reverse order so dequeue() runs O(1); does this heap concept still apply? Or could we sort using binary search?
+00:58:47	Nick Bowman:	@Kyle Yeah that’s a good way of thinking about it! The heap is “partially sorted” which is good enough for implementing the priority queue interface
+00:59:20	Zachary Alon:	Thank you
+00:59:21	Kevin H Fan:	Thank you!
+00:59:22	julia wang:	Thank you!
+00:59:22	Kenneth Fischer:	Thank you!
+00:59:25	Guozhen Miao:	thank you
+00:59:25	Gautham Rajesh:	thank you
+00:59:29	Kenny Wang:	great xkcd
+00:59:37	Nick Bowman:	The sorted array-base dan heap-based priority queue are two different entities on the assignment, the sorted array version doesn’t require any knowledge or use of heaps.
+00:59:39	Elena Williams:	I think I might have missed this — what becomes the new root in the heap after dequeueing?
+00:59:54	Nick Bowman:	The array remains sorted by clever insertions into the right locations, not by doing binary search
+01:00:04	runze yu:	Can we somehow incorporate recursion into binary heap? I think there is some sort of self-similarity in a binary heap
+01:00:11	Elena Williams:	I mean after bubbling down — is there any way to replace the root?(Sorry — my mic isn’t working!)
+01:00:30	Nick Bowman:	You could! But not necessary, you can do bubble up and bubble down both iteratively.
+01:00:44	Nick Bowman:	We will talk more about the self-similarity of trees when we formally discuss them at the end of next week
+01:01:01	karan parikh:	I have a logistics question: If I want to sign up for a 15 minute office hour period do I sign up for it between 5-7 pm? Because it says that LAIR happens between 5-7pm but when do I join the queue
+01:01:10	Nick Bowman:	@Elena the process of bubbling down results in elements form lower down in the tree being “promoted” to the root position
+01:01:28	Elena Williams:	So there end up being two roots?
+01:01:42	Nick Bowman:	@Karan There is no advance sign-up for LaIR slots .You just log on between 5-7pm and join the queue.
+01:02:00	karan parikh:	ok got it thanks
+01:02:06	Nick Bowman:	@Elena, no there is only ever one root. When you bubble down, you’re swapping elements, which means the item being “promoted” replaces the old root
+01:02:25	Nick Bowman:	like in the diagram when “c”, 8 gets swapped to its new position, “e”, 11 gets sent down lower in the tree so there is still only one "root"
+01:02:37	Nick Bowman:	the “root” is really just the element at index x0 of the array
+01:02:43	Elena Williams:	Ohhhh, ok I get it. Thank you!
+01:02:52	Elena Williams:	Sorry that took me a minute haha :)
+01:02:56	Elena Williams:	See you tomorrow!
+01:03:12	Nick Bowman:	no worries, glad we got i it cleared up!
+01:03:56	akhil iyer:	how would you maintain the heap structure if two elements have the same priority?
+01:04:39	Nick Bowman:	Elements with the same priority can show up in an arbitrary order (either one can be the parent of the other)
+01:05:04	Nick Bowman:	We only need to swap elements if the property is violated, which means that a child is strictly greater than one of its parents
+01:05:32	akhil iyer:	is it also possible for both children to have the same priority?
+01:05:38	Nick Bowman:	Yes, that’s possible
+01:06:36	Shifeng Hong:	Is it true that any algorithm that has O（log n）can be represented by a binary tree structure？
+01:06:46	akhil iyer:	so how would you determine when two children can have the same priority versus when a parent and a child can have the same priority?
+01:07:24	Liza George:	thank you!!
+01:07:25	haoming li:	Have a good one
+01:07:31	Nick Bowman:	@Shifeng I don’t know that it would be true for all algorithms. Binary search is an O(log n) process that isn’t necessarily represented by a tree
+01:07:56	Jordan Lin:	How are the 'average' Big O notation of functions calculated?
+01:08:04	Jordan Lin:	Are they usually done mathematically or via experiments?
+01:08:08	Nick Bowman:	But most algorithms that operate on a binary tree structure are able to achieve O(log n) behavior
+01:08:23	Nick Bowman:	@Jordan you can do both – you can either use formal analysis or use timing results to come to the Big O conclusion
+01:08:29	Shifeng Hong:	Thank you
+01:08:36	akhil iyer:	ok thank you
+01:10:05	Liza George:	this is weird there are normally so many questions after lecture
+01:10:18	Nick Bowman:	And we finished early!
+01:10:22	Nick Bowman:	the world must be ending

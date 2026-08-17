@@ -1,0 +1,1906 @@
+WEBVTT
+
+1
+00:00:06.690 --> 00:00:08.069
+kylie jue: Alright, can you hear me.
+
+2
+00:00:09.510 --> 00:00:12.269
+kylie jue: Great. So welcome back to
+
+3
+00:00:14.160 --> 00:00:24.120
+kylie jue: Today we are going to be talking about binary search trees. I'd love to hear in the chat. What is your favorite type of tree and you don't have to take this question too seriously.
+
+4
+00:00:25.290 --> 00:00:37.770
+kylie jue: But the reason I'm asking what your favorite type of tree is is that the next couple lessons are we're actually going to be learning about different types of trees in computer science. So moral link data structures.
+
+5
+00:00:39.180 --> 00:00:42.090
+kylie jue: But today, specifically, we're going to be talking about binary search trees.
+
+6
+00:00:42.420 --> 00:00:50.490
+kylie jue: And it's a little more specific than what Nick talked about in lecture yesterday. So we're going to actually discuss how can we take advantage of the structure of trees that we discussed
+
+7
+00:00:50.910 --> 00:00:55.560
+kylie jue: To actually efficiently manipulate data to use them effectively to store the information we want
+
+8
+00:00:56.490 --> 00:01:05.460
+kylie jue: And so we'll start off with learning about what is a binary search tree and then we'll learn how to build one and then we'll finish off with actually implementing a set using a binary search tree.
+
+9
+00:01:06.570 --> 00:01:14.490
+kylie jue: Alright, so just a quick review of the trees that we went over yesterday, so just a definition a tree is a hierarchical
+
+10
+00:01:15.210 --> 00:01:27.510
+kylie jue: Data organization structure composed of a route value linked to zero or more non empty sub trees and remember what we meant by zero or more non empty sub trees but tree is empty. It's just going to be null pointer.
+
+11
+00:01:28.740 --> 00:01:36.690
+kylie jue: And then a single node will be the parent and it will have zero or more non empty sub trees and you can think of these purple clouds as the possible sub trees that you would have
+
+12
+00:01:37.080 --> 00:01:45.840
+kylie jue: I mean, you can actually think about trees as a result recursive Lee in the way we've defined them. So this is just a quick rundown of the many pieces of terminology that we went over yesterday.
+
+13
+00:01:46.770 --> 00:01:56.760
+kylie jue: I broke it into two sort of categories. One is types of node. So we have the root node, which defines the top of our tree and then every node is going to have zero or more children notes descending from it.
+
+14
+00:01:57.120 --> 00:02:01.890
+kylie jue: And then nodes with no children are called leaf nodes. So those are the ones at the bottom that don't have any children.
+
+15
+00:02:02.250 --> 00:02:12.330
+kylie jue: And then every node in a tree has exactly one parent nodes. So if you remember our definition of a tree yesterday. You can't have multiple parents for any given node. Otherwise, it doesn't qualify as a tree.
+
+16
+00:02:13.200 --> 00:02:20.850
+kylie jue: And then some terminology for just quantifying trees. So we talked about a path between two nodes. And when you're talking about a path we're looking specifically
+
+17
+00:02:21.120 --> 00:02:29.970
+kylie jue: At the edges between a parent and it's child and some child farther down. And then when we talk about the length of a path that is the number of edges between two given nose.
+
+18
+00:02:30.450 --> 00:02:37.080
+kylie jue: And then for the depth of a node, we look at the length of the past between the root node and the node that we're talking about.
+
+19
+00:02:37.980 --> 00:02:46.770
+kylie jue: And then lastly, for the height of a tree. The height is the number of nodes in the longest path through the tree. You can also think about that as the number of levels in a tree.
+
+20
+00:02:47.910 --> 00:02:59.100
+kylie jue: And so I sort of, I wanted to just clarify that terminology, because I know sometimes it's easy to mix up like height and depth in length. And so usually we're talking about different things have a path versus a node versus a tree when we use those words.
+
+21
+00:03:01.440 --> 00:03:15.510
+kylie jue: And then we also discussed a specific type of tree, the ones you're going to see mostly when we're working in code which are binary trees and a binary tree is specifically when you have every node either has 01 or two children.
+
+22
+00:03:16.560 --> 00:03:23.040
+kylie jue: And no note in a binary tree is allowed to have more than two children. So in the example we saw before. We saw some notes that had like three
+
+23
+00:03:23.370 --> 00:03:33.330
+kylie jue: In this case, this would be the maximum number of children that you can have and then typically the two children of the finer of a given note in a binary tree are referred to as the left child and the right child.
+
+24
+00:03:35.220 --> 00:03:42.030
+kylie jue: And then to formally defined that in code. We're going to define this struct called a tree node we saw notes already when we look worked with linked lists.
+
+25
+00:03:42.450 --> 00:03:55.350
+kylie jue: But with tree nodes are going to still have some sort of data that gets stored and it can be any sort of type, but we're going to look specifically at strings today. And then we would have to pointers stored inside a struct one to the left sub tree and wanted a tree.
+
+26
+00:03:57.420 --> 00:04:09.000
+kylie jue: So again, what is the tree and c++ we can formalize it specifically with binary trees as being either know pointer or a single tree node, the structure. We just talked about that has either 01 or two.
+
+27
+00:04:09.450 --> 00:04:17.580
+kylie jue: Non know pointers to other two nodes. So in this case, these would be the two partners. We have and they could either both be no one could be no or neither could be no
+
+28
+00:04:19.320 --> 00:04:29.280
+kylie jue: Alright, so we also saw an example function for building a very specific tree and the general takeaways from that with the process. It's actually pretty similar to building a linked list.
+
+29
+00:04:29.520 --> 00:04:33.240
+kylie jue: And in order to do that we have to create new nodes by dynamically allocating memory.
+
+30
+00:04:33.510 --> 00:04:41.280
+kylie jue: And then we actually started by first creating the leaf nodes and then creating the parents. Right. And we did that because what that allowed us to do is once you have the node.
+
+31
+00:04:41.610 --> 00:04:51.810
+kylie jue: On the leaf. Then when you create the parents. You can rewire the parents left and right to point to the children that you've already created. If you started with the parents and then had to go to the children, you just have a lot of different
+
+32
+00:04:52.560 --> 00:04:57.480
+kylie jue: You know variables that you'd have to go back and rewire after you create the children and don't get kind of a little more messy.
+
+33
+00:04:58.710 --> 00:05:08.370
+kylie jue: So we also learned about three different ways to traverse a tree pre order in order and post order. And this is sort of a summary here of what we saw yesterday of the functions that we implemented.
+
+34
+00:05:08.730 --> 00:05:15.180
+kylie jue: pre order you do something with the current node first before traversing the left and the right within order you traverse the left
+
+35
+00:05:15.240 --> 00:05:17.010
+marcus forst: Then you do something with the current and then you do the
+
+36
+00:05:17.010 --> 00:05:21.270
+kylie jue: Right, and then post you traverse the left and right, and then you do something with the current node.
+
+37
+00:05:23.070 --> 00:05:29.970
+kylie jue: And all of these were implemented recursive Lee. And so there are different reasons why you might use pre in order or post order.
+
+38
+00:05:30.840 --> 00:05:40.200
+kylie jue: And we're actually going to get practice with that yourself. So we're going to put you into breakout rooms for this exercise, and we want you to use what you learned about these different reversals.
+
+39
+00:05:40.530 --> 00:05:47.640
+kylie jue: And use it to actually free a tree. So we're going to put you into breakout rooms and then you're going to go into ed and we have some workspaces setup here.
+
+40
+00:05:48.210 --> 00:05:52.920
+kylie jue: Each of the workspaces is going to have an instructions file and then you can also open the main dot cpp
+
+41
+00:05:53.520 --> 00:06:01.710
+kylie jue: Just as a note main dot cpp has the actual three reversal functions that we wrote pre order in order and post order.
+
+42
+00:06:02.040 --> 00:06:11.310
+kylie jue: And specifically what we want you to think about when you're working on this free tree function. It's going to look really similar to these one of these reversal functions. So think about which version.
+
+43
+00:06:12.420 --> 00:06:19.980
+kylie jue: Which type of reversal, would you want to use when you're recursive Lee freeing a tree. So by freeing a tree, we mean deleting all of the nodes inside of a tree.
+
+44
+00:06:20.730 --> 00:06:30.330
+kylie jue: So think about these two questions which method of reversal, would you use to free the nodes pre in or post order and then where would the delete call go within that freeing function.
+
+45
+00:06:30.750 --> 00:06:39.000
+kylie jue: And then so talk about those two and then try to go ahead and fill in this function and then we'll come back and do it as an entire group, Nick, you want to go ahead and open the breakout rooms.
+
+46
+00:06:42.540 --> 00:06:55.980
+kylie jue: And we'll give you about four minutes to do that. So come back up and 4041
+
+47
+00:07:00.630 --> 00:07:01.200
+Alright.
+
+48
+00:07:03.960 --> 00:07:12.180
+kylie jue: Well folks are going into those breakout rooms. I will go ahead and code this up ourselves. And I'm going to go ahead and do this.
+
+49
+00:07:13.710 --> 00:07:18.180
+kylie jue: Instead inside cutie creator. So if you are watching from home.
+
+50
+00:07:19.530 --> 00:07:21.000
+kylie jue: Or in this room and didn't join a breakout room.
+
+51
+00:07:22.170 --> 00:07:31.740
+kylie jue: Think about, I do want you to think for a second, which order of reversal, do you think would actually be the most useful when we're freeing a tree. And if you remember when we free a tree. We want to recursive Lee free it
+
+52
+00:07:33.270 --> 00:07:38.580
+kylie jue: But remember from link list that we have to be very careful about how we're freeing things
+
+53
+00:07:39.030 --> 00:07:50.640
+kylie jue: To make sure that we're not going to do reference something after we've deleted it. Right. So we want to think about how to recursive. We do that. So we do this while avoiding that issue of the referencing after deletion.
+
+54
+00:07:51.180 --> 00:08:02.940
+kylie jue: And so that should give you a hint. Right there, about which type of reversal. We want to use. We're going to go ahead, actually, and do post overturn reversal and I'm not going to call this function, specifically, but we're going to use a similar pattern here. So,
+
+55
+00:08:03.630 --> 00:08:07.230
+kylie jue: In our base case, we still want to check if the tree is equal to no pointer.
+
+56
+00:08:09.450 --> 00:08:16.410
+kylie jue: And we can go ahead and return if that's the case, and what does that mean, that just means a tree is already empty.
+
+57
+00:08:17.910 --> 00:08:30.000
+kylie jue: And loose the one that we've passed into the function and then we're going to do our post order reversal by just calling free tree on the trees left and on the trees right
+
+58
+00:08:32.070 --> 00:08:37.830
+kylie jue: And you'll note that, again, we're checking to make sure we're not D referencing something that's normal, because we've checked if something isn't little here.
+
+59
+00:08:38.070 --> 00:08:47.100
+kylie jue: And if the left or right child is in factional. So in other words, you're adding. No, that does not have a left or right child that's going to get caught in the base case when you actually called us function again.
+
+60
+00:08:48.900 --> 00:08:51.780
+kylie jue: And then lastly I posed that question. Where would you put the delete call
+
+61
+00:08:52.110 --> 00:09:01.860
+kylie jue: Basically after you have traverse the left and right sub tree. So all the children underneath a given node, then you can go ahead and delete that node. Why, because then we know
+
+62
+00:09:02.640 --> 00:09:17.580
+kylie jue: We've already gotten rid of all of the memory that it was pointing to that. Could that you would ever need to reference. So we can now save to go ahead and delete the top level nodes. So, that is what our free tree function is going to look like. And we're going to go ahead and
+
+63
+00:09:19.170 --> 00:09:29.520
+kylie jue: We're going to go ahead and give the folks in the breakout rooms. Another couple of minutes. So if you want, you can go ahead and forward a minute or two, and I will come back and show everyone this function.
+
+64
+00:09:32.010 --> 00:09:35.790
+Nick Bowman: Does that syntax work, then usually receive delete tree with no policy.
+
+65
+00:09:36.720 --> 00:09:38.430
+kylie jue: Yeah, I actually don't know if that would work.
+
+66
+00:09:39.750 --> 00:09:39.930
+Nick Bowman: But
+
+67
+00:09:49.980 --> 00:09:52.320
+kylie jue: It doesn't throw an unhappy warning surprisingly
+
+68
+00:09:55.980 --> 00:10:19.950
+kylie jue: 30 more seconds.
+
+69
+00:10:21.990 --> 00:10:23.460
+kylie jue: To a minute I'm coming back or
+
+70
+00:10:24.090 --> 00:10:24.960
+Nick Bowman: Just two seconds.
+
+71
+00:10:25.560 --> 00:10:26.340
+kylie jue: Yeah, let's get them.
+
+72
+00:10:44.610 --> 00:10:44.880
+Alright.
+
+73
+00:10:56.400 --> 00:10:56.880
+Nick Bowman: Cool.
+
+74
+00:10:57.780 --> 00:11:01.680
+kylie jue: So while you were all in the breakout rooms. I went ahead and
+
+75
+00:11:02.040 --> 00:11:10.410
+kylie jue: coded up this function out here, but hopefully what you came to when you're in your discussions with your groups, was that the type of reversal that you actually wanted
+
+76
+00:11:10.740 --> 00:11:18.180
+kylie jue: Is this post order trip or so. And why do you want postorder reversal. Remember when we're dealing with nodes and thinking about recursion.
+
+77
+00:11:19.170 --> 00:11:24.630
+kylie jue: Especially when we're deleting things we want to make sure we are not D referencing anything after we've deleted it.
+
+78
+00:11:24.900 --> 00:11:32.040
+kylie jue: And so the idea here is that we want to go ahead and delete all of the children before we delete the current node right and that will help prevent us from
+
+79
+00:11:32.580 --> 00:11:39.960
+kylie jue: D referencing something that's know and so it looks exactly like this post order print tree function, except instead of printing are going to be freeing
+
+80
+00:11:40.200 --> 00:11:46.740
+kylie jue: And then the last step that you do is you delete the current node after you've deleted all of the left sub tree and all of its right sub tree.
+
+81
+00:11:48.720 --> 00:11:54.090
+kylie jue: Yeah, so hopefully that was a little bit of an exercise of thinking about what are the benefits of pre, post and in order to reversal.
+
+82
+00:11:55.320 --> 00:11:58.290
+kylie jue: And if I run the tests here.
+
+83
+00:12:00.720 --> 00:12:12.120
+kylie jue: We have some tests inside of me that just are checking in. For leaking any memory. So let me go ahead and show that. So I'm going to just go ahead and do the ones in me.
+
+84
+00:12:12.810 --> 00:12:22.110
+kylie jue: And that is passing so and if you want to see what that looks like. If you click into here, it's just basically building the example tree from yesterday and then freeing it
+
+85
+00:12:23.700 --> 00:12:26.460
+kylie jue: Alright, any questions on that before.
+
+86
+00:12:32.070 --> 00:12:41.640
+kylie jue: Alright, so we've free to tree. And that was a little bit of review of our three different reversal methods from yesterday. But the really key takeaway that I want you to remember
+
+87
+00:12:42.150 --> 00:12:52.680
+kylie jue: About trees that we talked about yesterday. Is that why do we use trees we use trees because the distance from each element or any given node in a tree to the top of the tree tends to be small.
+
+88
+00:12:53.280 --> 00:12:58.980
+kylie jue: Even if there are many elements and we can take advantage of that fact to actually store our data really efficiently.
+
+89
+00:12:59.850 --> 00:13:05.970
+kylie jue: And so the question we have for today is how can we actually take advantage of that fact, while we're manipulating data.
+
+90
+00:13:06.720 --> 00:13:13.770
+kylie jue: So I want to take a step back real quick and just revisit our levels of abstraction to remind us of where we are in the course I know we're in our second to last week.
+
+91
+00:13:14.160 --> 00:13:25.890
+kylie jue: And you've learned a lot of the different levels of abstraction. So we are we have just you've learned about trees. And that was actually another way of like fundamentally storing data in line with arrays and linked lists.
+
+92
+00:13:26.220 --> 00:13:34.920
+kylie jue: And today what we're going to talk about specifically our binary search trees. So a lot of people had questions yesterday about what's the difference between a binary heap and a binary tree.
+
+93
+00:13:35.550 --> 00:13:42.150
+kylie jue: Or just a tree in general. And basically what the answer to that. Was that a binary keep is just a more you can store it.
+
+94
+00:13:42.390 --> 00:13:49.920
+kylie jue: As a tree we happen to do it as an array. When we did our assignment, but you could represent a binary keep as a tree with certain constraints. Right.
+
+95
+00:13:50.130 --> 00:13:58.350
+kylie jue: And so what we're going to learn about today is a binary search tree, which is a tree with specific constraints around it, about how we structure the data that's stored inside
+
+96
+00:13:59.250 --> 00:14:05.190
+kylie jue: And then tomorrow you're actually going to talk about how countries, which is another type of tree with certain constraints around how we store the data.
+
+97
+00:14:06.510 --> 00:14:11.700
+Nick Bowman: Before you move on. Can you just re, re like moving the headphones on, it sounds like there's some like audio feedback.
+
+98
+00:14:14.040 --> 00:14:16.650
+Nick Bowman: Is that any better. Yeah, that's that sounds better.
+
+99
+00:14:17.040 --> 00:14:18.120
+Nick Bowman: Yeah yeah
+
+100
+00:14:18.840 --> 00:14:19.380
+kylie jue: Um,
+
+101
+00:14:19.410 --> 00:14:23.100
+Nick Bowman: Yeah, let me know if the audio is really good, but okay.
+
+102
+00:14:24.420 --> 00:14:26.010
+kylie jue: Should I repeat the slider was no
+
+103
+00:14:26.100 --> 00:14:30.780
+Nick Bowman: No. No, you're good news. You can hear you're saying it was more like something school
+
+104
+00:14:32.580 --> 00:14:39.420
+kylie jue: And then to motivate why we're learning about trees. Again, I want to have turned to something that you probably haven't looked at in a while.
+
+105
+00:14:39.720 --> 00:14:53.220
+kylie jue: But, which is our at big oh matrix. And we sort of left this mystery that we never really explained, which is why our sets and maps old login. And we talked briefly about it when we went over recursion and showed these tree structures.
+
+106
+00:14:53.460 --> 00:14:56.790
+kylie jue: And now we're actually going to understand what is the underlying data.
+
+107
+00:14:58.170 --> 00:15:06.600
+kylie jue: Data, not quite data structure, but the underlying structure in c++ that we're using to store information and sets of maps like gives us that login runtime.
+
+108
+00:15:08.070 --> 00:15:16.590
+kylie jue: And so that's sort of the arc of today we're going to talk a little bit about what vs Ts are and then we're going to use one to actually implement a set and get that login runtime.
+
+109
+00:15:17.610 --> 00:15:30.840
+kylie jue: So what is a binary search tree. And I'm going to start referring to them as vs TS moving forward. So if you remember, we actually saw a PST yesterday, we didn't tell you that it was a BSD we told you it was a binary tree, but it was actually a binary search tree.
+
+110
+00:15:32.850 --> 00:15:46.410
+kylie jue: And so what is a binary search tree. A binary search tree either again can be defined recursive Lee as either a null pointer or a single node, who's left sub tree is smaller then
+
+111
+00:15:47.220 --> 00:15:53.190
+kylie jue: Contains all value smaller than the current node x and the right sub tree where all of the sub
+
+112
+00:15:54.030 --> 00:16:01.470
+kylie jue: We're all of the elements in this side are actually larger than the value x. And if we go back to this side here we can define smaller and larger alphabetically.
+
+113
+00:16:02.100 --> 00:16:05.970
+kylie jue: And so with pineapple. Right. All of the things and it's left sub tree.
+
+114
+00:16:06.390 --> 00:16:17.190
+kylie jue: Come alphabetically before pineapple and all of the things in its right sub tree come alphabetically after pineapple. And that is true in any subject. If you look at coconut. The same is true here. And the same is true of strawberry.
+
+115
+00:16:18.720 --> 00:16:28.920
+kylie jue: So how do we actually filled one of these vs Ts. I'm going to walk you through a process with these example data points and then we're going to talk a little bit more about why we do the process. The way we do.
+
+116
+00:16:29.400 --> 00:16:33.420
+kylie jue: But first, I'm just going to show you, like, if we're given these data points. How might we build at the St.
+
+117
+00:16:34.410 --> 00:16:38.460
+kylie jue: So the main idea here is, first we want to pick the median element in our data.
+
+118
+00:16:38.670 --> 00:16:47.160
+kylie jue: Set and you can actually write it out. If you're not sure if this is the medium but I promise. This is the median. So what do I. It is the median in this data set. And we're going to go ahead and put it in the middle here.
+
+119
+00:16:48.090 --> 00:16:57.420
+kylie jue: And then once we have our median element. We're going to take all of the elements that are less than 108 and put them to the left and all the elements that are greater than one away, and we're going to put them to the right side.
+
+120
+00:16:57.870 --> 00:17:08.490
+kylie jue: And that does that there and we can kind of group them together and start thinking about them as forming the sub trees from our original node 108. And so how do we form the some trees.
+
+121
+00:17:08.760 --> 00:17:20.310
+kylie jue: We repeat this process. So again, you may begin to see the recursive nature of this on the left hand side, we're going to pick the median, which is 123 and then we're going to divide the elements and half with elements that are less than, and greater than 103
+
+122
+00:17:21.720 --> 00:17:27.150
+kylie jue: And then we're going to go ahead and form some trees from one to three and then we can do the same thing on the right side with
+
+123
+00:17:28.320 --> 00:17:32.070
+kylie jue: Where we divide them into less than, and greater than and inform some trees.
+
+124
+00:17:33.180 --> 00:17:44.940
+kylie jue: And you keep going right until you reach a state where we now only have two things on either side, or one thing on our side, and there are no more nodes to keep subdividing into some trees.
+
+125
+00:17:45.990 --> 00:17:53.070
+kylie jue: And if you repeat that for all of these, you end up with a tree that looks like this. And again, it's going to keep our properties of for every node.
+
+126
+00:17:53.370 --> 00:18:06.210
+kylie jue: All of the elements on its left hand side, or less than it and all of its elements, right hand side or right hand sub tree or greater than that and you can go through each of the nodes and show yourself that that is actually true for each of the nodes on this tree.
+
+127
+00:18:08.400 --> 00:18:18.060
+kylie jue: So the other takeaway here is if we go back to what we were talking about with efficiency and why are binary search trees actually helpful for us is, even though we have 13 nodes in the tree.
+
+128
+00:18:18.330 --> 00:18:35.520
+kylie jue: The path to any node is no more than a log of 13 log of 13 why because we're dividing by two. Again, each time. And so the number of steps you take from here to the farthest thing down is no is about log of 13 and if it's shorter than it's even less than log of 13
+
+129
+00:18:36.750 --> 00:18:40.020
+kylie jue: And so that's why it's really helpful. Even if we have an things
+
+130
+00:18:41.220 --> 00:18:47.040
+kylie jue: Most of our operations here are going to be about log of third log of pen or log of 13 in this case.
+
+131
+00:18:47.940 --> 00:19:02.370
+kylie jue: So let's look at an example. How can we actually check if the number 106 is in this tree. So if we're starting at the root right our tree isn't starts by pointing to the route we can look at and compare 106 to whatever the current node, we're looking at is
+
+132
+00:19:03.480 --> 00:19:11.730
+kylie jue: So in our case 106 have left the model, right. So we're going to look at the left sub tree in our node. And that's going to lead us to 1081 or three
+
+133
+00:19:12.180 --> 00:19:19.920
+kylie jue: And 106 is greater than 103 so now we want to take a step to the right. So we're going to go to 107 and then we go to the left and then refined 106
+
+134
+00:19:20.760 --> 00:19:25.410
+kylie jue: So there's this pattern of if we're looking for something we can use the property of whether
+
+135
+00:19:25.860 --> 00:19:35.520
+kylie jue: The left sub tree is less than the right or the left sub tree is less than the right sub tree is more than the current element to know what direction we need to search for something. And that's why it's called a binary surgery.
+
+136
+00:19:36.150 --> 00:19:45.510
+kylie jue: And so we can do the same thing. Even if an element is not in the tree. So if we look at the example of 170 greater than 108 greater than 154 greater than 166
+
+137
+00:19:45.840 --> 00:19:57.870
+kylie jue: And we hit this case right word 166 doesn't have a right child node with probably has no pointer stored there so we know we're done because there's nothing greater than 106 or 166 in this tree.
+
+138
+00:19:59.280 --> 00:20:05.220
+kylie jue: Alright, so some quick takeaways here. So how do we build a BST. So we can build an optimal BST.
+
+139
+00:20:05.550 --> 00:20:13.380
+kylie jue: By repeatedly choosing the median element as the root node of the given sub tree and then separating the elements into groups that are less than, and greater than that median.
+
+140
+00:20:14.370 --> 00:20:21.300
+kylie jue: And so one question that may have come up as you're watching this is sort of what is optimal mean and why are we choosing the media.
+
+141
+00:20:22.080 --> 00:20:31.230
+kylie jue: So I want to more formally explain what do we mean when we're saying optimal PST. So what if I didn't choose the media. And what if we said let's choose the smallest element instead
+
+142
+00:20:31.710 --> 00:20:39.780
+kylie jue: What's going to happen to our process of building the tree. So it started 41 and all of the elements are going to go in the right hand sub tree.
+
+143
+00:20:40.380 --> 00:20:53.070
+kylie jue: Then if we do the same thing. We're going to keep seeing this process until you get something that looks like this. And this is not a very pretty. Treat right it is a valid BST. Remember our, our definition of a PST is just that.
+
+144
+00:20:54.180 --> 00:21:03.060
+kylie jue: There's only two nodes or two children nodes for a given know that most right so in all the notes here have zero to two between zero and two children.
+
+145
+00:21:04.560 --> 00:21:11.040
+kylie jue: And all of the nodes. Follow the property that things on the right hand side or greater than it right but it's just going to continually keep getting greater
+
+146
+00:21:11.940 --> 00:21:21.480
+kylie jue: And now our longest path is oh of n. Right. It is not, oh of log n, which is what gave us that sort of nice property of having a short distance between the route and any other given node.
+
+147
+00:21:23.160 --> 00:21:37.920
+kylie jue: So a takeaway from that is there are actually multiple valid vs TS for the same set of data like this is still a valid BST. And this is another example of a valid BST. But again, not as efficient as we would really like it for 13 nodes.
+
+148
+00:21:38.910 --> 00:21:44.730
+kylie jue: So the takeaway here is that how you construct the tree and the order in which you add the elements really matters.
+
+149
+00:21:44.940 --> 00:21:54.030
+kylie jue: So in general, if you have a data set and you want to construct a really efficient PST or an optimal BST. That's why we're using the median and taking the media and they've each step.
+
+150
+00:21:55.020 --> 00:22:02.160
+kylie jue: But it is possible to construct a PST without doing that you'd still get a valid BST. It just wouldn't quite give you the efficiency benefits.
+
+151
+00:22:03.720 --> 00:22:11.310
+kylie jue: And to more formally defined this an efficient BST is one that is actually balanced. So what is a balanced binary search tree.
+
+152
+00:22:11.760 --> 00:22:18.840
+kylie jue: A spinal surgery is balanced, if its height is oh of log and so just like the first tree we saw or n is the number of nodes in the tree.
+
+153
+00:22:19.230 --> 00:22:30.630
+kylie jue: Another way you can save this and you can think about why this is true. But if you look at the left and right. So please, for any given node, the left and right sub fuse for a given node won't different height by more than one
+
+154
+00:22:31.410 --> 00:22:34.980
+kylie jue: And you can convince yourself. That's true by actually going through some examples. I'm trying it out.
+
+155
+00:22:35.430 --> 00:22:47.340
+kylie jue: But that's just another way of framing the definition of balanced. What does this allow us to do it gives us look up insertion and deletion in operations are they all become operations that operate in. Oh login time
+
+156
+00:22:48.390 --> 00:22:52.710
+kylie jue: And there's actually a theorem that says if you start with an empty tree and add in random values.
+
+157
+00:22:53.010 --> 00:22:58.950
+kylie jue: Then with high probability the tree has bounced. We're not going to talk about why that is. I'm it's actually, it's really interesting theorem.
+
+158
+00:22:59.310 --> 00:23:07.770
+kylie jue: But if it's if you're interested in learning more about it. We're proving it. I recommend taking CS 161 which is an algorithms class that you can do after Windows XP.
+
+159
+00:23:08.760 --> 00:23:14.310
+kylie jue: And then the last note, I'll make which is also a little beyond the scope of this class, but just a piece of terminology to have
+
+160
+00:23:14.610 --> 00:23:28.530
+kylie jue: Is that a self balancing PST is a tree that specifically reshapes itself after you insert or delete any elements so that it stays balanced. We're not going to implement that in this class because it's not. It's a pretty, it's, it's a non trivial algorithm to implement
+
+161
+00:23:30.120 --> 00:23:38.880
+kylie jue: But that is how, if you see vs Ts in practice that are maintaining that old log n runtime. They're usually self balancing
+
+162
+00:23:41.100 --> 00:23:49.350
+kylie jue: All right before I go into announcements. Any questions on the definitions of vs TS after announcements. We're going to talk about how to actually use one to implement a set
+
+163
+00:23:52.890 --> 00:24:05.250
+Nick Bowman: Of. I don't know if this is coming up later and not forgetting. But are you gonna mention the in order reversal of the PST later on. And should we talk about that now because there was a question about it, which I which I consider it. But if you're looking at, Franklin.
+
+164
+00:24:06.300 --> 00:24:09.900
+kylie jue: What do you mean, I guess we will see an example of it.
+
+165
+00:24:11.310 --> 00:24:12.630
+kylie jue: When we do implementation.
+
+166
+00:24:13.950 --> 00:24:16.200
+kylie jue: But yeah, I don't know it was there a more specific question.
+
+167
+00:24:16.200 --> 00:24:28.350
+Nick Bowman: About, you know, just the it just as the special property that I was hinting at yesterday, which is like the in order to reversal of the BS to give you the results and sorted orders. Someone was asking if you could use a binary search free to actually sort elements.
+
+168
+00:24:28.710 --> 00:24:36.270
+Nick Bowman: And the answer was, yeah. If you put all your elements into a PST and then you just do an in order to reversal of the nodes, you'll actually get all the elements in sort of
+
+169
+00:24:36.810 --> 00:24:47.370
+kylie jue: Yeah, that's a good question. Yeah. So I mean, can you answer that they're watching. We'll see an example of that, when we're doing our set implementation that will actually use for printing out the elements inside of the side. Yeah.
+
+170
+00:24:49.230 --> 00:24:49.680
+kylie jue: Cool.
+
+171
+00:24:50.430 --> 00:24:52.680
+kylie jue: So let's go ahead and talk about some announcements that are
+
+172
+00:24:52.680 --> 00:24:58.920
+kylie jue: Pretty much the same as yesterday but everything's move forward today so assignment five is do tonight at 11:59pm
+
+173
+00:24:59.670 --> 00:25:12.000
+kylie jue: PDT and then assignment six is going to be released by the end of the day tomorrow, and it's going to have a hard deadline on Wednesday, August 12 which is next Wednesday. So no grace period and no submissions accepted after that time.
+
+174
+00:25:13.350 --> 00:25:21.300
+kylie jue: And that's deliberate so that we can get grades in at the end of the quarter and also so that you can focus on your final projects presentations after that.
+
+175
+00:25:21.780 --> 00:25:30.390
+kylie jue: And again. Similarly, there won't be any revisions on the current assignment assignment five or assignment six just because of that submission deadline, next Wednesday.
+
+176
+00:25:31.470 --> 00:25:38.220
+kylie jue: And then final project reports are do this coming Sunday at 11:59pm and so we recommend
+
+177
+00:25:38.940 --> 00:25:49.350
+kylie jue: If you want to sign up for slots early your section leader is going to release times this weekend and you're welcome to submit multiple times up till august 9 at 11:59pm
+
+178
+00:25:49.890 --> 00:25:59.250
+kylie jue: So if you want to schedule a slot. You can submit something and then submit the final thing afterwards. But you will only be able to schedule your final presentation slot. After you've submitted something on paperless
+
+179
+00:26:00.660 --> 00:26:01.140
+kylie jue: Alright.
+
+180
+00:26:02.520 --> 00:26:09.450
+kylie jue: So with that, let's go ahead and actually put a PST to use and talk about implementing a set with vs Ts.
+
+181
+00:26:09.990 --> 00:26:19.830
+kylie jue: And just like our vector class that we did earlier in the quarter, we're going to write a set that specifically only store strings in state of type, just because
+
+182
+00:26:20.490 --> 00:26:29.490
+kylie jue: We're going to write a tree note type up the data is string and it's going to look like this. And you'll see this in the code for today as well.
+
+183
+00:26:30.090 --> 00:26:44.100
+kylie jue: But it has its data. It has its left and right. And we have a couple of different constructors that we can use where we can either default. We have a default constructor that just doesn't initialize anything or we can, we have three argument constructor.
+
+184
+00:26:45.180 --> 00:26:48.180
+kylie jue: Where you can initialize it with its data is left and it's right.
+
+185
+00:26:49.170 --> 00:26:57.060
+kylie jue: And we also in implementing our set. We're going to have a header file but already includes the public interface of what we need to define and this is what its gonna look like.
+
+186
+00:26:57.660 --> 00:27:05.940
+kylie jue: We have our constructor and our D structure and then the methods that we're going to have here contains add, remove, clear size is empty and print set contents.
+
+187
+00:27:06.210 --> 00:27:13.590
+kylie jue: And if we have time, we'll hopefully get to all of these, with the exception of remove we're going to include code for remove in the final
+
+188
+00:27:14.760 --> 00:27:20.610
+kylie jue: Zip file that we put out for today but remove is pretty complicated, and we want to give you the time to think through it.
+
+189
+00:27:21.060 --> 00:27:30.150
+kylie jue: On your own and you're not going to have to do anything as complicated as the rewiring that is shown in the remove code. So we'll let you sort of look at it on your own, but we're not going to cover that in class today.
+
+190
+00:27:31.320 --> 00:27:38.700
+kylie jue: And as we write this up methods. I want you to really think about how the runtime will change for a balanced versus an unbalanced PST
+
+191
+00:27:39.000 --> 00:27:49.530
+kylie jue: And the reason for that is, like I mentioned before, actual sets that are backed by binary search trees and trees are self balancing, but we're not going to actually go into the details of how to implement that.
+
+192
+00:27:50.160 --> 00:28:00.090
+kylie jue: So we're not guaranteeing in our methods that we're going to implement today that we're going to get that log in runtime, but you'll get an idea of how they would be if the tree itself. We're actually self balancing
+
+193
+00:28:02.370 --> 00:28:10.830
+kylie jue: Alright, so you'll probably remember these three questions when we're writing our own classes, we want to think about three things. The member functions. The member variables and the constructor.
+
+194
+00:28:11.160 --> 00:28:19.590
+kylie jue: And I remember functions in this case are already going to be defined for us. And so we're going to actually fill in the member variables and then the constructor, as well as some of our other
+
+195
+00:28:20.700 --> 00:28:28.380
+kylie jue: Our other member functions that we are told we have to have. So we're going to start here. We're going to start with the constructor and D structure as well as what the remember variables.
+
+196
+00:28:28.680 --> 00:28:39.180
+kylie jue: And then with some of the shorter functions which are just clear size is empty, and then, like I mentioned a nick brought up earlier and we'll do some in order to reversal with our print set contents.
+
+197
+00:28:40.440 --> 00:28:51.690
+kylie jue: So let's go ahead and code it. I'm going to go ahead and pull this up and make this larger. And so what we're going to do just to show you this is our header file here.
+
+198
+00:28:52.500 --> 00:28:57.120
+kylie jue: That has a description of our public interface. And then we also have some private
+
+199
+00:28:58.080 --> 00:29:04.320
+kylie jue: Methods here and I'm going to go ahead and put in to private member variables that we're going to need for our set class.
+
+200
+00:29:04.560 --> 00:29:10.920
+kylie jue: And for these don't worry about them. Like I said before, removes already going to be implemented. So those are just already in there for us.
+
+201
+00:29:11.850 --> 00:29:29.280
+kylie jue: Um, but we are actually going to have to specific private private member variables that we need. One is, again, we're storing everything in a PST so we are going to have a pointer to a tree node specifically to the root node. And that's how we're going to keep track of our tree.
+
+202
+00:29:30.480 --> 00:29:40.680
+kylie jue: And we're also going to keep track of num items. We don't want to have to sort of traverse the tree every single time we need to count how many things. There are in our tree. So we're just going to store an integer here.
+
+203
+00:29:42.210 --> 00:29:52.710
+kylie jue: I keep track of how many items are inside of the tree. Alright, so that's what we're going to put in our header file and then here is our dot cpp file.
+
+204
+00:29:53.580 --> 00:30:01.680
+kylie jue: And I'm going to go ahead and start with our constructor and in our constructor. Remember, we want to think about how do we initialize the instance variable. So the member variables for our class.
+
+205
+00:30:02.220 --> 00:30:08.850
+kylie jue: We're going to go ahead and set num items equal to zero. And we're going to set our route equal to know pointer.
+
+206
+00:30:09.900 --> 00:30:13.980
+kylie jue: So again, just initializing our variables. If we had an empty set.
+
+207
+00:30:16.170 --> 00:30:22.950
+kylie jue: And then I'm going to go down and just quickly fill in some of the shorter functions here.
+
+208
+00:30:24.150 --> 00:30:34.740
+kylie jue: And the shorter ones here our size and is empty. So for size, we can just return items right because that's going to tell us exactly how many things are inside
+
+209
+00:30:35.250 --> 00:30:46.020
+kylie jue: And this is a pattern, you've seen in the past for is empty, we can just say return if not items is equal to zero, right, because if not items as equals zero. We have an empty set.
+
+210
+00:30:47.160 --> 00:30:58.020
+kylie jue: Alright so that is those are sort of our quick functions that just use our member variables or return information about them quickly. So now I want to talk a little bit more about our, our set function.
+
+211
+00:30:59.790 --> 00:31:08.730
+kylie jue: And what do we want to do in our set, we want to say, okay, whatever things are stored in our tree that our route is pointing to. We want to free them before we
+
+212
+00:31:09.660 --> 00:31:21.120
+kylie jue: Before we the variable goes out of scope. And so how do we do that we just what we just implemented a function that does that, right, in our trees file here from free tree.
+
+213
+00:31:22.830 --> 00:31:41.850
+kylie jue: So we're going to actually I'm going to copy this and and we're going to actually use it as a helper function in our, our set function to actually do this freeing. So remember, since I'm going to create this as a private helper function. I'm going to create our free tree function here.
+
+214
+00:31:44.550 --> 00:31:51.570
+kylie jue: And I'm gonna call it in here. And what I want to call it on is I want to call it on our root node.
+
+215
+00:31:51.900 --> 00:31:57.720
+kylie jue: Right. So basically what I'm doing in my instructor is I'm just freeing the entire tree by calling free tree on the root node.
+
+216
+00:31:57.930 --> 00:32:11.340
+kylie jue: And this recursion is going to take care of properly deleting it for us. And then just as a note. Remember, I have to go ahead and since this is a new helper function that I added, I need to add it to the private section of our class.
+
+217
+00:32:13.260 --> 00:32:19.950
+kylie jue: So that it knows that that's going to exist, and now it's happier when I come back in this file. There you go.
+
+218
+00:32:21.150 --> 00:32:28.830
+kylie jue: Alright, so that's what our instructor is going to do. I'm just what our free tree function did before and then
+
+219
+00:32:29.220 --> 00:32:33.930
+kylie jue: Similarly, are clear function is actually going to do the same thing, right, if we're clearing all the elements out
+
+220
+00:32:34.530 --> 00:32:40.770
+kylie jue: If you remember when we worked with a vector before we were like, oh, we can just set the number of elements to zero. Right. Um,
+
+221
+00:32:41.610 --> 00:32:51.510
+kylie jue: But in clear here. We can't just set the number of elements to zero and then start a new tree from the root right because we'd be we'd still have all of this like leftover memory that we would not
+
+222
+00:32:52.860 --> 00:32:58.710
+kylie jue: We need to get rid of. So what we have to do here is we're actually going to also free the tree on the route.
+
+223
+00:32:59.550 --> 00:33:18.390
+kylie jue: But the difference here instead of just saying okay now I'm done. We still have to do our non items is equal to zero, right. We're freeing everything and resetting our member variables and so route will now have to be no point in this is resetting remember variables.
+
+224
+00:33:20.190 --> 00:33:27.960
+kylie jue: Because with clear, you're going to still keep using the class versus in the instructor, you don't really care, because the variable is going to go out of scope and you're done using the data structure.
+
+225
+00:33:29.970 --> 00:33:30.480
+kylie jue: Alright.
+
+226
+00:33:31.770 --> 00:33:36.510
+kylie jue: So those are our initial functions and then the. The other thing I want to
+
+227
+00:33:38.040 --> 00:33:45.510
+kylie jue: I want to code real quick, just because we're going to be using this as we're debugging and in our tests to sort of show what the print set
+
+228
+00:33:46.050 --> 00:33:53.640
+kylie jue: We're going to show what the contents of the set are. I'm going to go ahead and implement our prints up content. So right now it's just printing to curly braces.
+
+229
+00:33:54.900 --> 00:34:00.690
+kylie jue: And but what we want to do. Like we mentioned before, is we're going to do in order to reversal to actually print the
+
+230
+00:34:01.800 --> 00:34:06.060
+kylie jue: The contents of our binary search tree in alphabetical order.
+
+231
+00:34:07.140 --> 00:34:17.100
+kylie jue: And so how are we going to do it. We're going to call our in order for entry function on the route and once again I'm just going to borrow this function.
+
+232
+00:34:17.760 --> 00:34:27.450
+kylie jue: From over here. And remember to do this properly. Right, we're going to record on the left, then print the current thing and then recursive on the right, and that's going to give us our alphabetical order.
+
+233
+00:34:27.930 --> 00:34:33.180
+kylie jue: And I'm going to do the same thing that I did with free tree which is turn this into a private helper variable.
+
+234
+00:34:34.200 --> 00:34:42.930
+kylie jue: For our class. So now I have to go back into here and add it as a private member function.
+
+235
+00:34:47.970 --> 00:34:57.360
+kylie jue: There we go. So now we have a method that is using in order to reversal to actually print the contents of our binary search tree in alphabetical order.
+
+236
+00:34:58.980 --> 00:35:04.980
+kylie jue: Alright, any questions on these before I move on to some more complex functions in our set
+
+237
+00:35:09.810 --> 00:35:16.680
+kylie jue: Alright. So those are sort of our basic functions that will help us with debugging, and then also just setting up or clearing our set
+
+238
+00:35:17.040 --> 00:35:21.600
+kylie jue: A max. I'm going to move on to two more complicated ones contains an ad
+
+239
+00:35:22.020 --> 00:35:32.520
+kylie jue: And I sort of walk you through an example of how contains might work when we are talking about the definition of binary search trees right we walked through the tree, depending on the value we were looking for.
+
+240
+00:35:33.480 --> 00:35:45.720
+kylie jue: And what the current value of the note we were on is. And we can do this or currently right we walked to the left or right, depending on if it's less than or greater than and then you repeat that process for the node that is that we walk to afterwards.
+
+241
+00:35:47.010 --> 00:35:58.440
+kylie jue: So let's go ahead. We're going to start with contains and we're going to, again, we're going to do this recursive Lee because trees are just great, great structures for efficiently using recursion to solve problems so
+
+242
+00:35:59.640 --> 00:36:06.570
+kylie jue: In order to do this, I'm actually going to create a helper function because, like I mentioned in this diagram here.
+
+243
+00:36:07.260 --> 00:36:18.960
+kylie jue: We need to know what route or what node. We're currently looking at and compare the value to a current nodes value. And so in order to do that we have to have a helper function that actually takes in a node itself.
+
+244
+00:36:21.120 --> 00:36:30.660
+kylie jue: So let's go ahead and add that helper function. So our helper function is also going to return a Boolean. And I'm just going to call it contains.
+
+245
+00:36:31.410 --> 00:36:41.910
+kylie jue: Helper and it's going to take in the value. So the same value is up there. And this one is also going to take in a tree node pointer to whatever current node, we are on
+
+246
+00:36:42.990 --> 00:36:51.600
+kylie jue: Let me go ahead and just add this so that we start getting an air into our header file. So again, another private
+
+247
+00:36:53.460 --> 00:36:54.750
+member function.
+
+248
+00:36:58.410 --> 00:37:09.540
+kylie jue: Care don't look good. Alright, so now we want to think about, okay, what are our base cases. And what's our recursive case right so in our first base case.
+
+249
+00:37:11.250 --> 00:37:21.240
+kylie jue: We can either way. So look, if we look at the example here, we, we looked at both 106 and like a number 170 where we couldn't find it in the tree. So let's say our first base case is
+
+250
+00:37:21.780 --> 00:37:30.180
+kylie jue: Element is not in the tree and if our element is not in the tree. How do we know well, we basically say, Okay, if
+
+251
+00:37:31.710 --> 00:37:43.920
+kylie jue: The current know that you're on is no pointer, right, if you've now traverse the tree and you've gotten to a null pointer, you can return false because you know that whatever you're looking for just doesn't exist in the tree because there's nothing less than nothing greater than
+
+252
+00:37:46.110 --> 00:37:47.670
+kylie jue: Our second base case here.
+
+253
+00:37:48.870 --> 00:37:52.710
+kylie jue: Use Case two is the element is in the tree.
+
+254
+00:37:54.030 --> 00:37:56.580
+kylie jue: I you found the value
+
+255
+00:37:59.160 --> 00:38:14.940
+kylie jue: And so what would we do here. We're going to go ahead and say, Okay, if the current nodes data is equal to the value. Right. So again, we found the value because the nodes current data is equal to whatever we're looking for, then we can go ahead and return true. So those are our base cases.
+
+256
+00:38:16.380 --> 00:38:35.610
+kylie jue: And now we want to think about our recursive case. So we have sort of two options. Right. Um, we have option one. The nodes data is less than the value. And in this case, what do we want to do we want to look at the left so tree.
+
+257
+00:38:37.080 --> 00:38:39.570
+kylie jue: And then the other option right option two.
+
+258
+00:38:40.770 --> 00:38:52.530
+kylie jue: Is the node state of the current nodes. Data is greater than the value, in which case you want to look at the sorry this is if the current nodes data is less than it
+
+259
+00:38:55.230 --> 00:38:56.190
+kylie jue: Yeah, that's right. Okay, sorry.
+
+260
+00:38:58.590 --> 00:39:03.420
+kylie jue: No, no data is less than the value we want to look at the right sub tree.
+
+261
+00:39:05.100 --> 00:39:17.220
+kylie jue: And if the current nodes. Data is greater than the value we look at the left subject. Right. So if you look at this example here. If the current nodes. Data is greater than what we're looking for. We're going to look at the left sub tree, but I do that. Right. Yeah. Okay.
+
+262
+00:39:19.800 --> 00:39:30.450
+kylie jue: So let's go ahead and code up a recursive case. So what are we doing we are comparing value to the actual no data. So if the value is less than the nodes data.
+
+263
+00:39:32.400 --> 00:39:37.860
+kylie jue: Then we want to look at the left sub tree so return contains helper.
+
+264
+00:39:39.540 --> 00:39:41.820
+Value no left
+
+265
+00:39:43.110 --> 00:39:43.980
+kylie jue: Otherwise,
+
+266
+00:39:45.990 --> 00:39:50.700
+kylie jue: We can just do return contains helper value.
+
+267
+00:39:51.840 --> 00:39:54.120
+Node right
+
+268
+00:39:56.010 --> 00:40:00.240
+kylie jue: And this effectively ask Susan else because we're just returning as soon as we get to that state.
+
+269
+00:40:01.290 --> 00:40:13.650
+kylie jue: Alright, so that should work. Let's go ahead, I think, let me just double check. So in our classes down here, we're testing both add and contain so I don't have one that's just gonna
+
+270
+00:40:15.030 --> 00:40:22.770
+kylie jue: My can. Yeah, we don't have one that's just going to test out. So I'm going to go or just test contains. I'm going to go ahead and do add before I'm
+
+271
+00:40:23.820 --> 00:40:29.220
+kylie jue: Running this, but are there any questions on this contains function. Before I move on to add
+
+272
+00:40:33.270 --> 00:40:33.960
+Alright.
+
+273
+00:40:35.340 --> 00:40:42.720
+kylie jue: Cool. So I'm going to go ahead and do add add is going to look really similar, because we will follow sort of the same process of figuring out where to add something.
+
+274
+00:40:43.020 --> 00:40:51.900
+kylie jue: Except the differences, right, when we get to where we need to go instead of just saying, Oh, we true or false, we follow the element, we want to actually add it to wherever
+
+275
+00:40:53.100 --> 00:41:09.000
+kylie jue: It belongs in the tree. And so how do we do this, I'm going to do a very similar process where our first I'm going to create an ad helper that takes in our value and in this case it's going to start by taking the route or I guess it did that appear to I'm
+
+276
+00:41:10.020 --> 00:41:12.660
+kylie jue: And I'm going to create my our set
+
+277
+00:41:14.430 --> 00:41:17.370
+kylie jue: Helper that takes in a string value.
+
+278
+00:41:18.900 --> 00:41:21.210
+kylie jue: In a tree node.
+
+279
+00:41:24.360 --> 00:41:31.830
+kylie jue: But the one difference here. I'm actually going to pass this node by reference. And I want you to think for a second about why do I need to pass this node by reference.
+
+280
+00:41:32.670 --> 00:41:38.520
+kylie jue: So remember, just like I'm in are linked lists, when we were dealing with functions that would actually
+
+281
+00:41:39.000 --> 00:41:54.030
+kylie jue: Edit the list itself. In this case, we're actually editing the tree itself, right, we might be adding the node in somewhere. So we need to actually pass our node by reference in order for those changes to persist and so I'm going to go ahead and add this in here as well.
+
+282
+00:41:56.160 --> 00:42:01.110
+kylie jue: So that we have it and then now I'm going to go ahead and do our
+
+283
+00:42:02.130 --> 00:42:03.480
+kylie jue: Ad function. So,
+
+284
+00:42:04.860 --> 00:42:07.950
+kylie jue: In this case, we're going to actually have very similar
+
+285
+00:42:09.270 --> 00:42:15.690
+kylie jue: Cases, at least for the first one. So if we hit. So our base case is then
+
+286
+00:42:16.740 --> 00:42:19.770
+kylie jue: Add the node where we are.
+
+287
+00:42:21.690 --> 00:42:29.820
+kylie jue: Let's say adds value where we are. And so how are we going to figure that out. If the current node is no pointer, meaning that we've sort of
+
+288
+00:42:30.150 --> 00:42:38.040
+kylie jue: Let's say we were trying. Let's say we are trying to add that value 172 this tree. Once we got here, we would sort of be like, oh, it's no
+
+289
+00:42:38.460 --> 00:42:44.040
+kylie jue: That must be where this node must go right. So instead of searching. We're actually saying, Okay, we're trying to find where it will go
+
+290
+00:42:44.280 --> 00:42:50.850
+kylie jue: So again, when we hit the null pointer place we're like, okay, nothing's there. So that's where our notice going to actually end up
+
+291
+00:42:51.630 --> 00:42:59.460
+kylie jue: So now what we need to do is we're going to say right now that notice currently not right. Nothing is there instead what we want to put their as we want to put a neutrino.
+
+292
+00:42:59.850 --> 00:43:12.450
+kylie jue: So we're going to allocate space for a neutrinos that has value. It's or it's data as the value that we're actually adding and then it's going to have to know pointers as it's left and right children because it doesn't have any children.
+
+293
+00:43:13.590 --> 00:43:21.900
+kylie jue: And then the other thing we have to change. We have to make sure we add one to our member variable items to say, okay, we've added something to our tree.
+
+294
+00:43:23.010 --> 00:43:34.410
+kylie jue: So this is our base case where we're adding the value where we are. Otherwise, what we want to do. Right. Otherwise, we're still looking for where to add this node. And so again we have sort of two recursive cases here.
+
+295
+00:43:36.540 --> 00:43:47.430
+kylie jue: Where we would have. Okay. Either you want to add it to the left sub tree or you want to add it to the rights. So if our node. Data is greater than the value
+
+296
+00:43:48.600 --> 00:43:52.230
+kylie jue: What we want to do is we want to add it to the left sub tree.
+
+297
+00:43:55.530 --> 00:44:04.770
+kylie jue: Or basically not added to the left sub tree, but we have to keep exploring until we find the null pointer. Right. So what we would do here is we're going to call add helper recursive Lee.
+
+298
+00:44:05.100 --> 00:44:15.600
+kylie jue: With the same value. But now what we're doing is we are rehearsing on the left sub tree of the current note. So we're saying keep looking to the left to figure out where we're going to add it
+
+299
+00:44:16.830 --> 00:44:19.320
+kylie jue: Otherwise, what we want.
+
+300
+00:44:21.330 --> 00:44:27.780
+kylie jue: To do is just to be super clear here. This would be known data.
+
+301
+00:44:29.820 --> 00:44:37.140
+kylie jue: Less than the volume and we are going to go ahead and do the same thing, but this time we will be adding it to the right sub tree.
+
+302
+00:44:38.850 --> 00:44:41.910
+kylie jue: So this one is add it to the right.
+
+303
+00:44:43.080 --> 00:44:43.680
+Sub tree.
+
+304
+00:44:45.990 --> 00:44:50.460
+Nick Bowman: Okay, kind of a quick comment about why that why that Elsa is necessary, rather than just
+
+305
+00:44:52.410 --> 00:45:01.740
+Nick Bowman: Because it's really a tough question from earlier audio is asking, what can we assume that this tree isn't gonna have duplicates and it's actually kind of our job to enforce that it's not going to have people gets
+
+306
+00:45:02.310 --> 00:45:15.690
+Nick Bowman: So it's actually important that that's an else if because if the no data is actually equal to the value we have an implicit kind of stopping condition here it says don't add it to the tree. And so it's actually important that that's an Elsa and not just a house.
+
+307
+00:45:16.770 --> 00:45:18.810
+Nick Bowman: Because that'll prevent us from having to the truth.
+
+308
+00:45:20.430 --> 00:45:20.580
+Nick Bowman: Yeah.
+
+309
+00:45:20.610 --> 00:45:22.410
+Nick Bowman: Good point. So I'll have that down here. Yes.
+
+310
+00:45:22.410 --> 00:45:25.770
+kylie jue: The value is already in the tree.
+
+311
+00:45:27.780 --> 00:45:28.260
+Don't
+
+312
+00:45:29.340 --> 00:45:33.930
+kylie jue: Yeah, that's a good point. It is a set and we don't want to add duplicates to our set. Yeah.
+
+313
+00:45:35.850 --> 00:45:44.340
+kylie jue: Great. Um. Any other questions about add before I'll go ahead and run the tests. While we're waiting, any questions.
+
+314
+00:45:53.130 --> 00:45:53.790
+All right.
+
+315
+00:45:56.010 --> 00:46:00.840
+kylie jue: And while this is running, I will point out, I'm going to go ahead and comment it now.
+
+316
+00:46:01.860 --> 00:46:06.540
+kylie jue: I have all of the remove code down here that I'm not going to go through, because it's quite long.
+
+317
+00:46:08.400 --> 00:46:17.820
+kylie jue: But I highly recommend looking through it on your own to see how it's working. There's a lot more rewiring that needs to happen if you're potentially removing something from the middle of a tree.
+
+318
+00:46:19.800 --> 00:46:24.600
+kylie jue: And so it's it's a little more complex. We're not going to ask you to do any of that logic with trees yourself.
+
+319
+00:46:25.800 --> 00:46:30.840
+kylie jue: But you can take a look here to see how remove would actually work and it would still be oh login. If you have a balance tree.
+
+320
+00:46:32.160 --> 00:46:34.980
+Alright, so let's come back up here.
+
+321
+00:46:36.810 --> 00:46:37.680
+And
+
+322
+00:46:38.700 --> 00:46:45.390
+kylie jue: It's not like a museum in but that's okay. Alright, so we're going to go ahead and run the test from our set
+
+323
+00:46:47.730 --> 00:47:00.540
+kylie jue: So that kind of structure in the day structure are working and if I scroll down here. The tests are just sort of creating a set and then checking if it's empty, and then it should go out of scope and call the instructor and
+
+324
+00:47:01.560 --> 00:47:09.660
+kylie jue: Then here. There's a lot of functions that are actually testing the functionality of our set. And if I pull this up a little bit.
+
+325
+00:47:11.730 --> 00:47:15.390
+kylie jue: Yeah, you actually see, I guess, in this case, it's only printing it once, but
+
+326
+00:47:16.410 --> 00:47:30.300
+kylie jue: I'm in the console down here is actually using our prints up contents function to see what the things inside are and you can play around with that I'm home on your own. If you want to read some more tests and just get a better understanding of how this is working.
+
+327
+00:47:31.860 --> 00:47:32.370
+Alright.
+
+328
+00:47:34.170 --> 00:47:37.470
+kylie jue: So that was contains and add in summary.
+
+329
+00:47:38.550 --> 00:47:53.070
+kylie jue: There were a few things I wanted to point out one is that we actually use some of those tree utility functions that we wrote earlier in class and yesterday to actually have private member functions like in order printing and free entry I'm helpers when we're dealing with the trees.
+
+330
+00:47:54.690 --> 00:48:02.730
+kylie jue: And in particular, that in order to reversal helps us print our elements in the correctly sorted order which are actually could see in the example here of how it's printing
+
+331
+00:48:04.620 --> 00:48:11.880
+kylie jue: And then using a PST allows us to take advantage of recursion to traverse our data. And if we did actually have a balanced tree.
+
+332
+00:48:12.120 --> 00:48:19.470
+kylie jue: At any point in time, because we were sort of going down a particular branch, we would get an old login runtime for add for our contains
+
+333
+00:48:19.710 --> 00:48:29.460
+kylie jue: And similarly, actually for removed as well. But again, that was sort of dependent on this PST being balanced. You can imagine that if it weren't balanced, that would not actually be an O log and runtime.
+
+334
+00:48:30.720 --> 00:48:38.520
+kylie jue: And then the last thing is rewiring trees is a little more complicated than what you had to do with rewiring of linked list right because you have those left and right children.
+
+335
+00:48:39.540 --> 00:48:46.500
+kylie jue: So one thing is to always make sure to consider when you need to pass your notes by reference. Like we did with ADD TO MAKE SURE YOU'RE ACTUALLY editing it
+
+336
+00:48:46.770 --> 00:48:58.050
+kylie jue: And then I highly recommend checking out the remove method after class. If you're interested in seeing sort of a complex example of creativity wiring, but you won't be required to do anything sort of that complicated for an assignment.
+
+337
+00:48:59.760 --> 00:49:08.580
+kylie jue: Alright, so what's next. So tomorrow. We're going to talk about more linked data structures, but in conjunction with real world algorithms and I think
+
+338
+00:49:09.510 --> 00:49:13.560
+kylie jue: It's a really fun, leading to the last assignment that you're going to have to do
+
+339
+00:49:14.070 --> 00:49:19.620
+kylie jue: So we're going to talk about Huffman trees and have been trees or a specific type of trees that are used for Huffman coding
+
+340
+00:49:19.920 --> 00:49:30.390
+kylie jue: Which is a common algorithm used in compression and something you're actually going to implement on the last assignment for the entire quarter. I mean, it'll be a good sort of putting together of everything you've learned so far.
+
+341
+00:49:31.860 --> 00:49:42.990
+kylie jue: What with trees and priority queues and all those sorts of things. But that is it. So, we will see you for lecture tomorrow. And again, I will stick around for any questions. Thanks.
+
+342
+00:49:44.430 --> 00:49:44.730
+Siddharth Balaji: Thank you.
+
+343
+00:49:45.810 --> 00:49:46.260
+Samuel Lynn Ledden: Thank you.
+
+344
+00:49:46.320 --> 00:49:47.250
+Samuel Lynn Ledden: Thank you.
+
+345
+00:49:47.670 --> 00:49:48.060
+gavin gee: Thank you.
+
+346
+00:49:48.450 --> 00:49:49.050
+Oz Gitelson: Thank you.
+
+347
+00:49:49.680 --> 00:49:50.400
+Thomas Tao Hale: Thank you.
+
+348
+00:49:54.750 --> 00:49:54.990
+Yeah.
+
+349
+00:49:57.660 --> 00:49:59.130
+Demi Lei: Yeah, so
+
+350
+00:49:59.700 --> 00:50:13.140
+Demi Lei: I just don't quite understand about like so. I mean, I just said in the chat. It's down south and when we're adding things into the set of, like, we're always adding it as a
+
+351
+00:50:15.000 --> 00:50:25.110
+Demi Lei: Child. So like, I'm like, How can we keep entire things sorted or like it's just not going to be entirely sorted, just like in the binary he
+
+352
+00:50:26.700 --> 00:50:33.570
+kylie jue: It'll be so it'll be sorted in that it looks like this right where you still keep the property of like everything on the left of a
+
+353
+00:50:33.570 --> 00:50:34.830
+kylie jue: given notice smaller than it
+
+354
+00:50:35.550 --> 00:50:48.600
+kylie jue: Right is larger. And so that's sort of what this these else chefs are doing. Right. So you're basically looking at the current node, you're at and saying okay there's something there. So I can't replace it right because I'm just adding something to it. And so if you're imagining
+
+355
+00:50:49.950 --> 00:50:54.180
+kylie jue: I was placing like 170 here, you would say, okay, 170 is greater than 108
+
+356
+00:50:54.570 --> 00:51:00.780
+kylie jue: Right, so it would fall into this bucket and you're saying, Okay, let's go to the right and then we're going to keep going to the right.
+
+357
+00:51:00.810 --> 00:51:01.770
+kylie jue: until we reach
+
+358
+00:51:01.800 --> 00:51:06.090
+kylie jue: Know pointer and then we're gonna say, okay, add it right and then our tree maintains that
+
+359
+00:51:06.090 --> 00:51:07.410
+kylie jue: Property of
+
+360
+00:51:08.970 --> 00:51:11.760
+kylie jue: The sub trees being correctly like greater than or
+
+361
+00:51:11.760 --> 00:51:15.960
+kylie jue: Less than the out the node that is the parent. Does that make sense.
+
+362
+00:51:18.270 --> 00:51:19.950
+Demi Lei: I got it. Thanks. Yeah.
+
+363
+00:51:22.710 --> 00:51:31.740
+Nick Bowman: Did you have your thought on you. I do like can I, can you draw on this tree, the order in which the first order reversal work, we didn't, we didn't draw yes or no.
+
+364
+00:51:32.880 --> 00:51:36.570
+Nick Bowman: Yes, or if you want to pick us just a smaller sub tree. If you don't want to do the whole thing.
+
+365
+00:51:37.980 --> 00:51:39.000
+kylie jue: Let's I can
+
+366
+00:51:40.290 --> 00:51:41.550
+kylie jue: So the post order.
+
+367
+00:51:45.120 --> 00:51:47.010
+kylie jue: Yeah. So if I'm doing post
+
+368
+00:51:48.510 --> 00:51:49.410
+kylie jue: Order.
+
+369
+00:51:50.940 --> 00:51:52.080
+Reversal
+
+370
+00:51:53.160 --> 00:51:53.790
+Um,
+
+371
+00:51:54.870 --> 00:51:56.790
+kylie jue: So what I would do here is
+
+372
+00:51:59.070 --> 00:52:00.300
+kylie jue: Pull up the code.
+
+373
+00:52:00.780 --> 00:52:01.320
+To
+
+374
+00:52:03.510 --> 00:52:05.400
+So this is post order number so
+
+375
+00:52:08.790 --> 00:52:14.910
+kylie jue: Let's do this. I'll put a post or reversal here and then I'll do it for this subject for the sub tree over here I'm
+
+376
+00:52:16.170 --> 00:52:18.480
+Nick Bowman: So sorry. I think you have the in order
+
+377
+00:52:19.680 --> 00:52:20.490
+Nick Bowman: Oh, you're right. Sorry.
+
+378
+00:52:24.900 --> 00:52:25.080
+Nick Bowman: Yeah.
+
+379
+00:52:30.450 --> 00:52:32.760
+kylie jue: So, so if we're doing post order here.
+
+380
+00:52:35.100 --> 00:52:38.940
+kylie jue: And so we want to go all the way to the left first.
+
+381
+00:52:40.050 --> 00:52:46.140
+kylie jue: So we would be doing a recursive call. We'd start there. And then we go here and then we go here, right.
+
+382
+00:52:48.450 --> 00:52:50.430
+kylie jue: So this would be the first thing that's printed
+
+383
+00:52:51.540 --> 00:52:57.840
+kylie jue: And then when you return from that call you would end up going here. So this would be to
+
+384
+00:53:00.600 --> 00:53:06.690
+kylie jue: This would be three and then from here, right. You don't go. You still haven't printed the route. So you'd come here.
+
+385
+00:53:07.020 --> 00:53:08.010
+Nick Bowman: And then you go here.
+
+386
+00:53:08.550 --> 00:53:12.480
+kylie jue: And then before you go to five and then you would go
+
+387
+00:53:14.250 --> 00:53:14.910
+Does that make sense.
+
+388
+00:53:21.870 --> 00:53:22.170
+Nick Bowman: Yeah.
+
+389
+00:53:25.230 --> 00:53:25.980
+kylie jue: I saw how many
+
+390
+00:53:35.760 --> 00:53:37.050
+haoming li: Similar question that
+
+391
+00:53:39.870 --> 00:53:57.210
+haoming li: I see these cases when we convert to a new point. So, and I didn't see any like wiring. So does that mean we're only added to the
+
+392
+00:53:58.440 --> 00:54:00.690
+haoming li: Us that we will never
+
+393
+00:54:01.860 --> 00:54:03.060
+haoming li: Explain. Yeah.
+
+394
+00:54:03.150 --> 00:54:03.720
+Yeah.
+
+395
+00:54:04.830 --> 00:54:12.360
+kylie jue: Yeah, that's exactly right. So anytime we're adding something to a tree, we would only be adding like sort of at the leaves here.
+
+396
+00:54:12.960 --> 00:54:24.720
+kylie jue: You would never like have to add something in between these two right because if you imagine you have some number that's between them. You would actually just still be going, you'd still be like let's say you're adding 111 right
+
+397
+00:54:25.440 --> 00:54:27.150
+kylie jue: If you're going down this way you'd say, okay,
+
+398
+00:54:27.480 --> 00:54:40.230
+kylie jue: Greater than one way smaller than 154 So technically, even the 111 would go between these two items you could still go this way you would say greater than one 10th smaller than 143 and you still have a valid tree when you added 111 down here.
+
+399
+00:54:43.770 --> 00:54:44.460
+haoming li: Oh,
+
+400
+00:54:45.900 --> 00:54:47.670
+haoming li: I see what i'm sure
+
+401
+00:54:48.450 --> 00:54:49.800
+haoming li: We'll have number
+
+402
+00:54:51.060 --> 00:54:51.300
+haoming li: One.
+
+403
+00:54:53.730 --> 00:54:59.670
+kylie jue: Yeah, so you you will never need to rearrange sort of the order of the elements. So that's why we sort of said that like
+
+404
+00:55:00.000 --> 00:55:05.790
+kylie jue: The order in which you add the elements actually matters to how your tree will end up looking at being structured right
+
+405
+00:55:05.940 --> 00:55:16.290
+kylie jue: And so if you wanted to sort of make it balance only, the only time you would ever need to like sort of rewire to add things in the middle or change the order of the elements as if you're trying to rebalance the tree, which we're not going to actually have you do
+
+406
+00:55:17.700 --> 00:55:23.250
+kylie jue: But you can still maintain the PST properties from adding elements in any order you like. Yeah.
+
+407
+00:55:27.030 --> 00:55:27.330
+Yeah.
+
+408
+00:55:29.460 --> 00:55:33.330
+haoming li: Also, another question about the structure and the clear
+
+409
+00:55:35.070 --> 00:55:37.800
+haoming li: And yeah, just dropped her clear
+
+410
+00:55:38.070 --> 00:55:38.820
+kylie jue: I'm sure yeah
+
+411
+00:55:41.100 --> 00:56:01.560
+haoming li: I can see that the structure just delete the whole thing. We are all those found and clear just delete or the items, but we still have the root of the tree, though the last on your phone.
+
+412
+00:56:03.510 --> 00:56:09.630
+haoming li: But I didn't see like how they work differently. Why
+
+413
+00:56:11.430 --> 00:56:13.380
+haoming li: The instructor, we need to
+
+414
+00:56:14.400 --> 00:56:17.010
+haoming li: Call the function. So the tree recursive they
+
+415
+00:56:18.060 --> 00:56:20.760
+haoming li: Think they are. We don't, we're always
+
+416
+00:56:22.890 --> 00:56:29.550
+kylie jue: So they're both calling recursive Lee, the same function. So this part is the same for both the only difference for clear
+
+417
+00:56:29.940 --> 00:56:38.250
+kylie jue: So I think in this, in both cases, they're going to feed the group but unclear. You also have to reset the member variables because you can imagine in an actual client program.
+
+418
+00:56:38.640 --> 00:56:47.610
+kylie jue: Right. The distractors getting called as soon as you go out of scope. So when our set, we don't need it anymore versus in here. I could have called clear like in the middle here while I'm still
+
+419
+00:56:48.180 --> 00:56:56.940
+kylie jue: Excuse me, using it. So our set still exists. And we need to be able to add things to it, but we want to remove everything that's already there. So we're deleting everything
+
+420
+00:56:57.660 --> 00:57:03.870
+kylie jue: And then resetting our member variables as if we're starting with an empty set. When we call clear. Does that make sense.
+
+421
+00:57:05.880 --> 00:57:06.300
+haoming li: Yeah.
+
+422
+00:57:08.100 --> 00:57:08.490
+On the
+
+423
+00:57:10.980 --> 00:57:14.580
+haoming li: Instructor way called that's for left and right.
+
+424
+00:57:15.840 --> 00:57:15.990
+haoming li: But
+
+425
+00:57:16.710 --> 00:57:30.810
+kylie jue: You know, in the distributor. We just called a free treatment. So this is the instructor. If it's I can also, this is a helper function. So I can put it like down here if that's clear. This is a helper function that's getting used by clear and by our distributor.
+
+426
+00:57:31.620 --> 00:57:32.250
+haoming li: Oh, yeah.
+
+427
+00:57:33.690 --> 00:57:36.540
+haoming li: Yeah, so we just did a number of
+
+428
+00:57:55.980 --> 00:58:08.280
+edouard des: A question about them when you put the little star and percent symbol on. You have a choice of whether you want to put it on closer to that, like the type declaration or closer to the name of the variable.
+
+429
+00:58:08.940 --> 00:58:16.230
+edouard des: Or the parameter in this case. And I think all the cases, what is the best practice because if you try to use command I
+
+430
+00:58:16.500 --> 00:58:23.070
+edouard des: to format it for you. It'll always put this and percent star on the name of the premonition analytics, I have to put it back the law.
+
+431
+00:58:23.850 --> 00:58:32.670
+edouard des: He's wondering why. And so there's like a common doesn't matter, right, because it just ignores the competitive scene was always space anyway. But, um, what's the best practice.
+
+432
+00:58:34.050 --> 00:58:42.240
+kylie jue: Um, I don't actually know if there's like a nick might know this if there's a c++ best practice generally like just consistency.
+
+433
+00:58:42.930 --> 00:58:49.230
+kylie jue: Is the best practice as long as you're being consistent about how you're using the white space so that it's clear to read, um,
+
+434
+00:58:49.980 --> 00:58:59.670
+kylie jue: I like this better just because I think about whoops I think about this whole thing as related to the type, right, because it is a reference to a node point node pointer.
+
+435
+00:59:01.650 --> 00:59:05.670
+kylie jue: And then this is like the name of your variable, right, like the and is not part of the name of your variable.
+
+436
+00:59:06.270 --> 00:59:18.210
+kylie jue: So that's why I agree with it this way. There might be a better reason for it, but like you mentioned, it actually doesn't matter because the compiler is just going to ignore the white space, Nick, do you have a good. Do you know if there's like a convention around it.
+
+437
+00:59:21.300 --> 00:59:26.520
+Nick Bowman: I am not sure I people will do different things. I don't think
+
+438
+00:59:29.550 --> 00:59:31.890
+Nick Bowman: We're just whatever where you try to stay consistent
+
+439
+00:59:32.820 --> 00:59:37.890
+edouard des: So long as I guess it's not floating in the middle of your life, things you could technically put like a bunch of tabs on each side and just
+
+440
+00:59:39.630 --> 00:59:40.320
+kylie jue: Don't do that.
+
+441
+00:59:42.990 --> 00:59:44.580
+edouard des: Okay, that makes sense.
+
+442
+00:59:49.590 --> 00:59:53.430
+edouard des: And also as a sign up for the function which on the post.
+
+443
+00:59:54.510 --> 01:00:01.530
+edouard des: The post order. Nothing. The reason it works out that way. The reason you're in the week after the tune on recursive calls.
+
+444
+01:00:01.830 --> 01:00:12.780
+edouard des: Is because when like it's not actually when you, when it, when the function does the return. So when he gets the return value it proceeds to the next one. And because we're passing tree by reference.
+
+445
+01:00:14.730 --> 01:00:25.470
+edouard des: It's invalid term. And that's how it knows what tree to delete it, because otherwise, it'd be it would be related no point or any additional angry if you try to do that like over on us. You can always I can
+
+446
+01:00:26.220 --> 01:00:27.600
+kylie jue: Sorry, which which function we're
+
+447
+01:00:28.710 --> 01:00:31.560
+edouard des: Not the one we did in the workspace, the post order.
+
+448
+01:00:33.930 --> 01:00:35.580
+edouard des: Yeah, I can print it.
+
+449
+01:00:37.590 --> 01:00:47.100
+edouard des: Yeah, that one. The reason like we never end up the referencing mail pointer because when it, when it gets another point her returns and then we'll move on to the next one call. So when it gets to tree.
+
+450
+01:00:47.580 --> 01:00:55.620
+edouard des: The tree. It'll be a D referencing is the tree that that is inside it's parameter. Right, so it'll still got there and it will never delete null pointer.
+
+451
+01:00:57.780 --> 01:01:09.960
+kylie jue: Yeah, yeah. The base case of sort of protecting you from G referencing anything that's right because you'll exit before you do that, so the only time you would ever be doing this is, if there is at least
+
+452
+01:01:11.400 --> 01:01:18.510
+kylie jue: If the tree itself does not know which means it may not have left and right, which is okay because then when it gets into the call the next time it'll just
+
+453
+01:01:18.990 --> 01:01:27.420
+kylie jue: Be known exit there and then it will. So even if these the left and right when all these calls wouldn't do anything and then it would still to leave the note itself.
+
+454
+01:01:27.930 --> 01:01:33.840
+edouard des: If you were to pass it by the tree note, if you were to pass it by reference. Instead of passing by value.
+
+455
+01:01:34.980 --> 01:01:44.940
+edouard des: It would not work right because then what would happen is that if it would when it got to the next iteration you would you would you would end up not leading half the tree right
+
+456
+01:01:46.170 --> 01:01:48.120
+kylie jue: Ah, what work what
+
+457
+01:01:50.460 --> 01:01:51.000
+Nick Bowman: Was the question.
+
+458
+01:01:51.510 --> 01:01:53.910
+kylie jue: Of your past tree here by reference. Would it work.
+
+459
+01:01:56.490 --> 01:01:59.940
+Nick Bowman: Yeah, I mean, there's no reason to you because you never actually said tree for anything.
+
+460
+01:02:02.730 --> 01:02:03.090
+Okay.
+
+461
+01:02:04.350 --> 01:02:05.160
+edouard des: Okay, thank you.
+
+462
+01:02:06.420 --> 01:02:13.530
+kylie jue: I'm going to hop over to my office hours but Nick can stick around and keep answering questions here.
+
+463
+01:02:18.120 --> 01:02:19.200
+Nick Bowman: Especially in
+
+464
+01:02:20.070 --> 01:02:26.490
+Jordan Lin: Africa question about when we should pass by reference. And when we should pass by a value so
+
+465
+01:02:27.630 --> 01:02:30.060
+Jordan Lin: I like like from the link list.
+
+466
+01:02:31.110 --> 01:02:44.220
+Jordan Lin: Assignment. There's actually a lot of cases where we find that sometimes we just kind of don't need to pass by reference. But we still do, like, what is the convention behind passing by reference of passing the value of it, like, all you're passing us to reach us at pointer.
+
+467
+01:02:44.760 --> 01:02:49.530
+Jordan Lin: And like either way, your functions to kind of works that access
+
+468
+01:02:49.650 --> 01:02:58.110
+Nick Bowman: Um, well, I would say you want to reserve passing by reference. Only if you explicitly need to every week we talked about them reflected by list like
+
+469
+01:02:58.350 --> 01:03:04.440
+Nick Bowman: It doesn't like planners are small so it doesn't make sense to like always pass them by reference. Especially if you don't need to
+
+470
+01:03:05.400 --> 01:03:16.170
+Nick Bowman: Like we usually like our default for passing pointers to say pass them by value. But if you need to potentially change where they point to then you have no other options besides to pass them by reference.
+
+471
+01:03:16.830 --> 01:03:29.070
+Nick Bowman: I wouldn't say that. Yeah, I would say that you should always be passing in the reference because I can honestly just lead to potential issues in the code if you're not careful with how you're using it. So the default should be
+
+472
+01:03:31.110 --> 01:03:38.850
+Nick Bowman: Passing by value and you should only change it to passing by reference. If you explicitly to and and that's the at least in the lecture examples. That's the, that's the sort of
+
+473
+01:03:39.990 --> 01:03:44.130
+Nick Bowman: Practice that we took. Right, the only the only function that we implemented the past the point
+
+474
+01:03:44.250 --> 01:03:48.600
+Nick Bowman: Of reference for the ones that might modify the structure of the list and therefore might need to update for the five
+
+475
+01:03:50.910 --> 01:03:51.450
+Jordan Lin: OK, I see.
+
+476
+01:03:58.950 --> 01:03:59.400
+Nick Bowman: Questions.
+

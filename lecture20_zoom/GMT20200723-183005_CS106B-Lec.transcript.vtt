@@ -1,0 +1,1658 @@
+WEBVTT
+
+1
+00:00:04.650 --> 00:00:08.099
+kylie jue: Alright, welcome back to 106 be
+
+2
+00:00:09.570 --> 00:00:11.219
+Whoops. There we go.
+
+3
+00:00:12.269 --> 00:00:18.330
+kylie jue: So today we are going to be talking about a new topic called link list, which is a nice lead in from the pointers.
+
+4
+00:00:19.080 --> 00:00:28.890
+kylie jue: Lecture that Nick gave yesterday. And while we're getting started, if you could throw in the chat. Is there a topic you'd like us to dive more depth into in the last week of class. We have a few classes, towards the end.
+
+5
+00:00:29.430 --> 00:00:35.100
+kylie jue: Where we're mostly just going to cover some like fun concepts, things that are not essential for you.
+
+6
+00:00:35.670 --> 00:00:43.650
+kylie jue: To know coming out on a six be but things you're interested in. So we'd love to hear if you have any suggestions for things you've learned about or heard about that you'd like us to talk more
+
+7
+00:00:45.120 --> 00:00:55.980
+kylie jue: About alright so where are we, we are now officially moving into the linked data structures part of implementation. So we just finished learning about the basics of dynamic memory management.
+
+8
+00:00:56.280 --> 00:01:06.450
+kylie jue: And now we're going to learn how to put it all together. So specifically. Today's question is going to be how can we use pointers to organize non contiguous memory on the heap. And we'll talk a little bit more about what that means in a moment.
+
+9
+00:01:08.370 --> 00:01:17.430
+kylie jue: And so just a quick review of the very there was yesterday was a pretty dense lecture. There was a lot to learn about memory and pointers and I promise you that it will get
+
+10
+00:01:18.210 --> 00:01:22.980
+kylie jue: Clear as you start using them in your actual code but pointers can be tricky when you're just getting started.
+
+11
+00:01:23.340 --> 00:01:33.060
+kylie jue: So where are we, we are learning about fundamental c++ data storage and yesterday, Nick also give you a little bit of a quick lesson on computer hardware and how those two things are related.
+
+12
+00:01:33.960 --> 00:01:37.170
+kylie jue: Specifically how his computer memory or guys we learned about RAM.
+
+13
+00:01:37.740 --> 00:01:49.050
+kylie jue: And this idea that ram or memory on your computer is sort of a bunch of tiny little suitcases or boxes where you can store pieces of information and every suitcase also has a memory address, which is what we see in this tag here.
+
+14
+00:01:50.880 --> 00:01:59.880
+kylie jue: And so, more specifically, every variable that you create in your programs has an address and memory on your computer, regardless of whether it was created on the stack or on the heap.
+
+15
+00:02:00.150 --> 00:02:04.560
+kylie jue: And more recently, we've been dealing with things that we create on the heap. When we dynamically allocate them.
+
+16
+00:02:05.400 --> 00:02:12.810
+kylie jue: But more generally, a pointer which is what we learned about mostly yesterday is just another type of variable. But the variable specifically stores and memory address
+
+17
+00:02:13.320 --> 00:02:18.570
+kylie jue: So again, you could just think about it as another type for your variables that storage memory addresses on your computer.
+
+18
+00:02:19.500 --> 00:02:29.010
+kylie jue: But when you declare pointers. You have to specify the type of the variable that it points to so that c++ knows how much space that value is pointing that it's pointing out is taking it.
+
+19
+00:02:29.220 --> 00:02:33.780
+kylie jue: So when you declare a string pointer. It knows. Okay. When I go to where I'm pointing
+
+20
+00:02:34.410 --> 00:02:43.710
+kylie jue: The thing that there will be the size of a string. And that's how I will be able to get the value that's there D reference it if you don't specify the type that the pointer is pointing to that it won't know that
+
+21
+00:02:45.570 --> 00:02:55.560
+kylie jue: But as an emphasis there. It's really important to still remember that the fat point or type, like for example a string pointer versus a string itself. They're completely two different data types. So don't
+
+22
+00:02:59.010 --> 00:03:02.850
+kylie jue: Just remember that the pointer to something is very different than the actual type itself.
+
+23
+00:03:04.590 --> 00:03:09.600
+kylie jue: And like I mentioned, when you dynamically allocate variables on the heat using that new key word that we learned
+
+24
+00:03:10.560 --> 00:03:21.060
+kylie jue: Or new with the square brackets. In the case of an array, you must store the address in a pointer to keep track of it. And this is an example, if you're dynamically allocated integer, you have to store it in into pointer.
+
+25
+00:03:21.480 --> 00:03:27.780
+kylie jue: And really, in this class, even though we saw a lot of different examples yesterday. This is what I really want you to take away from pointers, is that
+
+26
+00:03:28.620 --> 00:03:36.720
+kylie jue: The only way you're really going to be using them is when you dynamically allocate variables specifically for the reasons of working, often with lower level classes.
+
+27
+00:03:37.800 --> 00:03:43.860
+kylie jue: But that's really the only way you're going to be using these pointers. Not with that ampersand that we saw yesterday that was just for the sake of examples.
+
+28
+00:03:45.540 --> 00:03:46.410
+kylie jue: And then lastly,
+
+29
+00:03:47.250 --> 00:03:55.860
+kylie jue: To get the value located at a particular memory address that is stored in the pointer, you have to D reference the pointer which means like follow the arrow, and then get the value that's there.
+
+30
+00:03:56.040 --> 00:04:05.100
+kylie jue: And we do that using the star operator. So if the previous in the previous example, we created a pointer to an integer called number to get the actual integer that is stored there.
+
+31
+00:04:05.460 --> 00:04:14.700
+kylie jue: We would reference that using the star operator and that is a very quick sort of rundown of what we covered yesterday and the main points that you're going to need as you're using pointers in this class.
+
+32
+00:04:17.070 --> 00:04:23.460
+kylie jue: And then I'm actually going to show this video because I think it's a really it's short. It's only three minutes and it's a really great summary of pointers itself.
+
+33
+00:04:24.000 --> 00:04:37.350
+kylie jue: For those of you who stayed around yesterday. I know you've already seen it. But for those who didn't. I just wanted to show it again. And this is created by a lecturer in the Stanford CS department named Nick polenta. Oh wait, is my i think my computer audio is not shared. Is it
+
+34
+00:04:38.850 --> 00:04:40.650
+So let me go ahead and do that.
+
+35
+00:04:47.910 --> 00:04:48.510
+All right, let's try it.
+
+36
+00:04:51.840 --> 00:05:01.140
+Before pointer fun. What's that one about players. Oh, goody. Well, to get started. I guess we're gonna need a couple pointers.
+
+37
+00:05:01.590 --> 00:05:05.520
+Okay, this code allocates two pointers, which can point to integers.
+
+38
+00:05:06.090 --> 00:05:14.850
+Okay, well, I see the two pointers, but they don't seem to be pointing to anything. That's right. Initially pointers. Don't point anything the things they point to are called points.
+
+39
+00:05:15.330 --> 00:05:28.920
+And so you have a separate step. Oh, right, right. I knew that the point teaser a separate or. So how do you allocate a pointy. Okay, well this code allocates new integer pointy and this part sets X to point to it.
+
+40
+00:05:30.030 --> 00:05:46.200
+Hey, that looks better. So make it do something. Okay. Oh, the reference the pointer X to store the number 42 into its pointy for this trick. I'll need my magic wand of the referencing your magic wand of D referencing that, that's great.
+
+41
+00:05:47.310 --> 00:05:50.880
+This is what the code looks like. I'll just set up the number and
+
+42
+00:05:52.110 --> 00:06:00.660
+A look, there it goes. So doing a D reference on X follows the arrow to access. It's pointy in this case to store 42 in there.
+
+43
+00:06:01.140 --> 00:06:15.120
+Hey, try using it to store the number 13 through the other pointer. Why, okay, I'll just go over here to why and get the number 13 setup and then take the one of D referencing and just
+
+44
+00:06:16.800 --> 00:06:27.570
+Oh hey, that didn't work. Say, thinking, I don't think the referencing. Why is a good idea because, you know, setting up the point is a separate step. And I don't think we ever did it.
+
+45
+00:06:28.050 --> 00:06:38.130
+Hmm, good point, yeah we allocated the pointer. Why, but we never set it to point to a pointy hmm very observant. A. You're looking good there Binky.
+
+46
+00:06:38.580 --> 00:06:44.400
+Can you fix it so that why points to the same point. He is X. Sure, I'll use my magic wand of pointer assignment.
+
+47
+00:06:44.940 --> 00:06:51.690
+Is that gonna be a problem like before. No, this doesn't touch the point to it just changes one pointer to point to the same thing as another
+
+48
+00:06:52.500 --> 00:07:05.220
+Oh, I see now why points to the same place as x. So, so wait. Now, why is fixed. It has a pointy so you can try the one of the referencing again to send the 13 over. Oh. Okay, here goes.
+
+49
+00:07:06.240 --> 00:07:12.660
+Hey, look at that. Now do you referencing works on why and because the pointers are sharing that one pointy. They both see the 13
+
+50
+00:07:13.290 --> 00:07:19.110
+Yeah, sharing, whatever. So are we going to switch places now. Oh look, we're out of time, but
+
+51
+00:07:19.680 --> 00:07:26.400
+Just remember the three pointer rules. Number one, the basic structure is that you have a pointer and it points over to a pointy
+
+52
+00:07:26.790 --> 00:07:32.520
+But the pointer and pointy are separate and the common error is to set up a pointer, but to forget to give it a pointy
+
+53
+00:07:33.150 --> 00:07:39.810
+Number two points or D referencing starts at the pointer and follows its arrow over to access. It's pointy, as we all know.
+
+54
+00:07:40.200 --> 00:07:43.830
+This only works if there is a pointy which kind of gets back to rule number one.
+
+55
+00:07:44.400 --> 00:07:58.470
+Number three pointer assignment takes one pointer and changes it to point to the same pointy as another pointer. So after the assignment. The two pointers will point to the same pointy sometimes that's called sharing and that's all there is to it. Really, bye bye now.
+
+56
+00:08:01.290 --> 00:08:13.410
+kylie jue: All right, so hopefully that gave a good quick summary of the important parts about pointers that you'll need to know and like I mentioned, you're really going to be just doing the referencing and using that new keyword when you're working with pointers in this class.
+
+57
+00:08:14.220 --> 00:08:18.300
+kylie jue: So today we're going to talk about how to use pointers in practice.
+
+58
+00:08:18.660 --> 00:08:28.080
+kylie jue: Specifically, how can we use pointers to organize non contiguous memory on the heap. And when we talk about non contiguous memory, we're specifically talking about not arrays right when we talked about
+
+59
+00:08:28.350 --> 00:08:41.310
+kylie jue: Arrays on the heap. We said that they are actually a block of memory with things located directly next to each other. But when we create separate pointers. They may not necessarily be next to each other. So how do we organize those into something that's more useful for us.
+
+60
+00:08:42.630 --> 00:08:53.010
+kylie jue: So I just wanted to throw this up here to to point out that we have learned about a lot of different levels of abstraction. Now, now that we covered computer hardware and sort of that low level of RAM.
+
+61
+00:08:53.910 --> 00:09:07.560
+kylie jue: And pointers are actually the tool that help us move across that boundary between the hardware like the physical storage on your computer and how we represented in code right because point your store the memory address of a location on your computer hardware and these two
+
+62
+00:09:08.580 --> 00:09:15.990
+kylie jue: These two fundamental units of c++ data storage, we've learned about arrays and today we're going to be learning, learning about linked list. These are built on top of pointers.
+
+63
+00:09:17.070 --> 00:09:23.460
+kylie jue: So again, our focus for today is going to be linked lists as a fundamental c++ data storage and they use pointers very heavily
+
+64
+00:09:24.300 --> 00:09:32.460
+kylie jue: So what exactly do are we talking about when we are referring to a linked list. So a linked list is a chain of nodes and all defined a note shortly.
+
+65
+00:09:32.760 --> 00:09:42.480
+kylie jue: Each node contains two pieces of information include some piece of data that is stored in the sequence and it also includes a link to the next node in the list.
+
+66
+00:09:43.440 --> 00:09:53.400
+kylie jue: And we can traverse the link list by starting at the very first node and then repeatedly following its link. So that's generally the idea behind how link list work. So let's look at one that's actually
+
+67
+00:09:54.090 --> 00:10:03.870
+kylie jue: How it might actually be depicted pictorial. So if this is a node A node has the piece of data, which can be sort of any type. And then it also has a link
+
+68
+00:10:04.740 --> 00:10:13.080
+kylie jue: And then we have, we can have a pointer to a node. So we create a pointer that stores and memory address and it points to our node type
+
+69
+00:10:14.250 --> 00:10:23.130
+kylie jue: And then this node will point to another node and this node points to another node and what's happening here is specifically this link part is what's pointing to the node.
+
+70
+00:10:25.080 --> 00:10:32.400
+kylie jue: And then the question is, what comes at the end here when you don't have anything else left what you actually want to do is you assign that to NULL pointer.
+
+71
+00:10:34.050 --> 00:10:36.990
+kylie jue: And just a quick fun aside here.
+
+72
+00:10:38.100 --> 00:10:44.610
+kylie jue: This is about no pointer. A California man wants tried to personalize his license plate is no and he thought it would confuse the system.
+
+73
+00:10:45.300 --> 00:10:59.220
+kylie jue: But when cops actually left the plate number info empty on any ticket or citation defined ends up going to him and he got sent over $12,000 in fines to him in his first year, having the license plate so be careful with no and no pointer is the takeaway of this story.
+
+74
+00:11:00.630 --> 00:11:05.880
+kylie jue: But let's go back to link list. So why do we use linked lists, they're more flexible than arrays.
+
+75
+00:11:06.690 --> 00:11:14.790
+kylie jue: And since they're not contiguous pieces of memory. They're actually easier to rearrange and you'll see that in a moment when I start talking about how to actually implement linked lists and c++
+
+76
+00:11:15.330 --> 00:11:20.640
+kylie jue: We can also efficiently splice new elements into the list or remove them from anywhere in the list.
+
+77
+00:11:21.060 --> 00:11:27.900
+kylie jue: Because they're so flexible and we also will never end up having to do a massive copy step. Like, for example, when we resized are arrays.
+
+78
+00:11:28.020 --> 00:11:34.920
+kylie jue: We have to copy everything over in order to be located in that new contiguous block of memory will see we won't have to do that with linked lists.
+
+79
+00:11:35.550 --> 00:11:41.610
+kylie jue: So link those do have many trade offs. And that doesn't mean they're always the best data structure, but these are just some of the reasons why we might use them instead of inner right
+
+80
+00:11:42.780 --> 00:11:47.310
+kylie jue: So let's talk about how do we actually create a linked list in c++
+
+81
+00:11:47.760 --> 00:11:56.550
+kylie jue: So here's what our node struct is going to look like I talked about sort of this general thing that is a node that makes up our link list. But in practice, we're going to define that as a struct.
+
+82
+00:11:56.970 --> 00:12:08.520
+kylie jue: And struck again can store data. And it's also going to have a pointer to the next node and one piece of note one piece of information about the data is. It doesn't have to be a string type just to start with. I'm going to say it's a string type.
+
+83
+00:12:09.090 --> 00:12:11.550
+kylie jue: But you can define that data to be any type that you would like
+
+84
+00:12:12.540 --> 00:12:18.900
+kylie jue: And I wanted to note here that the structure is actually defined recursive Lee right we have a node that within it points to the next node.
+
+85
+00:12:19.110 --> 00:12:29.100
+kylie jue: And you can think about link list is almost being defined recursive Lee to write, you have a pointer that points to the rest of the link list which contains a pointer to the next to the rest of the link list, etc.
+
+86
+00:12:30.270 --> 00:12:39.330
+kylie jue: And one quick note the compiler when it compiles your code can handle the fact that you are defining a note itself with a pointer to a note.
+
+87
+00:12:39.630 --> 00:12:47.220
+kylie jue: Because again, remember that the node itself as a type is very different from the node star, the node star is just saying I have a pointer to a node.
+
+88
+00:12:48.720 --> 00:12:56.670
+kylie jue: And that's why it's able to do that, you would not be able to recursive we define a node by saying that it stores another node itself because it's like saying, I'm going to define a node.
+
+89
+00:12:56.970 --> 00:13:05.160
+kylie jue: With a definition of another node inside of it. And that wouldn't make any sense. But because these types are actually different than note in the node star. It's going to be able to figure out what to do.
+
+90
+00:13:06.900 --> 00:13:10.140
+kylie jue: Alright, any questions on the node struct before we move on.
+
+91
+00:13:15.450 --> 00:13:25.140
+kylie jue: Alright, so now let's talk about how do we actually create the link list we know now what a note is in c++. So let's actually create our linked list of nodes.
+
+92
+00:13:25.890 --> 00:13:37.380
+kylie jue: So in order to do this we have to dynamically allocate a new variable, just like we would with any other pointer. So let's suppose we have our pointer. That is a list and we're going to call it.
+
+93
+00:13:37.770 --> 00:13:47.550
+kylie jue: We're going to make it a new node. So it's going to when we do this line of code. It's going to create a new node in the heap in memory. And now we have a pointer called list that points to that note.
+
+94
+00:13:48.540 --> 00:13:59.370
+kylie jue: And so far, we know this node is going to store some sort of data and some sort of next pointer, but we haven't said what what those are yet. So we want to figure out how do we actually update those values, how do we actually change the note itself.
+
+95
+00:14:00.750 --> 00:14:11.430
+kylie jue: And so we can do something like this. So this is a pretty dense line of code. But what's actually going on here. We're saying okay first D reference our list pointer. Right.
+
+96
+00:14:12.330 --> 00:14:25.140
+kylie jue: Because the list. Remember we learned about this operator yesterday where the star is the d reference operator. And that's how we're going to get the value that with when we follow this arrow is here. So we're D referencing the note the pointer to get to the node itself.
+
+97
+00:14:25.500 --> 00:14:31.590
+kylie jue: And then we use our structure notation. This notation to actually update the data fields. So remember, this is of data field called
+
+98
+00:14:31.920 --> 00:14:44.730
+kylie jue: Or the field called data and then this one is the field called next. So we have to use this dot notation, after we've referenced it right because this is getting us the node and then we're getting the field for the structure itself and then we're sending it to some data.
+
+99
+00:14:45.930 --> 00:14:54.780
+kylie jue: All right, and then we can do the same thing here, we're, again, we want the last thing in our linked list to point to the null pointer, just for safety reasons, and so
+
+100
+00:14:55.350 --> 00:15:04.140
+kylie jue: We can do the same thing with the next field where we do reference our list to get the note itself. And then we say okay the next field of this node is going to point to no pointer.
+
+101
+00:15:05.460 --> 00:15:13.680
+kylie jue: Alright, so that's pretty dense, but there is actually an easier way to do this. And this goes back to the question. I know many of you had, I think it was last week about
+
+102
+00:15:14.520 --> 00:15:26.310
+kylie jue: What does the arrow mean. So there's an easier way to do this is actually to use our arrow operator and what now. Now we're going to formally defined what is this arrow act operator actually doing. So this arrow notation, actually.
+
+103
+00:15:26.850 --> 00:15:34.080
+kylie jue: Groups that into two groups. These two steps of D referencing and accessing the field for a struct into one step.
+
+104
+00:15:34.830 --> 00:15:47.760
+kylie jue: So specifically, you will use this arrow notation. When you have a pointer to a struct. And what it will do is it the references the the the pointer itself first and then it goes and finds the field that is associated
+
+105
+00:15:48.270 --> 00:15:58.920
+kylie jue: With the structure that you just referenced. Alright. So instead, basically, instead of doing this, which is kind of complicated with the parentheses and the star and the.we can just use an arrow here just simplify things
+
+106
+00:15:59.760 --> 00:16:03.510
+kylie jue: And that's how we're going to access our note fields, when we're using think bless
+
+107
+00:16:04.710 --> 00:16:12.150
+kylie jue: All right before I go into announcements. Any questions about that. This is sort of the basics of link lesson, we're going to talk about operations after announcements.
+
+108
+00:16:16.200 --> 00:16:17.310
+Any questions in the chat.
+
+109
+00:16:19.020 --> 00:16:19.320
+No.
+
+110
+00:16:20.820 --> 00:16:21.300
+Alright.
+
+111
+00:16:22.440 --> 00:16:33.960
+kylie jue: So I'm going to go ahead and move forward again our announcements are actually the same as yesterday, we have assignment for that's do this upcoming Monday, it's going to be focused on priority queues. So make sure to get started. If you haven't already.
+
+112
+00:16:34.980 --> 00:16:45.030
+kylie jue: And then make sure to also look over the final project guidelines and just start brainstorming what you might want your product to be on. We've had some really great conversations with people in Oh excuse me already this week.
+
+113
+00:16:46.140 --> 00:16:53.130
+kylie jue: And if you want to talk about it more, we're happy to. We're happy to do that with you, especially if it's about a topic that we may not have covered yet in class.
+
+114
+00:16:54.870 --> 00:16:58.650
+kylie jue: Great. So let's talk about how do we actually manipulate link plus
+
+115
+00:16:58.950 --> 00:17:11.820
+kylie jue: And then this portion of the class, just as a heads up. I'm going to be doing a little bit of slides, but I'm going to be working mostly in Qt Creator and we've posted a blank or not a blank project, but the starter code for this project will post the filled in code after lecture is over.
+
+116
+00:17:13.530 --> 00:17:19.620
+kylie jue: But when we're manipulating linked lists. There's sort of four main things that you can do when you're working with link bliss.
+
+117
+00:17:20.130 --> 00:17:27.930
+kylie jue: There's reversal. So how do we actually walk through all of the elements in our list. There's rewiring. So what if we want to rearrange the elements in the list.
+
+118
+00:17:28.470 --> 00:17:37.140
+kylie jue: We have insertion. If we want to add something in, and we have deletion. If you want to remove something. And these are all very closely related, we might do insertion and deletion while traversing
+
+119
+00:17:37.740 --> 00:17:43.560
+kylie jue: Insertion and deletion will require rewiring but these are just some general operations that you might want to be thinking about
+
+120
+00:17:44.190 --> 00:17:49.140
+kylie jue: When you're thinking when you're trying to manipulate your list. So the specific example we're going to be using today.
+
+121
+00:17:49.470 --> 00:17:57.630
+kylie jue: Is we're going to use a linked list to actually implement a stack. And just as a quick note this is not necessarily how stacks are implemented, but you can implement them this way.
+
+122
+00:17:58.050 --> 00:18:03.480
+kylie jue: You could hypothetically implement a stack with an array. The purpose of this example is really just to give you practice with blink bliss.
+
+123
+00:18:04.140 --> 00:18:07.800
+kylie jue: So don't go around saying ALL stocks are implemented by link, both because that may not be true.
+
+124
+00:18:08.790 --> 00:18:13.140
+kylie jue: Alright, so let's talk about what do we, how would we actually define a stack using a linked list.
+
+125
+00:18:13.860 --> 00:18:23.490
+kylie jue: So what we're going to be doing is we're going to keep a member variable that represents the top of our stack. And how are we going to represent the top of our stack. We're going to use a note star.
+
+126
+00:18:23.940 --> 00:18:35.550
+kylie jue: And so it's going to point to the top of our stack. And when we initialize our stack. We want that top to point to the null pointer to represent the fact that our stack is empty. There's nothing in there.
+
+127
+00:18:36.750 --> 00:18:42.600
+kylie jue: Are linked lists nodes are going to be connected from the top to the bottom of our stack.
+
+128
+00:18:43.020 --> 00:18:51.870
+kylie jue: So in other words, your first, your first point or your top point is going to point to the top and then from the top as we traverse the link list, we're going to be moving towards the bottom of the stack.
+
+129
+00:18:54.000 --> 00:19:04.080
+kylie jue: And then our staff will specifically hold integers. So we're changing up our node structure little instead of the string data. We're going to be holding an integer data just because that's what our stack is going to hold
+
+130
+00:19:05.340 --> 00:19:11.430
+kylie jue: Alright, so we're going to define specifically three staff operations over the next 20 or so minutes
+
+131
+00:19:12.210 --> 00:19:16.500
+kylie jue: Push Pop. And we're also going to talk about the structure. So the first one we're going to talk about us push
+
+132
+00:19:17.490 --> 00:19:22.500
+kylie jue: So what pushes going to involve specifically because you're adding an item into our stack.
+
+133
+00:19:22.740 --> 00:19:33.810
+kylie jue: It's going to require some rewiring of our link list right because we're inserting and we're specifically going to insert at the front of our link list because remember our pointer is going to point to the top element. So we need to take the top
+
+134
+00:19:34.140 --> 00:19:45.630
+kylie jue: The top pointer and make it point to something else. So what does that look like. So suppose we have the following stack. So this looks just like your clients that code that you might have written in some of your assignments. We have a stack that is
+
+135
+00:19:46.830 --> 00:19:51.990
+kylie jue: Containing nine and eight, and we want to push the result we want to push seven to the resulting stack.
+
+136
+00:19:52.680 --> 00:20:01.710
+kylie jue: So it might start off looking like this. Right, here's our linked list. We have our top pointer which is pointing to eight, which is the top of the stack which points to nine, which will then point to NULL pointer.
+
+137
+00:20:01.950 --> 00:20:07.380
+kylie jue: And what we want to end up with is something that looks like this. Right, we want to take the top and make it now. Point two, seven.
+
+138
+00:20:07.710 --> 00:20:18.630
+kylie jue: And then it'll point eight and then I'll point two, nine, etc. So this is generally what the, the change between the link list state what that looks like. When we use the PUSH operator. Alright, so let's go ahead and code it.
+
+139
+00:20:19.950 --> 00:20:26.970
+kylie jue: Before I jump into the push code just to familiarize you with what this what this class looks like. So we've created a class called
+
+140
+00:20:29.220 --> 00:20:29.640
+Sorry.
+
+141
+00:20:31.530 --> 00:20:41.640
+kylie jue: Okay, go ahead. Oh window open, so I can type. Alright, so we've created a class called inspect and if you take a look at our start here actually in our header file.
+
+142
+00:20:42.240 --> 00:20:50.490
+kylie jue: So we're going to have a constructor. We're going to have a deconstructor we're going to push and pop and I'll show you what the is empty function looks like as well. But we've already filled that in
+
+143
+00:20:50.940 --> 00:20:56.730
+kylie jue: And the only private member variable that we have is our top node or node pointer specifically
+
+144
+00:20:57.720 --> 00:21:06.000
+kylie jue: And then just as a note. We've also you can see our structure defined here. So that's generally what our stack is going to look like and what we're going to support when we were working on
+
+145
+00:21:06.990 --> 00:21:16.170
+kylie jue: The class and we want to go ahead and start with push, but just as a note when we, again, I mentioned to this one. I was talking about how we define a staff to the link list.
+
+146
+00:21:16.680 --> 00:21:21.720
+kylie jue: But we're going to go ahead and set our top to know pointer. When we initialize it because we want to say our, our
+
+147
+00:21:22.170 --> 00:21:29.700
+kylie jue: Our stack is actually empty and then what this allows us to do is, it says whenever our stack is empty, we can just check if the top point is pointing to NULL pointer.
+
+148
+00:21:29.970 --> 00:21:37.230
+kylie jue: And if talk is no pointer, we will know that our stack is empty. So it's important that we keep that in the back of our heads as we're updating our stack.
+
+149
+00:21:38.520 --> 00:21:53.700
+kylie jue: That this is how we're going to define whether or not our stack is empty. So let's go ahead and start with push. So I'm going to go ahead and draw some diagrams here and see if this works. So as a reminder, what do we want to get to. So we have our
+
+150
+00:21:54.780 --> 00:21:55.920
+kylie jue: Our pointer.
+
+151
+00:21:56.940 --> 00:22:04.740
+kylie jue: And this is going to be top which is a node star. And again, I'm just going to redraw. Just so we can have it as a visual
+
+152
+00:22:05.430 --> 00:22:16.110
+kylie jue: What this looks like. So we have another node here that points to eight. And then we have a pointer within that node that points to nine.
+
+153
+00:22:16.650 --> 00:22:23.760
+kylie jue: And then this one is just, I'm going to represent the null pointer like that. So that's we're going to pretend that that's the current state of our
+
+154
+00:22:24.630 --> 00:22:40.290
+kylie jue: Linked list. And what we want to do is we want. We now have a value getting passed in that is equal to seven. And we want to insert value as a node in here right we want it to basically go like this, if I actually, let's move this over.
+
+155
+00:22:42.390 --> 00:22:51.450
+kylie jue: So what I want to do, right, is I want to say let's create a seven and we want to point the seven to eight, and we want to move our top pointer to note, and we have
+
+156
+00:22:52.470 --> 00:23:01.260
+kylie jue: Value over here. So let's go ahead and see how we might code this up. So you could imagine that in order to add this seven element here.
+
+157
+00:23:02.040 --> 00:23:14.760
+kylie jue: What we're going to need to do is we're going to need to create a new node star. And let's call it, Tim. And what that's going to do is we're going to allocate a new node right and now we want to say, okay,
+
+158
+00:23:15.990 --> 00:23:27.570
+kylie jue: Temps data. So we're using again this arrow operator which D references and then sets the data field for this structure over here is going to be equal to, and I'm going to its value here, right.
+
+159
+00:23:28.080 --> 00:23:34.260
+kylie jue: So that's right now. All that did is it created this and then it sets its data field to value.
+
+160
+00:23:35.070 --> 00:23:49.380
+kylie jue: And now we want to talk about, okay, how do we do this free wiring step. And one thing I want to point out as a common bug you might see is doing this right let's just set top equal to tap and let me go ahead and label.
+
+161
+00:23:50.610 --> 00:24:00.360
+kylie jue: The idea here is we've actually just created a node star temp that points to a new node on the heap and it looks like that.
+
+162
+00:24:01.440 --> 00:24:11.400
+kylie jue: And now what we said, Okay, let's go ahead and take top and pointed to temp. So what happens there. We're going to do and I'm going to draw this in red to represent this line.
+
+163
+00:24:13.650 --> 00:24:18.810
+kylie jue: What we're going to do is we're going to take this pointer and pointed to temp.
+
+164
+00:24:19.740 --> 00:24:21.480
+kylie jue: So that's what that line of code would do.
+
+165
+00:24:21.900 --> 00:24:33.540
+kylie jue: And really important right, we're, again, we're setting pointers equal to each other. So what we're saying is, go and follow that. Make sure it points to the same address. So it's not it's not pointing to top to temp itself it's pointing it
+
+166
+00:24:34.260 --> 00:24:36.810
+kylie jue: To what temp is pointing to. That's an important note.
+
+167
+00:24:38.070 --> 00:24:47.490
+kylie jue: But you might notice this and say, okay, well, something's definitely going wrong here, because once we do that, we're going to lose all access to the rest of our link list and we definitely don't want that.
+
+168
+00:24:47.730 --> 00:25:01.140
+kylie jue: Right. So we really have to be careful about the order in which we rewire things because if we do that, then we just lose all access to this memory and you might end up with a memory leak. And in general, you won't be able to rewire like you want you. So let's not do that.
+
+169
+00:25:03.390 --> 00:25:13.770
+kylie jue: So if I remove that we don't want that what we actually want to do first is we want to say, okay, let's set temps next
+
+170
+00:25:15.090 --> 00:25:17.490
+kylie jue: Equal to what top is pointing to.
+
+171
+00:25:18.660 --> 00:25:20.220
+kylie jue: Right. And so what that will do
+
+172
+00:25:21.450 --> 00:25:22.770
+erase this
+
+173
+00:25:25.980 --> 00:25:30.750
+kylie jue: What that will do is it's going to go ahead and take
+
+174
+00:25:31.980 --> 00:25:33.300
+kylie jue: This will still point and
+
+175
+00:25:36.420 --> 00:25:41.340
+kylie jue: This will still point here. And what it says is take the next that is here.
+
+176
+00:25:42.390 --> 00:25:47.670
+kylie jue: And have it point to where top is currently pointing to. Right. So that's what, that's the state at this line.
+
+177
+00:25:48.060 --> 00:25:59.820
+kylie jue: What it's going to look like. And now all that we have left to do is to rewire our top node here. So how do we do that now we can use that same line of code and say top is equal to tap
+
+178
+00:26:01.800 --> 00:26:15.360
+kylie jue: All right. And so what that last line does is it will take our so we can remove that arrow there and what we will do is we will now take this and point it to there. And so now we end up with the link list.
+
+179
+00:26:16.770 --> 00:26:24.450
+kylie jue: That we actually want that is what our push operation is going to look like. Any questions on that before I move on.
+
+180
+00:26:31.770 --> 00:26:34.080
+kylie jue: Alright, so I'm going to go ahead and
+
+181
+00:26:34.080 --> 00:26:35.220
+kylie jue: Clear this
+
+182
+00:26:35.310 --> 00:26:36.000
+Trying
+
+183
+00:26:42.570 --> 00:26:45.210
+haoming li: To do any worse. Yeah.
+
+184
+00:26:45.780 --> 00:26:47.010
+kylie jue: Yeah, that's a good question.
+
+185
+00:26:48.660 --> 00:26:56.280
+kylie jue: So in this case, we actually don't need to do anything with temp at the end here because temp is a variable that's on the stack. Once we exit this function.
+
+186
+00:26:56.880 --> 00:27:06.570
+kylie jue: Temple get automatically garbage collected and cleaned up for us. And since temp itself. We do want this new node to stay there, right, because now our top points to that node.
+
+187
+00:27:07.080 --> 00:27:18.750
+kylie jue: So we don't want to get rid of the thing that tempest pointing to. But the temp variable itself will just actually automatically go away when you exit this function. So we actually don't need to do anything to temp after we finish. Yeah, good question.
+
+188
+00:27:24.090 --> 00:27:25.440
+Any other questions before I move on.
+
+189
+00:27:28.710 --> 00:27:33.420
+kylie jue: Alright so that was the code for push. So now let's talk a little bit about pop
+
+190
+00:27:34.470 --> 00:27:45.720
+kylie jue: So some common link list operations when we're dealing with pop. Again, we need to do the rewiring but now it's going to be the opposite of push right we're going to be deleting an element from our list. And what does that look like. So imagine we have
+
+191
+00:27:46.350 --> 00:27:56.040
+kylie jue: This is the same link list that we're starting with we have seven, eight and nine. And now when we call my stacked up pop. What we want the result to be is just this threat. We want to remove the seven
+
+192
+00:27:56.850 --> 00:28:05.610
+kylie jue: And we want our top two now point two eight because we're removing the top thing on our list. So let's go ahead and code that and I'm going to redraw.
+
+193
+00:28:06.720 --> 00:28:22.650
+kylie jue: This. So the current again our current state is we have our top which is a node star and it's going to point to will say about seven and this points to eight and this points.
+
+194
+00:28:23.610 --> 00:28:25.980
+kylie jue: To nine which points to like a null pointer.
+
+195
+00:28:26.790 --> 00:28:30.840
+kylie jue: So we'll say that's the starting state of our list. And what we want to do here with pop. Remember, we want to
+
+196
+00:28:31.080 --> 00:28:39.930
+kylie jue: Get This Value in return it because that's what our pop operation does for the stack on but we also want to do some rewiring to properly clean up and get rid of that node so
+
+197
+00:28:40.830 --> 00:28:46.470
+kylie jue: The first thing I want to do, actually this is more of a safety check if you remember when we talked about
+
+198
+00:28:47.250 --> 00:29:00.150
+kylie jue: Removing things from a vector and implementing our class for the priority queue. We always when we're implementing a class, we want to do some error checking and safety checking. So if our if our stack were empty. We don't want to be able to pop. Right. So just as a quick
+
+199
+00:29:01.650 --> 00:29:05.190
+kylie jue: safety check here. I want to do and if
+
+200
+00:29:06.660 --> 00:29:17.250
+kylie jue: Is empty. So what I'm doing right as I'm calling our member function to check to see if our stack is currently empty and if it is currently empty. I'm going to go ahead
+
+201
+00:29:19.320 --> 00:29:21.360
+kylie jue: And throw an error.
+
+202
+00:29:22.380 --> 00:29:26.670
+kylie jue: Error trying to pop from an empty.
+
+203
+00:29:27.690 --> 00:29:30.480
+Stomach. I'm actually I think this should not be thrilled. It should be
+
+204
+00:29:33.300 --> 00:29:33.510
+Yeah.
+
+205
+00:29:34.890 --> 00:29:39.630
+kylie jue: Alright so that is just what we want to do if our stack is empty.
+
+206
+00:29:43.980 --> 00:29:44.250
+kylie jue: Um,
+
+207
+00:29:45.750 --> 00:29:47.700
+kylie jue: And then was this
+
+208
+00:29:53.310 --> 00:29:57.180
+Nick Bowman: Other model. This might be a little bit confused. Yeah.
+
+209
+00:29:58.650 --> 00:30:00.540
+kylie jue: No worries. So we're going to just ignore that.
+
+210
+00:30:01.080 --> 00:30:12.870
+kylie jue: So, okay, we checked. We've checked if our stack is empty. And now what we want to do is we want to get this first thing inside of our stack to eventually return it. Right. So we need to create a new integer variable. And we're going to call it the top value.
+
+211
+00:30:13.680 --> 00:30:27.720
+kylie jue: And the way we get that right, is we go to our top pointer. We do reference it to get the know that it's pointing to. And then we also get the field data. So this is the field data. So now, what it is is we will now just to draw
+
+212
+00:30:29.010 --> 00:30:39.840
+kylie jue: What this is actually doing so I'm creating a top value which is an integer and it is now going to store the value seven right that's what that line of code just it
+
+213
+00:30:40.650 --> 00:30:49.110
+kylie jue: Just as a quick aside here I'm drawing I know it might seem a little bit slow, but I'm purposefully drawing out these diagrams, as I'm coding because it's really good practice that you can use.
+
+214
+00:30:49.320 --> 00:30:55.560
+kylie jue: While you're working with pointers and linked list because it can be really tricky to remember what all the things are pointing to, and
+
+215
+00:30:56.340 --> 00:31:02.040
+kylie jue: To keep track of the memory that your program is dealing with and so drawing pictures is a great way
+
+216
+00:31:02.700 --> 00:31:13.860
+kylie jue: To do that as you're figuring out how things are working. I'm so I'm just sort of modeling that here. Alright, so now we have our top value. And now we need to figure out, okay, how do we actually do this deletion and rewiring that we were talking about
+
+217
+00:31:16.230 --> 00:31:16.830
+kylie jue: Um,
+
+218
+00:31:17.940 --> 00:31:32.550
+kylie jue: And so let's go ahead and say, okay, so what we can imagine is, well, we want to rewire top right to just go over here and point two eight instead of seven. So, what we can say is top is equal to top next
+
+219
+00:31:33.660 --> 00:31:42.900
+kylie jue: And this is bad. We don't want to do this and why is this bad. Well, it's actually similar to our air before right we're, what we're doing is we're saying, Okay, take
+
+220
+00:31:44.130 --> 00:31:47.100
+kylie jue: Take top and have it point over here.
+
+221
+00:31:49.470 --> 00:31:59.040
+kylie jue: And now, again, we've just lost the seven this node that's over here and we want to be able to be allocated right. We want to be able to pop something off and then remove it from are linked lists safely.
+
+222
+00:31:59.370 --> 00:32:07.410
+kylie jue: And if we just sort of rewire top before we do anything to this node we no longer have access to this node. And that's bad. So we don't want to do that.
+
+223
+00:32:07.830 --> 00:32:15.510
+kylie jue: Again, a common error is to rewire before you've actually worked with the data that it's originally pointing to. So let's go ahead and get rid of that.
+
+224
+00:32:16.890 --> 00:32:27.780
+kylie jue: So we don't want to do that. And instead, what we're going to do is we're going to do a similar pattern up here. We're going to first we need to get this node, right. And so what we can do.
+
+225
+00:32:28.740 --> 00:32:38.160
+kylie jue: Is say no temp is equal to talk. And this is a little different. Right, we're not creating a new node node already exists. So all this is doing in actual memory.
+
+226
+00:32:39.090 --> 00:32:52.290
+kylie jue: Right is we've now created again a new pointer called temp, which is a node star and what tip is going to do is it's going to help us keep track of this thing that we're going to be so we've created a pointer that now points to the thing that top also points to
+
+227
+00:32:54.360 --> 00:33:00.540
+kylie jue: And now what we can do now, we can do our rewiring right now, we can say, okay, let's take this line and it's no longer going to be
+
+228
+00:33:01.560 --> 00:33:10.440
+kylie jue: doing bad things. We're going to go ahead and set top equal to top next and that's okay because we still have access to this first node using our temp.
+
+229
+00:33:12.390 --> 00:33:24.210
+kylie jue: And so now, now that we have top pointing to top. Next, what we can go ahead and do is we're going to delete temp because again we want to actually get rid of that node and then we're going to return top
+
+230
+00:33:26.460 --> 00:33:26.850
+Value.
+
+231
+00:33:28.080 --> 00:33:34.500
+kylie jue: And so again, what are these lines, doing all finished drawing it out. So this first line here.
+
+232
+00:33:36.900 --> 00:33:48.030
+kylie jue: Sorry. This is because the iPad is plugged into my computer. Okay, so what we have happening here, right, is once we once we go here. We're going to rewire top to point over here.
+
+233
+00:33:50.010 --> 00:33:51.450
+kylie jue: And then when we delete temp.
+
+234
+00:33:52.470 --> 00:34:00.750
+kylie jue: What we're actually going to do is we're going to follow this pointer and say delete. What was here in memory, right. So that's actually just going to delete the pointer itself. I'm gonna unplug this
+
+235
+00:34:03.240 --> 00:34:13.590
+kylie jue: And then when we return top value. What it will do is we'll actually just return the the integer that we have stored over here. Any questions on that before we move on.
+
+236
+00:34:15.360 --> 00:34:19.500
+Nick Bowman: And you also don't eat the line from top to service.
+
+237
+00:34:19.710 --> 00:34:20.220
+kylie jue: Oh, yes.
+
+238
+00:34:20.340 --> 00:34:22.470
+Nick Bowman: Top two places at once. Yes.
+
+239
+00:34:22.530 --> 00:34:23.070
+I see it.
+
+240
+00:34:24.540 --> 00:34:26.070
+kylie jue: Edwards hand is raised
+
+241
+00:34:26.070 --> 00:34:26.640
+edouard des: As well.
+
+242
+00:34:27.870 --> 00:34:30.180
+edouard des: I had a bit of a question just regarding know Tim
+
+243
+00:34:30.750 --> 00:34:38.010
+edouard des: I'm is that value initialize at the beginning because if you're going to pop something you have to push something and we initialize the variable there.
+
+244
+00:34:38.370 --> 00:34:46.080
+edouard des: Or is it because you don't have to necessarily use the new keyword. If you're going to, because this is not just a point on it's not an actual like new entry and memory.
+
+245
+00:34:46.500 --> 00:34:48.540
+kylie jue: Yeah, you're saying here, this line. What is it doing
+
+246
+00:34:49.650 --> 00:34:53.820
+kylie jue: Yeah So what This time is doing is you're creating a new point your variable on the stack.
+
+247
+00:34:54.060 --> 00:35:00.030
+kylie jue: And like you mentioned, you don't have to set an equal to any new node, because we don't actually want to allocate any new nodes in the heat on memory.
+
+248
+00:35:00.210 --> 00:35:08.190
+kylie jue: We just want to say, okay, we're using this temporary variable to be able to access this thing we're going to actually eventually DELETE to while we're rewiring
+
+249
+00:35:09.930 --> 00:35:18.360
+kylie jue: And so we can just have it point to the same thing that top was pointing to, at the time, which is the first element in the stack. So the stack being with data structures. Yeah.
+
+250
+00:35:19.140 --> 00:35:28.530
+edouard des: So, so we don't like. It's not the note the note temp in in push and the no attempt in pop are completely different. And you don't need to run one before running the other
+
+251
+00:35:28.860 --> 00:35:35.910
+kylie jue: Correct. It is, yeah. These are completely separate variables. And if I wanted to. If it's clear here to I could
+
+252
+00:35:37.320 --> 00:35:38.190
+kylie jue: Even say like
+
+253
+00:35:39.240 --> 00:35:43.440
+kylie jue: Let's rename this and also this is a fun trick if you ever want to rename your variables to make them more district.
+
+254
+00:35:44.070 --> 00:35:54.420
+kylie jue: Descriptive you can right click or control click on it, click refactor and then rename symbol under cursor. So let's give us some more descriptive name. This is going to be called like new.
+
+255
+00:35:55.230 --> 00:36:02.970
+kylie jue: Element instead of temp right and that didn't change anything about the code. But maybe that's a little more descriptive of we're pushing a new element on to our stack.
+
+256
+00:36:03.180 --> 00:36:10.710
+kylie jue: Versus here. This is literally a temporary variable but just helps us keep track of this first thing when we need to. So that we can delete it later. Yeah.
+
+257
+00:36:10.740 --> 00:36:17.040
+edouard des: So the new the new keyword effectively returns a pointer, whereas that you're just, you're just given you're already given a pointer.
+
+258
+00:36:17.130 --> 00:36:18.540
+kylie jue: Exactly. Yeah. Mm hmm.
+
+259
+00:36:20.910 --> 00:36:22.740
+edouard des: Any other questions before
+
+260
+00:36:22.770 --> 00:36:23.370
+I
+
+261
+00:36:24.660 --> 00:36:25.080
+kylie jue: Move on.
+
+262
+00:36:29.070 --> 00:36:34.650
+kylie jue: All right, great. Let's go ahead and clear this and then we're going to talk a little bit about the disrupter
+
+263
+00:36:36.570 --> 00:36:46.680
+kylie jue: Alright, so now we are at the last of our stack operations with the D structure. And this one is going to cover the last link list operation that we haven't talked about yet.
+
+264
+00:36:47.040 --> 00:36:57.390
+kylie jue: Specifically reversal. So how are we going to walk through all of the elements in the link list. And why do we need to do that because when when we're destroying the link bus. We want to make sure we've destroyed every single thing inside list.
+
+265
+00:36:58.890 --> 00:37:01.920
+kylie jue: And it also going to cover deletion, right, because we're deleting all the nodes along the way.
+
+266
+00:37:02.670 --> 00:37:11.430
+kylie jue: So this is the state. We want to end up in right we want to end up with an empty stack which is represented by our top our top node star pointing to the null pointer.
+
+267
+00:37:12.330 --> 00:37:20.700
+kylie jue: And again, we want to make sure we delete all the nodes. And then we're going to reassign top null pointer when we're done. So let's go ahead and code the destructive so
+
+268
+00:37:22.050 --> 00:37:26.670
+kylie jue: I'm going to go ahead and fill this in. And the way we're going to do this is I'm going to have a while loop.
+
+269
+00:37:27.180 --> 00:37:40.380
+kylie jue: And what I'm going to say as well. The top pointer is not equal to no pointer. We know we still have stuff. We need to delete right so that's how we're going to start. So we can imagine. Right now, we might have, are you draw the song.
+
+270
+00:37:42.750 --> 00:37:45.840
+kylie jue: We have, let's go back to our list that looks something like this.
+
+271
+00:37:47.610 --> 00:37:50.970
+kylie jue: We have our node star top
+
+272
+00:37:52.320 --> 00:38:02.880
+kylie jue: Right, which is pointing to. And just for the sake of the example I'm going to have it look like this where we have two elements in our staff and we have the null pointer here at that
+
+273
+00:38:04.200 --> 00:38:14.940
+kylie jue: And so right now top is not equal to the null pointer right it's equal to some node. And what we want to do is you want to get rid of this node and also then get rid of the next one, right. So let's, let's say we did this delete.
+
+274
+00:38:15.480 --> 00:38:24.480
+kylie jue: Top to get rid of what it's currently pointing to, and then set top equal to top next. Alright, so this is our
+
+275
+00:38:25.350 --> 00:38:35.550
+kylie jue: Version one of the destructive and we have actually a poll here and it could you go ahead and launch the poll. I want you to look at this code and think about what it's doing. And then in the poll predict
+
+276
+00:38:36.150 --> 00:38:43.080
+kylie jue: What is this code going to do. Do we have a working destruction. Now, is it going to segue fault when the test run for some reason.
+
+277
+00:38:43.740 --> 00:38:55.560
+kylie jue: Will it pass the test, but maybe it creates a memory leak or we can't actually know for sure what this code is going to do so, which of those for what we just wrote what is it going to do and that pool should be open now.
+
+278
+00:39:07.470 --> 00:39:11.130
+kylie jue: And I can actually see the results. So Nick, go ahead and let me know and they're mostly
+
+279
+00:39:35.340 --> 00:39:35.700
+Nick Bowman: Cool.
+
+280
+00:39:36.690 --> 00:39:40.530
+kylie jue: And it looks like most people are saying it will segue for one the tests will run
+
+281
+00:39:40.890 --> 00:39:49.560
+kylie jue: And then it's pretty evenly split between it might pass, but we'll have a memory leak, some people are saying we don't know what we'll do, and a small percentage of people said, okay, maybe it'll work as intended.
+
+282
+00:39:50.460 --> 00:40:00.450
+kylie jue: So let's actually try this. What I'm going to do now is I'm going to actually build and run the code. And we actually see we have a provided test here where we are acting as a client in our test.
+
+283
+00:40:01.800 --> 00:40:11.190
+kylie jue: We're creating a new stack. And then we're going to push 10 things and then we're going to pop them and then we'll exit. So let's actually see what's going to happen. So I'm going to go ahead and run this.
+
+284
+00:40:35.160 --> 00:40:36.270
+It's building
+
+285
+00:40:38.310 --> 00:40:44.190
+kylie jue: Alright, so here we have our console. I'm gonna go ahead and just run the provided test because that's all we need.
+
+286
+00:40:46.020 --> 00:40:50.040
+kylie jue: And it passed and nothing happened. So what's what's going on here.
+
+287
+00:40:51.390 --> 00:40:57.540
+kylie jue: The answer actually to the poll now if you still happen to have that up is that was the fourth option. It's we can't know for sure what it will do
+
+288
+00:40:57.960 --> 00:41:08.670
+kylie jue: And what's actually happening. And on my computer, in particular, is it actually worked, isn't it, and that's not necessarily what it will do on every device and not necessarily the same thing every time.
+
+289
+00:41:10.230 --> 00:41:24.420
+kylie jue: But what happens is, I'm going to draw in here in read what this is actually doing. So while top is not equal to null pointer. We're going to delete top so we follow we follow our arrow and we go ahead and delete it is the first thing we do.
+
+290
+00:41:25.290 --> 00:41:32.340
+kylie jue: And now top is just going to be pointing to potentially garbage. But remember what we said about what the delete operator doesn't sort of marks.
+
+291
+00:41:32.580 --> 00:41:37.680
+kylie jue: To our computer that okay this memory now is something we can recycle and use elsewhere in the program.
+
+292
+00:41:37.890 --> 00:41:45.180
+kylie jue: But it may not actually change any of the values that are located there. So what's probably actually happening. And the reason my tests are passing is that eight
+
+293
+00:41:45.480 --> 00:41:51.960
+kylie jue: That note right here is still existing so when we get to this line, we are actually able to D reference
+
+294
+00:41:52.830 --> 00:42:07.410
+kylie jue: And go to the next element when we do top next and talk will actually point to here, but we can't guarantee that will happen because if we're telling the computer this memory is garbage and can now be reused something else may it may change the value here, it may not change the value
+
+295
+00:42:08.460 --> 00:42:16.170
+kylie jue: And we may end up just segue bolting we're getting an error when we try to D reference some garbage value, right, because we're actually saying D reference some garbage value.
+
+296
+00:42:16.680 --> 00:42:25.110
+kylie jue: And so it's non deterministic. It may not do the same thing every time. And so we need to be really careful. This is a common bugs that you will see you in dealing with pointers.
+
+297
+00:42:25.410 --> 00:42:35.070
+kylie jue: And with dynamically allocated memory is if you delete something and then actually try to use it or specifically often do reference it, it's really hard to catch these bugs.
+
+298
+00:42:36.420 --> 00:42:47.730
+kylie jue: But this is actually a bug. So I'm going to go ahead and clear that well what. So what do we actually want to do instead we're going to use our handy tempt variable to make a better version of this destructive. So I'm gonna go ahead and
+
+299
+00:42:48.180 --> 00:42:52.500
+brianzhg@stanford.edu: comment this out because this is bad. Don't do that.
+
+300
+00:42:55.800 --> 00:43:04.350
+kylie jue: So what are we going to do instead, we are going to create a new node pointer temp and said it equal to top. So now again.
+
+301
+00:43:05.610 --> 00:43:17.220
+kylie jue: We are going to have a temporary node pointer that points to the same thing. And now we can do the top is equal to talk next. So again, we're going to do the rewiring first
+
+302
+00:43:17.730 --> 00:43:22.950
+kylie jue: Before we've deleted that thing, right, we again we have the node still so we can rewire top properly.
+
+303
+00:43:23.400 --> 00:43:32.250
+kylie jue: And then we can go ahead and delete temp. Right. And so it's a similar pattern, actually, to what we saw down here, right, we create a temporary variable to point to what top is pointing to.
+
+304
+00:43:32.580 --> 00:43:43.530
+kylie jue: rewire and then we go ahead and delete and we're going to just be doing that over and over again here so that we're doing that for every single element until our top is finally pointing to the middle pointer at the very end.
+
+305
+00:43:44.850 --> 00:43:52.020
+kylie jue: Alright, any questions about this and what this is doing or why we needed to do that. Yeah.
+
+306
+00:43:54.480 --> 00:44:03.150
+edouard des: So, so just. We don't have to specifically assigned no point or like when we get to like at any point, because we know the last, the last item in the list is going to be no pointer. Right.
+
+307
+00:44:03.420 --> 00:44:08.520
+kylie jue: Yeah, exactly. So if I would actually like draw what this is doing right if we had
+
+308
+00:44:09.570 --> 00:44:11.040
+kylie jue: If we had our top here.
+
+309
+00:44:11.490 --> 00:44:23.130
+kylie jue: And it's pointing to a which points to nine which points to no pointer. Right. You can imagine that the first iteration of the while loop, right, you, you. Let's do this. So like
+
+310
+00:44:25.020 --> 00:44:26.070
+kylie jue: Iteration
+
+311
+00:44:27.090 --> 00:44:33.510
+kylie jue: Number one, right, you rewire this and you go ahead and delete that. Right. And then in iteration to
+
+312
+00:44:36.510 --> 00:44:47.340
+kylie jue: What you're going to do right is you're going to go ahead and rewire top 2.2 this which is the next word it points to the next of this and then we can go ahead and delete that. Does that make sense.
+
+313
+00:44:48.600 --> 00:44:48.990
+edouard des: Yes.
+
+314
+00:44:49.350 --> 00:44:49.890
+edouard des: Yes, exactly.
+
+315
+00:44:51.930 --> 00:44:52.470
+edouard des: All right.
+
+316
+00:44:52.890 --> 00:44:55.470
+kylie jue: Any other questions about how this is working.
+
+317
+00:45:00.660 --> 00:45:06.450
+kylie jue: Alright, I'm gonna go ahead and remove the bad code here.
+
+318
+00:45:08.250 --> 00:45:09.630
+And clear the screen.
+
+319
+00:45:14.010 --> 00:45:14.430
+kylie jue: Alright.
+
+320
+00:45:15.510 --> 00:45:25.200
+kylie jue: So just a quick summary of what we talked about. So what are linked list again link list again or chains of node structure that we define so the structured data could be
+
+321
+00:45:25.590 --> 00:45:35.400
+kylie jue: Any variable type that you want, but these nodes structure also contain a pointer to the next node. So it's a bunch of structure connected by pointers and since the memory is not continuous.
+
+322
+00:45:35.910 --> 00:45:40.890
+kylie jue: So instead of an array or you might have all of the data points like lined up next to each other.
+
+323
+00:45:41.820 --> 00:45:51.960
+kylie jue: And you have to have that pointer to the next one, but it allows for fast rewiring between the nodes, right. So in an array right if you want you to remember if you deleted something in the middle or you added something in the middle.
+
+324
+00:45:52.530 --> 00:46:00.210
+kylie jue: We'd have to take all the other things and shift them over by one, right, because it's a contiguous block of memory. You don't have to do that with these notes drugs, right, you can just actually
+
+325
+00:46:00.600 --> 00:46:09.060
+kylie jue: temporarily store that delete it and then rewire your pointer or rewire before you delete in order to edit the the link list itself.
+
+326
+00:46:09.990 --> 00:46:20.910
+kylie jue: And then this comment this pattern that we see this pattern that we saw in the code with the while loop where you have a while some pointer is not know and then you traverse by going to the next.
+
+327
+00:46:21.870 --> 00:46:28.920
+kylie jue: That is a really common reversal strategy that you'll see for walking through a linked list. You have a while loop again with a pointer that starts at the front.
+
+328
+00:46:29.130 --> 00:46:36.450
+kylie jue: And then inside you're going to reassign that pointer to the next node and you can do any sort of manipulations or printing or anything like that.
+
+329
+00:46:37.200 --> 00:46:43.920
+kylie jue: In between, so yeah controversial strategy specifically for things like printing deleting or finding something in your list.
+
+330
+00:46:44.370 --> 00:46:56.250
+kylie jue: And then common bugs that we that we just saw in this lecture, be careful about the order in which you delete and rewire pointers. You don't want to be trying to rewire after you delete right because you might be trying to rewire garbage.
+
+331
+00:46:57.360 --> 00:46:59.130
+kylie jue: Or rewire something that points to garbage.
+
+332
+00:47:00.750 --> 00:47:03.450
+kylie jue: And you don't want to accidentally delete something and try to reference it
+
+333
+00:47:03.870 --> 00:47:16.860
+kylie jue: And it's also easy to end up with dangling pointers or memory leaks dangling pointers as the reminders. When you have a pointer that points to garbage and hasn't been set to anything meaningful and memory leaks is when you may have
+
+334
+00:47:17.790 --> 00:47:26.370
+kylie jue: Memory that hasn't been de allocated but you no longer have a pointer that points to it, which is the mistakes that we saw in the beginning with push where we tried to actually
+
+335
+00:47:27.780 --> 00:47:34.230
+kylie jue: We tried to actually rewire something, but then we no longer had access to the rest of blink list. So that would be considered a memory leak.
+
+336
+00:47:35.580 --> 00:47:38.400
+kylie jue: Alright, any questions on this before I move on.
+
+337
+00:47:45.300 --> 00:47:53.340
+Nick Bowman: One thing since since we do have a little bit of extra time. Can you show why the way that you've committed works, why does it work for adding an empty list on
+
+338
+00:47:55.530 --> 00:47:55.800
+kylie jue: Here.
+
+339
+00:47:55.890 --> 00:47:59.880
+Nick Bowman: So, like that. Yeah, the code for push. Why does that also work for in so many different empty.
+
+340
+00:48:00.240 --> 00:48:01.230
+kylie jue: Then have it sometimes like
+
+341
+00:48:01.290 --> 00:48:02.340
+Nick Bowman: inserting into an empty list.
+
+342
+00:48:03.540 --> 00:48:04.650
+kylie jue: Yeah, that's a great question.
+
+343
+00:48:04.830 --> 00:48:06.060
+kylie jue: So let's actually walk through it so
+
+344
+00:48:06.060 --> 00:48:17.220
+kylie jue: Let's suppose we have to remember, if we have an empty list, all we have right now is we will have a node star top right.
+
+345
+00:48:18.240 --> 00:48:24.600
+kylie jue: That just points to know pointer. Right. That's our starting state of push. And let's suppose we did stock.
+
+346
+00:48:25.800 --> 00:48:27.300
+Let's not use the stock.
+
+347
+00:48:31.770 --> 00:48:39.630
+kylie jue: That we have our stack. And we're going to do now stack dot push the value seven right
+
+348
+00:48:40.530 --> 00:48:57.060
+kylie jue: And so this is sort of our client code. And what we're seeing on the client. So in here, we're going to say, Okay, first we're going to do node new element equals new node, right. And so what we do is we will create a node star called a new element.
+
+349
+00:48:58.380 --> 00:49:09.840
+kylie jue: And it's going to point to a new node. So remember when we have this line, we are creating a new note in memory. And we haven't done anything with that. Great. So that's what that's what this. Oops, that's what that person is doing.
+
+350
+00:49:11.430 --> 00:49:21.870
+kylie jue: And then let's talk about these two lines, right. What is, what are these two lines going to do. We're going to follow new elements. Remember that arrow operator you're following new element to the data field. So this is data.
+
+351
+00:49:22.920 --> 00:49:35.670
+kylie jue: And this is next. And we're going to go ahead and put value. So value is seven here and then we're going to save the next is going to point to top. So what is that doing it's actually taking this
+
+352
+00:49:36.720 --> 00:49:37.410
+And
+
+353
+00:49:38.520 --> 00:49:47.190
+kylie jue: Pointing it to the null pointer, right, because that is what top is currently pointing to, and then top equals new element. Now, what we can do in this line.
+
+354
+00:49:48.840 --> 00:49:55.800
+kylie jue: Right. What we're going to do is we're going to say, okay, top now rewire yourself to point to the new element. So it looks like that.
+
+355
+00:49:56.730 --> 00:50:05.970
+kylie jue: And then this pointer goes away. For some reason I can't erase because the bar is blocked on my computer right now. But that's why I'm crossing it out. Yeah. Does that make sense.
+
+356
+00:50:08.400 --> 00:50:10.200
+Nick Bowman: Yeah, I just wanted to show that works. Yeah.
+
+357
+00:50:10.230 --> 00:50:10.680
+Cool, so
+
+358
+00:50:11.820 --> 00:50:13.080
+kylie jue: Are there any other questions in the chat.
+
+359
+00:50:16.350 --> 00:50:16.830
+Nick Bowman: And
+
+360
+00:50:17.310 --> 00:50:19.650
+kylie jue: What is your hand is still up from before, or is that a new question.
+
+361
+00:50:20.790 --> 00:50:22.530
+edouard des: I kind of forgot to put down, but I do have a question.
+
+362
+00:50:23.520 --> 00:50:24.210
+kylie jue: Yeah, go for it.
+
+363
+00:50:25.020 --> 00:50:42.390
+edouard des: With the with the instructor when we go ahead and we distract the stack. Do we destruct all over the last element. If I can call that the last type of node that that will happen to the point of no point or should we also destroy the last a node so that it's not sort of still there.
+
+364
+00:50:43.530 --> 00:50:44.130
+kylie jue: In here.
+
+365
+00:50:44.190 --> 00:51:00.810
+kylie jue: So we actually we do right because we're going to have 10 go over every single if you walk through this, it'll, it'll go and point to every single individual node in the links list and delete it. Because once you hit top is top is equal to null pointer.
+
+366
+00:51:01.890 --> 00:51:03.540
+kylie jue: Wants to know pointer.
+
+367
+00:51:03.750 --> 00:51:08.460
+edouard des: If the current element that's being reversed is the last one right so when
+
+368
+00:51:09.390 --> 00:51:12.150
+kylie jue: That happens after you right so if you feel it's
+
+369
+00:51:13.050 --> 00:51:24.810
+edouard des: Not like no point or that would be a problem if know pointer, we're pointing to the next of the next element, but next is like of the current element, it's looking at the pointer and where is it going after that. So if it's going to know pointer.
+
+370
+00:51:26.640 --> 00:51:27.510
+kylie jue: So I think
+
+371
+00:51:30.300 --> 00:51:37.500
+kylie jue: If I go like this. Right. And I'm going to traverse it right so if I can, in the first iteration. Right.
+
+372
+00:51:40.530 --> 00:51:43.890
+kylie jue: And the first iteration, we have 10 pointing here, right.
+
+373
+00:51:45.180 --> 00:51:49.380
+kylie jue: And then what we do is we say okay rewire top 2.2 here and delete it. Right.
+
+374
+00:51:50.070 --> 00:51:50.280
+edouard des: Yeah.
+
+375
+00:51:50.610 --> 00:51:57.840
+kylie jue: And then the next iteration top is not equal to null pointer. Right. So we do the next iteration. So in relation
+
+376
+00:51:59.160 --> 00:52:13.650
+kylie jue: To right then we have now temp is now pointing to here, right, because we haven't set to whatever top is pointing to. And then we go ahead and say okay now rewire top to point to the null pointer and then delete. Right. So there's still you still do all three of those lines for
+
+377
+00:52:14.160 --> 00:52:21.360
+edouard des: Yeah, so it's kind of course talk gets deleted because it's a variable inside the stack. So it just dies after the function and
+
+378
+00:52:21.420 --> 00:52:28.170
+kylie jue: So the top is actually you don't want top to get deleted, because that's our member variable that we're going to rewire if you ever add something to it, but
+
+379
+00:52:28.200 --> 00:52:29.460
+kylie jue: Temp does get polluted. Yes.
+
+380
+00:52:29.550 --> 00:52:30.510
+edouard des: Oh, I see. Okay. Yeah.
+
+381
+00:52:31.530 --> 00:52:41.940
+edouard des: actually assign a number of variables like are they at the end of the constructor. At the end of the method. Do they sort of like get wiped back to zero or do this or whatever the default value is or do they sort of just stay there.
+
+382
+00:52:42.390 --> 00:52:50.940
+kylie jue: At the end of the instructor, you have to set them. Well, I'm sorry, the destructive know you they will if they are on the stock, they'll just get deleted as well.
+
+383
+00:52:53.550 --> 00:52:59.130
+kylie jue: Alright, so to bring us to the end, the lecture because I know where a few minutes now over
+
+384
+00:52:59.640 --> 00:53:05.970
+kylie jue: Let's just quickly say what's next, we're going to talk more about linked data structures. We're going to talk more about specifically how we're going to use link bliss.
+
+385
+00:53:06.960 --> 00:53:13.260
+kylie jue: And we'll learn about more complex things that you can do with them today was just sort of your overview of what is a link less than what I started the basic operations.
+
+386
+00:53:13.800 --> 00:53:20.490
+kylie jue: But we'll stick around and answer more questions, since we're sort of into Q AMP. A already. So thank you. I'll see you all next week. Thank
+
+387
+00:53:22.020 --> 00:53:22.470
+Edward Chung Yik Yeung: You
+
+388
+00:53:23.280 --> 00:53:23.700
+Kenny Wang: Thank you.
+
+389
+00:53:24.030 --> 00:53:24.930
+julia wang: Thank you. Thank you.
+
+390
+00:53:25.410 --> 00:53:25.980
+Jennifer Anna Bonello: Thank you.
+
+391
+00:53:26.790 --> 00:53:27.240
+shirley li: Thank you.
+
+392
+00:53:28.200 --> 00:53:28.590
+Evan F Davis: Thank you.
+
+393
+00:53:29.640 --> 00:53:30.150
+Oz Gitelson: Thank you.
+
+394
+00:53:45.990 --> 00:53:46.290
+haoming li: With
+
+395
+00:53:48.000 --> 00:54:01.350
+haoming li: The beginning, and I see how it works. But I don't know was not her as, like, what does it for why we are trying to add in your stock.
+
+396
+00:54:01.620 --> 00:54:03.720
+kylie jue: Yeah. Yeah, no, that's a good question. So
+
+397
+00:54:03.720 --> 00:54:06.720
+kylie jue: The destructive basically you'll notice like it's never explicitly
+
+398
+00:54:06.720 --> 00:54:14.520
+kylie jue: Called here but you can actually think about it as actually getting called at the end here. Once we exit out of our tests. So we've created a stack.
+
+399
+00:54:14.820 --> 00:54:23.070
+kylie jue: That exists in the scope of this specific test. And then when we exit the scope of this test just like any other function. It's going to clean up anything we've created
+
+400
+00:54:23.790 --> 00:54:35.430
+kylie jue: In memory on the so basically will call the instructor for this stack variable implicitly and without us having to do it explicitly. So basically, when we exit this this task or this function.
+
+401
+00:54:36.450 --> 00:54:41.280
+kylie jue: What we want to say is, OK, we don't want the stack to exist in our computers memory anymore, clean it up.
+
+402
+00:54:42.330 --> 00:54:47.490
+kylie jue: And that's what the destructive in general for any object is going to get called once that variable goes out of scope.
+
+403
+00:54:51.360 --> 00:54:52.260
+haoming li: Whoa.
+
+404
+00:54:53.700 --> 00:54:56.940
+haoming li: Whoa, hold on one you're finished.
+
+405
+00:54:57.750 --> 00:55:03.510
+kylie jue: It's sort of like c++ will do so it's sort of like, okay, like you can almost think about it, it's happening out here right like
+
+406
+00:55:04.830 --> 00:55:06.210
+kylie jue: Test exited
+
+407
+00:55:07.980 --> 00:55:14.970
+kylie jue: Call deconstructor on any local variables inside test. Yeah.
+
+408
+00:55:17.730 --> 00:55:20.610
+haoming li: Does that make sense. Yeah, I see.
+
+409
+00:55:27.630 --> 00:55:29.580
+kylie jue: Are there any questions in the chat that I should answer out loud.
+
+410
+00:55:31.470 --> 00:55:31.710
+No.
+
+411
+00:55:33.810 --> 00:55:34.590
+Edwin your hands up.
+
+412
+00:55:37.170 --> 00:55:38.370
+edouard des: This time I forgot to put it down.
+
+413
+00:55:52.080 --> 00:55:53.520
+Any other questions.
+
+414
+00:55:59.370 --> 00:55:59.790
+All right.
+

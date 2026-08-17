@@ -1,0 +1,1822 @@
+WEBVTT
+
+1
+00:00:09.059 --> 00:00:14.940
+Nick Bowman: So it's just about 6 billion industry and so welcome everyone to lecture today.
+
+2
+00:00:16.410 --> 00:00:26.670
+Nick Bowman: He talking about interesting new sort of basically having obstructions on to what we've seen over the last couple of days for to do some interesting ways of actually storing data.
+
+3
+00:00:27.480 --> 00:00:41.640
+Nick Bowman: Which will allow us to actually build new data structures that are better and more powerful than anything, even if it's a fun class. So the question for today and the inverse of yesterday's question which is what is one area of growth that you identified
+
+4
+00:00:42.690 --> 00:00:45.000
+Nick Bowman: Those sort of a takeaway from considering the diagnostic
+
+5
+00:00:47.880 --> 00:00:56.550
+Nick Bowman: So we're going to sort of stay in the realm of the implementation sort of side of things today and we're still going to be working with arrays and dynamic memory management.
+
+6
+00:00:57.450 --> 00:01:01.800
+Nick Bowman: But really what we're going to be doing is we're going to move into talking about extra layers of abstraction.
+
+7
+00:01:02.250 --> 00:01:15.540
+Nick Bowman: And so the question that we're going to have today is sort of how can we make use of multiple levels of obstruction in the way that we store data and the way that we use data storage techniques to sort of come up with and build better
+
+8
+00:01:17.790 --> 00:01:26.100
+Nick Bowman: And so I'll do a little bit of review and I'll wrap up what I was talking about yesterday, and then we'll switch over and talk to about priority key cues and binary
+
+9
+00:01:28.500 --> 00:01:37.110
+Nick Bowman: So, do some review what we saw yesterday. So yesterday we we started implementing this class called our vector. And our goal was to implement our very own version of the Stanford c++
+
+10
+00:01:37.560 --> 00:01:47.280
+Nick Bowman: We've been working with so far. And we worked sort of pursuant to some constraints. And so we were only implementing some subset of the public methods.
+
+11
+00:01:47.970 --> 00:01:54.150
+Nick Bowman: We are working under this constraint that we are actually only store managers, we can really sort of store. Other times,
+
+12
+00:01:54.600 --> 00:02:02.160
+Nick Bowman: And when we left off yesterday we were sort of limited to storing a fixed number of elements we always allocated some amount of space initially
+
+13
+00:02:02.490 --> 00:02:12.630
+Nick Bowman: And so yesterday with like eight. They're like eight spots. And if we wanted to store any more elements in that we were kind of and so kind of where we have it off as we were just throwing an error forever Rackspace
+
+14
+00:02:13.920 --> 00:02:26.340
+Nick Bowman: And so we had this public sort of interface that we implemented and we implement most of the functions together and we didn't do the insert function together but I recommend going back and revisiting the kotel included in each answer says
+
+15
+00:02:27.750 --> 00:02:38.070
+Nick Bowman: And when we were designing with Australia, we decided that we really need to three member variables to keep track of introducing our class. So we had a pointer to an array of editors that was sort of how we did our underlying data storage.
+
+16
+00:02:38.610 --> 00:02:48.810
+Nick Bowman: And then we had two integers one that kept track of the amount of space that we did have and then one that kept track of the amount of slots that we were currently using. And with those two numbers, we were able to basically implement
+
+17
+00:02:49.470 --> 00:02:53.760
+Nick Bowman: All of the operations that we needed and things like that and move and insert
+
+18
+00:02:56.070 --> 00:03:04.830
+Nick Bowman: And we also touched briefly on our sort of last sort of new topic of object learning program, which is this idea of constructors and D structures.
+
+19
+00:03:05.250 --> 00:03:15.900
+Nick Bowman: And so we saw that when we're building classes that are that are sort of relying on dynamically allocating memory, the constructors. The special method where we allocate that memory and we initialize all of our members variables.
+
+20
+00:03:16.200 --> 00:03:25.860
+Nick Bowman: And then the directors, the special method that gets called when our classes done and that is responsible for freeing on memory and that sort of a helpless of memory leaks and sort of helped us
+
+21
+00:03:26.580 --> 00:03:31.230
+Nick Bowman: Implement those good programming practices of always giving back any memory that you've asked the computer.
+
+22
+00:03:33.660 --> 00:03:42.270
+Nick Bowman: And so with these three number of variables and the constructor and everything that we've seen so far. This was kind of a brief illustration of the internal state of vectors we sat
+
+23
+00:03:42.750 --> 00:03:49.980
+Nick Bowman: And we sort of had some allocated capacity, we were able to store items we were able to keep track of the number of items that we were storing
+
+24
+00:03:50.310 --> 00:03:58.020
+Nick Bowman: And then we have this sort of points or to the beginning of our elements array that that allowed us to actually access the array in store numbers and numbers and all that good stuff.
+
+25
+00:04:00.270 --> 00:04:05.280
+Nick Bowman: And and so then the last thing that I want to wrap up today's is we touched on this briefly at the end of class yesterday.
+
+26
+00:04:05.730 --> 00:04:13.080
+Nick Bowman: But there's this idea of running out of space. So right now, our implementation runs out of space really quickly right we allocate EIGHT SPOTS to begin with.
+
+27
+00:04:13.440 --> 00:04:22.860
+Nick Bowman: And then as soon as we have eight items and then we're done. Right. There's nothing we can't really add more than that. And that's kind of seemed like a very kind of crippling constraint and something that we want to do.
+
+28
+00:04:24.210 --> 00:04:29.370
+Nick Bowman: And so what we need to figure out what some way to dynamically resize our internal arrays.
+
+29
+00:04:29.790 --> 00:04:37.560
+Nick Bowman: Which seemed kind of at odds with the fact that we've been telling you a razor fixed size right when you allocate an array. It's going to be exactly that long or shorter or longer.
+
+30
+00:04:38.190 --> 00:04:46.320
+Nick Bowman: So the idea is, sort of, how do we how do we actually do that and we tested this on this analogy of how hermit crabs sort of live
+
+31
+00:04:46.860 --> 00:04:52.440
+Nick Bowman: We did a little bit of sensation, since it like sensationalizing with how the proper mechanics of their lives, but
+
+32
+00:04:52.650 --> 00:04:58.440
+Nick Bowman: There's this general idea that if a hermit crab rooms at a space where it does is it, it can't grow its current show
+
+33
+00:04:58.680 --> 00:05:08.820
+Nick Bowman: So it's responsible for finding a new one transferring all of its belongings and it's livelihood over to the new one and then sort of updating the state of the world and saying, Okay, I live in this new shell. This is where you can
+
+34
+00:05:10.290 --> 00:05:21.270
+Nick Bowman: And and what we saw. And this is the sort of last part that I left off on yesterday, which is this idea, even though it's kind of a silly metaphor actually models. The, the process that we're going to use kind of exactly
+
+35
+00:05:21.570 --> 00:05:27.840
+Nick Bowman: To quote unquote grow arrays. And so to find a way to dynamically resize the internal our internal sort of data storage.
+
+36
+00:05:29.250 --> 00:05:36.690
+Nick Bowman: And in particular, and it sort of took these five steps and we have this illustration and learning sort of show you how these five steps.
+
+37
+00:05:37.620 --> 00:05:45.120
+Nick Bowman: So you can imagine a scenario where we've run out of space in our internal data storage to say maybe we have only allocated for spots and four items story.
+
+38
+00:05:45.810 --> 00:05:54.300
+Nick Bowman: And what we did was we first created a new larger right so we actually like created a new array. And that was double the size that we had before.
+
+39
+00:05:54.780 --> 00:06:03.240
+Nick Bowman: And again, if you remember what I was saying yesterday. The reason that we double. It's a little bit unclear why it's kind of something that just works very well in practice.
+
+40
+00:06:03.600 --> 00:06:10.290
+Nick Bowman: Because it's a good balance between, you know, asking for enough more new space that it will be a long time before we have to do this operation again.
+
+41
+00:06:10.860 --> 00:06:18.450
+Nick Bowman: Without being too wasteful, right, like, you know, we could say oh go by a factor of 10 but you know that would be kind of wasteful would be allocating a lot of memory that we might not
+
+42
+00:06:19.410 --> 00:06:27.630
+Nick Bowman: So we just say we doubled in size and and that's what you'll do on your assignment. And that's kind of just generally what the normal practices when you're building and sort of resizing data structures.
+
+43
+00:06:29.280 --> 00:06:38.490
+Nick Bowman: And so then what we did is we had to say, Okay, if this is going to be our new home. If this blu ray up top is going to kind of be the new, bigger, better way that we're going to use for storage.
+
+44
+00:06:39.090 --> 00:06:44.700
+Nick Bowman: We need to copy everything over right we can't, we can't just lose track of everything that we have before. So let's go ahead and copy everything
+
+45
+00:06:46.710 --> 00:07:00.060
+Nick Bowman: And then now that we're done with the older a right, the older is isn't really going to be useful to us anymore. Right. It's, it's too small. There's nothing really more useful, we can do with it. And so as good programmers, we go ahead and delete it. And so we say
+
+46
+00:07:02.280 --> 00:07:13.680
+Nick Bowman: And so what we say is that we delete the array this dynamically allocates the current storage that we have and it leaves sort of our diagram and mistake.
+
+47
+00:07:14.670 --> 00:07:21.510
+Nick Bowman: Once we're done with that, then we can update our elements pointer to now point to the beginning of the year, right. So we go ahead and update that
+
+48
+00:07:22.140 --> 00:07:28.230
+Nick Bowman: And so notice that the pointer value the memory address for your change, right, because we're now referencing different location computer's memory.
+
+49
+00:07:29.490 --> 00:07:39.450
+Nick Bowman: And then the very last thing that we get is, hey, now we want to now we actually have more space. So we want to make sure that we keep track of the fact of it more space. So we update the allocated capacity and that will store.
+
+50
+00:07:40.920 --> 00:07:47.640
+Nick Bowman: And so the last part that will wrap up today and it will show you is how do you actually code this up and sort of make this work.
+
+51
+00:07:48.570 --> 00:07:58.170
+Nick Bowman: In in our actual implementation. And so if we jump over to Katie created and you'll see that that most of what we have here is where we left off on this.
+
+52
+00:07:58.890 --> 00:08:08.640
+Nick Bowman: And specifically, we left off with this idea that if we ran out of space in our ad or an or search functions we just throw an error. And so we're going to remove that that can serve
+
+53
+00:08:10.290 --> 00:08:17.220
+Nick Bowman: As sort of as Good programming style, we're gonna we're going to decompose our expanded functionality into this, into this helper function called expand
+
+54
+00:08:17.880 --> 00:08:27.450
+Nick Bowman: But one quick thing I want to point out is that this helper function is actually defined in the private section. This is actually, I think, is the first time that we're seeing a method defined in the pilot section.
+
+55
+00:08:27.870 --> 00:08:32.190
+Nick Bowman: And it's totally possible to do this and it's actually very common practice to do this.
+
+56
+00:08:32.700 --> 00:08:37.650
+Nick Bowman: And what this is saying is the same. This method is really important for the decomposition of our class.
+
+57
+00:08:37.890 --> 00:08:44.700
+Nick Bowman: But we definitely don't want to let a client call it, we do not want to let the client of agency over when you're ready expands or not.
+
+58
+00:08:45.000 --> 00:08:54.990
+Nick Bowman: Us as the implementation, we should be the only ones that have the capability to that. And so by doing so, we put it in the private section and now a client cannot hold the extent can only be relevant to them in a class.
+
+59
+00:08:57.690 --> 00:09:04.890
+Nick Bowman: And so now we go ahead and research. And so we have sort of outline these five steps. And so let's see what these five steps that I can play
+
+60
+00:09:06.210 --> 00:09:10.980
+Nick Bowman: So the very first thing we're going to do is we're going to allocate a new array. And I'll just call it new elements.
+
+61
+00:09:12.180 --> 00:09:20.460
+Nick Bowman: And we said that we want this array to be twice as big as our old one. And so we can just say, all right, whatever my allocated capacity was before I want to allocate something that's quite a bit.
+
+62
+00:09:22.080 --> 00:09:28.170
+Nick Bowman: And so now that we've done that, then we want to say, all right, let's just take everything that we already have and copy it all over.
+
+63
+00:09:29.130 --> 00:09:42.300
+Nick Bowman: So we can iterate through all of our indexes in our old array, and we say, okay, go into new elements and store it there at index i. The thing that I currently have in my element or a index.
+
+64
+00:09:43.050 --> 00:09:47.940
+Nick Bowman: And so this is going to take everything that currently exist in the elements array and copy it over into the studio.
+
+65
+00:09:49.590 --> 00:09:55.830
+Nick Bowman: Now that we're done copying. We say, all right, we're pretty much done with the memory and our elements, right. So we can go ahead
+
+66
+00:09:56.880 --> 00:09:59.490
+Nick Bowman: And be allocated using our, our delete key word.
+
+67
+00:10:01.110 --> 00:10:04.080
+Nick Bowman: The most important step in the step that you cannot forget
+
+68
+00:10:04.470 --> 00:10:19.050
+Nick Bowman: Is that once you're done doing this right now elements is sort of referencing kind of memory that doesn't belong to us. And so if we if we wanted to sort of return back to a valid point or turn right, we have to make sure to point it to the new array that we just declare
+
+69
+00:10:20.070 --> 00:10:28.260
+Nick Bowman: And so what this line of code is saying is, is saying, take the memory address stored in new elements and store that memory address in our, in our member variable elements.
+
+70
+00:10:28.500 --> 00:10:44.850
+Nick Bowman: And by storing this new memory address now elements is pointing to the new learner. Right. And so, so that sort of stuff is super critical and then the very last step is just to say, okay, well we have twice as much space now. So let's update our allocated capacity available to us.
+
+71
+00:10:46.740 --> 00:10:59.430
+Nick Bowman: And so with all of these steps combined. Now it's really just as simple as saying, Oh, well, now if we run out of space. Hey, just go ahead and expand and and we know that after this function rooms will actually have space to store things
+
+72
+00:11:00.570 --> 00:11:04.110
+Nick Bowman: So we can go ahead and call this instrument here.
+
+73
+00:11:05.580 --> 00:11:14.760
+Nick Bowman: And then if we run it hopefully what we go ahead and see there's now also we are very last test before was testing sort of 50 elements.
+
+74
+00:11:15.270 --> 00:11:23.610
+Nick Bowman: And so before it was failing because we're running out of space. But now we see exactly what we want, which is that this test passes and our Ray actually had to expand twice to get there.
+
+75
+00:11:25.080 --> 00:11:39.240
+Nick Bowman: No, it actually did send three times. So the first time that expanded from eight elements to 16 that still wasn't enough space we have expanded from 16 to 32 that's still wasn't enough space and expanded from 30 to 60 and then by the end, it had enough space to store all 50
+
+76
+00:11:41.040 --> 00:11:51.090
+Nick Bowman: And so you'll be doing something that very similar to this and this and that. So I would strongly recommend when you get to the point of dealing with. Okay, how do we actually expand the capacity of the data structures that were running
+
+77
+00:11:51.660 --> 00:12:00.750
+Nick Bowman: Please refer back to this code, it's it's meant to be sort of a helpful resource for you and it'll be pretty useful when you're thinking about, okay, how do I actually grow the internal arrays.
+
+78
+00:12:03.690 --> 00:12:18.570
+Nick Bowman: And then so just back to the slides for quick recap. So as we saw right when we're implementing entity classes. There were a lot of different steps, right. The first step was always to define the public interface the private member variables and then the initialization procedures.
+
+79
+00:12:19.650 --> 00:12:28.920
+Nick Bowman: And we also saw that pretty much all underlie if we're going to implement our own at classes and we're going to need to store that data and underlying array. And it's less what we saw me working
+
+80
+00:12:30.420 --> 00:12:32.490
+Nick Bowman: And then the lives ideas. We saw that
+
+81
+00:12:32.760 --> 00:12:45.750
+Nick Bowman: We could find workarounds to the some of the restrictions and c++ gifts. So c++ tells us, hey, you can only have a fixed size right we say, okay, we'll implement this clever new kind of permit crap like strategy and we'll be able to grow as as necessary.
+
+82
+00:12:46.290 --> 00:12:55.770
+Nick Bowman: And then. So that was sort of our last time we take on. And so the transition into today's lecture and is talking about, well, what happens when we have more complexity to
+
+83
+00:12:56.370 --> 00:13:04.770
+Nick Bowman: The vector know it's the first you need to learn, and for good reason. It's relatively straightforward because it stores its data in exactly the order the user tells it. Great.
+
+84
+00:13:05.190 --> 00:13:13.260
+Nick Bowman: User you can specify hey out to the end or insert an index. There's no added complexity. Let's introduce the data, kind of just stored as the client monster.
+
+85
+00:13:15.030 --> 00:13:23.520
+Nick Bowman: But if we want to build more powerful and more interesting and more special data structures. We're gonna have to start playing around with this organizational patterns of the data.
+
+86
+00:13:23.700 --> 00:13:29.190
+Nick Bowman: And and and taking sort of agency for ourselves to out on an extra layer of abstraction to figure out new ways.
+
+87
+00:13:32.190 --> 00:13:34.410
+Nick Bowman: And so with that, I will
+
+88
+00:13:34.500 --> 00:13:35.670
+Nick Bowman: I will stop sharing
+
+89
+00:13:36.030 --> 00:13:42.150
+Nick Bowman: And will actually handed over to Kylie and we're going to talk about what, what sort of multiple layers of abstraction.
+
+90
+00:13:44.310 --> 00:13:45.540
+kylie jue: Yeah, while I'm doing that. How about
+
+91
+00:13:45.840 --> 00:13:56.850
+kylie jue: How about asked a question about in the insert function, don't we only call expand once. How does it double three times. I don't know if that's, I don't know if you want to clarify your I think it only does
+
+92
+00:13:56.940 --> 00:13:57.300
+kylie jue: Yeah.
+
+93
+00:13:57.360 --> 00:14:09.000
+Nick Bowman: Well, one, sorry, it only does a double once per insertion, but so if you think about when you add the ninth element. It doubles when you add the 17th element. It doubles and then the other 33rd element of doubles right every time it runs out of space.
+
+94
+00:14:09.120 --> 00:14:19.380
+Nick Bowman: Because we're adding 50 elements. And so every time it runs out of space that double. So you're right. It's not like on the very first insertion, it knows that. Oh, there's going to be eventually 50 elements. And so it like resize is three times.
+
+95
+00:14:19.890 --> 00:14:26.820
+Nick Bowman: Know it just it on any given insertion or addition if it's out of space at that point in time. Yeah.
+
+96
+00:14:29.430 --> 00:14:34.470
+kylie jue: Alright, so let's transition to talking about what we mean when we say multiple levels of abstraction.
+
+97
+00:14:35.010 --> 00:14:41.910
+kylie jue: And so these are the different levels. The three different levels that we're going to talk about today you've learned a lot about abstract data structures.
+
+98
+00:14:42.120 --> 00:14:51.300
+kylie jue: And you can think about the boundary for the user as existing where this dotted line is so the user only needs to worry about abstract data structures and understand how to use those.
+
+99
+00:14:52.170 --> 00:14:59.820
+kylie jue: But we're going to learn about these levels of abstraction that exists behind the abstraction boundary that you're going to work on when you're doing
+
+100
+00:15:00.810 --> 00:15:08.160
+kylie jue: Implementation of your classes. And so again, the abstract data structures include things like vectors sets cues grids.
+
+101
+00:15:08.400 --> 00:15:16.830
+kylie jue: And in particular, what you're going to look at in assignment for and what I'm going to talk about today is this new abstract data structure called a priority queue and I'll come back to that in a little bit.
+
+102
+00:15:18.270 --> 00:15:25.920
+kylie jue: When we talk about this first level of abstraction behind the boundary data organization strategies. It's all about how the data is organized
+
+103
+00:15:26.640 --> 00:15:34.620
+kylie jue: Underneath the hood. So we can think about an array being sorted and we're also going to talk about this this organization strategy called a binary heap today.
+
+104
+00:15:35.130 --> 00:15:38.160
+kylie jue: So this is just an overview of the different topics that we're going to talk about
+
+105
+00:15:38.790 --> 00:15:51.420
+kylie jue: And then lastly, what we've been talking about and what you've been learning about is the fundamental actual data storage that happens at the language level at the C plus plus level, and that includes things like arrays and linked lists link list is something we're going to cover
+
+106
+00:15:52.590 --> 00:15:56.820
+kylie jue: Later in this quarter. But so far, you've learned about arrays of sort of this fundamental building block.
+
+107
+00:15:57.090 --> 00:16:05.970
+kylie jue: Of how we store data and then the idea of how do we organize that data in within the array is what we're talking about when we say data organization strategies.
+
+108
+00:16:06.270 --> 00:16:12.210
+kylie jue: And so what we're going to focus on today is you're going to, I'm going to do an overview of what the priority queue data structure is
+
+109
+00:16:12.540 --> 00:16:21.030
+kylie jue: Because you're going to be actually implementing that on the assignment that we released yesterday, and then I'm also going to talk about a binary heap strategy for organizing your data.
+
+110
+00:16:22.800 --> 00:16:39.420
+kylie jue: Alright, so let's jump into priority queues as a new abstract data structure that you're going to learn about. So a priority queue is a cue that orders its elements based on a pro provided priority. So before we had cues that just get ordered depending on when you add
+
+111
+00:16:40.710 --> 00:16:45.120
+kylie jue: When you add items into them. In this case, now we're going to order them instead based on a priority.
+
+112
+00:16:45.480 --> 00:16:57.960
+kylie jue: And just like regular cues. You can't index into them to get a particular position. So you can't say priority queue at index i and get the item that's there. You can only do the same DQ and en que operations that you had on regular cues.
+
+113
+00:16:58.680 --> 00:17:09.060
+kylie jue: Why do we care about priority queues. They're super useful for maintaining data with sort that are, that is sorted based on priorities. So you can think about things like an emergency room waiting room.
+
+114
+00:17:10.050 --> 00:17:18.990
+kylie jue: Where you actually want to prioritize patients, depending on the severity of their condition or if their injury. You can think about different airline boarding groups where
+
+115
+00:17:19.500 --> 00:17:27.420
+kylie jue: Depending on the priority of the passenger, they might board earlier so families and first class passengers would have a higher priority.
+
+116
+00:17:28.020 --> 00:17:37.380
+kylie jue: Than frequent flyers and boarding group A, B, etc. And one thing I'm just going to point out here is that it is possible for individual data points to have the same priority right when they say
+
+117
+00:17:37.620 --> 00:17:44.850
+kylie jue: Families and first class passengers please line up toward they don't order the families and first class passengers, I guess, depending on the airline. But in most cases.
+
+118
+00:17:45.600 --> 00:17:50.580
+kylie jue: So just as a note individual data points can have the same priority and we're not going to worry about.
+
+119
+00:17:51.570 --> 00:17:56.430
+kylie jue: Distinguishing between those. We're just going to say, however you handle the data points with the same priority is fine.
+
+120
+00:17:57.150 --> 00:18:09.030
+kylie jue: And then another thing that we can do with priority queues is we can actually filter the data we have to get the top X results. So for example, if you have a list of Google searches and how popular they are, you can just cut off at the top like
+
+121
+00:18:09.900 --> 00:18:18.750
+kylie jue: 1000 or 100 or 10 depending on what you want to display. And one of the examples, you'll see in the example demo in the actual assignment is actually sorting.
+
+122
+00:18:19.380 --> 00:18:27.240
+kylie jue: And getting the fastest times for the women's 800 meter freestyle swimming event among some other demos that you'll be able to use once you implement the priority queue.
+
+123
+00:18:28.290 --> 00:18:33.780
+kylie jue: So priority queues, like I mentioned, have three fundamental operations that look very similar to regular cues.
+
+124
+00:18:34.140 --> 00:18:40.500
+kylie jue: Except now we're going to think about it in terms of how this would work with a priority. So when you end you something you're going to give
+
+125
+00:18:41.010 --> 00:18:47.010
+kylie jue: The priority queue both the priority and the element that you want to interview and so you insert the element based on its priority.
+
+126
+00:18:47.940 --> 00:18:59.400
+kylie jue: Things that have a higher priority are going to be closer to are going to be DQ first. So what the DQ you remove the element with the highest priority from the queue and peak.
+
+127
+00:18:59.880 --> 00:19:04.230
+kylie jue: Just looks at what is the element currently with the highest priority without actually removing it from the queue.
+
+128
+00:19:05.460 --> 00:19:10.680
+kylie jue: So, again, very similar to cues except now we're thinking about the ordering is based on a priority that you're giving it
+
+129
+00:19:11.880 --> 00:19:24.120
+kylie jue: Some less fundamental operations that you're going to see one is the science which gives you the number of elements in the queue. You have is empty, which returns. Just if it's empty or not. And then clear which is going to completely empty out or clear the queue.
+
+130
+00:19:26.040 --> 00:19:34.860
+kylie jue: So we want to be thinking about how do we design this priority queue class and we're going to go back to our three questions that we talked about when we discussed class design.
+
+131
+00:19:35.220 --> 00:19:45.090
+kylie jue: What are the member functions. What are the member variables and what is the constructor. And so for the assignment. Specifically, and you can really think about this lecture as a primer to how to get started on assignment for
+
+132
+00:19:45.510 --> 00:19:56.820
+kylie jue: But in the assignment specifically what we're gonna do is we're going to give you the public interface. We're going to give you what member functions, you need to define which are what I just went over on the previous slides right you have to have in queue DQ peak.
+
+133
+00:19:57.570 --> 00:20:11.580
+kylie jue: Is empty, etc. But what you have to figure out is, what are the member variables. I'm going to need and what does the constructor, you basically get to decide on the implementation details for this priority queue class that we're going to ask you to implement
+
+134
+00:20:12.600 --> 00:20:23.760
+kylie jue: And so I want to give us a quick high level overview. As a quick as a note, I'm not going to go into any code because that's what you're going to be doing on the assignment, but I'm going to give you sort of a high level of how might we go about implementing a priority queue.
+
+135
+00:20:25.560 --> 00:20:30.780
+kylie jue: And so the thing we really want to keep in mind is we want to be able to access the element that has the highest priority.
+
+136
+00:20:31.080 --> 00:20:37.230
+kylie jue: in constant time. So that is basically the peak operation right we want the peak operation to happen in constant time. You want to be fast.
+
+137
+00:20:37.680 --> 00:20:43.110
+kylie jue: And so our idea that we might first have is we could keep a sorted array. So we have an array of elements.
+
+138
+00:20:43.650 --> 00:20:54.750
+kylie jue: In order of their priority for the highest priority element is at the end of the race was the last thing in the array and then DQ will be super fast, as well as peak. Right. We just have to look at with the last element in our ways
+
+139
+00:20:55.740 --> 00:21:02.460
+kylie jue: But what isn't so great is that every time we increase something we're going to have to adjust the entire array, right. We'll have to look at what's the priority when we in-q
+
+140
+00:21:02.640 --> 00:21:09.510
+kylie jue: Figure out where in their way, it's going to go. And then depending on where it goes, move everything else over a little bit. So that's not great.
+
+141
+00:21:10.260 --> 00:21:13.110
+kylie jue: That you're going to end up implementing that in the assignment.
+
+142
+00:21:13.470 --> 00:21:21.270
+kylie jue: But one of the things we're going to talk about after you implement that is how can we actually do better. So there's different there's two different ways. You're going to implement something there implement the priority queue.
+
+143
+00:21:22.860 --> 00:21:32.220
+kylie jue: And as a note. Yes, it is possible to do better. And one of the big takeaways from this assignment and from this lecture is that they're actually multiple possible implementations for the same ADT
+
+144
+00:21:32.460 --> 00:21:36.150
+kylie jue: Or sore for the to generalize that even more often for the same class.
+
+145
+00:21:36.360 --> 00:21:46.230
+kylie jue: You can have different ways of implementing it under the hood and the user doesn't even need to know about it, and there'll be able to use it in the exact same way as long as the public interface doesn't change.
+
+146
+00:21:46.830 --> 00:21:55.110
+kylie jue: So again, we're now going to move into the next level of abstraction which is data organization strategies for actually implementing your priority queue.
+
+147
+00:21:55.350 --> 00:22:01.260
+kylie jue: And so I talked very briefly about how you might do it with assorted array and you'll get to see some of that code.
+
+148
+00:22:01.710 --> 00:22:08.040
+kylie jue: In the actual assignment, but the bulk of the work on the assignment is going to be organizing your data based on this concept called the binary heap.
+
+149
+00:22:08.610 --> 00:22:18.570
+kylie jue: And so I'll discuss the binary here right after the announcements. But actually, before I jump into announcements. Are there any questions about priority queues are these three levels of abstraction that we've discussed so far.
+
+150
+00:22:21.270 --> 00:22:22.530
+kylie jue: Anything in the chat, Nick.
+
+151
+00:22:23.370 --> 00:22:24.540
+haoming li: Yeah, I have a question.
+
+152
+00:22:24.840 --> 00:22:25.050
+Yeah.
+
+153
+00:22:26.910 --> 00:22:27.390
+haoming li: Things.
+
+154
+00:22:27.690 --> 00:22:33.450
+haoming li: Have the same priority. How do we order that we're seeing their own good.
+
+155
+00:22:33.870 --> 00:22:38.730
+kylie jue: Yeah, we're just going to say, we don't care. So you can decide how you want to do that if you want to do it based on
+
+156
+00:22:38.940 --> 00:22:44.700
+kylie jue: The things that were ordered later if you want to actually try to sort them depending on their element that's sort of up to you.
+
+157
+00:22:45.630 --> 00:22:52.320
+kylie jue: But basically what that means is it will make the implementation easier for you. You are you aren't going to need to worry about if things have the same priority, essentially, yeah.
+
+158
+00:22:53.040 --> 00:22:53.910
+haoming li: Oh, okay.
+
+159
+00:22:56.460 --> 00:22:57.270
+haoming li: Any other questions.
+
+160
+00:22:57.990 --> 00:22:58.950
+michael haynes: Yeah, I have a question.
+
+161
+00:23:01.410 --> 00:23:04.020
+michael haynes: In the construct the private
+
+162
+00:23:05.130 --> 00:23:07.170
+michael haynes: Classes. Is it, are we only
+
+163
+00:23:08.190 --> 00:23:13.320
+michael haynes: We only restricted to raise a query is vectors, your other things to store the data.
+
+164
+00:23:13.650 --> 00:23:20.280
+kylie jue: Yeah, that's a good question. So we're going to work only pretty much with arrays and for this assignment. We're going to specify that you have to use an array.
+
+165
+00:23:20.400 --> 00:23:26.640
+kylie jue: You could use a vector, right. You could use you could build your abstract data structure on top of another abstract data structure.
+
+166
+00:23:27.210 --> 00:23:33.480
+kylie jue: The thing is, it gives you a little bit less control over how the memory is being managed and for something like arrays.
+
+167
+00:23:33.660 --> 00:23:45.180
+kylie jue: Versus vectors. In particular, it can actually be more efficient to use something like an array because you'll be able to decide when you want to resize and that sort of thing. You have basically just more control over the storage at a lower level.
+
+168
+00:23:46.440 --> 00:23:58.770
+kylie jue: But you could hypothetically use another abstract data structure in your like under the hood here, you would not be thinking about it so much as like fundamental c++ data storage, but sort of building an abstraction on top of an abstraction. Yeah.
+
+169
+00:23:59.580 --> 00:24:00.000
+michael haynes: Thank you.
+
+170
+00:24:03.420 --> 00:24:04.110
+michael haynes: Anything else
+
+171
+00:24:07.200 --> 00:24:19.860
+kylie jue: Alright, I'm going to go ahead and move on them so quick announcements before I jump into binary heaps. So assignment for was released yesterday afternoon. It's due next Monday, July 27 at 11:59pm
+
+172
+00:24:20.280 --> 00:24:28.680
+kylie jue: And trip is going to have assignment yeah session. Who's assignment. Yes, I shouldn't tonight at 6pm PDT that information is on the course website with the zoom info.
+
+173
+00:24:30.060 --> 00:24:38.430
+kylie jue: Yesterday, we also posted final project guidelines. Those are on the website. If you go under assessments, there's an actual page all about the final project. So definitely read that.
+
+174
+00:24:38.850 --> 00:24:48.180
+kylie jue: There's also a sample one that you can look at, but start thinking about what you want your projects to be on as a first step. There's also a timeline that we recommend you follow, just to make sure you're getting
+
+175
+00:24:49.020 --> 00:24:52.020
+kylie jue: Enough done each week that it's a manageable amount of work.
+
+176
+00:24:52.920 --> 00:24:59.280
+kylie jue: A couple other small reminders wonders that we've been seeing a lot of private posts on Ed. And it's fantastic that you all are using it as a resource.
+
+177
+00:24:59.700 --> 00:25:03.450
+kylie jue: But just if you're asking a general question that you think other students might benefit from
+
+178
+00:25:03.690 --> 00:25:13.410
+kylie jue: And we highly recommend just make it public will actually probably set your post to public if we think it's something that does not contain any like code or sensitive information about how to solve an assignment.
+
+179
+00:25:13.920 --> 00:25:20.520
+kylie jue: So default to public if you're making a post on that. And then the last thing is just make sure you're reading and applying your assignment feedback.
+
+180
+00:25:21.060 --> 00:25:28.860
+kylie jue: We know in the summer, unlike in the school year, you don't meet individually with your section leaders are you, you don't have to meet individually with your sexual leaders, but it's really important.
+
+181
+00:25:29.820 --> 00:25:33.780
+kylie jue: Excuse me, that you're still reading and applying the feedback that they're giving you on your assignments, because they've worked
+
+182
+00:25:34.080 --> 00:25:39.330
+kylie jue: Really hard to make sure it's a good learning experience for you that you can then improve for your next your next assignment.
+
+183
+00:25:40.140 --> 00:25:49.800
+kylie jue: Alright. So with that, let's go ahead and jump into binary heaps. So what is a binary. So you can think about a heap as a treat a structure.
+
+184
+00:25:50.220 --> 00:25:54.990
+kylie jue: That satisfies something called the heat property. So what does the heat property just defined to heat. The heat property.
+
+185
+00:25:55.770 --> 00:26:02.700
+kylie jue: Property is that parents have a higher priority than any of their children and you'll see an image of what I mean by this in a second.
+
+186
+00:26:03.270 --> 00:26:12.810
+kylie jue: But I just want to sort of lay out the properties of the heat. First, we call it a binary heat because there are two children per parent. So each node in the tree is going to have
+
+187
+00:26:13.530 --> 00:26:22.050
+kylie jue: Two children, but there's no implied order ordering between these siblings, which means that the within those two children, you can flip them around. It doesn't really make a difference.
+
+188
+00:26:22.890 --> 00:26:28.800
+kylie jue: A binary. He also has to be completely filled. So that means that each parent node has to have two children.
+
+189
+00:26:29.010 --> 00:26:39.840
+kylie jue: With the exception of the bottom level that you're still feeling, but you have to fill the bottom level from left to right. And we'll see some examples of trees again in a second. If that's not if you're not totally clear what that means. You'll see a picture in a moment.
+
+190
+00:26:41.340 --> 00:26:44.100
+kylie jue: And there are also two types of heaps. There are
+
+191
+00:26:44.730 --> 00:26:53.700
+kylie jue: Men heaps and there are max heaps and which one we use depends on what we define as a higher priority. So I've been saying this word higher priority without actually defining what a priority is
+
+192
+00:26:54.210 --> 00:27:02.190
+kylie jue: But usually we will represent priorities as integers and if we're saying a smaller number. So, like, one is a higher priority than to
+
+193
+00:27:02.670 --> 00:27:12.120
+kylie jue: Then we're going to use a min heap and what that just means that the smaller numbers are the items that have smaller priorities in our heap are going to be closer to the to the top of the tree.
+
+194
+00:27:13.290 --> 00:27:22.380
+kylie jue: If we decide that larger numbers. So, for example, to is a higher priority than one, then it's more beneficial to us and max heap where those larger numbers end up closer to the route or the top of the tree.
+
+195
+00:27:23.400 --> 00:27:33.120
+kylie jue: We're going to focus on men heaps, because the assignment uses men heaps. But you can just, I encourage you to think about how these examples would be flipped. If we were using a Mac sleep instead of them in here.
+
+196
+00:27:34.200 --> 00:27:46.830
+kylie jue: Alright so here are two examples of men heaps heaps and heaps you. And just to clarify that terminology went over on the last slide. When I talk about the root of the tree. It's at the top there, it's this. The first starting node. And when I talk about a parent.
+
+197
+00:27:47.880 --> 00:27:57.300
+kylie jue: These are the children of the root nodes. And then, for example, this one has two children that are here and here. So every node can have children. And those are the things that are underneath it.
+
+198
+00:27:58.170 --> 00:28:02.100
+kylie jue: And but the root is specifically the top one. So that's just a little bit of the terminology
+
+199
+00:28:02.610 --> 00:28:07.980
+kylie jue: But we're going to go ahead and pull you here. Take a look at both of these heaps real quick and
+
+200
+00:28:08.370 --> 00:28:20.490
+kylie jue: I want you to try to guess which of these heaps is a valid min keep is a huge one. Is it keep two is it both of them, or is it neither of them, given the properties that we just discussed and go ahead and vote there.
+
+201
+00:28:21.600 --> 00:28:29.460
+kylie jue: And Nick I can't see the results. So you can go ahead and let me know when it's good to just show the results. Whenever there's critical mass.
+
+202
+00:28:40.500 --> 00:28:44.040
+kylie jue: And totally fine. Again, if you're not 100% sure of the answer we're going to discuss it in a
+
+203
+00:28:44.040 --> 00:28:44.670
+Nick Bowman: Moment.
+
+204
+00:28:44.970 --> 00:28:50.160
+kylie jue: But which one which one or ones of these are valid heaps.
+
+205
+00:28:53.610 --> 00:28:54.930
+kylie jue: Alright, so it looks like
+
+206
+00:28:55.410 --> 00:28:56.790
+kylie jue: Most people said he won.
+
+207
+00:28:57.360 --> 00:29:06.840
+kylie jue: Some people said, Neither so there's a little bit of a small percentage on each. So the answer here is he one is are valid. So why is keep one the valid keep these two really similar.
+
+208
+00:29:07.980 --> 00:29:17.910
+kylie jue: But what is actually not valid about the second one is that we have a parent element that doesn't have children that are both smaller. So remember min keeps me but all of the
+
+209
+00:29:18.840 --> 00:29:30.510
+kylie jue: Parents have to have children with larger priorities. So we start with a four here and if this one has six. You can't have a priority of five as a child underneath it. These two should be flopped.
+
+210
+00:29:32.610 --> 00:29:44.550
+kylie jue: And then, in turn, otherwise this satisfies all of the other priorities for our heat, it's completed so every, every node has two children, with the exception of the last row.
+
+211
+00:29:45.570 --> 00:29:48.450
+kylie jue: And you're starting to fill the last row from left to right. All right.
+
+212
+00:29:49.500 --> 00:29:55.860
+kylie jue: Let's do this one more time. So next poll. What about these two. Which of these two heaps is a valid min heap.
+
+213
+00:30:15.210 --> 00:30:15.780
+Do we have
+
+214
+00:30:19.470 --> 00:30:20.190
+The result results.
+
+215
+00:30:21.810 --> 00:30:33.240
+kylie jue: Alright, so we have the majority of people say both keep it one, and he to the next one says he to and then some say he wants something that isn't super interesting. So the answer here.
+
+216
+00:30:34.380 --> 00:30:41.820
+kylie jue: Is actually only he one is about. So this one's a little bit misleading. But this one has to do with the property of being complete
+
+217
+00:30:43.080 --> 00:30:50.280
+kylie jue: Or filled. So remember that something is a valid keep only if you're filling the last row from left to right. And in this case, right.
+
+218
+00:30:50.730 --> 00:30:55.950
+kylie jue: This level of the heap is not complete, because for some reason we started filling the things on the right, instead of the
+
+219
+00:30:56.460 --> 00:31:03.120
+kylie jue: On the left, but this one is totally fine, because you don't have a root node and you're filling the first child on the left and you just haven't filled the ones on the right.
+
+220
+00:31:03.690 --> 00:31:10.830
+kylie jue: So this is still complete because that last row doesn't have to be full. It just has to be in the process of being filled from left to right. So that's really important.
+
+221
+00:31:11.670 --> 00:31:18.510
+kylie jue: So that one was tricky, but a good thing to sort of to spot. And keep in mind when you're filling your hips or any questions on that before I move on.
+
+222
+00:31:23.490 --> 00:31:32.460
+Nick Bowman: Yeah, can you just so you don't have to have every nerve or two children. So can you just explain again where the, where the sort of special case, there is
+
+223
+00:31:32.790 --> 00:31:45.750
+kylie jue: Yeah. So yeah, that's a good point because we say, sort of like this level is not complete, and we're looking at the bottom level. But when we think about it. What that means is that the second to last level doesn't not necessarily need to have parent like
+
+224
+00:31:46.140 --> 00:31:52.080
+kylie jue: All of the nodes on the second to last level don't necessarily need to have children yet, right. So if I go back to this example. Right.
+
+225
+00:31:52.320 --> 00:32:00.510
+kylie jue: This one has to have children, because it's above the second to last level. But the second to last level here. You just need to be filling their children from left to right.
+
+226
+00:32:01.230 --> 00:32:10.350
+kylie jue: So even though we say the bottom level is what's not complete. It's not that this level needs to have all children because that's what we're sort of filling in. Does that, does that answer the question.
+
+227
+00:32:14.460 --> 00:32:16.350
+Nick Bowman: Yeah. Okay. Cool.
+
+228
+00:32:18.510 --> 00:32:29.610
+kylie jue: Alright, so now I want to talk a little bit more about now that just conceptually, you have an understanding of what is a binary heap and this idea of, it's like a tree structure. But how do you actually implement it in code.
+
+229
+00:32:31.290 --> 00:32:41.670
+kylie jue: And so now we're going to move into sort of both levels here with the fundamental data storage and we're going to talk about how do we actually use a race to store binary. He's because arrays look linear right brains don't look like a tree.
+
+230
+00:32:42.120 --> 00:32:54.090
+kylie jue: But there is a way to do it. So binary keeps you can think about it as both. Another way to implement the priority queue ADT but it's also an abstraction on top of array. So again, there's multiple levels of abstraction here.
+
+231
+00:32:55.140 --> 00:33:01.980
+kylie jue: We're going to see a different approach just storing trees. Later in the quarter, but for heaps, in particular, even though they look like trees.
+
+232
+00:33:02.280 --> 00:33:15.330
+kylie jue: The best solution is actually a simple array that's going to be the most efficient here. And the reason for this is because of the complete nature of the structure because we're filling all the levels from left to right, an array is actually a great choice for us.
+
+233
+00:33:16.500 --> 00:33:28.710
+kylie jue: So let's get a little bit more into the weeds. How are the parents and the children in the tree actually related in a flattened array. So let's take this example we have this tree. And this is what it would look like in an array.
+
+234
+00:33:29.760 --> 00:33:45.750
+kylie jue: So we have our root node here at index zero, right, with priority for so the smallest priority storing an element a and it's left child. So this one E6 is at index one and it's right child is an index to
+
+235
+00:33:47.220 --> 00:33:48.360
+kylie jue: We look at be six.
+
+236
+00:33:49.530 --> 00:33:56.250
+kylie jue: You can think about it as having the index one and its children, it's left child is that index three and it's right child's that index for
+
+237
+00:33:56.520 --> 00:34:04.170
+kylie jue: So we're actually going to be able to generalize this a little bit. Let's look at both of these examples. So if we think about the parent index or some number I
+
+238
+00:34:05.340 --> 00:34:18.510
+kylie jue: Then we can actually describe with the left and right children as to i plus one and two. I post to regardless of what that parent indexes. So this is important when you're going to be thinking about how you're implementing the binary heat in your assignment.
+
+239
+00:34:18.870 --> 00:34:26.760
+kylie jue: To be really careful with thinking about these indices between the parents and the children. So that's how we generalize given a parent index, how do we find its children.
+
+240
+00:34:28.680 --> 00:34:36.390
+kylie jue: Excuse me. We can also go the other way around, and go from child to parents. So suppose we have a child node and we want to figure out what the parent indexes.
+
+241
+00:34:37.950 --> 00:34:44.790
+kylie jue: So the nice thing here is actually because of integer division we can generalize that regardless of if it's the left child to the right child.
+
+242
+00:34:45.000 --> 00:34:51.810
+kylie jue: The parent index for a child at i is going to be minus one divided by two. Right. And we see that example here with
+
+243
+00:34:52.080 --> 00:35:04.860
+kylie jue: Both of in the indexes indices wanting to have a parent at zero, which matches this equation and the same thing here, where both of indices three and four. I have their parent at one, which again works out with the integer division here.
+
+244
+00:35:05.850 --> 00:35:17.040
+kylie jue: So it can be a little bit hard to convince yourself that this is always going to be true, but I encourage you to try to like try filling out there and see how it's actually going to fill from left to right when you follow this pattern and this
+
+245
+00:35:17.250 --> 00:35:21.510
+kylie jue: Convention for how you use your indexing and you'll see that in the assignment as well.
+
+246
+00:35:23.670 --> 00:35:30.660
+kylie jue: Alright so manipulating keep content. So now we actually now that we sort of know okay here's how it's going to be structured in
+
+247
+00:35:31.110 --> 00:35:45.420
+kylie jue: In an array we understand what a binary. He is I want to talk about how do we actually now like manipulated and actually do these operations that we said the priority queue is going to have. So again, there's three important operations that we need to keep to have peak in queue and DQ
+
+248
+00:35:47.490 --> 00:35:48.990
+kylie jue: And for peak.
+
+249
+00:35:50.040 --> 00:35:52.890
+kylie jue: Were again going to just return the element with the highest priority.
+
+250
+00:35:53.850 --> 00:36:02.940
+kylie jue: Which is the lowest number for him and he so the lowest priority and this operation isn't going to change the state of the heap at all for in queue, we're going to insert an element into the heap.
+
+251
+00:36:03.540 --> 00:36:08.850
+kylie jue: One note here is I noticed I forgot to put in the priority here but this wall. So the element will include a priority in this case.
+
+252
+00:36:09.150 --> 00:36:17.760
+kylie jue: The reason I just put it as he here is in the actual assignment, you'll see that the priority and the item itself that it storing is going to be encapsulated into one struct.
+
+253
+00:36:18.600 --> 00:36:22.050
+kylie jue: But, in other words, you're just going to insert an element into the heat based on the priority.
+
+254
+00:36:22.320 --> 00:36:28.530
+kylie jue: And you have to make sure that you are still maintaining the heat property of your like flattened tree within the array.
+
+255
+00:36:28.830 --> 00:36:33.870
+kylie jue: And that's going to require some specific manipulation that we're going to talk about in a little bit. And then for DQ
+
+256
+00:36:34.680 --> 00:36:40.200
+kylie jue: We're going to remove the thing with the highest priority or again the smallest element smallest priority for them in heat
+
+257
+00:36:40.560 --> 00:36:48.570
+kylie jue: And this changes the state of the heat. So we have to make sure we restore again the heat property. So thinking about how do we maintain the heat properties that we discussed at the beginning.
+
+258
+00:36:49.080 --> 00:36:53.220
+kylie jue: Is really important as we're doing these operations. So here's an example tree.
+
+259
+00:36:53.970 --> 00:37:04.470
+kylie jue: And again, you can walk through to convince yourself that these indices follow the scheme that we talked about. But our root node is a five and zero. And then this is a complete tree because we're filling the bottom row from left to right.
+
+260
+00:37:06.210 --> 00:37:14.760
+kylie jue: So let's look at how each of the different operations would actually happen on this tree. Again, we're going to do this at a conceptual level and then your job on the assignment is going to formalize this into actual code.
+
+261
+00:37:15.360 --> 00:37:20.010
+kylie jue: So for peak. We want to look just at the root of the tree, right, because that is our highest priority.
+
+262
+00:37:20.550 --> 00:37:32.580
+kylie jue: Or lowest number for priority element. So we're just looking at the root of the tree. And that's going to be old one, because we know it's always positions. So that one's easy. We just look at the index zero of our ray in order to get Pete
+
+263
+00:37:34.140 --> 00:37:45.870
+kylie jue: All right, in case a little more complicated. So how can we actually go about inserting into the binary heap. So for example, let's say we wanted to end q j with a priority of nine into that keep on the previous slide.
+
+264
+00:37:46.290 --> 00:37:51.840
+kylie jue: So really key here is to understand how the hips are built, we have to make sure that we fill the level from left to right.
+
+265
+00:37:52.080 --> 00:38:02.160
+kylie jue: And so what we're going to do is we're going to start by putting the element, just in the first empty slot at the bottom level. So just like we don't care about the priority. We're just going to follow the convention of filling left to right.
+
+266
+00:38:03.570 --> 00:38:08.880
+kylie jue: And in order to do that you can imagine that we're doing something like this, right, we have our array here that is representing the heap.
+
+267
+00:38:09.360 --> 00:38:21.780
+kylie jue: We know what size it currently is. And we're just going to put that new element at size. So again, we're doing the operation in q-j nine we just put it at the first available slot, which in the tree looks like best. And then the array will just be the next index.
+
+268
+00:38:22.950 --> 00:38:30.720
+kylie jue: All right, but now our heat property has violated, right. We can't have a parent that has a child with a smaller priority. So we have to fix this. So what are we going to do
+
+269
+00:38:31.950 --> 00:38:40.080
+kylie jue: So in order to fix it. We have to do this process called bubbling up and bubbling up basically looks at the element that is in the spot.
+
+270
+00:38:41.010 --> 00:38:50.100
+kylie jue: And says, Okay, I'm going to compare it to its parent and do they have the right mean keep relationship is the parents priority smaller than the child's
+
+271
+00:38:50.580 --> 00:38:54.390
+kylie jue: If yes, then we're done. We don't need to worry about it. But if not, we have to swap them.
+
+272
+00:38:54.630 --> 00:39:05.130
+kylie jue: And then basically what we have to do is you have to keep repeating this process with the element we added until one either we say okay no are yes we're done, we don't need to keep doubling up or
+
+273
+00:39:05.730 --> 00:39:11.040
+kylie jue: It becomes the root of the heap. And this is how we're going to sort of make sure we maintain that heat property within array.
+
+274
+00:39:12.030 --> 00:39:22.500
+kylie jue: So let's go to the example. So we just inserted J nine into the last place in our right or in our heat and we need to bubble up. So we're going to compare it with its parent, which is 11
+
+275
+00:39:23.550 --> 00:39:29.640
+kylie jue: And then again, you can actually think about this as getting the right indices based on those formulas we said before, so we know the parent index.
+
+276
+00:39:29.970 --> 00:39:39.060
+kylie jue: Of J nine or at index nine is going to be four and we say, okay, we need to swap them because it's violating the heat property. So we actually just swap the elements in the array.
+
+277
+00:39:40.200 --> 00:39:45.420
+kylie jue: And so now I have to repeat. So now we're still we have Jay nine and index for. Let's go get its parent
+
+278
+00:39:46.230 --> 00:39:52.710
+kylie jue: That's be 10 violating the property. We need to swap them. So again, we're going to take them and actually swap them in our array.
+
+279
+00:39:53.010 --> 00:40:00.510
+kylie jue: And so we're, again, we're you'll you'll you'll kind of see why we're describing this process is bubbling up because we're taking the thing we added and we're moving it up in the tree.
+
+280
+00:40:01.740 --> 00:40:12.450
+kylie jue: And then the last comparison that we do is we're going to compare it with a five. And in this case we don't need to swap them right the heat property is satisfied because the parent has a smaller priority or is higher priority.
+
+281
+00:40:13.020 --> 00:40:21.150
+kylie jue: Than the child. And so we can stop bubbling and now we have a valid keep we've added Jay nine properly and put it bubbled up to the correct place.
+
+282
+00:40:23.550 --> 00:40:36.780
+kylie jue: So after we bubbled up the heat is now in its proper state, if that is sort of something you want to keep watching over and over again without having to just flip through these slides. Definitely recommend this keep animation to actually to actually watch the process.
+
+283
+00:40:38.310 --> 00:40:42.180
+kylie jue: And then what is the runtime complexity. So what is the runtime of the queue operation.
+
+284
+00:40:42.420 --> 00:40:54.120
+kylie jue: In the worst case scenario right you're making comparisons are bubbling up the element, all the way from the bottom of the tree to the top or the root. And since there and total elements, again, we talked about how
+
+285
+00:40:55.020 --> 00:41:02.760
+kylie jue: When you make a tree of n elements you end up having log and levels because you think about how many times do I have to divide by two to get to the root.
+
+286
+00:41:03.780 --> 00:41:16.110
+kylie jue: And so that means we have to do login comparisons and log and swaps along the way and the overall complexity is oh log and and that's much faster than old and which is what we were seeing in the queue with our sorted array implementation from before.
+
+287
+00:41:17.640 --> 00:41:23.550
+kylie jue: So before I move on to DQ. Are there any questions on in queue or how this tree worked the bubbling up
+
+288
+00:41:28.050 --> 00:41:28.710
+Anything in the chat.
+
+289
+00:41:32.130 --> 00:41:32.580
+Nick Bowman: Looks like
+
+290
+00:41:33.810 --> 00:41:34.500
+kylie jue: Yeah, good.
+
+291
+00:41:36.570 --> 00:41:42.810
+edouard des: Good question regarding now we would, would we use this whole tree relationship to increase performance like currently just have it that it would all be I'm
+
+292
+00:41:43.080 --> 00:41:48.150
+edouard des: Like just an array with all the parties and we just move it all the way back up to the top and tell them, how's the party that's less
+
+293
+00:41:48.570 --> 00:41:53.580
+kylie jue: Yeah, exactly. Yeah. So what you just described is the sorted array implementation that you're going to be working
+
+294
+00:41:53.580 --> 00:41:58.950
+kylie jue: With as well. Right. And it's purely for for optimization of the runtime.
+
+295
+00:41:58.980 --> 00:41:59.730
+edouard des: Right, because you
+
+296
+00:41:59.760 --> 00:42:02.760
+kylie jue: Have to do that, we would do Oban operations instead of login
+
+297
+00:42:03.480 --> 00:42:04.680
+edouard des: I see a question.
+
+298
+00:42:08.790 --> 00:42:09.870
+edouard des: Anything else before I move on.
+
+299
+00:42:12.960 --> 00:42:21.840
+kylie jue: Alright, I'm going to go ahead and talk about DQ so dQ is similar. We're going to see that it actually does sort of like the opposite direction of bubbling so
+
+300
+00:42:22.140 --> 00:42:31.860
+kylie jue: We're gonna instead here when we remove the when we remove an element from the tree we again. We always want to get the thing with the highest priority which is located at our route. Right.
+
+301
+00:42:32.520 --> 00:42:44.040
+kylie jue: So we're going to remove the root of the tree. And now we definitely don't have the heat property. So in order to regain the heat property. We're actually going to replace the route with the last element in our tree. So again, the last level for this right
+
+302
+00:42:44.460 --> 00:42:50.100
+kylie jue: Since we know that that location is going to end up empty. And that can be a little bit counterintuitive. Right. You're like, why are we taking the thing at
+
+303
+00:42:50.160 --> 00:42:57.240
+kylie jue: A thing at the bottom of the tree and putting it at the route we know that it's going to violate the heat property, but that's okay. We're going to regain it by bubbling down
+
+304
+00:42:57.720 --> 00:43:01.860
+kylie jue: And you'll see how, why this works. So let's look at these first two steps. First
+
+305
+00:43:02.190 --> 00:43:15.390
+kylie jue: So let's say we we did the DQ operation removing that first element right we're removing the root of our tree and we're saying, take the thing at the bottom right, and put it at our route now because we know that index nine is going to be
+
+306
+00:43:16.560 --> 00:43:23.340
+kylie jue: vacated right because we are removing something from our tree. So we just took 313 and we're not putting it at the top of our tree.
+
+307
+00:43:24.930 --> 00:43:29.670
+kylie jue: And so let's talk about how do we actually bubble it down to regain the heat property.
+
+308
+00:43:31.410 --> 00:43:34.860
+kylie jue: So in order to do this we have to now instead of comparing
+
+309
+00:43:35.520 --> 00:43:41.850
+kylie jue: The parent instead of comparing the element with the parent. We're now going to compare the element that we put at the top with the two children.
+
+310
+00:43:42.180 --> 00:43:52.050
+kylie jue: And there are two sort of options here. If one of the children is smaller, if only one of the two children to smaller just swap it with that child. But if both of the children are smaller than you want to swap with the one that's smaller
+
+311
+00:43:53.730 --> 00:43:58.770
+kylie jue: And then if you don't have a third child that's smaller than you just stopped terminate.
+
+312
+00:43:59.340 --> 00:44:03.120
+kylie jue: But you're going to repeat this process and bubble down until there are no more children to compare to.
+
+313
+00:44:03.570 --> 00:44:11.370
+kylie jue: So let's take a look at how this actually looks in practice. So we have 313 and we're looking at both of the children, both of the children in this case are smaller than it
+
+314
+00:44:11.940 --> 00:44:14.820
+kylie jue: So what we're gonna do is we're going to swap out with the smaller of the children.
+
+315
+00:44:15.000 --> 00:44:23.850
+kylie jue: And why do we do that, you'll notice that if we swapped it with either of the children right if we swapped it with this one, we would be violating the heat property. Again, right, we would have J nine bigger than see eight
+
+316
+00:44:24.090 --> 00:44:31.320
+kylie jue: And so we want to make sure that we don't we don't have to make to swaps at this level, right. We only want to have to swap with the smaller elements that we've maintained the heat property.
+
+317
+00:44:32.160 --> 00:44:45.330
+kylie jue: So we're going to swap key 13 and see eight. So now we have to 13 ca here and now we want to look at the children. The new children of G 13 based on its new index. And you see how the swapped in the array itself as well.
+
+318
+00:44:46.350 --> 00:45:00.180
+kylie jue: So now we're looking at indices, five, and six. So we're looking at the two children of index two and we're saying, Okay, in this case now only one of them is smaller than the parent. So we definitely don't want to swap it with F 14 we're just going to swap it with 11
+
+319
+00:45:01.980 --> 00:45:10.500
+kylie jue: Now, we don't know. We don't have any children for June 13 so we can go ahead and stop. So that's what we're that that was a representation of the DQ process that we would have
+
+320
+00:45:11.760 --> 00:45:21.090
+kylie jue: Alright. So in summary, again, you remove them in an element of the tree or the route replace the route with the last element so that we free up that last space and then we bubble down to became a heat property.
+
+321
+00:45:21.420 --> 00:45:31.920
+kylie jue: And again, at worst, you have log and comparisons, because you're moving it down one level of the tree to the very bottom. And in this case, it was actually a little bit less than login, but on or it'll be on the order of login at worst.
+
+322
+00:45:32.970 --> 00:45:42.000
+kylie jue: Excuse me. So now we have a data structure with only log and and open operations. We don't have any oh of an operations, which is great. That is what we want.
+
+323
+00:45:43.740 --> 00:45:54.480
+kylie jue: And that's really why we're benefiting from using a tree here instead of just thinking about it as a flattened sorted array. And this is what you're going to implement on assignment for any questions before we move on.
+
+324
+00:46:02.250 --> 00:46:04.920
+Nick Bowman: Can you just repeat again what replace the top of the tree.
+
+325
+00:46:06.060 --> 00:46:07.290
+kylie jue: Yeah, so
+
+326
+00:46:07.590 --> 00:46:10.140
+kylie jue: I go back to the beginning.
+
+327
+00:46:11.670 --> 00:46:15.120
+kylie jue: So when we put in. We originally had the root and we say, Let's remove the
+
+328
+00:46:15.330 --> 00:46:26.070
+kylie jue: Thing with the highest priority right like the thing that's next and in the queue or in line that we should service remove that. So that's a five. And so after we remove it. We just take the last thing, right, because we know that
+
+329
+00:46:26.670 --> 00:46:35.400
+kylie jue: This index is going to become free when we remove one thing index nine is not going to be junk. So we're just going to take the thing at the end and put at the top and then bubble that down. Yeah.
+
+330
+00:46:37.770 --> 00:46:38.610
+Does that answer the question.
+
+331
+00:46:40.590 --> 00:46:48.630
+kathleen bryan: Oh, sorry, that was my question, I guess I was just wondering, like, because you took the A element like the the A for
+
+332
+00:46:48.720 --> 00:46:54.330
+kathleen bryan: All yeah and then it bubble down to the new position. But what replaced that top most position.
+
+333
+00:46:55.410 --> 00:47:02.250
+kylie jue: So when we take off a five, you can sort of think about it like just like when you have like in the queue data structure that we talked about before.
+
+334
+00:47:02.640 --> 00:47:15.060
+kylie jue: We're giving it back to the user and it is no longer there, right. So what we're actually saying is, like, remove it here. And then at zero, replace it with the last thing. So it actually is that last thing that's replacing you you see
+
+335
+00:47:15.690 --> 00:47:16.800
+kathleen bryan: Okay. Okay, got it.
+
+336
+00:47:17.850 --> 00:47:18.240
+Thanks.
+
+337
+00:47:22.140 --> 00:47:22.890
+kylie jue: Any other questions.
+
+338
+00:47:24.780 --> 00:47:32.970
+edouard des: Maybe just as a follow up question to that we're not like when we, when we say replace all we're doing is we're effectively just taking on the one at the bottom and putting it on top right when I actually like
+
+339
+00:47:33.270 --> 00:47:41.940
+edouard des: Removing anything. Correct. And we're not. And when we, when we replace the one at the end, we don't actually like remove it. We just place it and then pretend it doesn't exist anymore, but it's
+
+340
+00:47:42.180 --> 00:47:42.900
+edouard des: still technically there.
+
+341
+00:47:43.170 --> 00:47:45.600
+kylie jue: exactly it. That's how we sort of manipulate arrays, right, we're
+
+342
+00:47:45.600 --> 00:47:55.830
+kylie jue: Going to assign the value that was here to now be the first index and then say like, Oh, our index RA only has eight things now even though we didn't technically like remove or
+
+343
+00:47:56.010 --> 00:47:59.280
+edouard des: Delete. Like, it's still technically there but we just pretend it's not
+
+344
+00:47:59.400 --> 00:47:59.940
+Exactly.
+
+345
+00:48:04.200 --> 00:48:04.740
+Alright.
+
+346
+00:48:06.300 --> 00:48:11.970
+kylie jue: So to wrap up. In summary, we have now seen multiple layers of abstraction.
+
+347
+00:48:12.750 --> 00:48:16.350
+kylie jue: And in assignment for what you're going to be doing is implementing a priority queue.
+
+348
+00:48:16.560 --> 00:48:29.670
+kylie jue: With two different ways of organizing the data you're going to do the complete implementation for the binary here and we're going to have you just implement the in-q operation for the sorted array and you'll get a lot of practice with again these fundamental c++ storage.
+
+349
+00:48:30.900 --> 00:48:43.530
+kylie jue: Units basically arrays and in summary priority queues. Again, our cues ordered based on a priority of the element where highest priority elements get DQ first and it's really important to make sure you've wrapped your head around what this highest priority means
+
+350
+00:48:44.130 --> 00:48:53.490
+kylie jue: In the assignment. In particular, we're going to say that higher priorities are smaller numbers. So we're going to be using a min heat, but it is possible to define it the other way. And we're just not going to do that for this assignment.
+
+351
+00:48:54.870 --> 00:49:01.950
+kylie jue: And as a takeaway. There can be multiple ways to implement the same abstraction which we just saw with both the sorted array and the binary heap.
+
+352
+00:49:02.460 --> 00:49:10.290
+kylie jue: But for both ways. In this case of implementing the priority queues. We're going to be using a race specifically for our lowest level of abstraction, which is the data storage.
+
+353
+00:49:12.090 --> 00:49:13.410
+kylie jue: And in terms of what's next.
+
+354
+00:49:14.610 --> 00:49:31.290
+kylie jue: We're going to finish up implementation and we're going to talk specifically about memory and pointers. So we're going to dive even deeper into what we're talking about when we say we have a pointer, but it is to a memory address and how we use those in our code.
+
+355
+00:49:32.610 --> 00:49:41.550
+kylie jue: Alright, so we're finished one minute early for once, and we'll stick around for any questions. But if not, we'll see you tomorrow. Thanks.
+
+356
+00:49:42.810 --> 00:49:43.170
+Jihe He: Thank you.
+
+357
+00:49:43.740 --> 00:49:44.100
+Siddharth Balaji: Thank you.
+
+358
+00:49:44.130 --> 00:49:45.270
+Thomas Tao Hale: Thank you. Thank you.
+
+359
+00:49:46.050 --> 00:49:46.590
+Elan Smolar Eisenberg: Thank you.
+
+360
+00:49:46.920 --> 00:49:47.850
+shirley li: Thank you.
+
+361
+00:49:47.880 --> 00:49:48.300
+Kenny Wang: Thank you.
+
+362
+00:50:04.290 --> 00:50:06.690
+kylie jue: Any questions on what we cover.
+
+363
+00:50:10.950 --> 00:50:19.590
+kylie jue: I see in the chat, what becomes the new route in the heap after D queuing yeah so that it again was, it's the last element that was in the queue.
+
+364
+00:50:20.430 --> 00:50:29.340
+kylie jue: So once we remove that we basically take this last one because that's going to be an empty spot in our new array. I'm in. Just put it at the top and then we bubble down
+
+365
+00:50:36.150 --> 00:50:38.070
+haoming li: Have a question about bubble up
+
+366
+00:50:40.950 --> 00:50:49.110
+haoming li: When we were bubbling up I see in a previous example where we're doing that from bright to
+
+367
+00:50:50.520 --> 00:50:54.120
+haoming li: It's a little abstract, by the way, we're only comparing
+
+368
+00:50:55.140 --> 00:51:06.120
+haoming li: Though with one child so will not be cases when we follow this Jane out there, but it doesn't
+
+369
+00:51:07.620 --> 00:51:09.570
+haoming li: meet our rules for the average
+
+370
+00:51:11.160 --> 00:51:13.800
+kylie jue: So for doing because you're going up.
+
+371
+00:51:13.980 --> 00:51:24.510
+kylie jue: You only have to make one comparison because you are just comparing it to the parent, right, because every child will only have one parent versus with dq
+
+372
+00:51:25.230 --> 00:51:30.720
+kylie jue: You have to compare the parent because you're doubling down to both of its children. Right.
+
+373
+00:51:31.890 --> 00:51:34.980
+kylie jue: Does that make sense so you're making multiple comparisons. When you're doing it each
+
+374
+00:51:37.980 --> 00:51:43.560
+haoming li: See because one parent to child to children, making comparisons.
+
+375
+00:51:44.010 --> 00:51:45.240
+haoming li: Exactly. Oh.
+
+376
+00:51:54.600 --> 00:52:18.180
+Demi Lei: Yeah, so, um, so I I'm just wondering, just to clarify that. So the parents, children relationship as like in this one than men. He won the children only needs to be smaller than the direct parent and the parent level doesn't really like matter.
+
+377
+00:52:18.660 --> 00:52:19.200
+To the
+
+378
+00:52:20.250 --> 00:52:30.480
+kylie jue: Parent doesn't matter. But you flop or read the child has the parent has to be smaller in priority or which is confused because it's higher priority, but the number of the on the parent
+
+379
+00:52:30.600 --> 00:52:33.060
+kylie jue: Should be smaller than the children to satisfy the property.
+
+380
+00:52:33.450 --> 00:52:49.530
+Demi Lei: So for example, in this slide. You're on. So we can see that like agent. I like 22 and 43. They're like, greater than 12 let it be as like actually greater than 43 it's still there and it's still fine.
+
+381
+00:52:49.620 --> 00:52:50.670
+kylie jue: Yes, and that's totally fine.
+
+382
+00:52:50.670 --> 00:52:51.630
+Demi Lei: During with nine
+
+383
+00:52:51.900 --> 00:53:00.810
+kylie jue: Yeah, and that's what, that's where we said that the order of the two children, doesn't matter, right. Like it doesn't have to be that the smaller child is on the left, as long as both the children.
+
+384
+00:53:00.840 --> 00:53:07.950
+Demi Lei: are larger than the pair. So in terms of like a flat array. It's not like a completely sorted
+
+385
+00:53:08.250 --> 00:53:16.710
+kylie jue: Are ranked. Yes. And that's sort of why it's more efficient actually then are completely sorted array, right, because it doesn't have to have like 100% sorted
+
+386
+00:53:18.660 --> 00:53:31.440
+Demi Lei: Also, can you explained it to children thing again. In the example of how you have like one parent on the top and you have something just on the left. And that's complete like how
+
+387
+00:53:32.160 --> 00:53:34.380
+kylie jue: Yeah, like what it means to be complete based on the number of
+
+388
+00:53:34.440 --> 00:53:35.850
+Demi Lei: Yes, yes, yes.
+
+389
+00:53:35.880 --> 00:53:45.510
+kylie jue: Yeah, so this is a complete tree here because every parent that we can say is above. I guess the second to last level has two children. So this one's a parent that has two children.
+
+390
+00:53:45.750 --> 00:53:57.270
+kylie jue: This is a parent that has two children. This is apparent that has two children. And then because you're filling in this bottom level from left to right, the second to last level won't necessarily have all of us.
+
+391
+00:53:58.230 --> 00:54:04.380
+kylie jue: Not all of the nodes in the second to last level will have children, but you should be filling them in from left to right on this bottom level.
+
+392
+00:54:04.920 --> 00:54:10.380
+Demi Lei: OK. So the general rule of thumb is just to try to fill in from left to right and
+
+393
+00:54:10.380 --> 00:54:10.890
+kylie jue: Exactly.
+
+394
+00:54:11.040 --> 00:54:12.030
+Demi Lei: Well, highest level.
+
+395
+00:54:12.240 --> 00:54:13.860
+kylie jue: Yeah, from top to bottom, left to right.
+
+396
+00:54:14.790 --> 00:54:16.170
+Demi Lei: Okay, got it. Thank you.
+
+397
+00:54:20.580 --> 00:54:21.720
+Other questions.
+
+398
+00:54:25.950 --> 00:54:27.210
+kylie jue: Anything in the chat was saying you
+
+399
+00:54:30.420 --> 00:54:30.900
+Nick Bowman: Know, good.
+
+400
+00:54:35.070 --> 00:54:35.490
+haoming li: For
+
+401
+00:54:35.940 --> 00:54:46.230
+haoming li: These elements, the same before period, that's something that you are related with the order. It's just information we're storing and
+
+402
+00:54:47.250 --> 00:54:48.420
+haoming li: Number Oscar, the
+
+403
+00:54:50.010 --> 00:54:50.850
+haoming li: Property
+
+404
+00:54:51.180 --> 00:54:58.800
+kylie jue: Exactly. Yeah. So if you're thinking about this is like the waiting room analogy, like the sea or the J, those are names of patients and then their priority is
+
+405
+00:54:58.950 --> 00:54:59.910
+haoming li: Represented but the number
+
+406
+00:55:01.230 --> 00:55:01.410
+haoming li: One.
+
+407
+00:55:08.160 --> 00:55:13.080
+edouard des: question regarding I'm. Is it possible to know to the same priority.
+
+408
+00:55:13.650 --> 00:55:14.220
+kylie jue: Yes.
+
+409
+00:55:14.550 --> 00:55:15.690
+kylie jue: It is, yeah. Yeah.
+
+410
+00:55:17.100 --> 00:55:19.740
+kylie jue: Yeah, so they maintain good
+
+411
+00:55:20.400 --> 00:55:23.670
+edouard des: So, so like if I'm, if I had like nine as be
+
+412
+00:55:24.780 --> 00:55:35.460
+edouard des: The like that that would still work and then would it matter in which, which are the two children. It was so long as it was because like if you're equal then then your base. It's like a child is apparent no
+
+413
+00:55:36.690 --> 00:55:37.080
+kylie jue: Yeah.
+
+414
+00:55:37.590 --> 00:55:39.090
+kylie jue: That would be a valid tree. So I
+
+415
+00:55:39.090 --> 00:55:41.370
+kylie jue: Guess you could think about it then is greater than or equal to
+
+416
+00:55:42.090 --> 00:55:56.340
+edouard des: For the children, but it's still valid. Okay. And also I'm out of curiosity arteries ETS themselves or they like like because like can you if they're managing their index for you. So, like, are they are they fun like. Are there any details. Well,
+
+417
+00:55:56.610 --> 00:56:04.680
+kylie jue: I would think about them as an abstraction. I wouldn't think about them as specifically a data type, because you're working with a more lower level memory.
+
+418
+00:56:06.240 --> 00:56:07.740
+kylie jue: Memory. What do I want to call it.
+
+419
+00:56:08.160 --> 00:56:10.770
+kylie jue: Just you're accessing lower level memory that it's not like a
+
+420
+00:56:10.980 --> 00:56:23.610
+kylie jue: An object. Because I think when we think of abstract data types are often talking about objects in c++, which is how we define objects using classes and arrays are not defined with the class. It's actually giving you like that low level access to the memory.
+
+421
+00:56:24.210 --> 00:56:29.340
+kylie jue: So you can think about it as an abstraction over your computer's memory, but I wouldn't call them necessarily need you to. Yeah.
+
+422
+00:56:29.640 --> 00:56:31.500
+edouard des: Okay. And can you have nested arrays.
+
+423
+00:56:32.580 --> 00:56:33.480
+kylie jue: Can you have
+
+424
+00:56:33.900 --> 00:56:34.470
+edouard des: I think the answer.
+
+425
+00:56:35.160 --> 00:56:36.840
+kylie jue: Is yes. Right, Nick.
+
+426
+00:56:38.160 --> 00:56:40.740
+Nick Bowman: Um, it depends on what you mean by a nested array.
+
+427
+00:56:41.370 --> 00:56:49.860
+edouard des: I'm not sure what I mean either, but like, is it possible to have, like, like, Well, would that mean, like, could you, I guess you could have an array, full of pointers to other arrays. Right.
+
+428
+00:56:50.370 --> 00:56:57.600
+edouard des: Yes, yes, but as that is that, do people do that or is that because, like if the point has changed, and you have to keep that array of pointers updated day
+
+429
+00:56:59.040 --> 00:57:09.780
+Nick Bowman: Um, yeah, if people do that. I mean that that is if you fundamentally wanted to have a quote unquote like two dimensional data structure in RAM memory and those how you're talking
+
+430
+00:57:11.610 --> 00:57:13.020
+Nick Bowman: With the capabilities that we have now.
+
+431
+00:57:16.050 --> 00:57:16.560
+edouard des: Thank you.
+
+432
+00:57:21.090 --> 00:57:35.940
+Oz Gitelson: Um, I just wanted to make sure I'm understanding this correctly be runtime of DQ but actually be to log n. But that's just simplified down to login. Right. Yes. All right. Great. Thanks.
+
+433
+00:57:47.010 --> 00:57:48.270
+Any other questions.
+
+434
+00:58:01.140 --> 00:58:08.940
+kylie jue: See a killing the chat room, how would you determine when two children have the same priority versus when a parent and the child can have the same priority.
+
+435
+00:58:09.660 --> 00:58:14.970
+kylie jue: So if you follow the sort of like general algorithm that we talked about for bubbling up and publishing down
+
+436
+00:58:15.750 --> 00:58:28.410
+kylie jue: It just depends on when when those things are being added to the key right like you could have added them in an order such that you end up with a parent that has two children have the same priority or you could add them in an order like
+
+437
+00:58:29.730 --> 00:58:40.440
+kylie jue: Edward mentioned where if this were nine, you could end up with having a child and apparent with the same priority and it just depends on the order, actually, in which you decided to in queue or DQ them. Yeah.
+
+438
+00:58:44.850 --> 00:58:53.580
+edouard des: But with this, you still can't like, choose a certain priority to DQ right like you can't be like, give me priority like to you have to take the first one lifetime.
+
+439
+00:58:54.960 --> 00:58:56.100
+kylie jue: You only get the highest one
+
+440
+00:59:06.360 --> 00:59:09.600
+kylie jue: That's any leftover questions on the chat.
+
+441
+00:59:11.820 --> 00:59:20.430
+Junhao Wang: Oh yeah, good question. So does a Trojan only have to be bigger than its own parents or like both of the parents.
+
+442
+00:59:21.690 --> 00:59:26.760
+kylie jue: Since it only has one pair you technically only think about it as having one parent. So yeah, it only has to be bigger than the
+
+443
+00:59:26.880 --> 00:59:35.550
+kylie jue: Right, like you, for example, this one is not a parent of be right. So that one is still bigger and that's fine you only it only has to be bigger than its actual parent. Okay.
+
+444
+00:59:36.990 --> 00:59:37.470
+Junhao Wang: I'm
+
+445
+00:59:37.770 --> 00:59:43.770
+Shifeng Hong: Sorry, you can repeat on. How should we deal with data they have a certain crowd. He
+
+446
+00:59:44.760 --> 00:59:50.850
+kylie jue: Yeah, so you can treat them the same way, like if you had if you imagine that this was let's pretend this was actually 11
+
+447
+00:59:51.090 --> 00:59:52.440
+Shifeng Hong: Right, instead of 13
+
+448
+00:59:52.740 --> 00:59:54.030
+kylie jue: And if I go back
+
+449
+00:59:56.040 --> 01:00:05.520
+kylie jue: If I go back to my process. It would have been a valid tree. If this were 11 right because you're filling it from left to right and you would follow the same steps here at you bubble it to the top.
+
+450
+01:00:06.180 --> 01:00:14.280
+kylie jue: And then you would swap it with the smaller one. And then you'd end up here, right, and all that would happen is, in this case, you just wouldn't swap it right because they're the same.
+
+451
+01:00:14.670 --> 01:00:22.680
+kylie jue: It's 11 and you can think about it the same way bubbling up the process actually does not change at all. All it is, is that like when you have something that's equal. You don't need to make a swap
+
+452
+01:00:31.380 --> 01:00:32.820
+Cool. Any other questions.
+
+453
+01:00:45.990 --> 01:00:50.220
+kylie jue: Alright, we just finished really only 10 minutes of questions.
+
+454
+01:00:53.130 --> 01:00:57.690
+kylie jue: All right, if nothing else, we're going to sign off, and we will see all of you tomorrow.
+
+455
+01:00:58.560 --> 01:00:58.950
+edouard des: Thank you.
+

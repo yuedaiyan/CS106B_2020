@@ -1,0 +1,1570 @@
+WEBVTT
+
+1
+00:00:06.240 --> 00:00:07.200
+kylie jue: Alright, welcome back to
+
+2
+00:00:08.280 --> 00:00:16.080
+kylie jue: Today we're going to be wrapping up our discussion around linked lists. And then we're also going to be introducing one of my favorite topics in the course which is sorting.
+
+3
+00:00:16.440 --> 00:00:23.820
+kylie jue: And as we're getting started, I'd love to hear what is a problem or challenge in your everyday life that you feel empowered to solve with computer science.
+
+4
+00:00:24.870 --> 00:00:29.550
+kylie jue: Our sorting topic is going to bring us into
+
+5
+00:00:30.060 --> 00:00:37.980
+kylie jue: The real world algorithms part of our course. And we're going to sort of in these last couple weeks go back and forth between link data structures in real world algorithms.
+
+6
+00:00:38.340 --> 00:00:47.430
+kylie jue: But that's sort of the lead in for that question about thinking. Now, how can we apply computer science topics that we've learned to problems that we might see in everyday life, or that we've seen before.
+
+7
+00:00:49.260 --> 00:01:00.660
+kylie jue: Alright so today's questions. So how can we implement linked list operations that require rewiring multiple elements. So it'll be a little bit more complex. The type of link list operations that we're going to be doing today.
+
+8
+00:01:00.870 --> 00:01:06.000
+kylie jue: And then we're going to jump into our real world algorithms specifically on sorting. Alright.
+
+9
+00:01:07.170 --> 00:01:14.760
+kylie jue: So let's just start with a quick review of the link list operations that Nick went over yesterday so yesterday for the first time we saw the
+
+10
+00:01:15.090 --> 00:01:20.670
+kylie jue: link list can be used outside of classes, even though our first example and our lead in was talking about how link bliss.
+
+11
+00:01:21.240 --> 00:01:29.700
+kylie jue: Are sort of this underlying structure that you can use when implementing things will be able to actually use linked list outside of classes and you're going to do this on assignment five
+
+12
+00:01:30.210 --> 00:01:43.350
+kylie jue: And another thing that was really important from yesterday is thinking about when you want to pass pointers by reference in order to edit the original pointer and to avoid leaking memory by ending up with something that you can no longer access in your helper function.
+
+13
+00:01:44.400 --> 00:01:48.270
+kylie jue: So pass by reference to something we've seen before, but now we're going to be using it specifically with pointers.
+
+14
+00:01:49.050 --> 00:01:54.000
+kylie jue: As a reminder, these are for common link list operations and yesterday we covered reversal.
+
+15
+00:01:54.870 --> 00:02:07.350
+kylie jue: And saw three different applications of it. We saw printing a linked list measuring a link. Listen, freeing a link list. And I'm not going to go into depth about the code and the walkthrough that we did yesterday, but the main idea here is that we used a while loop.
+
+16
+00:02:08.070 --> 00:02:16.170
+kylie jue: That had a pointer that started at the front of the list and then you updated that pointer to point to the next thing, and you did something before you updated it
+
+17
+00:02:16.380 --> 00:02:29.400
+kylie jue: And just as a note. It does look a little bit different for freeing because we want to make sure we're avoiding losing track of anything by deleting it first. So just keep that in mind and take a look at yesterday slides. If you want to remember what freeing looks like.
+
+18
+00:02:30.540 --> 00:02:35.880
+kylie jue: So some takeaways from linked list reversal that we saw is that temporary pointers into lists are super helpful.
+
+19
+00:02:36.180 --> 00:02:45.210
+kylie jue: When you actually process. The link list interactively it's really common to introduce pointers that point two cells in multiple spots in the list and we're going to see multiple examples of this actually today as well.
+
+20
+00:02:45.630 --> 00:02:57.810
+kylie jue: And it's particularly useful when we're destroying or rewiring existing list. And again, we're going to use that while loop convention with a condition to check if the pointer isn't no pointer before trivia.
+
+21
+00:02:59.130 --> 00:03:12.990
+kylie jue: As traverse a way of traversing the link list. And then we also saw a little bit yesterday about how you could do some of this recursive Lee, but in general we want to stick to iterative reversal to have a really scalable way of going through large linked lists.
+
+22
+00:03:14.220 --> 00:03:23.460
+kylie jue: The other thing we talked about briefly yesterday was insertion. So how do we actually add an element to a list and we saw two different ways to do that. We saw pre pen to and we saw a pen to
+
+23
+00:03:23.700 --> 00:03:33.780
+kylie jue: Prepare to put things at the beginning of our link lists and what would happen is that whatever you passed in, or whatever you pretended would end up in reverse order, right. The first thing you would add would end up at the back of the list.
+
+24
+00:03:35.190 --> 00:03:37.080
+kylie jue: And the most recent thing would end up at the front.
+
+25
+00:03:37.560 --> 00:03:45.780
+kylie jue: We also saw a pen to which actually kept the order of the things that you added right. The first thing you add would end up at the front, and then you have to traverse all the way to the back in order to add it
+
+26
+00:03:46.230 --> 00:03:54.810
+kylie jue: And the big takeaway from these two functions is it introduced this idea again of passing a node by reference or a pointer by reference node star by reference.
+
+27
+00:03:55.980 --> 00:04:02.160
+kylie jue: And again, when you're thinking about this. We want to keep in mind the scope of our variables and where are the pointers existing
+
+28
+00:04:02.610 --> 00:04:09.960
+kylie jue: Whether it's something that exists in Maine versus something in the function and whether you need to pass it by reference so that they point to the same thing and will be ending up editing the same thing.
+
+29
+00:04:11.130 --> 00:04:16.920
+kylie jue: All right, so, but one unresolved issue that we ended with yesterday is that are a pen to function was pretty
+
+30
+00:04:17.580 --> 00:04:27.120
+kylie jue: Not great in bingo complexity. Right. It was oh event because every time you added something you have to traverse all the way to the end until you found no pointer. At the end of your list and said okay, now I can add it
+
+31
+00:04:27.540 --> 00:04:32.910
+kylie jue: But you can imagine that that's pretty bad for a single insertion of every time you had to do over then
+
+32
+00:04:33.810 --> 00:04:38.700
+kylie jue: To insert in something into a link list. It's not any better than something like an array. Right.
+
+33
+00:04:39.060 --> 00:04:52.020
+kylie jue: And we said, linked list could be better. So we're going to talk today about how can we actually do some fun rewiring and better insertion in order to reduce that runtime. And we're also going to talk about in the second part of our link this
+
+34
+00:04:53.130 --> 00:04:56.010
+kylie jue: Topic actually inserting in deleting in the middle of a list.
+
+35
+00:04:57.060 --> 00:05:01.950
+kylie jue: So let's talk first about this more efficient append So yesterday we saw the O event append
+
+36
+00:05:02.550 --> 00:05:10.800
+kylie jue: But what if we know we're going to add many things in some maintained order, right. So a pen tool is great if you're just adding one thing and sure that it's open.
+
+37
+00:05:11.010 --> 00:05:15.780
+kylie jue: But if we know we're going to add multiple things over and over. We don't want every single one of those to be oh event.
+
+38
+00:05:15.960 --> 00:05:24.000
+kylie jue: So let's look specifically at the example of, let's take a vector. And we're going to convert that vector into a linked list. And we want to maintain the order of the elements that we're adding
+
+39
+00:05:25.200 --> 00:05:34.320
+kylie jue: So let's look at our first attempt. Our first attempt takes in about a vector with values, it says, If it's empty, we're going to return the null pointer because there's nothing inside of our link list.
+
+40
+00:05:34.620 --> 00:05:41.340
+kylie jue: But otherwise, what we're going to do is we're going to create a new node that is the first thing inside of our vector that points to know
+
+41
+00:05:41.700 --> 00:05:48.540
+kylie jue: That what we're going to do. We're going to edit iterate over the values in a side of our vector. And we're going to call our pens to function. Right.
+
+42
+00:05:49.290 --> 00:06:03.030
+kylie jue: So that was the function we wrote yesterday, it's going to traverse the end. Every time and then add it to the end of our list where we're starting with the first thing in our vector. So my question for you is, what do you think the runtime of this is going to go help. Great.
+
+43
+00:06:04.560 --> 00:06:15.630
+kylie jue: Thanks already open to the pole, but so this is our first attempt. What do you think the runtime of this create lists with a pen function is. Is it all of n, is it all of n squared or of n cubed, or oh login
+
+44
+00:06:24.390 --> 00:06:32.970
+kylie jue: Alright, I'm seeing boats coming in, which looks good. It looks like there's two big choices that people are sort of trying to decide between
+
+45
+00:06:35.850 --> 00:06:48.000
+kylie jue: Alright, so about 68% of people thought it would be, oh of n squared. And the second runner up there is, oh of n, and it is of n squared because remember we said a pen to itself is oh of n.
+
+46
+00:06:48.360 --> 00:06:58.800
+kylie jue: And then when we wrap it in a for loop that repeats n times n is the number of things inside of our vector, it's going to be n squared, right, you're repeating and oh event operation and times. So you're going to multiply those together.
+
+47
+00:06:59.550 --> 00:07:01.380
+kylie jue: So this is not good. We don't like this.
+
+48
+00:07:01.920 --> 00:07:07.440
+kylie jue: We don't really want to have an open squared operation. So we're going to do a better one. We're going to have a pen.
+
+49
+00:07:07.680 --> 00:07:16.440
+kylie jue: And we're going to take advantage of what I just talked about in our introduction, which is keeping track of multiple places inside of our linked list in order to create a more efficient function.
+
+50
+00:07:16.830 --> 00:07:26.250
+kylie jue: So let's go ahead and code it and I've gone ahead and end today's code, we have the create with a pen. If you want to test it out. And there are some time tests in the
+
+51
+00:07:27.180 --> 00:07:30.510
+kylie jue: In the main file to that you can try out when we finish this one.
+
+52
+00:07:30.840 --> 00:07:39.990
+kylie jue: And if we have time, we'll show how that goes. So let's go ahead and talk about, okay, what we want to do is we want to create a concept called a tail pointer and what our tail pointer is going to do.
+
+53
+00:07:40.200 --> 00:07:44.730
+kylie jue: Is it's going to keep track of the last thing in our list at all times. Right.
+
+54
+00:07:45.360 --> 00:07:55.320
+kylie jue: And that way we don't have to continually iterate from the beginning to the end. Every time we add something. Instead, we can just say, oh, where's our tail pointer pointing to add it there and then update it.
+
+55
+00:07:55.920 --> 00:08:03.810
+kylie jue: So that's the general concept that we want to follow. So let's go ahead and we want a very similar looking thing in the beginning of create lists with tail pointer.
+
+56
+00:08:04.110 --> 00:08:12.060
+kylie jue: We want if values.is empty right if we know our vectors empty. We're still going to go ahead and return null pointer. That's not going to change.
+
+57
+00:08:12.330 --> 00:08:24.180
+kylie jue: And our creation of our head node is also not going to change. Right. We want to create a new node and we want it to have the as its data. The first thing inside of our values vector and it's pointer is just going to be no pointer.
+
+58
+00:08:25.020 --> 00:08:28.680
+kylie jue: So that looks pretty much the same as what we have appear with our create list to append
+
+59
+00:08:28.920 --> 00:08:37.980
+kylie jue: So this is where things are going to look a little different. So now what I'm going to do is I'm going to create a node pointer called curve for current and I'm going to start it at head.
+
+60
+00:08:38.400 --> 00:08:41.580
+kylie jue: And this is going to look similar to our pattern with reversal.
+
+61
+00:08:42.060 --> 00:08:49.860
+kylie jue: Except the difference here is now we know how many things we're iterating over. So what I'm going to do is I'm going to stay for it i equals one.
+
+62
+00:08:50.250 --> 00:08:58.740
+kylie jue: Because we don't need to add the very first thing, because we've already done that. So I want to add the second thing inside values. Values dot size.
+
+63
+00:09:00.210 --> 00:09:08.460
+kylie jue: And since we're using a for loop here. If the list only or if the vector only had one thing in it. This would protect us from trying to access something that wasn't there.
+
+64
+00:09:08.880 --> 00:09:19.230
+kylie jue: And so now what I'm going to do is ok for each item inside of values that is not the first one I'm going to create a new node, right. So this looks the same as our code above
+
+65
+00:09:19.620 --> 00:09:25.590
+kylie jue: Were in this time I'm going to index into values using AI and then it's still going to be no point or when we create the new node.
+
+66
+00:09:26.730 --> 00:09:32.100
+kylie jue: And what I'm actually going to do now is I'm going to use my current pointer to say okay her
+
+67
+00:09:33.750 --> 00:09:44.400
+kylie jue: Next equals new node, right. So if I'm at the very beginning. The first thing I'm adding in an index one is going to get placed as the next node for the one that is index zero
+
+68
+00:09:45.120 --> 00:09:53.100
+kylie jue: And then what I can do is I can say Kerr equals new node. And at the end, I'm going to just return my head pointer.
+
+69
+00:09:53.520 --> 00:10:05.010
+kylie jue: So one thing I want you to think about is why couldn't I just use head here. Some of you might be asking that question. Like, why couldn't I, why do I need this extra Kurt pointer, can't I just say like head next equals new node and then update the head
+
+70
+00:10:05.430 --> 00:10:09.360
+kylie jue: And the issue with that right if I need to, at the very end when I'm done.
+
+71
+00:10:09.570 --> 00:10:18.120
+kylie jue: return a pointer still to the front of my list, whatever the value zero was. And if I'm updating head itself right I lose track of everything I'm adding as I add it, which is
+
+72
+00:10:18.270 --> 00:10:23.070
+kylie jue: Not what I want. I want to be able to still get the first thing. So what we need is we need the second pointer.
+
+73
+00:10:23.580 --> 00:10:32.910
+kylie jue: This sort of temporary one that's again keeping track of the end of our list. So we know where to add to, are there any questions on this or how this is different from what was happening up here.
+
+74
+00:10:34.860 --> 00:10:37.320
+Nick Bowman: Just a quick note on the floor that you want i less than you thought.
+
+75
+00:10:38.700 --> 00:10:40.080
+Oh yeah, good.
+
+76
+00:10:41.940 --> 00:10:42.150
+Nick Bowman: Job.
+
+77
+00:10:42.660 --> 00:10:43.590
+Nick Bowman: Okay, great.
+
+78
+00:10:45.060 --> 00:10:48.720
+kylie jue: Alright, so yes. So this is a better version of our
+
+79
+00:10:49.290 --> 00:10:58.350
+kylie jue: Create list function again, if this is and this is specifically for the case where we know we're going to have something where we're adding multiple values in over and over again. And we need to keep track of.
+
+80
+00:10:58.890 --> 00:11:08.940
+kylie jue: The tail pointer here. So just to sort of really visualize what's going on here. How is this working. This is an example of how are you, how we use it in code and I can. I'll run this over in Maine in a moment to
+
+81
+00:11:10.680 --> 00:11:19.290
+kylie jue: But let's suppose you wanted to actually use on the client side function we just wrote the Create lists would say a pointer and we passed in this vector of me, Nick and trips name.
+
+82
+00:11:19.890 --> 00:11:23.760
+kylie jue: And so this was the function I just wrote a little condense just for room on the fly.
+
+83
+00:11:24.120 --> 00:11:30.600
+kylie jue: And we're passing and Nick trip and Kylie. And so what happens. I'm just going to do a quick walkthrough here so that it's super clear how this is working.
+
+84
+00:11:31.020 --> 00:11:38.460
+kylie jue: So we skip over that line. Then we're going to create a new head node that has again points to null pointer and it has nickname first because that's the first value.
+
+85
+00:11:38.910 --> 00:11:47.220
+kylie jue: And then we create a carpenter, right, which creates an entirely new pointer, but it's pointing to the same place has had when we start and then we're going to go on to our for loop.
+
+86
+00:11:49.950 --> 00:11:56.880
+kylie jue: So for the first node that we create. We're going to create something called new node. And again, this is introducing a new pointer. So it's creating new node.
+
+87
+00:11:57.180 --> 00:12:08.340
+kylie jue: And it's going to place Kylie into it because our index here is one and then we set career next equal to new node. And so what does that do it updates. This next point or 2.2 Kylie
+
+88
+00:12:09.870 --> 00:12:16.560
+kylie jue: And since Kylie was already pointed to NULL pointer. We don't have to worry about updating anything over here because that's working through this line here.
+
+89
+00:12:17.280 --> 00:12:26.610
+kylie jue: And then we can just say, okay, set Kurt equal to new node. And so my computer is a little slow today. OK, so now Kurt is going to be pointing to Kylie
+
+90
+00:12:27.570 --> 00:12:31.950
+kylie jue: Which is the same thing as new node and then when we go through our new version of the for loop.
+
+91
+00:12:32.130 --> 00:12:42.450
+kylie jue: We're going to see that new node. Again, remember that the scope of a variable, right, is where these curly brackets are so new node goes away temporarily when we exit and then we are repeating right because there's a for loop.
+
+92
+00:12:42.690 --> 00:12:52.980
+kylie jue: And so now is to. And so we create a new new node which has trip. And we're going to go through the process again where we update because current is now pointing here we can update Kylie to point to trip.
+
+93
+00:12:53.910 --> 00:13:03.750
+kylie jue: And we will finish with the right value for head where we send what head is pointing to back to our color which is list.
+
+94
+00:13:04.500 --> 00:13:18.600
+kylie jue: Alright, so let's just sort of walk through the logic that you saw me code. And in general, what we just saw as we built a linked list with the desired order of elements maintained as well as old and time right we maintain the order of the vector elements.
+
+95
+00:13:19.740 --> 00:13:26.130
+kylie jue: Or the other way you can think about it as the first thing that we added ends up at the front of the list. And the last thing that we added ends up at the back of the list.
+
+96
+00:13:27.090 --> 00:13:32.400
+kylie jue: So that's great. Alright so that is how we can improve our append function.
+
+97
+00:13:32.610 --> 00:13:36.810
+kylie jue: And now I'm going to talk about slightly different manipulations that we're going to do we're going to handle
+
+98
+00:13:36.990 --> 00:13:44.880
+kylie jue: Insertion and deletion in the middle of the list. So, so far, you've seen insertion and deletion at the beginning and at the end of the list as well as reversal for different processes.
+
+99
+00:13:45.120 --> 00:13:49.380
+kylie jue: And now we're going to talk about combining sort of all of those things to reversal.
+
+100
+00:13:49.890 --> 00:13:54.600
+kylie jue: insertion, deletion and rewiring to get to something in the middle of the list. And why might we want this.
+
+101
+00:13:54.960 --> 00:14:01.950
+kylie jue: We might want to maintain a particular sorted order of the list. So if we have like in the previous example, we have a linked list where everything is sorted
+
+102
+00:14:02.220 --> 00:14:17.280
+kylie jue: We may want to add a new thing that is not that it's going to be somewhere in the middle. Based on a particular sorting, or we may want to remove a particular element in the list. Maybe I'm given a linked list. And I say, okay, find the thing that I need to remove and remove that one specifically
+
+103
+00:14:18.450 --> 00:14:23.580
+kylie jue: So we're going to write two functions here we're going to write one called alphabetical add alphabetical is just specifying
+
+104
+00:14:24.060 --> 00:14:29.730
+kylie jue: How we're going to order the things inside and then we're going to write a function called removes to do exactly these things that we talked about.
+
+105
+00:14:30.600 --> 00:14:45.090
+kylie jue: One thing I want to point out here is that we will need to pass our list by reference because we're going to again be adding and removing from the list itself. We don't want to have those changes not persist. Alright, so let's go ahead and start with alphabetical ad
+
+106
+00:14:47.070 --> 00:14:56.910
+kylie jue: So if I'm here, so let's um let's go ahead and I want to just draw a picture here, and we're going to see
+
+107
+00:14:59.340 --> 00:15:04.350
+kylie jue: Let's see. Okay. So I'm going to just draw a quick picture here to say, let's imagine again the Kylie trip, Nick.
+
+108
+00:15:04.800 --> 00:15:16.290
+kylie jue: Linked list. This time, but now we want to have sorted values. And let's imagine that we are adding my name, or let's say we're adding nickname, and my name and trips are already in there. So we've passed in.
+
+109
+00:15:17.580 --> 00:15:25.800
+kylie jue: A list that looks like this. Right, here's our node star pointer and already inside is my name.
+
+110
+00:15:27.030 --> 00:15:30.960
+kylie jue: And trips name, and this was going to point to know
+
+111
+00:15:32.640 --> 00:15:41.280
+kylie jue: And what we want to do is we want to insert Nick here. Okay, so that's sort of our goal. So let's go ahead and try to figure out, how would we do that.
+
+112
+00:15:41.850 --> 00:15:50.610
+kylie jue: So what we're past in the past and data. So you can imagine the string data here would be Nick and this list is what we currently have here and let's say
+
+113
+00:15:51.210 --> 00:15:56.610
+kylie jue: Well, first we want to create an actual new node that's going to have a nickname. So let's do that.
+
+114
+00:15:57.060 --> 00:16:09.630
+kylie jue: So we create a new node. And remember, we have our node constructor, where we pass in the data first and then we're just going to go ahead and pass a null pointer. Right. And so now what we have is we have a new node pointer.
+
+115
+00:16:10.920 --> 00:16:14.310
+kylie jue: Right, that has Nick.
+
+116
+00:16:15.420 --> 00:16:27.330
+kylie jue: And a null pointer attachment. So now, that's what that one's going to be doing. And so now what I want to do is I'm going to actually do this. I'm going to have
+
+117
+00:16:27.990 --> 00:16:37.680
+kylie jue: Something called current and I'm going to iterate while current is not equal to the null pointer. So, current is going to start at list up here.
+
+118
+00:16:38.100 --> 00:16:48.180
+kylie jue: And while current is not equal to the null pointer and remember we're sorting alphabetically. So I'm going to say, while the current is not equal to the null pointer and
+
+119
+00:16:49.230 --> 00:16:53.580
+kylie jue: The current data. So the name that I'm looking at right now is less than the data.
+
+120
+00:16:53.820 --> 00:17:00.780
+kylie jue: What I want to do is I'm going to go ahead and say current is equal to current next. So this is a similar pattern right we're creating a temporary node.
+
+121
+00:17:01.050 --> 00:17:12.600
+kylie jue: That's going to help us move or traverse through the list to figure out where we need to be. And basically, what I'm saying is use this while loop to figure out, okay, let's stop once I get to the point where I need to insert Nick.
+
+122
+00:17:13.710 --> 00:17:19.800
+kylie jue: So the one thing here though is right now if I have. So, let's go. So I have my cursor pointer.
+
+123
+00:17:20.310 --> 00:17:30.600
+kylie jue: And it's going to start at Kylie and that's going to be less than data. So I'm going to have it point to next. And it's going to end up here, right at that point it's going to break out of the while loop because we're going to get
+
+124
+00:17:31.470 --> 00:17:37.380
+kylie jue: Trips name and say, okay, well the data now is greater than nickname right because of alphabetically trips name comes after next
+
+125
+00:17:38.520 --> 00:17:42.450
+kylie jue: But how do we insert it here, right, we have to be able to update the pointer that's here.
+
+126
+00:17:42.810 --> 00:17:52.200
+kylie jue: And point to Nick. But now that we're pointing to trip. We don't have access to that anymore. Right, so that makes it really hard. So what we actually have to do here is I'm going to introduce another node pointer.
+
+127
+00:17:52.560 --> 00:18:02.550
+kylie jue: Called previous and what previous is going to start this. I'm going to have it set to NULL pointer and before I update current occur next I'm going to set previous equal to occur.
+
+128
+00:18:03.510 --> 00:18:11.580
+kylie jue: And what that does is it just makes previous sort of one step behind the current node. So what's going to happen here. My previous node.
+
+129
+00:18:13.890 --> 00:18:14.520
+Pointer
+
+130
+00:18:15.660 --> 00:18:24.060
+kylie jue: Is going to point to Kylie right so we have a current that's pointing to trip and a previous of point to Kylie and now it's going to be much easier to actually rewire
+
+131
+00:18:25.650 --> 00:18:33.780
+kylie jue: rewire our notes. So let's go ahead and do the rewiring. So now that we have it. We want to say, Okay, we're going to say previous
+
+132
+00:18:34.530 --> 00:18:47.760
+kylie jue: Next is going to be equal to the new node right so that's going to set my next equal to Nick and then we're going to say new nodes. Next is going to be equal to occur.
+
+133
+00:18:49.170 --> 00:18:56.250
+kylie jue: And this looks good. Right. It's going to correctly insert neck and it's going to update my pointer and then update next pointer to be equal to trip.
+
+134
+00:18:56.910 --> 00:19:09.870
+kylie jue: But the one thing here that's going to go wrong is what happens if I am let's say I'm trying to add a name that is alphabetically before mining right so what would happen there, we would end up saying careers equal to the list.
+
+135
+00:19:10.350 --> 00:19:18.930
+kylie jue: We would have previous equal to no pointer and we would never even enter this while loop, right, because we would be entering something that's we have a data that's alphabetically before my name.
+
+136
+00:19:19.710 --> 00:19:28.920
+kylie jue: And so we'd end up with current pointing to list which points to me and previous people to know pointer and then we're going to get maybe a segue fault or a memory error here right when we try to
+
+137
+00:19:29.340 --> 00:19:38.580
+kylie jue: Do reference something that is not because previous will still be know if I'm trying to insert at the front of the list. So we need to do is we need to be very careful of that and use an if statement here.
+
+138
+00:19:38.850 --> 00:19:45.750
+kylie jue: To actually protect against that. So we only want to do what I just said if previous is not know
+
+139
+00:19:48.420 --> 00:19:53.910
+kylie jue: And if previous is no again. This means that we are adding to the front.
+
+140
+00:19:55.680 --> 00:20:05.580
+kylie jue: Of our link list. And if we're adding to the front of our link list. What we can do is we can just say, Okay, let's just set the new nodes next equal to the front of our list.
+
+141
+00:20:07.020 --> 00:20:14.280
+kylie jue: And we can now. Then after we're done. Set the list equal to the new node, right, because we're just updating the very front of our list.
+
+142
+00:20:14.490 --> 00:20:28.470
+kylie jue: And we're not going to return anything again because we're passing or node by reference. So we're automatically updating list itself. Alright, so I'm just a comment here. What this section is doing right is this was finding where we need to put
+
+143
+00:20:32.790 --> 00:20:45.210
+kylie jue: All right, any questions on how this works, it's a little bit tricky to wrap your head around, because we've got so many different pointers here. So I encourage you to if you're if it's still like not 100% sure what's going on a walk through it with diagrams.
+
+144
+00:20:45.480 --> 00:20:52.380
+kylie jue: After class on your own and really think about how things are getting updated. But the whole idea here is to really
+
+145
+00:20:53.790 --> 00:21:02.580
+kylie jue: To really have both this current node and this previous notes so that we're able to easily rewire something in the middle of our list. Any questions before I move on, about this.
+
+146
+00:21:07.650 --> 00:21:10.770
+kylie jue: No. All right, great knew how to clear the screen.
+
+147
+00:21:11.850 --> 00:21:23.730
+kylie jue: And so the next thing I want to do is I'm going to code we're jumping right into another code. It's going to be very similar. We're going to now do remove. So it's sort of the opposite of what we just did. Let's suppose that I have
+
+148
+00:21:25.200 --> 00:21:35.340
+kylie jue: The same list right we have a list right that we're passing in and then we're going to have list and I'm this time I'm going to have everyone in here.
+
+149
+00:21:38.280 --> 00:21:51.600
+kylie jue: And we'll have this point to know at the end. And this is going to be Kylie Nick and trip. And now let's suppose I actually want to remove Nick from the list, right. So we want to remove this one.
+
+150
+00:21:53.340 --> 00:22:05.940
+kylie jue: So let's go ahead and we're going to do a very similar structure here where we use a current and previous node to help us iterate through this list and do the rewiring so I'm going to create
+
+151
+00:22:06.270 --> 00:22:14.580
+kylie jue: Our current which is going to again start at least at the very front and then I'm going to go ahead and create a previous and that's going to be set to NULL pointer.
+
+152
+00:22:15.750 --> 00:22:17.460
+kylie jue: And now we're going to do is we're going to say
+
+153
+00:22:18.570 --> 00:22:27.060
+kylie jue: We just want to iterate until we find, Nick, or until we hit the end of our list. Like suppose, and it's not in the list. And we just want to safely and our loop.
+
+154
+00:22:27.780 --> 00:22:36.390
+kylie jue: And so in order to do that we see the same convention, we've seen in the past, which is while current is not equal to null pointer, right, because that's what tells us that we get to the end of the list.
+
+155
+00:22:36.810 --> 00:22:46.770
+kylie jue: And then what we're going to do is we're going to say current data is equal to date if it's equal to data to remove. That's how we know we found the thing that we need to get rid of for it.
+
+156
+00:22:47.820 --> 00:23:00.630
+kylie jue: And so what do we need to do if we found this if we find it. We need to go ahead and rewire here. Right. And so what we're gonna do is we're going to say previous next is going to be equal to current next
+
+157
+00:23:01.350 --> 00:23:09.840
+kylie jue: And then let's go ahead and delete. Correct. Right. So what that says is, as we're going along and you have the previous one and you have the current one.
+
+158
+00:23:10.140 --> 00:23:19.620
+kylie jue: Once you know the current one is what I want to skip. You're going to take the previous is next and put it over here so that it just skips the node and then you're going to delete the note there.
+
+159
+00:23:21.570 --> 00:23:25.380
+kylie jue: And then the last thing we want to do is if this is not the case. Right.
+
+160
+00:23:26.580 --> 00:23:34.920
+kylie jue: What we're going to go ahead and do or even if it is the case you want to say previous is equal to occur. So we're going to update previous and then we're going to update current
+
+161
+00:23:35.190 --> 00:23:43.470
+kylie jue: To be her and next. And so again, you still have to do, just like we did here, we're doing the update for previous and for current each time we go through the while loop.
+
+162
+00:23:44.400 --> 00:23:53.220
+kylie jue: I want to pause here for a second before I change anything, but I want you to think about is there anything that could go wrong here.
+
+163
+00:23:54.930 --> 00:24:01.800
+kylie jue: Is there anything that could possibly go wrong with this loop that we're updating things we're keeping track of previous and current. Oops.
+
+164
+00:24:02.880 --> 00:24:10.590
+kylie jue: So the thing that could potentially go wrong is actually the same bug that we talked about here. Right. What if, for example,
+
+165
+00:24:11.280 --> 00:24:16.830
+kylie jue: The first thing. What if we're trying to remove my name right. What if the first thing in the list is the thing we're trying to remove
+
+166
+00:24:17.100 --> 00:24:26.490
+kylie jue: We're going to again try to be trying to do reference something that is not right. And so this is something that you really should be thinking about constantly when you're working with link list and you'll see the same assignment.
+
+167
+00:24:26.670 --> 00:24:33.630
+kylie jue: Is MIT referencing a null pointer. I need to make sure I am not be referencing a null pointer. I was how you can get some unfortunate bugs.
+
+168
+00:24:35.340 --> 00:24:41.130
+kylie jue: So how are we going to do this instead we're going to say, okay, again, we're going to check if previous is not equal to null pointer.
+
+169
+00:24:42.690 --> 00:24:48.540
+kylie jue: Then we can do this right, we can go ahead and set previous next equal to current next and that's fine.
+
+170
+00:24:48.930 --> 00:25:00.720
+kylie jue: Otherwise, what we want to do. We're just going to set list itself equal to current next right because we want to update the value of list itself to just skip the first element, but in both cases, we're still going to delete the current element.
+
+171
+00:25:02.280 --> 00:25:02.670
+Alright.
+
+172
+00:25:03.720 --> 00:25:12.330
+kylie jue: Hopefully that made sense. And again, feel free to walk through this on your own. If you want to make like confirm with yourself that this actually does work.
+
+173
+00:25:12.810 --> 00:25:19.950
+kylie jue: You can do it on sort of a small example like this and see. Oh yes, it is actually rewiring correctly. Any questions before I move on.
+
+174
+00:25:22.920 --> 00:25:28.500
+Pepe Bolorinos: I have a question. Wouldn't you have to make sure that career is not the null pointer as well.
+
+175
+00:25:29.130 --> 00:25:35.340
+kylie jue: Yeah, that's a good question. So since we're starting current list, we know that it'll start as not the null pointer. Right.
+
+176
+00:25:36.690 --> 00:25:46.080
+kylie jue: But I guess if unless you have an empty list. But that's sort of an extra case. But what you have here is a while loop that only operates when Kurt is not equal to the null pointer. So that is a great point.
+
+177
+00:25:46.680 --> 00:25:55.140
+kylie jue: All these times that were D referencing career, you do want to make sure it's not the null pointer and our while loop is sort of going to implicitly guarantee or explicitly guarantee that for us.
+
+178
+00:25:55.290 --> 00:26:01.320
+kylie jue: Because it's making sure occur is not equal know pointer and if it is, then we're going to not be in this. Yeah, good question.
+
+179
+00:26:05.850 --> 00:26:06.570
+Anything else
+
+180
+00:26:12.480 --> 00:26:17.670
+kylie jue: Alright, so I'm going to go ahead then and move on here.
+
+181
+00:26:18.930 --> 00:26:25.440
+kylie jue: So let's talk about, oh, so this was just the takeaways I guess from what I what I talked about. So when while you're traversing
+
+182
+00:26:25.740 --> 00:26:34.620
+kylie jue: And you want to actually add or remove a node in the middle of a list again the takeaway here keep track of what the current and previous pointer is going to make your life a lot easier for rewiring
+
+183
+00:26:35.670 --> 00:26:38.430
+kylie jue: And it also another thing that you really want to make sure of is
+
+184
+00:26:39.270 --> 00:26:42.990
+kylie jue: You should check that neither of your pointers is NULL pointer before do you referencing
+
+185
+00:26:43.230 --> 00:26:51.240
+kylie jue: And you can imagine in your head that you have something that looks like this, where at all times when you're going through your loops. You're just updating previous and cursor previous is sort of one behind her.
+
+186
+00:26:52.410 --> 00:26:52.830
+kylie jue: All right.
+
+187
+00:26:55.530 --> 00:27:05.070
+kylie jue: And just in summary, so this is our last day of talking about linked lists and your entire assignment five is going to be on linked list as well as sorting, which you're going to start today.
+
+188
+00:27:05.580 --> 00:27:13.680
+kylie jue: But just as a summary you've learned a lot of different ways to manipulate link bus now right you've learned reversal requiring insertion and deletion all from the front, back in middle
+
+189
+00:27:14.520 --> 00:27:17.070
+kylie jue: You've seen link listing classes and outside of classes.
+
+190
+00:27:17.280 --> 00:27:27.330
+kylie jue: And you've also seen pointers pass by value and pass by reference depending on what you're trying to do to the link list. So these are all strategies, you're going to be using in the upcoming assignment that's going to be released today.
+
+191
+00:27:27.750 --> 00:27:39.000
+kylie jue: And assignment five, I want to really emphasize this is really going to test your understanding of link list and it's super important that you draw lots of pictures and that will really be helpful as you're debugging.
+
+192
+00:27:40.770 --> 00:27:51.030
+kylie jue: As well as testing small parts of your code at a time to make sure like these individual operations that you're doing are working correctly, right, because if one thing is if you have one thing not working or not decomposed
+
+193
+00:27:51.270 --> 00:27:57.570
+kylie jue: It can cause bugs way down the line that are really tricky. So really modular testing is going to be your friend. And this upcoming assignment.
+
+194
+00:28:00.270 --> 00:28:06.930
+kylie jue: Alright, I'm trying to move slides. There we go. So announcements. So before I move on to the second part.
+
+195
+00:28:07.290 --> 00:28:18.030
+kylie jue: The second half of today's lecture on sorting. I'm going to just do some quick announcements. So revisions for assignment three are going to be do on Thursday, July 30 at 1159 so that's this Thursday.
+
+196
+00:28:18.420 --> 00:28:24.510
+kylie jue: And then assignment five is going to be released by the end of the day today. And it's going to be due next Tuesday at 11:59pm
+
+197
+00:28:25.320 --> 00:28:32.790
+kylie jue: Diagnostic regrets we've pushed the deadline. Note the extension here to Thursday at 11:59pm instead of Wednesday at 11:59pm
+
+198
+00:28:33.210 --> 00:28:37.290
+kylie jue: And that was because if any of you saw the post the email I sent out on Ed.
+
+199
+00:28:37.950 --> 00:28:47.910
+kylie jue: We ended up completely. Just re grading problem for just for consistency. We noticed that some of them were not following the criteria like we expected. So we just completely recreated it for everyone.
+
+200
+00:28:48.210 --> 00:29:00.300
+kylie jue: For the vast majority of people. It didn't change anything, but please do go and check grade scope to see if that made any changes, and as a result we are extending the regroup deadline to Thursday, July 30 and will handle all the grades after the deadline.
+
+201
+00:29:01.560 --> 00:29:09.150
+kylie jue: And then the last point is, again, really emphasizing you want to be staying on track with this final project so that you're not doing it all at the end of the quarter.
+
+202
+00:29:09.600 --> 00:29:15.780
+kylie jue: So definitely come talk to me or Nick or trip or an SL during their or email your SL to get
+
+203
+00:29:16.080 --> 00:29:26.520
+kylie jue: Feedback on what you're thinking for your final project in particular, one of the things we really want to help you with, and make sure that is reasonable, as the scope of your problem. We're so excited that a lot of you are
+
+204
+00:29:27.240 --> 00:29:39.870
+kylie jue: Like excited about what you're working on. Want to do big projects and that's great. But we want to also help you scope. The problem so that it's a reasonable thing you can do in the next like week and a half, two weeks. So yes, definitely come talk to us this week. If you can
+
+205
+00:29:40.950 --> 00:29:47.220
+kylie jue: Alright. So with that, I'm going to go ahead and move on to our new topic. Our second topic for the day. And that is sorting.
+
+206
+00:29:47.640 --> 00:29:57.510
+kylie jue: And sorting is a real world algorithm that we use to organize data. So what exactly is sorting, you probably are all familiar with the word just in terms of like it's normal use
+
+207
+00:29:58.560 --> 00:30:02.250
+kylie jue: And this is not, unfortunately, the kind of sorting that we mean
+
+208
+00:30:02.940 --> 00:30:06.510
+kylie jue: Instead, we're going to be talking about sorting from a computer's perspective.
+
+209
+00:30:06.810 --> 00:30:23.040
+kylie jue: And so what do we mean by sorting, we mean that given a list of data points. We're going to sort those data points into ascending and descending order using some sort of quantity, whereas it useful. So in any sort of spreadsheet, where you see sort sheet by that is using a sorting algorithm.
+
+210
+00:30:24.150 --> 00:30:32.700
+kylie jue: This is actually an example from Wikipedia. If you've ever seen the tables in there and sometimes on Wikipedia and other websites, you can just click on a column and sort automatically that's using sorting.
+
+211
+00:30:33.150 --> 00:30:39.180
+kylie jue: And often games will use sorting particularly things that use cards, where you might care about the order in which they are
+
+212
+00:30:39.780 --> 00:30:43.890
+kylie jue: All of these are users of sorting in computer algorithms are in computer programs.
+
+213
+00:30:44.820 --> 00:30:56.520
+kylie jue: So there are a lot of different approaches to sorting and we are not going to be able to cover all of them in this class. So we're going to introduce you to some basic sorting algorithms today and slightly more efficient and complex ones tomorrow.
+
+214
+00:30:57.240 --> 00:31:05.700
+kylie jue: And so suppose that we want to rearrange a sequence to put elements in ascending order. So each element is less than or equal to the element that follows it.
+
+215
+00:31:06.600 --> 00:31:08.730
+kylie jue: And over the next two days, we're going to answer the following questions.
+
+216
+00:31:09.060 --> 00:31:19.590
+kylie jue: What are some strategies we can use, how do those strategies compared to one another. And we're going to ask the question, is there a best strategy. Like, is there something where you can say, like, this is the best strategy to sort my data.
+
+217
+00:31:20.790 --> 00:31:25.200
+kylie jue: So with that, I'm going to jump into we're going to talk about two specific sorting algorithms today.
+
+218
+00:31:26.130 --> 00:31:34.710
+kylie jue: And a huge thank you to lecture Keith Schwartz for these animations, but we're going to talk about selection sort, and insertion certain in particular. So let's start with selection sort.
+
+219
+00:31:35.700 --> 00:31:43.380
+kylie jue: So let's suppose we're trying to sort these columns in order from smallest column two biggest column. And so this is the order that you're given.
+
+220
+00:31:43.890 --> 00:31:51.750
+kylie jue: And the idea is you want the smallest element to go in the front. So what selection sort, does that says, okay, find my smallest element and put it at the front.
+
+221
+00:31:52.650 --> 00:32:00.840
+kylie jue: So we found our smallest element. We're going to swap it and basically when we say put it at the front, we mean swap it with the position of the element that's currently at the front.
+
+222
+00:32:01.320 --> 00:32:11.640
+kylie jue: So now what do we have, we have the element that's in the right place. But the rest of them still need to be sorted. Right. So we're going to repeat the process. We're going to say okay in these remaining elements.
+
+223
+00:32:12.000 --> 00:32:24.030
+kylie jue: Find the one that is smallest, which is our two and then let's put it at the front of the remaining elements are not have all the elements, but just the remaining ones. So we're going to go ahead and swap two and four and we repeat again.
+
+224
+00:32:25.290 --> 00:32:35.880
+kylie jue: Now when you're in the right place. And then this time. Notice the for itself is actually in the right place right for is the smallest element remaining it's in the right place. We don't need to do any swaps.
+
+225
+00:32:36.510 --> 00:32:43.230
+kylie jue: So we can go ahead and say, Okay, these are now in the right place and repeat the process. And then our last swap, of course, is between six and seven here.
+
+226
+00:32:44.190 --> 00:32:54.810
+kylie jue: And we're going to say okay now 12346 are in the right place. And technically, we do have to check. Okay, seven is the last element. So we're going to put it at the front of the remaining elements.
+
+227
+00:32:55.590 --> 00:33:01.470
+kylie jue: Even though that's sort of a trivial thing we do need to do it. And so now we have one through seven correctly sorted
+
+228
+00:33:01.890 --> 00:33:15.030
+kylie jue: So that's sort of the high level overview or a visualization of how selection sword is working. If we put it in words, we can say, Okay, we're going to find the smallest element and then move it to the first position in the sequence that we're sorting.
+
+229
+00:33:16.080 --> 00:33:27.510
+kylie jue: Okay, once we have that locked in. We're going to say, okay, now look at the rest of them find the smallest amount of what's left and move it to the second position and then do the third one and then do the fourth one, etc. Until we are all sorted
+
+230
+00:33:28.080 --> 00:33:36.750
+kylie jue: So this is what it actually looks like in code and I am I'll give this coffee out right now we're gonna, I'm going to show you the code for both of these sorting algorithms.
+
+231
+00:33:36.990 --> 00:33:45.300
+kylie jue: And I'll walk through it, but it's not important. It's not super important that you like are able to code. These yourselves, the ones that we're going to ask you to coder actually tomorrow sorting algorithms.
+
+232
+00:33:45.450 --> 00:33:51.990
+kylie jue: So these are sort of just examples. So it's okay if you need to come back later and say, I need to revisit this, but I'll just walk through it verbally.
+
+233
+00:33:52.980 --> 00:34:04.080
+kylie jue: Instead of coding it myself. So, so we have our selection sort algorithm. And again, like I showed in the visualization. We're going to iterate over all of the elements inside of our sequence. So you can imagine our sequence being the specter
+
+234
+00:34:05.250 --> 00:34:18.180
+kylie jue: And we're going to say, Okay, first find the smallest item of what's left and then swap it with the thing we're currently on right like. So this is the current thing we're on. And this is the smallest element that we find. And then our smallest
+
+235
+00:34:18.630 --> 00:34:22.410
+kylie jue: helper function which finds what in whatever whatever is left. Find the small
+
+236
+00:34:22.650 --> 00:34:31.410
+kylie jue: Is going to have to iterate again over all the remaining elements. So how does it do that it takes in the LM index, we're currently at and goes one to the left of it or to the right of it.
+
+237
+00:34:32.070 --> 00:34:39.150
+kylie jue: Because we don't want to look at the one we're currently at and finds the smallest one by looping over them and keeping track of it. And then it just returns that index.
+
+238
+00:34:39.450 --> 00:34:50.040
+kylie jue: So what we're doing. Basically, every time is we're saying, okay, as we go through the vector in the remaining elements, find the ones that smallest and swap it with the one that isn't in our current place.
+
+239
+00:34:51.570 --> 00:34:59.220
+kylie jue: Alright, so that's just how that's how selection sort of works and that I want to actually analyze it a little bit to understand, is this a good sort
+
+240
+00:34:59.820 --> 00:35:13.950
+kylie jue: Will we ever want to use selection sword and how much work. Are we doing when we're used to doing selection sort. So in order to find the smallest value in that helper function that we have will need to look at all and elements all remaining and elements.
+
+241
+00:35:17.130 --> 00:35:18.960
+kylie jue: And then define the second smallest value.
+
+242
+00:35:19.530 --> 00:35:26.970
+kylie jue: We need to look at n minus one element. So the, so this is one of the first time we go through we looking at all end to find the smallest. The second time we look at n minus one.
+
+243
+00:35:27.330 --> 00:35:33.810
+kylie jue: And then the third time, we look at n minus two. And that process is going to continue right every time until we have found
+
+244
+00:35:35.280 --> 00:35:39.720
+kylie jue: Every smallest element and we get to the end. So in total, the amount, we're doing at each
+
+245
+00:35:40.200 --> 00:35:48.660
+kylie jue: In in total at each step is first and then plus and minus one plus and minus two operations. All the way until we only have one right about case where we only had one thing
+
+246
+00:35:49.290 --> 00:35:53.760
+kylie jue: And there's actually a mathematical formula. You don't have to worry about too much. How about is derived
+
+247
+00:35:54.360 --> 00:35:59.910
+kylie jue: But we can just say, like when you have this sort of sequence that's n plus and minus one plus and minus two, all the way down to one.
+
+248
+00:36:00.150 --> 00:36:06.210
+kylie jue: You can actually simplify that into a closed form that looks like this, that it's just n times n plus one divided by two.
+
+249
+00:36:07.170 --> 00:36:14.370
+kylie jue: And so we can call this our complexity, right, the total amount of work we're doing is, oh of n times n plus one divided by two.
+
+250
+00:36:15.030 --> 00:36:24.210
+kylie jue: And remember, we can, we're doing bigger. Oh, so we can ignore these extra factors. So we can get rid of the devote division by two which is sort of just a constant multiplier.
+
+251
+00:36:24.570 --> 00:36:27.600
+kylie jue: And then we can simplify to this of all of n squared plus and
+
+252
+00:36:28.560 --> 00:36:35.130
+kylie jue: And remember, we only care about the biggest term. So, in the simplest way you can think about it. We are doing over n squared operations.
+
+253
+00:36:35.310 --> 00:36:44.190
+kylie jue: Which makes sense if you think back to the code, right, we're in the outer function you're looping overall and elements. And then in the inner helper function you're again looping over and elements.
+
+254
+00:36:44.340 --> 00:36:48.690
+kylie jue: So you can think about it as open square. This is just sort of the formal way of how we actually got that.
+
+255
+00:36:49.950 --> 00:37:06.330
+kylie jue: All right, so that's the complexity of selection sort n squared is not really great right um, select your sword is working by sort of selecting a smallest remaining element in the list and then putting it at the front, but we can definitely do better than that. We don't have to do n squared.
+
+256
+00:37:08.160 --> 00:37:13.080
+kylie jue: And so for our second take we are going to do a sort called insertion sort.
+
+257
+00:37:13.680 --> 00:37:24.060
+kylie jue: So let's go ahead and talk about how insertion sort of works. So we're seeing a similar sequence here where we want to put them in sorted order, where one would end up over here and seven would end up on the right.
+
+258
+00:37:25.530 --> 00:37:36.150
+kylie jue: So in this case, it's going to look a little bit different. We're gonna instead look first at just the first element and say, you know what the first element, if we consider that the sequence of sort of things.
+
+259
+00:37:36.600 --> 00:37:41.820
+kylie jue: It is already sorted, because it is trivial trivial one item. So if we look at, like, just the sequence of seven.
+
+260
+00:37:42.390 --> 00:37:51.150
+kylie jue: That's already sorted. So how do we now handle the rest of the elements. So the great items in particular are still unsorted there is no particular order in them.
+
+261
+00:37:52.110 --> 00:37:58.890
+kylie jue: So what we're gonna do is we're going to take the first thing that's in the gray items, the number four. And we're going to insert it into the sorted sequence.
+
+262
+00:37:59.250 --> 00:38:06.750
+kylie jue: And then sort them. So how do we do that. So we were saying, Okay, let's let's put four inside. We know that for is less than seven. So we need to swap the two
+
+263
+00:38:07.440 --> 00:38:15.150
+kylie jue: So we're going to go ahead and swap them. So now we know okay four and seven are now sort of the blue elements are sorted and we have these gray ones that are still uncertain.
+
+264
+00:38:15.990 --> 00:38:24.210
+kylie jue: So now we're going to repeat the process. Again, we're going to take the yellow item in the blue and inserted into the blue sequence, making the blue one item larger
+
+265
+00:38:24.630 --> 00:38:30.450
+kylie jue: And so we first compared to the seven and we say, okay, two is smaller than seven. So we're going to swap them.
+
+266
+00:38:30.780 --> 00:38:43.800
+kylie jue: And then we need to compare two and four and we say, okay, to a smaller than four. And we're going to swap them. And this process should be a little bit familiar to you as you just as you are just finishing or did just finish assignment for. It's kind of like, bubbling down right
+
+267
+00:38:45.480 --> 00:38:56.400
+kylie jue: Now our blue elements are an order and we do the same thing for one right we're going to add one to the blue items and we need to bubble it all the way back down right to the beginning because it's smaller than all of the things we're comparing it
+
+268
+00:38:57.990 --> 00:39:04.680
+kylie jue: And then for the last item we're going to look at six, and we only need to swap it with seven and then we have a completely sorted
+
+269
+00:39:05.340 --> 00:39:15.450
+kylie jue: Sequence. So that's generally how insertion sort works. In summary, we are repeatedly inserting an element into the sorted sequence at the front of the array. So we're saying, okay, the front of our
+
+270
+00:39:16.500 --> 00:39:21.840
+kylie jue: The front of our elements is going to be sorted and we're going to take the first thing that's not sorted and inserted into there.
+
+271
+00:39:23.010 --> 00:39:27.720
+kylie jue: And how are we going to do that we're going to swap it backwards so bubble, kind of like, bubbling it down.
+
+272
+00:39:28.830 --> 00:39:34.410
+kylie jue: Until either it's bigger than the element that we're comparing it to the element before it or it's at the front of the array.
+
+273
+00:39:35.820 --> 00:39:48.780
+kylie jue: So this is what the code looks like the code is a little bit nicer than selection sorts. What can we're, we're going to iterate over all of the items inside of our vector and this is our process of sort of scanning backwards so going backwards.
+
+274
+00:39:49.860 --> 00:39:54.210
+kylie jue: From that element until either the preceding element is not bigger than it
+
+275
+00:39:55.260 --> 00:39:57.450
+kylie jue: Which is this if statement here right it's saying
+
+276
+00:39:58.860 --> 00:40:00.510
+kylie jue: If the item before it.
+
+277
+00:40:01.530 --> 00:40:07.410
+kylie jue: For if it is large. Sorry if the item you're looking at right now is larger than the item before it, go ahead and stop it means it's in the right place.
+
+278
+00:40:07.710 --> 00:40:18.330
+kylie jue: Otherwise you're going to keep moving backwards and swapping it with the one before, which is what this line is doing here, you can imagine that we have this sort of I know it wasn't selections, or do we can have, we have this like magical swap function.
+
+279
+00:40:19.140 --> 00:40:20.970
+kylie jue: That you can just use to switch the elements
+
+280
+00:40:22.230 --> 00:40:29.790
+kylie jue: Alright, so let's try to understand the complexity of insertion start here, though. So, in the worst case insertion sort.
+
+281
+00:40:30.630 --> 00:40:40.020
+kylie jue: Is actually going to take the same amount of time a selection sore and you probably could tell from Intuit this from the nested for loops here, right in the worst case, it's still oh of n squared.
+
+282
+00:40:41.850 --> 00:40:50.250
+kylie jue: But in the best case like take the example where the array is already completely sorted right in the best case. The insertion is actually going to be over n.
+
+283
+00:40:50.640 --> 00:41:01.260
+kylie jue: Because you're only iterating from left to right once and you don't need you any swapping backwards right every time you hit that second inner for loop, you're going to say, oh, actually, I'm already
+
+284
+00:41:02.370 --> 00:41:13.920
+kylie jue: I'm already smaller than the I'm already larger than the element that's before me, so I'm done. And so what it does is it actually is much better than selection sort, when you have an already sorted list.
+
+285
+00:41:14.880 --> 00:41:24.960
+kylie jue: And then as a fun fact, we're not going to talk a lot about average run times here, but on average insertion Stuart does still take all events squared. And if this is something you're interested in or want to
+
+286
+00:41:26.130 --> 00:41:30.600
+kylie jue: understand a little bit better. Highly recommends yes 109 as a course to take next
+
+287
+00:41:31.050 --> 00:41:37.080
+kylie jue: But this is sort of our first introduction to sort of thinking about different ways of considering oh event or sorry. Oh, I'm
+
+288
+00:41:37.350 --> 00:41:50.160
+kylie jue: Big because then, in the past, we've only really ever considered the worst case, which is what we care about when we're designing systems, in many cases, but we can also think about when things are tied like selection sorted in Search, search and sort. What is the best case.
+
+289
+00:41:51.870 --> 00:42:03.990
+kylie jue: And for more advanced classes, you can also think about what is the average case cut up because I could definitely come in handy as well. All right. Before I move on. Are there any questions about selection or insertion sort.
+
+290
+00:42:07.470 --> 00:42:08.730
+And how they are working
+
+291
+00:42:13.380 --> 00:42:14.370
+Anything in the chat me
+
+292
+00:42:15.630 --> 00:42:15.930
+Know,
+
+293
+00:42:17.550 --> 00:42:18.330
+All right.
+
+294
+00:42:20.490 --> 00:42:33.090
+kylie jue: So, tomorrow, we are going to see more efficient sorting algorithms that use specifically the strategy called divide and conquer. Because again, oh event squared is our worst cases still pretty bad.
+
+295
+00:42:33.690 --> 00:42:39.300
+kylie jue: And we want to do better than that. And so we are going to see some algorithms tomorrow, specifically merge and keep sort
+
+296
+00:42:39.630 --> 00:42:47.280
+kylie jue: That are better. And those are the algorithms we're actually going to ask you to implement on assignment five using linked list. And you'll see that in the handout when it comes out.
+
+297
+00:42:48.600 --> 00:42:54.480
+kylie jue: But to end with I want to go ahead and show the beginning of this video. I'm not going to show the whole thing. But the really fun thing here.
+
+298
+00:42:55.110 --> 00:43:01.800
+kylie jue: It's visualizing the sorting algorithms that I want you to see the first two are selection and insertion and it'll say what algorithm. It is on the top here.
+
+299
+00:43:02.430 --> 00:43:09.240
+kylie jue: I want you to see if you can actually recognize that pattern that I just talked about the algorithm itself in the way this is visualize. So I'm going to go ahead and play.
+
+300
+00:44:46.350 --> 00:44:58.980
+kylie jue: Alright, so, so what's next. So tomorrow, you're going to finish learning about some additional sorting algorithms. And there's a lot more to that video. So if you want to go back and see even more sorting algorithms, I can encourage you to watch it. It's quite fun.
+
+301
+00:45:00.480 --> 00:45:10.920
+kylie jue: We have two more specifically, it's going to be merged sort of quick sort, and Nick will be covering those and it'll be I highly recommend watching two miles lecture before starting on the assignment because it's going to be super helpful.
+
+302
+00:45:11.940 --> 00:45:22.380
+kylie jue: That you sort of understand these algorithms. Before getting started and we'll stick around. I know, or five minutes early, which is maybe the first time we've been to this early. All right. Thank you.
+
+303
+00:45:25.770 --> 00:45:27.240
+gavin gee: Thank you. Thank you.
+
+304
+00:45:27.630 --> 00:45:28.290
+Oz Gitelson: Thank you.
+
+305
+00:45:29.340 --> 00:45:29.670
+Thank you.
+
+306
+00:45:32.850 --> 00:45:33.330
+Aadi M Rane: Thank you.
+
+307
+00:45:45.360 --> 00:45:47.340
+Are there any questions.
+
+308
+00:45:57.390 --> 00:45:58.920
+Aadi M Rane: Can you go back to the
+
+309
+00:46:00.180 --> 00:46:03.420
+Aadi M Rane: The, the link list remove
+
+310
+00:46:15.210 --> 00:46:16.710
+kylie jue: Can you able to see it.
+
+311
+00:46:16.980 --> 00:46:24.840
+Aadi M Rane: Yes. So if you delete the current pointer why click and then you point pre
+
+312
+00:46:26.640 --> 00:46:29.190
+Aadi M Rane: Be as accurate. Will that cause them here.
+
+313
+00:46:30.090 --> 00:46:32.190
+kylie jue: So that's a good um
+
+314
+00:46:33.930 --> 00:46:35.730
+kylie jue: Yeah, so the idea here. Let's see.
+
+315
+00:46:36.510 --> 00:46:40.170
+Nick Bowman: Can I, can I jump in. Yeah, go for it. There's a bug here.
+
+316
+00:46:41.670 --> 00:46:44.760
+Nick Bowman: Let me, let me send you. I was fixing to
+
+317
+00:46:46.290 --> 00:47:01.890
+Nick Bowman: Replace it with this good. So, so I didn't answer your question and pointing previous occur is not a bad thing. Like it like the pointer, a signer like setting two pointers equal to one another and like pointing something somewhere is not necessarily bad.
+
+318
+00:47:02.910 --> 00:47:06.090
+Nick Bowman: But if you think about what will happen is after you delete one element.
+
+319
+00:47:06.450 --> 00:47:15.540
+Nick Bowman: And if you were to delete a second element immediately afterwards you would end up D referencing previous right and then you would be end up sort of de referencing memory that you just free
+
+320
+00:47:16.110 --> 00:47:28.320
+Nick Bowman: And and so the the slightly better way to do it is to only update previous and current or to only update previous if you didn't just remove it, because if you did just remove a note previous is is the old
+
+321
+00:47:29.370 --> 00:47:31.200
+Nick Bowman: It's the same the same PC.
+
+322
+00:47:32.550 --> 00:47:38.700
+Nick Bowman: Yeah, so it's it's it's a good point. So it's not the actual assignment. That's the problem. It's that later on. You might actually try to do reference that
+
+323
+00:47:40.920 --> 00:47:45.030
+kylie jue: Yeah, so what the difference is just a highlight what the difference is going happening in the code here.
+
+324
+00:47:45.330 --> 00:48:00.270
+kylie jue: Is the we are getting next before we may end up deleting current right and then if we do delete current we just set current equal to next so that we can actually update it, Nick. The other reason I had, and I'm trying to progress in my head right now. This is doing this.
+
+325
+00:48:01.650 --> 00:48:06.450
+kylie jue: Is if you have multiple instances of data to remove that you wanted to get rid of. But I think this handles.
+
+326
+00:48:07.500 --> 00:48:08.220
+Time as well.
+
+327
+00:48:10.500 --> 00:48:23.730
+Nick Bowman: Yeah, they should still handle it, because it's still updates career to be like the next thing on our list. So like curve will still consider that. It's just that you don't you don't want to update previous yes if if you just reboot something basically because the previous is the same.
+
+328
+00:48:25.500 --> 00:48:27.060
+kylie jue: Cool. Yeah, thank you for catching it.
+
+329
+00:48:32.460 --> 00:48:32.910
+Aadi M Rane: Does that
+
+330
+00:48:33.570 --> 00:48:34.260
+Answer your question.
+
+331
+00:48:36.690 --> 00:48:37.470
+Aadi M Rane: Yes, thank you.
+
+332
+00:48:46.890 --> 00:48:49.200
+kylie jue: Any other questions.
+
+333
+00:48:51.000 --> 00:48:55.500
+Nick Bowman: There's a question in the chat about talking about the difference between the two different version of
+
+334
+00:48:56.820 --> 00:48:57.990
+kylie jue: The two different Oh like
+
+335
+00:48:58.050 --> 00:48:59.940
+kylie jue: Delete versus delete like this.
+
+336
+00:49:00.300 --> 00:49:08.910
+kylie jue: Yeah, yeah. So really only use this if it's if you're deleting an array and not just indicates that the thing you're deleting
+
+337
+00:49:09.360 --> 00:49:22.800
+kylie jue: Is going to be an array. And it has to do with the fact that when you actually allocate the pointer, the first time. Like if you allocated it without allocating an array, then you're just going to use the regular delete. But if I were creating like
+
+338
+00:49:25.140 --> 00:49:30.360
+kylie jue: This isn't an example. But if I if I were, this isn't actually, on occasion, either, but um
+
+339
+00:49:31.320 --> 00:49:45.660
+kylie jue: Let's look back up here. So when I create the new nodes like this. I'm not creating an array of nodes and I'm just creating one pointer. So when I end up deleting it which technically is happening down here, I just use the regular delete operator. But if you remember when we did like
+
+340
+00:49:46.710 --> 00:50:01.290
+kylie jue: In Star like numbers equals an array of numbers, right, something like this new event. And then the number of numbers that you might want to have them for this, in particular, you would need to do. Delete.
+
+341
+00:50:02.610 --> 00:50:04.170
+Number. Yeah.
+
+342
+00:50:06.210 --> 00:50:06.960
+I'm new to the question.
+
+343
+00:50:21.060 --> 00:50:28.530
+edouard des: Just out of curiosity, if you were to allocate a pointer to an array. You had another point or that you all get that same array and you try to do reference that
+
+344
+00:50:29.220 --> 00:50:36.840
+edouard des: That new pointer that has no allocated to the array, but that wasn't initialized as an array, would it still would you use this, you still used to lead with the two brackets.
+
+345
+00:50:41.370 --> 00:50:52.770
+edouard des: If I create an effective create an array with and then I use the new so it goes into a pointer. But then I create a new pointer and I go pointer is equal to the old pointer to the older a
+
+346
+00:50:53.370 --> 00:50:56.550
+edouard des: I like to use our pointer.
+
+347
+00:50:56.760 --> 00:50:58.170
+kylie jue: Equals numbers like that.
+
+348
+00:50:58.260 --> 00:51:02.730
+edouard des: Yeah. And then I tried good reference pointer will that work like
+
+349
+00:51:02.790 --> 00:51:04.170
+edouard des: Reference to the way
+
+350
+00:51:04.740 --> 00:51:12.390
+edouard des: With. With. With. Delete. I'm sorry, not the reference. That's a delicate using the. Yeah, but I would still use the square brackets right yeah
+
+351
+00:51:12.450 --> 00:51:16.290
+kylie jue: Yeah, you would still want to use the square brackets right because you're you're thinking about
+
+352
+00:51:18.210 --> 00:51:31.320
+kylie jue: This is going to know that your point while you're pointing pointer to a array of numbers, not just a single number. And so since you're deleting the whole thing. You still have to use the square brackets because it's still pointing to.
+
+353
+00:51:32.310 --> 00:51:42.420
+edouard des: This. So that means that when you do it. Good. And when you do allocate am an array, it knows how long it is because able to delegate all of the continuous memory. Memory Box. Correct.
+
+354
+00:51:46.500 --> 00:51:47.970
+kylie jue: Nick, do you know the answer to that question.
+
+355
+00:51:49.320 --> 00:51:50.070
+Nick Bowman: Was the question.
+
+356
+00:51:51.150 --> 00:52:00.180
+kylie jue: How does it if if you have an array. And we're saying we've been saying, oh, an array doesn't know how long it is like there's no sighs operator. How does delete know how much to delete.
+
+357
+00:52:08.760 --> 00:52:11.010
+edouard des: Computer just know. I just don't want to tell us. Yeah.
+
+358
+00:52:11.190 --> 00:52:11.970
+Nick Bowman: It just knows
+
+359
+00:52:14.220 --> 00:52:15.720
+Nick Bowman: A meta data about how much memory.
+
+360
+00:52:15.720 --> 00:52:23.850
+Nick Bowman: Is allocated realistically. Actually, no. No, actually I do know the answer. This little sort of gets a little wonky and
+
+361
+00:52:24.420 --> 00:52:32.250
+Nick Bowman: Basically, there is a there is literally a computer program like running as part of operating system.
+
+362
+00:52:33.060 --> 00:52:40.620
+Nick Bowman: whose job it is is to like give you memory, right, like when you ask for memory. It gives you any sort of keep track of everything that has given you
+
+363
+00:52:41.370 --> 00:52:49.320
+Nick Bowman: And so it knows actually for every single point or memory address it has given you. It knows exactly how much memory is allocated for that so
+
+364
+00:52:49.740 --> 00:52:58.890
+Nick Bowman: Um, so, you know, it knows that how hey I gave you this pointer. You're asking to delete it. Okay, I know that I need to to free a specific amount of memory, because I know exactly
+
+365
+00:52:59.130 --> 00:52:59.490
+I can
+
+366
+00:53:00.720 --> 00:53:02.160
+Nick Bowman: Just be difficult. And it doesn't want to
+
+367
+00:53:02.190 --> 00:53:03.960
+edouard des: Give us the actual size of the area.
+
+368
+00:53:06.120 --> 00:53:15.270
+Nick Bowman: But it's, it's, I don't know, it's, it's, it's almost like an attraction thing where we're not no other program knows right besides this one whose job it is to manage all of these like
+
+369
+00:53:15.720 --> 00:53:30.330
+Nick Bowman: Basically allocations and memory, right. So it's not like the pointer nose and it's not telling you it's not like c++ nose and it's not telling you like there's a very specific component of like the the operating system computer that that that sort of knows that.
+
+370
+00:53:33.420 --> 00:53:34.890
+Nick Bowman: Yeah, it looks like. Please. I just posted
+
+371
+00:53:34.980 --> 00:53:35.670
+edouard des: On that. Thank you.
+
+372
+00:53:38.130 --> 00:53:38.550
+edouard des: Thank you.
+
+373
+00:53:56.520 --> 00:53:57.450
+kylie jue: Any other questions.
+
+374
+00:54:03.750 --> 00:54:08.730
+edouard des: Actually kind of a question. Sure. Um, regarding this is no this this is regarding like
+
+375
+00:54:09.060 --> 00:54:15.090
+edouard des: Because I know that there's some in c++ when you use the size. It's a, it's like a function that returns the internal size, but I'm in certain
+
+376
+00:54:15.360 --> 00:54:20.010
+edouard des: Other languages and now this kind of unrelated. So if it's not like as maintenance that's completely fine. But like
+
+377
+00:54:20.460 --> 00:54:25.920
+edouard des: You the size is a method and it's like it's part of a prototype and the prototype is immutable, and you can't change it.
+
+378
+00:54:26.280 --> 00:54:36.000
+edouard des: Like is that because it like the language automatically maintains what that prototype. Isn't it like increments and does all those kinds of things that we're doing ourselves and so does it for you.
+
+379
+00:54:36.570 --> 00:54:46.980
+kylie jue: So when it's a method, it means that the type was defined via class, right. So just like we learned about classes they would, you would have someone even. It was like the creators of the language itself.
+
+380
+00:54:47.280 --> 00:54:58.620
+kylie jue: Wrote a class that has a size method that like somehow keeps track of, like, how many things are inside like this is such a the array in particular is not like
+
+381
+00:54:59.640 --> 00:55:00.810
+kylie jue: Not a class on the
+
+382
+00:55:01.860 --> 00:55:06.720
+kylie jue: Road that I guess not a class on the back end. And that's sort of why there's no associated method.
+
+383
+00:55:07.260 --> 00:55:19.500
+edouard des: But you know I'm Mr. Said property not method because it's not like when you have brackets to method that's like a function. It doesn't have like brackets, like, it's like, yeah, it's as if you're accessing size. And when I say this, I'm thinking of JavaScript and Python but I'm not sure.
+
+384
+00:55:19.890 --> 00:55:20.130
+kylie jue: Yeah.
+
+385
+00:55:20.550 --> 00:55:21.930
+edouard des: If you access the production
+
+386
+00:55:22.290 --> 00:55:26.580
+kylie jue: Yeah, those will be like the amount like number of variables in a class in different languages of different conventions about
+
+387
+00:55:26.580 --> 00:55:27.660
+kylie jue: Whether member variables are
+
+388
+00:55:27.660 --> 00:55:35.910
+kylie jue: Accessible or not. And so it's similar actually where you instead. Instead, it's just not a method, but it's actually just remember variable that is publicly accessible.
+
+389
+00:55:36.390 --> 00:55:38.460
+edouard des: But real part of a class. Yeah.
+
+390
+00:55:39.330 --> 00:55:40.230
+edouard des: Okay, good. Thank you.
+
+391
+00:55:45.240 --> 00:55:47.970
+Alright. No other questions.
+
+392
+00:55:49.740 --> 00:55:51.120
+kylie jue: I think we're good to go.
+

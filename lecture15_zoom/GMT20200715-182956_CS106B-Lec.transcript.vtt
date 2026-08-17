@@ -1,0 +1,2038 @@
+WEBVTT
+
+1
+00:00:05.970 --> 00:00:06.990
+kylie jue: Alright, welcome back to
+
+2
+00:00:08.099 --> 00:00:11.940
+kylie jue: Today we are going to talk about a completely new topic.
+
+3
+00:00:12.480 --> 00:00:19.710
+kylie jue: We have finally finished up version. And we're going to talk about something called object oriented programming and I'm really excited about today's lecture because
+
+4
+00:00:20.010 --> 00:00:25.590
+kylie jue: We are finally going to be crossing that abstraction boundary that we told you about on day one of the course.
+
+5
+00:00:26.070 --> 00:00:37.050
+kylie jue: So as we start getting into that, let us know. What do you think, and you don't have to have an answer that, you know, is a good one for this one. But what do you think makes a good well designed abstraction and go ahead and throw your answers in the chat.
+
+6
+00:00:41.460 --> 00:00:46.260
+kylie jue: Alright, so we are here, we are starting object oriented programming and it is right on that boundary
+
+7
+00:00:46.740 --> 00:00:58.530
+kylie jue: And today's question is how do we design and define our own abstractions. So we've been using other people's abstractions. This whole course and we're finally going to get into designing and defining our own
+
+8
+00:00:59.670 --> 00:01:08.220
+kylie jue: Today we're going to cover what is a class, a class, a major part of understanding object oriented programming. And then we're going to get a taste of how to write in design them.
+
+9
+00:01:08.490 --> 00:01:12.330
+kylie jue: And three and four should actually be switched there, but we will see that in a moment.
+
+10
+00:01:12.720 --> 00:01:19.980
+kylie jue: So just a very quick review, congratulations on getting through recursion recursion. I think personally is one of the most conceptually difficult
+
+11
+00:01:20.610 --> 00:01:29.610
+kylie jue: Topics that we're going to cover this quarter, especially as a new problem solving technique, it was new. When I took one of six be and it may be new to many of you.
+
+12
+00:01:30.540 --> 00:01:39.120
+kylie jue: And so you've learned two different types of recursion and there's the basic form of recursion. And then there was backtracking recursion, which is what we spent this week and the end of last week on
+
+13
+00:01:39.990 --> 00:01:49.440
+kylie jue: Again, the really key differences here is that with basic recursion, you have one repeated task, but as you make these recursive calls, help you each recursive
+
+14
+00:01:49.890 --> 00:01:56.760
+kylie jue: Function is helping. Sorry. Each recursive call is helping you build up the solution as you go back up the call stack and have these functions return
+
+15
+00:01:57.030 --> 00:02:09.210
+kylie jue: Versus backtracking solution you have like a tree looking structure. And each of those branches is a possible solution. And at the end of each branch you're hitting a possible solution that may get you closer to what you what you're looking for.
+
+16
+00:02:10.290 --> 00:02:12.300
+kylie jue: And with backtracking. We saw
+
+17
+00:02:12.840 --> 00:02:22.440
+kylie jue: The overall paradigm is this choose explore and choose and there were sort of two different ways you could do it. Why not this explicit and choose step and one with a sort of more implicit on to Step
+
+18
+00:02:22.620 --> 00:02:34.860
+kylie jue: The implicit ones being the strings, where we sort of pass things in by value and we were undoing things because we weren't modifying the string with each recursive call versus when we were passing things in by reference. We were doing more of the
+
+19
+00:02:36.150 --> 00:02:45.060
+kylie jue: She was exploring and undoing where you actually have to undo any edits you made to the data structure because they're all using the same copy of referring to the same copy of the data structure.
+
+20
+00:02:46.020 --> 00:02:52.890
+kylie jue: In those recursive calls. And then we saw three different uses for backtracking generating are counting all solutions which we also called enumeration.
+
+21
+00:02:53.460 --> 00:03:01.530
+kylie jue: Finding a single solution or proving the existence of a single solution and then just returning when we found it and then yesterday we saw picking the best solution or optimization
+
+22
+00:03:01.980 --> 00:03:10.440
+kylie jue: And in general, we saw different things you could do with backtracking, which included permutations subsets combinations and using those three things for lots of different
+
+23
+00:03:11.520 --> 00:03:12.690
+kylie jue: Lots of different tasks.
+
+24
+00:03:13.770 --> 00:03:25.260
+kylie jue: And then just I know we've shown this slide. Every time at the end of lecture, but we've never actually really dive deeply into like how to use this when you're thinking about recursion, but hopefully it's been helpful for you as you've been working on the assignment.
+
+25
+00:03:26.370 --> 00:03:37.890
+kylie jue: Really the key ideas here is that we've seen a lot of different backtracking strategies and every problem looks a little bit different. Sometimes you have a for loop in your recursive case. Sometimes it's just two or three calls
+
+26
+00:03:39.180 --> 00:03:47.130
+kylie jue: Sometimes you return in your recursive case and other times you don't. Sometimes you're building up a data structure or sometimes you returning a Boolean and you're checking if the Boolean is true or false.
+
+27
+00:03:47.370 --> 00:03:51.270
+kylie jue: And there's lots of different things that you could be doing depending on what problem you're solving
+
+28
+00:03:51.450 --> 00:04:02.520
+kylie jue: And so what we want these questions to do is hopefully guide you and thinking about what should those parameters be what should my base case in recursive case be what type in my returning depending on the problem you're solving
+
+29
+00:04:04.590 --> 00:04:14.790
+kylie jue: Yeah, and I and always, I would say the first thing you want to do is thinking about your decision tree and your base and recursive cases and those can go in either order, but they'll help you think about each other.
+
+30
+00:04:15.450 --> 00:04:23.010
+kylie jue: They help you think about the others as well. Um, yeah, I think that's it. On this slide, but yeah, definitely use this as
+
+31
+00:04:23.880 --> 00:04:27.540
+kylie jue: A some sort of reference, while you're while you're doing working on any backtracking problems.
+
+32
+00:04:28.440 --> 00:04:36.150
+kylie jue: Alright so stepping a little bit back again. Where are we now, if you remember this diagram, which is just sort of you removed all the fancy colors, but it's the same
+
+33
+00:04:36.450 --> 00:04:48.240
+kylie jue: The same roadmap, we have covered abstract data structures. So you've learned how to use vectors map sets stacks and Q's, and you've really gained this fundamental key.
+
+34
+00:04:48.990 --> 00:04:58.530
+kylie jue: set of skills with testing algorithmic analysis like big oh and recursive problem solving. Most recently, and so now what we're going to finally do is we are finally going to cover that abstraction boundary
+
+35
+00:04:58.890 --> 00:05:10.740
+kylie jue: Which goes into classes and object oriented programming today. And again, this is actually literally the abstraction boundary tomorrow. We're going to do a little bit more of crossing it but today we're going to define what is the abstraction boundary. And how do we define them.
+
+36
+00:05:12.390 --> 00:05:13.860
+kylie jue: So let's revisit abstraction.
+
+37
+00:05:14.880 --> 00:05:25.110
+kylie jue: So another definition about traction. You could call it the freedom from represent representational qualities in art. So this is a cow or a bull.
+
+38
+00:05:26.340 --> 00:05:36.180
+kylie jue: And then as you get more abstract as you have higher levels of abstraction. The details of what the bowl actually looks like get farther and farther removed.
+
+39
+00:05:37.590 --> 00:05:41.490
+kylie jue: And arguably, maybe you could say the final one still look like a cow. But, you know,
+
+40
+00:05:43.170 --> 00:05:52.380
+kylie jue: Though the main takeaway from this is the levels of traction get higher, it's you. You get more moved from how the underlying structure works and what the details are of the
+
+41
+00:05:53.820 --> 00:05:57.330
+kylie jue: Of the core, the core thing you're trying to describe
+
+42
+00:05:57.720 --> 00:06:04.380
+kylie jue: And so again, attraction is a design that hides the details of how something works, while still allowing the user to access complex functionality.
+
+43
+00:06:04.590 --> 00:06:10.800
+kylie jue: And so we're going to talk about how do we actually accomplish this with c++ and we're going to use a thing called classes. So what is a class.
+
+44
+00:06:11.130 --> 00:06:19.500
+kylie jue: A class defines a new data type for our programs to us. And this definition should be a little bit familiar to you if it's ringing bells.
+
+45
+00:06:20.430 --> 00:06:27.870
+kylie jue: You probably remember you might remember how we defined structure. And we've seen some strokes actually in our backtracking problems, most recently with the backpack item that stores.
+
+46
+00:06:28.590 --> 00:06:35.460
+kylie jue: A survival value in a way to juror which stores a name and a bias. And again, we defined structure, way back when we talked about grid locations.
+
+47
+00:06:35.910 --> 00:06:40.200
+kylie jue: As a way to bundle different types of information and c++ kind of like creating a custom data structure.
+
+48
+00:06:40.500 --> 00:06:46.800
+kylie jue: So then the question I imagine a lot of you are asking is, what is the difference, then what is the difference between a class and a struct fundamentally
+
+49
+00:06:47.580 --> 00:06:52.920
+kylie jue: And so to sort of illustrate that I'm going to bring back good locations and also G points which you've seen
+
+50
+00:06:53.220 --> 00:07:02.430
+kylie jue: Now, if you have started working on the serpent's key triangle fractal. But in general, and we're doing anything with graphics. You can represent a place on your canvas that you're drawing on using a cheap point
+
+51
+00:07:02.760 --> 00:07:09.120
+kylie jue: And I want to point out the differences between the two of these. The first we notice is when we're trying to get the row and column in a grid, we can use these
+
+52
+00:07:10.800 --> 00:07:19.050
+kylie jue: These the dot notation and they're not functions. They're just things that are stored inside your stroke. So you just do the dot name versus here we're using functions to get the x and y.
+
+53
+00:07:19.470 --> 00:07:25.140
+kylie jue: And remember, you can also set things in the structure using this notation, but can you do this in G points.
+
+54
+00:07:26.040 --> 00:07:34.440
+kylie jue: No, you actually can't right we don't actually have direct access to the G points x and y coordinates we can get them using these handy get functions get x and y.
+
+55
+00:07:34.650 --> 00:07:47.220
+kylie jue: But we cannot change the actual coordinates of a G point on the campus. And there's a reason for that. So, you know, back to the definition of what is a class. Why is it that we can't get that get those change those x and y values over two point
+
+56
+00:07:48.570 --> 00:07:56.820
+kylie jue: So we've already seen lots of examples of classes. We've seen vectors map stacks. Q. These are classes that we've defined that Stanford, the Stanford libraries have defined for you.
+
+57
+00:07:57.690 --> 00:08:04.980
+kylie jue: And every class has two parts. It has an interface which is specifying what operations can be formed on instances of the class. So what does that mean
+
+58
+00:08:05.190 --> 00:08:10.020
+kylie jue: It's basically saying it defines what you can do with the class and that is the actual abstraction boundary
+
+59
+00:08:10.530 --> 00:08:16.020
+kylie jue: So you can think about what the vectors, what functions. Can you call to add things from the vector. What properties does the vector have
+
+60
+00:08:16.530 --> 00:08:23.490
+kylie jue: In terms of size and things like that that is the interface, how, when we look at the documentation for a vector that is the interface of the vector class.
+
+61
+00:08:23.850 --> 00:08:29.520
+kylie jue: And then the actual implementation is how are these operations actually performed under the hood and you don't necessarily have
+
+62
+00:08:30.360 --> 00:08:42.180
+kylie jue: Any access. Well, you might, but you don't actually have to read the vector dot cpp file to understand how it's working. You just deal with the interface, but the implementation is actually what's enabling ad and what's enabling you to get that size.
+
+63
+00:08:43.050 --> 00:08:52.290
+kylie jue: And this goes back now to the G point. The key difference between structure and classes are what we call the encapsulation of defaults and all defined encapsulation on the next slide.
+
+64
+00:08:52.590 --> 00:09:01.500
+kylie jue: But the main idea here is a structure defaults to public members. So, for example, with the row and column and grid location. They are publicly accessible to anyone who's using the grid location.
+
+65
+00:09:01.680 --> 00:09:10.440
+kylie jue: And that's why you're able to update it, but we deliberately did not want you to just be able to edit the x and y, have any G point. And so the class G point defaults those
+
+66
+00:09:10.770 --> 00:09:19.380
+kylie jue: Members to private, so x and y and the G point are private members that are only accessible in the class implementation, which only the person who made it needs to have access to
+
+67
+00:09:19.980 --> 00:09:26.190
+kylie jue: We basically define the interface and say you don't need to have access to these private members, besides through these functions get X and get live
+
+68
+00:09:27.630 --> 00:09:29.850
+kylie jue: And just to go back to the definition of encapsulation.
+
+69
+00:09:30.690 --> 00:09:40.710
+kylie jue: Encapsulation is the process of grouping related information and relevant functions into one unit and defining where that information is accessible so structure and classes, both enable encapsulation.
+
+70
+00:09:40.860 --> 00:09:46.890
+kylie jue: What we're going to see how powerful classes are and the way classes enable and installation in the rest of this class.
+
+71
+00:09:48.750 --> 00:09:49.170
+Right.
+
+72
+00:09:50.730 --> 00:09:59.910
+kylie jue: Another way you can think about classes. So there's a lot of terminology I just threw at you with interface implementation and Captain clap solution. So I'm going to take another high level idea.
+
+73
+00:10:00.390 --> 00:10:11.640
+kylie jue: If you've never seen classes before you can think about classes as a blueprint for a new type of c++ object. So we've seen lots of to festivals objects you can do abstract data structures, you've seen strings. You've seen
+
+74
+00:10:11.670 --> 00:10:12.270
+Integers.
+
+75
+00:10:13.290 --> 00:10:19.410
+kylie jue: So you can think about. We're now going to be able to define blueprints for how to create c++ objects and again a blueprint.
+
+76
+00:10:19.860 --> 00:10:33.090
+kylie jue: Defines the general structure. And then we create specific instances of that class using this structure. So, we say, What properties does a string have or what functions. Can you call on it. What does it generally look like and how do you define it.
+
+77
+00:10:34.200 --> 00:10:41.130
+kylie jue: We're not saying like a string will always look like this. It will always be the word HELLO, but we describe the general structure of it.
+
+78
+00:10:42.780 --> 00:10:48.000
+kylie jue: And then the definition of an instance here is that when we create an object that is our new type
+
+79
+00:10:48.270 --> 00:11:01.170
+kylie jue: We call this creating an instance of our class. So basically, what is the saying when you create sort of like a variable and define it to be of type string or of type vector you are creating a vector object or an instance of the vector class.
+
+80
+00:11:01.440 --> 00:11:10.110
+kylie jue: Or an instance of the string class. And that's just the terminology. We're going to hear here. So you might hear me use the words object and instance of this class interchangeably.
+
+81
+00:11:13.200 --> 00:11:21.420
+kylie jue: Alright and this is just a very concrete example. This which you've probably done already, and many much of your code creates an instance of the vector class.
+
+82
+00:11:22.110 --> 00:11:31.260
+kylie jue: That is an object of the type vector. So I just really want to hammer in this terminology here because you're going to hear it constantly again throughout the quarter. I mean, you may have even heard as use it already.
+
+83
+00:11:31.650 --> 00:11:42.390
+kylie jue: This is just sort of formerly defining what you've already heard before I move on to how we actually go about defining these classes and c++. Are there any just general questions about what a class is
+
+84
+00:11:47.460 --> 00:11:49.230
+kylie jue: Right. Nick anything in the chat and we're good.
+
+85
+00:11:50.250 --> 00:11:50.940
+kylie jue: Okay, cool.
+
+86
+00:11:51.060 --> 00:11:57.390
+kylie jue: So I'm going to move on. Um, how do we define classes in C plus plus. So,
+
+87
+00:11:58.680 --> 00:12:03.540
+kylie jue: There are three main parts that you're going to think about when you're defining a class, there are these things called member variables.
+
+88
+00:12:03.960 --> 00:12:09.150
+kylie jue: There are member functions or you may have heard them called methods. And then there's the constructor.
+
+89
+00:12:09.420 --> 00:12:18.870
+kylie jue: You're probably most familiar so far with member functions because those are what you've been using when you've been using these at teams that you've been having to work with on the assignments, so
+
+90
+00:12:19.620 --> 00:12:23.310
+kylie jue: What are each of these the member variables are variables that are stored within the class.
+
+91
+00:12:24.000 --> 00:12:26.970
+kylie jue: So kind of like with the with the struct where you had like
+
+92
+00:12:27.210 --> 00:12:39.930
+kylie jue: Row and call them as separate variables that are packaged into the actual struct itself classes also have variables like that. But the difference again with the encapsulation is usually these variables are not accessible outside the class implementation, they sort of
+
+93
+00:12:40.470 --> 00:12:45.540
+kylie jue: Underlying the class store the important data for you, but you don't want outside people to be able to alter that data.
+
+94
+00:12:46.890 --> 00:12:59.730
+kylie jue: Remember functions or methods. So those are functions you can call them the object. These are things you've seen before, like back add vector sized remove these are things that you basically allow the user to do to your to an object of that class.
+
+95
+00:13:00.960 --> 00:13:09.120
+kylie jue: And then lastly is a new term called constructor. The constructor gets called when you create the object. So when we do something like this vector. In fact,
+
+96
+00:13:09.570 --> 00:13:18.150
+kylie jue: That is calling a constructor an object can have multiple different types of construct multiple different constructors, which is why you can see there's often different ways of defining
+
+97
+00:13:19.200 --> 00:13:31.440
+kylie jue: All of the abstract data, data types that we've seen already, and we'll get more into this but basically it's just saying when this object is initially created when a user defines an instance of our class. What do we want to happen.
+
+98
+00:13:32.640 --> 00:13:34.320
+kylie jue: Alright, so those are the three main parts.
+
+99
+00:13:35.970 --> 00:13:40.350
+kylie jue: And so what are the questions we should ask ourselves when we're actually defining the class.
+
+100
+00:13:42.120 --> 00:13:49.230
+kylie jue: So when we're thinking about member variables, we want to think about what some variables make up this new variable type. What data do we need to store inside this new type
+
+101
+00:13:49.980 --> 00:14:02.760
+kylie jue: member functions what functions. Can you call on a variable of this type. So just like with the vector, you want to think about what operations. Can someone perform on your class and then a constructor. What happens again when you make a new instance of this type.
+
+102
+00:14:04.200 --> 00:14:15.360
+kylie jue: In general classes are really useful and helping us with complex programs where information can be grouped into objects. So why would you define your own class. So far, we've only seen a lot of people providing classes to us. And we've been using them.
+
+103
+00:14:15.810 --> 00:14:23.580
+kylie jue: But we'll find is we start writing more complex programs, but it's actually useful for us to define our own classes and you'll get experience with this.
+
+104
+00:14:24.600 --> 00:14:28.470
+kylie jue: In the next assignment after the mid the mid quarter diagnostic
+
+105
+00:14:29.640 --> 00:14:35.340
+kylie jue: Alright, so just to get a taste of designing classes. I'm not. We're going to put you in breakout rooms for
+
+106
+00:14:36.180 --> 00:14:39.480
+kylie jue: A little bit and we'll give you some more time here because we want you to get be able to get through this exercise.
+
+107
+00:14:40.020 --> 00:14:46.080
+kylie jue: So remember, these three questions that I have up on the side and we're going to ask you, how would you design a class for these two
+
+108
+00:14:46.740 --> 00:14:55.950
+kylie jue: For these two situations. The first is a bank account that enables transferring funds between accounts and the second is Spotify or really any other music platforms playlist.
+
+109
+00:14:56.370 --> 00:15:04.650
+kylie jue: You want to think about what are the member variable. So what's the information you need to store for each of these things. What are the number of functions. So what functions can call in a variable, this type
+
+110
+00:15:05.610 --> 00:15:16.770
+kylie jue: And what would you need to have happen when you create a new instance of this type. So when you create a new playlist. What happens when you open a new bank account what happens, and we're going to put you in breakout rooms for about, let's do 10 minutes
+
+111
+00:15:17.850 --> 00:15:27.090
+kylie jue: So 1135 will bring you back and you'll have Ed workspaces here where we've outlined this and put that information and you can just fill this in here. All right, Nick, can you go ahead and open this up.
+
+112
+00:15:55.560 --> 00:15:56.310
+kylie jue: Launch a poll
+
+113
+00:15:58.650 --> 00:16:01.110
+Nick Bowman: Oh no, I don't think so. Oh.
+
+114
+00:16:01.260 --> 00:16:07.560
+kylie jue: Weird, maybe I clicked on Paul's next nevermind. Alright. For those of you watching at home.
+
+115
+00:16:08.400 --> 00:16:20.400
+kylie jue: I'm gonna go ahead and walk through this exercise because we're probably not going to review it a ton when we get back in. So let's go ahead and talk about, let's go ahead and talk about what are the ways you might actually define classes.
+
+116
+00:16:20.880 --> 00:16:22.230
+kylie jue: For our bank account and for
+
+117
+00:16:22.980 --> 00:16:23.760
+For Spotify.
+
+118
+00:16:24.900 --> 00:16:26.820
+kylie jue: I'm going to go ahead and let's see.
+
+119
+00:16:27.960 --> 00:16:33.690
+kylie jue: I'm going to focus. I'm in this walkthrough on the Spotify playlist, because we're going to see the bank account example.
+
+120
+00:16:34.260 --> 00:16:42.750
+kylie jue: Either later in class today or tomorrow as an example. So I'm going to walk through this one. So let's talk about what are the member variables or potential
+
+121
+00:16:43.530 --> 00:16:50.880
+kylie jue: Things that you might need to store inside a Spotify playlist so a playlist is made up of a bunch of songs. So you could imagine that, let's say for
+
+122
+00:16:51.450 --> 00:16:59.640
+kylie jue: Our purposes stroke songs are represented a strings. And in order to have a playlist, which does have a particular order. You want to think about what data structure.
+
+123
+00:17:00.180 --> 00:17:13.620
+kylie jue: Do we want to use to store our list of songs. So the bells that might be going off in your head is a vector because you want to be able to have them ordered and you want to be able to move things around in different orders. So you can imagine having a vector of strings.
+
+124
+00:17:14.700 --> 00:17:20.700
+kylie jue: For our actual music clueless. And let me go ahead and just fill this so you might have something like a vector.
+
+125
+00:17:21.600 --> 00:17:34.410
+kylie jue: Of strings for your songs, um, other things I'm imagining like what gets actually display like when we're playing this music before the before class starts. What is information that gets played
+
+126
+00:17:35.580 --> 00:17:36.870
+kylie jue: Maybe you want something
+
+127
+00:17:38.190 --> 00:17:43.200
+kylie jue: Maybe you want something like total time as an in maybe a double
+
+128
+00:17:44.580 --> 00:17:53.310
+kylie jue: For like how long the playlist is like often you'll see on Spotify to play it displays the duration, you might actually have like the A string for the name of the playlist.
+
+129
+00:17:54.600 --> 00:17:55.020
+kylie jue: Name.
+
+130
+00:17:56.070 --> 00:18:06.690
+kylie jue: Playlist. Let's fix this. Um, let's see anyone else or Nick, you have any ideas, any other thoughts on one of the member variables, we want to
+
+131
+00:18:13.530 --> 00:18:20.850
+kylie jue: Look good, and so function. So I talked a little bit about one of these, but maybe you want to be able to, like, move
+
+132
+00:18:22.200 --> 00:18:33.120
+kylie jue: Move song right and you pass on a string for the song. And what this should allow you to do, right, it should be allowed. Maybe you pass in a string song and you pass an end.
+
+133
+00:18:34.620 --> 00:18:42.570
+kylie jue: location where you're moving song to a new location, you should be able to just add song.
+
+134
+00:18:43.590 --> 00:18:53.280
+kylie jue: Which is going to be done. Maybe that's a new song. And so this will just like add the song to the end of list the playlist.
+
+135
+00:18:55.980 --> 00:18:58.530
+kylie jue: And what else maybe remove song.
+
+136
+00:19:04.410 --> 00:19:06.090
+kylie jue: Where you're taking a string song.
+
+137
+00:19:09.240 --> 00:19:12.060
+kylie jue: Maybe something like actually
+
+138
+00:19:13.200 --> 00:19:14.220
+kylie jue: playing a song.
+
+139
+00:19:15.300 --> 00:19:27.390
+kylie jue: I'm where you would get, again, I'm trying to that would maybe this. What this does is it iterate over your playlist. I'm shuffle.
+
+140
+00:19:29.130 --> 00:19:39.660
+kylie jue: Which will randomly play songs from your playlist and the list could go on. Right. There's so many things you would want people to pause. You don't want to be able to
+
+141
+00:19:41.340 --> 00:19:42.510
+kylie jue: Thinking about others.
+
+142
+00:19:43.680 --> 00:19:54.240
+kylie jue: And I'm not. I'm blanking on some but there's lots of different things you can imagine, everything that you click on or every button. You might push in any music application could potentially be a member function for your playlist class.
+
+143
+00:19:55.530 --> 00:20:00.210
+kylie jue: And then in terms of the actual constructor. So when I click like start a playlist.
+
+144
+00:20:02.010 --> 00:20:07.200
+kylie jue: You could imagine having like just creating the empty songs vector
+
+145
+00:20:09.120 --> 00:20:13.710
+kylie jue: Right, because you want to establish somewhere where you will be able to put the songs, you'd want to
+
+146
+00:20:14.820 --> 00:20:18.180
+kylie jue: Define the playlist name.
+
+147
+00:20:20.430 --> 00:20:26.940
+kylie jue: Maybe with a default of like untitled something, I don't know, whatever. It defaults to know um
+
+148
+00:20:28.440 --> 00:20:40.380
+kylie jue: And what else and then you'd also want to set total time to be equal to zero, right, if this is if these are a member variables. Another way you want to think of the constructor is what do we want to initialize our member variables to
+
+149
+00:20:42.870 --> 00:20:50.220
+kylie jue: Yeah, I think those are the main things there. I can talk a little bit now about the bank account example you can imagine something like
+
+150
+00:20:51.540 --> 00:21:05.940
+kylie jue: An inch balance. We're keeping track of how much money you have in your account. You might have, again, a name of the person maybe account holder name, um,
+
+151
+00:21:07.050 --> 00:21:17.820
+kylie jue: I think those are the main things you'd have in this one. So this one's actually a little bit. There's less information that you're storing here, but you might want to, we said, you want to be able to transfer funds between accounts. So maybe you have
+
+152
+00:21:19.290 --> 00:21:34.590
+kylie jue: Transfer and then you would pass some string like sunder or not shrink. So you actually probably want to do an actual bank account will get more into like how you would do this, but you would actually have some the bank account for the sender and a bank account for the receiver.
+
+153
+00:21:35.970 --> 00:21:40.290
+kylie jue: You may want to deposit money in. So you would have an aunt balance.
+
+154
+00:21:41.790 --> 00:21:47.310
+kylie jue: And this may not be exactly what we're going to actually see later. And you might have like a withdraw and
+
+155
+00:21:48.630 --> 00:21:49.950
+kylie jue: Not a mouth.
+
+156
+00:21:51.120 --> 00:22:05.220
+kylie jue: So these are all examples of things that you might want to do. And there's more hair on the instructor again constructor not instructor, you'd want to initialize your balance which would with whatever you're opening the account to
+
+157
+00:22:06.450 --> 00:22:09.960
+kylie jue: And define the account holders thing.
+
+158
+00:22:11.370 --> 00:22:26.070
+kylie jue: Yeah, so those I think by the main things. Um, and where we still have a few minutes left, so feel free. If you would like to pause the video here and then we'll, we'll bring it back when folks come back from the rooms are people coming back already. Or is it just
+
+159
+00:22:27.030 --> 00:22:28.710
+Nick Bowman: Not yeah that's
+
+160
+00:22:29.850 --> 00:22:30.900
+Nick Bowman: That's so
+
+161
+00:22:31.500 --> 00:22:31.800
+Cool.
+
+162
+00:23:33.780 --> 00:23:36.840
+Nick Bowman: That I can't remember the first time properly hoping
+
+163
+00:23:38.310 --> 00:23:38.850
+Nick Bowman: You're gonna
+
+164
+00:23:39.150 --> 00:23:40.890
+kylie jue: Send it to one minute or 10 seconds.
+
+165
+00:23:42.030 --> 00:23:45.870
+Nick Bowman: Setting the default value period over from last minute, so I'm just going to let them know
+
+166
+00:23:46.290 --> 00:23:46.500
+Okay.
+
+167
+00:23:48.150 --> 00:23:48.390
+Nick Bowman: Okay.
+
+168
+00:23:50.580 --> 00:23:52.440
+Nick Bowman: All right. It actually looks like it's so
+
+169
+00:23:59.730 --> 00:24:00.090
+kylie jue: Cool.
+
+170
+00:24:05.460 --> 00:24:08.280
+kylie jue: Alright I think folks are coming back.
+
+171
+00:24:11.070 --> 00:24:11.670
+kylie jue: Is everyone back
+
+172
+00:24:12.930 --> 00:24:23.190
+kylie jue: OK, cool. So I'll show you what I did while we're while you were all working to and talking through and you could come up with different answers. And there's lots of different things that you might have said about these
+
+173
+00:24:23.850 --> 00:24:31.320
+kylie jue: But these are some of the things I mentioned thinking about what information to store in a playlist you might have a data structure, a vector of songs you might
+
+174
+00:24:31.920 --> 00:24:39.930
+kylie jue: I know like Spotify to play displays the total amount of time that it will take to listen to your playlist and maybe you're storing that on a double you definitely want to name for your playlist.
+
+175
+00:24:40.230 --> 00:24:44.700
+kylie jue: And then these are all the different things you might want to do in a playlist so sort of explaining that
+
+176
+00:24:45.270 --> 00:24:53.760
+kylie jue: Any button you can push any action you can take on a page where you're editing or playing or listening to your playlist that could potentially be an actual function.
+
+177
+00:24:54.210 --> 00:25:02.970
+kylie jue: And then with the constructor. What you want to think about is how do you initialize often your member variables. So, for example, you'd want to create an empty vector of the songs
+
+178
+00:25:03.420 --> 00:25:07.710
+kylie jue: You would want to define the playlist name and you would set total time to zero. If there's no songs in there yet.
+
+179
+00:25:08.400 --> 00:25:18.570
+kylie jue: Same idea for bank account bank account actually probably has fewer pieces of information because there's not as many actions you would want to take you might have a balance and account holders name for transferring funds.
+
+180
+00:25:19.920 --> 00:25:26.070
+kylie jue: We'll get into this later, but you might actually want to use the bank account type itself to indicate what accounts, you're sending and receiving to from
+
+181
+00:25:26.430 --> 00:25:29.790
+kylie jue: And then you might have functions like deposit and withdraw and then
+
+182
+00:25:30.720 --> 00:25:43.860
+kylie jue: A constructive at initialize is balanced to whatever you're initially opening the account with in terms of money and defining the name. So again, thinking about the constructor initializing or or putting in default values for these for these number of variables.
+
+183
+00:25:45.180 --> 00:25:49.470
+kylie jue: Alright, any questions about that activity before we move on.
+
+184
+00:25:53.130 --> 00:25:59.580
+Kaan Alp Yay: Yeah, I had a question. So we can we can call the classes class type itself within itself.
+
+185
+00:25:59.880 --> 00:26:01.500
+kylie jue: Yeah, we'll see an example of that.
+
+186
+00:26:02.010 --> 00:26:03.780
+kylie jue: That you'll be able to use the member
+
+187
+00:26:04.050 --> 00:26:13.920
+kylie jue: variables and functions within the implementation itself. And you can also create instances of other like you'll say like this is going to require an instance of the class itself. Yeah.
+
+188
+00:26:14.340 --> 00:26:15.300
+Alright. Cool. Thanks.
+
+189
+00:26:19.560 --> 00:26:28.860
+kylie jue: Alright, if nothing else, I'm going to go ahead and move on. So before we jump into our final part of our class which is going to actually show you how in c++ to write these classes.
+
+190
+00:26:29.280 --> 00:26:40.530
+kylie jue: Let's go through a few quick announcements. So the mid quarter diagnostic is coming soon. It's going to be released on Friday at 12:01am PDT and then will remain open until 1159 PDT on Sunday.
+
+191
+00:26:40.860 --> 00:26:47.940
+kylie jue: So please make sure to read through the information on this link page right here. If you haven't already, we want to make sure that you get a chance to download the book.
+
+192
+00:26:48.150 --> 00:26:59.790
+kylie jue: And try submitting. So there are no technical difficulties when you actually decide to sit down and take the exam. So please, please make sure to read that page assignment three is due tomorrow, Thursday, July 16th at 11:59pm
+
+193
+00:27:00.840 --> 00:27:16.320
+kylie jue: And there will be a diagnostic review session hosted by trip tomorrow night we weren't able to get another section leader to do it. So we will be recorded so miners can watch afterwards or anyone can watch afterwards, and it's going to be from seven to 830 tomorrow evening.
+
+194
+00:27:17.610 --> 00:27:18.060
+kylie jue: All right.
+
+195
+00:27:19.110 --> 00:27:29.250
+kylie jue: Oh, another quick announcement. Um, one of our section leaders shared that there is an event at the company where he is. Is he working there. I think Nick.
+
+196
+00:27:30.300 --> 00:27:37.470
+kylie jue: Yeah, where he's working this summer. And there's an info session on recursion source graph does some cool stuff with actually like
+
+197
+00:27:38.520 --> 00:27:42.510
+kylie jue: Enabling like searching within. I think it's web pages. I'm
+
+198
+00:27:43.440 --> 00:27:59.760
+kylie jue: Not 100% sure on what they do, exactly, but they will talk about their work and also be talking about how recursion is relevant to their work and an actual real piece of software. So if you're interested that link right there tomorrow at 5pm PDT on Twitch. You can bring your questions.
+
+199
+00:28:00.990 --> 00:28:12.780
+kylie jue: Alright, so how do we write classes in c++. Now we're going to get into a little bit more of the nitty gritty on what if we actually want to make one of our one of these new data types. So we're going to define our new
+
+200
+00:28:13.470 --> 00:28:22.500
+kylie jue: abstract data type called a random bag. What is a random bag a random bag is a data structure that's similar to a soccer or Q and it supports to operations.
+
+201
+00:28:23.100 --> 00:28:30.150
+kylie jue: It supports adding which puts an element into the random bag and removing random with returns and removes a random element from the bag.
+
+202
+00:28:31.050 --> 00:28:34.740
+kylie jue: Seems pretty simple, but there are actually some really cool applications. You could imagine it.
+
+203
+00:28:35.700 --> 00:28:39.570
+kylie jue: Being useful for shuffling a deck of cards and there are some more advanced applications to
+
+204
+00:28:39.900 --> 00:28:52.350
+kylie jue: The random bag is an actual data structure that can be used for generating artwork designing mazes and actually have been training self driving cars to park and change lanes. How does it feel application. So we're going to create our own custom random bank.
+
+205
+00:28:53.700 --> 00:29:01.350
+kylie jue: So how do we create our own class so classes in c++ defining them requires usually two steps. So
+
+206
+00:29:02.040 --> 00:29:08.940
+kylie jue: A header file a header file. These are things that you've been dealing with then you've seen, but we haven't really explicitly, how'd you do much besides reading them so far.
+
+207
+00:29:09.510 --> 00:29:12.450
+kylie jue: So I had our follows suffix or ends with H
+
+208
+00:29:12.840 --> 00:29:23.670
+kylie jue: And it describes what operations. The class can perform and what internal state, it needs that is basically defining are showing the interface that you are going to have for your class again.
+
+209
+00:29:24.000 --> 00:29:29.850
+kylie jue: Keeping in mind those words interface versus implementation, the header file. That's why we had you read them when you were working with them.
+
+210
+00:29:30.240 --> 00:29:40.290
+kylie jue: Says, What can you do with your class and then the actual implementation file is going to be a dot cpp file that literally contains the implementation of the class that's going to explain how things work or not explained, it's gonna
+
+211
+00:29:41.040 --> 00:29:46.860
+kylie jue: It's going to actually implement how things work and implement the interface that is defined in your head.
+
+212
+00:29:48.540 --> 00:29:53.430
+kylie jue: So clients of the class or people who are going to basically use your type. So we for a long time have been clients.
+
+213
+00:29:53.730 --> 00:30:01.470
+kylie jue: Of the abstract data structure types like vector map, etc. Remember, we have to include the directive and what this does, it actually includes the
+
+214
+00:30:02.310 --> 00:30:09.030
+kylie jue: Right. It helps connect to your code to the header file of the class to the actual interface that says, These are the things I'm going to be able to do with the class.
+
+215
+00:30:10.050 --> 00:30:23.070
+kylie jue: So that's formalizing actually things you've already seen in header files and implementations with defining formerly defining classes. So let's talk about what I had a file looks like. So what's in an actual header file, you start with this sort of
+
+216
+00:30:24.600 --> 00:30:32.460
+kylie jue: New looking directive called fragment once and you basically will just put this in all your header files. It's called a pre processor directive.
+
+217
+00:30:33.060 --> 00:30:43.800
+kylie jue: All you have to worry about is that it makes sure that if you include this header file and multiple places in your code, you're not going to include the same thing over and over and over again. It's just going to happen. I'm
+
+218
+00:30:44.610 --> 00:30:50.520
+kylie jue: Just going to happen once. And if you're curious how it works. You can come ask after class. But basically, you just have to have pregnant once in your header files.
+
+219
+00:30:51.600 --> 00:30:54.750
+kylie jue: And then you're going to define the class. So this is what's called a class definition.
+
+220
+00:30:55.830 --> 00:31:00.510
+kylie jue: And we're creating specifically a new class called random bag. It looks a little bit like a struct.
+
+221
+00:31:01.950 --> 00:31:06.300
+kylie jue: In that you define the name of the class itself and then you're using these curly brackets.
+
+222
+00:31:06.630 --> 00:31:14.880
+kylie jue: And you have to make sure to add this semi colon you'll run into some scary compiler errors errors if you leave it out. So that's a common bug, but just make sure you have a semi colon at the end there.
+
+223
+00:31:16.770 --> 00:31:26.370
+kylie jue: And again that's header file is the interface right now. We'll get into the implementation, but the interface gives us sort of a peek of the of the main things and the implementation. So the public interface.
+
+224
+00:31:26.880 --> 00:31:40.980
+kylie jue: specifies what functions you can call on objects of this type. So just like we talked about with the bank account and Spotify examples. What are things you want your user to be able to do so that class or with that class and then the random bag. We specifically had added dot find
+
+225
+00:31:42.750 --> 00:31:48.630
+kylie jue: And so with and then the private implementation. This is where we put the things that we don't want the user to have access to
+
+226
+00:31:49.050 --> 00:31:55.170
+kylie jue: This is where we're going to put all of our private member variables and basically things that are necessary for our class to get the job done.
+
+227
+00:31:55.620 --> 00:32:04.470
+kylie jue: But invisible to people using the classes is a big part of abstraction, we are abstracting away the details. By having some private information in our class, but the user won't need to know about.
+
+228
+00:32:06.000 --> 00:32:16.020
+kylie jue: All right, and then. So like we said, these are the member functions when you're defining a header. You do you put the actual function prototypes underneath the public section.
+
+229
+00:32:17.700 --> 00:32:19.140
+kylie jue: When you're defining the
+
+230
+00:32:20.160 --> 00:32:29.940
+kylie jue: Class. And so what we say is we give the type of the function. The name of the function in any parameters, it's going to take. So again, these are remember functions for the random bag class we have add and remove random
+
+231
+00:32:32.130 --> 00:32:42.210
+kylie jue: And will actually implement them or say like, what do these functions do and how do they work in the dot cpp file all the dot h file is doing is saying, we will have these functions and you'll and the user will be able to access them.
+
+232
+00:32:42.840 --> 00:32:46.560
+kylie jue: And then for our random bag. We're going to have a data member
+
+233
+00:32:48.120 --> 00:32:55.590
+kylie jue: Or member variable called LM which is just basically going to include the elements and we're going to use a vector internally to implement it.
+
+234
+00:32:56.730 --> 00:32:57.480
+kylie jue: And so
+
+235
+00:32:58.530 --> 00:33:13.140
+kylie jue: Because we're using a vector, we have to use pounding through the vector each file. So I know that you can write you can and you often will use other classes when you're defining your classes. Right, that's sort of, again, the whole idea with abstractions here.
+
+236
+00:33:15.390 --> 00:33:22.410
+kylie jue: Alright, so just a summary here in our header. We have the class definition in name with class and then the curly braces and then we have
+
+237
+00:33:23.160 --> 00:33:31.980
+kylie jue: A public section, which will include all of the methods that your user can call or or we also call them member functions. And then I remember variables will be in this private section down here.
+
+238
+00:33:34.230 --> 00:33:46.980
+kylie jue: Alright, so now let's talk about the implementation files, the kind of fun part of actually working through this. So at the top of our implementation file. We're going to include our header file.
+
+239
+00:33:48.180 --> 00:33:57.000
+kylie jue: And when we implement the random bad type. The cpp file has to include the class needs to have the class definition available. And that's why we have the pound include at the top.
+
+240
+00:33:58.920 --> 00:34:13.410
+kylie jue: All implementation again just a really important point on to petition all implementation files need to include the relevant headers. And so you can imagine now because we've included it we have access to the sort of header file which we just defined previously. Alright.
+
+241
+00:34:14.550 --> 00:34:16.440
+kylie jue: So let's go ahead and define our ad function.
+
+242
+00:34:16.830 --> 00:34:27.330
+kylie jue: Again, our add function is going to be void. It's not going to return anything but what we wanted to do is we want to add an element into our bag and remember our bag of elements is represented by this vector
+
+243
+00:34:27.660 --> 00:34:38.640
+kylie jue: So all we do is we say, okay, excuse me, just like what the vector function. We have to pass in a value that's going to get added and then under the hood. What are we going to do, we're just going to add it directly to our vector
+
+244
+00:34:39.930 --> 00:34:41.430
+kylie jue: So that's what our ad function is going to do.
+
+245
+00:34:42.720 --> 00:34:47.490
+kylie jue: And then what I really want to point out here is the syntax appear the random bag colon colon add
+
+246
+00:34:48.360 --> 00:35:02.160
+kylie jue: Which means add this is specifically the add function defined inside of random bags. That is what this colon colon operators doing. It's called the scope resolution operator and c++ and it's basically used to say where where you look for things
+
+247
+00:35:03.720 --> 00:35:14.970
+kylie jue: And if you had written something like this. Instead, where you remove the random bag pulling pulling on the compiler would just think we're defining some random free function called ad and it has nothing to do with random value at all.
+
+248
+00:35:15.420 --> 00:35:21.420
+kylie jue: So you want to make sure you avoid that mistake. You have to put the name of the class and colon colon before the functions. You're defining
+
+249
+00:35:23.460 --> 00:35:34.230
+kylie jue: The other thing I really want to note is you actually because we're including this header file over here, the compiler knows that we're inside of and also because of this up here, the compiler knows we're inside of friends and bag.
+
+250
+00:35:35.310 --> 00:35:44.970
+kylie jue: So it means look at the current collection of sorry the current random bags collection of elements or in other words the cop the copy of albums that is associated with this random bag.
+
+251
+00:35:45.150 --> 00:35:51.000
+kylie jue: So you don't need to tell it where is LM or how is how does it find LM it just will do that for you by default.
+
+252
+00:35:52.410 --> 00:35:56.460
+kylie jue: So let's take a look now at our other function which is a little more complicated, we just remove random
+
+253
+00:35:56.940 --> 00:36:06.750
+kylie jue: And really important when you're defining classes for other people error handling becomes even more valuable because you don't want someone to try to use your class in a way that you don't intend it to be used.
+
+254
+00:36:06.960 --> 00:36:14.160
+kylie jue: So for example, you don't want someone to be able to remove anything from your bag. If it's empty. So we're gonna throw an error if someone tries to call the remove random function.
+
+255
+00:36:14.640 --> 00:36:21.900
+kylie jue: If our bag is empty. And again, you've been using errors in your code already. But really, really vital when you're defining classes that other people are going to use
+
+256
+00:36:23.070 --> 00:36:26.820
+kylie jue: And then we're going to get a random index. So there's a random library.
+
+257
+00:36:27.780 --> 00:36:38.430
+kylie jue: In c++ and we're going to randomly pick an element between zero and the LM size minus one, because again, these are the indices for the actual elements inside of our bag. Then we're going to actually
+
+258
+00:36:39.360 --> 00:36:51.510
+kylie jue: Take our result and return it. When we get removed random. So we first grab the element, then we remove it from albums itself, right, because we are removing we have to remove it from our internal data structure. And then we return results.
+
+259
+00:36:51.840 --> 00:36:56.730
+kylie jue: And the order of this is important, right, we have to grab it before we remove it so that we have access to it to return.
+
+260
+00:36:58.170 --> 00:36:58.650
+kylie jue: Alright.
+
+261
+00:36:59.880 --> 00:37:08.130
+kylie jue: We're going to go ahead and add a couple more functions in here, it might be useful, someone might want to know, okay, well how many items don't have left in my random bag. And again, these are similar.
+
+262
+00:37:08.340 --> 00:37:21.270
+kylie jue: Functions to what you saw with the data structures that we've been using. So we might want to have a size function that returns. How many things are in our bag. And we also might want to have an empty function. So these are pretty simple one line functions.
+
+263
+00:37:23.340 --> 00:37:27.330
+kylie jue: Our size function is just going to return the size of the vector right
+
+264
+00:37:28.740 --> 00:37:40.860
+kylie jue: And why do we do this again. We don't want someone to be able to directly edit this out these elements inside of the vector we want people to only be able to interact with our random bag like we expect like removing something random
+
+265
+00:37:41.070 --> 00:37:50.100
+kylie jue: Not being able to index into this element. So that's why elements is private, and that's why we're going to just call the function for them. We're going to return elements size inside of random bag size.
+
+266
+00:37:50.880 --> 00:38:00.450
+kylie jue: And it's actually we're going to do a very similar thing where we just returned whether or not the size of our current factor is zero, that's being covered right now. There you go. Um,
+
+267
+00:38:01.200 --> 00:38:09.720
+kylie jue: And again, one line function. We're just saying is the size empty. And the thing I want to point out here is we're actually not even calling elements that size here. We just called our size function.
+
+268
+00:38:10.650 --> 00:38:19.230
+kylie jue: So this goes back. It's not exactly the same question, but it's a similar question to what someone asked before this cold calls the size function that we've defined in our own implementation.
+
+269
+00:38:19.860 --> 00:38:30.900
+kylie jue: So our class and boot camp implementation can actually use the public interface that we've defined in here. So when we call size, we know that it's referring to our size function inside random bag.
+
+270
+00:38:32.490 --> 00:38:41.190
+kylie jue: And what we're going to do just to show you that change again we're going to do the same thing up here where we actually just call the size function when we are picking a random integer
+
+271
+00:38:42.210 --> 00:38:44.400
+kylie jue: Between zero and then the size of what's left
+
+272
+00:38:45.990 --> 00:38:46.410
+kylie jue: All right.
+
+273
+00:38:48.180 --> 00:38:51.270
+kylie jue: This is going to be a new concept. So we've learned about the word concept.
+
+274
+00:38:51.630 --> 00:38:59.940
+kylie jue: When we're dealing with variables are parameters in our functions not variables parameters and our functions that we don't want to change. We're going to see a new use of the word concept here, so the
+
+275
+00:39:00.270 --> 00:39:07.350
+kylie jue: key word here means that I promise that these functions will not change the state of the object. So what do I mean by state of the object.
+
+276
+00:39:07.950 --> 00:39:15.690
+kylie jue: The state of the object basically means this function is not going to edit any of my private member variables. So, both sides and is empty.
+
+277
+00:39:16.110 --> 00:39:23.280
+kylie jue: Are accessing elements and looking at the size of checking if it's empty, but they're not actually going to change the
+
+278
+00:39:24.150 --> 00:39:35.400
+kylie jue: And I'm actually going to change elements itself. So we're going to add console to the end here. And we're also going to add cons to the end of the functions where we're implementing them as well. We have to make sure that those match.
+
+279
+00:39:37.680 --> 00:39:41.280
+kylie jue: All right. Alright so that is essentially our random bag.
+
+280
+00:39:42.660 --> 00:39:49.710
+kylie jue: Both the header file and the dot cpp file. So I want to go ahead and show you what it looks like in Qt Creator.
+
+281
+00:39:51.330 --> 00:39:56.520
+kylie jue: So first, I'm just gonna go ahead and show you like this it looks exactly like we just did in slides.
+
+282
+00:39:57.960 --> 00:39:58.860
+kylie jue: Or make this big
+
+283
+00:40:00.090 --> 00:40:04.110
+kylie jue: Right, we have a remove random function. And we have this
+
+284
+00:40:05.310 --> 00:40:08.700
+kylie jue: The syntax for saying this is a function that's inside of our random bag.
+
+285
+00:40:10.680 --> 00:40:17.940
+kylie jue: We did a little differently. We just did plus equals for the value for adding instead. And again, you'll notice we're accessing these things that are the this
+
+286
+00:40:18.210 --> 00:40:26.850
+kylie jue: member variable that's defined inside of our header file. So if I open up our random bag header file, it looks like we said there's a public section. There's a private section.
+
+287
+00:40:27.090 --> 00:40:32.250
+kylie jue: This is where alums are elements are being defined and we say, which functions.
+
+288
+00:40:32.610 --> 00:40:45.480
+kylie jue: We're going to have in our public interface. So again, this each file the interface. And then we have the implementation here, which is exactly like I showed on the slide. And I'm going to go ahead and show you how to use it up. I see a hand raised kinder and ago
+
+289
+00:40:46.440 --> 00:41:02.580
+Kaan Alp Yay: Yeah, so we talked about struts, we are able to access like the the the variables inside strokes, but it seems like we can also do that for classes as long as we put the elements in the if you put the the variables in the the public part is that is that is that legal. Can we do that or
+
+290
+00:41:02.610 --> 00:41:04.380
+kylie jue: Yeah, that's a good point. So if I had put
+
+291
+00:41:04.680 --> 00:41:08.490
+kylie jue: The vector of elements inside of public yes you're right, you would be able to edit them.
+
+292
+00:41:09.030 --> 00:41:18.870
+kylie jue: As a general style convention with classes we usually will put our private member variable. Sorry, our member variables and keep them private and we will usually write functions.
+
+293
+00:41:19.080 --> 00:41:30.630
+kylie jue: That allow you to edit them because basically the idea is if the variables are what we're using to sort of store the underlying information in our type. We don't want someone to be able to come along and just sort of
+
+294
+00:41:30.930 --> 00:41:40.590
+kylie jue: Randomly edited however they want, particularly with something like this. Right. We don't want someone to be able to suddenly index into our elements and not just get a random one because that's just not how we want our random back to work.
+
+295
+00:41:41.280 --> 00:41:51.570
+kylie jue: But what you said is true. Yes, you could. If you did put the private side if you put a member variable in the public section, you would have access to it where we're actually going to use it. Yeah.
+
+296
+00:41:52.230 --> 00:41:53.010
+kylie jue: Good, thanks. Yeah.
+
+297
+00:41:53.070 --> 00:41:53.520
+kylie jue: Good question.
+
+298
+00:41:55.050 --> 00:42:04.590
+kylie jue: So this is our example. So what we're going to do is I'm having a random bag demo function and all it does is it creates a random bag. So what this is going to do is, this will
+
+299
+00:42:05.790 --> 00:42:15.300
+kylie jue: Call our constructor. And one thing I actually didn't know or didn't mention right I said there's these three parts right up defining a class, there is the member variables. The member functions and a constructor.
+
+300
+00:42:15.780 --> 00:42:25.200
+kylie jue: But we didn't define a constructor in our random bag and that's okay because what actually happens is if you don't define a constructor explicitly and we'll talk more about how to define a constructor.
+
+301
+00:42:25.740 --> 00:42:32.190
+kylie jue: Tomorrow, but if you don't define a constructor explicitly there will be an implicit default constructor.
+
+302
+00:42:32.910 --> 00:42:42.030
+kylie jue: And that basically initialize is your member variables to whatever default value those variables will typically be initialized. So, for example, for our elements. It just creates an empty vector
+
+303
+00:42:42.660 --> 00:42:50.400
+kylie jue: So that's what this is doing. It's creating an instance like an instance of our class so bag is an object of type random back
+
+304
+00:42:50.910 --> 00:42:58.830
+kylie jue: And then what we're going to do is we're going to iterate over the numbers zero through nine and add them into our bag. So we're calling our ad function for the bag.
+
+305
+00:42:59.340 --> 00:43:03.510
+kylie jue: And then we're going to call. We have a little helper function here, that's just going to print out
+
+306
+00:43:04.170 --> 00:43:10.680
+kylie jue: The size of our bag. So we're going to pick the size of the bag. After that, and we expect this to be 10 right because we just added 10 things to it.
+
+307
+00:43:11.040 --> 00:43:20.070
+kylie jue: And then we're going to say, well, the bag is not empty. So we're using our is empty function remove a random element from the bag and then go ahead and print it out. So let's go ahead and see how this is working.
+
+308
+00:43:22.680 --> 00:43:29.460
+kylie jue: And while I'm reading this one thing I want to. The reason I'm showing this is that this random bag class that we just defined
+
+309
+00:43:30.360 --> 00:43:35.520
+kylie jue: works exactly like any of the other add to that you've been using in this class, right.
+
+310
+00:43:36.270 --> 00:43:47.640
+kylie jue: You're using it here, just like you would use a factor stack or a queue and the way the person who's using it would do it is they use this dot notation to call the member functions and they create instances of your class.
+
+311
+00:43:49.170 --> 00:43:57.780
+kylie jue: Yeah, so this is just creating a bag with 10 things and then randomly removing items. And if I ran it again, you'll see that the items are truly random um
+
+312
+00:44:01.530 --> 00:44:01.800
+kylie jue: Yeah.
+
+313
+00:44:03.360 --> 00:44:03.750
+kylie jue: Cool.
+
+314
+00:44:04.950 --> 00:44:08.160
+kylie jue: Alright any questions here before I'm
+
+315
+00:44:15.690 --> 00:44:16.620
+kylie jue: Sure chiffon
+
+316
+00:44:17.550 --> 00:44:28.770
+Shifeng Hong: Oh yes, I'm so for this random bag class file is to is the data type storing the vector
+
+317
+00:44:30.030 --> 00:44:31.950
+Shifeng Hong: Elements only integer
+
+318
+00:44:32.190 --> 00:44:37.170
+Shifeng Hong: Yes. Okay. We all can we make your store heavy data type weekend. No.
+
+319
+00:44:37.710 --> 00:44:49.410
+kylie jue: No. So since we're using a vector right vector operates the same as any other vector we use. We still have to specify a type of a specific like we could have changed this, I could have decided my random bag is going to store strings. And then I could have type string here.
+
+320
+00:44:51.120 --> 00:44:55.320
+kylie jue: That I need to change it everywhere else, too. But yeah, yeah, yeah. It's only is holding one type
+
+321
+00:44:56.010 --> 00:45:02.400
+Shifeng Hong: So on. If you want the random bag class to store string when we need to write a new class.
+
+322
+00:45:03.780 --> 00:45:05.250
+Shifeng Hong: Okay, I see. Thank you.
+
+323
+00:45:07.620 --> 00:45:08.490
+Shifeng Hong: I saw another hand.
+
+324
+00:45:08.730 --> 00:45:09.150
+Maybe
+
+325
+00:45:14.790 --> 00:45:16.380
+kylie jue: Know. Is there any other hand something
+
+326
+00:45:23.310 --> 00:45:29.070
+edouard des: Yeah, um, I just, I'm not, I'll let I'll let someone else. I'm going to, I kind of forgot my
+
+327
+00:45:30.420 --> 00:45:30.810
+No worries.
+
+328
+00:45:32.160 --> 00:45:32.490
+kylie jue: Me.
+
+329
+00:45:33.990 --> 00:45:39.870
+Demi Lei: Oh, so I'm just wondering, so like those function in the public
+
+330
+00:45:40.170 --> 00:45:50.580
+Demi Lei: Is like from is it from like the vector age because we did not really defined it, right. Like, like let's say ad and stuff.
+
+331
+00:45:50.910 --> 00:45:59.820
+kylie jue: Now, so this this is defining what functions we are actually going to define ourselves inside random bag dot cpp. So what we're saying is
+
+332
+00:46:00.180 --> 00:46:01.110
+Demi Lei: Okay, yeah.
+
+333
+00:46:01.140 --> 00:46:12.990
+kylie jue: Does that make sense. So what we're saying is we're going to create an ad function. And we're going to create a remove random function and we define them here, right, like this is where we say this is what our ad function is. This is what our remove Random House.
+
+334
+00:46:13.440 --> 00:46:22.500
+Demi Lei: Okay. Oh, alright. And I'm so like without those function, you cannot edit the variable in the private class right
+
+335
+00:46:22.800 --> 00:46:23.730
+kylie jue: Exactly, yes.
+
+336
+00:46:23.790 --> 00:46:24.750
+kylie jue: Okay, got it.
+
+337
+00:46:24.780 --> 00:46:25.320
+Demi Lei: Thank you.
+
+338
+00:46:27.720 --> 00:46:30.480
+kylie jue: Yeah, I guess, more formally to just sort of clarify that is
+
+339
+00:46:30.750 --> 00:46:39.690
+kylie jue: We are specifically when we're defining the class, we are specifying this is how you will be able to edit the variable in the private class. Yeah, yeah.
+
+340
+00:46:41.940 --> 00:46:42.810
+kylie jue: Did Jordan have
+
+341
+00:46:43.830 --> 00:46:44.430
+kylie jue: A hand up.
+
+342
+00:46:47.130 --> 00:46:48.270
+kylie jue: No. Yes.
+
+343
+00:46:48.840 --> 00:46:51.870
+Jordan Lin: My question was answered by Nick in the chat so oh
+
+344
+00:46:51.930 --> 00:46:52.500
+kylie jue: Okay, great.
+
+345
+00:46:57.030 --> 00:47:10.200
+edouard des: Yeah, my question was about. I mean, can you do even if you are some like for defining the functions and the variables inside of the I'm in the header. Is it possible to define them within the class as well. And will they automatically be set to private if you do
+
+346
+00:47:11.610 --> 00:47:16.200
+kylie jue: Um, so you have to put them in the header function in order to say like these are the things that are going to exist.
+
+347
+00:47:16.620 --> 00:47:28.110
+kylie jue: Will see an example of like a constructor, where you can say, like, if I wanted my elements for some reason to default to having like five zeros inside you would do that in a constructor. So in terms of like actually
+
+348
+00:47:29.490 --> 00:47:41.460
+kylie jue: Initializing them to different values, you can do that in a constructor inside of the dot cpp file, but you do still have to say, like the ones that are going to exist. The private member functions, you have to specify them in your header file.
+
+349
+00:47:42.000 --> 00:47:48.630
+edouard des: And then we get angry. If you don't, and also from the whatever the correct if you were to go back to the random by about CPP
+
+350
+00:47:49.440 --> 00:47:59.520
+edouard des: We always use the double colon, whatever you possible to put using namespace random bag and and not need to put the semi colon or is that not how is like random bag and namespace two different things.
+
+351
+00:48:01.980 --> 00:48:04.440
+kylie jue: Um, I think Nick, do you know the answer to that question.
+
+352
+00:48:05.160 --> 00:48:12.090
+Nick Bowman: There are two different things. You can't say using namespace random bad because random bag. It's not a namespace. It's a class.
+
+353
+00:48:13.590 --> 00:48:20.010
+Nick Bowman: And we won't talk about names faces detail this class, they use the same scope resolution operator, but they're two different steps.
+
+354
+00:48:20.790 --> 00:48:23.100
+edouard des: Okay, thank you. Swimming shows me a few you so much.
+
+355
+00:48:25.110 --> 00:48:25.560
+kylie jue: Alright.
+
+356
+00:48:26.100 --> 00:48:30.960
+kylie jue: And the last couple minutes, I'm going to go ahead and just wrap up here with some takeaways.
+
+357
+00:48:31.620 --> 00:48:38.910
+kylie jue: So again takeaways public member variables are declared in the header file and automatically are accessible in the dot cpp file.
+
+358
+00:48:39.330 --> 00:48:41.370
+kylie jue: Exactly what I was pushing was just now.
+
+359
+00:48:41.730 --> 00:48:53.610
+kylie jue: And as a best practice these number variable should be private, and you can create public member functions that allow the users to edit them in a very controlled way. So, exactly. You can define how the user is going to interact with the data that you're storing in your class.
+
+360
+00:48:54.630 --> 00:49:01.110
+kylie jue: Remember functions. So this is something I didn't say explicitly but member functions actually have an implicit parameter
+
+361
+00:49:01.410 --> 00:49:07.560
+kylie jue: That allows them to know what objects, they're operating on. So what am I talking about when I say that when we actually call back
+
+362
+00:49:07.890 --> 00:49:18.150
+kylie jue: Add because we use this dot notation, you can actually think about this implicit parameter that is the copy or sorry, the instance of bag being passed into our ad function.
+
+363
+00:49:18.390 --> 00:49:27.780
+kylie jue: And so that's how add knows. Okay, which bag and my adding two or which bag in my checking the size up or which bag and member moving randomly. There's just sort of implicit
+
+364
+00:49:29.010 --> 00:49:35.520
+kylie jue: Parameter that gets added when you use the documentation that says, Okay, that's going to help me understand which instance of the class I'm operating on
+
+365
+00:49:37.560 --> 00:49:43.110
+kylie jue: And then we mentioned, if you don't have a constructor. There's a default zero argument constructor, meaning a constructor, with no arguments.
+
+366
+00:49:43.560 --> 00:49:49.140
+kylie jue: That instantiate it's all private member variables. And we'll see an explicit constructor in an example tomorrow.
+
+367
+00:49:50.100 --> 00:49:55.410
+kylie jue: So this will be the example we start with tomorrow. And then, in summary, so object oriented programming.
+
+368
+00:49:56.100 --> 00:50:02.160
+kylie jue: We just had a very quick introduction to that with classes, we can create our own abstractions for defining data types using classes.
+
+369
+00:50:02.460 --> 00:50:10.920
+kylie jue: And classes allow us to end cap encapsulate information in a structured way they have three main parts member variables. Remember functions which are methods and in a constructor.
+
+370
+00:50:11.400 --> 00:50:20.490
+kylie jue: And then writing classes requires the creation of these two files basically two steps. One is the dot h file for the interface. And then the actual implementation lives in the dot cpp file.
+
+371
+00:50:21.240 --> 00:50:33.600
+kylie jue: And that was it for today, tomorrow, Nick is going to talk a little bit more in depth about that implementation side of things with arrays and dynamic memory management and then as a reminder, your diagnostics going to start on Friday.
+
+372
+00:50:35.340 --> 00:50:43.890
+kylie jue: And yeah get excited for more for actually actually crossing the abstraction boundary. We're like living right on top of it right now. Well, yeah, we'll stick around for questions. Thanks.
+
+373
+00:50:46.140 --> 00:50:47.640
+Jihe He: Thank you. Thank you so much.
+
+374
+00:50:48.060 --> 00:50:48.810
+Samuel Lynn Ledden: Thank you. Thank you.
+
+375
+00:50:48.870 --> 00:50:50.910
+Thomas Tao Hale: Thank you. Thank you.
+
+376
+00:50:51.030 --> 00:50:53.100
+Kenny Wang: Thank you. Thank you.
+
+377
+00:50:54.870 --> 00:50:57.120
+kylie jue: See AWS raised their hand.
+
+378
+00:50:58.320 --> 00:51:14.220
+Oz Gitelson: Yeah, so I was wondering, back in the example of you, creating a header file when you declare the functions in the header file, but then actually like right the functions that are cpp file, why not just do it all in on random back outage.
+
+379
+00:51:15.420 --> 00:51:22.200
+kylie jue: Why not just all, why not just do it. You could technically speaking, it's, it's sort of a best practice to separate the two.
+
+380
+00:51:22.950 --> 00:51:31.230
+kylie jue: I think another reason for that is that you'll often notice that like the user like we actually had you on an assignment, take a look at a dot h file right
+
+381
+00:51:31.620 --> 00:51:36.000
+kylie jue: To know what functions you have access to. I think it was first specifically for the graphics class.
+
+382
+00:51:36.240 --> 00:51:46.980
+kylie jue: And so if you're pointing people to dot h files or allowing them to have access and see the interface. You don't really want them to care or know about the details of the implementation, which is why we do this separation into two separate files.
+
+383
+00:51:47.310 --> 00:51:48.540
+Oz Gitelson: All right, thanks.
+
+384
+00:52:04.740 --> 00:52:09.660
+karan parikh: Um, so I was just wondering about that was working on assignment three and I had this problem.
+
+385
+00:52:11.220 --> 00:52:14.640
+karan parikh: And I found a solution which was something with like colon colon.
+
+386
+00:52:16.470 --> 00:52:22.650
+karan parikh: So I see this a lot in c++ where there's like a series of colons and then it statement.
+
+387
+00:52:23.940 --> 00:52:26.970
+karan parikh: But I can't really find what that's called actually read up on it anymore.
+
+388
+00:52:28.380 --> 00:52:29.010
+kylie jue: Ah,
+
+389
+00:52:29.100 --> 00:52:29.400
+And then
+
+390
+00:52:30.480 --> 00:52:35.070
+kylie jue: The actual operator. Let me go back in the slides is called
+
+391
+00:52:36.480 --> 00:52:37.830
+kylie jue: See if I can find the right side.
+
+392
+00:52:41.520 --> 00:52:45.060
+kylie jue: Because I don't always remember off the top of my head, either. Did I pass it.
+
+393
+00:52:53.010 --> 00:52:56.160
+kylie jue: It is called the scope resolution operator. Okay.
+
+394
+00:53:00.510 --> 00:53:00.720
+karan parikh: Yeah.
+
+395
+00:53:01.020 --> 00:53:02.760
+kylie jue: I thought that means hand go up next.
+
+396
+00:53:04.050 --> 00:53:17.790
+Demi Lei: Yeah, it's not really related to this class, I just saw that from another class that the instructor was saying that for summer session like they allow teachers to like meet with students like one on one.
+
+397
+00:53:18.060 --> 00:53:18.420
+kylie jue: Mm hmm.
+
+398
+00:53:18.510 --> 00:53:27.060
+Demi Lei: So for that class like they can expand our office. Our and like discussion sort of sections. I'm just wondering, are we going to have any changes.
+
+399
+00:53:27.360 --> 00:53:37.980
+kylie jue: Know where we had actually been doing a workaround as we had had folks who are not actually active section leaders for the class like basically just being second people sitting in on those
+
+400
+00:53:38.520 --> 00:53:46.320
+kylie jue: Yeah, we just don't need that anymore. But we aren't able to expand office hours because we actually didn't have like additional staff who were cross pairing. Yeah.
+
+401
+00:53:47.220 --> 00:53:48.300
+Demi Lei: Okay, got it. Thank you.
+
+402
+00:53:49.920 --> 00:53:50.340
+kylie jue: Jennifer
+
+403
+00:53:51.630 --> 00:53:54.810
+Jennifer Anna Bonello: So I just wanted to ask what the Proxima once thing was about
+
+404
+00:53:55.050 --> 00:53:58.620
+kylie jue: Oh yeah, sure. Yeah. So the idea here is basically
+
+405
+00:53:58.860 --> 00:54:01.680
+kylie jue: When we are when we have a lot of files in our program.
+
+406
+00:54:01.950 --> 00:54:09.450
+kylie jue: You might see like this isn't a great example because there's only one main file and we're including random bag here. Right. But you can imagine like
+
+407
+00:54:09.780 --> 00:54:19.620
+kylie jue: In another file I have, like, kind of like when we give you your assignments we break it into like these separate files. And you can imagine, like, oh, maybe I'm also going to include random bag in that file.
+
+408
+00:54:20.370 --> 00:54:28.770
+kylie jue: But then the main file needs to include that. So like basically there's all these like nested includes includes that are including other files and what Padma ones does is it says
+
+409
+00:54:29.520 --> 00:54:42.870
+kylie jue: To the compiler only include this header file once in the entire program like when I actually do my compilation and like put everything together. I only need one copy of this file, and it can actually cause some confusion if it tries to do it multiple times. So that's all that that saying
+
+410
+00:54:44.310 --> 00:54:46.980
+edouard des: If you don't put it like die.
+
+411
+00:54:51.090 --> 00:54:51.780
+Nick Bowman: Compile
+
+412
+00:54:52.830 --> 00:54:53.070
+edouard des: Yeah.
+
+413
+00:54:53.490 --> 00:54:54.000
+Nick Bowman: If you
+
+414
+00:54:54.330 --> 00:55:01.920
+Nick Bowman: Don't include that. And you don't and you try to include the file from more than one other location, it won't compile
+
+415
+00:55:02.190 --> 00:55:08.070
+Nick Bowman: You'll get it's the same way that you can't define a variable with the same name twice, like in the same scope.
+
+416
+00:55:08.430 --> 00:55:18.630
+Nick Bowman: It's the exact same thing. You can't define a class with the exact same name twice, and that's that's what it's going to try to do if it includes the file size Economic. Economic profile. Otherwise, it just
+
+417
+00:55:22.410 --> 00:55:23.910
+kylie jue: Jennifer was that done into your question.
+
+418
+00:55:26.790 --> 00:55:27.300
+kylie jue: Michael
+
+419
+00:55:29.880 --> 00:55:32.970
+Michael M Hu: Chill go over the scope resolution operative
+
+420
+00:55:34.470 --> 00:55:49.950
+kylie jue: Yeah, so the idea here. Um, what it's doing is it's just saying when I have maybe it's better to do it from here. When I define my remove random function if I actually look it sounds a little simpler if I did that.
+
+421
+00:55:51.180 --> 00:56:00.360
+kylie jue: Now, all it says is my dot cpp file has this random function called add that just exists but you notice how now it doesn't it doesn't recognize what LM says
+
+422
+00:56:00.750 --> 00:56:07.290
+kylie jue: Because it doesn't know that I'm associating the ad function with the random bag class. So what the scope
+
+423
+00:56:08.070 --> 00:56:12.180
+kylie jue: The scope resolution operator, but the scope resolution operator does is it saying
+
+424
+00:56:12.450 --> 00:56:22.410
+kylie jue: Okay, I am working within the scope of my random bag class. So I know oh my LM that I'm referring to is the LM from my random bag class.
+
+425
+00:56:22.650 --> 00:56:32.160
+kylie jue: Um, so basically, long story short is just make sure to include the name of the class and then the scope resolution operator before any function that you're defining for your class.
+
+426
+00:56:34.380 --> 00:56:48.720
+Michael M Hu: All right, so just it's an explicit way to show how like the header implementation Arlene, yes. All right. And for the and the header and the implementation, do they have to be deemed the same exact thing.
+
+427
+00:56:49.440 --> 00:56:50.880
+Michael M Hu: Order for this to work as well.
+
+428
+00:56:51.030 --> 00:56:54.450
+kylie jue: Mm hmm. Yeah. These function prototypes have to match here and here.
+
+429
+00:56:55.950 --> 00:56:56.430
+Michael M Hu: But
+
+430
+00:56:58.020 --> 00:57:01.200
+Nick Bowman: What's the function prototype we sorry were you asking the file name.
+
+431
+00:57:02.010 --> 00:57:03.600
+Nick Bowman: The file names to be the same.
+
+432
+00:57:04.020 --> 00:57:04.650
+Nick Bowman: Oh, yeah.
+
+433
+00:57:08.820 --> 00:57:12.060
+Michael M Hu: I guess I got an answer to both
+
+434
+00:57:12.150 --> 00:57:13.410
+Michael M Hu: I wasn't really sure you there.
+
+435
+00:57:14.490 --> 00:57:14.880
+kylie jue: Okay.
+
+436
+00:57:16.290 --> 00:57:22.500
+Nick Bowman: Yeah, the file names are actually unimportant. As long as you pound include the right file name, so like
+
+437
+00:57:23.250 --> 00:57:36.750
+Nick Bowman: Like you could have named that something completely random, but as long as you're kind of putting the right thing. It'll work but you shouldn't do that like the standard accepted way to implement c++ classes is to have two files with the same route and then adopt ah
+
+438
+00:57:37.830 --> 00:57:40.890
+Michael M Hu: So would it be possible to have more than one implementation file.
+
+439
+00:57:43.470 --> 00:57:54.960
+Nick Bowman: No, it's the same reason, like you couldn't implement remove random twice because then the compiler be confused, say like, I don't, I don't know what you mean. So
+
+440
+00:57:55.110 --> 00:58:00.900
+kylie jue: Could you, what could you do it across. What could you have one cpp file for removing another one CPP for add
+
+441
+00:58:01.650 --> 00:58:03.930
+Nick Bowman: Yeah, you could write you would
+
+442
+00:58:04.650 --> 00:58:05.820
+That be kind of where you could
+
+443
+00:58:07.890 --> 00:58:09.630
+kylie jue: Redefine functions. Yeah.
+
+444
+00:58:10.080 --> 00:58:16.140
+Michael M Hu: I'm trying to understand how like the class creation and implementation, where it's just like, because it's new.
+
+445
+00:58:18.390 --> 00:58:18.810
+Michael M Hu: All right.
+
+446
+00:58:19.980 --> 00:58:20.130
+Michael M Hu: Yeah.
+
+447
+00:58:20.160 --> 00:58:20.880
+kylie jue: Does that clarify.
+
+448
+00:58:21.660 --> 00:58:23.400
+Michael M Hu: Yeah okay, my answer is quite
+
+449
+00:58:24.480 --> 00:58:24.840
+kylie jue: Cool.
+
+450
+00:58:30.180 --> 00:58:30.570
+Kaan Alp Yay: Yeah.
+
+451
+00:58:31.590 --> 00:58:41.220
+Kaan Alp Yay: So I was just curious about the I mean get another question about the double double colon thing, but it's not the same. I get the cloud, how it works with the class type, but
+
+452
+00:58:41.580 --> 00:58:52.590
+Kaan Alp Yay: If I look up like c++ dot com for like referencing like different like stuff on the standard library. They whenever they create strings, for example, they use STD dot like colon.
+
+453
+00:58:52.680 --> 00:59:00.000
+Kaan Alp Yay: colon colon string. So like they have like they they use it and then this thing is like all over the place for a lot of different things.
+
+454
+00:59:00.600 --> 00:59:01.620
+kylie jue: And so things
+
+455
+00:59:01.650 --> 00:59:08.670
+Kaan Alp Yay: Start with STD dot dot colon colon before they call whatever class type that they're looking at
+
+456
+00:59:09.120 --> 00:59:16.260
+kylie jue: Yeah so c++ has. So again, different from classes name spaces in class. They're not the same thing. So preface it with that.
+
+457
+00:59:17.010 --> 00:59:31.710
+kylie jue: But c++ has a like standard namespace, which is what the STD is standing for when we put this at the top of our file using namespace STD basically prevents us from needing to do that work of like with integers like that right or something with strings.
+
+458
+00:59:31.710 --> 00:59:32.460
+Oh,
+
+459
+00:59:33.510 --> 00:59:33.780
+kylie jue: Yeah.
+
+460
+00:59:33.900 --> 00:59:34.740
+Kaan Alp Yay: I see. Okay.
+
+461
+00:59:36.240 --> 00:59:40.740
+Kaan Alp Yay: So it just by putting using namespace STD. We can get rid of all that stuff that
+
+462
+00:59:40.740 --> 00:59:42.120
+Kaan Alp Yay: They have like, amen. Okay.
+
+463
+00:59:42.150 --> 00:59:43.350
+Kaan Alp Yay: Perfect, thank you so much. Great.
+
+464
+00:59:47.520 --> 00:59:47.910
+edouard des: How
+
+465
+00:59:50.220 --> 01:00:04.080
+Junhao Wang: Um, so I have a question about the pregnant ones like I'm the top is that like necessary because like I read through some other header files from the last assignment that sounded included some kind of confused.
+
+466
+01:00:05.160 --> 01:00:06.720
+Junhao Wang: Exclusive for class or
+
+467
+01:00:07.890 --> 01:00:14.130
+kylie jue: It's specific. It's not specific to classes, but there is what you might see. So this is actually
+
+468
+01:00:14.580 --> 01:00:24.750
+kylie jue: I don't know exactly what header files, you're looking at, but there are two ways to sort of tell the compiler that you only should include things once one is pregnant once and then there's an older way of doing it that I don't remember.
+
+469
+01:00:25.230 --> 01:00:36.750
+kylie jue: The name of but you may be seeing as some of the older files have the old way of doing it, but it's doing the same thing they'll have something like, I think it's like in depth, Nick, do you remember what exactly what it's called.
+
+470
+01:00:37.500 --> 01:00:45.270
+Nick Bowman: It's called include guard. And I think what he's actually I'm pretty sure the header files that he's referencing is correct, but there's actually no protection there.
+
+471
+01:00:45.720 --> 01:00:52.920
+Nick Bowman: And you can absolutely have a header file with no protection on it. It's just if you try to include it in more than one place you have issues.
+
+472
+01:00:53.160 --> 01:01:02.370
+Nick Bowman: And if you look at the way that we use those actually on all the assignments. Prior to this, the only reason we've included a header files is to force you to conform to our
+
+473
+01:01:02.700 --> 01:01:14.310
+Nick Bowman: Prototypes we kind of hit like we literally we put the function prototypes in there. So if you try to change them in the CPP files, you will get errors because one of the most common issues for grading and people will change the prototypes and I'm like, we can
+
+474
+01:01:15.750 --> 01:01:25.410
+Nick Bowman: So we were only including them in one place. And so we, I mean, yes, we got lazy. I probably should have included the practical ones just good practice.
+
+475
+01:01:26.130 --> 01:01:32.130
+Nick Bowman: But if you're only going to include the header file in one location. You don't need it. And it's just it becomes relevant as soon as you start trending.
+
+476
+01:01:34.350 --> 01:01:37.710
+Nick Bowman: Okay, we're kind of using the header files for a non standard purposes.
+
+477
+01:01:40.560 --> 01:01:41.280
+Junhao Wang: Only. Thank you.
+
+478
+01:01:45.750 --> 01:01:46.110
+scott nelson: I
+
+479
+01:01:47.280 --> 01:01:49.410
+scott nelson: Had a question about the terminology
+
+480
+01:01:51.150 --> 01:02:00.660
+scott nelson: Like the component or the book, use the term fields, kind of in relation to Members and I was wondering if there's a difference, or if they're interchangeable.
+
+481
+01:02:01.020 --> 01:02:04.140
+kylie jue: Yeah, that's just another term. You can use from member variables.
+
+482
+01:02:04.800 --> 01:02:05.100
+Okay.
+
+483
+01:02:15.870 --> 01:02:28.080
+edouard des: Just as a final question, and when, if you. Is there a name for if you put a hashtag followed by him and include or primal wants to these will have like a common name or did you just just call him the hashtag thing.
+
+484
+01:02:30.510 --> 01:02:35.430
+kylie jue: Don't you just call them the hashtag think it'll be fine if that was I think they're called directives, but I might be wrong.
+
+485
+01:02:35.520 --> 01:02:38.370
+Nick Bowman: Is that right, yeah. They're called pre processor directives.
+
+486
+01:02:39.150 --> 01:02:39.780
+Nick Bowman: Okay, anything
+
+487
+01:02:41.370 --> 01:02:45.720
+Nick Bowman: With the pound is is interpreted by
+
+488
+01:02:47.370 --> 01:02:48.030
+The processor
+
+489
+01:02:51.360 --> 01:02:53.850
+edouard des: Okay, thank you. Sounds good fancier than hashtag thing.
+
+490
+01:02:56.340 --> 01:02:57.300
+edouard des: Have a good day. Thank you.
+
+491
+01:03:00.720 --> 01:03:02.220
+kylie jue: Any other questions.
+
+492
+01:03:04.650 --> 01:03:05.280
+kylie jue: Yeah, Michael.
+
+493
+01:03:06.810 --> 01:03:10.530
+Michael M Hu: I have a question about one of the assignments. Can I say here or
+
+494
+01:03:11.310 --> 01:03:14.640
+kylie jue: Sure. We won't go into like in depth debugging help, but if you have like a
+
+495
+01:03:15.180 --> 01:03:18.600
+kylie jue: Question. That's conceptual about the assignment or bug common bugs, we can
+
+496
+01:03:20.280 --> 01:03:24.510
+Michael M Hu: I don't know if it's a common bug, but for one of the
+
+497
+01:03:25.530 --> 01:03:35.010
+Michael M Hu: For merge its I'm getting an error, where it's like it's saying it's out of think vector bounds or it's trying to access the element that's those that's not
+
+498
+01:03:36.690 --> 01:03:37.530
+Michael M Hu: In the
+
+499
+01:03:39.660 --> 01:03:43.500
+Michael M Hu: Range. I don't know where that's coming from
+
+500
+01:03:44.520 --> 01:03:47.610
+kylie jue: A should give you a line number
+
+501
+01:03:48.360 --> 01:03:51.120
+Michael M Hu: The line number. It just gives the test.
+
+502
+01:03:52.290 --> 01:03:52.800
+kylie jue: I see.
+
+503
+01:03:53.190 --> 01:04:00.150
+Nick Bowman: If you run the code under the debugger. It'll if it's like actually raising an air if you run the code in the debugger, it'll stop at alignments racing.
+
+504
+01:04:03.360 --> 01:04:08.340
+Nick Bowman: But generally, generally, those kinds of things will show up like online where you're like accessing
+
+505
+01:04:09.390 --> 01:04:21.360
+Nick Bowman: Like where you're using the index our operation right either indexing or like sub list like anything that takes in indices. Those are the lines that are going to fail if you have like intelligent disease and they'll tell you that
+
+506
+01:04:22.170 --> 01:04:29.490
+Nick Bowman: But if you run the test under the debugger it instead of just crashing the program and cause of raising an error. It'll, it'll stop with the line that
+
+507
+01:04:33.690 --> 01:04:34.140
+Michael M Hu: Thank you.
+
+508
+01:04:40.590 --> 01:04:42.120
+kylie jue: Any other questions.
+
+509
+01:04:49.980 --> 01:04:50.520
+kylie jue: No, I'm gonna
+

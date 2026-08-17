@@ -1,0 +1,2086 @@
+WEBVTT
+
+1
+00:00:02.429 --> 00:00:04.859
+Nick Bowman: You saw about a minute before I get started.
+
+2
+00:00:07.799 --> 00:00:08.280
+Nick Bowman: For sure.
+
+3
+00:00:33.840 --> 00:00:40.380
+Trip (he/him): It was really annoyed that when you're presenting zoom doesn't show you it shows like another person.
+
+4
+00:00:41.220 --> 00:00:41.640
+Regina Ta: That's
+
+5
+00:00:41.910 --> 00:00:43.140
+Trip (he/him): That's always kind of gotten to me.
+
+6
+00:00:45.480 --> 00:00:47.280
+kylie jue: Depends on what format you
+
+7
+00:00:47.940 --> 00:00:48.810
+Trip (he/him): Know, I can change it.
+
+8
+00:00:49.200 --> 00:00:58.050
+Trip (he/him): I always have like one person in the corner that I believe shows me to like when it's recorded. But when I'm looking at it. I'm not seeing myself.
+
+9
+00:00:59.070 --> 00:01:02.640
+kylie jue: The drop down. I always see myself at the top and then some people
+
+10
+00:01:02.760 --> 00:01:05.850
+Trip (he/him): If I do the drop down will not show other people and
+
+11
+00:01:06.090 --> 00:01:12.780
+kylie jue: I know it will still show other people, but you can pin yourself. How many just mentioned that new. That's how I keep this
+
+12
+00:01:16.950 --> 00:01:20.520
+Trip (he/him): If I have a drop down and it will just show a bunch of confused people watching
+
+13
+00:01:23.760 --> 00:01:25.470
+Trip (he/him): Yeah. Hi, everyone.
+
+14
+00:01:25.980 --> 00:01:26.910
+Nick Bowman: Welcome, welcome.
+
+15
+00:01:27.240 --> 00:01:36.840
+Trip (he/him): This is CS one of six be lecture 29 multi threading and parallel computing. And as you can probably see I am either Nick nor Kylie. My name is trip. I've been teaching this quarter.
+
+16
+00:01:37.440 --> 00:01:42.720
+Trip (he/him): Which is more or less kind of working in the background, ensuring that things aren't on fire and that people are happy.
+
+17
+00:01:43.380 --> 00:01:51.570
+Trip (he/him): If you're not a minor. Hello. Maybe you see me around. If you are a minor, as you know, I'm watching the state of California therefore cannot talk to you.
+
+18
+00:01:52.080 --> 00:02:03.630
+Trip (he/him): But it is nice to finally make your acquaintance, and hopefully teach you some cool things today. So we'd love to see what you think. I've been doing this quarter. But for the sake of time, let's jump in.
+
+19
+00:02:04.800 --> 00:02:12.150
+Trip (he/him): So here's sort of the world of where we've been in want to 60. As you can see, we've gone around quite a few places where are we now,
+
+20
+00:02:12.660 --> 00:02:18.720
+Trip (he/him): Right, well, you know, yesterday we learned about graphs and graphs are cool. They're not that cool. But they're okay.
+
+21
+00:02:19.260 --> 00:02:27.390
+Trip (he/him): But we're sort of after these real world algorithms, right, we're very much for now in want to explain like life after Windows XP. When should I say so let's expand that a little bit.
+
+22
+00:02:28.710 --> 00:02:36.030
+Trip (he/him): This is where you are right now with respect to the undergraduate curriculum for for computer science. So as you can see it's kind of split into two tracks.
+
+23
+00:02:36.420 --> 00:02:42.900
+Trip (he/him): This will be talked about more perhaps in the future, or you can also find this yourself. If you're interested in taking more computer science classes.
+
+24
+00:02:43.260 --> 00:02:49.260
+Trip (he/him): I just wanted to show you where you might find a multi threading and parallel computing. That's about here.
+
+25
+00:02:49.950 --> 00:02:54.450
+Trip (he/him): Now I understand you may feel like, oh, that's kind of weird, it's, it's like kind of far down and the systems track.
+
+26
+00:02:55.170 --> 00:03:02.370
+Trip (he/him): That being said, I don't really believe that multi threading is is that inaccessible topic. It actually has been taught formally you want to succeed.
+
+27
+00:03:02.850 --> 00:03:15.150
+Trip (he/him): It's just often most applicable in these kinds of classes, but I think that today. We'll all see that there are some really cool applications in want to speak and hopefully you'll learn a lot and kind of expand your horizon on how you think about computers.
+
+28
+00:03:15.900 --> 00:03:26.250
+Trip (he/him): So let's move into sort of our guiding question for the day, but hopefully you'll be able to answer after this lecture. How can we harness the course and our computer in order to paralyze a workload safely.
+
+29
+00:03:28.080 --> 00:03:35.130
+Trip (he/him): All right, hopefully, right now, you're like, Whoa, what like multiple cores like parallel
+
+30
+00:03:36.090 --> 00:03:41.640
+Trip (he/him): Like trip. I don't even know what recursion is like, I still haven't figured that out. Now you're throwing all these random words in here. It's okay.
+
+31
+00:03:41.970 --> 00:03:49.410
+Trip (he/him): Well, we'll break this down, but we'll break it down into each piece step by the end of this lecture, you'll know what all this means and be able to give a pretty good answer.
+
+32
+00:03:50.790 --> 00:03:55.590
+Trip (he/him): So here's sort of our theory high level roadmap for the day, a little bit of review.
+
+33
+00:03:56.040 --> 00:04:01.620
+Trip (he/him): Of things that I think you should know more about just coding in general not really any topic in particular.
+
+34
+00:04:01.860 --> 00:04:08.160
+Trip (he/him): Then we'll talk about computer architecture, just some systems, the stuff about threads and processors and then if we have time, we'll talk about Fred safety.
+
+35
+00:04:08.580 --> 00:04:16.200
+Trip (he/him): So let's start with a little bit of review. This is just simple code flow, not necessarily anything you've ever learned, but things that I think intuitively should make sense.
+
+36
+00:04:17.310 --> 00:04:22.980
+Trip (he/him): So let's take a look at this code on the right. Right, very simple function. The course of variables call a function see out, we're done.
+
+37
+00:04:24.270 --> 00:04:30.090
+Trip (he/him): The question for you is, how does the computer read and run your code. In this case it's the main function right
+
+38
+00:04:30.990 --> 00:04:34.950
+Trip (he/him): He really thought about that before, right, just kind of happens. But if I had to ask you to trace it
+
+39
+00:04:35.400 --> 00:04:41.850
+Trip (he/him): You probably go from top to bottom, you can see my laser pointer like yeah this then this then this maybe in this function.
+
+40
+00:04:42.180 --> 00:04:48.930
+Trip (he/him): It goes into some other code then it comes back here. It's the outset is done, logically, like your code is executed, top to bottom.
+
+41
+00:04:49.620 --> 00:04:53.280
+Trip (he/him): I'm kind of left to right. But mostly, like, top to bottom right. That shouldn't be a surprise to anyone.
+
+42
+00:04:54.210 --> 00:05:00.480
+Trip (he/him): That's actually not the question that I'm not concerned about. I just wanted to get that idea in your mind that code is executed from top to bottom. Pretty linearly
+
+43
+00:05:00.930 --> 00:05:09.870
+Trip (he/him): The question I really wanted to get at is, who is that right, what's actually the thing that's running your code like that encapsulates your code.
+
+44
+00:05:10.320 --> 00:05:17.610
+Trip (he/him): And the answer I feel like it's just kind of the computer. Right. Well, we'll look into that. Today I wanted to find something for you, called the thread.
+
+45
+00:05:18.210 --> 00:05:22.290
+Trip (he/him): A thread is an abstraction that represents a sequential execution of code.
+
+46
+00:05:22.890 --> 00:05:30.120
+Trip (he/him): All right. Now again, you might have that like confused Pythagoras theorem meme or it's like, whoa, lots of words here. Let's break it down.
+
+47
+00:05:30.660 --> 00:05:35.970
+Trip (he/him): A threaded is an abstraction, right, an abstraction is something that separates implementation from behavior.
+
+48
+00:05:36.510 --> 00:05:47.790
+Trip (he/him): And it's an abstraction that represents sequential line by line, top to bottom execution of code, anything that's code a thread is an abstraction that more or less represents a bit of code.
+
+49
+00:05:48.930 --> 00:05:51.450
+Trip (he/him): Become sort of encapsulates a piece of code.
+
+50
+00:05:53.400 --> 00:05:59.340
+Trip (he/him): So here's another way to think about what threads are. I understand that it's a very abstract topic and kind of hard to think about
+
+51
+00:05:59.880 --> 00:06:12.210
+Trip (he/him): So when people talk about threads, a very common way to use them use the word is to say, a thread of execution. Okay, maybe you've heard that before. Maybe that just that sentence kind of makes sense. Oh yeah, it's like a thread of execution.
+
+52
+00:06:12.870 --> 00:06:18.840
+Trip (he/him): So think about this line on the right, this little squiggly as as a programs flow and execution from kind of top to bottom.
+
+53
+00:06:19.230 --> 00:06:23.970
+Trip (he/him): This is like the start of Maine, for example, and this is the end of me the last line or that closing curly bracket.
+
+54
+00:06:24.360 --> 00:06:32.550
+Trip (he/him): Well, the flow is technically linear, right. It goes from top to bottom, but maybe it's squiggles sometimes, right, maybe you have an if statement and it kind of goes in there, maybe have a while.
+
+55
+00:06:32.820 --> 00:06:45.480
+Trip (he/him): I get stuck in there. Maybe you have a function, it gets stuck in there. Maybe you have a corrosion. It goes in and comes back comes back, but at the end of the day, it'll come back home, right, it'll come back to me and continue. It's sort of weary trail from top to bottom.
+
+56
+00:06:46.620 --> 00:06:47.100
+So,
+
+57
+00:06:48.720 --> 00:06:55.620
+Trip (he/him): You can see that the code flow isn't necessarily linear straight, top to bottom. It kind of squiggles around a little bit, but eventually go from point A to point B.
+
+58
+00:06:56.220 --> 00:07:02.280
+Trip (he/him): And you can think of this little squiggle as a thread right. It even looks like a little squiggly line. So another way to think about a thread.
+
+59
+00:07:02.670 --> 00:07:16.050
+Trip (he/him): Is sort of this this this code flow the execution from the beginning to the end of a piece of code. But let's think about threads even more concretely right now your computer is running a couple of threads. Let's talk about some examples of threads running on your PC.
+
+60
+00:07:17.460 --> 00:07:22.140
+Trip (he/him): A one example, are you on zoom right now. Well guess what, zoom from by threads.
+
+61
+00:07:23.220 --> 00:07:28.680
+Trip (he/him): Do you have a web browser open like Chrome or Safari. Well, good news also run by threads.
+
+62
+00:07:29.790 --> 00:07:37.950
+Trip (he/him): Last example, are you watching tech talks during lecture, I certainly hope not, more power to you, however, because if you are also run by threats.
+
+63
+00:07:39.330 --> 00:07:48.030
+Trip (he/him): So now that you've seen those examples, I've got a question for all of you prosper rhetorical. How many threads. Do you think my computer had an active when I was making this slide over the weekend.
+
+64
+00:07:50.160 --> 00:07:57.120
+Trip (he/him): Take a second. Think about it 10 hundred zero. I don't know. Well, turns out it's a lot
+
+65
+00:07:58.140 --> 00:08:05.940
+Trip (he/him): It was executing about 3500 threads at the time of making the slide you can see that right here 3400 threads.
+
+66
+00:08:06.750 --> 00:08:13.290
+Trip (he/him): I'm the cool thing about threads, is that many of large programs like web browsers might actually need multiple threads to run
+
+67
+00:08:13.950 --> 00:08:19.980
+Trip (he/him): That's just because they're complex programs and have so many moving parts right so many different pieces of code that they need to run
+
+68
+00:08:20.820 --> 00:08:27.810
+Trip (he/him): So what I wanted to get what I want you to get out of this is that threads are everywhere. And there are tons of them running at all times and your computer.
+
+69
+00:08:29.580 --> 00:08:30.240
+Trip (he/him): Question for you.
+
+70
+00:08:31.350 --> 00:08:34.980
+Trip (he/him): When you run a program and cute creator is a thread executing your coat
+
+71
+00:08:37.320 --> 00:08:45.300
+Trip (he/him): It'd be like, it's like a trick question or something. I think so. Like you show me a pretty much everything on my computer is like a thread right it's all code well
+
+72
+00:08:46.650 --> 00:09:01.830
+Trip (he/him): The answer is yes, kind of, it's a thread executing your code. Well, when you're running a program and Qt Creator, like a section handout or an assignment, a thread that encapsulates your code, right, the squiggly line that is your code. A third encapsulating that code is being executed.
+
+73
+00:09:03.000 --> 00:09:06.690
+Trip (he/him): However, a thread alone isn't actually enough to run your code. Okay.
+
+74
+00:09:07.170 --> 00:09:14.850
+Trip (he/him): And why is that, well, I have to introduce something called the software, hardware boundary. Right. You know how I had 3500 threads running before
+
+75
+00:09:15.300 --> 00:09:21.210
+Trip (he/him): Well, they couldn't all run at the same time, right, the hardware does not exist for that. So let's let's do some definitions.
+
+76
+00:09:22.080 --> 00:09:27.960
+Trip (he/him): I defined software as programs and obstructions more or less code, not a physical entity.
+
+77
+00:09:28.830 --> 00:09:39.720
+Trip (he/him): For example, when you defined the abstraction. That was the priority queue. Keep class, could you touch your priority queue. Well, not really, but it exists right it's something concrete that you made. It's not physical. It's all code.
+
+78
+00:09:40.410 --> 00:09:42.990
+Trip (he/him): So programs and instructions any code really a software.
+
+79
+00:09:43.290 --> 00:09:55.020
+Trip (he/him): Whereas hardware is actually the physical parts of your computer, right. Maybe it's your keyboard. Maybe it's your processor. Maybe it's your graphics card. These are all pieces of hardware and hardware and software have to work together in order to get things done.
+
+80
+00:09:56.820 --> 00:10:01.290
+Trip (he/him): So where I'm going with this. Is that a throat alone. It can't run your program. It can't do it alone.
+
+81
+00:10:01.740 --> 00:10:08.430
+Trip (he/him): A thread really is just software, right. It's just code. You can't touch a thread. It's a software that isn't abstraction representing a program that you've written
+
+82
+00:10:09.360 --> 00:10:21.330
+Trip (he/him): A thread actually needs to work with the computers hardware in order to run the code that encapsulates and that makes sense, right, like you need like to run your computer to run any program. You can't just do it with code. You also need hardware to run it.
+
+83
+00:10:23.430 --> 00:10:27.210
+Trip (he/him): But what piece of hardware. Does this right like what actually is it that one's code.
+
+84
+00:10:28.440 --> 00:10:31.290
+Trip (he/him): More definitions. I'm going to define the CPU.
+
+85
+00:10:31.770 --> 00:10:37.860
+Trip (he/him): Also known as the central processing unit as a piece of hardware that's responsible for executing instructions that make up a computer program.
+
+86
+00:10:38.130 --> 00:10:47.640
+Trip (he/him): Think of this as the brain of a computer any computer will have it this phone has it my computer has it your computer has it Mark Zuckerberg, has it. Anything that's kind of robotic will sort of operate with a CPU.
+
+87
+00:10:49.050 --> 00:10:58.440
+Trip (he/him): Inside of CPU, you might have course the core is an individual processor inside of the CPU. Okay, I'll restate that a CPU can have multiple courts.
+
+88
+00:10:58.890 --> 00:11:10.920
+Trip (he/him): Each core is able to execute code independently of other course alright so inside of CPU, you might have multiple cores and each core can actually execute tasks independently of the others.
+
+89
+00:11:11.640 --> 00:11:19.260
+Trip (he/him): Let's actually look inside of CPU for a second, there's some kind of ugly stuff here, but I am really caring about these courts here. Let's just kind of focus in on these
+
+90
+00:11:20.430 --> 00:11:24.930
+Trip (he/him): Question for you. How many concurrent programs can the CPU run or support.
+
+91
+00:11:29.760 --> 00:11:38.580
+Trip (he/him): Hopefully people should be saying for in the chat. We have four things capable of independently executing instructions. So yes, we can run for concurrent programs.
+
+92
+00:11:40.350 --> 00:11:48.870
+Trip (he/him): Let's talk a little bit about threads, of course. So in order for an individual thread to be able to execute some code, it must be running on a CPU core
+
+93
+00:11:49.410 --> 00:12:00.450
+Trip (he/him): Okay, a thread right. It can't just run. It's a piece of your code. But what runs it will win a thread is on is operating with a CPU core hardware, then it can actually run an execute your program.
+
+94
+00:12:01.590 --> 00:12:09.450
+Trip (he/him): But trip you asked, like you said you had 3500 cores 3500 threads and for course right that doesn't work out, does it
+
+95
+00:12:09.840 --> 00:12:19.920
+Trip (he/him): Well, very frequently all cores and your CPU will be busy, right, all four will be doing stuff. So if all the courses are busy a thread that's not on a core has to wait.
+
+96
+00:12:20.370 --> 00:12:30.690
+Trip (he/him): It's literally has to wait for a quarter for you before I can hop on that core and begin executing its own code. There's a whole complex weighting system of, like, oh, I need to go on this core, but they're busy. I gotta wait
+
+97
+00:12:31.590 --> 00:12:42.930
+Trip (he/him): Let's take a look at what that might look like. So let's assume for the sake of this simple example that our computer has a CPU with just one core okay we're capable of doing one thing at a time. No multitasking.
+
+98
+00:12:43.410 --> 00:12:51.570
+Trip (he/him): So this single core and we have a single thread. Well, I'm this thread and I see that the core is free, right, like, oh, there's no there's no
+
+99
+00:12:52.950 --> 00:13:00.570
+Trip (he/him): Question for you to think about for later. It's this course free, right, there's no one on it has anything happening in the computer right now. Right.
+
+100
+00:13:01.350 --> 00:13:13.230
+Trip (he/him): Like if the course. The only thing capable of doing work, how can it ever be free. Well, I'll get to that in a second, but let's just say for this example, the course free right so this thread has the ability to hop on this Court.
+
+101
+00:13:14.430 --> 00:13:17.880
+Trip (he/him): There it is. Now the thread which might be your cutie creator program is running.
+
+102
+00:13:19.440 --> 00:13:25.410
+Trip (he/him): Now let's say if it comes around, right. I know if any of us from your computer. One of the 3500 is ready to do some work.
+
+103
+00:13:25.890 --> 00:13:35.610
+Trip (he/him): Well, it can't. As you can see the course busy Fred is being run right now. So it as well as well as any other threads that show up have to wait for thread one to be done.
+
+104
+00:13:37.560 --> 00:13:47.520
+Trip (he/him): So I know now, you probably have a lot of questions about this right who decides how long a thread should be able to run a process it. Right, let's say, a thread is like, I don't know, a movie or something. It takes two hours. Right.
+
+105
+00:13:48.180 --> 00:13:51.270
+Trip (he/him): You can just have a thread the Occupy for like two hours can you
+
+106
+00:13:51.690 --> 00:14:05.160
+Trip (he/him): Write or like a really long program. Doesn't that severely bottleneck your entire computer that's like a fourth of your computer running or maybe even like half of your computer running just for one task. How is it possible to have 3500 threads going at any time.
+
+107
+00:14:06.690 --> 00:14:12.480
+Trip (he/him): But only four cores or fewer who decides how long should be able to run, who decides which direction from next
+
+108
+00:14:14.130 --> 00:14:24.720
+Trip (he/him): And then the other question, what was running when the single core was free. In the example right like how anything gets done when there was a single core. Well, the answer to all of that is a good friend called the operating system.
+
+109
+00:14:25.140 --> 00:14:30.180
+Trip (he/him): So the operating system is code that manages the relationship between the computers hardware.
+
+110
+00:14:30.570 --> 00:14:40.710
+Trip (he/him): And software, right. So if you ever asked, like what's better hardware, software, if any electrical engineer asks you, its software because you need software to manage the relationship between hardware and software.
+
+111
+00:14:42.240 --> 00:14:48.930
+Trip (he/him): So, for example, the relationship between your CPU and the rest of your computer that's managed by the operating system.
+
+112
+00:14:50.430 --> 00:14:57.930
+Trip (he/him): So the operating system. It determines both how long a thread should be able to run on a core and which thread of the many that are waiting should run next
+
+113
+00:14:58.470 --> 00:15:04.620
+Trip (he/him): If you want to learn actually how to implement these things take a class called just 140. It's pretty cool. Nick and I actually took it in the spring.
+
+114
+00:15:05.400 --> 00:15:16.050
+Trip (he/him): For the purposes of this lecture. However, let's simplify and assume that a thread or run on a core until its program terminates right it's little squiggle goes all the way to the end, or it's forced off the processor, it's forced off a core
+
+115
+00:15:17.460 --> 00:15:23.340
+Trip (he/him): Let me elaborate on the second part, I think the first part should make sense if the thread finishes its program. It's task, it's done, but
+
+116
+00:15:24.030 --> 00:15:28.290
+Trip (he/him): What about this one right there are many reasons actually why a thread may be booted from a core
+
+117
+00:15:29.010 --> 00:15:34.800
+Trip (he/him): Sometimes the operating system deems that a thread needs to vacated spot right a threads just chillin on the core. And the guy says, hey,
+
+118
+00:15:35.670 --> 00:15:41.190
+Trip (he/him): A more important threads come up your the least important thread running. I'm going to boot you and put this more important thread on
+
+119
+00:15:42.030 --> 00:15:52.440
+Trip (he/him): Other times, a thread will actually voluntarily yielded score. It'll say, You know, I'm not doing something that important. So I'll just kind of chill hang back and I'll let someone else take the court. That's a very nice thread.
+
+120
+00:15:53.580 --> 00:15:54.030
+Trip (he/him): So,
+
+121
+00:15:55.350 --> 00:15:59.460
+Trip (he/him): Let's take a break from all that local jazz. Be happy to actually answer.
+
+122
+00:16:00.480 --> 00:16:06.810
+Trip (he/him): A question or two if anyone has. Before we get into coding for a second. Um, Nick, or Kylie. Are there any that
+
+123
+00:16:08.250 --> 00:16:09.510
+Trip (he/him): I can answer up here.
+
+124
+00:16:11.280 --> 00:16:13.860
+Trip (he/him): If not totally down to keep moving.
+
+125
+00:16:15.570 --> 00:16:16.710
+Trip (he/him): Cool. Alrighty.
+
+126
+00:16:16.830 --> 00:16:17.370
+Nick Bowman: P i think
+
+127
+00:16:17.460 --> 00:16:19.170
+Trip (he/him): Maybe people are sufficiently confused.
+
+128
+00:16:19.350 --> 00:16:23.820
+Trip (he/him): I apologize for that. But we'll get back there. Let's write a really simple program right now. Um,
+
+129
+00:16:24.420 --> 00:16:28.590
+Trip (he/him): Let's say that you wanted to revise your assignment to write your the search engine program that you wrote
+
+130
+00:16:29.010 --> 00:16:38.760
+Trip (he/him): By making it ping the internet. Remember, so in search engine you kind of, you put in search queries and then it responded with data, it pulls them a text file. Well, the text file is great, but it wasn't like
+
+131
+00:16:39.180 --> 00:16:46.590
+Trip (he/him): A lot of information. Let's say that we actually wanted to modify it by paying the internet that way we'd have a really, really good search engine basically Google
+
+132
+00:16:47.250 --> 00:16:56.370
+Trip (he/him): Um, well, the action of painting the internet, right. Just think about that in code. I know that we haven't learned how to actually pick the internet. But imagine it's just like a ping function.
+
+133
+00:16:56.610 --> 00:16:59.790
+Trip (he/him): That you send something out to Google and then it comes back to you with data.
+
+134
+00:17:00.570 --> 00:17:07.020
+Trip (he/him): The actual task of writing that is called an IO bound task. This is in bold. It's a big key word. It's an IO bound task.
+
+135
+00:17:07.590 --> 00:17:12.510
+Trip (he/him): Because the performance bottleneck on that function isn't actually the code. It's not creating the packet to send to Google.
+
+136
+00:17:12.750 --> 00:17:19.230
+Trip (he/him): It's not getting the packet back and like processing it. It's actually the process of sending it to Google and waiting for Google to respond.
+
+137
+00:17:19.620 --> 00:17:30.120
+Trip (he/him): You can imagine that right like single lines of code are very, very fast. But the second I actually have to take that data and send it out over the internet to someone who might be like across the country across the world and then wait for a response.
+
+138
+00:17:30.390 --> 00:17:36.510
+Trip (he/him): That takes a long time. And that's called an IO bound test the bottleneck is waiting for what happens between sending and getting back
+
+139
+00:17:38.070 --> 00:17:45.360
+Trip (he/him): What is IO like input output, but really anything involving communication with the outside world is IO, for example.
+
+140
+00:17:46.200 --> 00:17:53.880
+Trip (he/him): If in a program, I have to write to disk, right, I have a text file, like your Hoffman file, for example, and I want to save that Huffman file in my code.
+
+141
+00:17:54.270 --> 00:18:02.160
+Trip (he/him): To a place on your hard drive. That's an IO interaction with for your program with the outside world. In this case, your computer's hard drive.
+
+142
+00:18:02.640 --> 00:18:12.180
+Trip (he/him): Anything that is outside interaction into your computer that isn't IO. If I hit a key on my keyboard that is also an IO. It's an input from an outside source.
+
+143
+00:18:12.930 --> 00:18:19.830
+Trip (he/him): And all these tasks are called IO bound because typically the bottleneck is waiting for the IO and not actually any code that happens.
+
+144
+00:18:21.390 --> 00:18:21.840
+Trip (he/him): So,
+
+145
+00:18:23.160 --> 00:18:27.210
+Trip (he/him): Let's simplify this even more. Let's write a program that repeatedly executes
+
+146
+00:18:28.140 --> 00:18:35.640
+Trip (he/him): This IO bound function called task. Okay, assume that this is just an IO bound function, something that is bottlenecks by waiting time
+
+147
+00:18:35.970 --> 00:18:42.060
+Trip (he/him): That isn't necessarily active time but time let's say pinging Google, right, we're just kind of sitting on our butts waiting for Google to respond for us.
+
+148
+00:18:43.260 --> 00:18:51.690
+Trip (he/him): Forget the search engine thing that was just sort of a primer. Let's assume that I've already implemented the task function for you and all you have to do is call it repeatedly. Okay.
+
+149
+00:18:52.860 --> 00:18:54.150
+Trip (he/him): Let's, let's do that.
+
+150
+00:18:56.550 --> 00:19:03.930
+Trip (he/him): So I have my little program here. I know that there's a lot of code. But what we have to do is actually pretty straightforward. I'll show you the task function for a second.
+
+151
+00:19:04.380 --> 00:19:08.910
+Trip (he/him): I have a little bit of bottleneck stuff. I'm actually going to time how long it takes. But here's the task function.
+
+152
+00:19:09.780 --> 00:19:18.750
+Trip (he/him): It takes in this input and it does some work with this input we can assume that maybe it's sent it to Google, the work we do here doesn't really matter because I'm just simulating what an eye on tasks might look like.
+
+153
+00:19:19.260 --> 00:19:26.970
+Trip (he/him): Here's what the simulation really does it actually sleeps, the current program. It takes the program. It tells it just a week. It just says okay
+
+154
+00:19:27.900 --> 00:19:40.980
+Trip (he/him): To simulate an IO bound task. I'm just going to stop this thread stop this program from running for a whole second. Okay, that's what this really ugly line of code does. And then after a second this program can come back and continue executing. Okay.
+
+155
+00:19:43.710 --> 00:19:52.380
+Trip (he/him): So all we have to do in this main function is right here called task on K or a size and teachers that are all in this numbs the process vector. Okay.
+
+156
+00:19:52.890 --> 00:20:05.130
+Trip (he/him): Let's say that we've already gotten the data. It's an inspector carry size in this case is 10 so we're going to call it on 10 numbers, this should be pretty easy. This is like, I think one of six a stuff, more or less, we're just going to loop for 10 times and call task 10 times
+
+157
+00:20:06.240 --> 00:20:13.710
+Trip (he/him): I zero, so I know I blog keyboard is less than them. We can say carry size. You can also say numbs the process that size.
+
+158
+00:20:16.050 --> 00:20:18.750
+Trip (he/him): Size and then i plus plus.
+
+159
+00:20:20.550 --> 00:20:34.080
+Trip (he/him): And then we're going to call task on these the numbers in the sector. This is the data that we're given. And let's call this IO bound task on that data. So we can say called function task on thumbs to process.
+
+160
+00:20:36.870 --> 00:20:37.230
+Trip (he/him): All right.
+
+161
+00:20:38.280 --> 00:20:46.350
+Trip (he/him): Which is pretty straightforward, right task takes in an integer what integer, are we providing it was the one that we got from them is the process which is just some function that gives us data.
+
+162
+00:20:47.370 --> 00:20:51.750
+Trip (he/him): Can I answer any clarifying questions about this example before I get into running it.
+
+163
+00:20:53.670 --> 00:20:58.020
+Trip (he/him): I know that it was kind of a lot of introduction for very little bit a very little amount of code.
+
+164
+00:21:09.720 --> 00:21:10.260
+Trip (he/him): Okay, okay.
+
+165
+00:21:14.370 --> 00:21:26.460
+Trip (he/him): All right, I'll keep moving it. So basically, this stuff is just timing it. And I'd like to ask how long you think this is going to take. Okay, I am running task 10 times. Okay. Carrie sizes 10
+
+166
+00:21:29.850 --> 00:21:39.960
+Trip (he/him): And each time in task as you saw, I'm forced to wait for a second. Okay. Every time he called task. I have to wait. That's the I O for a second and then I come back and continue
+
+167
+00:21:40.380 --> 00:21:48.330
+Trip (he/him): So I don't know post in the chat what you think the time will be and I'll run it very, very soon run times are pretty fast on Linux.
+
+168
+00:21:50.160 --> 00:21:51.060
+So let's run it.
+
+169
+00:21:55.650 --> 00:21:59.460
+Trip (he/him): So you said setting the program up. This is just some setup code that I wrote.
+
+170
+00:22:01.560 --> 00:22:03.300
+Trip (he/him): So it's right. All right. We gotta wait
+
+171
+00:22:09.810 --> 00:22:15.690
+Trip (he/him): Cool. So it took about 10 seconds. All right. Hopefully people shouldn't be surprised as
+
+172
+00:22:17.310 --> 00:22:26.790
+Trip (he/him): I can close this, as you saw in task. I know it wasn't super clear but this pauses the thread for one second, okay. CASEY Time is about a second
+
+173
+00:22:28.020 --> 00:22:37.020
+Trip (he/him): And so if we call task 10 times I think intuitively it makes sense that if I call something that waits one second 10 times. It should take about 10 seconds to execute. Alright.
+
+174
+00:22:38.760 --> 00:22:40.200
+Trip (he/him): So let's get back to the slides, then
+
+175
+00:22:42.810 --> 00:22:52.230
+Trip (he/him): Because what actually happened here, right, our code was super slow like it shouldn't be surprising that it was slow. Let's talk about at a lower level what actually happened.
+
+176
+00:22:53.490 --> 00:23:04.170
+Trip (he/him): So before you run your program. Right. Remember how we had like 3500 threads running. Well, presumably, like the CPU is busy running all of those right before your program comes in. It's probably chugging away doing other things.
+
+177
+00:23:05.070 --> 00:23:14.280
+Trip (he/him): So then mean comes along. Right. And when you run your main function. Uh, do you ever have to wait for like other threads to vacate the processor
+
+178
+00:23:15.030 --> 00:23:20.670
+Trip (he/him): Not really. Sometimes you're waiting for like a slow build but you've never actually experienced like oh the processors visit, you have to wait.
+
+179
+00:23:20.970 --> 00:23:30.990
+Trip (he/him): No. So that means that the main thread is actually pretty important. So what it will do is it'll actually it has the power to boot another thread off of a core it'll go to a thread, it'll go eat.
+
+180
+00:23:31.890 --> 00:23:39.030
+Trip (he/him): It'll kind of do its thing. Spin around fun animations and then it will assume that core because it's that important.
+
+181
+00:23:40.110 --> 00:23:40.560
+Trip (he/him): So,
+
+182
+00:23:42.270 --> 00:23:51.600
+Trip (he/him): Made is running and mean will call the I will call the iron bound function tests. Right. So when main calls task on the thread that is me.
+
+183
+00:23:52.110 --> 00:24:01.530
+Trip (he/him): Watch me remove itself from the processor while it's waiting for an IO. This goes back to that example when I was talking about why threads will sometimes remove themselves from processors.
+
+184
+00:24:01.980 --> 00:24:08.040
+Trip (he/him): If a thread knows that it's it can't do any work for a period of time, which in this case, we saw the third was sleeping for a second.
+
+185
+00:24:09.150 --> 00:24:14.190
+Trip (he/him): The thread will actually remove itself from the processor and allow another thread to take the processor for
+
+186
+00:24:16.230 --> 00:24:22.410
+Trip (he/him): So let me just repeat that. So this is a little bit confusing when you call the I'll bet function task or really any IO bound function.
+
+187
+00:24:23.190 --> 00:24:27.660
+Trip (he/him): That has a very, very clear waiting period, the thread will remove itself from the processor
+
+188
+00:24:28.590 --> 00:24:34.710
+Trip (he/him): Because it's waiting for an IO, and therefore unable to do any work. How does it know how to do that operating systems are very, very smart.
+
+189
+00:24:35.340 --> 00:24:41.310
+Trip (he/him): And right as soon as it removes itself in the processor. We got a lot of process. We got a lot of friends going on another thread will take its place immediately.
+
+190
+00:24:42.750 --> 00:24:44.310
+Trip (he/him): Why does the self removal makes sense here.
+
+191
+00:24:45.420 --> 00:24:51.570
+Trip (he/him): Well, you don't want to vacate the core. Right. You want to have all four cores running at all times. So the thread will remove itself right we called sleep.
+
+192
+00:24:52.410 --> 00:24:56.430
+Trip (he/him): I'm the main thread. I'm sleeping. I can't do anything. So let another thread take on the court.
+
+193
+00:24:57.420 --> 00:25:07.590
+Trip (he/him): Gotta wait I gotta wait. Well, after a second the IO bound task completes right the sleep has done the thread wakes up and now only now after that. Second, is it able to
+
+194
+00:25:08.490 --> 00:25:13.650
+Trip (he/him): Get back into the waiting list and reassume a core as soon as possible. Okay.
+
+195
+00:25:14.220 --> 00:25:22.290
+Trip (he/him): It's orders technically up to the operating system. But as you've noticed on May, the main thread is very, very important. So typically when it wakes up. It'll immediately.
+
+196
+00:25:22.830 --> 00:25:34.380
+Trip (he/him): Get a spot on the processor. As you can see this if they can see the main third will assume it and then just reassume running. Notice how we're actually core agnostic. I know that the first time the main thread ran on the score the second time. That means around this core
+
+197
+00:25:35.820 --> 00:25:46.410
+Trip (he/him): First, like, depending on the operating system that shouldn't actually matter which core we're running on because right course are just things to execute tasks. So we should be able to run on any of them and do the same work.
+
+198
+00:25:47.940 --> 00:25:58.440
+Trip (he/him): So the main third is here now just really finishing up finishing up the first task, going back to the while loop and main or the for OPEN MAIN calling the second task. And this process will continue.
+
+199
+00:25:59.070 --> 00:26:04.110
+Trip (he/him): Are there any questions about these events before we continue, like what just happened in a single iteration.
+
+200
+00:26:05.280 --> 00:26:06.450
+Trip (he/him): It's probably a lot right
+
+201
+00:26:10.950 --> 00:26:14.160
+Nick Bowman: I guess one question that I'll relay from the
+
+202
+00:26:15.600 --> 00:26:19.890
+Nick Bowman: From the V2, which I answered there, but it might be good future repeat sort of
+
+203
+00:26:20.370 --> 00:26:34.020
+Nick Bowman: So if you see I mean multi threading kind of seem magical right like so if I just created 1000 threads. Right. Like, could I just do all my jobs instantly or they're sort of some restrictions on like why why don't we just run everything with with like an insane amount of threads.
+
+204
+00:26:34.830 --> 00:26:36.630
+Nick Bowman: For sure, it's
+
+205
+00:26:36.690 --> 00:26:43.980
+Trip (he/him): Yeah, so I'll repeat the question. Like, I'll be at 3000 threats right but computers are so slow. So I know it's been like a million.
+
+206
+00:26:44.490 --> 00:26:51.060
+Trip (he/him): Right, like more threads, the better. Right. Well, there's two reasons why we might not want that one. We still only ever have four cores.
+
+207
+00:26:51.630 --> 00:26:58.230
+Trip (he/him): So there has to be about. That's the bottleneck, like the limit of course like that is for things that can execute simultaneously.
+
+208
+00:26:58.560 --> 00:27:06.150
+Trip (he/him): So there has to be a sweet spot of, like, not too many threads and not too few threads of how we can maximize the utility of our of our CPU.
+
+209
+00:27:06.780 --> 00:27:12.780
+Trip (he/him): On the other hand, threads also our memory intensive like individual thread right has the ability to run a program
+
+210
+00:27:13.230 --> 00:27:21.840
+Trip (he/him): So you can imagine that a threads, probably a pretty complex structure. And so for making tons of threads. We're actually not going to have that much memory left in our computer
+
+211
+00:27:22.470 --> 00:27:25.110
+Trip (he/him): If you want to go back into that page and ever see like
+
+212
+00:27:25.410 --> 00:27:31.860
+Trip (he/him): How your computer's operating, you'll see that sometimes when it's just kind of standing still, with a couple browsers, open it might have many gigabytes of RAM used
+
+213
+00:27:32.070 --> 00:27:41.700
+Trip (he/him): It might be like, Oh, I'm already using like 50% of your RAM and all you have open as Google Chrome. That's because there's a lot of threads going on. That's one of the reasons why lots of threads going on that are kind of bulky threads.
+
+214
+00:27:43.020 --> 00:27:54.300
+Trip (he/him): And so you can't have too many threads anyway because you could your system just won't have enough memory to support them. But even if you did have that many threads. The having only four cores will severely limit that performance.
+
+215
+00:27:56.400 --> 00:27:56.760
+Trip (he/him): Work.
+
+216
+00:27:58.500 --> 00:28:00.000
+Trip (he/him): Cool. Alright, so let's keep moving.
+
+217
+00:28:01.650 --> 00:28:11.040
+Trip (he/him): So the process of getting on a court and the beginning then removing ourselves when we call sleep and then waiting for the second and then the second is up. Let's require the core
+
+218
+00:28:11.340 --> 00:28:19.050
+Trip (he/him): That happens every time we call task. Right. That happened 10 times we had to get on a call a week and then go back on it.
+
+219
+00:28:19.890 --> 00:28:31.530
+Trip (he/him): 10 times. But as you saw the time it took was like 10,000 and like one milliseconds. So it took about one millisecond for everything else to happen. All of the other code right
+
+220
+00:28:32.760 --> 00:28:39.510
+Trip (he/him): And then 10,000 milliseconds, just for the sleeps. So that's a little bit of that. That's an example of how fast.
+
+221
+00:28:40.170 --> 00:28:50.700
+Trip (he/him): Your CPU can run or a core can actually run code versus how slow IO bound tasks can be we have. We can't speed up IO bound tasks, someone might say, Oh, I just got my new
+
+222
+00:28:51.300 --> 00:29:00.480
+Trip (he/him): Intel super crazy processor now like YouTube watching will be so much faster. Well, the bottleneck. There's the IO, right, the connection with the internet, not necessarily your machine.
+
+223
+00:29:00.840 --> 00:29:15.150
+Trip (he/him): So just another another example how IO bound things are really the bottleneck here, not necessarily our machinery, but of course 10 seconds. Can we do better. And the answer is yes. But first, let's talk about some announcements.
+
+224
+00:29:16.440 --> 00:29:22.620
+Trip (he/him): A couple things, make sure to sign up for a final presentation slot. If you haven't already, those are going to be over this weekend.
+
+225
+00:29:23.400 --> 00:29:34.500
+Trip (he/him): Another one assignment six o'clock tomorrow at 1159 PDT. This is a hard deadline, please, please, please submit it before my recommendation is that just submit. Now, even if you have written like 10 lines of code.
+
+226
+00:29:35.280 --> 00:29:44.040
+Trip (he/him): Even if you're halfway through, even if you're still brushing it up just submit now submit, just in case you forget to submit and have nothing that happened to a friend of mine.
+
+227
+00:29:44.640 --> 00:29:49.710
+Trip (he/him): partial credit is better than absolutely zero credit. So just submit now to get something in, and then just resubmit
+
+228
+00:29:51.060 --> 00:30:01.470
+Trip (he/him): So another thing lecture tomorrow we're gonna have a really fun ask us anything component. And so please fill out the Google Form below to fill out some really cool questions that will be able to answer.
+
+229
+00:30:02.640 --> 00:30:11.010
+Trip (he/him): Should be a lot of fun. Final announcement. There's no section this week, of course, kind of wrapping up. So, uh, hopefully you'll see your section leaders at these final presentations.
+
+230
+00:30:12.510 --> 00:30:15.150
+Trip (he/him): Already like the action so
+
+231
+00:30:15.990 --> 00:30:20.820
+kylie jue: ask one quick question that came up in the chat based on the first part, not on the announcements.
+
+232
+00:30:21.810 --> 00:30:29.490
+kylie jue: So the question was, how can I ensure that a compute intensive program, something like for example a matrix solver has all of all of the required resources available.
+
+233
+00:30:30.000 --> 00:30:33.930
+kylie jue: With maximum performance when they're sort of like thousands of other threads also running
+
+234
+00:30:36.060 --> 00:30:37.350
+Trip (he/him): How can you ensure that has what
+
+235
+00:30:39.570 --> 00:30:44.400
+kylie jue: I guess the resources, the required resources available for maximum performance. Interesting.
+
+236
+00:30:45.300 --> 00:30:53.190
+klaus cerny: Yes. What I meant mean with this. Yeah, I mean memory unit all the caches fully available to your metric salting task. Yeah.
+
+237
+00:30:53.820 --> 00:30:54.570
+Trip (he/him): I mean, that's
+
+238
+00:30:54.630 --> 00:30:56.490
+Trip (he/him): A task for the operating system to handle
+
+239
+00:30:57.330 --> 00:30:57.540
+Trip (he/him): Yeah.
+
+240
+00:30:58.110 --> 00:31:05.580
+klaus cerny: I'll kind of tell us the operating system. Yeah. Hey, listen, this is a big metrics. I want to solve and I need know all this resources.
+
+241
+00:31:06.900 --> 00:31:07.740
+klaus cerny: For quite some time.
+
+242
+00:31:08.190 --> 00:31:16.170
+Trip (he/him): The answer is you really can't operating system type is hard job of trying to predict the future, right, because how does the operating system.
+
+243
+00:31:16.170 --> 00:31:16.680
+Trip (he/him): Know,
+
+244
+00:31:16.860 --> 00:31:21.600
+Trip (he/him): In advance that like, hey, this is a really intensive program, you got to make room for it. There are a couple ways to do it.
+
+245
+00:31:22.680 --> 00:31:24.210
+Trip (he/him): How we said threads have priority.
+
+246
+00:31:25.710 --> 00:31:30.180
+Trip (he/him): And there might be things in the background. You can do tell an operating system that you have a really important process coming along.
+
+247
+00:31:30.480 --> 00:31:34.980
+Trip (he/him): A little bit of metadata about two processes, but really it's it's a very, very tricky.
+
+248
+00:31:35.340 --> 00:31:42.900
+Trip (he/him): Task. It's kind of an open question. In fact, for matrix multiplication, things like that, you actually have special processors and special computers just for those like
+
+249
+00:31:43.200 --> 00:31:50.730
+Trip (he/him): For example, like graphics cards that will have to handle a lot of things like that. There's separate processors basically that are optimized for that kind of computation.
+
+250
+00:31:51.750 --> 00:32:02.700
+Trip (he/him): A little bit of scope for what we're talking about. But it's great question in a very, very difficult one. There's a lot of research going into. So if you like that question just 110 to 140 and then some graphics classes will hopefully answer that better than I'll be able to
+
+251
+00:32:06.480 --> 00:32:08.340
+Trip (he/him): Cool. Are you go back to the action.
+
+252
+00:32:10.890 --> 00:32:20.550
+Trip (he/him): Let's do it. So just reveal what happened right super slow took 10 seconds right the code was really fast took like a millisecond, but the actual waiting was 10 seconds. Can we do better.
+
+253
+00:32:21.450 --> 00:32:27.360
+Trip (he/him): The answer yes, I'm in the world. So one of my section us last quarter. Let's paralyze this bad boy and see if we can do better.
+
+254
+00:32:28.200 --> 00:32:37.980
+Trip (he/him): Um, let's try and implement the same or cheap using multi threading. Okay. What this means is that instead of having one thread running our entire program from top to bottom.
+
+255
+00:32:38.490 --> 00:32:42.540
+Trip (he/him): Like, you know, kind of going in going into the into the loop getting stuck on every single sleep.
+
+256
+00:32:43.110 --> 00:32:51.030
+Trip (he/him): What if we just dispatched a thread for every single task. Right. It was like, oh, this task, just a new thread this house just a new thread this test says new thread.
+
+257
+00:32:51.540 --> 00:32:58.560
+Trip (he/him): What if we tried to use multiple threads instead of one to paralyze or workflow. What would that look like, Well, here's how you do it.
+
+258
+00:32:59.190 --> 00:33:08.820
+Trip (he/him): Before we can make threads, you need to include this header include thread. The cool thing is that this is a standard c++ library. You don't need to worry about the Stanford only things. This is standard c++ here.
+
+259
+00:33:10.590 --> 00:33:19.800
+Trip (he/him): And that to actually make a new thread. It's pretty simple. I'm thread new thread right the name of the thread is equal to thread. Here's the constructor and then it can take in one parameter
+
+260
+00:33:20.670 --> 00:33:28.260
+Trip (he/him): funk name so initially pretty vanilla. Right. It's just like making any other data type that you've seen know and love, except for this parameter. Right. What is functioning.
+
+261
+00:33:28.710 --> 00:33:36.840
+Trip (he/him): Well fuck name is the name of the function that you want to execute. Let's say you wanted a thread that could run mean it's a thread new thread is equal to thread parentheses mean
+
+262
+00:33:37.530 --> 00:33:46.980
+Trip (he/him): As long as me doesn't scope, it will run the main function, right. So that goes back to this idea of a thread encapsulating code in this case this thread new thread it encapsulates talk name.
+
+263
+00:33:48.780 --> 00:33:57.780
+Trip (he/him): So let's make new threats that encapsulate cast right will make 10 of them. And that's it. Right. It's not that hard. Well, let's just let's hold the first, second, there's, there's a couple more.
+
+264
+00:34:03.840 --> 00:34:05.640
+Trip (he/him): Things to talk about before we just jump in and starts
+
+265
+00:34:05.670 --> 00:34:06.000
+kylie jue: Okay.
+
+266
+00:34:06.090 --> 00:34:13.470
+Trip (he/him): It begins to run as soon as you execute this line of code that the idea of just making a thread I see that my internet connection is unstable. So I want to
+
+267
+00:34:14.640 --> 00:34:15.270
+Trip (he/him): Are we doing okay.
+
+268
+00:34:15.840 --> 00:34:17.130
+Nick Bowman: I want to read
+
+269
+00:34:17.190 --> 00:34:18.000
+kylie jue: The last slide.
+
+270
+00:34:18.060 --> 00:34:19.980
+Nick Bowman: Yeah, I remember the last couple sentences.
+
+271
+00:34:20.130 --> 00:34:28.620
+Trip (he/him): Awesome. Yeah, so I'll just go back to the slide before we start spouting off threads. You should know that as soon as you instantiate a threat, it begins to run
+
+272
+00:34:29.190 --> 00:34:33.420
+Trip (he/him): Okay, so the second you execute this line of code thread new thread is equal to this.
+
+273
+00:34:33.870 --> 00:34:42.120
+Trip (he/him): There's no, like, oh, now that I have new thread. Let's call new thread dot start or something right new thread run. Nope. It starts immediately it starts as soon as you write this line of code.
+
+274
+00:34:42.630 --> 00:34:52.200
+Trip (he/him): So you gotta keep that in mind, like maybe sorry this slide is not formatted. So, just be sure that you're ready before you dispatch the thread okay because it runs immediately.
+
+275
+00:34:53.130 --> 00:35:00.390
+Trip (he/him): The other thing is that, as I said before, threads are kind of resource intensive right you can imagine that to encapsulate a program. It needs to have a lot of memory.
+
+276
+00:35:00.690 --> 00:35:07.410
+Trip (he/him): And and a lot of abilities to do things. So when we dispatch a thread, we actually need to keep track of that thread like the name of the thread.
+
+277
+00:35:07.770 --> 00:35:15.270
+Trip (he/him): So that we can clean the throat up once it's completed. This is just like the new and delete key words you've used right when you keep allocate memory with the new keyword, you have to delete it.
+
+278
+00:35:15.690 --> 00:35:23.910
+Trip (he/him): Same thing with threats. When you make a new thread dispatch it as it will to automatically. You got to remember that that thread handle the thing returned by thread parentheses funk.
+
+279
+00:35:24.420 --> 00:35:35.280
+Trip (he/him): Keep track of that thread so that you can delete it afterwards. Well, how do you delete the thread after you've spawned it simply call thread name dot join to clean it up. Okay.
+
+280
+00:35:36.360 --> 00:35:44.100
+Trip (he/him): When you're spanning multiple threads. How do you keep track of all these thread names. This usually requires you storing the threads in a collection, like I got an array or a vector of friends.
+
+281
+00:35:44.520 --> 00:35:48.630
+Trip (he/him): Important note, though you can't use a Stanford vector capital D to store threads.
+
+282
+00:35:49.230 --> 00:36:01.080
+Trip (he/him): I think it's because the, the new thread library from standard c++ is a little bit newer than the last update for Stanford vector. This could be solved with an update, but you can just use like a c++ array or c++ standard vector to do this too.
+
+283
+00:36:03.600 --> 00:36:10.950
+Trip (he/him): So are there any questions about creating and joining threads all I'll explain two things that I didn't mention before while you're typing in your questions.
+
+284
+00:36:11.580 --> 00:36:17.100
+Trip (he/him): You can call join from your main function immediately or your main thread immediately after spawning a new thread.
+
+285
+00:36:17.730 --> 00:36:25.080
+Trip (he/him): So, immediately after saying, Oh, let's make thread, you can say for that joint immediately after and you're like wait, won't it just like immediately kill it.
+
+286
+00:36:25.620 --> 00:36:36.450
+Trip (he/him): Join actually waits for the thread to completely finished executing before cleaning it up so don't worry mean will wait for you to finish that will wait for your thread to finish running
+
+287
+00:36:37.650 --> 00:36:39.630
+Trip (he/him): Another question is, well, right, like
+
+288
+00:36:40.830 --> 00:36:46.890
+Trip (he/him): The thread takes in a parameter, like the function name. What if my function name has multiple parameters. Right. How do I account for that.
+
+289
+00:36:47.250 --> 00:37:00.330
+Trip (he/him): Well to pass parameters into a thread just include them as the next parameters. When you're declaring thread so thread new thread is equal to thread funk comma first parameter comma second parameter common third parameter right that's what that would look like.
+
+290
+00:37:01.590 --> 00:37:04.230
+Trip (he/him): Oh, take another second for questions answered.
+
+291
+00:37:07.860 --> 00:37:14.280
+Trip (he/him): I gotta keep moving, though, because there's a lot of Coby South right let's paralyze um I'll briefly show you what this looks like.
+
+292
+00:37:16.140 --> 00:37:19.920
+Trip (he/him): So the first thing we gotta do we gotta make a collection of threats. Okay.
+
+293
+00:37:21.000 --> 00:37:34.320
+Trip (he/him): A collection of threads so we can keep track of them to delete them after. So I'll make an array, I'll say thread spreads and it's if can resize. All right, this is just how I simply stack allocate an array of threads.
+
+294
+00:37:35.760 --> 00:37:47.400
+Trip (he/him): And then what I can do is in this for loop here I can actually declare these threads, I can say threads. I read some storing the return thread in this array.
+
+295
+00:37:48.000 --> 00:37:53.220
+Trip (he/him): And that's going to equal to a thread and that I have this constructor. Right. What's the name of the function. It's task.
+
+296
+00:37:53.580 --> 00:38:00.210
+Trip (he/him): Is it taking a parameter. It does. It takes in a parameter and that is like the number in dumps the process. So that's number two process.
+
+297
+00:38:01.140 --> 00:38:07.890
+Trip (he/him): Okay, so making this new thread it calls the function name, and it takes the function takes in a single parameter that is the next
+
+298
+00:38:08.790 --> 00:38:25.290
+Trip (he/him): That's the next Oregon threads. And then I'm going to store it in this threads array so that I can keep track of it to join it after. So how do I join a clean up my memory. Well, I'll duplicate this for looks. I'm lazy and then I'll say threads i dot join
+
+299
+00:38:26.520 --> 00:38:34.020
+Trip (he/him): Alright, so as I said before, you can call join immediately after you spawn a thread join. We'll just wait for the thread to be done.
+
+300
+00:38:36.270 --> 00:38:39.000
+Trip (he/him): So let's see what this does.
+
+301
+00:38:44.400 --> 00:38:45.600
+How long do people think it will take
+
+302
+00:38:51.420 --> 00:38:54.690
+Trip (he/him): There you go. It took one second. Oops.
+
+303
+00:38:57.750 --> 00:39:05.640
+Trip (he/him): Sorry, is my audio back. I just completely took out my my headphones. It took only one second. How cool was that um we spawned off a single thread.
+
+304
+00:39:06.450 --> 00:39:17.280
+Trip (he/him): For each task and it took just one second and right one millisecond of extra stoppage time for all of that action. How cool is that, let's talk about why that happened a little bit
+
+305
+00:39:18.390 --> 00:39:26.970
+Trip (he/him): Because that was super fast like that was 10 seconds, which immediately gone. Um, it didn't seem like there was any at a time at all for like making those threads and joining them.
+
+306
+00:39:27.510 --> 00:39:37.830
+Trip (he/him): So when our main thread spawned up a new thread the new thread it might have taken a core on the processor, right. This is our main thread just running. And so when we meet a new thread.
+
+307
+00:39:39.330 --> 00:39:40.500
+Trip (he/him): Let's call it worker one
+
+308
+00:39:41.730 --> 00:39:44.700
+Trip (he/him): Let's assume that in this case, a sort of he did
+
+309
+00:39:45.750 --> 00:39:49.530
+Trip (he/him): He did another thread off the CPU. Now we have two threads running from our cutie program.
+
+310
+00:39:51.150 --> 00:40:01.470
+Trip (he/him): And so at the very first time we have made running and then it spawns off of worker who is running. Another core. Okay, this is just the first iteration, we don't know like which court might have been, but let's just say it's this one.
+
+311
+00:40:02.940 --> 00:40:11.730
+Trip (he/him): So what happens right mean and worker one are operating concurrently right of course can operate concurrently independently so mean and work on our operating at the same time.
+
+312
+00:40:12.540 --> 00:40:16.320
+Trip (he/him): But what does worker one do right we talked about this worker one immediately goes to sleep.
+
+313
+00:40:16.860 --> 00:40:24.870
+Trip (he/him): Right worker one will start to goes to sleep removes itself from the core getting replaced right that's what happened to me in the first time. That's all you have to wait for 10 seconds.
+
+314
+00:40:25.650 --> 00:40:34.320
+Trip (he/him): But lo who is that in the distance. Main is also running. It's still running concurrently. So while working one is about the sleeping got removed from the processor
+
+315
+00:40:34.980 --> 00:40:42.240
+Trip (he/him): Worker to was being created by me and and so it was worker three worker for work or five. So who replaces worker one
+
+316
+00:40:42.900 --> 00:40:53.010
+Trip (he/him): It might be worker to well worker. One was busy waiting name was busy spinning up new threads. All right. And those new threads will take the place of those other threads as soon as those other threads leave
+
+317
+00:40:54.570 --> 00:41:01.350
+Trip (he/him): Question. Right. How long does it take for those other threads to go to sleep, as we saw less than a millisecond right
+
+318
+00:41:01.830 --> 00:41:15.450
+Trip (he/him): There with the entire process of all 10 threads running was like 1001 milliseconds. So 1000 was the sleep time one millisecond was the time to for everything else to happen, which is ridiculously fast just shows how fast course can be
+
+319
+00:41:17.100 --> 00:41:31.320
+Trip (he/him): So this process will continue each worker thread only needs to be on the core for a fraction fraction of a second just to set up the I O and then leave and then just to come back for a second and then that's it. And then when it leaves another worker thread can come in.
+
+320
+00:41:32.610 --> 00:41:33.870
+Trip (he/him): So very, very fast.
+
+321
+00:41:35.430 --> 00:41:47.850
+Trip (he/him): Each threat will be able to retake a core at completion time. So let's say worker. One is done sleeping after a second, it comes back on the processor for just a fraction of a second just to finish and then it's done.
+
+322
+00:41:49.620 --> 00:41:52.920
+Trip (he/him): So each task will finish a new terrible job come in and try to complete
+
+323
+00:41:53.310 --> 00:42:05.670
+Trip (he/him): They'll basically like the bar at the processor for like almost a negligible time also for a second. Come back bombard the processor for almost negligible time and then I'll be done and then main still running. It will just clean them all up very, very quickly.
+
+324
+00:42:07.320 --> 00:42:09.900
+Trip (he/him): Fair warning though, you can actually predict the order of friends.
+
+325
+00:42:11.130 --> 00:42:19.740
+Trip (he/him): Like, it seems like worker. One should always be the first one to start and then I guess the first one to finish with the lesson the CPU working very unpredictable ways. As you can see,
+
+326
+00:42:20.730 --> 00:42:27.420
+Trip (he/him): code is executed very, very quickly. So sometimes where one might not be the first thing that executes, and we can actually test that out in a second.
+
+327
+00:42:28.830 --> 00:42:39.330
+Trip (he/him): So the example that you saw was blazing fast because the task at hand only needed to be on the processor for a short period of time before I answered a question about why you don't have that many threads. This is the actual answer.
+
+328
+00:42:41.640 --> 00:42:54.720
+Trip (he/him): The reason why this was fast is because they were IO bound tasks, really, as you can see the process of yielding a quarter another worker takes basically no time of like a core going on the processor off the processor another court ruling on that takes no time at all.
+
+329
+00:42:56.670 --> 00:43:05.820
+Trip (he/him): Parallel ization however is less successful when you don't have long iOS. If all of your tasks are CPU intensive it, they need to be on the CPU at all times.
+
+330
+00:43:06.270 --> 00:43:13.950
+Trip (he/him): There's less. There are there aren't nice threads that say I'm not doing anything, I'll let someone else take the processor. Everyone's like, I need to be on the processor for the whole time.
+
+331
+00:43:14.310 --> 00:43:20.220
+Trip (he/him): And then you don't have the advantage to be able to paralyze the workflow, like we did takes us 114 to find out a little more about that.
+
+332
+00:43:22.050 --> 00:43:25.830
+Trip (he/him): Any questions about this really briefly we have one more topics to talk about
+
+333
+00:43:27.600 --> 00:43:29.940
+Trip (he/him): But I think Nick and Kyle y'all can handle the questions.
+
+334
+00:43:31.350 --> 00:43:31.710
+Trip (he/him): Awesome.
+
+335
+00:43:32.970 --> 00:43:33.810
+Trip (he/him): Bonus slides.
+
+336
+00:43:34.170 --> 00:43:41.850
+Trip (he/him): Remember when I said that we can't really determine the order that fertile, Ryan. Let's we can actually show that. Okay, let's add some logging to our code to show
+
+337
+00:43:42.840 --> 00:43:48.210
+Trip (he/him): The order of the threads that show up, I just realized that I haven't been plugged in this entire time. So I have to be right back.
+
+338
+00:43:49.980 --> 00:43:54.690
+Trip (he/him): How's the computer running so slowly. It's like lacking a and it's because it was wasn't
+
+339
+00:43:56.370 --> 00:43:56.700
+Trip (he/him): Cool.
+
+340
+00:43:57.870 --> 00:44:06.270
+Trip (he/him): We're back. So let's actually add some console logs okay in task a mo adolescent ID and will say, Oh, hi I'm this thread.
+
+341
+00:44:07.050 --> 00:44:21.660
+Trip (he/him): So that way we can actually track who's running. So let's modify task a little bit. And let's say that will add an inch Star ID. Why is it a pointer well to pass things by reference with threads. It's really weird. You have to use pointers instead of ampersand. Okay.
+
+342
+00:44:23.190 --> 00:44:24.570
+Trip (he/him): Uh, let's talk about that after
+
+343
+00:44:25.860 --> 00:44:31.500
+Trip (he/him): But if you want to pass me by a reference within the land of friends. Yes, he's a pointer in Star ID.
+
+344
+00:44:33.120 --> 00:44:37.590
+Trip (he/him): And so now, let's say that after this thread sleeps, we can say we can say see out
+
+345
+00:44:39.690 --> 00:44:40.260
+Trip (he/him): Hello.
+
+346
+00:44:41.670 --> 00:44:42.240
+Trip (he/him): Hello.
+
+347
+00:44:48.390 --> 00:44:53.940
+Trip (he/him): The referencing that and Bill. I know if this is like a lot of weird pointer stuff and don't worry about it too much.
+
+348
+00:44:56.580 --> 00:45:01.380
+Trip (he/him): And then we have to modify this a little bit. Cuz task is a little different. Now we can pass in
+
+349
+00:45:02.400 --> 00:45:03.720
+Trip (he/him): The address of I
+
+350
+00:45:05.310 --> 00:45:12.840
+Trip (he/him): We can say, hey, so right i sorry i is the thing that like identifies this thread. So the zero thread is the first one.
+
+351
+00:45:13.230 --> 00:45:18.780
+Trip (he/him): The first third is the second one. And then in tasks we can actually print that to see like what the order of them coming in is
+
+352
+00:45:19.410 --> 00:45:24.480
+Trip (he/him): Because the order. And you might ask, why didn't you put it here. Well, the order of them going out should be the same as the earth and going in.
+
+353
+00:45:25.110 --> 00:45:34.380
+Trip (he/him): In a perfect world. So let's see if the OS actually jumbles them up. Well, this build, probably not. Let's see, make any mistakes. Now it looks like it's okay so let's see what this prince.
+
+354
+00:45:35.610 --> 00:45:37.200
+Trip (he/him): Let's just see the order that things happening.
+
+355
+00:45:42.960 --> 00:45:43.380
+Well,
+
+356
+00:45:44.940 --> 00:45:51.930
+Trip (he/him): That is not right. First of all it took a long time. And that is really ugly, so
+
+357
+00:45:54.570 --> 00:45:55.170
+Trip (he/him): What happened.
+
+358
+00:45:57.330 --> 00:46:02.910
+Trip (he/him): Really bad, right. Congratulations. You just had your first race condition a race condition.
+
+359
+00:46:03.450 --> 00:46:13.860
+Trip (he/him): Is a bug that is the product of two threads racing against each other right when two threads are operating pretty much concurrently, and they're operating on the same state in an undesirable order basically
+
+360
+00:46:15.810 --> 00:46:20.520
+Trip (he/him): This is the, the problem of when things are operating concurrently. You can't predict in what order they're going to happen.
+
+361
+00:46:21.240 --> 00:46:29.610
+Trip (he/him): So what's the problem. The problem is that see out is not thread safe. Okay. See how it's kind of slow as you can see all those see us to about three seconds instead of our usual one second.
+
+362
+00:46:30.060 --> 00:46:41.400
+Trip (he/him): So what happens is that CEOs so slow that it was like, Okay, I'm getting ready to purchase the console. What's in like my buffer to show you the console. And it was like 10 threads worth of Hello, I'm a thread.
+
+363
+00:46:41.880 --> 00:46:49.830
+Trip (he/him): 10 threads worth of it, and it did 10 times, it basically printed some form of all 10 threads output 10 times. And that's kind of what we saw here like
+
+364
+00:46:50.880 --> 00:46:55.080
+Trip (he/him): I kind of 10 versions of really ugly unpredictable jargon.
+
+365
+00:46:56.550 --> 00:47:06.180
+Trip (he/him): So see how it's not thread safe, meaning that if you're a multi threading and operating concurrently see is not safe. Okay. You can't do it. But how do we fix it. There has to be away and there is
+
+366
+00:47:07.320 --> 00:47:14.160
+Trip (he/him): I'm going to define something called atomic, which means that the state of something can't be observed or superseded before or after an operation occurs.
+
+367
+00:47:15.300 --> 00:47:25.230
+Trip (he/him): So basically an operation can't be interrupted. Okay. When. See how it happens, it can't be interrupted by another co call okay when see what happens.
+
+368
+00:47:26.100 --> 00:47:36.870
+Trip (he/him): The entire see what will happen without anything being able to interrupt it like a concurrent threat, for example. So each see what will happen, independently of the others with no kind of jumbling that we saw before.
+
+369
+00:47:37.500 --> 00:47:41.100
+Trip (he/him): How do we do this, we can use something called a meat ax. Okay. It's a new data type.
+
+370
+00:47:42.360 --> 00:47:50.580
+Trip (he/him): And to make me texts you can do something like this include the new Tech's library standard c++ and you can declare a single text with this. Not too hard.
+
+371
+00:47:52.650 --> 00:47:57.450
+Trip (he/him): You want to make a single new tax and share it, so pass by reference which is using the pointer system.
+
+372
+00:47:58.080 --> 00:48:08.940
+Trip (he/him): To all of the worker threads. Okay, the threads need to share the new text so that they can all kind of figure out, like when to when to let one thread just execute some code. For example, this is going to be the CEO.
+
+373
+00:48:10.350 --> 00:48:19.740
+Trip (he/him): So in order to make the code atomic rights that the seats are protected. All you need to do is wrap the code and question around these statements you text block you text unlock. Okay.
+
+374
+00:48:20.160 --> 00:48:28.260
+Trip (he/him): If any code that is in those locked state will be protected and cannot basically have race conditions around them, we think
+
+375
+00:48:30.660 --> 00:48:35.100
+Trip (he/him): When you walk him. He checks all other threads trying to walk that new text have to wait.
+
+376
+00:48:35.700 --> 00:48:43.140
+Trip (he/him): Okay. That's why it works, right, because you might think, oh, like I have 10 threads all trying to walk me text name at the same time, right, they all share that new text.
+
+377
+00:48:43.560 --> 00:48:49.170
+Trip (he/him): So tend towards trying to lock in at the same time, only one will succeed the operating system determines who wins everyone else has to wait.
+
+378
+00:48:49.440 --> 00:48:58.290
+Trip (he/him): So only one third will see out successfully and cleanly, then it will unlock them you text, but another third try to get it. Let's see what that looks like. I'm trying to this really quickly.
+
+379
+00:49:00.810 --> 00:49:03.960
+Trip (he/him): I'll declare me text here. Let's say you text. Oops.
+
+380
+00:49:05.430 --> 00:49:05.670
+Oops.
+
+381
+00:49:06.990 --> 00:49:07.500
+I'm
+
+382
+00:49:08.970 --> 00:49:19.230
+Trip (he/him): Passing this me Tex, it has to be the same new tech scout share it by reference because every third is doing the same every thread has to offer the same one you text point your M.
+
+383
+00:49:22.980 --> 00:49:24.390
+Trip (he/him): Let's share this the task.
+
+384
+00:49:26.850 --> 00:49:32.580
+Trip (he/him): And then let's lock this co write this. See, I was not thread safe. So let's lock it.
+
+385
+00:49:33.840 --> 00:49:34.260
+Trip (he/him): Lock
+
+386
+00:49:35.580 --> 00:49:37.080
+Trip (he/him): And then will unlock it.
+
+387
+00:49:38.400 --> 00:49:39.570
+Trip (he/him): To let someone else have a try.
+
+388
+00:49:43.320 --> 00:49:44.010
+Trip (he/him): Let's run this.
+
+389
+00:49:53.640 --> 00:50:04.290
+Trip (he/him): Cool. So we fixed one problem, it's still, it's pretty 10 for all of them. That's a problem. But the sub problem of our garbled input is. Okay, so it looks like the race condition about see out
+
+390
+00:50:04.620 --> 00:50:15.840
+Trip (he/him): Is better what it's printing is wrong. Right. It's just all 10 but the actual thing of CO getting jumbled is all better. So in the last two minutes. Why is everything 10 right well
+
+391
+00:50:16.620 --> 00:50:25.020
+Trip (he/him): Remember how we passed it by reference right we shared a pointer to it, which is basically saying there's only one ID you all share that same integer variable.
+
+392
+00:50:25.830 --> 00:50:32.010
+Trip (he/him): That's actually the problem. The problem is that the threads share I okay. What this means is that
+
+393
+00:50:32.700 --> 00:50:48.510
+Trip (he/him): The main thread right that is operating concurrently with all of our workers finished the for loop the eye for loop that created all 10 threads before a single worker could complete that makes sense, right, so the thread actually the first form that we have, I can show you here.
+
+394
+00:50:50.370 --> 00:50:57.450
+Trip (he/him): This is where we declare I write this for look completely executed before any thread could finish it sleeping come back.
+
+395
+00:50:57.990 --> 00:51:05.010
+Trip (he/him): Right then that makes sense, right, because usually the code ran like a single like a millisecond. So in a millisecond this for loop is done is 10 right
+
+396
+00:51:05.610 --> 00:51:16.260
+Trip (he/him): And then the first thread comes back after it sleep, and it says oh hello from thread ID well IDs 10 because they're all sharing the same variable that is I
+
+397
+00:51:16.890 --> 00:51:29.310
+Trip (he/him): And so they all print 10. How do we fix that. Well, in this case, we actually do have to pass that value so that they don't share this data. So just get rid of all the ampersand and all the weird things on ID.
+
+398
+00:51:32.640 --> 00:51:33.930
+Trip (he/him): Sure. Right. Again, really quickly.
+
+399
+00:51:37.410 --> 00:51:42.120
+Trip (he/him): Hopefully now be able to see the order in which things happen, or at least the order in which threats come back.
+
+400
+00:51:43.110 --> 00:51:57.630
+Trip (he/him): There it is. So look, zero comes back first. But then after that, like, one is almost. It's like the second to last one. So why operating systems. They're kind of weird, but we fixed it. That was another little subtle race condition.
+
+401
+00:52:00.000 --> 00:52:06.420
+Trip (he/him): Final thoughts. I know we're basically out of time. Multi threading is really powerful to paralyze work amongst multiple CPU cores.
+
+402
+00:52:06.810 --> 00:52:16.800
+Trip (he/him): And threads are a fundamental building block of computer systems. So when you take 110 or 140 the systems. The courses, you'll see how threads are actually implemented to really construct computer from the ground up.
+
+403
+00:52:17.820 --> 00:52:25.170
+Trip (he/him): When you're using multiple threads. Be wary of any data that is shared between them, right, that I variable or like the sea out uses some shared state.
+
+404
+00:52:25.710 --> 00:52:34.650
+Trip (he/him): Using me texts allows you to enforce out of necessity in sections of code, meaning it sort of forces in order saying this CEO has to happen and cannot be interrupted. That's an example.
+
+405
+00:52:35.190 --> 00:52:44.220
+Trip (he/him): The problem is you could say, why not make all code atomic well if you make all code atomic, then there's no parallelization at all right that enforces that things happen in certain orders so
+
+406
+00:52:44.550 --> 00:52:56.730
+Trip (he/him): The difficulty of systems programming is finding out how to what to paralyze and what you have to protect. So if you like this topic CS 110 just 141 49 I'll go into more depth cool classes.
+
+407
+00:52:57.990 --> 00:53:11.100
+Trip (he/him): What's next really briefly. They asked me anything where I found out after one of six be I'll stay up for any more questions that you might have. That is time for leisure. Thank you so much. There's all the slides info on the website and I'll see you all tomorrow.
+
+408
+00:53:24.480 --> 00:53:26.580
+There aren't a ton of questions in the chat.
+
+409
+00:53:28.230 --> 00:53:32.520
+kylie jue: Right now shocked if anyone would like to unmute and ask a question, you are welcome to
+
+410
+00:53:32.760 --> 00:53:35.340
+Trip (he/him): Who is in the soon as you stop the recording or keep, keep going.
+
+411
+00:53:35.400 --> 00:53:37.260
+kylie jue: Let's go ahead and keep it running for the questions.
+
+412
+00:53:37.950 --> 00:53:38.880
+Trip (he/him): Should I keep this either.
+
+413
+00:53:39.690 --> 00:53:42.660
+kylie jue: Sure, if you want. It's up to you close us out. If you want, or if you want
+
+414
+00:53:42.780 --> 00:53:45.570
+Trip (he/him): To reference I might have to reshare if anyone has any questions. Yeah.
+
+415
+00:53:47.100 --> 00:53:48.450
+scott nelson: I had a question does
+
+416
+00:53:50.430 --> 00:53:51.750
+scott nelson: Certain URLs have a
+
+417
+00:53:52.770 --> 00:53:56.070
+scott nelson: ending.io does is that related to IO bound operations.
+
+418
+00:53:56.400 --> 00:53:57.120
+Trip (he/him): Oh, good question.
+
+419
+00:53:58.170 --> 00:53:59.760
+Trip (he/him): Like like slither I oh
+
+420
+00:53:59.790 --> 00:54:00.660
+scott nelson: Yeah, exactly. Yeah.
+
+421
+00:54:00.690 --> 00:54:06.810
+Trip (he/him): I don't actually know. I don't know what the I O stands for it. I mean, like any, anything that's like web related is I owe.
+
+422
+00:54:07.170 --> 00:54:20.370
+Trip (he/him): More or less, right, because anything IO has to it probably is. Right. Because the idea is that it's like an interactive game. So it has to rely on network connections anything with the internet really is IO related. My guess is the iOS, just a
+
+423
+00:54:22.140 --> 00:54:28.080
+Trip (he/him): It's just like an ending for like something right like.com.org dot iOS.
+
+424
+00:54:28.110 --> 00:54:30.960
+Nick Bowman: Something. Yeah, it's like having a vanity license plate.
+
+425
+00:54:33.570 --> 00:54:36.600
+Nick Bowman: Like, actually, it doesn't change the functionality of things but
+
+426
+00:54:37.440 --> 00:54:43.110
+Nick Bowman: There's, there's actually different different countries or different endings based off of like their country name.
+
+427
+00:54:43.500 --> 00:54:55.200
+Nick Bowman: And so some countries actually make a lot of money selling off these like dot like fun. Insert fun short little thing here and but it but yeah trip is right. It doesn't actually change the functionality.
+
+428
+00:54:56.310 --> 00:54:58.200
+kylie jue: But people think it's cool because it has an
+
+429
+00:54:58.200 --> 00:54:59.730
+scott nelson: Actual meaning. Oh, yeah.
+
+430
+00:55:00.690 --> 00:55:01.440
+Trip (he/him): Now, you know. Yeah.
+
+431
+00:55:12.330 --> 00:55:12.810
+haoming li: So just
+
+432
+00:55:13.800 --> 00:55:14.670
+haoming li: We're all city.
+
+433
+00:55:15.270 --> 00:55:15.510
+haoming li: Yeah.
+
+434
+00:55:16.500 --> 00:55:18.180
+haoming li: When you like trying to do.
+
+435
+00:55:20.340 --> 00:55:30.840
+haoming li: And things parallel, how many cores of us, because it depends on like threads, you know, system may or
+
+436
+00:55:31.560 --> 00:55:38.790
+Trip (he/him): seriously asking like when we, when we split up those templates, how many cores, we're operating on our program is over. You're asking
+
+437
+00:55:39.300 --> 00:55:46.530
+haoming li: Right, unless example chart you should like us to corner, sir, I get that all attain so yeah
+
+438
+00:55:46.530 --> 00:55:47.310
+Trip (he/him): It's a great question.
+
+439
+00:55:49.020 --> 00:55:58.740
+Trip (he/him): I don't actually know a operate. And the funny thing is, is that if you're operating on Mac. I'm on Linux someone else's on Windows, all three operating systems might handle it differently.
+
+440
+00:56:00.300 --> 00:56:04.590
+Trip (he/him): In fact, there are some problems in one of six be behind the scenes that actually happened when
+
+441
+00:56:05.430 --> 00:56:12.870
+Trip (he/him): Someone writes a multi threaded program that's like a July, like the auto greater for one operating system and then it crashes on someone else's computer
+
+442
+00:56:13.410 --> 00:56:21.990
+Trip (he/him): Because just the operating system schedule threads differently in a way that works on one person's machine crashes on another person's machine that's why this stuff can be really tricky.
+
+443
+00:56:24.300 --> 00:56:25.230
+haoming li: Yeah, so
+
+444
+00:56:25.770 --> 00:56:26.070
+Yeah.
+
+445
+00:56:28.500 --> 00:56:36.120
+klaus cerny: Are there ways that you can synchronize between threats, so that you save once read has to finish first and the second, sir.
+
+446
+00:56:36.480 --> 00:56:37.320
+Trip (he/him): That's going to be locking
+
+447
+00:56:37.800 --> 00:56:40.950
+klaus cerny: Without me texts on. So that's the locking mechanism you explained before.
+
+448
+00:56:40.950 --> 00:56:41.190
+Yeah.
+
+449
+00:56:43.770 --> 00:56:51.120
+Trip (he/him): But there are also other synchronization primitives. So me text is one of them. There are some other really really cool ones that you'll learn about in 110
+
+450
+00:56:52.890 --> 00:56:55.500
+Trip (he/him): That have slightly different properties for different things you want to do.
+
+451
+00:56:56.580 --> 00:56:56.880
+Okay.
+
+452
+00:57:01.830 --> 00:57:06.300
+kylie jue: Next, Nick. We're going to chime in with the chats with chat questions from elsewhere.
+
+453
+00:57:06.360 --> 00:57:14.160
+Nick Bowman: Yeah, there's actually there's a good one from from the YouTube chat that will answer live. What is the difference between a process and thread trip.
+
+454
+00:57:15.720 --> 00:57:16.950
+Trip (he/him): Why someone asking this.
+
+455
+00:57:18.720 --> 00:57:20.130
+Trip (he/him): Thread is a lightweight process.
+
+456
+00:57:21.150 --> 00:57:29.490
+Trip (he/him): And 110 your I think learn that they're different. They're kind of the same. The reason why I wanted to teach about threads and not processes.
+
+457
+00:57:31.530 --> 00:57:38.130
+Trip (he/him): In CS one to one, that there's these two. Actually, there were these two ways of spawning off tasks of doing work, you can either use a threat.
+
+458
+00:57:38.550 --> 00:57:45.120
+Trip (he/him): Or you can use a process and they kind of have different properties. Well, I only talked about threads today because a process under the hood is really just a
+
+459
+00:57:45.120 --> 00:57:45.450
+kylie jue: Thread
+
+460
+00:57:45.900 --> 00:57:50.070
+Trip (he/him): A process just has a lot more context, a process is like
+
+461
+00:57:51.210 --> 00:58:00.360
+Trip (he/him): I'm a very, very specific program. In fact, usually when it runs it will price on process, a process has like its own like memory space.
+
+462
+00:58:01.290 --> 00:58:09.810
+Trip (he/him): It's like a very separate entity. It's like this big hoity toity official thing like I am an independent program. I can do my own things. I can spend my own threads. Do whatever
+
+463
+00:58:10.050 --> 00:58:14.430
+Trip (he/him): A thread is much more versatile much more lightweight, what ends up happening actually with threads.
+
+464
+00:58:14.790 --> 00:58:23.850
+Trip (he/him): Is that threads will actually go kind of fall in and out between your program and the operating system. So when I was saying before, like how does
+
+465
+00:58:24.330 --> 00:58:33.060
+Trip (he/him): Like on a single threaded machine, right, a single core machine, how does like anything happened right if a thread is on the processor. How does it get off the processor, right, because like
+
+466
+00:58:33.420 --> 00:58:39.780
+Trip (he/him): How does the operating system run if there's only one processor in the threads running on it. Well threads are super, super generic
+
+467
+00:58:40.200 --> 00:58:46.440
+Trip (he/him): And they actually have the ability to switch into operating system mode. They have like a hidden mode that they're not aware of that's operating system mode.
+
+468
+00:58:46.770 --> 00:58:55.770
+Trip (he/him): That when certain things happen. The thermals get taken over by the operating system and then be able to execute operating system stuff. And I'll just go back to the thread and cerebral never even realized, it'll just be like, Oh, I'm back.
+
+469
+00:58:56.880 --> 00:58:57.510
+Trip (he/him): So,
+
+470
+00:58:58.650 --> 00:59:02.580
+Trip (he/him): The way to think about threads that they're more lightweight, they have less ability to be
+
+471
+00:59:03.720 --> 00:59:09.630
+Trip (he/him): To be independent of each other processes are very independent threads can work together very easily, they're lightweight, they're smaller
+
+472
+00:59:10.530 --> 00:59:22.410
+Trip (he/him): But really threads operate under everything underneath a process. There's a thread, just with a lot of context built around it and like a whole lot of infrastructure around it breads are really how everything's gotten done in computer science.
+
+473
+00:59:32.790 --> 00:59:33.990
+Nick Bowman: True 140 students
+
+474
+00:59:34.200 --> 00:59:36.600
+Trip (he/him): Yeah, that was, that was a 140 question.
+
+475
+00:59:36.630 --> 00:59:37.170
+Trip (he/him): Right there.
+
+476
+00:59:42.870 --> 00:59:45.660
+Trip (he/him): Interesting thought point for that person asked the question, um,
+
+477
+00:59:47.040 --> 00:59:58.380
+Trip (he/him): browsers, web browsers, how I said a lot of complex programs use multiple threads browsers are typically multi threaded right because they have to do a lot of things at the same time, Google Chrome is actually uses multi processing.
+
+478
+00:59:59.760 --> 01:00:12.900
+Trip (he/him): Which is tricky, the threads are nice because they can they can share state really easily. As we solve that kind of problems, but it's really easy to communicate between threats. They just share variables processes can't really do that. So you can read up about Chrome. If you want to see.
+
+479
+01:00:12.930 --> 01:00:14.760
+Nick Bowman: How they get that to work when it's multi process.
+
+480
+01:00:42.270 --> 01:00:47.610
+Trip (he/him): A lot of material that's like, it's like multiple like 110 classes. I feel like and a little bit of 140
+
+481
+01:00:49.380 --> 01:00:50.640
+haoming li: A lot to take today.
+
+482
+01:00:52.110 --> 01:00:52.290
+haoming li: It's
+
+483
+01:00:53.760 --> 01:00:55.590
+haoming li: Very interesting. It's cool.
+
+484
+01:00:55.620 --> 01:00:59.340
+Trip (he/him): It's, it's, it's probably my favorite subfield out there.
+
+485
+01:01:02.100 --> 01:01:03.810
+haoming li: Thank you. You're welcome.
+
+486
+01:01:04.530 --> 01:01:05.310
+christopher cooper: A trip.
+
+487
+01:01:06.750 --> 01:01:10.410
+christopher cooper: What are like the main examples of pulling people to want to
+
+488
+01:01:11.580 --> 01:01:17.340
+christopher cooper: Change your program like stuff that we've been doing to using threads. Great question. So
+
+489
+01:01:17.550 --> 01:01:32.700
+Trip (he/him): You might not see a huge benefit. If you are doing lots of CPU intensive work which is most work honestly one of the reasons why you don't learn about threads until 140 is that are like 110 is that only then when you really start doing networking
+
+490
+01:01:33.810 --> 01:01:42.300
+Trip (he/him): Or things that are more IO bound threads really coming to their prime when you have IO bound stuff with a threat and say, I'm going to take myself off the processor let someone else do work, ie
+
+491
+01:01:42.570 --> 01:01:51.210
+Trip (he/him): The task will take a long time. But there's minimal CPU intensive for when everything you're doing is really CPU intensive it's harder to paralyze
+
+492
+01:01:51.960 --> 01:02:01.890
+Trip (he/him): One example, however, might be if you have to literally do parallel work, for example, like let's say you want to sort something maybe like emerged sort. It's kind of break it down into multiple smaller pieces.
+
+493
+01:02:02.640 --> 01:02:12.810
+Trip (he/him): It would be hard, but it is possible to paralyze that with some kind of multithreading, it would be really hard to share state effectively, but it is possible. I think that might be a 110 section question um
+
+494
+01:02:13.710 --> 01:02:22.380
+Trip (he/him): Because, like, even though their CPU intensive workloads, you know, technically, you could have like two splits happening at the same time right as long as they don't like mess each other up.
+
+495
+01:02:23.370 --> 01:02:35.340
+Trip (he/him): That that could work. You're just not going to see the same crazy benefits that you saw with multi threading an IO bound cases because all the work you're doing is CPU intensive. So like, at best, you can do like
+
+496
+01:02:36.660 --> 01:02:44.670
+Trip (he/him): Optimization times like the number of course that you have right so if you only have four cores, the best you could ever hope to do is like four times four things at a time.
+
+497
+01:02:47.430 --> 01:02:48.930
+christopher cooper: Great, thank you. You're welcome.
+
+498
+01:02:57.840 --> 01:03:05.340
+Trip (he/him): And I say four things at a time for your four cores, because when we did our example. Right. The first multi threaded example, it looks like we did 10 things at a time. Right.
+
+499
+01:03:07.530 --> 01:03:20.640
+Trip (he/him): It had the illusion of that that's people call it virtualization. So that's why we can have 3500 threads and four and four courts because a lot of code can happen really really quickly and then process or a thermal to say, oh, I don't need the processor anymore.
+
+500
+01:03:22.140 --> 01:03:29.160
+Trip (he/him): So you can handle lots of work with only a couple cores and the operating system has do automatic to make that make that look like it's all happening at the same time.
+
+501
+01:03:38.190 --> 01:03:48.540
+Nick Bowman: There's a question in the chat trip of if you paralyze things. Are you are you changing the big of the algorithms are frequently multi threaded emerged start like so that change for Bingo.
+
+502
+01:03:49.500 --> 01:03:54.720
+Trip (he/him): You're changing the this that space complexity, I believe, well,
+
+503
+01:03:56.010 --> 01:04:06.360
+Trip (he/him): You could be changing the space complexity. If you operate something interactively making a new thread is adding space, it could affect the bigger, you have to be really careful.
+
+504
+01:04:07.980 --> 01:04:10.860
+Trip (he/him): You have to be really careful because you might not be sure about the
+
+505
+01:04:12.240 --> 01:04:15.540
+Trip (he/him): You have it depends. So in our example that we saw.
+
+506
+01:04:16.590 --> 01:04:21.900
+Trip (he/him): You. I think you could start pretty safely that because it was IO bound and will define that we got from like event. It's sort of like oh one.
+
+507
+01:04:22.560 --> 01:04:32.430
+Trip (he/him): Like from 10 times work to like one piece of work or like one piece of well defined work, although maybe that's like 10 verses and but we reduce our runtime by like 10 times this week 10 units of work.
+
+508
+01:04:33.630 --> 01:04:50.100
+Trip (he/him): If you have like a multi threaded sort, for example, it's more difficult because you can't really define like how much parallelization you're going to get. And if you do, the question is, has that scale, right. Are you having your runtime.
+
+509
+01:04:51.240 --> 01:05:01.590
+Trip (he/him): Maybe if you're lucky, and then this having your runtime affect the big up, maybe not. Right. So even in this example, we might not. We might not have actually changed the big necessarily
+
+510
+01:05:02.040 --> 01:05:16.980
+Trip (he/him): We could have gotten that down the constant fairly versus like maybe over one person event, but pretty rarely will you see drastic changes from parallelization in terms of bingo, but you will see very big performance changes just in the real world, I think.
+
+511
+01:05:18.360 --> 01:05:33.720
+Trip (he/him): But going from like of n squared to of n. That's pretty impressive that requires some. That's why I think algorithms have to work with systems together. You can't say, oh, this is the perfect multi threading and I have a crappy algorithm. Right. You have to have good both that work together.
+
+512
+01:05:37.680 --> 01:05:42.210
+Nick Bowman: Yeah, and I would say like, you know, merge sort of still an old and login
+
+513
+01:05:42.720 --> 01:05:49.560
+Nick Bowman: Right. Like it doesn't change the sort of like theoretical limits on you know how much actual total work, we will need to do to solve a problem.
+
+514
+01:05:49.920 --> 01:05:54.540
+Nick Bowman: It may very much speed up how quickly it happens. But remember,
+
+515
+01:05:54.930 --> 01:06:02.130
+Nick Bowman: Big O is not necessarily like it's not a measure of how fast something runs right it is how the performance of something scales over time.
+
+516
+01:06:02.370 --> 01:06:14.580
+Nick Bowman: Right. And so a multi threaded version numbers or will still scale or even the for the runtime is on each individual runner much faster. There's still scale, the same time. Yeah, exactly. It'll shorten the time, but it's not going to change the growth rate.
+
+517
+01:06:20.670 --> 01:06:21.390
+Good questions.
+
+518
+01:06:29.580 --> 01:06:37.230
+Trip (he/him): People want a little bit of context in CS 110 you kind of learned about threads and processes and you learned about me, Texas and things. And you'll learn about how to use them.
+
+519
+01:06:37.590 --> 01:06:43.500
+Trip (he/him): And 140 you actually get to implement them like, oh, like what is the credible tech under the hood. What is a beat me text looks like under the hood.
+
+520
+01:06:44.940 --> 01:06:51.060
+Trip (he/him): So if this really interested you first. You get to learn about using them. And then you get to like peek under and see how they work. Super cool.
+
+521
+01:07:31.980 --> 01:07:32.100
+The
+

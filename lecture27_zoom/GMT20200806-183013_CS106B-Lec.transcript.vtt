@@ -1,0 +1,1458 @@
+WEBVTT
+
+1
+00:00:03.570 --> 00:00:04.830
+kylie jue: Alright, welcome back to
+
+2
+00:00:06.029 --> 00:00:13.799
+kylie jue: Today we're going to be talking talking about a new topic called hashing. But before we get to that, I'm going to do a little bit of review of
+
+3
+00:00:14.460 --> 00:00:19.740
+kylie jue: Hoffman encoding, which we learned about yesterday. So just to start off. What's an example of compression, which is
+
+4
+00:00:20.160 --> 00:00:31.860
+kylie jue: What the Huffman coding algorithm provided for us that you might have seen when you're using technology. So I know some of you talked about zip files yesterday. What are some other examples of compression that you've seen as you're using technology.
+
+5
+00:00:33.690 --> 00:00:41.790
+kylie jue: And so for the rest of the quarter. Well, in the last few classes that we have, we're going to be talking about real world algorithms as well as life after 160
+
+6
+00:00:42.330 --> 00:00:53.160
+kylie jue: So hopefully these remaining lectures will be really interesting for you so you can see a little bit more of how some of the concepts, you've learned about over the quarter have are applied in real world algorithms.
+
+7
+00:00:54.300 --> 00:01:03.840
+kylie jue: And so specifically for today we're going to talk about how does hashing apply to a variety of different computational tasks and real world problems you'll soon learn that hashing is everywhere.
+
+8
+00:01:04.650 --> 00:01:12.750
+kylie jue: And we'll learn shortly about what it actually is. So we'll cover what a hash function is. And then we'll look at how hashing actually affects a DTS, and they run times
+
+9
+00:01:13.170 --> 00:01:21.990
+kylie jue: And then we'll look at some real world applications of passion, but to review Huffman coding first so have been coding is what your last assignment is going to be all about
+
+10
+00:01:23.640 --> 00:01:25.770
+kylie jue: And again, what happened and coding provide this as a form of
+
+11
+00:01:26.220 --> 00:01:32.160
+kylie jue: Compression. And so we learned about ASCII and coatings and how you can store data across multiple systems.
+
+12
+00:01:32.400 --> 00:01:42.120
+kylie jue: Using ASCII and coatings for every individual character, but this isn't really ideal in terms of space storage you use the same amount of space for every character. And if you want it to take up less room.
+
+13
+00:01:42.660 --> 00:01:44.460
+kylie jue: That's not really possible with asking coding
+
+14
+00:01:45.450 --> 00:01:52.380
+kylie jue: So instead what we can do is we can build custom codes or ways of representing specific strings that might actually. Let us save some space.
+
+15
+00:01:52.620 --> 00:01:58.890
+kylie jue: And in particular, we're going to use a compression algorithm to reduce the amount of space needed to store a specific piece of text.
+
+16
+00:01:59.730 --> 00:02:07.350
+kylie jue: Helping encoding and specifically was a type of lossless compression, which means that no information is lost when you actually apply it to whatever you're compressing
+
+17
+00:02:07.830 --> 00:02:17.880
+kylie jue: And compression algorithms in general use patterns in the data that they're compressing to take advantage or take advantage of those patterns to actually more efficiently represents that data.
+
+18
+00:02:19.770 --> 00:02:31.530
+kylie jue: And so, in particular, have been encoding took advantage of redundancy in character in the letters are in the frequency of the characters that showed up in a specific piece of texts that you're compressing we look specifically at this
+
+19
+00:02:32.370 --> 00:02:39.510
+kylie jue: At the string Kirk stick and the frequencies of each letter for that string are shown on the right and so
+
+20
+00:02:40.320 --> 00:02:45.930
+kylie jue: We thought, how can we actually give shorter and coatings to characters that are more common to save some space.
+
+21
+00:02:46.890 --> 00:02:50.430
+kylie jue: And that's what brought us to the idea of prefix codes or prefix codes.
+
+22
+00:02:51.120 --> 00:02:56.880
+kylie jue: Are specifically and encoding system where no code is the prefix of another code. And just to really clarify that here.
+
+23
+00:02:57.060 --> 00:03:04.740
+kylie jue: Um, it doesn't mean that the prefix for a code is not the prefix of another right like all of these have the prefix zero or all of them. I have a prefix one
+
+24
+00:03:04.980 --> 00:03:14.220
+kylie jue: But a whole code in itself is not the prefix of another code in the table. And that's really important. And you'll understand that even better as you're generating your Huffman encoding trees.
+
+25
+00:03:15.420 --> 00:03:18.720
+kylie jue: And so this is the example of what the prefix code could be for Kirk stick
+
+26
+00:03:19.800 --> 00:03:30.300
+kylie jue: And then we talked about, well, how do we actually manage that prefix code or create that prefix code and that brought us finally back to our concept of trees and generating coding trees.
+
+27
+00:03:30.720 --> 00:03:37.110
+kylie jue: The main insight here being that we can actually represent a prefix coding scheme with the binary tree. And we call this a coding tree.
+
+28
+00:03:37.860 --> 00:03:43.560
+kylie jue: So a coding tree was valid if all the letters were stored it believes. With the internal nodes just doing the routing.
+
+29
+00:03:43.830 --> 00:03:51.810
+kylie jue: And as a reminder, if you have something stored inside of internal note and said about a leaf, you will no longer have a prefix code, you can think a little bit about why that might be true.
+
+30
+00:03:52.950 --> 00:03:59.730
+kylie jue: But in general, our goal is to find the best coding tree for string so that we can better and code it and compress it.
+
+31
+00:04:00.780 --> 00:04:04.740
+kylie jue: So Huffman coding in particular was an algorithm for generating the coding treat
+
+32
+00:04:05.190 --> 00:04:13.950
+kylie jue: Given a specific piece of data, it would provide a provably minimum and coding for a given pattern up letter frequencies and different pieces of data will have different
+
+33
+00:04:14.340 --> 00:04:19.770
+kylie jue: Personalized Huffman coding choose to take advantage of sort of the patterns you see in that specific thing that you're compressing
+
+34
+00:04:20.460 --> 00:04:27.720
+kylie jue: And you're going to actually implement this algorithm on assignment six but just to give you some some practice what we're going to have you do today is we're going to give you
+
+35
+00:04:27.930 --> 00:04:34.320
+kylie jue: Just to make sure you really understand how Huffman coding works. We're going to ask you to actually generate a Huffman coding tree given a particular string.
+
+36
+00:04:34.710 --> 00:04:38.940
+kylie jue: But before we do that, as a reminder of how the pseudo code works. So the way Huffman coding works.
+
+37
+00:04:39.780 --> 00:04:49.650
+kylie jue: Is again you want to generate a tree. So first, what you do is you build a frequency table. So you look at the entire string and you say, how many times does each character appear, and that's going to be your frequency table.
+
+38
+00:04:49.890 --> 00:04:57.600
+kylie jue: And then you're going to initialize an empty priority queue. We're just going to be building a tree. So you're not going to like actually write any code implement a priority queue.
+
+39
+00:04:58.200 --> 00:05:03.300
+kylie jue: But you will use a priority queue that holds partial trees and those trees are represented as tree notes.
+
+40
+00:05:04.140 --> 00:05:11.940
+kylie jue: And the first thing you do is you put into the priority queue every single leaf node. So every character every individual character that you see in that table.
+
+41
+00:05:12.150 --> 00:05:22.530
+kylie jue: And the way you insert it into the priority queue is you use the characters frequency as its priority. So then what happens is you have the letters ordered by their frequency inside of your priority queue.
+
+42
+00:05:22.950 --> 00:05:30.750
+kylie jue: And then sort of the algorithm for building the tree is while there are two or more trees and the priority queue you DQ the two lowest priority trees.
+
+43
+00:05:32.550 --> 00:05:35.400
+kylie jue: And sorry, that should actually say you DQ the two lowest like
+
+44
+00:05:35.700 --> 00:05:43.530
+kylie jue: Numerical priority trees, but you would think of that is like the two highest highest priorities in terms of what's coming out of the queue. So you just DQ twice.
+
+45
+00:05:43.800 --> 00:05:52.470
+kylie jue: And that's going to give you the two characters with the smallest frequencies in the original strength and then you combine them together into a new tree and then you
+
+46
+00:05:52.800 --> 00:06:00.600
+kylie jue: Re insert that tree into the priority queue and repeat that process until you only have one node left and you saw an example of that in lecture yesterday.
+
+47
+00:06:01.560 --> 00:06:10.260
+kylie jue: But what we'd like you to do now is actually try it yourself on a different string. So we're going to ask you to build a Hoffman coding tree in some breakout rooms and this is the text.
+
+48
+00:06:10.710 --> 00:06:14.910
+kylie jue: You don't have to read through all those again. But we just basically re outlined the
+
+49
+00:06:15.270 --> 00:06:26.430
+kylie jue: Footsteps and the pseudo code here so that you can see it. And then what you can do is you're going to build a Huffman coding tree for the string means with an exclamation point at the end you can think about it as all caps.
+
+50
+00:06:27.390 --> 00:06:38.880
+kylie jue: And then go ahead and go through the process of first generating the frequency table, put the nodes into a priority queue and then DQ them to build up that final tree and you can use the whiteboard functionality in zoom to sort of share
+
+51
+00:06:39.330 --> 00:06:45.510
+kylie jue: We're going to give you about, let's say until like 1141 to get as far as you can with this. It's okay if you don't finish.
+
+52
+00:06:45.720 --> 00:06:57.390
+kylie jue: The idea is just to get sort of comfortable with how this Kaufman and coding algorithm works before you start on the assignment or some of you may have already started, which is totally fine, too. All right, Nick, go ahead and open up the breakout rooms. If you can
+
+53
+00:07:22.830 --> 00:07:23.940
+Alright.
+
+54
+00:07:26.010 --> 00:07:32.040
+kylie jue: Seems like most people are in the rooms now. So if you are watching at home. I'm going to go through how to build it.
+
+55
+00:07:33.000 --> 00:07:40.680
+kylie jue: Momentarily with the whole group. So I recommend actually going into this workspace and trying it out yourself. You could do it on a piece of paper. It doesn't have to be an actual workspace.
+
+56
+00:07:41.130 --> 00:07:55.230
+kylie jue: But try to actually build the table and the priority queue yourself. We're gonna we actually asked you to do this as one of the warm ups for the assignment as well. So it's good practice for that. And then you can forward to about 1142 ish
+
+57
+00:07:57.120 --> 00:07:59.070
+kylie jue: And then we will come back and go over it.
+
+58
+00:08:31.590 --> 00:08:32.100
+kylie jue: What did you say
+
+59
+00:08:32.970 --> 00:08:35.640
+Nick Bowman: I didn't see what time they got open so you just have to tell me
+
+60
+00:08:36.300 --> 00:08:37.680
+kylie jue: Okay, yeah, that's fine.
+
+61
+00:08:49.260 --> 00:08:54.300
+kylie jue: I think probably at like 1143 we can bring them back to so they have some time to talk, they
+
+62
+00:08:55.860 --> 00:08:58.620
+Can also check out how things are going.
+
+63
+00:09:01.980 --> 00:09:51.090
+kylie jue: 43 seems like it'll be the right amount of time for people to finish this.
+
+64
+00:11:10.320 --> 00:11:13.050
+kylie jue: Like one minute warning in the chat.
+
+65
+00:11:29.670 --> 00:11:29.940
+Nick Bowman: I see.
+
+66
+00:12:19.980 --> 00:12:21.480
+kylie jue: Alright, you want to go ahead and bring them back, Nick.
+
+67
+00:12:39.120 --> 00:12:39.570
+Nick Bowman: Cool.
+
+68
+00:12:40.410 --> 00:12:48.570
+kylie jue: So hopefully you got the chance to get most of it done if or at least get the general sense of how you're going to go about doing that. This is one of the warm up exercises as
+
+69
+00:12:48.570 --> 00:13:02.010
+kylie jue: Well, on the assignment, just with a different string. So really want to make sure how you're comfortable with how have been treats work. So let's go and go through the solution. So you might have come up with a frequency table that hopefully look like this.
+
+70
+00:13:03.120 --> 00:13:08.130
+kylie jue: And then to actually initialize the priority queue. We're just going to insert each of the characters with their frequencies.
+
+71
+00:13:09.810 --> 00:13:18.360
+kylie jue: And you'll actually notice right like depending on how you inserted these and what order you put the, the two ones. The two twos. Um, you might end up with a different tree. And we'll see that in a little bit.
+
+72
+00:13:18.720 --> 00:13:25.560
+kylie jue: So what do you do your first DQ the first two nodes. And then you're going to connect them and then we're going to read and cue the node with priority to
+
+73
+00:13:26.040 --> 00:13:32.940
+kylie jue: In this case, I'm going to choose to put it at the end. Then we're going to do the same thing with Ian and combine them and then put them
+
+74
+00:13:33.000 --> 00:13:34.020
+kylie jue: After the
+
+75
+00:13:34.200 --> 00:13:35.490
+kylie jue: The first combined node.
+
+76
+00:13:35.580 --> 00:13:38.610
+kylie jue: And then we combine them together and we end up with a tree that looks like this.
+
+77
+00:13:39.690 --> 00:13:46.500
+kylie jue: And then this will end up being our actual are codes that correspond to each characters, based on the tree that we just generated
+
+78
+00:13:47.040 --> 00:13:51.060
+kylie jue: And just as a note, like I mentioned before, there are other valid trees that are possible.
+
+79
+00:13:51.840 --> 00:14:02.250
+kylie jue: What might have happened after you DQ exclamation point and asked if you had it in this order. You couldn't put them back at the beginning, instead of the end of your priority queue. It just sort of depends on how you choose to break ties.
+
+80
+00:14:03.960 --> 00:14:13.200
+kylie jue: And then if we do this again and we keep following this process, you'd end up with the tree that looks like list, which is actually pretty different. Right, our character codes. Now look like this, and is going to have the code zero
+
+81
+00:14:13.470 --> 00:14:26.190
+kylie jue: Is one one and then SM the exclamation point. Help us to be digit character code. And there are lots of other options. You could have had a tree that ended up like this, or something that ended up like this and that's totally fine.
+
+82
+00:14:27.450 --> 00:14:38.400
+kylie jue: So just to show you that for a given sequence of characters. If you have characters with the same frequencies, you might end up with multiple trees, and that's something you might want to keep in mind when you're writing tests for your Hoffman encoding assignment later.
+
+83
+00:14:39.600 --> 00:14:49.440
+kylie jue: So in summary data compression is a really important real world problem and it relies on the patterns in data to sort of compact what it's compressing and then
+
+84
+00:14:50.400 --> 00:14:55.050
+kylie jue: In order to support like variable length and coatings for data where some characters might be one.
+
+85
+00:14:55.650 --> 00:15:02.850
+kylie jue: one digit long for the character codes and others might be longer. We're going to be using prefix coding schemes that can be modeled as binary trees.
+
+86
+00:15:03.180 --> 00:15:06.570
+kylie jue: And then helfman encoding and particular users, what we call a greedy algorithm.
+
+87
+00:15:07.080 --> 00:15:15.150
+kylie jue: To construct and coatings by building the tree from the bottom up and putting the most frequently frequent characters higher up in the tree based on their order in the priority queue.
+
+88
+00:15:16.140 --> 00:15:25.320
+kylie jue: And then the last thing, which we're not going to tell you how to do but it goes over it and detail in the actual assignment is that you'll need to send the encoding table itself with the. In other words, the actual tree.
+
+89
+00:15:25.680 --> 00:15:31.350
+kylie jue: With the compressed message so that whoever gets your message is able to decode the message and you'll see how to do that on the assignment.
+
+90
+00:15:32.790 --> 00:15:45.990
+kylie jue: Alright, so let's talk about some new topic for today, which is hashing and before I talk about what hashing is exactly i want to motivate it by going back to our ADT Big O matrix. And we saw that the sort of best
+
+91
+00:15:46.530 --> 00:15:58.680
+kylie jue: run times and bingo, that we could get for a DTS was this old login. And so I want to pose this question, can we actually do better. Can we do better than log and runtime for operations in our 80s.
+
+92
+00:15:59.460 --> 00:16:05.760
+kylie jue: And so what about constant meant time. That's sort of like the best runtime, we can get. What if we wanted to get constant runtime dinner at
+
+93
+00:16:06.750 --> 00:16:10.950
+kylie jue: So here's an idea that won't work. But we're going to see what it looks like. Anyway,
+
+94
+00:16:11.430 --> 00:16:17.010
+kylie jue: What if you're used like you're implementing a set and you use an array to back yourself. So you're implementing your set using an array.
+
+95
+00:16:17.250 --> 00:16:25.620
+kylie jue: And when a user adds value some value I. So in this case, seven. One, or nine, you're just going to store that actual value at index IMU it
+
+96
+00:16:25.920 --> 00:16:37.980
+kylie jue: So seven is going to be sorted index seven one's going to be stored at index one lines at index nine. And so, think for a second. Like, what does that give us in terms of benefits and what are the reasons why this would actually be feasible. Right.
+
+97
+00:16:39.000 --> 00:16:47.190
+kylie jue: So this would give us Constantine look up right way to get our own one if we're trying to find something, all we have to say is, OK, go to that index in the array. Right.
+
+98
+00:16:47.730 --> 00:16:52.080
+kylie jue: But what's the problem with this approach. So say now, I wanted to add set 1000
+
+99
+00:16:52.650 --> 00:17:01.350
+kylie jue: All of a sudden, if I'm adding a really large number to my array, I need to resize it to be huge and actually pretty space inefficient. If it's only storing for numbers.
+
+100
+00:17:01.740 --> 00:17:11.520
+kylie jue: And it needs to store 1000 values because I'm storing it at that index. That's not great. And then we have no real idea of what we should initialize are a two and that sort of thing.
+
+101
+00:17:12.120 --> 00:17:16.350
+kylie jue: So not great but it gives us an intuition about how we would think about old one.
+
+102
+00:17:16.740 --> 00:17:23.850
+kylie jue: So the key idea I want you to think about as we're going into hashing is can we get old one runtime for look up operations.
+
+103
+00:17:24.240 --> 00:17:34.740
+kylie jue: Well, only using a fixed amount of space, right, and that's what hashing is going to help us do is when the key there is a fixed amount of space, right, the previous solution, you don't really know how much space, you're going to need
+
+104
+00:17:36.210 --> 00:17:43.350
+kylie jue: But we're going to use Hash. Hash functions or take advantage of hash functions to actually get that fixed amount of space that we want in our 80s.
+
+105
+00:17:44.370 --> 00:17:51.270
+kylie jue: So what's the definition of a hash function. It's pretty abstract. The idea is it's just any function that takes an arbitrary inputs.
+
+106
+00:17:51.480 --> 00:18:05.850
+kylie jue: And sort of maps them to a fixed set of outputs. So you could have an input size that's really large and then your output size is always fixed and that sort of, again, going back to what we just asked for. It's going to give us a fixed constraint on the output size.
+
+107
+00:18:07.020 --> 00:18:20.820
+kylie jue: And you might remember name HASH FROM assignment zero. This was actually a hash function. I'm not going to go into too much detail about how it works. But what it did is it took in your name. The first law, your first and last name and then it gave you back a hash value some number.
+
+108
+00:18:22.140 --> 00:18:30.510
+kylie jue: So you can also think about a hash function more specifically as taking an input of a particular type when we define our hash functions. We have to say what type it takes it.
+
+109
+00:18:30.990 --> 00:18:34.740
+kylie jue: And then it's going to return a hash value, which will usually be a number
+
+110
+00:18:35.310 --> 00:18:48.270
+kylie jue: And hash values. This is just a little bit of terminology these hash values can also be referred to as hash codes or hashes. So if you hear any of those three terms, it's just talking about the output of your hash function given a particular input.
+
+111
+00:18:49.440 --> 00:18:53.400
+kylie jue: And there's sort of two really important properties that we need to have a hash functions.
+
+112
+00:18:53.790 --> 00:18:58.020
+kylie jue: The first is given the same input the hash function must return the same output.
+
+113
+00:18:58.320 --> 00:19:10.620
+kylie jue: So if you ran the assignment zero code multiple times you ran name hash multiple times on your name, you will always get the same number, right, it has to be. This is also called a deterministic function for every input, there's a specific output.
+
+114
+00:19:12.450 --> 00:19:21.480
+kylie jue: And then the other important property, it has to have is that two different inputs. Well, usually in parentheses, and we'll talk about what usually means in a little bit produce different outputs.
+
+115
+00:19:22.020 --> 00:19:26.850
+kylie jue: Even if the inputs are very similar. So if I put in my full last name as opposed to just the last initial
+
+116
+00:19:27.360 --> 00:19:36.690
+kylie jue: These two outputs actually end up very different and that's something that we want. We want it so that whatever gets output. It doesn't tell us anything really about what got input it
+
+117
+00:19:38.220 --> 00:19:40.410
+kylie jue: In terms of patterns in the data or anything like that.
+
+118
+00:19:42.090 --> 00:19:54.960
+kylie jue: Alright and then just a note designing hash functions is beyond the scope of 106 be and in real life programmers will actually tend to use mostly just existing hash functions that other people have come up with. It's a whole theory.
+
+119
+00:19:55.500 --> 00:20:04.800
+kylie jue: Or whole area of computer science in terms of designing hash functions. So we're not going to go into that, but we will talk about how we're actually going to use them for some interesting algorithms.
+
+120
+00:20:06.330 --> 00:20:14.700
+kylie jue: And so I'm going to talk about that in the second half of class, but I guess before I move on, are there are there any questions before I go into announcements, just about the definition of a hash function.
+
+121
+00:20:20.580 --> 00:20:23.760
+kylie jue: Right, so let's go ahead with the announcements.
+
+122
+00:20:24.990 --> 00:20:35.910
+kylie jue: So assignment six was released yesterday, it's going to be do with a hard deadline, next Wednesday. On August 12 at 11:59pm PDT and again it's a hard deadline, meaning there's no grace period and then we're not going to
+
+123
+00:20:36.570 --> 00:20:43.110
+kylie jue: Accept submissions. After that time and that also means there's not gonna be any revisions for assignments five or six after that date.
+
+124
+00:20:43.770 --> 00:20:54.510
+kylie jue: Final projects report reports are do on Sunday of this coming weekend and you'll have the opportunity to schedule, you'll find you'll find your final presentation. After you've submitted that report so paperless
+
+125
+00:20:56.580 --> 00:21:07.260
+kylie jue: Alright and then just as a note to I think we've said this before, but those final presentations are going to take place through next Thursday through Sunday and those will be scheduled by your section leader.
+
+126
+00:21:09.060 --> 00:21:14.280
+kylie jue: Alright, so let's talk a little bit more about. Now you've learned more abstractly what is a hash function.
+
+127
+00:21:14.640 --> 00:21:24.810
+kylie jue: And what does it actually do. So now let's talk about how do we use them in practice. And specifically, we're going to go back to this question of can we do better for a DTS. Can we get this constant runtime.
+
+128
+00:21:25.860 --> 00:21:30.150
+kylie jue: And just a final use of this levels of abstraction picture.
+
+129
+00:21:30.600 --> 00:21:37.680
+kylie jue: We're going to talk about hash table. Specifically, which we can generate using our hash functions. I mean, there are actually to data types.
+
+130
+00:21:37.890 --> 00:21:44.220
+kylie jue: Are abstract data types that we didn't tell you about that also exist in the Stanford library, but in general are well known.
+
+131
+00:21:44.970 --> 00:21:54.000
+kylie jue: At Ts and those are called hash sets and hash maps and they are set some apps. They use the exact same or they have the same interface in terms of how you would use it.
+
+132
+00:21:54.300 --> 00:22:01.440
+kylie jue: As regular sets of maps, but they're going to take advantage of hashing to be even more efficient than our regular login sets and maps.
+
+133
+00:22:02.490 --> 00:22:09.750
+kylie jue: And then just as a note here. We'll get to this in a little bit, but we'll find out that what's actually storing our data at the fundamental c++ data storage level.
+
+134
+00:22:10.140 --> 00:22:13.290
+kylie jue: Are going. It's going to be a combination of amazingly plus and you'll see why in a moment.
+
+135
+00:22:14.010 --> 00:22:24.390
+kylie jue: So let's take a step back and talk about what is a hash table. So let's suppose you're trying to organize all your clothes into a hash table or into a bunch of drawers, so
+
+136
+00:22:25.050 --> 00:22:31.830
+kylie jue: The way you can think about a hash table is you have a large number of small collections called buckets. So you could think about those drawers.
+
+137
+00:22:32.370 --> 00:22:37.170
+kylie jue: So drawers, you have a large number of drawers that each store small amount of information.
+
+138
+00:22:38.100 --> 00:22:43.740
+kylie jue: And put together those buckets form a hash table. So maybe like an entire dresser is your hash table.
+
+139
+00:22:44.220 --> 00:22:54.870
+kylie jue: And then we want to find a rule that tells us okay when I'm folding my clothes after I did my laundry. Where do I put that object. So thinking about, like, which drawer. Do I put my object in
+
+140
+00:22:55.860 --> 00:23:03.120
+kylie jue: And then when we need to find it. We just know. Okay, I'm going to go look in that drawer, right, like I have a sock drawer. I'm going to go find my socks in my sock drawer.
+
+141
+00:23:03.510 --> 00:23:09.840
+kylie jue: And it makes it a lot easier organizationally to know where things are. So it's sort of like the abstract idea behind a hash table.
+
+142
+00:23:10.860 --> 00:23:20.220
+kylie jue: And so for the second step, finding a rule that lets us know where each object should go. That's where our hash functions come in we're going to actually use our hash function to figure out where things should go.
+
+143
+00:23:20.880 --> 00:23:34.380
+kylie jue: So how do we do that. So this is an example, let's suppose we have a table with multiple buckets and I'm representing buckets here as like bucket zero bucket 12345 and we want to add to our set or add to our hash table.
+
+144
+00:23:35.760 --> 00:23:36.840
+kylie jue: This value uranium.
+
+145
+00:23:38.280 --> 00:23:45.030
+kylie jue: And so how do we do that. This is how we're going to formally defined our bucket rule by bucket, really. I mean, how do we determine what bucket. It's going to go into
+
+146
+00:23:45.570 --> 00:23:48.480
+kylie jue: We're going to call our hash function on the input.
+
+147
+00:23:48.810 --> 00:24:00.150
+kylie jue: And then we're going to mod by the number of buckets. And so what will happen is the bucket will always be a value between zero and five because we're modeling by the number of buckets and the hash value can or this hash.
+
+148
+00:24:00.780 --> 00:24:14.790
+kylie jue: Now this hash file, you can sort of be any number that you want, but it'll get converted into one of the five or six buckets here. So in this case we would plug in uranium into our hash function. Say it gave us back this number 12,206
+
+149
+00:24:15.930 --> 00:24:22.350
+kylie jue: And then we'd made by our number of buckets to get the bucket number two. And then we go ahead and just put it in that bucket.
+
+150
+00:24:23.460 --> 00:24:29.490
+kylie jue: So that's generally how we apply our bucket role to decide, okay, when we're adding something to our data structure where is it going to go
+
+151
+00:24:30.810 --> 00:24:40.770
+kylie jue: And then when we actually have to find something in our data structure, we can just look in the bucket. We have signed it to. And we use the same rule for lookup right if we're looking for something we can take our bucket rule.
+
+152
+00:24:41.220 --> 00:24:57.510
+kylie jue: Plug in the thing that we're looking for when we call set contains to get the value to and then what we do is we look in Phuket to and traverse until you find that value or if it's not in the set, you would just run out of elements, right. So it makes look up a little bit faster. So
+
+153
+00:24:58.950 --> 00:25:02.730
+kylie jue: Let's go ahead and so this is sort of the takeaway again.
+
+154
+00:25:03.390 --> 00:25:14.280
+kylie jue: So we have a bunch of buckets. We have a rule that tells us where each object should go or which bucket. It should go in and then once we know what bucket. It should go and we can also look it up easily and know okay we're just going to look in that bucket for it.
+
+155
+00:25:15.420 --> 00:25:26.040
+kylie jue: Well, we talked about, okay, we wanted to get constant runtime. So how efficient is this actually, let's talk about how can we actually formally quantify what the efficiency of this hash table is
+
+156
+00:25:26.610 --> 00:25:29.040
+kylie jue: So in general, each hash table operation.
+
+157
+00:25:29.820 --> 00:25:42.690
+kylie jue: We just saw is going to choose a bucket and jump straight to that bucket and then it might need to scan everything in that bucket. So, at worst, just like in this previous example, it's going to have to go all through all three items that are in that current bucket.
+
+158
+00:25:43.740 --> 00:25:49.230
+kylie jue: So the claim here about our efficiency is that the efficiency of a given hash table.
+
+159
+00:25:49.950 --> 00:25:58.080
+kylie jue: Depends on how well spread out the elements are so when we say how well spread out, we're talking about spread out across the different buckets inside of the hash table.
+
+160
+00:25:58.440 --> 00:26:09.240
+kylie jue: And in particular, if we want to have one look up operations we want our buckets to have a size of approximately one element, on average, right, because then you don't have to traverse a bunch of elements. Once you get to a particular bucket.
+
+161
+00:26:10.230 --> 00:26:17.040
+kylie jue: Okay, so how do we actually get this. That seems great in practice, but we just looked at an example where that was not really the case so
+
+162
+00:26:17.550 --> 00:26:21.180
+kylie jue: What this actually depends on is having what is called a strong hash function.
+
+163
+00:26:22.020 --> 00:26:26.640
+kylie jue: And a strong hash function is going to distribute those elements evenly across our buckets.
+
+164
+00:26:26.940 --> 00:26:38.610
+kylie jue: So we have to recall our to hash function properties we have the given that particular input the hash function must return the same output. So that's what's going to enable both adding and look up to give us the same bucket and then
+
+165
+00:26:39.120 --> 00:26:42.630
+kylie jue: This. The second property for having two inputs that will produce
+
+166
+00:26:43.530 --> 00:26:47.730
+kylie jue: Any two inputs will usually produce different outputs. We can reframe it to sort of be like this.
+
+167
+00:26:48.030 --> 00:26:55.590
+kylie jue: For any given input value. It's going to pretty much give us what looks like a random output. And what that will do if our hash function is really producing
+
+168
+00:26:55.950 --> 00:27:07.470
+kylie jue: Random outputs or what looked like man outputs. That's going to give us a relatively equal distribution across our buckets. And so we can use these two properties to think about what a strong or good hash function actually is.
+
+169
+00:27:09.000 --> 00:27:21.750
+kylie jue: And so now let's actually put some numbers on this. What if we have let's say we have the buckets. I'm here on elements in our table. So we're distributing and elements into the buckets. So how, on average, how many elements will be in a bucket.
+
+170
+00:27:22.530 --> 00:27:28.200
+kylie jue: We're just going to divide and by be right in order to figure out how many elements on average are in a bucket you do an over be
+
+171
+00:27:29.280 --> 00:27:38.220
+kylie jue: And then therefore the expected cost of any insertion, deletion or look up his own one. The constant time it takes to hash the value and get to the bucket.
+
+172
+00:27:38.520 --> 00:27:50.130
+kylie jue: Plus and over be. In other words, how many things, you're probably on average going to have to look through within that given bucket. Right. So, and over be here is a really important values for helping us understand our efficiency.
+
+173
+00:27:53.040 --> 00:27:56.250
+kylie jue: And then we've actually, it's so important that we actually have a formal term for it.
+
+174
+00:27:56.790 --> 00:28:00.300
+kylie jue: We call it our load factor and we can represent it by this character alpha
+
+175
+00:28:00.630 --> 00:28:11.280
+kylie jue: And if our load factor gets too big or hash table is going to be slow. What does it mean if our load factor gets too big. It means that we have a lot of items and not very many buckets or fewer buckets than we have.
+
+176
+00:28:12.630 --> 00:28:21.720
+kylie jue: Items. We're not going to get that average of about one element in our buckets. And if it gets too low. The hash tables going to waste too much space, right. Suppose we have a ton of buckets.
+
+177
+00:28:21.960 --> 00:28:29.940
+kylie jue: It's sort of actually like that original example I showed you. And so if you had like 1000 buckets and you're only storing three items you really don't need that many buckets in your hash table.
+
+178
+00:28:31.350 --> 00:28:36.540
+kylie jue: So, as a general rule of thumb. Here's what we're gonna do. We're gonna say if our load factor gets too big.
+
+179
+00:28:36.840 --> 00:28:40.800
+kylie jue: We need to resize our underlying buckets array. So how many buckets. We have
+
+180
+00:28:41.070 --> 00:28:47.130
+kylie jue: And then when we resize it. We're going to have to rehash the values that are stored there currently to new buckets in the larger array.
+
+181
+00:28:47.400 --> 00:28:55.920
+kylie jue: And they should sort of be ringing bells for you. It's actually very similar to the resize operation that we did and that you had to implement in the priority queue class that you wrote
+
+182
+00:28:56.760 --> 00:28:59.190
+kylie jue: In particular, how are we going to formalize this we're going to say
+
+183
+00:28:59.550 --> 00:29:12.000
+kylie jue: When our threshold of when our load factor gets greater than or equal to two. We're going to double our the size of our underlying array. So we're going to double the number of buckets. When we hit that threshold of alphas greater than or equal to two.
+
+184
+00:29:13.470 --> 00:29:23.220
+kylie jue: All right before I move on. Any questions about the efficiency of these hash tables or the logic behind why why this works the way it does.
+
+185
+00:29:31.170 --> 00:29:36.780
+kylie jue: Alright, great. So I'm just a quick note here, right. We talked about. Okay.
+
+186
+00:29:37.710 --> 00:29:48.030
+kylie jue: Our hash function should distribute elements approximately evenly across buckets. But in reality, if it is really producing random outputs and then we're modeling them by the number of buckets.
+
+187
+00:29:48.840 --> 00:30:01.320
+kylie jue: We're not always going to get like perfect even distribution across other buckets and that's okay. What is it called when that happens, it's actually called a collision and a particular collision occurs when two or more elements map to the same bucket.
+
+188
+00:30:03.000 --> 00:30:07.410
+kylie jue: And so in this case bucket to has a collision between the two values that we
+
+189
+00:30:08.220 --> 00:30:16.560
+kylie jue: Include in there. Okay, but we just have to have a way of actually handling that right if we are saying or buckets are an array. We have to be able to store multiple things in each bucket.
+
+190
+00:30:16.980 --> 00:30:19.560
+kylie jue: And how do we do that we use the strategy called chaining.
+
+191
+00:30:20.070 --> 00:30:26.610
+kylie jue: And so chaining actually you takes advantage of what we've learned about pointers and linked lists where it says okay in each bucket.
+
+192
+00:30:26.910 --> 00:30:35.670
+kylie jue: Instead of storing one element. We're actually going to store a pointer to an element and that element is going to point to potentially other elements. And so in
+
+193
+00:30:35.970 --> 00:30:48.000
+kylie jue: What we're actually doing is we have this array of linked lists at each bucket in the array. So that way you can actually chain multiple elements within a given bucket. And then we'll see how this works in practice in the actual implementation.
+
+194
+00:30:49.950 --> 00:30:56.730
+kylie jue: Alright, so now what we're gonna do is, I'm going to walk through how to actually implement a hash set just as a note here.
+
+195
+00:30:57.390 --> 00:31:03.570
+kylie jue: I'm not going to live code this I'm going to show you the code and slides and sort of just explain it as I go and stop for questions.
+
+196
+00:31:04.200 --> 00:31:14.940
+kylie jue: But the reason for that is, you're not going to have to actually implement anything related to hashing. In the final assignment like this is completely just a separate thing. So it's mostly fun and good to know.
+
+197
+00:31:16.380 --> 00:31:26.760
+kylie jue: But you're not actually going to have to implement anything like this and the implementation. If you go a little farther can get pretty complex. So just to start with. This is our header file for a hash set
+
+198
+00:31:27.960 --> 00:31:35.280
+kylie jue: So our public interface. The ones where in our real hash that would have more functions in this, but the ones we're going to talk about today are add clear and contains
+
+199
+00:31:35.610 --> 00:31:42.210
+kylie jue: Where we add an element that's represented by a value you can clear all the contents and you're set. And you can also check it for set contains something
+
+200
+00:31:43.710 --> 00:31:51.780
+kylie jue: And oh another note though is we will update it will upload an actual code file with the actual final implementation of hash that afterwards so that you can sort of look at it.
+
+201
+00:31:52.350 --> 00:31:53.730
+kylie jue: At the end of class. If you would like to
+
+202
+00:31:54.450 --> 00:32:02.130
+kylie jue: But right and then we also have this struct called a hash node. And that's going to help us store a particular element in our hash table.
+
+203
+00:32:02.370 --> 00:32:14.310
+kylie jue: And just like we mentioned, with it being a how we're going to have to use pointers. We're going to have a pointer to the next Tasha node. So we can form these linked lists and then for this specific hash that we're just going to store integer values as our data.
+
+204
+00:32:15.600 --> 00:32:17.640
+kylie jue: And then we're also going to have some private functions here.
+
+205
+00:32:18.930 --> 00:32:28.650
+kylie jue: Are private private member variables and private functions. So we're going to create a get index function that's going to give us the actual index or the bucket at which we need to store elements.
+
+206
+00:32:29.130 --> 00:32:36.810
+kylie jue: Will have this rehashed function when we need to resize our array my size represents how many things are currently in the
+
+207
+00:32:37.350 --> 00:32:43.500
+kylie jue: Set and capacity represents the number of buckets. So that's just a note on what the to the difference between my size and capacity are
+
+208
+00:32:43.830 --> 00:32:52.860
+kylie jue: And then this is the first time you're probably seeing something that looks like this. And again, you're never going to have to in this class at least write anything that uses double pointers like this.
+
+209
+00:32:53.670 --> 00:33:08.340
+kylie jue: But what this is saying is we are going to store in array called elements of hash node pointers, and that's why we sort of have those two stars here we're declaring an array of pointers. And again, you're not going to have to do this, but just for notation. That's why it looks like that.
+
+210
+00:33:09.720 --> 00:33:19.320
+kylie jue: Alright, so let's actually look at how we would implement our constructor and sort of this basic kit index function, which provides the rule for building our hash table.
+
+211
+00:33:19.950 --> 00:33:30.930
+kylie jue: So for the constructor. What we're going to do is we're going to just set our capacity initially to some default number of buckets will say 10 and are my size variable is just going to be zero. Right. There's nothing stored inside of our set yet.
+
+212
+00:33:32.130 --> 00:33:44.460
+kylie jue: And then in order to initialize elements they should look pretty similar to what you've seen before, when we are initializing an array. The only difference here is that we're storing pointer. So you have to use hash node star in order to say this is an array of pointers.
+
+213
+00:33:45.570 --> 00:33:49.830
+kylie jue: And then we're using this notation, with the parentheses at the end to actually just initialize all of the
+
+214
+00:33:50.910 --> 00:33:53.910
+kylie jue: Capacity Hashanah pointers to know pointer initially
+
+215
+00:33:55.410 --> 00:34:02.220
+kylie jue: Alright and then for our get index. This looks just like the rule that we mentioned before for actually figuring out a bucket given a particular value.
+
+216
+00:34:02.700 --> 00:34:14.190
+kylie jue: We will hash out using some provided hash function that we have. And then we're going to modify the capacity, which is the number of buckets to say, okay, given a value that's the bucket. It's going to give you are. That's the bucket. It should go into
+
+217
+00:34:15.510 --> 00:34:21.810
+kylie jue: Alright, any questions on this so far before I move on to sort of a more complicated functions.
+
+218
+00:34:26.850 --> 00:34:27.420
+Alright.
+
+219
+00:34:29.040 --> 00:34:41.340
+kylie jue: So now let's talk a little bit about AD. So we saw an example in the diagrams of how we would actually walk through ad, but how would we actually add something to our array of leaflets.
+
+220
+00:34:42.270 --> 00:34:54.930
+kylie jue: So first it's a set. So we want to check does it contain the value already. And we're going to write the function contains in a little bit. For now we can just assume we have a contains function for our hash that that actually works. It knows whether or not it has an item.
+
+221
+00:34:56.130 --> 00:35:06.540
+kylie jue: And then what we're going to do is, okay, we're going to get the actual bucket for that value. So we're going to call our get index out function and actually store the buckets that we're going to put the value into
+
+222
+00:35:07.680 --> 00:35:14.220
+kylie jue: And then what we want to do is we want to insert the item at the front of the links list for that bucket. So this is a pretty dense line of code.
+
+223
+00:35:14.550 --> 00:35:23.400
+kylie jue: So what are we doing first we have our bucket index. So we're going to index into our elements array to get to the bucket. And that's going to this is going to give us a pointer at the
+
+224
+00:35:24.330 --> 00:35:25.350
+kylie jue: At the front of our bucket.
+
+225
+00:35:26.310 --> 00:35:39.570
+kylie jue: And then what we're going to say is, OK, let's insert a new hash notes. So a new pointer that stores. Our current value and it's next pointer points to what was currently at that bucket. So again, you're rewiring what was already in the bucket.
+
+226
+00:35:40.230 --> 00:35:46.650
+kylie jue: By putting a new node there and then pointing to the things that were already there. So we're just putting it at the front of heart bucket.
+
+227
+00:35:47.490 --> 00:35:52.890
+kylie jue: And then we're just going to increment our size by one. So that's our function. It's pretty concise.
+
+228
+00:35:53.430 --> 00:36:01.140
+kylie jue: But there's a lot going on here in terms of manipulating both the array and the link lists and then also calculating the hash value for a particular
+
+229
+00:36:02.040 --> 00:36:03.300
+kylie jue: Input that we're trying to store.
+
+230
+00:36:04.290 --> 00:36:14.970
+kylie jue: And then, just a quick note, I'll put I'll come back to this in a little bit. We'll add rehashing here later. Right. You might remember from priority queue that, well, what if we go beyond the bucket size or we hit that limit that we talked about of our load factor.
+
+231
+00:36:15.210 --> 00:36:22.590
+kylie jue: I'll come back to that in a little bit. But for now, that's sort of just how ad works when you want to put a new element into our pockets.
+
+232
+00:36:24.240 --> 00:36:29.040
+kylie jue: Alright, so now we're going to talk about. We used contains here. Let's talk about how contains actually works.
+
+233
+00:36:30.960 --> 00:36:32.160
+kylie jue: And just another quick note here.
+
+234
+00:36:32.760 --> 00:36:43.380
+kylie jue: The reason this is. Oh, have one. I guess that's the other thing I wanted to mention. Right. And the reason it's all one is, don't you just calculate the bucket and then you stick it right at the beginning of that bucket. So our insertion time is very fast, right.
+
+235
+00:36:44.130 --> 00:36:51.870
+kylie jue: It's constant time, just like what we want. And so we want to also have contains be approximately constant time. So let's see what contains is going to look like.
+
+236
+00:36:53.190 --> 00:36:59.130
+kylie jue: And again, just as a reminder, this costume just means that we're not actually going to change any of the internal member variables in this function.
+
+237
+00:36:59.520 --> 00:37:03.390
+kylie jue: We're just checking if our set has something inside of it. So,
+
+238
+00:37:04.290 --> 00:37:13.290
+kylie jue: This sort of combines a couple of the previous lines in the ad, but what are we going to do, we're going to create and or we're going to create a variable that stores a hash node pointer.
+
+239
+00:37:14.160 --> 00:37:18.210
+kylie jue: And what is it going to be, it's going to point to the first element in the proper bucket.
+
+240
+00:37:18.480 --> 00:37:29.730
+kylie jue: For the value we're looking at. So again, we're calling our get index of value function to figure out, okay, this is the bucket that I need to go to to look for this value and then we're going to index into the elements array using that bucket.
+
+241
+00:37:30.750 --> 00:37:36.810
+kylie jue: And so all Kurt is doing is saying, Okay, here's the bucket. I need to start looking at, and that's what our current pointer is going to be
+
+242
+00:37:37.800 --> 00:37:48.600
+kylie jue: And then we actually need to say, okay, we could potentially have a linked list or at this bucket. So we need to traverse that link list to see is the element. We're looking for stored inside that link list.
+
+243
+00:37:49.650 --> 00:37:53.280
+kylie jue: So how do we do this. This is just like how we traverse link list that you've seen before.
+
+244
+00:37:54.720 --> 00:38:06.840
+kylie jue: We're going to use KERR AND CHECK until Curtis know also until you reach the end of the link list if you eat the end of the link less we and we haven't found our element, we're going to return false because we know the value that we're looking for is not inside
+
+245
+00:38:07.950 --> 00:38:21.840
+kylie jue: But how do we check inside here. Well, we're going to basically keep moving forward in our links list and checking at each step. Okay. Is the data at Kerr equal to the value we're looking for. If it is, then we found what we need.
+
+246
+00:38:22.410 --> 00:38:36.990
+kylie jue: Otherwise, we're just going to move our pointer forward. And again, this is for one particular bucket. We know it's in this particular bucket. And then we're just traversing the link list to see if it's there. And again, if we follow our rules of our load factor being relatively small.
+
+247
+00:38:38.880 --> 00:38:49.320
+kylie jue: this while loop is actually not going to be too many iterations. Right. It's going to still take us about constant time. If it's less than or equal to two elements on average inside of our buckets.
+
+248
+00:38:51.180 --> 00:38:56.550
+kylie jue: Alright, so now let's talk about the. Actually, before I move on, is there any questions on add or contains
+
+249
+00:39:00.990 --> 00:39:06.210
+kylie jue: All right, great. Let's talk about the disrupter and clear so
+
+250
+00:39:07.260 --> 00:39:15.480
+kylie jue: In our previous versions of anything. We didn't look link list we sort of just have to iterate over a linked list and delete all of the elements in our link list right
+
+251
+00:39:17.250 --> 00:39:24.660
+kylie jue: And so we still have to do that if we have a clear function, right, if we have a clear function, we need to clear out all of the linked lists in our
+
+252
+00:39:25.230 --> 00:39:38.040
+kylie jue: Buckets array, but in the in the disrupter we also have to make sure to D allocate the array itself. So what clear is going to do is it's going to remove all the elements from the individual link lists. And then if we're really exiting
+
+253
+00:39:38.580 --> 00:39:46.410
+kylie jue: The scope for our hash set variable. We also want to delete the elements fair. Right. And so basically what we have is we have a function called clear
+
+254
+00:39:46.860 --> 00:39:53.850
+kylie jue: That you can use to actually empty your set and you're also going to call clear when you actually destroy your set at the end. But how does clear work.
+
+255
+00:39:54.270 --> 00:40:02.430
+kylie jue: So in order to clear all the elements in our set, we need to iterate over all of the buckets in the array. And that's what this for loop is doing right
+
+256
+00:40:02.580 --> 00:40:14.400
+kylie jue: You're just iterating from it will zero to the capacity, which is the number of buckets. And then inside this for loop, we have to free the linked list that is stored at bucket those for lupus just iterating over the buckets.
+
+257
+00:40:15.990 --> 00:40:24.540
+kylie jue: And then what we have in here is a while loop that's actually going to traverse the linked list at bucket I so basically we're going to say okay this is bucket. I
+
+258
+00:40:25.050 --> 00:40:35.880
+kylie jue: While bucket is not equal to no pointer, get the current list note at the front and then move so you can almost think about this elements is just a current pointer that's helping us traverse through our list.
+
+259
+00:40:37.500 --> 00:40:40.830
+kylie jue: And this looks just like how you feed your link lists in
+
+260
+00:40:41.580 --> 00:40:47.400
+kylie jue: In your assignments, but you're going to basically move your pointer forward and then delete the previous element that you just
+
+261
+00:40:47.730 --> 00:40:54.360
+kylie jue: moved over right and so this is just going through a given bucket and then deleting things after you've moved your pointer forward.
+
+262
+00:40:55.260 --> 00:41:03.480
+kylie jue: And what you've done this for every buckets, where every bucket. We're just going to set the entire size to zero because there's nothing left inside of power set. Alright.
+
+263
+00:41:04.770 --> 00:41:07.650
+kylie jue: Any questions on this.
+
+264
+00:41:14.550 --> 00:41:15.150
+All right.
+
+265
+00:41:16.350 --> 00:41:25.860
+kylie jue: And so, for this one, this is pretty dense. I'm going to walk through it quickly. And I encourage you, if you are interested to take come back and look at it.
+
+266
+00:41:27.570 --> 00:41:40.320
+kylie jue: If you're interested in how it works. But this is very similar to sort of the resize function of priority queue except now when we're thinking about resizing, we have to move all of our links lists to the new array that we're allocating
+
+267
+00:41:41.340 --> 00:41:55.890
+kylie jue: So that's what rehashes doing and we hash is going to get called right when I load factor hits a certain threshold. So how does it work. We are going to first create our first we're going to store our previous elements array inside of a
+
+268
+00:41:56.910 --> 00:42:01.080
+kylie jue: An old elements array. So basically saying, Okay, keep track of what we already have stored
+
+269
+00:42:01.950 --> 00:42:12.810
+kylie jue: And then we're going to expand our capacity. We're going to double our capacity and then basically say, Okay, make elements, a new array at the larger capacity right so elements is now this bigger array.
+
+270
+00:42:13.200 --> 00:42:20.400
+kylie jue: And old elements is the old, the old array that we have a has all of our data. So what do we have to do. We have to iterate over the older re
+
+271
+00:42:21.210 --> 00:42:28.080
+kylie jue: Using old capacity and then basically rewire or rewire our pointers so that
+
+272
+00:42:28.860 --> 00:42:35.280
+kylie jue: The, the values that were stored in the old array gets stored in the new version of elements. So how do we do that.
+
+273
+00:42:35.490 --> 00:42:45.360
+kylie jue: Again, we are going to iterate over the old buckets. So we get each bucket by using AI and then we have a pointer to that bucket. And then we're going to actually iterate over the link list and the given old bucket.
+
+274
+00:42:47.220 --> 00:42:54.030
+kylie jue: And then put it into the new bucket. So we have to rehash the values and the important thing to note right is since we're rehashing values into a new bucket.
+
+275
+00:42:55.290 --> 00:43:11.550
+kylie jue: Let me just draw this here so that. So if you have like old elements. Right. And let's just say it's like the size to this is our way and then our new are our current elements, right. We just resized it so it's going to be double the size
+
+276
+00:43:13.110 --> 00:43:22.590
+kylie jue: And it's going to be four things. So what we do here is we're iterating over the old elements right so i equals zero. I was one
+
+277
+00:43:23.640 --> 00:43:30.060
+kylie jue: And if there's a linked list stored here. So you can imagine that this is pointing to something. This is pointing to something
+
+278
+00:43:30.780 --> 00:43:34.680
+kylie jue: What are while loop does is it first goes over the link list, sort of, it will zero
+
+279
+00:43:35.670 --> 00:43:47.580
+kylie jue: And it stores the previous notes of the current the thing at the front and then again it's rewiring our current pointer and then it rehashes this old point. So the first thing it does is it rehashes the item at the front.
+
+280
+00:43:48.570 --> 00:43:56.220
+kylie jue: puts it into the appropriate bucket in the new array. Right. So it's taking it and then putting it into the new elements over here.
+
+281
+00:43:57.240 --> 00:44:08.430
+kylie jue: And then, what it says is, OK, we have to update the pointer for this for this elements array to what we just inserted. So if this book. So let's just say we have a node that's here.
+
+282
+00:44:10.380 --> 00:44:20.430
+kylie jue: And it gets rehashed to in this case if we have these as our buckets. Let's say this time it was it was previously in buckets zero and now it's getting put in bucket to
+
+283
+00:44:21.150 --> 00:44:27.330
+kylie jue: So what we have to do is we have to update the pointer that's in bucket to to point to the new item, and that's what this line is doing here.
+
+284
+00:44:28.350 --> 00:44:36.720
+kylie jue: And by updating curve. Before we do all of this, like we inserting this is going to basically say, Okay, make sure this point are now points to the next thing.
+
+285
+00:44:37.170 --> 00:44:43.860
+kylie jue: So that when we go back into the next iteration of the while loop we can just repeat this for all of the nodes that are being stored at a given
+
+286
+00:44:44.850 --> 00:44:58.140
+kylie jue: Given bucket in the array. I'm going to get this is pretty dense code. So if it's not making sense. The first time through. That's okay. I recommend like walking through out yourself, but you won't have to do any sort of like arrays with link lists on the assignment or anything like that.
+
+287
+00:44:59.370 --> 00:45:12.450
+kylie jue: And then at the end, just like we did when we were doing our resize function for our priority queue. We have to delete this old array so that we get rid of this and everything has now been repopulated into our elements are new elements array.
+
+288
+00:45:14.730 --> 00:45:21.120
+kylie jue: Right, and then just as a note here, we have to call rehash right so basically this is using our load factor.
+
+289
+00:45:21.300 --> 00:45:30.810
+kylie jue: If our load factor again is greater than or equal to two, after we've added something we're just going to call this we hash function. So this is just revisiting the add function to make sure that it's rehashing at the right time.
+
+290
+00:45:33.360 --> 00:45:47.070
+kylie jue: Alright, so some hash that takeaways. So when we're implementing handsets and hash maps, we are using an array to store pointers and each bucket in the array specifically a strong appointed to a linked list. In case of collisions within that bucket.
+
+291
+00:45:48.030 --> 00:45:59.730
+kylie jue: And that was an example of hash set, but you can imagine with hash map your node strength is just going to include a key and a value instead of just the data field, it would have both the key and a value. But otherwise, the operations would look very similar.
+
+292
+00:46:00.930 --> 00:46:07.080
+kylie jue: And then to remind a reminder about our hash function, the hash function is telling us what bucket in the array, the element should go in
+
+293
+00:46:09.090 --> 00:46:27.240
+kylie jue: And then because we add new nodes to the front of the link list at a given bucket our ad is hash is oh one and then I look up is also have one if our load factor is small enough in our and we get an efficient sort of contains contains that there
+
+294
+00:46:29.040 --> 00:46:33.270
+kylie jue: Are any questions on hashtags before we move on to applications passion.
+
+295
+00:46:40.770 --> 00:46:51.570
+kylie jue: Alright, so now let's get to sort of like the fun part of hashing. So where is this actually used in real in the real world like besides making our sets on our maps faster. How do we use hashing.
+
+296
+00:46:52.590 --> 00:46:56.370
+kylie jue: So again, we have hash function was used to create hash tables for our at Ts.
+
+297
+00:46:57.030 --> 00:47:06.750
+kylie jue: But hashing is also used in places like hashing your passwords right websites and applications don't want to store your passwords in plain text. Otherwise that would be really insecure and dangerous.
+
+298
+00:47:07.080 --> 00:47:19.920
+kylie jue: And so instead, what they do is they'll hash your passwords before storing them to sort of obscure the contents and because the output of hash functions is almost random, you can't actually tell from the hash values what someone's password was
+
+299
+00:47:21.270 --> 00:47:31.470
+kylie jue: Hashing is also used in cryptography for secure or encrypted communication as well as for checking data integrity. So maintaining the state of a particular piece of data.
+
+300
+00:47:31.770 --> 00:47:40.020
+kylie jue: And for example, when you communicate over the Wi Fi network, you can ask, like, is this website secure is the document that I'm getting actually from the person that says it's from
+
+301
+00:47:40.860 --> 00:47:49.020
+kylie jue: And like when I send an email is it actually getting has my email been tampered with before from when I sent it to when the recipient. Got it. If you hash. A lot of these things.
+
+302
+00:47:49.740 --> 00:47:59.400
+kylie jue: Look, comparing the hat. The original hash value to the hash value of when you get there, it'll tell you about whether or not you're maintaining data integrity and it also will help with encryption.
+
+303
+00:48:00.540 --> 00:48:09.150
+kylie jue: So let's look at actually a specific example and learn a little bit about if any of you've ever used exam. She has Amazon app that you can use to recognize
+
+304
+00:48:09.720 --> 00:48:19.830
+kylie jue: What song is being played right now and we're actually going to learn that she's am and recognizing song footprints uses hashing. So first let me play this demo.
+
+305
+00:48:21.000 --> 00:48:35.250
+kylie jue: So we'll post this code again after. But this is sort of code that actually implement something like this. And I'm going to go ahead and run this code and then I'm going to play a song while it's just a hands and you might recognize the song.
+
+306
+00:48:36.810 --> 00:48:37.290
+kylie jue: With me
+
+307
+00:48:40.020 --> 00:48:40.530
+kylie jue: To
+
+308
+00:48:56.850 --> 00:48:57.270
+kylie jue: Shaq
+
+309
+00:48:59.070 --> 00:48:59.400
+kylie jue: Shaq
+
+310
+00:49:01.140 --> 00:49:01.470
+kylie jue: Shaq
+
+311
+00:49:03.210 --> 00:49:03.600
+kylie jue: Shaq
+
+312
+00:49:21.090 --> 00:49:29.010
+kylie jue: Alright so that is how to recognize our song baby show. Um, I'll show you in a second what this
+
+313
+00:49:30.750 --> 00:49:35.280
+kylie jue: Graph is. But let's talk a little bit about how that worked so
+
+314
+00:49:35.880 --> 00:49:42.990
+kylie jue: You can imagine if you're just thinking about, okay, how might show Sam work. You could just compare all the notes at every time stamp in a given song.
+
+315
+00:49:43.320 --> 00:49:46.680
+kylie jue: Right. And then if you're literally comparing note by note at every single timestamp.
+
+316
+00:49:47.370 --> 00:49:48.960
+kylie jue: It would tell you if you've got the right song.
+
+317
+00:49:49.230 --> 00:50:02.010
+kylie jue: But also what you then have to do is it would require storing all the notes at every time step, which is the equivalent of saying, I'm going to store the entire song for every song everywhere. And that would just be a lot of data that shows them would have to store.
+
+318
+00:50:03.300 --> 00:50:07.740
+kylie jue: And comparing things like every single time stuff would just take a really long time.
+
+319
+00:50:08.130 --> 00:50:16.230
+kylie jue: When you're choosing a song. So it's not that fast. That's not what we want. So instead what we're going to do is we're only going to look at notes that appear close to one another in time.
+
+320
+00:50:17.040 --> 00:50:23.460
+kylie jue: So what does this graph actually showing. So this is time as you move from the beginning. As you move from left to right, that's time as it goes.
+
+321
+00:50:23.700 --> 00:50:32.700
+kylie jue: And then a given column or the notes at a particular timestamp and the way their staff to sort of by pitch. So there are notes at different pitches that are occurring at that time.
+
+322
+00:50:33.750 --> 00:50:39.240
+kylie jue: And so when we look at notes that appear close to one another in time we look at things that are in columns that are close to one another.
+
+323
+00:50:40.980 --> 00:50:49.110
+kylie jue: And these are potentially like all a bunch of different pairs of notes that you could use to sort of identify characteristics of the song that you just played
+
+324
+00:50:50.220 --> 00:50:59.160
+kylie jue: So how does it actually work. What it does is it stores a frequency map of hash values for each song. So if you look back at this example. What you do is you take a pair
+
+325
+00:50:59.400 --> 00:51:05.880
+kylie jue: And then you're going to hash the pair of notes as well as the time difference between when those two notes appeared, and then what you do.
+
+326
+00:51:06.720 --> 00:51:15.870
+kylie jue: You have a map but stores. Those hash values and the counts for those hash value. So, how many times did that note and that note appeared. This time difference, apart from one another.
+
+327
+00:51:16.980 --> 00:51:23.280
+kylie jue: And then what you can do is you have to create these frequency maps for a bunch of different songs and then you can just compare the frequency maps.
+
+328
+00:51:23.820 --> 00:51:38.250
+kylie jue: And that's actually a lot more space efficient and enables easier and faster comparison between songs. So Suzanne was actually hashing information about a given song and storing that hash information in order to match them together when you hit on a song.
+
+329
+00:51:39.240 --> 00:51:48.060
+kylie jue: I mean, it's actually hashing, for example, to get this. It's actually and then compare which song I just played. It's actually hashing. The song in real time.
+
+330
+00:51:49.500 --> 00:51:58.440
+kylie jue: Alright, so that's it on hashing in terms of what's next. Um, we haven't fully fleshed out. What we're going to do next week on Monday.
+
+331
+00:51:59.010 --> 00:52:03.690
+kylie jue: But trip is going to give a lecture on Tuesday, which get excited for that.
+
+332
+00:52:04.020 --> 00:52:17.610
+kylie jue: But it will be more real world algorithms and life after one or 16 and, in general, next week. Just going to be fun. So hopefully it'll be a nice relaxing week as you're finishing up work on your assignments and your final projects. So Nick and I will stick around for questions. Thanks.
+
+333
+00:52:20.220 --> 00:52:20.550
+Evan F Davis: Thank you.
+
+334
+00:52:21.270 --> 00:52:22.740
+Jihe He: Thank you. Thank you.
+
+335
+00:52:22.980 --> 00:52:23.490
+ian rundle: Thank you.
+
+336
+00:52:24.390 --> 00:52:25.020
+shirley li: Thank you.
+
+337
+00:52:29.550 --> 00:52:30.240
+louise marzolf: Thank you.
+
+338
+00:52:31.980 --> 00:52:32.490
+Aadi M Rane: Thank you.
+
+339
+00:52:32.670 --> 00:52:33.360
+Thomas Tao Hale: Thank you.
+
+340
+00:52:42.540 --> 00:52:45.990
+kylie jue: Any questions in the chat. Nick, but I should answer out loud.
+
+341
+00:52:57.060 --> 00:53:02.790
+Feel free to unmute yourself. So if you have a question I was going to stop sharing my screen. Yeah.
+
+342
+00:53:05.310 --> 00:53:19.770
+Jordan Lin: Just a pure curiosity how are I'm just like, I'm these, like, Get in there, get index hash functions like Howard Britain, like, you know, how do you go about designing one. How do you know if once good at distributing numbers, etc.
+
+343
+00:53:21.000 --> 00:53:29.580
+kylie jue: Yeah. So again, it's actually like a whole field of theory and computer science to design these hash functions and, you know, the way that we think about, like, what's a good hash.
+
+344
+00:53:29.580 --> 00:53:30.000
+Jordan Lin: Function.
+
+345
+00:53:30.330 --> 00:53:39.570
+kylie jue: A lot of it has to do with like not having a lot of collisions right and doing that sort of random distribution. So those two properties that I talked about for like what defines a hash function.
+
+346
+00:53:39.780 --> 00:53:48.930
+kylie jue: where something is deterministic. That's sort of a requirement and then this like nice distribution, you can actually evaluate like how well, something is like randomly distributing items.
+
+347
+00:53:50.340 --> 00:53:53.970
+kylie jue: And that's how you sort of begin to say, okay, whether or not this is a good hash function.
+
+348
+00:53:54.870 --> 00:54:04.230
+kylie jue: Or something that is like not as good of a hash function because it doesn't distribute things as equally and you would also want to think about, like, what are the values. I'm distributing over right like so what is the
+
+349
+00:54:05.100 --> 00:54:12.270
+kylie jue: Range of my output right depending on what you know the input data is and how you're going to use the use that data. Yeah.
+
+350
+00:54:20.280 --> 00:54:20.850
+Other questions.
+
+351
+00:54:24.510 --> 00:54:26.520
+christopher cooper: Hi, I'm working on the final project.
+
+352
+00:54:27.990 --> 00:54:34.890
+christopher cooper: I'm using the, the example the problem example as like a template. Okay.
+
+353
+00:54:36.360 --> 00:54:49.080
+christopher cooper: So like I finished like the first page like things like write a function, you know, when you're telling them what function, you know, and your function should also fulfill the following requirements. I'm using like that same
+
+354
+00:54:49.140 --> 00:54:51.090
+christopher cooper: Yeah. Okay. All right.
+
+355
+00:54:51.990 --> 00:54:52.290
+Thanks.
+
+356
+00:55:02.580 --> 00:55:04.620
+Any other questions.
+
+357
+00:55:11.910 --> 00:55:14.640
+If not, I think we're good to go.
+
+358
+00:55:17.850 --> 00:55:28.710
+Liza George: I'm sorry, I'm not sure if it's just answered before but when do we know when to use the hash function and a half set versus a regular site. Is it always just better to use hash.
+
+359
+00:55:29.400 --> 00:55:39.810
+kylie jue: That's a good question. Usually, um, it's like a free if you're worried you're caring about efficiency, you do want to use a hash set or a hash map and you'll get the same sort of
+
+360
+00:55:41.130 --> 00:55:47.910
+kylie jue: You'll get the same sort of client side things that you can use. The one difference is that because of hashing.
+
+361
+00:55:48.330 --> 00:55:51.930
+kylie jue: Somewhat randomly ordering elements. You'll notice that when we did have a
+
+362
+00:55:52.230 --> 00:56:02.400
+kylie jue: Regular sets a map, you actually had a specific ordering like an alphabetical ordering of the of the keys or of the elements in the set. So if you do want to have a particular ordering you would end up with you, you would want to use a senator a map.
+
+363
+00:56:02.640 --> 00:56:06.900
+kylie jue: But if you don't care about the ordering and you want more efficiency, you can just use a hash cetera hash map.
+
+364
+00:56:23.040 --> 00:56:23.550
+Alright.
+

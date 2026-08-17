@@ -1,0 +1,104 @@
+00:09:22	Lukas Fullner:	no
+00:09:23	Weiqi Yu:	A
+00:09:23	louise marzolf:	A
+00:09:24	Ryan Gabel:	A
+00:09:24	Jennifer Anna Bonello:	A
+00:09:24	Rohan Chowla:	yea
+00:09:25	Kenneth Fischer:	Um..
+00:09:25	Hemant Chaudhary:	Picture A
+00:09:25	Kenny Wang:	I am disturbed
+00:09:26	yukun yang:	A
+00:09:27	dyson ye:	a
+00:09:27	Siddharth Balaji:	B
+00:09:28	Sami Kunaish:	B
+00:09:28	Jordan Lin:	A
+00:09:29	Faith Aing Okamoto:	a
+00:09:29	Ryan Gabel:	Because it's pantS
+00:09:30	Ryan Gabel:	plural
+00:09:30	Kyle Thomas Booker:	A but I wish it was B
+00:09:31	Elan Smolar Eisenberg:	A
+00:09:31	Weiqi Yu:	Recursively wear pants
+00:09:32	Aadi M Rane:	A
+00:09:37	Ryan Gabel:	Recursive pants
+00:09:38	david huang:	A
+00:09:39	Kenneth Fischer:	B?
+00:09:57	christopher cooper:	a
+00:20:45	Thomas Tao Hale:	I joined late what did I miss?
+00:23:54	Thomas Tao Hale:	How about unicode characters?
+00:24:18	kylie jue:	@Thomas we’ll mention that later but it’s a newer form of encoding to account for the larger number of characters
+00:25:43	Elan Smolar Eisenberg:	Does the 01 at the front indicate to the computer that it’s a letter?
+00:26:01	kylie jue:	No the 01 in the encoding was part of the byte representing a letter
+00:26:19	Thomas Tao Hale:	Is modern ASCII/unicode still in 8-bit form or is it something like hexadecimal now?
+00:26:33	kylie jue:	@Thomas I’m not sure
+00:26:39	Liza George:	dikdiks!!!
+00:26:51	Thomas Tao Hale:	69
+00:26:57	Kenny Wang:	awww
+00:27:05	Hanna Mofid:	soo cute
+00:28:47	Thomas Tao Hale:	So do we use pointers for this “compression”?
+00:29:13	kylie jue:	@Thomas we’re going to talk about the specifics algorithm shortly - it will use trees and pointers
+00:31:08	Michael M Hu:	Is that how .zip files work?
+00:31:48	kylie jue:	Yes!
+00:32:04	christopher cooper:	Honey, I shrunk the data
+00:32:10	Kenny Wang:	lol
+00:32:18	Kenny Wang:	are .zip files losslessly compressed?
+00:32:33	Thomas Tao Hale:	probably
+00:32:35	kylie jue:	Yes .zip files use lossless compression
+00:33:00	Thomas Tao Hale:	Pretty sure images are compressed with loss tho, considering how a lot of times compressing image data affects the quality
+00:34:29	Kyle Thomas Booker:	panic
+00:34:30	kylie jue:	@Thomas yes some image formats use lossy compression.  CS248 is a graphics class that talks more about how images are represented!
+00:35:04	Kenny Wang:	this is a surprisingly modern meme for a college level class
+00:35:19	Thomas Tao Hale:	Well duh, these guys are college students
+00:35:40	kylie jue:	Please keep the chat to questions!
+00:35:53	Thomas Tao Hale:	Like what is the meaning of life?
+00:36:29	Aadi M Rane:	but don't D, S, and space all start with 11?
+00:36:39	Aadi M Rane:	in fact S and space starts with 110
+00:36:48	Elan Smolar Eisenberg:	But they end differently
+00:36:56	kylie jue:	@Aadi when we’re talking about prefixes, we mean that no single code is a prefix of another
+00:37:00	Kenneth Fischer:	So is the tradeoff less compression for better accuracy?
+00:37:08	kylie jue:	It’s okay if they have the same prefixes within the larger code
+00:37:10	I. Lemhadri:	if there
+00:37:15	Aadi M Rane:	oh ok
+00:37:31	I. Lemhadri:	if there’s a wrong set of 0 and 1s ? Like 000, would it just crash ?
+00:37:41	Siddharth Balaji:	If we were running a decompression algorithm, could you use a strategy similar to a strategy implemented by people who break ciphers in that the vowels would be used more than any other letters and write an algorithm that determines the code based on that?
+00:37:59	Thomas Tao Hale:	So when, say, a word doc is getting ready to compress a doc, are the “indexes” for each character based on its density in the doc, or is it a fixed “index” system?
+00:38:05	kylie jue:	@Kenneth  that’s true for lossy compression but for lossless compression, it has more to do with the variance in the data (i.e. how many unique letters/characters you’er storing)
+00:38:41	kylie jue:	@Siddarth yes the idea is similar - in that the frequency of letters affects how the letter is encoding (where it is in the tree)
+00:39:27	kylie jue:	@Thomas It depends on what the compression algorithm being used is.  I’m not sure how word docs specifically get compressed
+00:39:47	Aadi M Rane:	how does the tree account for different lengths of the codes?
+00:39:51	Thomas Tao Hale:	Don’t think Microsoft will be so forthcoming with its secrets
+00:39:59	Elan Smolar Eisenberg:	Doesn’t this only work if all the codes/representations are equal to each other in length?
+00:40:09	Elan Smolar Eisenberg:	Which makes it less efficient
+00:40:23	kylie jue:	@Aadi A more frequent letter will be higher up in the tree (have a shorter length code)
+00:40:55	kylie jue:	@Elan the codes don’t need to be equal to one another in length - the exact algorithm will be clearer in the coming slides
+00:41:18	Kelly L. Boles:	So, the upper tree nodes have junk values?
+00:41:31	Kelly L. Boles:	never mind. just answered.
+00:43:09	Ali Mahdi:	do we need to submit our code for the final report? or is screenshotting the code onto the report sufficient?
+00:43:41	Thomas Tao Hale:	Where do you access an empty project?
+00:43:45	kylie jue:	@Ali putting in code snippets into the writeup is fine!  But if you’d like to submit the code for the final report (especially if you did a lot of additional work outside just the problem), you’re welcome to
+00:43:54	kylie jue:	@Thomas on the homepage of the course website in the right sidebar
+00:44:19	louise marzolf:	True panic mode
+00:44:30	Thomas Tao Hale:	EUREKA!!!
+00:45:41	Thomas Tao Hale:	Literally a eureka moment lol
+00:52:09	Jordan Lin:	Why don't we implement the PQueue in the other direction (lowest to highest priority), so dequeue only costs O(1) instead of O(n)?
+00:53:10	kylie jue:	@Jordan it will be o(1) here. when we say “highest priority” we actually mean priority closest to the front (most important to handle first).  So the lower numbers (higher priorities) get dequeued first
+00:56:14	Siddharth Balaji:	Why doesnt the tree compress inwards and fill in those “intermediate” nodes with nodes that actually hold a character value
+00:56:41	kylie jue:	@Siddharth then it wouldn’t give us a prefix coding scheme because some letters would have codes that are prefixes of others
+00:56:53	Siddharth Balaji:	Makes sense thanks
+00:57:53	Liza George:	do the numbers in those nodes mean anything?
+00:57:55	Siddharth Balaji:	If you inputted a string with both alphabetical characters and numerical characters it would still work right?
+00:58:04	Kenny Wang:	I think it would work
+00:58:10	Liza George:	in the last videos' diagram**
+00:58:12	kylie jue:	@Liza they were the “frequencies”
+00:58:23	kylie jue:	@Siddharth yes it would!
+00:58:25	Liza George:	ooh ok thanks
+01:00:28	Thomas Tao Hale:	Wonder how surprised the proff was when Huffman presented the solution lo
+01:00:42	Kenny Wang:	would the encoding table take a lot of data to send? or would it be okay?
+01:01:03	kylie jue:	@Kenny it depends on the table but usually it’s not too much additional space
+01:01:18	kylie jue:	You’ll see on the assignment how they can be stored efficiently
+01:01:27	Weiqi Yu:	Thank you!
+01:01:28	Kenneth Fischer:	Thank you!
+01:01:28	Tongjun (Albert) Zhang:	Thank you
+01:01:34	louise marzolf:	Thank you!
+01:01:39	Shifeng Hong:	Thank you
+01:01:43	Thomas Tao Hale:	Bet that supercalifragilisticexpialidocious wouldn’t work so well with the encoding algorithm lol
+01:02:06	kylie jue:	You can try that once you’ve done the last assignment :)

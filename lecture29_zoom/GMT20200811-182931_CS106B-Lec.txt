@@ -1,0 +1,26 @@
+00:33:29	haoming li:	You can pin yourself
+00:33:31	Evan Baldonado:	^
+00:33:55	rayjohns@stanford.edu:	Refactoring his code to use only global variables
+00:34:09	Ryan Bernstein:	making segfaults
+00:40:24	klaus cerny:	50+
+00:41:14	haoming li:	Yes?
+00:58:40	haoming li:	Not sure lol
+01:01:43	klaus cerny:	How can I ensure that a compute intensive program e.g. matrix solver has all the required resources available with max. performance when 1000 of threads are running?
+01:11:35	haoming li:	That’s cool!
+01:25:36	Hemant Chaudhary:	Thank you!
+01:25:43	Michael M Hu:	Thanks!
+01:25:44	christopher cooper:	Thanks Trip!
+01:25:47	louise marzolf:	thank you!
+01:25:47	Edward Chung Yik Yeung:	thank you!
+01:25:53	rayjohns@stanford.edu:	this is the coolest, thank you
+01:25:58	Shifeng Hong:	Thank you
+01:28:00	rayjohns@stanford.edu:	.io is the British Indian Islands
+01:28:07	rayjohns@stanford.edu:	*Indian Ocean
+01:28:58	kylie jue:	! learned something new haha - I wonder if some of the games that use it just like the .io extension but the British Indian Ocean benefits from the purchased URLs
+01:32:59	haoming li:	Got it
+01:33:00	haoming li:	Thank you!
+01:33:36	klaus cerny:	Very interesting intro into multi threading. Thx.
+01:35:28	Shifeng Hong:	if merge sort happen on multi thread does thst mean shorter Big O？
+01:38:35	Shifeng Hong:	I see，it would shorten the time but not changing its growth rate
+01:38:49	Shifeng Hong:	Thank you all！
+01:39:38	tori qiu:	woohoo!

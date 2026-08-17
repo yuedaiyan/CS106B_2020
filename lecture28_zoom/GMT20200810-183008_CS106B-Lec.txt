@@ -1,0 +1,92 @@
+00:09:33	tomhal@stanford.edu:	Getting the code to work
+00:09:36	hriday chhabria:	Getting absurdly high runtimes
+00:09:36	marcus forst:	Making a pokemon game
+00:09:48	Lukas Fullner:	creating my own unique system
+00:09:54	Kenneth Fischer:	Coming up with multiple different solutions
+00:10:02	Rohan Chowla:	ranking in the top 3% of sudoku players in the world lol
+00:10:16	tomhal@stanford.edu:	Congrats?
+00:10:17	Kenny Wang:	coming up with unique solutions
+00:10:20	Liza George:	actually writing whole paragraphs for the first time in 8 weeks
+00:10:31	klaus cerny:	finding a solution which converges all the time.
+00:12:17	Kenny Wang:	yay
+00:12:20	tomhal@stanford.edu:	YouTube livestream is based
+00:12:40	Kenny Wang:	where will we find the link?
+00:12:43	Kenny Wang:	oh ok
+00:12:49	Nick Bowman:	It’ll be posted on Ed and the course website
+00:12:54	Liza George:	it's still during the same time right? half of the minors would probably be gone for school anyways :(
+00:13:07	tomhal@stanford.edu:	Boo facebook
+00:13:08	Nick Bowman:	Yes, it’ll be at the normal time from 11:30-12:20
+00:13:29	Kenny Wang:	I like how NZ is so connected to Australia
+00:14:03	tomhal@stanford.edu:	Is that arpanet?
+00:14:25	tomhal@stanford.edu:	Cuz I know arpanet connecting thru the universities in America
+00:14:32	Nick Bowman:	Yes, the initial internet diagram was the state of the Internet when it was first getting started out
+00:19:48	tomhal@stanford.edu:	More like a parasocial relationship in that case
+00:33:30	Hanna Mofid:	So this only works if it is undirected?
+00:33:45	Kenneth Fischer:	How would you store this in a data structure?
+00:34:55	Nick Bowman:	@Hanna No, you can have these representations for directed nodes as well!
+00:35:07	Hanna Mofid:	Ok, thanks!
+00:35:15	Nick Bowman:	@Kenneth You might represent an adjacency matrix as a Grid<int>
+00:35:32	Nick Bowman:	But there are many other possible options as well, depending on which C++ libraries you’re working with
+00:35:40	Kyle Thomas Booker:	So a graph is not reflexive if there are no relations along a diagonal in matrix representation
+00:35:46	Kyle Thomas Booker:	Cool property
+00:36:13	Aadi M Rane:	specifically the main diagonal
+00:36:27	Kyle Thomas Booker:	Yeah ^
+00:36:28	edouard des:	For the presentations, are we to present our writeup or are we expected to make slides?
+00:36:33	Liza George:	actually this is not as applicable to graphs but just in general, can we use an array of arrays to make a matrix? the same way java uses 2d arrays?
+00:36:35	karan parikh:	Is there a final exam?
+00:36:45	kylie jue:	@Edouard you don’t have to make slides but you can if you think it would help with your presentation
+00:36:52	kylie jue:	@Karan no - only final projects
+00:36:59	edouard des:	Aha okay thank you!
+00:37:02	kylie jue:	@Liza yes you can do that!
+00:42:45	tomhal@stanford.edu:	Oh so there is no final diagnostic?
+00:42:52	kylie jue:	@Thomas nope
+00:45:14	Kenny Wang:	Dijkstra's! we meet again!
+00:45:19	Kenny Wang:	>:(
+00:45:22	Angela Zhang:	Dijkstra's gives me PTSD
+00:45:27	Weiqi Yu:	PTSD lol
+00:45:36	Aadi M Rane:	wait where have we done this before
+00:45:46	Liza George:	having to figure this out from geeksforgeeks sucked
+00:45:51	kylie jue:	@Aadi we haven’t covered Dijkstra’s before in this class
+00:46:03	Angela Zhang:	we haven't done this in class, but I've done it outside of this class
+00:46:36	Michael M Hu:	Thank you for sharing
+00:50:39	Liza George:	So if you had one node that had multiple paths to the root node, would we always give it the longest path weight as the priority?
+00:51:06	kylie jue:	@Liza not quite - you’ll see how we’ll use the priority queue in a second
+00:52:37	tomhal@stanford.edu:	When will assignment 5 be graded?
+00:53:10	kylie jue:	by Tuesday night
+00:55:44	Liza George:	so when we updated that weight of B when looking at the path to it from C, do we only update it if the old priority was worse/shorter than the new path? Like if the path from SJ to B was 1 instead of 9, would we have updated the priority of B to be 2 when searching from C?
+00:56:32	kylie jue:	@Liza - yes you only update a node’s priority if you find a shorter path (or it’s not yet in the queue)
+00:56:39	Liza George:	oh ok, thank you!
+00:57:35	tomhal@stanford.edu:	So like using latitude and longitude?
+00:58:44	kylie jue:	@Thomas - sure you could potentially use latitude and longitude to figure out a heuristic. although the lat/long would be more like the specific location of the node and the cardinal direction (NSEW) would then be the heuristic
+01:00:25	tomhal@stanford.edu:	Is chebyshev the same Huy who made that statistics theorem?
+01:00:53	kylie jue:	@Thomas - I’m not familiar with the statistics theorem
+01:03:47	Weiqi Yu:	Thank you
+01:03:52	Kevin H Fan:	Thank you
+01:03:55	Lawrence Li:	thank you
+01:03:59	Kenneth Fischer:	Thank you!
+01:03:59	Tongjun (Albert) Zhang:	Thank you
+01:03:59	Jennifer Anna Bonello:	Thank you
+01:04:00	Michael M Hu:	Thanks!
+01:04:06	Shifeng Hong:	Thank you
+01:04:13	Liza George:	could you go over why the heuristic should always underestimate the path length?
+01:04:14	Kenny Wang:	thanks!
+01:04:29	kylie jue:	@Liza - sure I’ll ask Nick to do that out loud
+01:05:29	yukun yang:	It seems that the Zoom video is no longer downloadable. Is that due to university policy updates?
+01:06:11	kylie jue:	@Yukun they should be downloadable but it’s possible we forgot to flip a switch for one of them. (unless the university changed it’s policy and I’m not aware of it).  is there a specific lecture you’re looking at?
+01:07:14	Liza George:	how soon after the course ending would we loose access to the recorded lectures?
+01:07:27	Aadi M Rane:	is there an efficiency reason why we don't use adjacency matrices? I might have missed that part
+01:07:32	kylie jue:	@Liza once your Stanford email goes away, but I”m not sure how quickly that happens
+01:07:39	Liza George:	oh ok, thank you
+01:07:50	Jordan Lin:	So you can say the Dijkstra's Algorithm is the Huffman Coding of pathfinding?
+01:07:52	yukun yang:	All lectures starting from Lecture 24 are no longer downloadable.
+01:08:16	kylie jue:	@Aadi yes - you have to store a lot of extra 0s (i.e. you always need a n x n storage space where n is the number of nodes). but you might have much fewer edges than that
+01:08:33	yukun yang:	And I am currently looking for Lecture 27
+01:08:33	kylie jue:	@Yukun thanks for the heads up. we’ll check out the settings after lecture
+01:09:01	Liza George:	so it would be like saying SF is west instead of north?
+01:09:45	yukun yang:	Got it. Thank you.
+01:12:05	Liza George:	I think so
+01:13:01	Hanna Mofid:	Can a heuristic/external info be a direction? like choose the direction/node that is north and not west because we know that the destination is north of the node
+01:13:46	kylie jue:	@Hanna yes it could, but you’d have to assign some weight value to the unaligned/aligned directions so that you could use it to prioritize paths
+01:14:07	Hanna Mofid:	Ohhh I see, got it!
+01:18:37	Hanna Mofid:	Thank you!
+01:18:45	Liza George:	alrighty, bye bye! thanks~

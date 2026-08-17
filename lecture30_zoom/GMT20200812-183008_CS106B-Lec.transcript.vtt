@@ -1,0 +1,2326 @@
+WEBVTT
+
+1
+00:00:05.759 --> 00:00:22.260
+Nick Bowman: Okay. So, hello everyone, welcome to Last lecture reporter and we are going to be talking about all about life after CSM 60 today. So our question for today is what are you up to next. What are you doing for this class.
+
+2
+00:00:24.030 --> 00:00:25.260
+Nick Bowman: And so today.
+
+3
+00:00:29.670 --> 00:00:37.110
+Nick Bowman: And so today will be sort of finishing off right we've been going on this journey and sort of going to this question of
+
+4
+00:00:38.070 --> 00:00:49.410
+Nick Bowman: What does life after this 160 looks like. And so we'll do sort of a recap of the course, and then we will talk about sort of future areas exploration. So places that you can go from here.
+
+5
+00:00:49.830 --> 00:01:02.520
+Nick Bowman: And then we'll have some time at the end just for some q&a. A lot of us submitted questions in advance. So we've put some answers to those questions down on the slides, but then we'll also have some time for free response questions at the end.
+
+6
+00:01:04.530 --> 00:01:14.160
+Nick Bowman: So yeah, so of course we've got for today is basically everything. But to start off with. We actually want to talk a little bit about and all of you and so
+
+7
+00:01:15.630 --> 00:01:25.380
+Nick Bowman: You know that we were sort of had a very unique online quarter this quarter. And so, you know, we got you guys from all over the world. So you actually were in 16 different time zones.
+
+8
+00:01:25.770 --> 00:01:33.120
+Nick Bowman: And we put together this map of everyone in the class. So we collected that data that you submitted all the way back on the very first assignment.
+
+9
+00:01:33.540 --> 00:01:40.650
+Nick Bowman: And sort of is plotted on a map. And so we literally all across the world across 16 different time zone. So it's been
+
+10
+00:01:41.400 --> 00:01:49.950
+Nick Bowman: It's been great sort of telling you all and to teach you all this quarter. And you also sort of came from many, many different backgrounds. So we had
+
+11
+00:01:50.730 --> 00:01:55.920
+Nick Bowman: Some of you are in high school and range, all the way to career professionals and kind of all stages of life in between.
+
+12
+00:01:56.430 --> 00:02:04.200
+Nick Bowman: And so we put the other sort of this graph. And, you know, a lot of graduate students a lot of high school students, but sort of range the gamut on between
+
+13
+00:02:04.560 --> 00:02:11.970
+Nick Bowman: And again, we've met a lot of you and officers and have very interesting conversations about sort of things that you're interested in and places that you're going next.
+
+14
+00:02:12.540 --> 00:02:18.270
+Nick Bowman: So we hope that this class sort of gave you the skills that you needed sort of wherever you are in life to go on and do something cool.
+
+15
+00:02:19.440 --> 00:02:30.750
+Nick Bowman: And and you guys all had sort of really interesting stories and interesting background. And so he made a little, a little word cloud of of your fear response questions to again from the first assignment and so you sort of, who are you
+
+16
+00:02:31.290 --> 00:02:41.730
+Nick Bowman: And you all had very, very interesting answers. And we sort of put together here. So this kind of just a collection of kind of who you are and who who we were, as a class this quarter.
+
+17
+00:02:47.910 --> 00:02:48.240
+kylie jue: Alright.
+
+18
+00:02:49.680 --> 00:02:50.430
+kylie jue: So,
+
+19
+00:02:51.060 --> 00:02:53.310
+kylie jue: Just as a reminder of sort of where we started.
+
+20
+00:02:53.340 --> 00:03:01.440
+kylie jue: I wanted to bring us back to the learning, learning goals that we had at the beginning of the quarter, which we hope you feel like you've accomplished, or at least made progress toward
+
+21
+00:03:01.980 --> 00:03:09.420
+kylie jue: Now that we're at the end of eight weeks. So some of our, our learning goals were, I'm excited to use programming to solve real world problems I encounter outside class.
+
+22
+00:03:09.660 --> 00:03:13.980
+kylie jue: I recognize and understand common abstractions in computer science with this class was all about.
+
+23
+00:03:14.310 --> 00:03:21.030
+kylie jue: I can identify programmatic concepts present in everyday technologies because I understand how computers process and organize and information.
+
+24
+00:03:21.750 --> 00:03:24.540
+kylie jue: So when we go really deep into dynamic memory management.
+
+25
+00:03:25.290 --> 00:03:30.060
+kylie jue: Hopefully, you got a better understanding of how computers work and through trips lecture yesterday as well.
+
+26
+00:03:30.330 --> 00:03:43.680
+kylie jue: I can break down complex problems into smaller sub problems by applying my algorithmic reasoning and recursive problem solving skills and I can evaluate design trade offs and creating data structures and algorithms are utilizing them to implement technological solutions.
+
+27
+00:03:44.730 --> 00:03:50.880
+kylie jue: And we also wanted to just throw together this very large list which didn't fit in one column or one
+
+28
+00:03:52.710 --> 00:04:00.090
+kylie jue: And we have to make the font a little bit smaller to fit all things that you've learned this quarter. There are so many different things that I may have you been forgotten some
+
+29
+00:04:00.540 --> 00:04:11.010
+kylie jue: But you've covered a lot and this course is not a slow course. So I wanted to congratulate you all for sticking with us through it and working hard on all of these topics that you've really learned a lot.
+
+30
+00:04:12.090 --> 00:04:20.670
+kylie jue: And you've also made a lot. So go on through the assignments. If you remember, you started off with the c++ legs assignment on assignment one you implemented sound decks.
+
+31
+00:04:22.680 --> 00:04:32.760
+kylie jue: As well as an assignment to you work with collections to sort of solve a maze, as well as to implement like a very basic level search and understand how search works with
+
+32
+00:04:34.320 --> 00:04:44.010
+kylie jue: Inverted indices indexes on assignment three and you really honed your recursive problem solving skills and which hopefully you have or are also honing on this last assignment.
+
+33
+00:04:45.630 --> 00:04:50.160
+kylie jue: And you had a lot of different parts. But one of the big ones that a lot of people really liked on assignment three was Boggle
+
+34
+00:04:51.270 --> 00:05:01.260
+kylie jue: assignment for you use priority queue implemented a priority queue in multiple different ways and then actually got to see how a priority queue could be used in practice to do some pretty cool data visualizations.
+
+35
+00:05:01.740 --> 00:05:08.910
+kylie jue: In the demos that were packaged into that assignment assignment five really covered linked list. So you got really down deep with
+
+36
+00:05:09.270 --> 00:05:17.670
+kylie jue: Pointers and rewiring of pointers in linked data structures as well as doing that for sorting algorithms for Merge short and quick sort.
+
+37
+00:05:18.480 --> 00:05:32.670
+kylie jue: And then what you've been working on with assignment six is Huffman encoding thinking about compression and it's a very real world use today algorithm that takes in an input compresses it into something using a Half Men tree. And it's a great Capstone for
+
+38
+00:05:34.170 --> 00:05:39.180
+kylie jue: For using all the other skills that you've learned this quarter as well to see a real world application of that.
+
+39
+00:05:40.980 --> 00:05:46.980
+kylie jue: And then the questions that we hope you can start to answer we sort of post these at the beginning of the quarter and said there's no right or wrong answer.
+
+40
+00:05:47.250 --> 00:05:51.090
+kylie jue: To these questions, but we hope that through this class you'll be able to start to answer these as well.
+
+41
+00:05:51.330 --> 00:05:58.020
+kylie jue: So what is possible with technology and code, what isn't possible. How can I use programming to solve problems that I otherwise would not be able to
+
+42
+00:05:58.470 --> 00:06:05.340
+kylie jue: And then really what this class focuses on is how do you what makes for a good algorithm or data structure and how can I even evaluate that.
+
+43
+00:06:09.600 --> 00:06:21.210
+Nick Bowman: Yeah, and so kind of our big question for today's is really answering and then we'll spend most of our time on this is what can you do next, basically. So what is your life is going to look like after this class.
+
+44
+00:06:22.410 --> 00:06:27.600
+Nick Bowman: And there's kind of like two important things we actually want you to keep in mind as you as you go forward.
+
+45
+00:06:28.050 --> 00:06:35.100
+Nick Bowman: And the first is that kind of you know this class and whatever your sort of very introductory programming classes.
+
+46
+00:06:35.670 --> 00:06:43.140
+Nick Bowman: The sequence of classes is sort of introducing you to the field of computer science and but computer science itself is so much more than just program.
+
+47
+00:06:43.590 --> 00:06:53.670
+Nick Bowman: And so there's so much more that you can do kind of now that you have that kind of basic skills and fundamentals and and and just things that you know how to do now.
+
+48
+00:06:54.450 --> 00:06:57.180
+Nick Bowman: These skills are going to really just take, you know,
+
+49
+00:06:57.630 --> 00:07:05.130
+Nick Bowman: Too many other very cool places in life and kind of what you whatever you choose to do. Right. These skills are going to make you better at it.
+
+50
+00:07:05.340 --> 00:07:12.750
+Nick Bowman: Whether it's a very direct or very indirect application of those skills and so kind of that'll be the main theme of today is really just trying to show off.
+
+51
+00:07:13.110 --> 00:07:26.430
+Nick Bowman: And kind of the very wide range of things and go and go and do this and and so kind of one of the most direct applications of of what you can do after this class and you know this this will apply to
+
+52
+00:07:27.930 --> 00:07:35.520
+Nick Bowman: Well, actually, we're going to frame this as is going to frame this as sort of different concentrations within computer science. These technically mapped to
+
+53
+00:07:36.000 --> 00:07:39.180
+Nick Bowman: The different tracks within the undergraduate major here at Stanford.
+
+54
+00:07:39.900 --> 00:07:51.690
+Nick Bowman: But realistically, you know, these map on to various sort of generalize and wide branching sort of areas of computer science that that you can go into kind of regardless of what stage in your academic career or life, figure out
+
+55
+00:07:52.410 --> 00:08:07.470
+Nick Bowman: And and so we're going to talk about some of those some of those concentrations. And so I think there's there's eight. So we'll go through slides on on all eight of them. But one of the first and sort of most popular right now concentrations and places that you can go
+
+56
+00:08:09.450 --> 00:08:18.360
+Nick Bowman: And studying computer science is this idea of artificial intelligence. So this idea of AI and machine learning, probably terms that you've, you've heard a lot about
+
+57
+00:08:19.230 --> 00:08:28.920
+Nick Bowman: But what's really cool about these technologies is that, you know, they are they are built off of some of the very fundamental tools that we actually learned about this quarter.
+
+58
+00:08:29.580 --> 00:08:34.290
+Nick Bowman: A lot of the the libraries and frameworks and packages that you use to do machine learning and
+
+59
+00:08:34.980 --> 00:08:44.040
+Nick Bowman: Artificial intelligence are actually built on c++ and because of what we learned about c++ this quarter, which is a very powerful and fast and efficient programming language.
+
+60
+00:08:44.760 --> 00:08:53.880
+Nick Bowman: And but when you go to go solve more challenging problems, you'll see that there are so many different problems to solve. And so many sort of interesting applications.
+
+61
+00:08:54.300 --> 00:09:00.090
+Nick Bowman: And that you can start to use tools built by other people and implemented in languages like Python and things like that.
+
+62
+00:09:00.510 --> 00:09:14.490
+Nick Bowman: And to really get you be able to solve very interesting columns of natural language processing computer vision and implementing robotics and so this is sort of one of the most exciting here isn't one that that a lot of you might might choose to go into
+
+63
+00:09:17.310 --> 00:09:26.250
+Nick Bowman: Another area is the area of bio computation. So what you see on the right is actually, if any of you are actually in our
+
+64
+00:09:26.730 --> 00:09:37.140
+Nick Bowman: Pipeline intro class last summer. And you'll notice this diagram is actually a mapping sort of a visualization of certain genome and matching different base pairs within
+
+65
+00:09:38.370 --> 00:09:43.800
+Nick Bowman: Within a certain genome, but bio competition is a very also sort of important
+
+66
+00:09:44.190 --> 00:09:59.220
+Nick Bowman: And interesting some field of computer science because you can apply some of the company Titian the competition tools we've learned to, you know, study diseases and generate new technologies and things like that that sort of have very direct and kind of impact, which is also very cool.
+
+67
+00:10:00.720 --> 00:10:13.920
+Nick Bowman: Another cool field is computer engineering. So if you really enjoyed trips lecture yesterday. And if you really enjoyed sort of our lectures on pointers and memory and this idea that there's this boundary that
+
+68
+00:10:14.430 --> 00:10:23.730
+Nick Bowman: Between the hardware and the software that programmers and developers of computers kind of have to communicate across and Computer Engineering is all about that. It's all about this idea that
+
+69
+00:10:24.420 --> 00:10:29.640
+Nick Bowman: You know, someone has to build the computers and someone has to write the software and that is built on top of those computers.
+
+70
+00:10:29.850 --> 00:10:39.360
+Nick Bowman: And computer engineering lives on that boundary. It's all about how do you design and build actual physical systems. And then how do you write very low level code to sort of provide a basis on which other programs.
+
+71
+00:10:42.060 --> 00:10:50.400
+Nick Bowman: And there's also this cool field of graphics. So, you know, everything that you watch when you're seeing animated movies and you're looking at sort of
+
+72
+00:10:50.760 --> 00:11:01.860
+Nick Bowman: Anything sort of art that is computer generated kind of all all falls in this field of graphics and and there's actually a lot of really cool people at Stanford studying things and graphics
+
+73
+00:11:02.520 --> 00:11:05.250
+Nick Bowman: Last quarter. When I was exposed. We actually had the opportunity to
+
+74
+00:11:05.880 --> 00:11:16.620
+Nick Bowman: Have some folks from Pixar come and speak to us and and sort of talk to us about kind of have some of the technological advancements in graphics are really made like their art and their creative process. And actually, you know, changing
+
+75
+00:11:18.240 --> 00:11:19.590
+Nick Bowman: And so graphics has also
+
+76
+00:11:20.400 --> 00:11:34.830
+Nick Bowman: Kind of a very powerful application and then actually again a lot of lot of graphics libraries and things like that are implementing languages like C plus plus, because they're so computationally intensive that they need sort of computer languages and that can be so powerful.
+
+77
+00:11:36.390 --> 00:11:52.860
+Nick Bowman: And there's also this idea of human computer interaction, which is also another sort of concentration or sub field of computer science. And so this is actually all about how humans interact with technology and how to how to sort of way into consideration. Some of the sort of
+
+78
+00:11:54.120 --> 00:12:07.290
+Nick Bowman: Different impacts and ways in which people in which technology might be accessible or inaccessible people instead of thinking about how best to kind of bridge that gap between how between the technology that we make and the human in the people that actually
+
+79
+00:12:09.240 --> 00:12:16.260
+Nick Bowman: And then we see there's this whole sub field of information or what some of you might know it has data science.
+
+80
+00:12:16.620 --> 00:12:23.880
+Nick Bowman: Which is this idea of there's so much data out there in the world and computer science is a very powerful tool to process and understand that data.
+
+81
+00:12:24.630 --> 00:12:34.140
+Nick Bowman: So I think I believe this graph is actually a mapping in California, of the different water sources and the water supply network across the state of California.
+
+82
+00:12:34.650 --> 00:12:43.410
+Nick Bowman: And so understanding and visualizing analyzing that data is important again to sort of keeping track or building and maintaining a systems that can keep us all going
+
+83
+00:12:46.020 --> 00:12:57.330
+Nick Bowman: And then you have this idea of systems. So again, I said this for computer engineering, but also say it again for systems. If really what you were super excited about kind of what a trip, give you a taste of yesterday.
+
+84
+00:12:57.690 --> 00:13:09.330
+Nick Bowman: And this idea of parallel programming and building sort of fast, reliable systems. And that's a sort of another study so that involves things like databases, how do we actually store information.
+
+85
+00:13:09.720 --> 00:13:16.410
+Nick Bowman: And involves, you know, really any big software system. How do you engineer system to be sort of reliable and fast and efficient.
+
+86
+00:13:17.970 --> 00:13:31.200
+Nick Bowman: And then there's this area of theory, which is there's a whole some field of computer science that really has nothing to do with programming at all. So if you'd like the ideas of computer science, but didn't really like the programming aspect. There's even still a huge
+
+87
+00:13:32.220 --> 00:13:40.140
+Nick Bowman: And just proving like what things are possible with computers. What things aren't possible, what are the bounds on how quickly you can do things efficiently, we can solve problems.
+
+88
+00:13:40.650 --> 00:13:50.370
+Nick Bowman: And and so theory is also kind of a really important area because much of what actually gets implemented and done in computer science is built off this i'm sure you
+
+89
+00:13:53.400 --> 00:13:59.310
+kylie jue: All right. And so based on those concentrations, you might have some idea of some of the areas you're interested in exploring
+
+90
+00:13:59.940 --> 00:14:04.800
+kylie jue: Concepts that you might be interested in or even, like, how can I apply computer science to
+
+91
+00:14:05.280 --> 00:14:08.670
+kylie jue: My field and what would I need to know in order to be able to adequately do that.
+
+92
+00:14:08.970 --> 00:14:17.970
+kylie jue: And so we're going to talk a little bit more about more specifically, what should I study. Next, and this is we're first going to talk about Stanford classes, in particular, for those of you who have the option.
+
+93
+00:14:18.840 --> 00:14:27.240
+kylie jue: But you can at any place that you decide to study or where you're currently studying, you could look for parallel classes where you are, as well, because a lot of computer science majors will have these
+
+94
+00:14:28.170 --> 00:14:38.100
+kylie jue: Alright, so this is the CS core at Stanford and by core we just mean the core set of classes that you are required to take if you are a CS major, I believe. Also, if you're a CS minor
+
+95
+00:14:39.690 --> 00:14:53.250
+kylie jue: Also these concepts are sort of like the core of what they require. If you go into the master's degree at Stanford either having these already prior or completing them while you're here. And so you are here you are, you have finished and completed CS one or 60
+
+96
+00:14:55.170 --> 00:15:03.270
+kylie jue: And sort of, there are three different places you could potentially go in the core. From here, we're going to talk specifically about CS 107 and Cs one or three
+
+97
+00:15:03.690 --> 00:15:13.080
+kylie jue: CS 107 is sort of the next logical implementation based class or coding heavy class on computer systems which talks specifically about organization and systems within computers.
+
+98
+00:15:13.440 --> 00:15:29.100
+kylie jue: And then CS 123 is more theoretical area of mathematical mathematical foundations of computing what Nick just talked about. I'll talk briefly about CS one on it, which is more on intuitive probability for Cs, and then the other two CS 110 and 161 sort of following actually from those
+
+99
+00:15:30.210 --> 00:15:40.890
+kylie jue: And so presents 123 in particular, these are really the big questions that they asked it asks, What are the fundamental limits of computing power and how can we be certain about this, how can we actually prove that these are the limits.
+
+100
+00:15:42.030 --> 00:15:52.080
+kylie jue: And so these are some of the important ideas and if any of these like sort of interest, you're, you're asking, What does that even mean highly recommends yes 123. It was one of my favorite intro classes at Stanford, um,
+
+101
+00:15:52.680 --> 00:16:00.900
+kylie jue: But some ideas are bigger than other infinities and this actually has some infinities are bigger than other infinities and this has practical consequences.
+
+102
+00:16:01.500 --> 00:16:09.750
+kylie jue: Shops from Ancient Greek mythology can actually be made mathematically rigorous to prove limits on computing power and abstract models of computation.
+
+103
+00:16:10.290 --> 00:16:21.930
+kylie jue: Have so abstractions have applications and network drivers user interfaces compiler design text processing and lots of other application. So these theoretical limits actually matter when you're designing the actual systems yourself.
+
+104
+00:16:23.070 --> 00:16:26.010
+kylie jue: And so for CS 107 which is the more implementation. Place one
+
+105
+00:16:27.150 --> 00:16:35.700
+kylie jue: But the fundamental questions here. What is the internal organization of a memory and a computer. So if you really found interesting. The dynamic memory allocation pointers arrays.
+
+106
+00:16:36.180 --> 00:16:46.560
+kylie jue: A lot of the stuff we covered in the last part of the course. This is the class for you. How do we bridge the dichotomy between high level problem solving and voltage and wires and why is this important to note
+
+107
+00:16:48.450 --> 00:16:57.030
+kylie jue: So important ideas in CS 107 you'll learn about the nature of memory layout and why computer security is therefore hard to get right.
+
+108
+00:16:57.690 --> 00:17:05.760
+kylie jue: So like physical memory layout on your computer, learning about computers as physical devices, whose inner workings are visible, even in higher level.
+
+109
+00:17:06.090 --> 00:17:10.260
+kylie jue: Languages. So once you really have this. The cool thing about is once you have this sort of
+
+110
+00:17:10.710 --> 00:17:20.910
+kylie jue: Really deep understanding of how a computer system works at a very low level. You can see how that applies to even higher level languages, even if you don't use a lot of that low level information later.
+
+111
+00:17:21.960 --> 00:17:28.290
+kylie jue: And then compilers can actually sometimes write rewrite recursive functions intuitively. So if you remember, we talked a lot about
+
+112
+00:17:28.560 --> 00:17:34.260
+kylie jue: Like, be careful about using recursion is you don't want to have too many stack frames, you might not have enough space on your computer for that.
+
+113
+00:17:35.160 --> 00:17:40.980
+kylie jue: Compilers actually will sometimes do this optimization, where they will take a recursive function that you've written and implement or
+
+114
+00:17:41.790 --> 00:17:48.930
+kylie jue: Turn it into an iterative implementation and it'll give you the best of both worlds. And if you're interested about how that works, or why that happens. Take this 107
+
+115
+00:17:51.330 --> 00:18:03.330
+kylie jue: And then lastly CS 109 which is really entered a probability for computer science. So more on the math side here, but you can learn about sort of why a lot of the runtime, as we talked about in our class.
+
+116
+00:18:03.720 --> 00:18:11.400
+kylie jue: Are Actually True improve those. So why are hash tables fast and wire binary random binary search trees. Probably good and
+
+117
+00:18:12.090 --> 00:18:18.780
+kylie jue: How can we ENCODE data so that if bits get flipped and transit if anything gets messed up. You can actually use probability to figure out like
+
+118
+00:18:19.140 --> 00:18:25.230
+kylie jue: What is the message when it arrives, so that you can still with a good amount of probability, figure out what was encoded originally
+
+119
+00:18:26.100 --> 00:18:28.620
+kylie jue: How do I explore big data sets and make sense of them.
+
+120
+00:18:29.100 --> 00:18:36.240
+kylie jue: So this is a classic. For those of you who've been asked me about data science. I've been highly recommending this class because it's very applicable if you're interested in
+
+121
+00:18:36.690 --> 00:18:47.640
+kylie jue: Data Science probability and statistics skills are really good from this class. And then what is the whole machine. What is this whole machine learning thing, and how does it work and how do I do it, it'll give you a very
+
+122
+00:18:48.360 --> 00:18:57.750
+kylie jue: Baseline introduction to that and Cs one and nine because so much of machine learning does actually think about like probability and dealing with large amounts of data and making sensible.
+
+123
+00:19:01.170 --> 00:19:12.600
+Nick Bowman: Yeah, and then sort of so that kind of defines the core kind of very clear next steps based off of kind of directly the knowledge that you have now with where you can go next and
+
+124
+00:19:13.500 --> 00:19:20.730
+Nick Bowman: Sort of, you know, in, in the general kind of progression CS major or any academic content that might eventually
+
+125
+00:19:21.420 --> 00:19:29.010
+Nick Bowman: involve some sort of degree in computer science, like those are the kind of core next steps. But, you know, there's also lots of other classes beyond that.
+
+126
+00:19:29.670 --> 00:19:36.420
+Nick Bowman: That may sort of make it more specifically kind of fit your interest and give you the tools and skills that you need that don't sort of
+
+127
+00:19:36.960 --> 00:19:48.450
+Nick Bowman: necessarily need to be twofold signs and so the the first set of these which are very practical programming technologies and the set of classes at Stanford and that all start with
+
+128
+00:19:50.160 --> 00:19:55.380
+Nick Bowman: They're offered at different times throughout the year and they're offered in different sort of online and not online settings.
+
+129
+00:19:56.490 --> 00:20:07.290
+Nick Bowman: But these classes all focus on various specific kind of tool sets or technologies and that you can use to actually just go start creating things in the world. And once you have the sort of programming.
+
+130
+00:20:08.220 --> 00:20:17.760
+Nick Bowman: I would call the maturity of doing Windows XP and understanding and kind of the very fundamental building blocks of computer systems and developing code and debugging and testing.
+
+131
+00:20:18.540 --> 00:20:24.480
+Nick Bowman: You can jump into any one of these classes and you can sort of immediately pick up something very useful and very practical.
+
+132
+00:20:25.140 --> 00:20:30.990
+Nick Bowman: So whether that's, you know, at programming with Android or iOS or web programming building websites.
+
+133
+00:20:31.260 --> 00:20:38.340
+Nick Bowman: Or if, for those of you that don't have a background Python or they're jumping in and sort of relearning everything that we learn this word but learning it in Python.
+
+134
+00:20:38.850 --> 00:20:42.030
+Nick Bowman: The all of these classes sort of offer that opportunity.
+
+135
+00:20:42.450 --> 00:20:52.530
+Nick Bowman: And so if you're looking for more things to go from here in it and you're telling yourself. Oh man, I really want to make something like have this great idea and I really want to build it and flush it out. And these are all really good directions.
+
+136
+00:20:54.570 --> 00:21:01.650
+Nick Bowman: Then if you want to. So, another really interesting direction to go. If throughout this class, you've kind of you've enjoyed it.
+
+137
+00:21:02.130 --> 00:21:11.010
+Nick Bowman: But you've always been, you know, asking yourself for asking us, like, you know, how would I do this without the Stanford libraries or how does c++ actually do this or how to c++ work.
+
+138
+00:21:11.610 --> 00:21:18.660
+Nick Bowman: And there's this sort of great add on. It's just a one unit class and you can either take it alongside our class or after class.
+
+139
+00:21:19.380 --> 00:21:24.540
+Nick Bowman: But closest one to six L. Which actually shows you what c++ programming looks like in the real world. So
+
+140
+00:21:24.810 --> 00:21:31.620
+Nick Bowman: In CS one is going to be right. We use the Stanford libraries, a lot. It acts as a nice attraction for us to be able to learn high level concepts and
+
+141
+00:21:31.890 --> 00:21:39.720
+Nick Bowman: And really, you know, implement interesting things having to get bogged down in the details of c++ which is not the world's sort of most straightforward or simple language.
+
+142
+00:21:40.920 --> 00:21:51.840
+Nick Bowman: But what's the first one is Excel does is it starts to expose you to that and and actually I think by the time that you're done with the class, you can feel comfortable jumping into any c++ project, right, not, not just one user to Stanford libraries.
+
+143
+00:21:52.170 --> 00:22:02.070
+Nick Bowman: And and really understanding how to work with it and understanding what's going on there and in c++ is super, super powerful. There's a lot that we didn't teach you about the language because we just didn't have time to
+
+144
+00:22:02.550 --> 00:22:07.320
+Nick Bowman: But, you know, this is a kind of great opportunity to expand upon and extend the knowledge
+
+145
+00:22:10.830 --> 00:22:15.720
+Nick Bowman: And and then. So the next next interesting plus them enough. Oh, how many do you have a question.
+
+146
+00:22:17.910 --> 00:22:21.570
+haoming li: Yeah, I can. Can't do like two sides before
+
+147
+00:22:24.360 --> 00:22:25.200
+Nick Bowman: Sorry, I didn't click it.
+
+148
+00:22:26.310 --> 00:22:48.780
+haoming li: Yeah, I can hear you, like, go back, like two slides before about yeah yeah that I so you said after we have learned this one that we can jump into like almost any of these because I think they look pretty, pretty advanced like iOS programming and joy programming email can do that.
+
+149
+00:22:50.130 --> 00:22:57.450
+Nick Bowman: Yeah, absolutely. I mean, these classes, sort of, formally, like what they expect and what they're sort of looking for you. A lot of his classes have
+
+150
+00:22:58.290 --> 00:23:05.040
+Nick Bowman: As a prerequisite and simply because like the level of experience that you've gotten with programming this quarter.
+
+151
+00:23:05.340 --> 00:23:14.220
+Nick Bowman: Is pretty much the only knowledge they assume of you right they only assume like okay you know how to build code, you know how to put topics together you know how to synthesize things
+
+152
+00:23:14.670 --> 00:23:22.980
+Nick Bowman: And so, you know, I would sort of recommend like like I do. Truly believe you could jump into any one of these classes and there's not any
+
+153
+00:23:23.190 --> 00:23:29.250
+Nick Bowman: There's nothing else that I think you need to learn before you can just jump in and say, All right, look, I'm going to learn this specific set of technologies.
+
+154
+00:23:29.670 --> 00:23:37.620
+Nick Bowman: And I do think that's true. And I think that the instructor petitioners classes and believe that is true as well because for a lot of these the only prerequisite is because
+
+155
+00:23:40.500 --> 00:23:42.960
+haoming li: I see. That's pretty cool. Thanks. Yeah.
+
+156
+00:23:45.660 --> 00:23:54.000
+Nick Bowman: And yeah, so kind of a another interesting direction that you can go in, is, you know, I talked about human computer interaction as a subfield of computer science.
+
+157
+00:23:54.480 --> 00:24:03.330
+Nick Bowman: And and actually again in terms of the programming knowledge that you need and you can actually just jump right into this field. So CS 147 is this class.
+
+158
+00:24:03.780 --> 00:24:06.030
+Nick Bowman: Does introduction to the computer in action.
+
+159
+00:24:06.540 --> 00:24:13.200
+Nick Bowman: And you start answering really interesting questions right questions about how do you actually design software.
+
+160
+00:24:13.440 --> 00:24:17.730
+Nick Bowman: And what makes good design that we've talked about what makes good program so far this quarter.
+
+161
+00:24:17.940 --> 00:24:24.150
+Nick Bowman: But we haven't actually talked about what makes a good design in terms of what the users are seeing and what the user is how the users are actually interacting with our programs.
+
+162
+00:24:24.720 --> 00:24:38.490
+Nick Bowman: And and and Cs 147 will take you through this whole process of of prototyping testing out your systems and really getting in this iterative design process. And again, all you need to know is basically what you know from this class from from CS
+
+163
+00:24:41.040 --> 00:24:49.950
+Nick Bowman: And and then to, sort of, you know, then now just kind of dump a lot on you so so we've gotten a lot of questions throughout the quarter.
+
+164
+00:24:51.360 --> 00:24:53.640
+Nick Bowman: About this certain sort of questions about
+
+165
+00:24:55.080 --> 00:24:59.460
+Nick Bowman: You know what, you know, I'm interested in this area. You know what classes. Can I go on and take them.
+
+166
+00:25:00.240 --> 00:25:08.520
+Nick Bowman: And and so that the jump to these classes might be kind of a little bit more of a jump than what we talked about on the previous one, but I think they're all still kind of doable.
+
+167
+00:25:08.880 --> 00:25:19.350
+Nick Bowman: And from where you're at right now, assuming some some level of familiarity with kind of other kind of fundamental areas but, for example, if you're interested in graphics
+
+168
+00:25:20.220 --> 00:25:32.340
+Nick Bowman: To pornographic sequences yes 140 and 6048. So for those of you that were interested and some we had some questions about augmented reality. And so there's actually a class in the comp department about that.
+
+169
+00:25:33.480 --> 00:25:42.330
+Nick Bowman: But a lot of the languages and technologies that you use again you'll see things built on top of the language c++ that we've we've already seen that we already know.
+
+170
+00:25:43.590 --> 00:25:48.960
+Nick Bowman: And if you're interested in artificial intelligence. There's a whole suite of classes that you can take at Stanford.
+
+171
+00:25:49.350 --> 00:25:55.710
+Nick Bowman: And the sort of introduction to all these areas of CST 21 but there's also a sort of more specific classes like 59
+
+172
+00:25:56.070 --> 00:26:04.290
+Nick Bowman: And then these other classes that are listed that go very specifically into depth on areas like natural language processing computer vision and the neural networks and things like that.
+
+173
+00:26:05.460 --> 00:26:11.550
+Nick Bowman: And what's interesting is, again, I mentioned that you'll see lots of technologies, things like TensorFlow pipe torch.
+
+174
+00:26:12.120 --> 00:26:22.740
+Nick Bowman: Things sort of words, you may have already heard floating around. You might start programming on actual large computational platforms like Google Cloud Amazon Web Services and Microsoft Azure.
+
+175
+00:26:23.790 --> 00:26:34.170
+Nick Bowman: But even though you won't see it, you'll actually a lot of these technologies are actually do have c++ on the back end retreat implementing a lot of the efficient things that you get to use
+
+176
+00:26:36.270 --> 00:26:41.640
+Nick Bowman: And then we talked about systems. This is the idea of memory parallel programming compilers.
+
+177
+00:26:42.360 --> 00:26:50.160
+Nick Bowman: There's sort of classic can go on and take that and and within systems, you actually will directly use a lot of C and c++
+
+178
+00:26:50.550 --> 00:27:01.290
+Nick Bowman: And there are also new languages like go and rust sort of more modern cakes on C and c++ that give you sort of better guarantees and and sort of say for execution models and things like that.
+
+179
+00:27:01.830 --> 00:27:09.690
+Nick Bowman: So it's also an interesting direction to go and and in terms of building websites and doing web programming and things like
+
+180
+00:27:12.210 --> 00:27:17.250
+Nick Bowman: will teach you all the languages and technologies that you need to know to be able to start doing things like building your own website.
+
+181
+00:27:17.940 --> 00:27:25.590
+Nick Bowman: So you know HTML and CSS and JavaScript all the kind of fundamental building blocks. Again, which you will be so much more
+
+182
+00:27:26.340 --> 00:27:30.660
+Nick Bowman: Like after taking this class you'll be so much more prepared to kind of just jump in and learn something new.
+
+183
+00:27:31.110 --> 00:27:40.770
+Nick Bowman: And, you know, after you've learned your first and your second programming language and built your actual fundamental like Computational Thinking Skills jumping into other programming languages see kind of obviously countries.
+
+184
+00:27:42.210 --> 00:27:44.070
+Nick Bowman: So there's there's lots of really cool places.
+
+185
+00:27:46.920 --> 00:27:48.720
+kylie jue: One note, I just want to make on this slide, too, is
+
+186
+00:27:48.930 --> 00:27:59.460
+kylie jue: We know that for those of you who can't take Sanford classes. That's why we sort of put in, sort of like the languages and technologies that we recommend sort of looking into or finding tutorials about if these are areas you're interested in as well.
+
+187
+00:28:01.530 --> 00:28:02.370
+Nick Bowman: Yeah, absolutely.
+
+188
+00:28:04.050 --> 00:28:19.170
+Nick Bowman: Yeah. And then so. So on that note, and kind of going beyond Stanford right beyond for the formal coursework, there's, there's lots of other ways that you can sort of learn and continue building your skills as well. And so there's lots of really cool online resources, things like Code Academy
+
+189
+00:28:20.430 --> 00:28:30.780
+Nick Bowman: Places that that you MOOCs, which are sort of massive online courses which, at this point, I guess all courses are being massive online courses, but those, those have been around for a little longer.
+
+190
+00:28:31.380 --> 00:28:39.840
+Nick Bowman: Things like Khan Academy and MIT open course where there's so much. There's so many materials that you can have access to the Internet and that that really will will
+
+191
+00:28:40.350 --> 00:28:42.120
+Nick Bowman: Sort of help you along their learning journey.
+
+192
+00:28:42.660 --> 00:28:50.580
+Nick Bowman: And but but even at a higher level, or if you're just thinking about how you can you do self improvement on your own, you know, beyond just formal learning resources.
+
+193
+00:28:50.940 --> 00:28:52.890
+Nick Bowman: And kind of, how can you improve their strategies.
+
+194
+00:28:53.400 --> 00:28:59.700
+Nick Bowman: And there's lots of things you can do. Right, really the best thing you can do is just, just write code right like find something you're interested on working
+
+195
+00:28:59.940 --> 00:29:04.860
+Nick Bowman: You know, maybe find a couple of other people that are also interested in that. So you can kind of collaborate and bounce ideas off of them.
+
+196
+00:29:05.250 --> 00:29:12.000
+Nick Bowman: And just code right just just work on it and you're not always going to be building the prettiest or the most useful things but
+
+197
+00:29:12.480 --> 00:29:18.090
+Nick Bowman: That experience that you get a programming and coding just along the way. And I think what will always will always be a valuable.
+
+198
+00:29:19.080 --> 00:29:28.740
+Nick Bowman: And to that end. And, you know, if you're interested in doing something like 20 an open source project. Right. That's a great way to kind of join a community of people working in coding together and
+
+199
+00:29:33.240 --> 00:29:39.840
+kylie jue: Yeah. And for those of you who don't know what an open source project is a lot of like the libraries that we've talked about in c++ and things like that like
+
+200
+00:29:40.080 --> 00:29:49.470
+kylie jue: A community of people have put those together and so open source just means that literally anyone in the public can contribute to this like particular software project and you'll find a lot of those online.
+
+201
+00:29:51.480 --> 00:30:00.270
+kylie jue: Cool. What should my academic plan look like. So in this section, particular in particular, we're going to talk about sort of like what are good reasons to study.
+
+202
+00:30:00.630 --> 00:30:06.300
+kylie jue: continue studying Cs, and then we'll talk specifically about like what a CS major would look like at Stanford in particular.
+
+203
+00:30:06.660 --> 00:30:13.170
+kylie jue: But again, it might be a little bit different depending on what institution, you end up at or going to so
+
+204
+00:30:13.620 --> 00:30:21.600
+kylie jue: If you're thinking about studying more CS here's some really great reasons to consider that. So if you like what you learned in this course, or in any of the other CS courses.
+
+205
+00:30:22.260 --> 00:30:27.300
+kylie jue: As well as what you're actually doing in them. That's a really great sign that maybe you should think about taking more CS
+
+206
+00:30:27.810 --> 00:30:38.880
+kylie jue: If you like the people you're working with, and the impact of what you're doing and liking the community as well. So those are all for good reasons to think about doing. Yes. You don't have to fall under all of them, but any of them are good reasons to continue taking more classes.
+
+207
+00:30:39.900 --> 00:30:48.180
+kylie jue: So bad reasons to think about not doing Cs, and this is something that we've heard about people who decide to stop taking CSI there after this class or in the major in general.
+
+208
+00:30:49.530 --> 00:30:55.170
+kylie jue: And these are definitely thoughts that I've had even as well. So, like, I'm not good at this and other people are even better.
+
+209
+00:30:55.560 --> 00:31:02.970
+kylie jue: That is not a good reason to not do CS um I think it's really easy to look around you and feel like everyone else is doing better or knows more than you.
+
+210
+00:31:03.960 --> 00:31:11.820
+kylie jue: But that is not often what you said, there's this phenomenon called the imposter syndrome, which it's not often true it often is just something that you feel, but
+
+211
+00:31:12.360 --> 00:31:19.290
+kylie jue: You're actually doing quite well especially compared to the people around you, even the materials fun but there's nothing philosophically deep about that.
+
+212
+00:31:19.770 --> 00:31:28.650
+kylie jue: Deep about it if you think that's true. I highly recommend taking CS 123 you will learn. There's a lot of philosophically deep things about computer science that you may not have realized
+
+213
+00:31:30.480 --> 00:31:33.090
+kylie jue: I have heard you have to pick a track, but I don't know what I want to do yet.
+
+214
+00:31:33.480 --> 00:31:41.970
+kylie jue: So if you looked at sort of bed giant list of concentrations are interested in computer science and you say, you know, I really don't know what I want to do.
+
+215
+00:31:42.570 --> 00:31:51.570
+kylie jue: I just like I kind of like Cs. But I don't know how I want to use it or what how it's going to be applied and that's totally fine. That's what taking classes and exploring different different areas for
+
+216
+00:31:52.590 --> 00:32:00.930
+kylie jue: And also, don't worry about it. If you think well what if 20 years later, I'm going to be working in a cubicle all day and it's not fun. And I have an existential crisis well
+
+217
+00:32:01.650 --> 00:32:07.590
+kylie jue: There are lots of different things you can do with yes and like Nick said earlier CF skills can really help you in any area.
+
+218
+00:32:08.370 --> 00:32:21.300
+kylie jue: And if you do have a crisis about maybe I don't want to sit and I don't want to code all day. You can do like me and just end up teaching it instead. But, but we'll talk about in a second, how they're actually lots of different career paths and things you can do with computer science.
+
+219
+00:32:22.320 --> 00:32:24.570
+kylie jue: Even if coding was not your favorite part, of course.
+
+220
+00:32:26.100 --> 00:32:36.990
+kylie jue: So, specifically the CS major at Stanford. This is just a common timetable again not rigid or the end of the world if you do not follow this exact timetable, this is more for those of you who are at the beginning of your Stanford careers.
+
+221
+00:32:37.770 --> 00:32:43.110
+kylie jue: Or if you're a high school or thinking about studying CS in college. So in general, for Stanford.
+
+222
+00:32:43.650 --> 00:32:49.380
+kylie jue: People tend to aim to complete. Most of the course and not the entirety of it but just most of it by the end of the song their sophomore year.
+
+223
+00:32:49.860 --> 00:32:59.280
+kylie jue: Which is about four out of the six classes and that gives you time to explore the different tracks and concentrations and your junior year to see which one you like the most. And then spend your senior year completing it
+
+224
+00:33:01.200 --> 00:33:11.340
+kylie jue: And then it's also totally fine if you start late like I we have had, I've had lots of friends who actually don't necessarily complete the core by the end of their sophomore year, I've had friends who declared the major their junior year
+
+225
+00:33:11.970 --> 00:33:23.850
+kylie jue: Some people say that the latest time. You can comfortably like start from scratch a CS major is to take this 106 say in winter quarter of the sort of sophomore year, and for many of you, that isn't even apropos because you're already in one of six be
+
+226
+00:33:24.780 --> 00:33:33.210
+kylie jue: But if you are a Stanford student and you are starting later that is totally fine. And another thing that we always recommend is the co term is also an option. So the CO chairman Stanford.
+
+227
+00:33:34.620 --> 00:33:47.910
+kylie jue: If you are a Stanford undergrad is a master's that you can start while you're an underground or right after you finished undergrad to work towards the masters even, even if you are not a CS major that is one of the huge draws of that program.
+
+228
+00:33:50.160 --> 00:34:01.320
+kylie jue: Alright. And so with that, we're going to transition into the ask us anything portion of the class. So we're going to start off by we sent out a Google form. And we also have been soliciting questions to chat.
+
+229
+00:34:01.590 --> 00:34:12.090
+kylie jue: Over the course of the quarter. We're going to start off with some of those questions and then whatever time we have at the end afterwards, we'll just open up the floor and anyone can jump in with questions. So let's start with our pre submitted questions.
+
+230
+00:34:13.830 --> 00:34:20.550
+kylie jue: And all three of us will get to answer these for some for some of the cases. So what did you struggle with the most in CS 106 speed.
+
+231
+00:34:21.900 --> 00:34:28.620
+kylie jue: So here are answers. I can go ahead and start. So I definitely struggled. The most with big and recursion. When I took the class.
+
+232
+00:34:29.970 --> 00:34:33.750
+kylie jue: recursion is still tricky for me and I read I read it all the assignments this quarter.
+
+233
+00:34:34.410 --> 00:34:43.950
+kylie jue: And like the first time I would do like anything on assignment three or even on half men. I was like, How do I, how do I think about this recursive again. But I distinctly remember bingo, being one of my difficult
+
+234
+00:34:45.060 --> 00:34:55.350
+kylie jue: Areas, because one of my exams that I took when I took 106 be like asked us for almost every problem, but almost all of the problem. The coding problems like what is the big have this problem and I just felt like I was guessing on every single one.
+
+235
+00:34:55.890 --> 00:34:59.580
+kylie jue: So really teaching this class has also helped solidify my understanding, if they go
+
+236
+00:35:01.620 --> 00:35:10.980
+Nick Bowman: Yeah. And for me, and I'll answer for the trip as well. His his answers here. And for me it was definitely Winklevoss I remember actually specifically
+
+237
+00:35:11.250 --> 00:35:15.270
+Nick Bowman: My, my, my partner and I spent so much time drawing at these pictures of link list that I actually
+
+238
+00:35:16.230 --> 00:35:22.320
+Nick Bowman: We got I got so frustrated that I ordered a mini whiteboard off Amazon and actually still own that whiteboard. To this day, and
+
+239
+00:35:22.680 --> 00:35:31.800
+Nick Bowman: I've worked with that same partner for for many times from here on out. So it was probably the most useful. Useful preggers like get it done because it just took us so long. So on figure that all out.
+
+240
+00:35:32.580 --> 00:35:42.090
+Nick Bowman: And and and for trip you put down you know recursion point related things i i also identify the statement that there's certain recursive problems that we just look at now, and we're just like
+
+241
+00:35:42.600 --> 00:35:51.900
+Nick Bowman: Yeah. Nope, still, still don't get it done understand we're supposed to be teaching this. But, um, but, yeah, no, definitely, definitely recursion curtains tricky.
+
+242
+00:35:54.000 --> 00:35:55.590
+Nick Bowman: So another question. Someone oh
+
+243
+00:35:56.160 --> 00:36:02.310
+Nick Bowman: Sorry. Yeah. So, so another question that we have is, sort of, you know, what's your favorite thing about CNC programming.
+
+244
+00:36:04.860 --> 00:36:06.690
+Nick Bowman: And started. Sure.
+
+245
+00:36:06.900 --> 00:36:10.620
+kylie jue: Um, so for me I think like as much as I do enjoy coding
+
+246
+00:36:11.130 --> 00:36:20.160
+kylie jue: Like what I enjoy more from sort of having the knowledge of computer science and studying computer science is really like the computational thinking skills. More generally, that I've gained
+
+247
+00:36:20.550 --> 00:36:24.900
+kylie jue: Particularly when it comes to like understanding technology around me in terms of
+
+248
+00:36:25.140 --> 00:36:35.310
+kylie jue: Assessing like what are the benefits in society. What are the limitations of a particular device. And really, like, what's, what are the possibilities, or something that like I look at a process. And I'm like, you could solve that.
+
+249
+00:36:36.450 --> 00:36:47.820
+kylie jue: using recursion or like with a computer system that would just make life so much easier. And I think like being able to think critically about those things has only come because I have that level of understanding of computer science.
+
+250
+00:36:49.440 --> 00:36:59.460
+Nick Bowman: Yeah, yeah. Absolutely. And I think, actually, my trips answer to this one are relatively similar which is just that, like, it's so cool and and
+
+251
+00:36:59.940 --> 00:37:07.800
+Nick Bowman: Constantly interesting in terms of just how much there is to do with computer science and how much you can do with the problem solving aspects and skills you can learn
+
+252
+00:37:08.310 --> 00:37:14.880
+Nick Bowman: And I, I, I'm not joking when I'm really just like every three months I you know I take another set of classes. And I'm like, oh, this is the coolest thing ever.
+
+253
+00:37:15.150 --> 00:37:22.800
+Nick Bowman: And then three months later, I'm like, it's not that interesting anymore. But then, then there's something else which is even more interesting to kind of go and learn and and pick up the skills for
+
+254
+00:37:23.250 --> 00:37:33.870
+Nick Bowman: And and and and each of those also has its like sort of own unique ways to have impact and actually sort of, you know, have a platform to do really cool things with your problem solving skills.
+
+255
+00:37:34.290 --> 00:37:46.980
+Nick Bowman: And saying, that's just a really kind of cool aspect about computer science and on the programming and you know I did like I personally just love coding with the presence of writing code is just honestly so much fun. And so for me, that's, that's just like it.
+
+256
+00:37:50.370 --> 00:37:53.520
+kylie jue: And so you also asked us what made you interested in CS three
+
+257
+00:37:54.210 --> 00:38:03.030
+kylie jue: Short stories here. And for me, it was my after school, high school robotics team. I was, I went to an all girls school so I was very fortunate to have a female mentor who
+
+258
+00:38:03.600 --> 00:38:13.080
+kylie jue: Sort of encouraged me to go into engineering at Stanford and has continued to give advice throughout college, but I think without that I would not necessarily have
+
+259
+00:38:14.160 --> 00:38:20.760
+kylie jue: Pushed into engineering. I don't know I i I'm really thankful for that. And so I think having a mentor in that area was really helpful.
+
+260
+00:38:22.410 --> 00:38:32.340
+Nick Bowman: Yeah, and I think this is this idea sort of mentorship and kind of support and kind of people just encouraging you to do cool things was sort of a common trend for me as well.
+
+261
+00:38:32.790 --> 00:38:45.330
+Nick Bowman: And you know, I had this just this one teacher in high school who he was. I mean, he was just the greatest he wouldn't spend so much of his time after school and on the weekends, like just taking us to go do interesting things and kind of just showing us
+
+262
+00:38:46.140 --> 00:38:52.980
+Nick Bowman: Really the kind of instilled in us this this appreciation for the power of creation to come, they came computer science.
+
+263
+00:38:53.370 --> 00:38:59.880
+Nick Bowman: And and really just encouraged us to pursue whatever whatever that interest was in whatever specific way that that interest manifested
+
+264
+00:39:00.270 --> 00:39:12.600
+Nick Bowman: And just having someone there to, sort of, you know, show you that those things are cool and then put their time into like just actually giving you opportunities to do it. And I think was was very powerful and
+
+265
+00:39:13.470 --> 00:39:24.000
+Nick Bowman: And and trip. I like that you put something about what a success. So I have a story about about trip in one day. So, so, yeah. You didn't tell you about it so
+
+266
+00:39:25.110 --> 00:39:28.320
+Nick Bowman: For those of you that are Stanford students, you might know about this. But for those of you that are not
+
+267
+00:39:29.250 --> 00:39:40.320
+Nick Bowman: There is a portion in introductory computer science class, which we call the the graphics contest, which is this kind of, I think it's like a multi week long thing.
+
+268
+00:39:41.280 --> 00:39:48.420
+Nick Bowman: Where students kind of have the ability to kind of just go go crazy. Let's do something fun. It's extra credit. None of it's required but
+
+269
+00:39:48.780 --> 00:39:52.470
+Nick Bowman: You know, people we just tell people here. Here's the graphics library like go do something cool with it.
+
+270
+00:39:53.070 --> 00:39:57.540
+Nick Bowman: And and I remember at the time I didn't know who trip was, but I was very good friends with a sister.
+
+271
+00:39:58.170 --> 00:40:03.150
+Nick Bowman: And I all I remember is over Thanksgiving break that this would have been my my junior year
+
+272
+00:40:03.600 --> 00:40:14.370
+Nick Bowman: And all my sophomore year, actually, all I was getting was this is a story is of how her brother were just like in the car, working on CS AND JUST LIKE YOU KNOW CODY like coding up this crazy thing for this graphics contest.
+
+273
+00:40:15.600 --> 00:40:24.570
+Nick Bowman: And and it turns out that, uh, that our friend trip actually coded up Pokemon basically like a lightweight version of Pokemon and in this graphics library.
+
+274
+00:40:24.960 --> 00:40:28.950
+Nick Bowman: And i think i think he ended up winning the graphic sentence to at least at least one of the components of me.
+
+275
+00:40:29.850 --> 00:40:40.140
+Nick Bowman: So when he eventually became a section leader and when I finally actually got to meet him. Like, literally, a year later I was like that's like my my defining moment of trips intro to see so
+
+276
+00:40:41.610 --> 00:40:53.340
+Nick Bowman: Some I'm glad I'm glad you've gotten to the point where it where it feels like it's your thing. I'm glad you you sort of had your lunch. So yes, I, I heard the second hand stories of how much time you spend on that. And I got to see how cool it was
+
+277
+00:40:57.300 --> 00:40:57.570
+All right.
+
+278
+00:40:58.980 --> 00:41:04.860
+kylie jue: Yeah, yeah. So you also asked us what kind of person should pursue a career in computer science.
+
+279
+00:41:05.730 --> 00:41:13.200
+kylie jue: So, we define a very generally so like someone who is interested in designing making or understanding technologies for the benefit of others.
+
+280
+00:41:13.530 --> 00:41:23.010
+kylie jue: Someone who, if you're interested more in sort of like the research or academic side, someone who enjoys theoretical and practical problem solving use using computation.
+
+281
+00:41:24.210 --> 00:41:33.420
+kylie jue: But really, like the the reason these are so broad, or maybe philosophical even as some people are saying is that a career in CS is just so much broader than people think it is.
+
+282
+00:41:33.990 --> 00:41:39.420
+kylie jue: I can start listing off like all the different possible jobs, you could go so you could become a software engineer.
+
+283
+00:41:39.720 --> 00:41:52.080
+kylie jue: Product Management is a job or career in tech, which a lot of people with computer science backgrounds, go into. You could be a designer. If you really enjoyed the testing aspect of our class there's site reliability engineers.
+
+284
+00:41:53.310 --> 00:42:07.950
+kylie jue: And then there's doing actual research, there's this position at some companies like at Google, in particular, there's one called a developer advocate where you actually are the in between, between these big open source projects and people who are just who are developers for websites.
+
+285
+00:42:09.030 --> 00:42:20.130
+kylie jue: And like large companies that actually use those libraries you can do technical writing, which is something I've tried. We actually have a hand in writing documentation and educational materials around technology.
+
+286
+00:42:21.000 --> 00:42:27.210
+kylie jue: data scientists professional professors and teachers engineering managers technical consultants. The list could go on forever.
+
+287
+00:42:27.390 --> 00:42:37.740
+kylie jue: And that's like not even including the things you could do with CS in other careers, right, like those were all jobs centered in tech, but you don't even have to end up in tech. If you would like to pursue a career in CS
+
+288
+00:42:38.220 --> 00:42:48.570
+kylie jue: So the bottom line here is really that anyone can pursue a career in CS and the idea that some people are just like born CS people is completely a myth. You don't have to be any particular type of person.
+
+289
+00:42:49.530 --> 00:43:00.330
+kylie jue: To do that. And so I think related to that. Another question, folks, asked is how did the skills. We've learned translate into how CS is used in the technology industry, which I think is a great question.
+
+290
+00:43:00.660 --> 00:43:11.100
+kylie jue: And so linking them a little bit to some of the different jobs in computer science. So really understanding how to scale technology. So the importance of ego and efficiency.
+
+291
+00:43:11.940 --> 00:43:22.350
+kylie jue: And understanding systems. That's huge. If you're a product manager, someone who is sort of responsible for coordinating a team and understanding both the technical sides as well as the business side of a product
+
+292
+00:43:23.460 --> 00:43:24.900
+kylie jue: UI UX designers
+
+293
+00:43:26.130 --> 00:43:39.060
+kylie jue: So how might a user actually interact with your system or software as an abstraction. So understanding how people who may or may not have technical skills or understanding will actually use the software or the product that you're developing is super important.
+
+294
+00:43:40.650 --> 00:43:45.840
+kylie jue: And then I mentioned technical writers. You have to be able to communicate about technology and the software that you write to
+
+295
+00:43:46.380 --> 00:43:53.940
+kylie jue: Your users or to a particular audience which you've, you've done in your final projects and then data science. So taking advantage of patterns in data.
+
+296
+00:43:54.450 --> 00:43:57.600
+kylie jue: As well as thinking about how to efficiently process and store information.
+
+297
+00:43:57.780 --> 00:44:11.010
+kylie jue: Is huge if you go into the field of data science as well. And this is again not a comprehensive list, but just some of the ways that the skills and the things that you've learned can translate directly to jobs or things you might do in the technology industry.
+
+298
+00:44:13.830 --> 00:44:23.010
+Nick Bowman: Yeah, and then sort of for our last two questions. The first one we actually got was this idea of helping you actually take the so we spent the whole beginning of the quarter kind of
+
+299
+00:44:23.490 --> 00:44:31.980
+Nick Bowman: Taught telling you how you could translate your Python knowledge coming into this class and c++ but for somebody that may not have different
+
+300
+00:44:32.730 --> 00:44:38.970
+Nick Bowman: You know, may not have actually started out in Python. We have that discussion of how they can actually translate your one in 60 skills, this sort of moving back into Python.
+
+301
+00:44:39.450 --> 00:44:52.350
+Nick Bowman: And there's a lot of sort of interesting ways in which we can do this but but some things to keep in mind is you know a lot of a lot of the other. I should say some of the entities that we learned in c++ sort of
+
+302
+00:44:53.580 --> 00:45:01.770
+Nick Bowman: Directly exist in Python is kind of built in built in data types and there's built in data types are often very powerful and very efficient.
+
+303
+00:45:02.700 --> 00:45:10.410
+Nick Bowman: But there are some that also, you know, may not exist or may require you to sort of use. The, the fundamental types and kind of interesting or and
+
+304
+00:45:11.220 --> 00:45:19.680
+Nick Bowman: You know, an unusual ways. So, that is that is one difference and perhaps the biggest difference. And what we actually got in the question on this topic was
+
+305
+00:45:20.310 --> 00:45:30.450
+Nick Bowman: Someone was asking, you know, how can I translate what I know about low level memory management and pointers and all this stuff. Like how do I do that in Python, and what's what's actually interesting about that question is you can't
+
+306
+00:45:31.500 --> 00:45:38.280
+Nick Bowman: Python in the way that the language is designed and written does not give you access to low level memory in the same way that c++
+
+307
+00:45:38.850 --> 00:45:51.480
+Nick Bowman: And that's why they are fundamentally different. And we fundamentally use for different purposes. So there's not really any such there's no such thing as pointers, you don't get to choose are the things on the stack and the heap and and so there's a lot more
+
+308
+00:45:52.860 --> 00:45:56.070
+Nick Bowman: Kind of nuance that needs to happen when you're looking at these things in
+
+309
+00:45:56.550 --> 00:46:03.750
+Nick Bowman: In Python, I mean sometimes that's good, that's good that you don't have to worry about all that stuff. You can just use kind of built in Python types and not worry about it.
+
+310
+00:46:04.350 --> 00:46:12.930
+Nick Bowman: But a lot, maybe for things like link data structures and trees there are sometimes a little bit harder to create an extra minute because you don't have this kind of low level access to to
+
+311
+00:46:14.370 --> 00:46:20.850
+Nick Bowman: Um, but, you know, everything else. Have you learned in terms of algorithmic perspective. You know the problem solving skills that you use, and stuff like that.
+
+312
+00:46:21.210 --> 00:46:31.410
+Nick Bowman: That translates without really any need to do translation almost right like those are those are ways of thinking about things and solving problems that are in their head that are going to kind of be language agnostic as you
+
+313
+00:46:34.380 --> 00:46:42.000
+Nick Bowman: And on the last question was sort of actually about, you know, if you're at Stanford, or if you're looking for things to study that.
+
+314
+00:46:42.660 --> 00:46:57.990
+Nick Bowman: Kind of very impactful and and sort of very cool. And there we are. Last person sort of about what Stanford courses do the three of us in your life if there were any that sort of changed as possible. And then you kind of started
+
+315
+00:46:58.080 --> 00:47:11.130
+kylie jue: Sure. So a couple on there are education classes for me. The first one is really it talked about learning technologies and how to design learning technologies for for both students for kids and also for older
+
+316
+00:47:11.760 --> 00:47:22.950
+kylie jue: For older learners as well. That's education to 36, also known as the on bits and atoms. I don't know if it's going to be offered this year since it's a very hands on class, we actually there's like a maker space component to that as well, we actually build
+
+317
+00:47:23.610 --> 00:47:26.280
+kylie jue: Some of these technologies. But one of my favorite assignments and that
+
+318
+00:47:27.840 --> 00:47:34.860
+kylie jue: Was actually to build a kid's dream toy and we actually did that and then have to have some sort of programming component as well.
+
+319
+00:47:36.660 --> 00:47:41.730
+kylie jue: Education to AP is a curriculum construction. So how do you actually design curriculum.
+
+320
+00:47:42.060 --> 00:47:49.680
+kylie jue: And then English 12 a was introduction to African American literature and one of the required courses for the English core ML c++ English major.
+
+321
+00:47:50.040 --> 00:48:04.740
+kylie jue: But one of my favorite English classes and then to six is computational journalism 124 is natural language processing which she has 124 is totally your class, you can take right after one of six be and one of my favorites. Yes, courses at Stanford.
+
+322
+00:48:06.090 --> 00:48:09.810
+kylie jue: And the reason I ended up concentrating in information as well for my undergrad.
+
+323
+00:48:10.860 --> 00:48:21.300
+kylie jue: Highly recommend really well taught as well. And then CS 247 is a human computer interaction course which is all about designing technologies and user interface design and interaction design.
+
+324
+00:48:21.810 --> 00:48:31.860
+kylie jue: So if that's something you're interested in and thinking about like how people interact with technology, highly recommend that was a studio design course that I took from my masters that I really enjoyed
+
+325
+00:48:36.720 --> 00:48:47.580
+Nick Bowman: Yeah. And for me I think some of the most kind of impactful courses that I teach here at Stanford. And we're actually courses in the History Department and courses taught by
+
+326
+00:48:48.090 --> 00:48:54.300
+Nick Bowman: professor named James campaigns, who I think is one of the sort of the best educators that I had a chance to learn under the Stanford.
+
+327
+00:48:54.960 --> 00:49:04.350
+Nick Bowman: But specifically classes like history, Phoebe and African American Studies 47 and our respectively history classes on on 19th century American history.
+
+328
+00:49:05.070 --> 00:49:15.840
+Nick Bowman: And then history of South Africa. And so, you know, very impactful classes for kind of learning about kind of the systems of power structure and historical things that have
+
+329
+00:49:16.470 --> 00:49:24.480
+Nick Bowman: Led to things like that, you know, that kind of systemic racial injustices that we're seeing now is actually even more important. I took a class, a couple years. A couple years ago, but
+
+330
+00:49:24.810 --> 00:49:36.630
+Nick Bowman: I'm very, very cool, very well taught classes and then have the CS classes CS 398 is also a really great one. It's kind of brand new and it focuses on computational education. So actually, how can you use computational tools.
+
+331
+00:49:37.530 --> 00:49:44.070
+Nick Bowman: To to actually make educational experiences better, which is very cool and
+
+332
+00:49:44.880 --> 00:49:53.250
+Nick Bowman: I'm glad the triplets. Yes, wanted to W two great great course. And if you're interested on sort of the ethics and the implications of technology and society.
+
+333
+00:49:53.670 --> 00:50:02.610
+Nick Bowman: And sort of thinking about from a philosophical perspective, you know, what are we doing with technology and what and what should we be doing. And that's a really good class and
+
+334
+00:50:03.360 --> 00:50:13.590
+Nick Bowman: CS 110 is like we mentioned, that's kind of the next level systems class. So again, if you love them multithreading lecture just one kind of almost all about that. It's, it's super, super cool in that aspect.
+
+335
+00:50:15.600 --> 00:50:25.890
+Nick Bowman: And the last two, which I was looking up and triples. It was privately messaged me about our history 155 F is actually a class about the American Civil War. And I think kind of a similar theme.
+
+336
+00:50:26.430 --> 00:50:35.970
+Nick Bowman: Trip was mentioning is that you know there's these classes kind of really formalized these ideas of how the past, you know, kind of informed the present and build and really leads into the present.
+
+337
+00:50:36.330 --> 00:50:45.840
+Nick Bowman: And then having that knowledge and having that context is really important and and the music 24 series is your training. So I don't know if you guys know this but trip trip single acapella
+
+338
+00:50:46.500 --> 00:50:55.260
+Nick Bowman: So he's he's got a got some good years and a good voice. But what he mentioned to me is actually changes how you listen to music and facility, how you hear
+
+339
+00:50:55.890 --> 00:51:02.670
+Nick Bowman: Western music and listen to that. So all very cool courses. If you're asking them for have the afternoon and take more Stanford fences places. Yeah.
+
+340
+00:51:03.960 --> 00:51:11.370
+kylie jue: Cool. Um, there were some very, very specific questions that we also received in the Google Form that were like specific to individuals.
+
+341
+00:51:11.700 --> 00:51:17.760
+kylie jue: And so we didn't want to take the time in lecture specifically to answer that. But we are happy to answer those. If you send us an email.
+
+342
+00:51:18.420 --> 00:51:21.960
+kylie jue: Or if you come talk to us during office hours and it still has some tomorrow.
+
+343
+00:51:22.830 --> 00:51:29.370
+kylie jue: Or I know otherwise. Other than that, there's not a ton of office hours. But again, you can feel free to email us you know how to reach either of us are both of us.
+
+344
+00:51:29.670 --> 00:51:35.550
+kylie jue: And we will stick around still for some open Q AMP. A even though I know it's the end of class. So if you do have to go, please feel free
+
+345
+00:51:37.020 --> 00:51:42.270
+kylie jue: But yeah, we'll stick around for some open Q AMP. A. And I guess just to really, I forgot. We have these slides standing
+
+346
+00:51:43.620 --> 00:51:43.950
+Nick Bowman: So,
+
+347
+00:51:44.160 --> 00:51:44.490
+kylie jue: Why don't you
+
+348
+00:51:45.060 --> 00:51:51.690
+Nick Bowman: Yeah, but before you didn't pose. You're still around. So I kind of our summary and then, like I said, We'll stick around for q&a afterwards as we usually do.
+
+349
+00:51:52.560 --> 00:52:07.080
+Nick Bowman: But kind of you know where you're at now. You know, you've learned sort of this wide array of tools to solve a very wide variety of problems as we sort of recap at the very beginning of lecture and. And from there, right, catching on and go to the next one. Yes.
+
+350
+00:52:08.520 --> 00:52:13.860
+Nick Bowman: You know, not only do you have the tools to solve those problems right but you also know how to compare and contrast different
+
+351
+00:52:14.610 --> 00:52:30.330
+Nick Bowman: Problems for for different approaches to solving different problems and sort of figuring out which which ones are better or worse, and why and and then the sort of last place or the last sort of components of what what is where you are at now.
+
+352
+00:52:32.070 --> 00:52:32.460
+Nick Bowman: Okay.
+
+353
+00:52:33.870 --> 00:52:45.780
+Nick Bowman: Yeah. So you now know about what obstructions are right and and we've learned so much about attractions and and and this idea of having mental models for thinking about problem for you know
+
+354
+00:52:46.590 --> 00:52:52.860
+Nick Bowman: hiding away some of the complexity of problems that you can sort of enable people and then you will yourself to think about it softens it really powerful.
+
+355
+00:52:54.990 --> 00:53:00.480
+kylie jue: Yeah, and just some closing thoughts, questions, we want to leave you with them to think about after to take away a few Lucas classes.
+
+356
+00:53:00.900 --> 00:53:07.410
+kylie jue: And hopefully you'll be able to answer as well. A little bit better now is how is the technology we use made and who makes it
+
+357
+00:53:08.010 --> 00:53:15.120
+kylie jue: Who benefits from the technology, who might not benefit from the technology and what problems. Ultimately, will you choose to solve with technology.
+
+358
+00:53:15.930 --> 00:53:28.140
+kylie jue: And now you can truly enter life after one of the six be because we are we have completed the course. So good luck with final project presentations. Over the next several days. Um, and again we'll stick around for open Q AMP. A thanks
+
+359
+00:53:28.680 --> 00:53:29.160
+Elan Smolar Eisenberg: Thank you.
+
+360
+00:53:30.870 --> 00:53:32.100
+Siddharth Balaji: Thank you. Thank you.
+
+361
+00:53:33.270 --> 00:53:34.080
+Evan F Davis: Thank you so much.
+
+362
+00:53:34.290 --> 00:53:36.030
+Weiqi Yu: Thank you so much. Please.
+
+363
+00:53:36.930 --> 00:53:37.440
+Oz Gitelson: Thank you.
+
+364
+00:53:40.800 --> 00:53:51.990
+kylie jue: Alright, Elena had a great question in the chat. She asked, what are some of the most interesting or important problems today that are being solved in CS or by CS
+
+365
+00:53:54.510 --> 00:54:02.220
+Nick Bowman: Yeah um yeah that's that's a really cool question. Um, I guess my answer to that in terms of what I think is
+
+366
+00:54:04.500 --> 00:54:12.840
+Nick Bowman: Very interesting and kind of a very wide problem to solve is is actually derived from that conditional education class. So actually thinking about
+
+367
+00:54:13.890 --> 00:54:20.370
+Nick Bowman: Well, we may have accelerated towards this timeline unknowingly with with this, with this pandemic but but actually just thinking about
+
+368
+00:54:21.150 --> 00:54:27.810
+Nick Bowman: You know, how can you make high quality, you know, feedback based education like available in a very wide scale.
+
+369
+00:54:28.320 --> 00:54:45.930
+Nick Bowman: And and and yeah so so things like like you know automated tools for grading automated tools for giving feedback ways to sort of make the online education experience engaging because online education, you know, probably even now has enabled, you know,
+
+370
+00:54:47.160 --> 00:54:49.260
+Nick Bowman: Many more people to
+
+371
+00:54:50.310 --> 00:55:01.020
+Nick Bowman: Gain access to education and before, but it doesn't always it's not always successful, it doesn't always retain people. And in fact, in a lot of cases, it doesn't retain people it doesn't keep people sticking around.
+
+372
+00:55:01.380 --> 00:55:05.400
+Nick Bowman: And it's harder to actually make you grab people and keep them engaged.
+
+373
+00:55:05.880 --> 00:55:11.670
+Nick Bowman: And and so we've started to there's a professor, a couple of professors here at Stanford that through research on things like
+
+374
+00:55:11.970 --> 00:55:20.940
+Nick Bowman: You know, how can you customize the learning experience for someone without having to have another human involved so I can actually use Cs and machine learning and AI and tools like that.
+
+375
+00:55:21.180 --> 00:55:32.460
+Nick Bowman: To like look at someone's code and give them feedback like actual like good constructive feedback. The same way your section leader might without having a human in the loop right without having the need to scale the human featuring resources to actually do that.
+
+376
+00:55:33.240 --> 00:55:36.270
+Nick Bowman: So there's a lot of work being being done another area, but actually think just
+
+377
+00:55:37.920 --> 00:55:46.920
+Nick Bowman: Just being able to to make that educational experience like good and widespread is is one of the sort of interesting columns and people are working so
+
+378
+00:55:48.120 --> 00:55:57.540
+kylie jue: Yeah, I would add to that, a lot of advances in genomics and medicine have also been accelerated by technology, which has been I took a course.
+
+379
+00:56:00.120 --> 00:56:04.410
+kylie jue: That talked about how you can apply computational technologies to things like genomic sequencing.
+
+380
+00:56:04.740 --> 00:56:10.860
+kylie jue: And a lot of the companies like 23 and me or I don't, I don't know what some of them, all of them. I was like, help you understand your ancestry.
+
+381
+00:56:11.100 --> 00:56:21.090
+kylie jue: All enabled through technology. Right. And the fact that now that we have such powerful computers and computing algorithms, we can actually like, do these like really
+
+382
+00:56:21.690 --> 00:56:35.700
+kylie jue: Intensive computationally intensive genomic sequencing or comparisons that were not previously possible. And I think like the advances in medicine and understanding similarities between organisms and viruses and genes.
+
+383
+00:56:37.080 --> 00:56:50.280
+kylie jue: Is made possible through technology. And I think there's also a lot of like machine learning done for things like recognizing cancer cells in visual images and things like that. So a lot of really neat applications in medicine as well.
+
+384
+00:56:53.460 --> 00:56:57.420
+kylie jue: But that is just touching the tip of the iceberg. There's so much more. Yeah.
+
+385
+00:57:03.810 --> 00:57:06.060
+Nick Bowman: Yeah. When did you have a specific oh
+
+386
+00:57:07.260 --> 00:57:15.870
+Nick Bowman: Did you have a specific area or like other can I can think of things and other education aspect was the first one we can learn, but if you had like a specific area that you
+
+387
+00:57:28.770 --> 00:57:32.520
+Nick Bowman: Yeah, so, so you can was asking if there was sort of other CS related classes.
+
+388
+00:57:33.510 --> 00:57:39.660
+Nick Bowman: For people in other soundtracks, and specifically for things like environmental engineering that require sort of very large data analysis.
+
+389
+00:57:40.200 --> 00:57:55.980
+Nick Bowman: And for things like that. There certainly are there. There's a lot of sort of data analysis and and classes that will give you tools for working with with really big data and data sets and to the come to the top of my mind or CS 145 and see us to 46
+
+390
+00:57:57.210 --> 00:58:09.690
+Nick Bowman: Those numbers much fat and Cs 145 is a class on databases. So it's kind of the first class where you learn about systems that are designed to store and analyze very large
+
+391
+00:58:11.430 --> 00:58:12.450
+Nick Bowman: Quantity the beta
+
+392
+00:58:13.980 --> 00:58:28.530
+Nick Bowman: Six is a lot more specific about particular algorithms particular technologies that you can use to do analysis also at to do analysis on very, very large data sets. I think I think actually 6046 is called mining massive data sets and very very cool class.
+
+393
+00:58:30.240 --> 00:58:38.460
+Nick Bowman: And so those are two classes like even thinking like, okay, I'm in a field or I need to analyze giant amounts of data and sort of make sense of them. I think those are those are
+
+394
+00:58:43.650 --> 00:58:45.450
+kylie jue: Applying to a double major. Are you
+
+395
+00:58:46.620 --> 00:58:47.400
+kylie jue: At Stanford.
+
+396
+00:58:49.140 --> 00:58:49.770
+kylie jue: Are you
+
+397
+00:58:52.230 --> 00:59:01.860
+kylie jue: High School. Okay. Yeah. I mean, it's so hard to say because it's really dependent on where you end up going how feasible, it is to do something like a double major. I like
+
+398
+00:59:02.220 --> 00:59:05.910
+kylie jue: To be completely honest. I chose my majors at Stanford, largely because of the quality of
+
+399
+00:59:06.210 --> 00:59:14.310
+kylie jue: Instruction in both of the departments that I chose. And so again, it's really hard to say if I'm, if we're not familiar with the actual institution because I think like so much of
+
+400
+00:59:14.940 --> 00:59:23.370
+kylie jue: Like the quality of the courses really matters. And what I mean obviously, of course, the experience you get in terms of going into like a potential career, but especially with something between like
+
+401
+00:59:24.000 --> 00:59:33.630
+kylie jue: Like different engineering majors applied physics, computer science, if you have the ability to like still take those classes but major in something else. Um, it's, it's hard to say like without knowing exactly, yeah.
+
+402
+00:59:40.710 --> 00:59:44.250
+kylie jue: Yeah, feel free to unmute yourselves if you have other questions popcorn.
+
+403
+00:59:51.900 --> 00:59:55.470
+kylie jue: What pets do you have, and can we please see them. Sure. Okay. I back
+
+404
+00:59:57.180 --> 00:59:58.650
+Trip (he/him): I get Buster is gonna be really angry.
+
+405
+01:00:24.900 --> 01:00:27.540
+Nick Bowman: Guys have met my cat before but
+
+406
+01:00:30.420 --> 01:00:32.760
+Nick Bowman: Now twice as large as when we got here.
+
+407
+01:00:54.870 --> 01:00:57.360
+Nick Bowman: How's my man Buster DO IS HE IS HE recovering well
+
+408
+01:00:58.170 --> 01:00:59.760
+Trip (he/him): It's okay. Yeah.
+
+409
+01:00:59.790 --> 01:01:03.390
+Trip (he/him): He is. He's just napping. So it's a little bit confused.
+
+410
+01:01:06.210 --> 01:01:06.570
+Nick Bowman: Yeah.
+
+411
+01:01:07.320 --> 01:01:08.610
+Nick Bowman: He wants to see people but
+
+412
+01:01:09.150 --> 01:01:10.350
+kylie jue: It's half asleep so
+
+413
+01:01:11.940 --> 01:01:13.140
+Nick Bowman: All of our pets are definitely
+
+414
+01:01:13.440 --> 01:01:15.060
+Trip (he/him): The bring my computer down a little bit.
+
+415
+01:01:15.600 --> 01:01:16.740
+Nick Bowman: Yeah, I know. I had to
+
+416
+01:01:19.410 --> 01:01:19.740
+Nick Bowman: Know,
+
+417
+01:01:20.190 --> 01:01:20.790
+Nick Bowman: Kind of mustard.
+
+418
+01:01:22.260 --> 01:01:23.880
+Nick Bowman: mustard on Instagram page.
+
+419
+01:01:23.940 --> 01:01:25.470
+Trip (he/him): You gotta notice
+
+420
+01:01:25.950 --> 01:01:27.420
+Trip (he/him): Best throughout the United States.
+
+421
+01:01:29.820 --> 01:01:30.360
+Trip (he/him): So,
+
+422
+01:01:31.800 --> 01:01:32.460
+kylie jue: It was asleep.
+
+423
+01:01:38.190 --> 01:01:39.240
+kylie jue: You're welcome to bring your pet.
+
+424
+01:01:39.630 --> 01:01:47.880
+kylie jue: Calls to. We don't, we're not opposed to additional sorry friends. I also have a fish, but I thought that would be less exciting to bring into the call. So
+
+425
+01:01:48.390 --> 01:01:49.380
+Nick Bowman: This is your first solo
+
+426
+01:01:49.800 --> 01:01:50.460
+kylie jue: Yes, we fished
+
+427
+01:01:51.300 --> 01:01:54.240
+Nick Bowman: Out shocking. I guess there's no other fish around love to eat it.
+
+428
+01:01:55.050 --> 01:01:56.790
+Nick Bowman: The single thing.
+
+429
+01:01:58.860 --> 01:02:09.630
+Trip (he/him): I had a section, while I was eating one day, like a sandwich and Buster push this way into the door. And so I stopped section to show them. I was gonna feed Buster that they didn't get a
+
+430
+01:02:11.160 --> 01:02:11.700
+kylie jue: Sandwich.
+
+431
+01:02:11.850 --> 01:02:12.210
+Yeah.
+
+432
+01:02:14.040 --> 01:02:16.170
+Nick Bowman: Yeah. Boy, boy gets what he wants.
+
+433
+01:02:16.230 --> 01:02:17.820
+Trip (he/him): Oh yeah, but she gets whatever he wants.
+
+434
+01:02:21.180 --> 01:02:23.940
+kylie jue: Either other questions besides of our pets.
+
+435
+01:02:28.410 --> 01:02:33.000
+Trip (he/him): Someone asked a question about music. Yeah, yeah. So as a
+
+436
+01:02:34.170 --> 01:02:40.620
+Trip (he/him): When I came in. Well, when I was a sophomore like over the summer into my sophomore year, I was like, you know, I'm going to major in CS music I'm going to try it.
+
+437
+01:02:41.460 --> 01:02:53.130
+Trip (he/him): Sounds pretty fun. I then decided to take CS one to seven and section lead and then to music classes to start the music or if it was all I ran to a brick wall with Windows seven. I was just not ready for it.
+
+438
+01:02:55.080 --> 01:03:03.030
+Trip (he/him): And so that kind of killed my dreams of doing that. The good news is, they're actually kind of back there actually changing the music major to make it a lot more flexible.
+
+439
+01:03:04.200 --> 01:03:12.180
+Trip (he/him): Which I believe that that might be stopping because of the recent code issues, but within like a year or so I believe they're going to completely redefine the music major
+
+440
+01:03:13.020 --> 01:03:23.400
+Trip (he/him): To make it very flexible because a lot of people are actually who take music major are interested in doing a double. And I actually know a lot of people who are music CS double majors and I have a music minor
+
+441
+01:03:24.330 --> 01:03:29.100
+Trip (he/him): So I think it's definitely doable, especially if you plan early. My only recommendation is that
+
+442
+01:03:30.360 --> 01:03:33.000
+Trip (he/him): Don't feel like you have to a
+
+443
+01:03:34.170 --> 01:03:42.450
+Trip (he/him): Front end everything like definitely plan everything out instead of just like Oh, I'm just gonna take as much as I can right now that's that's the biggest piece of advice I can give
+
+444
+01:03:44.340 --> 01:03:58.650
+kylie jue: Yeah, I can talk a little bit about and I'm seeing other questions in there. So take too long. Here I was really, I thought I was gonna come a journal. I was a drunk major in English and the majority of my time as an undergrad was spent at the Stanford daily, which is the student newspaper
+
+445
+01:03:59.820 --> 01:04:08.400
+kylie jue: And I'm honestly, it wasn't until I started my master's that I was like, maybe I'll do education in CS and I think a lot of large part of it for me was
+
+446
+01:04:09.030 --> 01:04:17.880
+kylie jue: I liked Cs and I liked journalism independently and then I wasn't super interested in the ways that CS was being applied in journalism.
+
+447
+01:04:18.450 --> 01:04:36.960
+kylie jue: In terms of data visualization and like news applications. Um, but yeah, I guess I never officially ruled journalism off the table, but um yeah and then teaching was something that was sort of easy to incorporate into any area, both on the journalism side and on the SEO side I'm
+
+448
+01:04:38.940 --> 01:04:39.630
+Just sleeping.
+
+449
+01:04:44.520 --> 01:04:53.700
+Nick Bowman: To answer the question. Yeah, there are, there's a sequence of problems with do with cryptography and security at Stanford and they're called CS 155 and 65
+
+450
+01:04:54.180 --> 01:05:01.770
+Nick Bowman: And actually trip and I took the one back together last quarter or in the spring and but they're, they're very cool. They're very well thought
+
+451
+01:05:02.640 --> 01:05:06.120
+Nick Bowman: I would definitely recommend them. And the professor, the teachers and this
+
+452
+01:05:06.900 --> 01:05:14.880
+Nick Bowman: Is very, very cool. He, he, his, his redeeming characteristic is that he really like he loves cryptography to the point where he calls it in cute.
+
+453
+01:05:15.210 --> 01:05:24.390
+Nick Bowman: Like, like, he'll just like, Hey, like right up like this like cryptography format. I could explain this algorithm. And then just like stop in class and who like mountains, like this is so cute guy, his
+
+454
+01:05:25.710 --> 01:05:26.790
+Nick Bowman: He love
+
+455
+01:05:28.110 --> 01:05:28.740
+Nick Bowman: Um,
+
+456
+01:05:30.090 --> 01:05:39.120
+Nick Bowman: Yeah, so that that is I would definitely recommend those. There's also a class on on crypto currencies yesterday 51 which probably you're taking the phone.
+
+457
+01:05:41.550 --> 01:05:43.320
+kylie jue: There was another question.
+
+458
+01:05:44.400 --> 01:05:46.320
+kylie jue: See any
+
+459
+01:05:49.740 --> 01:05:52.650
+kylie jue: Any embarrassing or funny moments you experienced at Stanford.
+
+460
+01:05:54.360 --> 01:05:54.810
+kylie jue: Haha
+
+461
+01:05:55.110 --> 01:05:55.680
+Too many
+
+462
+01:06:00.090 --> 01:06:01.500
+Nick Bowman: Things for us one day.
+
+463
+01:06:02.850 --> 01:06:08.790
+kylie jue: There was, I can. So I had one. I remember when I first came to Stanford, okay, because she
+
+464
+01:06:12.090 --> 01:06:13.140
+Trip (he/him): Literally sleeping in my lap.
+
+465
+01:06:13.140 --> 01:06:13.500
+Trip (he/him): Right now.
+
+466
+01:06:14.760 --> 01:06:15.900
+Trip (he/him): Not very comfortable, though.
+
+467
+01:06:18.630 --> 01:06:23.430
+kylie jue: I remember my freshman year. This was like before I knew anyone I was taking a language placement test.
+
+468
+01:06:23.880 --> 01:06:31.050
+kylie jue: And I went to like I was taking her like Chinese language placement test and I went to the building and there are other like new freshmen who are also taking the test.
+
+469
+01:06:31.470 --> 01:06:37.590
+kylie jue: And I met someone who have found out was going to be living in the same dorm is me and we're talking about, like, oh, other interests you have right
+
+470
+01:06:38.490 --> 01:06:52.710
+kylie jue: And she was like, Yeah, I like to swim like I'm on. I'm going to be on like a club swimming team or just I really like swimming. And I was like, oh, that's really cool. And then later I found out she was an Olympic swimmer, who had gotten bronze.
+
+471
+01:06:54.090 --> 01:07:01.140
+kylie jue: Living in the same drive and I was just casually like yeah you know I like I like have hobbies to cool that will make fun of your hobbies.
+
+472
+01:07:02.340 --> 01:07:02.580
+Yeah.
+
+473
+01:07:05.730 --> 01:07:07.980
+kylie jue: She's great though, and she was not offended.
+
+474
+01:07:09.960 --> 01:07:14.490
+kylie jue: We are tangential for not super close now but yeah just great.
+
+475
+01:07:15.960 --> 01:07:16.230
+Nick Bowman: Yeah.
+
+476
+01:07:19.920 --> 01:07:28.740
+Nick Bowman: If, if we had had a physical layer this quarter. Some of you might have been in there with with Kayla directly, but we only have virtual so you guys were virtually on that.
+
+477
+01:07:31.140 --> 01:07:31.980
+Nick Bowman: Picture thing you want to
+
+478
+01:07:37.320 --> 01:07:41.460
+kylie jue: Last question there is, why did you choose Stanford, um,
+
+479
+01:07:42.240 --> 01:07:45.630
+Nick Bowman: Cuz it was far enough away from home, but still close enough.
+
+480
+01:07:49.980 --> 01:08:00.630
+kylie jue: Me. It was a I was already interested in sort of like the engineering slash journalism side and I knew that Stanford was sort of good for both both like humanities and
+
+481
+01:08:02.190 --> 01:08:10.500
+kylie jue: Engineering and so that's why I did it as opposed to just like more stem focused or a humanities college of liberal arts college
+
+482
+01:08:12.810 --> 01:08:13.380
+kylie jue: Of liberal arts
+
+483
+01:08:14.430 --> 01:08:14.700
+Think
+
+484
+01:08:25.380 --> 01:08:31.890
+Nick Bowman: It was nice because it was far away from home that I felt like I was in a different place. But it was also close enough that I could go on.
+
+485
+01:08:33.210 --> 01:08:33.780
+Nick Bowman: And
+
+486
+01:08:35.520 --> 01:08:50.130
+Nick Bowman: Know that I chose it for many practical reasons besides the fact that I knew I wanted to to computer science, and it had cool computers and stuff. I'm not sure it's very sunny. I don't know when I visited here that people were like happy.
+
+487
+01:08:54.480 --> 01:08:55.140
+kylie jue: Important
+
+488
+01:08:56.580 --> 01:08:59.310
+kylie jue: An important characteristic, though, happy people.
+
+489
+01:09:01.560 --> 01:09:02.730
+Trip (he/him): Yeah, I
+
+490
+01:09:04.500 --> 01:09:14.580
+Trip (he/him): I think I wanted to study English and maybe computer science that like because I didn't fail the AP Computer Science exam until like my senior year. So I didn't find out that I failed it until like
+
+491
+01:09:15.510 --> 01:09:26.790
+Trip (he/him): Like right like like until after I had already gotten into Stanford, so like before I was like yeah English and computer science, like this. These are the things I want to do. So I was looking at colleges. I was like San Fran seems like the best place to do both.
+
+492
+01:09:28.950 --> 01:09:37.170
+Trip (he/him): And yeah, my sister, as you might have gleaned from what Nick was saying. My sister was two years older than me. She also went there. So I thought I was the path of least resistance.
+
+493
+01:09:38.430 --> 01:09:41.250
+Trip (he/him): And yeah, it was, I think, was a good decision.
+
+494
+01:09:46.140 --> 01:09:55.140
+Nick Bowman: Yeah, it really was quite funny how long I had heard about trip and knew about him and heard stories about him and how long it actually took me to meet you.
+
+495
+01:09:56.130 --> 01:10:02.400
+Trip (he/him): Yeah, I know that. Yeah. Same thing with Nick de my sister always tell you next woman and I really just
+
+496
+01:10:02.400 --> 01:10:04.260
+Trip (he/him): didn't meet you for the longest time know
+
+497
+01:10:13.410 --> 01:10:14.700
+kylie jue: Any other questions.
+
+498
+01:10:19.680 --> 01:10:25.560
+kylie jue: Preparing to take CS 123 and seven in the fall. Any recommendations on preparing to take some
+
+499
+01:10:27.000 --> 01:10:30.450
+kylie jue: It'll be a lot in terms of workload. So I guess.
+
+500
+01:10:31.590 --> 01:10:36.870
+kylie jue: Rather than preparing just making sure you have the room in your schedule to really put time into both
+
+501
+01:10:38.370 --> 01:10:40.140
+kylie jue: And then the
+
+502
+01:10:42.180 --> 01:10:49.800
+kylie jue: Me. I mean, I think it's nice that one's more of a problem that class and one's more of an implementation class. At least that's how I liked to balance my classes when I took them.
+
+503
+01:10:50.250 --> 01:10:59.670
+kylie jue: In terms of preparing to take from I think for one or seven. There's an associated book and you can read a lot of the existing materials online. And so it's definitely
+
+504
+01:11:00.180 --> 01:11:15.900
+kylie jue: Not a bad idea to maybe get a head start in reading the book that they use or like looking at the materials that's already there online because the assignments change relatively little from quarter to quarter for 107 I'm not as I'm not sure with one or three
+
+505
+01:11:17.880 --> 01:11:34.050
+kylie jue: And then for one on three. Um, I think one of the nice things are not nice thing. One of the things to be better. Nice to be familiar with going into one of three is sort of formal proof. So if you've ever done formal proofs, or like did them way back when you took like high school geometry.
+
+506
+01:11:35.160 --> 01:11:38.430
+kylie jue: Be good to remind like yourself some of the terminology, even
+
+507
+01:11:39.450 --> 01:11:43.890
+kylie jue: Even if it's not like in depth because you will have to do a lot of form of proofs in one of three.
+
+508
+01:11:49.020 --> 01:12:01.800
+haoming li: What will the schedule and flow three or wall seven like also very tight as our while 60 like for lectures a week and one section like that.
+
+509
+01:12:01.950 --> 01:12:17.160
+kylie jue: So that is a uniquely summer schedule the forest for lectures a week actually during the school year, because it's a 10 week quarter instead of an eight week quarter lectures usually are Monday, Wednesday, Friday or longer lectures on Tuesday, Thursday, depending on the class.
+
+510
+01:12:18.870 --> 01:12:27.390
+kylie jue: So it's still like dance like the show a lot, you get through in 10 weeks, but it's not. It's not like literally every day, you're learning something new. Yeah.
+
+511
+01:12:30.120 --> 01:12:34.620
+haoming li: Yeah, it's like normal colon and
+
+512
+01:12:39.780 --> 01:12:46.440
+kylie jue: Kyle asked how accommodating Stanford for exploring interest if you don't know what you want to major in very, I think especially compared to other
+
+513
+01:12:46.770 --> 01:12:55.530
+kylie jue: Universities and colleges that I've heard about. You don't have to declare major till the end of your sophomore year, really, they don't start pestering to you until like partway through junior year
+
+514
+01:12:57.060 --> 01:13:00.840
+kylie jue: So I've had friends who like switch majors like five or six times.
+
+515
+01:13:01.080 --> 01:13:02.280
+kylie jue: During the course of their time at Stanford.
+
+516
+01:13:02.280 --> 01:13:05.130
+kylie jue: Because even after you declare sophomore year, you can still switch it after that.
+
+517
+01:13:06.330 --> 01:13:18.270
+kylie jue: So very accommodating. I think what mostly the limiting factors is like the stress that will cause on you in terms of what classes like the required classes that you have to take and switching that up like partway through your Stanford career.
+
+518
+01:13:18.810 --> 01:13:21.780
+kylie jue: But in terms of, like, are they flexible like very
+
+519
+01:13:36.210 --> 01:13:40.320
+kylie jue: Does anyone know this out to Nick road trip you notice, off the top your head. Put the 107 book is
+
+520
+01:13:41.070 --> 01:13:43.860
+Trip (he/him): Oh, it's a book, you don't really need
+
+521
+01:13:44.490 --> 01:13:49.680
+Trip (he/him): Really yeah like the only reason why you need it is to get the answer to keep alligator and the back into
+
+522
+01:13:51.450 --> 01:13:56.790
+Nick Bowman: The one thing I'll say is the book as much. You can use election material.
+
+523
+01:13:57.270 --> 01:13:58.260
+kylie jue: Yeah, I
+
+524
+01:13:58.620 --> 01:14:00.360
+Nick Bowman: Just go to the website and everything.
+
+525
+01:14:00.960 --> 01:14:06.210
+Trip (he/him): Yeah, I got the book for Windows seven, and it did not match at all the curriculum. It was like
+
+526
+01:14:07.080 --> 01:14:07.380
+Nick Bowman: Seven.
+
+527
+01:14:07.620 --> 01:14:12.480
+Trip (he/him): And it even said like designed for Stanford CS one of seven. And it was just like, it was like
+
+528
+01:14:12.810 --> 01:14:13.500
+Yeah.
+
+529
+01:14:15.240 --> 01:14:17.370
+Nick Bowman: Julie, the class like to use.
+
+530
+01:14:17.880 --> 01:14:19.710
+kylie jue: Because there wasn't much more similar when I took it.
+
+531
+01:14:25.230 --> 01:14:26.670
+Trip (he/him): Off the lecture slides in the labs.
+
+532
+01:14:28.980 --> 01:14:29.730
+christopher cooper: Cool, thanks.
+
+533
+01:14:31.140 --> 01:14:31.380
+Nick Bowman: Well,
+
+534
+01:14:32.160 --> 01:14:44.670
+Trip (he/him): Just get a great piece of partner for one or three. That way you'll learn a lot and do well with minimal work because it's one of the three is a lot of work. If you don't have a good partner. It's just a lot of thinking and a lot of productivity.
+
+535
+01:14:50.760 --> 01:14:53.880
+kylie jue: How would your life be if you didn't get into Stanford, to be honest.
+
+536
+01:14:55.860 --> 01:14:56.880
+kylie jue: I don't think that different
+
+537
+01:14:58.080 --> 01:14:59.040
+kylie jue: I don't know, I think.
+
+538
+01:14:59.310 --> 01:15:10.980
+kylie jue: Like the friends that I had from high school like basically for them for the vast majority of people like regardless of where they went. If it was like a top choice or not, like, Did totally fine.
+
+539
+01:15:12.120 --> 01:15:17.130
+kylie jue: Like and really enjoyed where they went. As long as you fat like because every school has a lot of the same
+
+540
+01:15:17.310 --> 01:15:28.590
+kylie jue: Like if you basically if you find a place that has what you want to study, regardless of whether or not it was like your top choice. If you find your people and you find like the communities that helped make you happy. Like, I think that's a large part of
+
+541
+01:15:29.730 --> 01:15:41.850
+kylie jue: Having a good college experience. Um, and I think maybe I wouldn't have maybe I would have gone more of the journalism route and less of the engineering route, just because I wouldn't have had like the section leading experience and I might not have gone
+
+542
+01:15:42.240 --> 01:15:50.460
+kylie jue: Like the CSI route because I wouldn't have gotten to take like education classes at Stanford Graduate School of Education. So things like that may have changed my path, but like
+
+543
+01:15:51.750 --> 01:15:55.710
+kylie jue: Those also weren't things I like predicted going to Stanford. Anyway, yeah.
+
+544
+01:16:14.130 --> 01:16:18.450
+kylie jue: How difficult is it to get involved in the teaching process or is it mandatory like
+
+545
+01:16:18.540 --> 01:16:20.190
+kylie jue: Section meeting or lecturing in the summer.
+
+546
+01:16:20.730 --> 01:16:22.410
+Nick Bowman: Make sure you over the summer. You just got asked
+
+547
+01:16:25.320 --> 01:16:38.070
+kylie jue: So lecturing, they usually will reserve for Masters or PhD students and it is actually a rather informal process of. Have you taken the class and then like what teaching qualifications, you bring
+
+548
+01:16:39.960 --> 01:16:49.590
+kylie jue: And talking to the department about it for sexual eating. There's a more formal process. And that's often a good actually sexual eating is like a great way. If you want to end up teaching courses as a grad student
+
+549
+01:16:49.830 --> 01:16:59.070
+kylie jue: As an undergrad to just like get teaching experience and get familiar with, like, meet lectures and the department who can help you like become a good teacher. Um,
+
+550
+01:16:59.880 --> 01:17:05.790
+kylie jue: And so at Stanford, at least section leading there's like a huge there's a there's a pipeline for getting in, in terms of
+
+551
+01:17:06.030 --> 01:17:14.490
+kylie jue: Like you have to complete a teaching interview and a debugging interview, like you're helping a student in layer and they're sort of in a written application. So there's this three step process.
+
+552
+01:17:14.910 --> 01:17:20.040
+kylie jue: That you can start anytime after you've taken 160 so some people do it while they're taking 160
+
+553
+01:17:21.150 --> 01:17:29.430
+kylie jue: I did it after. Um, but yeah. And then once you're in that community. You can sort of sexually for any of the introductory CS 106 classes. So one of six A.
+
+554
+01:17:31.470 --> 01:17:36.090
+kylie jue: Or x in the case of during the school year, which is basically an accelerated version of be
+
+555
+01:17:37.380 --> 01:17:39.660
+kylie jue: It's not mandatory, though, but yeah.
+
+556
+01:17:40.560 --> 01:17:44.010
+Trip (he/him): Yeah, I did it during one of six be and
+
+557
+01:17:45.150 --> 01:17:51.690
+Trip (he/him): It's great if you're really excited. So I, I actually don't think I'd be a computer science major. If I didn't do the sexual eating program.
+
+558
+01:17:52.080 --> 01:17:59.430
+Trip (he/him): How often do want to say, I was like, yeah, it's, it's cool, but like, it was the second leading thing. I was like super cool. Is this like you mean undergrad and teach people this is amazing.
+
+559
+01:18:00.540 --> 01:18:06.450
+Trip (he/him): And so I didn't want to be apply while being one of six people kind of problem there is that
+
+560
+01:18:06.840 --> 01:18:19.260
+Trip (he/him): You're applying kind of in the middle like week 5456 ish and on the application or like there are like during the application process, they'll ask you about things that either you're learning about or sometimes things you haven't even seen yet.
+
+561
+01:18:19.800 --> 01:18:26.160
+Trip (he/him): So I'm I remember distinctly. I'm an application there being a question about debugging like some pointers and stuff. And my answer was, I haven't seen this yet. I'm sorry.
+
+562
+01:18:26.820 --> 01:18:33.870
+Trip (he/him): And then the debugging interview. I was like their pointers and I had learned about them as, like, I see that there's a star here.
+
+563
+01:18:34.620 --> 01:18:43.860
+Trip (he/him): That looks wrong. So I just got rid of the star is a bunch of problems. That was my debugging interview. So what it is actually nice to have.
+
+564
+01:18:44.340 --> 01:18:53.130
+Trip (he/him): some distance from the material so that you can focus less on worrying about, like, what is going on and more about how can I relate this most effectively to other people.
+
+565
+01:19:06.270 --> 01:19:13.950
+kylie jue: Opportunities like sexual leading so sexual leading is something that is pretty old. The question in the chat is how do you find out about these opportunities, would you just hear about them.
+
+566
+01:19:15.390 --> 01:19:23.490
+kylie jue: It's actually getting is pretty broadly advertise for in the introductory classes so like the people who do the hiring will actually come into the classes and give a presentation about it.
+
+567
+01:19:25.440 --> 01:19:30.810
+kylie jue: Or like through email lists, I heard about it through some friends so it's it's
+
+568
+01:19:31.230 --> 01:19:41.970
+kylie jue: I mean, there, there are sort of, and I think this is trip. Many colleges and universities, there are sort of endless opportunities or things you can do. And it's sort of like sifting through it all, it's less of, like,
+
+569
+01:19:42.450 --> 01:19:48.720
+kylie jue: How do I find it because there aren't any but more of like how do I filter and figure out what are the things I actually do want to do
+
+570
+01:19:49.950 --> 01:19:56.160
+kylie jue: A good process for that, but there will, you'll see that there's lots of lots of ways to gather that information when you yeah
+
+571
+01:19:59.550 --> 01:20:02.310
+Nick Bowman: Yeah, I think. I mean, realistically, well,
+
+572
+01:20:04.170 --> 01:20:06.840
+Nick Bowman: Lord knows what it is, but in
+
+573
+01:20:07.140 --> 01:20:09.210
+Nick Bowman: In the past, when people lived in dorms.
+
+574
+01:20:09.390 --> 01:20:13.560
+Nick Bowman: Years later on so many different people living so many different things and you're just like heard about stuff.
+
+575
+01:20:14.790 --> 01:20:19.080
+Nick Bowman: Like the yeah just like yeah basically back in mind.
+
+576
+01:20:21.510 --> 01:20:32.790
+Nick Bowman: Yeah, I mean, honestly I think most of the interesting things I found out about at Stanford, or we're just like from moving around people. And this doesn't even mean like your close friends like you just, you know, beating with people and you'll just hear about like stuff.
+
+577
+01:20:34.020 --> 01:20:38.280
+Nick Bowman: And I think I've certainly heard about sexual healing from just like other people that I deal with it.
+
+578
+01:20:54.420 --> 01:20:55.080
+Alright.
+
+579
+01:20:56.790 --> 01:21:00.720
+kylie jue: Well, thank you all for sticking around. We also had a great quarter with all of you.
+
+580
+01:21:02.310 --> 01:21:05.370
+kylie jue: Making quarantine a little easier. Um,
+
+581
+01:21:06.810 --> 01:21:10.740
+kylie jue: So yeah, if no other questions we will go ahead and log off.
+

@@ -1,0 +1,2302 @@
+WEBVTT
+
+1
+00:00:04.500 --> 00:00:05.580
+Nick Bowman: Everyone and
+
+2
+00:00:07.560 --> 00:00:16.770
+Nick Bowman: Welcome to today's lecture. And it's going to be this is actually one of my favorite topics and say it's once a year. So it should be to be a playful nitrogen cycle all about
+
+3
+00:00:17.130 --> 00:00:25.680
+Nick Bowman: computer memory. And then this idea of pointers, which we got a little bit of exposure to already, but we can I can I kind of jumped a lot you can do today.
+
+4
+00:00:26.310 --> 00:00:36.480
+Nick Bowman: And so today's today's question is completely unrelated to the topic, but a little bit of fun, which is just What piece of advice or pointer, would you give to someone that's going to take the class that feature about how to be most
+
+5
+00:00:36.480 --> 00:00:37.020
+Successful
+
+6
+00:00:38.700 --> 00:00:42.840
+Nick Bowman: To go ahead and start putting the answers to lot in the tough thing and get started.
+
+7
+00:00:45.330 --> 00:00:45.720
+Nick Bowman: So,
+
+8
+00:00:46.140 --> 00:00:49.530
+Nick Bowman: Today we're going to stick around the area of implementation.
+
+9
+00:00:49.680 --> 00:00:55.290
+Nick Bowman: And I'm specifically. Now we're going to focus on dynamic memory management. So we're not going to be talking about a race specifically as much
+
+10
+00:00:55.830 --> 00:01:04.530
+Nick Bowman: anymore. We're just going to be talking about memory on the computer and a little bit more general sort of learning for work with it and then working with directly in c++
+
+11
+00:01:05.700 --> 00:01:11.790
+Nick Bowman: And so we have two questions. Today I will spend the first part of class just talking about how your computer's memory system is organized
+
+12
+00:01:12.210 --> 00:01:17.580
+Nick Bowman: And we'll go very little bit into depth on you know how your computer actually works in the scenes.
+
+13
+00:01:18.150 --> 00:01:30.930
+Nick Bowman: And then we'll talk and most of the last half the lecture talking about how we can actually navigate and directly sort of manipulate this, remember, like I said, we started to see how to do this with the race, but there's actually more even more fine grained powerful ways to do that.
+
+14
+00:01:33.150 --> 00:01:39.090
+Nick Bowman: So we'll just start offering through the priority queue and heaps and then we'll talk about computer memory and then we'll talk about winners.
+
+15
+00:01:40.290 --> 00:01:47.880
+Nick Bowman: And so today's review and so yesterday we talked about this idea, this new data structure called a priority queue. And then this sort of new way of organizing data quality.
+
+16
+00:01:48.780 --> 00:01:55.110
+Nick Bowman: And so we talked about this idea that when we're implementing at classes we got our first exposure than coming to class on Monday.
+
+17
+00:01:56.190 --> 00:02:02.430
+Nick Bowman: And the ways in which we actually choose to organize the data inside the TT insider application.
+
+18
+00:02:02.790 --> 00:02:15.540
+Nick Bowman: And even the way we choose, even if we choose to use innovator like actually store the data the way we organize it inside of that array actually matters a lot. And so, learning about new ways to organize data can actually help us achieve
+
+19
+00:02:16.560 --> 00:02:19.620
+Nick Bowman: Kind of better performance and better sort of
+
+20
+00:02:21.240 --> 00:02:22.980
+Nick Bowman: Just features of our data structures.
+
+21
+00:02:24.000 --> 00:02:29.340
+Nick Bowman: And so we talked about this idea there is actually this is extra abstraction level that we hadn't really thought about
+
+22
+00:02:29.820 --> 00:02:40.020
+Nick Bowman: Which is between the actual like class interface for the user. And then the arrays that we use to store the raw data, we can add this extra layer of abstraction is basically how to organize the data.
+
+23
+00:02:41.280 --> 00:02:46.410
+Nick Bowman: Still out of view of the client, but sort of on top of the fundamental data source.
+
+24
+00:02:48.690 --> 00:02:53.700
+Nick Bowman: And so we talked about this idea of a priority queue. So, similar to a regular Q in the sense that
+
+25
+00:02:54.870 --> 00:02:59.190
+Nick Bowman: Objects don't have sort of implicit exact position that you can sort of index out to get to
+
+26
+00:03:00.210 --> 00:03:10.740
+Nick Bowman: But the Q actually stores its elements in order of this notion of priority. And so it makes sure that when you DQ from the queue, you're always getting sort of the most urgent priority object.
+
+27
+00:03:11.880 --> 00:03:19.560
+Nick Bowman: And and they're useful for a lot of different real world applications and you'll actually get to play with some of those applications on there.
+
+28
+00:03:21.840 --> 00:03:36.750
+Nick Bowman: But they have these operations and the most important ones right we're in Q amp D q amp D. And now, right. Thank you. In addition to adding an element also take this priority this priority is going to dictate exactly how we get elements out of the structure when we call GQ or coffee.
+
+29
+00:03:38.760 --> 00:03:48.990
+Nick Bowman: And and so then in order to actually get this behavior. We have to introduce or I should say, in order to efficiently get this behavior. We have to introduce this new data organization strategy.
+
+30
+00:03:49.680 --> 00:03:57.450
+Nick Bowman: This new data organization strategy was called by name, and it was our first exposure to this thing called a tree based structure so similar.
+
+31
+00:03:58.170 --> 00:04:06.270
+Nick Bowman: To how we had seen recursive tree diagrams. A couple weeks ago and we can now actually start organizing data itself in the tree form know talks.
+
+32
+00:04:06.720 --> 00:04:21.000
+Nick Bowman: Super extensively about trees and I'm starting next week. But this is sort of a tree like looking structure and had this interesting property called the heat property and which is that all parent nodes always had to have a higher priority than any other children.
+
+33
+00:04:22.290 --> 00:04:33.630
+Nick Bowman: And then we saw this idea there is two different extra properties that we cared about, which is that each parent had two children and except for the bottom level. And so the the tree was completely filled
+
+34
+00:04:34.230 --> 00:04:41.400
+Nick Bowman: Except for the bottom level, which was filled from. And so there was we did those examples of looking at, okay, what actually are valid.
+
+35
+00:04:43.140 --> 00:04:46.800
+Nick Bowman: And we also talked about briefly, this idea of both on Monday and the Maxi
+
+36
+00:04:47.310 --> 00:04:58.140
+Nick Bowman: We're going to mostly be working with me and keeps us class. And then, what that means is we just consider smaller numbers to be her priority. So like the number one is a higher priority and exist closer to the team and
+
+37
+00:05:01.140 --> 00:05:09.150
+Nick Bowman: Then we saw that binary shapes actually have is very interesting property that even though they look like a tree. They can be very efficiently representative using an array.
+
+38
+00:05:09.690 --> 00:05:15.420
+Nick Bowman: And so if we just traverse each of our levels from left to right and we put on the elements into an array.
+
+39
+00:05:15.720 --> 00:05:24.060
+Nick Bowman: We can actually get this really nice mathematical properties that when we have a note that index high we can really easily find both his parents and his children just by doing some simple math.
+
+40
+00:05:24.960 --> 00:05:32.850
+Nick Bowman: And so we talked about some examples of how to do that and you'll get lots of practice with actually using this array representation of keeps when you're implementing
+
+41
+00:05:35.130 --> 00:05:48.840
+Nick Bowman: Them what we saw is when there are three sort of core operations for Pete and candy queue and they actually work very nice at this data structures. So the nice thing about peak is we always know our highest priority element is at the top. So it's super easy to get that
+
+42
+00:05:50.250 --> 00:06:01.290
+Nick Bowman: We know that in queuing is sort of this two step process where we first add the new element into the very first empty slot in the the right so you can think of it as the first empty slot one from left to right on the bottom of the tree.
+
+43
+00:06:01.890 --> 00:06:09.510
+Nick Bowman: And then we do this idea of bubbling up we simply just look at the parent if the property is violated with Spotify parent and we continue doing this process up the tree.
+
+44
+00:06:10.230 --> 00:06:17.520
+Nick Bowman: And because we only do one comparison for level the tree, we get this really nice old blog and paper. So now we have en que which
+
+45
+00:06:19.380 --> 00:06:25.950
+Nick Bowman: Which is much improved as to the old and that we saw with our potential other representations data storage representations per product.
+
+46
+00:06:27.300 --> 00:06:34.260
+Nick Bowman: And then we suddenly a dq, which was this idea where. First you take the top priority element of the beginning of the tree.
+
+47
+00:06:34.740 --> 00:06:42.510
+Nick Bowman: You actually replace it with the very last element in the tree and then you do the bubble down procedure, which was very similar to bubble up but kind of going the other direction.
+
+48
+00:06:42.780 --> 00:06:48.330
+Nick Bowman: Which is you let the elements sort of fall into the right place to be the tree. I just swapping with the lower parity.
+
+49
+00:06:49.890 --> 00:07:03.480
+Nick Bowman: And this also runs an old login, which means we now have a data structure is entirely defined by a login behavior, which is really good. And so we're sort of happy about the way that we were able to sort of design the data storage or presentations and to get those people
+
+50
+00:07:05.460 --> 00:07:12.750
+Nick Bowman: And sort of sort of the summer, we saw it priority queues allows to order data by priority which is really important when it comes to certain real life problems.
+
+51
+00:07:13.680 --> 00:07:25.830
+Nick Bowman: Binary keeps a really good way of organizing data when creating priority queue because there have this sort of partially sorted nature that makes it really easy to both find the top priority element and to replace it, and if necessary.
+
+52
+00:07:27.000 --> 00:07:38.190
+Nick Bowman: And the but just in general, the key sort of the key sort of thing. And we saw there was multiple raised him from the same attraction and and even both all of those different ways layered on top of that race.
+
+53
+00:07:41.520 --> 00:07:49.350
+Nick Bowman: And so, talking about those levels of abstraction really where we're going to focus on today is what's our lowest level so that actually that fundamental c++ data storage.
+
+54
+00:07:49.800 --> 00:07:57.360
+Nick Bowman: And this is really going to be sort of the introductory skills building lecture so that we can actually think about new ways of storing data that isn't just for invading race.
+
+55
+00:07:57.750 --> 00:08:04.800
+Nick Bowman: And we're going to talk about this idea of linked lists and the data structure starting tomorrow and sort of everything we talked about today is going to allow us to actually accomplish that.
+
+56
+00:08:06.840 --> 00:08:19.230
+Nick Bowman: And so in order to do that, in order to learn more about how we can actually sort of store information on not directly in the computer in kind of new and interesting ways. We have to talk a little bit about how the computer memory system is actually for them.
+
+57
+00:08:21.270 --> 00:08:34.020
+Nick Bowman: And what that means is we're going to go even deeper. So there's even going to be another level of instruction over the next 4am and specifically the boundary that we're going to explore today this this boundary between the way that c++ allow the city fundamental data storage.
+
+58
+00:08:34.440 --> 00:08:44.670
+Nick Bowman: I mean, literally, the way that that information is stored on your computer and then by sort of thinking about how about this boundary looks like and how we can we can do communication crosses boundaries and tools and c++
+
+59
+00:08:45.330 --> 00:08:51.900
+Nick Bowman: Will really sort of learn like the core underlying concepts apply your computer is is actually organized
+
+60
+00:08:53.940 --> 00:08:59.220
+Nick Bowman: So to do that, let's actually talk about this idea of the hardware, software boundaries is kind of abstraction boundary that I just talked
+
+61
+00:09:00.960 --> 00:09:13.740
+Nick Bowman: And so this is sort of going to be your brief, brief 32nd lecture on how your computer actually works. Right. So your computer is obviously a real physical device and it's made up of lots of different parts
+
+62
+00:09:14.790 --> 00:09:25.590
+Nick Bowman: And collectively, like all of the physical components of your computer and referred to as far as the computers Park and you may have heard that term before, you may have not that that's just sort of what we refer to as we say.
+
+63
+00:09:28.800 --> 00:09:40.350
+Nick Bowman: When we write computer programs. So when we write code. And we usually refer to that as software, right, it's not really a physical entity, it's kind of, it's something we right it's it's a formalization of our thoughts and things that we want to get done.
+
+64
+00:09:41.460 --> 00:09:53.250
+Nick Bowman: But that software sort of communicate directly with the hardware by telling to do calculations or store information or things like that and and this communication between the two is what sort of allows us to do everything that we do.
+
+65
+00:09:56.700 --> 00:10:04.380
+Nick Bowman: And so the one specific part that we care about when we actually have what is computer money. It's this part of your computer called random access memory.
+
+66
+00:10:06.090 --> 00:10:09.390
+Nick Bowman: It's memory in the sense that it remembers things it's able to store data.
+
+67
+00:10:09.870 --> 00:10:21.000
+Nick Bowman: And the random access part is not super important. But the general idea is that we can access any portion of memory at any point that we want. So we can sort of the random access is all over the different parts and we're not limited
+
+68
+00:10:22.770 --> 00:10:30.570
+Nick Bowman: And so when you hear people talking about computer memory that's exactly what they're talking about. So random access memory is literally physical part of the computers on where your computer.
+
+69
+00:10:31.890 --> 00:10:41.040
+Nick Bowman: And the cool thing is that c++ actually gives us a lots of different ways to fundamentally access that that computer memory. I'm not sort of in the army and
+
+70
+00:10:44.220 --> 00:10:58.110
+Nick Bowman: The reason that this is important in is because any program that you write right relies on this, on this computer memory and sort of its foundations for data storage. We've already seen our ability to do this and to implement at classes, which was cool in its own right.
+
+71
+00:10:59.520 --> 00:11:07.920
+Nick Bowman: But being able to work with the memory in an even deeper and more fundamental sense opens up sort of even more doors of cool things we can do.
+
+72
+00:11:08.790 --> 00:11:20.130
+Nick Bowman: And I mentioned this earlier, but we're after. Today we're going to spend the next two weeks, talking about this idea of linked data structures which are really even think that as an alternative way of storing data that's not an array.
+
+73
+00:11:21.270 --> 00:11:27.330
+Nick Bowman: And it's particularly interesting because it allows you to impose structure on data that has actually scattered all over the place.
+
+74
+00:11:27.810 --> 00:11:33.600
+Nick Bowman: When we talked about a raise. I received that arrays are always contiguous they always like existed in exactly the same sort of
+
+75
+00:11:34.440 --> 00:11:43.620
+Nick Bowman: Continuous part of them. And when we talked about linked data structure that's no longer than need to be true. I'm going to have data that's stored all over the place. And yet somehow we're still going to be able to impose structure on it.
+
+76
+00:11:45.510 --> 00:11:49.590
+Nick Bowman: And so in order to be able to understand these things. We're gonna have to sort of develop these skills to work.
+
+77
+00:11:52.350 --> 00:11:57.720
+Nick Bowman: And so let's just let's just kind of theorize a little bit about how computer memory sexual organs.
+
+78
+00:11:58.560 --> 00:12:08.610
+Nick Bowman: And this is actually a picture of random access memory. And one of my favorite jokes on the internet is people always say if you want your computer to run faster just download more rain, make a computer run faster.
+
+79
+00:12:09.000 --> 00:12:17.190
+Nick Bowman: Unfortunately, isn't it doesn't work that way. Ram is actually a physical component of your computer. And so you can't can't download it. Unfortunately, but but this is this is what it looks like.
+
+80
+00:12:18.120 --> 00:12:24.960
+Nick Bowman: And. And we've seen this notion before of, like, Oh, well, we have variables. And we know that the variables are stored in memory.
+
+81
+00:12:25.440 --> 00:12:30.930
+Nick Bowman: So maybe really all RAM is just a collection of suitcases or boxes places where we can store information.
+
+82
+00:12:31.920 --> 00:12:40.500
+Nick Bowman: And and actually that's exactly how we're going to think of it, and we're really just going to think of it as this this giant pool right it's this this giant pool.
+
+83
+00:12:40.920 --> 00:12:54.120
+Nick Bowman: And and it's just got spaces or slots or boxes, however, want it, you want to think about it suitcases where we can store information right there, kind of just like little cubbyholes or we can put data store it for later use them have a computer.
+
+84
+00:12:57.030 --> 00:13:05.550
+Nick Bowman: But the question that should hopefully arise out of like looking at this diagram is this doesn't look particularly organized, just as this kind of this like random massive of space.
+
+85
+00:13:06.420 --> 00:13:20.220
+Nick Bowman: And so the question is, how do we actually like communicate with computer right we say like, you know, I started this piece of information over here. I want to get that new piece of information. So I need some sort of like specific, you know, consistent way of referencing
+
+86
+00:13:22.020 --> 00:13:29.850
+Nick Bowman: And in order to do that, and now we mentioned his terminology before. But in order to do that, we're going to need to think about this concept of a memory address
+
+87
+00:13:30.510 --> 00:13:37.860
+Nick Bowman: Which you can think about as the computers sort of associated in America location with every box or every location in memory and storage.
+
+88
+00:13:38.760 --> 00:13:48.120
+Nick Bowman: And so this memory address really acts very similarly to a physical address it tells someone or tells you, as a program where you can find your information and
+
+89
+00:13:48.960 --> 00:14:00.660
+Nick Bowman: And so let's let's explore what that what that looks like. Yeah. So this is sort of this is a line of code that we saw way back in week one. So there's to creating a new string variable. We call it is for the value cabinet.
+
+90
+00:14:01.830 --> 00:14:12.360
+Nick Bowman: And again, like from the very beginning of the class. We've been using this representation of saying okay variables are like suitcases. They hold value they have types in the house and all of that still holds true
+
+91
+00:14:13.410 --> 00:14:16.530
+Nick Bowman: But let's add this extra layer of memory address
+
+92
+00:14:17.760 --> 00:14:24.330
+Nick Bowman: And then we don't want you to think of it as almost like a baggage time. Right. So you have this baggage baggage tag attached
+
+93
+00:14:24.750 --> 00:14:29.760
+Nick Bowman: That contains the exact and so if you've never actually put a baggage tag on your own sort of suitcase.
+
+94
+00:14:30.570 --> 00:14:40.800
+Nick Bowman: You know, you write your name, your at your address, so that if it gets lost, right, like someone can send it back or they know sort of exactly where the suitcase and memory addresses acts are almost exactly the same way.
+
+95
+00:14:42.210 --> 00:14:48.990
+Nick Bowman: And but you know there's some weird things that come along with it and and so the first is that
+
+96
+00:14:49.590 --> 00:14:54.600
+Nick Bowman: You know this is kind of what's interesting about this is this a specific special numerical value.
+
+97
+00:14:54.990 --> 00:15:00.870
+Nick Bowman: And it's a unique identifier of this location of this specific variable across all of the computers metric
+
+98
+00:15:01.260 --> 00:15:15.900
+Nick Bowman: Yeah, so if I gave you this value and it's very weird looking more dissected in a second and forgiveness very weird looking value you know exactly where in the computer's memory to go because it's sort of a unique identifier across this giant pool of storage spaces.
+
+99
+00:15:17.700 --> 00:15:25.680
+Nick Bowman: And so then there's a couple of questions that you hopefully are having as you as you look at this. And the first is just like, Where the heck did it come from.
+
+100
+00:15:26.250 --> 00:15:32.190
+Nick Bowman: And I mentioned this before we talked about arrays and and but these numbers are entirely determined by the computer.
+
+101
+00:15:32.700 --> 00:15:39.750
+Nick Bowman: And so, specifically, there's a portion of your computer, called the operating system that actually manages all of these all of these addresses.
+
+102
+00:15:40.350 --> 00:15:47.250
+Nick Bowman: And it's the one that's actually responsible for generating these values. And so if you look at this value and you say, Oh, it looks completely
+
+103
+00:15:47.580 --> 00:15:56.130
+Nick Bowman: You know insignificant and not understandable. To me, the answer is kind of like, yeah, it is because you don't have any control over. It's just the computer telling you this is where your variables.
+
+104
+00:15:57.930 --> 00:16:02.010
+Nick Bowman: The second question you might have is, like, okay, Nick, you're saying that this is a number
+
+105
+00:16:03.030 --> 00:16:08.220
+Nick Bowman: It doesn't really look like a number. It's preceded by zero x, it has numbers and it has letters in it.
+
+106
+00:16:08.970 --> 00:16:19.740
+Nick Bowman: So like, why is this a number. And why can we use this as an identifier. And so let's actually talk briefly about this numerical system called hexadecimal. Hopefully, I hope you understand this is
+
+107
+00:16:23.160 --> 00:16:33.570
+Nick Bowman: Normally when we represent numbers. So I would like when I when I tell you think about a number and probably what pops into your head and some is a number in base 10 and that's sort of the normal base that we use for our members.
+
+108
+00:16:34.380 --> 00:16:42.420
+Nick Bowman: So each place value is a factor of 10 you know we have the ones place, the 10th place the hundreds place and there's 10 digits right 09, those are sort of the normal
+
+109
+00:16:45.660 --> 00:16:53.940
+Nick Bowman: In computer systems. There's a number of factors that I'm not going to talk about in detail, but that make representing numbers using based him not great.
+
+110
+00:16:54.360 --> 00:17:00.210
+Nick Bowman: And so we sometimes tend to use this representation called hexadecimal, which is based 16
+
+111
+00:17:00.900 --> 00:17:08.700
+Nick Bowman: And it's very similar to base 10 and except now it's sort of revolves around this concept of everything is powers of 16 so every place value.
+
+112
+00:17:09.390 --> 00:17:18.060
+Nick Bowman: Is a power of 16 and then because of that. You also need 16 sort of digits, but since you only have like 10 numerical did it zero to nine.
+
+113
+00:17:18.510 --> 00:17:34.890
+Nick Bowman: And we have to use this kind of clever workaround where we start using letters to actually represent on numerical values. And so we use the letters A to F stands for a place value of 10 1112 1314 and 15 and so just we can still represent every place value of a single digit
+
+114
+00:17:37.620 --> 00:17:52.110
+Nick Bowman: Prefix zero x that we see in our numbers is really just communicates that number is being expressed in hexadecimal. So if you ever see a value that starts at zero x. That's just the value telling you hey I'm expressing myself in hexadecimal. And so interpret music lesson 100 not as aggressive
+
+115
+00:17:54.240 --> 00:18:01.440
+Nick Bowman: And in the end, this is more of just a fun aside to kind of give you guys a little bit of a taste of how computers are working underneath the scenes.
+
+116
+00:18:01.860 --> 00:18:07.830
+Nick Bowman: And remember again because we don't care about the specific values themselves because the computer is the one generating these values.
+
+117
+00:18:08.130 --> 00:18:10.260
+Nick Bowman: And we don't really need to understand the decimal.
+
+118
+00:18:10.620 --> 00:18:23.370
+Nick Bowman: And this is more of just a fun aside to kind of get us thinking about, oh, there are actually other ways to represent numbers and these weird things that we see that start with zero x and have numbers and letters they are actually real. So they are sort of valuable things
+
+119
+00:18:27.180 --> 00:18:36.120
+Nick Bowman: And so kind of the summary of what we're seeing here is that when we think of how computer memory is organized and there's a couple of sort of key points of each of
+
+120
+00:18:37.170 --> 00:18:52.560
+Nick Bowman: The first is that every location in memory has an address right this is sort of a uniquely identifying sort of number that tells us this is where there's a variable is located in this is where there's value lives in memory. And so go ahead and look at if you want to go and play.
+
+121
+00:18:54.120 --> 00:19:02.280
+Nick Bowman: The computer is the one that's responsible for generating these addresses and these variable values. And so we don't have direct control over that. We just have to work with.
+
+122
+00:19:03.210 --> 00:19:16.650
+Nick Bowman: Us and given these memory values and we can we can use these sort of addresses as a communication tool to communicate with the computer and say, I want this value and I want the value of this location.
+
+123
+00:19:18.210 --> 00:19:25.410
+Nick Bowman: And so now the question that we can ask ourselves is, now that we know about memory addresses and now that we know about how these things are actually stored
+
+124
+00:19:25.890 --> 00:19:33.480
+Nick Bowman: In organized. How can we read and manipulate computer memory and probably can. Guess what the answer is. And the answer is pointers and so
+
+125
+00:19:34.170 --> 00:19:43.830
+Nick Bowman: We're going to sort of spend the rest of lecture talking about pointers and the different ways that we can lead them in a good memory by using pointers and you guys can say hi to my cat.
+
+126
+00:19:45.480 --> 00:19:47.340
+Nick Bowman: And as I let my family.
+
+127
+00:19:48.480 --> 00:19:54.450
+Nick Bowman: And so we'll stop here for announcements. And I guess up for questions, if there's anything you want to you.
+
+128
+00:20:05.370 --> 00:20:10.110
+kylie jue: Know, there were some questions about hexadecimal. But just as a note, like this is not something that you're gonna have to need to convert
+
+129
+00:20:10.320 --> 00:20:16.980
+kylie jue: For it's just sort of like a fun aside so if it's not like, oh, I don't know how to convert numbers yet totally fine if you're interested in it. You can look it up.
+
+130
+00:20:17.850 --> 00:20:25.050
+Nick Bowman: Yeah, yeah. Most of the purpose of introducing it was just to let you all know when you see these values in the debugger, because you will see them represented as hexadecimal.
+
+131
+00:20:25.050 --> 00:20:25.890
+Nick Bowman: Numbers in the debugger.
+
+132
+00:20:26.220 --> 00:20:34.500
+Nick Bowman: And just so you know what they are. Right. And mostly exclusively in this class. We're going to use hexadecimal numbers to represent addresses, I guess, like, yeah, that's a good one to me.
+
+133
+00:20:34.800 --> 00:20:41.070
+Nick Bowman: So, don't, don't worry about it yet. You won't be asked to convert or do anything like that. Um, it's just to sort of recognize what what we're good.
+
+134
+00:20:43.200 --> 00:20:48.840
+Nick Bowman: Okay cool so announcements, a really brief today. And so just remember that the assignment is do this upcoming Monday.
+
+135
+00:20:49.470 --> 00:20:54.960
+Nick Bowman: It has a pretty substantial implementation component and generally working with memory and
+
+136
+00:20:55.530 --> 00:21:04.740
+Nick Bowman: The things that you'll have to debug along the way with memory errors can be really tricky, so make sure to get started. If you haven't gotten started yet. And I'm trying to try to download it today and get started today.
+
+137
+00:21:06.960 --> 00:21:11.880
+Nick Bowman: And then I just remember start thinking about the final project start brainstorming about what you might want to do your project on
+
+138
+00:21:12.420 --> 00:21:19.410
+Nick Bowman: And if you're interested in exploring the topic that we haven't actually lectured on yet that's totally cool. And we totally recommend doing that and if
+
+139
+00:21:20.130 --> 00:21:27.540
+Nick Bowman: You if you want to go ahead and explore on your own. And so that might be like linked data structures linquist trees are things that are on our schedule, but we haven't covered yet.
+
+140
+00:21:27.990 --> 00:21:34.290
+Nick Bowman: And we just come by our office hours and we're happy to sort of give you a preview of what lecture is might look like and hope you sort of scope your problem.
+
+141
+00:21:36.120 --> 00:21:38.370
+Nick Bowman: And yep so that's it for today.
+
+142
+00:21:40.290 --> 00:21:53.460
+Nick Bowman: So jumping back kind of into the thick of things. And so this whole last sort of second component of the lecture is going to be about navigating and manipulating computer memory and c++ and looking at what tools c++ offers us
+
+143
+00:21:57.030 --> 00:22:07.830
+Nick Bowman: And so this is going to be a recap to actually last Thursday when we, when we first introduced printers, we've actually seen the notion of pointers before. And so we're gonna we're going to revisit that. And we're going to sort of rehashing go into more depth.
+
+144
+00:22:09.930 --> 00:22:14.670
+Nick Bowman: So if you remember what we talked about last Thursday we introduced pointers as basically as new data type.
+
+145
+00:22:15.990 --> 00:22:29.460
+Nick Bowman: Is this idea that they allow us to work directly with computer memory addresses and specifically you know pointers because they're dirty data type, they take up space in memory, and they store values, just like any other data type or variable.
+
+146
+00:22:30.480 --> 00:22:39.510
+Nick Bowman: But what's super important about it is, they always store a memory address like the sole purpose of pointers as a data type is they store memory addresses.
+
+147
+00:22:39.990 --> 00:22:42.900
+Nick Bowman: They tell us where in the computer to look for a certain value.
+
+148
+00:22:43.590 --> 00:22:51.510
+Nick Bowman: And I'm going to repeat this again, they're gonna be like six slides today that's going to ask you what is a pointer, a pointer is memory address or point your scores and repress
+
+149
+00:22:51.990 --> 00:23:01.620
+Nick Bowman: And so that is I'm going to keep hammering out in and and I hope it really helps to just demystify pointer, but I think pointers can be a very kind of tricky and nebulous topic.
+
+150
+00:23:02.340 --> 00:23:08.130
+Nick Bowman: But if you ever getting confused about things, a pointer just stores and memory at best. And that's kind of the core thing that we're going to build the rest of
+
+151
+00:23:10.410 --> 00:23:17.730
+Nick Bowman: The reason that they're called pointers is by storing these memory addresses you can think of them as pointing to another location on your computer.
+
+152
+00:23:18.450 --> 00:23:28.230
+Nick Bowman: And we'll see that sort of represented visually in all of our examples today. And this this this quite literally this visual representation of pointing to somewhere else is going to be really helpful in understanding
+
+153
+00:23:30.630 --> 00:23:38.940
+Nick Bowman: So again, you're going to see this slide pop up so many times today. What is a pointer. It's a memory address that's all that it is. And that's all it's going to be
+
+154
+00:23:41.670 --> 00:23:51.180
+Nick Bowman: So like I said, we've talked about pointers before you've actually worked with pointers. We've implemented pointers we've stored in the number of variables. We've worked with them a fair amount already
+
+155
+00:23:52.140 --> 00:24:04.860
+Nick Bowman: But we've worked with them only in the context of dynamically allocate arrays and we said, oh, when we use the new keyword to create a dynamic allocated array we get a pointer back and then we can use, you know, the bracketing syntax to store elements in and out of here.
+
+156
+00:24:06.570 --> 00:24:10.560
+Nick Bowman: But when there's can actually be used to do a lot more than that. And so that's what we're going to explore
+
+157
+00:24:12.510 --> 00:24:18.420
+Nick Bowman: So let's go back to our diagram from before. So this is exactly what we saw before, and we have our string variable called pet.
+
+158
+00:24:18.930 --> 00:24:31.290
+Nick Bowman: storing the value of cat and then it's at this. It's not as baggage tag telling us that the hexadecimal number representing location and memory is FCA zero V 000 right completely random number that I just made up.
+
+159
+00:24:33.840 --> 00:24:48.960
+Nick Bowman: Let's declare a pointer, right, so we've seen before that winters are sort of declared using this special type where it's a base sort of data type that. So in this case we want to point to a string. So we declare a pointer of text.
+
+160
+00:24:51.780 --> 00:25:01.470
+Nick Bowman: And what we want to send people to, again, remember what is a pointer. It's a memory address. So what do we want to store in this variable. What has to be the memory address of the variable that we want to point to
+
+161
+00:25:02.820 --> 00:25:09.780
+Nick Bowman: Note that this this address our function doesn't really exist, but we will resolve that soon enough. This is mostly just kind of a for demonstration purposes.
+
+162
+00:25:10.800 --> 00:25:16.890
+Nick Bowman: But what happens when you do this. And so let's let's look at exactly what happens in memory when we expect those lines of code.
+
+163
+00:25:17.820 --> 00:25:30.480
+Nick Bowman: And so what you see is again pet pointer is just a variable. And so it's going to be represented exactly like all the variables, we've seen before, except you're just has a new type right and it has type String asterisk or string pointer is will say,
+
+164
+00:25:31.620 --> 00:25:38.070
+Nick Bowman: The value that it stores it ends up being the memory address of the variable that we want to point to
+
+165
+00:25:39.840 --> 00:25:54.840
+Nick Bowman: And when we do this right, the critical component and the thing that you're going to see sort of pop up in all of the examples today is when we do this, we use an arrow to represent the fact that this pointer variable is pointing to some other location.
+
+166
+00:25:56.460 --> 00:25:58.710
+Nick Bowman: And so this this era notation really super important.
+
+167
+00:26:00.360 --> 00:26:08.850
+Nick Bowman: What's going to be interesting is I said earlier, we don't care about specific memory address values. Remember the computer is just generating them.
+
+168
+00:26:09.180 --> 00:26:11.940
+Nick Bowman: And giving them to us and we just kind of have to trust that they're accurate.
+
+169
+00:26:12.630 --> 00:26:23.490
+Nick Bowman: And and so for a lot of my diagrams, you'll actually see me represented like this, it might sort of be a little bit confusing because it might, you might ask this question, well, why isn't pointer storing anything
+
+170
+00:26:24.210 --> 00:26:32.550
+Nick Bowman: And again, we don't care about the specific values, the values are there and it's a helpful way to think about pointers as you're first getting introduced to them.
+
+171
+00:26:32.910 --> 00:26:40.320
+Nick Bowman: But really all we care about is this pointer point to your relationship. So the pointer is pet pointer and it's the base of the arrow.
+
+172
+00:26:40.890 --> 00:26:48.450
+Nick Bowman: And then there's this arrow saying like representing this relationship and that is pointing to this thing called the pointy or, you know, the object of this point.
+
+173
+00:26:49.650 --> 00:26:57.450
+Nick Bowman: And so a lot of times in our diagrams. We'll just represent them like this and again you don't always, you don't have to draw suitcases and you're going to diagram like boxes is sufficient.
+
+174
+00:26:58.020 --> 00:27:02.400
+Nick Bowman: But it's this this arrow relationship and that will see how that is going to be really useful and
+
+175
+00:27:05.190 --> 00:27:15.810
+Nick Bowman: And again, I'm that I'm also the same way that I'm gonna repeat appointment as the memory address. I'm also going to repeat this line, but the best and the most helpful way to learn 20 years is to draw pictures.
+
+176
+00:27:16.440 --> 00:27:22.530
+Nick Bowman: If you're trying to work with pointers and you're not drawing pictures, you're going to have a really challenging time keeping track of all in your head.
+
+177
+00:27:22.830 --> 00:27:34.620
+Nick Bowman: And some people can do it and you know it might work for you and but for most students right what we see as the best way to understand point is just to draw on these pictures and just kind of the biggest of the best point of point of advice that I can get
+
+178
+00:27:36.600 --> 00:27:41.700
+Nick Bowman: And again, what is the pointer. It's just a memory of this. It's only this is
+
+179
+00:27:42.810 --> 00:27:51.060
+kylie jue: A quick clarification. Some people are asking like, what is the type of a pointer. When you're storing a pointer in a variable like How is that represented in c++
+
+180
+00:27:51.300 --> 00:27:55.740
+kylie jue: And it's just that pointers actually like the memory addresses themselves are actually their own type
+
+181
+00:27:56.100 --> 00:28:02.340
+kylie jue: In c++ so like, it's not like the hexadecimal is being represented as a string or something else like the memory address itself as its own type
+
+182
+00:28:03.030 --> 00:28:17.430
+Nick Bowman: Yeah, exactly. And so, so what we'll talk about this notation in a second. But this string asterisk quitting clearly defines a new type. It's like the same way that string to find the type String asterisk defines this brand new type that exactly stores. These hexadecimal. Yeah.
+
+183
+00:28:17.850 --> 00:28:20.430
+kylie jue: And what gets printed out if you try to see out a pointer.
+
+184
+00:28:21.120 --> 00:28:25.860
+Nick Bowman: Yeah, if you see on a pointer, you'll see the hexadecimal value. And that's actually why I wanted to them. I wanted to point them out.
+
+185
+00:28:26.490 --> 00:28:35.790
+Nick Bowman: But today's lecture starter code actually has a lot of examples of sort of running code and actually looking at memory those values. And so if you see out a pointer, you'll see that the decimal value.
+
+186
+00:28:36.090 --> 00:28:36.270
+Yeah.
+
+187
+00:28:38.820 --> 00:28:39.060
+kylie jue: Cool.
+
+188
+00:28:39.660 --> 00:28:42.180
+Nick Bowman: Alright, so let's talk about a little bit of the syntax of working the point
+
+189
+00:28:43.800 --> 00:28:51.180
+Nick Bowman: So pointer syntax can get really tricky and really into the weeds and we're going to give you a brief sort of holistic overview of things here.
+
+190
+00:28:51.900 --> 00:28:55.830
+Nick Bowman: But if you're really interested in this material and really want to sort of become a master of working with pointers.
+
+191
+00:28:56.100 --> 00:29:06.180
+Nick Bowman: And CS one of seven is the classroom, sort of the next class in the sequence and it'll get you lots of really great practice of working directly with the partners. But for now, we're going to talk about sort of forming components.
+
+192
+00:29:08.850 --> 00:29:18.960
+Nick Bowman: The first is that when we're declaring winners of a particular type, but we define these new pointer types by adding the asterisk symbol add on to an existing type that we already have. Right.
+
+193
+00:29:19.410 --> 00:29:29.730
+Nick Bowman: So if I want to have a pointer that points to a string, my new pointer type is string stress. I want to have a pointer that points to an integer, my new my new pointer type is int int Astros
+
+194
+00:29:30.540 --> 00:29:36.330
+Nick Bowman: Same thing for car you can take any data type. And you can make a pointer out of a pointer data type out of it by just having one
+
+195
+00:29:37.170 --> 00:29:44.970
+Nick Bowman: And so when we're declaring variables that are going to be pointers. They should have these data types that are defined by adding an asterisk on to one of our basic
+
+196
+00:29:46.800 --> 00:29:58.080
+Nick Bowman: And again, like note this right string asterisk and string are two very different data types, right, there's two completely different sets of operations that you can do on them because of different data types.
+
+197
+00:29:58.560 --> 00:30:08.400
+Nick Bowman: And so the the type of the pointer is always different than the type of the pointy. So just remember that. Right, that's kind of the critical, critical difference
+
+198
+00:30:10.770 --> 00:30:19.890
+Nick Bowman: And the second thing that we can talk about is that when we're working with pointers. If we want to get the address of a variable that already exists. We can use this ampersand operator.
+
+199
+00:30:20.640 --> 00:30:27.630
+Nick Bowman: And and so for example you know in my in our previous example, we kind of call this mystical address of function.
+
+200
+00:30:28.290 --> 00:30:42.060
+Nick Bowman: Well, the person is actually exactly that it is an operator that says, hey, computer tell me the address. Tell me the memory location of this this variable. And so when we do that, we get the same memory diagram that we chose
+
+201
+00:30:43.650 --> 00:30:52.320
+Nick Bowman: One thing to note is it's the exact same symbol is using a reference parameter, but it's a completely different concept like very, very different meanings.
+
+202
+00:30:52.800 --> 00:31:07.020
+Nick Bowman: And c++ really likes to overload operators and use the same sort of character operators to be very different things. So that can be confusing, but just remember, this is not passing something by reference. It is a completely different operation.
+
+203
+00:31:08.670 --> 00:31:16.110
+Nick Bowman: The other thing you need to know is, I'm teaching you about this because it's going to show up in our lecture examples as we just try to start building our understanding of pointers.
+
+204
+00:31:16.860 --> 00:31:22.290
+Nick Bowman: But I'm going to give you this disclaimer. You should never need to use this operator in code that you write for this class.
+
+205
+00:31:22.590 --> 00:31:38.160
+Nick Bowman: And if you find yourself doing it really reconsider why you're why you're choosing to use it and you'll see why it's useful and you'll see how to use it properly. As you move on to CS 107 and but in this class will use it as an educational tool, but you should never be using encoder.
+
+206
+00:31:39.780 --> 00:31:46.770
+Nick Bowman: And if you have questions about that or if you're really thinking you to use it, come talk to us and we will convince you that for the purposes of this class, right, you will not
+
+207
+00:31:49.470 --> 00:32:03.210
+Nick Bowman: The third component of pointer syntax is that, as we've seen already actually pointers can store the values generated by the new keyword. The new keyword is a way of actually asking the computer. Hey, give me the location of a block of memory that I can use.
+
+208
+00:32:04.290 --> 00:32:17.640
+Nick Bowman: We've actually seen this before with allocating you arrays right are variable type in the way that we stored a reference to our Ray was just by taking the value between my new and storing it in a pointer and that's because the value returned by new was just a memory.
+
+209
+00:32:19.530 --> 00:32:30.570
+Nick Bowman: And so that's sort of resulted in this diagram where we had our variable elements declared on the stack. And then we had our array over on the heat. And so we had this, but when we have this point in relationship.
+
+210
+00:32:32.730 --> 00:32:46.950
+Nick Bowman: It's actually possible to do this with just single variables as well. So we can dynamically allocate space for just a single variable. So we can use the new keyword. But now, without any of the square brackets and that just says, Hey, give me space for a single integer
+
+211
+00:32:48.030 --> 00:32:52.560
+Nick Bowman: And then give me the memory location of it and I will store that memory location in my pointer variable.
+
+212
+00:32:53.460 --> 00:32:56.220
+Nick Bowman: And so what that looks like. Is it relatively similar diagram.
+
+213
+00:32:56.580 --> 00:33:06.480
+Nick Bowman: But now on the right hand side, the memory that we've actually got access to is just a single suitcase, a single box. It's not an array. It's not, it's not a ton of memory. It's just one one sort of empty space that we can store information.
+
+214
+00:33:08.460 --> 00:33:18.930
+Nick Bowman: And why this is useful will become apparent starting tomorrow. So we're going to talk about it this discussion of link data structures tomorrow and and once we start talking about these link data structures, you'll actually see white white
+
+215
+00:33:21.180 --> 00:33:28.650
+Nick Bowman: And another aside, though. So c++ has many will call them endearing quirks. What will call them features and not bugs.
+
+216
+00:33:29.580 --> 00:33:39.480
+Nick Bowman: But that there is actually two versions of the delete key word. And we've seen the delete key word followed by square bracket operators and everything that we've done so far.
+
+217
+00:33:39.900 --> 00:33:43.950
+Nick Bowman: And that's the way that we free memory that's associated with an array.
+
+218
+00:33:44.910 --> 00:33:55.350
+Nick Bowman: But there is actually a version of the delete operator that doesn't have the square brackets and that's specifically used for free memory that's just been allocated with a new keyword with no brackets. So a single
+
+219
+00:33:55.830 --> 00:34:05.640
+Nick Bowman: Entity and memory, rather than a whole array, and you have to make sure to use the proper one if you mix them up, you'll start getting really bad undefined behavior and
+
+220
+00:34:06.330 --> 00:34:11.580
+Nick Bowman: We will see an example of how to properly use the the delete operator within those square brackets tomorrow.
+
+221
+00:34:12.150 --> 00:34:21.660
+Nick Bowman: But just know that the same way. There's two versions of the new keywords. So there's new to declare a single element. And there's new to declare in the rain. There's also delete to free an array and delete to free
+
+222
+00:34:22.770 --> 00:34:26.040
+Nick Bowman: And and we'll see an example of how to use that tomorrow and just wanted to keep this
+
+223
+00:34:29.550 --> 00:34:36.630
+Nick Bowman: And then, so then the last component of pointers and texts and this is perhaps the most important. So we'll spend a little time talking about this one.
+
+224
+00:34:37.260 --> 00:34:43.380
+Nick Bowman: And. And the idea here is, how do we actually modify the memory that a pointer refers to
+
+225
+00:34:44.070 --> 00:34:47.730
+Nick Bowman: And because we've talked about how to store it how its represented all this stuff right now.
+
+226
+00:34:48.210 --> 00:34:54.060
+Nick Bowman: But we haven't actually been able to do anything useful for it with it yet because we don't know how to actually access that memory and to store values.
+
+227
+00:34:54.780 --> 00:35:00.630
+Nick Bowman: And so the way that we do this is with again the asterisk operator which will look you can use to reference the pointer.
+
+228
+00:35:01.140 --> 00:35:09.240
+Nick Bowman: And if you're telling me. Hey, Nick. I thought we just use asked us to define the pointer type. Are we really using this again to do something completely different. The answer is yes.
+
+229
+00:35:09.870 --> 00:35:13.920
+Nick Bowman: Again c++ really likes using the same exact operator to represent different things.
+
+230
+00:35:14.280 --> 00:35:24.120
+Nick Bowman: And so again, this is going to be very different. You'll see the asterisk pop up when you're defining the type and but you'll also see a pop up when you're using it as an operator. And so we're going to talk about this operator.
+
+231
+00:35:25.440 --> 00:35:32.670
+Nick Bowman: In this section, and the way we talk about what do you referencing a pointer means is really, it just involves following an arrow.
+
+232
+00:35:33.180 --> 00:35:43.500
+Nick Bowman: And so you start out at the pointer. You follow the arrow to the memory location that it's referencing up and then you have the ability to read the value there or right to the value there.
+
+233
+00:35:45.360 --> 00:35:56.190
+Nick Bowman: So for example, if we have this snippet of code. So the first three lines is everything that you've seen before. So the first three lines setup is pointing relationship between the pet pointer and the pet variable.
+
+234
+00:35:57.240 --> 00:36:04.350
+Nick Bowman: And if we actually want to use the pointer to get the value cat. Right. So if we actually wanted to get that value.
+
+235
+00:36:04.860 --> 00:36:19.590
+Nick Bowman: We can D reference. We can literally say asterisk pointer and that combination of things says, Follow the arrow and get the value add that variable that we're pointing. So when we do a CF statement will see the value can get printed out
+
+236
+00:36:22.230 --> 00:36:27.570
+Nick Bowman: What we can also do is we can also use the D reference operator to change the memory that is stored there.
+
+237
+00:36:28.230 --> 00:36:44.490
+Nick Bowman: And so now if we put our D reference pointer on the left hand side of an equal sign. We say, hey, follow the arrow and now overwrite the value that is stored there. And so we can use this the reference operator as a way to actually modify the memory that appointees.
+
+238
+00:36:46.140 --> 00:36:53.910
+Nick Bowman: And we'll see this if this isn't it doesn't make sense. Right off the bat will actually see a couple of examples in a second time election next
+
+239
+00:36:54.870 --> 00:37:00.720
+kylie jue: Just to clarify that should read memory location at the end of the arrow not air right
+
+240
+00:37:00.930 --> 00:37:06.060
+Nick Bowman: Uh oh yeah sorry memory location at the end of the arrow. Yes. And then reading your modified
+
+241
+00:37:06.870 --> 00:37:19.920
+kylie jue: And then also, another question that came up, just to clarify, we're using the ampersand here just for the sake of an example of showing like that the pointer will store memory address, but it is correct, you should not be using that in your own
+
+242
+00:37:20.100 --> 00:37:22.800
+kylie jue: Code. This is just for the sake of example. Yeah.
+
+243
+00:37:22.860 --> 00:37:33.870
+Nick Bowman: Yeah, exactly. Please don't write code like this, we will write code like this to show you how pointers work, but please don't ever write code like this, starting with tomorrow's lecture, you'll see how you should actually be writing code to two
+
+244
+00:37:34.950 --> 00:37:36.900
+kylie jue: Yeah, and then Kathleen has her hand up.
+
+245
+00:37:37.680 --> 00:37:44.910
+kathleen bryan: Yeah, I'm, I'm not really understanding, like the initializing because like what because you put the
+
+246
+00:37:46.020 --> 00:38:04.110
+kathleen bryan: The ampersand, you know, before the the pet pointer, but like, what if you like initialized. That is like int pet pointer, but it was like pointing to a string pet like I'm not really understanding why we're like initializing twice. Why can't we just put like the star before like pet.
+
+247
+00:38:05.880 --> 00:38:12.660
+Nick Bowman: Does that make sense. Um, I think, I think that makes sense. Again, in this case, it's mostly for the sake of example like
+
+248
+00:38:13.050 --> 00:38:20.640
+Nick Bowman: You almost would never declare a variable and then declare a pointer to point to that variable that's like that's not really how you use pointers.
+
+249
+00:38:21.000 --> 00:38:34.290
+Nick Bowman: And it is mostly for example here and and and I think, like I said, starting with tomorrow you'll see how we actually use pointers. But this is kind of just a very simplified representation to actually like. So we can start modeling what what memory might look like.
+
+250
+00:38:34.770 --> 00:38:35.280
+kathleen bryan: I get
+
+251
+00:38:35.310 --> 00:38:36.060
+Nick Bowman: I get right the
+
+252
+00:38:36.210 --> 00:38:45.660
+kathleen bryan: Thing is, like, do you have to like initialize like as a separate like pet pointer and then also have a variable that's present to point that point or two.
+
+253
+00:38:45.960 --> 00:38:48.420
+Nick Bowman: Or can you do it in one know uh
+
+254
+00:38:49.500 --> 00:38:50.100
+Nick Bowman: Um,
+
+255
+00:38:50.430 --> 00:38:51.570
+kathleen bryan: If that makes sense.
+
+256
+00:38:52.050 --> 00:38:53.700
+Nick Bowman: Yes, I think that makes sense. I
+
+257
+00:38:56.310 --> 00:38:57.270
+Nick Bowman: I guess the the
+
+258
+00:38:59.190 --> 00:39:06.300
+Nick Bowman: You can declare a pointer without having a specific variable that it points to, if that makes sense. In this example, that's not how we're doing it.
+
+259
+00:39:06.810 --> 00:39:17.850
+Nick Bowman: But you'll see tomorrow when we start using like dynamically allocating memory, you will be able to like declare pointer and initialize a pointer without having to like pointed out of variable like variable party exists.
+
+260
+00:39:19.380 --> 00:39:20.790
+Nick Bowman: Yeah, but
+
+261
+00:39:20.820 --> 00:39:32.370
+kathleen bryan: But like, just like let's say that you just needed to have a pointer and he needed to affiliate it with a variable then like the first two lines here would be like kind of standard way to do that.
+
+262
+00:39:33.630 --> 00:39:34.980
+Nick Bowman: Uh, yes.
+
+263
+00:39:35.580 --> 00:39:39.270
+Nick Bowman: If that is what you wanted to do. I our point at the end of this lecture will be
+
+264
+00:39:39.360 --> 00:39:46.350
+Nick Bowman: You don't ever want to do this again like this is kind of just like an educational tool and you you should never write code that looks like this.
+
+265
+00:39:46.620 --> 00:39:51.780
+Nick Bowman: And so, like, yeah, this is not, this will not be a common pattern. This is more of just sort of a specific example.
+
+266
+00:39:52.710 --> 00:39:52.980
+Okay.
+
+267
+00:39:54.600 --> 00:39:54.960
+kathleen bryan: Thank you.
+
+268
+00:39:57.270 --> 00:39:57.480
+kathleen bryan: Alright.
+
+269
+00:39:57.600 --> 00:40:03.270
+Nick Bowman: Cool. So now let's just talk about a couple of tips to keep in mind on working with pointers and
+
+270
+00:40:04.410 --> 00:40:13.440
+Nick Bowman: Working with pointers can be really tricky and hopefully sort of with these tips. And with the examples over work through will give you the tools that you need to sort of feel confident about working with them.
+
+271
+00:40:13.980 --> 00:40:26.610
+Nick Bowman: And, but, you know, something you should be aware about is you should always be very hyper vigilant about where your point is appointing and whether or not there will use this word valid before you try to the reference. So let's see what that actually means.
+
+272
+00:40:28.350 --> 00:40:37.260
+Nick Bowman: The first thing is and and this actually relates back to a little bit what we're talking about is what if you want to declare or initialize a pointer variable. But you don't yet have anything to point out
+
+273
+00:40:37.890 --> 00:40:49.830
+Nick Bowman: That is that is a very possible situation and, and, specifically, right, if you just line right this line of code to declare variable and of type pointer and then what actually is happening in the scenes.
+
+274
+00:40:51.360 --> 00:41:00.990
+Nick Bowman: Well, again, with with any variable that we declare, but don't initialize we get sort of a random value stored in right. We don't. We can't really trust what value is stored there.
+
+275
+00:41:01.500 --> 00:41:06.660
+Nick Bowman: And and so when you just declare a pointer without initializing it without setting it equal to something
+
+276
+00:41:07.080 --> 00:41:11.850
+Nick Bowman: And you can think of it as kind of just pointing to garbage right there's going to be some random value there.
+
+277
+00:41:12.210 --> 00:41:17.310
+Nick Bowman: And the likelihood that that random value is a valid memory address that we have access to is practically zero
+
+278
+00:41:17.820 --> 00:41:26.700
+Nick Bowman: So you can think of our diagrams is actually starting off like this, which is when we declare a pointer. It's not referencing anything yet. And so this is sort of dangerous and then predictable.
+
+279
+00:41:27.990 --> 00:41:36.810
+Nick Bowman: And if we want to actually have a pointer that we can easily tell whether or not it's currently pointing to something valid are currently not pointing to something valid.
+
+280
+00:41:37.710 --> 00:41:44.520
+Nick Bowman: We're going to introduce this special value called an old pointer and this, this value is actually a way for us to to
+
+281
+00:41:45.930 --> 00:41:50.520
+Nick Bowman: Sort of clearly represent this idea that there is no valid address that are pointing to. Right.
+
+282
+00:41:52.770 --> 00:41:58.410
+Nick Bowman: And so what do I mean by that. Well, we can literally no pointer is just kind of as a special kind of constant value in c++
+
+283
+00:41:58.920 --> 00:42:07.050
+Nick Bowman: And so if we say string pet pointer equals no pointer that is explicitly saying I have a pointer and it is definitely not pointing to something
+
+284
+00:42:07.800 --> 00:42:22.590
+Nick Bowman: And again we'll, we'll see why this becomes useful in prose starting tomorrow. But for now, it's just this idea. Oh, I have this pointer variable. And here's a sort of clear and safe and consistent way of saying that it is not referencing anything useful just yet.
+
+285
+00:42:25.290 --> 00:42:35.760
+Nick Bowman: And so this second pointer tip kind of plays off of this and says, Okay, well, if someone hands us a pointer. How can we tell if it's safe to use. How can we tell if it's actually say you're referencing
+
+286
+00:42:36.720 --> 00:42:43.980
+Nick Bowman: And then the answer is, well, we can check for null pointer and it is sort of this, the standard sort of agreed upon.
+
+287
+00:42:44.490 --> 00:42:49.140
+Nick Bowman: way of representing things which is that if you have a pointer with a valid address and
+
+288
+00:42:49.860 --> 00:42:59.310
+Nick Bowman: I'm sorry if you have a printer. That's not storing the valid address it should always be initialized little pointer and the way that we can use this for example for just kind of writing, say like a civic function that principle.
+
+289
+00:43:00.930 --> 00:43:05.910
+Nick Bowman: Is we can say that we only want to do reference the pointer. If it is not know
+
+290
+00:43:07.170 --> 00:43:18.270
+Nick Bowman: And specifically like sort of demystify not a little bit. It's basically just saying you should only follow the arrow to find a value if an arrow exists, and if no pointer is your pointer variable.
+
+291
+00:43:18.960 --> 00:43:24.120
+Nick Bowman: That basically is telling you there is no arrow right there is no point in relationship store.
+
+292
+00:43:26.520 --> 00:43:34.830
+Nick Bowman: And so let's actually sort of see how this plays out in practice will see an example of know pointer come up a little bit later, but let's let's work through a couple of things.
+
+293
+00:43:36.270 --> 00:43:48.480
+Nick Bowman: And and our general philosophy, when we're working through these examples is that when you're getting practice with pointers. Right. And you should always, always be drawing these sort of box and arrow diagrams that I see.
+
+294
+00:43:49.560 --> 00:43:57.660
+Nick Bowman: These diagrams are just so, so important to understand what is happening and that we just always will strongly recommend working with these diagrams. When you're working through the pointers.
+
+295
+00:43:58.980 --> 00:44:04.440
+Nick Bowman: And and as with most things right. The best way to sort of understand these pointers is with lots of practice.
+
+296
+00:44:04.950 --> 00:44:14.160
+Nick Bowman: And so what I'll say is today's lecture code. I'm not going to run it in class, but I posted on the website. I mean, it's got a ton of examples of just code that does things with pointers.
+
+297
+00:44:14.880 --> 00:44:20.550
+Nick Bowman: So I would really strongly recommend downloading that code reading through it first and trying to predict exactly what it does.
+
+298
+00:44:21.690 --> 00:44:27.360
+Nick Bowman: And then running it and seeing what happens. And we provided both examples of buggy code and not buggy code.
+
+299
+00:44:28.890 --> 00:44:32.250
+Nick Bowman: To sort of help you get a good sense of like what are good practices and working
+
+300
+00:44:33.000 --> 00:44:39.300
+Nick Bowman: And so once we're done with lecture today. I recommend walking through those and then the next three examples I'm going to go through are all present in the code file.
+
+301
+00:44:39.810 --> 00:44:45.000
+Nick Bowman: So we recommend looking at those once we're done, and actually running them for yourself and seeing and we can work through it.
+
+302
+00:44:47.010 --> 00:44:54.570
+Nick Bowman: And and so let's just work through our first example, this one will actually model everything. It's this is sort of just a summary of all the examples we've seen so far.
+
+303
+00:44:55.140 --> 00:45:09.060
+Nick Bowman: And so when we declare a new pointer, right, we said okay, when I when I initialize it. I always want to initialize it to the value know pointer and so that creates a new variable new suitcase. It's got type in star and it's showing the value
+
+304
+00:45:11.310 --> 00:45:18.030
+Nick Bowman: Then we create a new variable called know which stores the value of six. Again, this is really super standard what we can see so far.
+
+305
+00:45:19.980 --> 00:45:32.400
+Nick Bowman: Then we associate appointing relationship. So we say, all right, the value that becomes stored in numb point or now is the address of this other variable. And so by doing this line of code we associate this point in value between the two.
+
+306
+00:45:34.290 --> 00:45:40.350
+Nick Bowman: And so at this point, we say that num point or points to know. And so it's this is pointing relationship, but even
+
+307
+00:45:42.300 --> 00:45:55.080
+Nick Bowman: Then if we want to actually access the value that the pointer is pointing to. And we can use the the reference operator. This will print out the value 106 so we can again follow the arrow and look for what value is stored at the end of the arrow.
+
+308
+00:45:56.400 --> 00:46:07.920
+Nick Bowman: And if we want to update that value that sort of the end of the arrow right. We can also use the the reference operator to do that and sort of what that line of code. Again, we say asterisk null pointer says go to the end of the arrow, and then set that value.
+
+309
+00:46:09.150 --> 00:46:10.560
+Nick Bowman: And so that's exactly what we see.
+
+310
+00:46:12.030 --> 00:46:24.570
+Nick Bowman: And so again, I really want to encourage you all to to replicate this process that you see me doing here, when you're working with your own code that it's pointers and go through it line by line and draw these diagrams and really try to illustrate exactly what
+
+311
+00:46:27.330 --> 00:46:40.680
+Nick Bowman: And and so yeah and so that's just a summary or something. And so here's the first and I'm sorry I'm most important site. What is the pointer. It's a memory address right. I think this is actually the last one. So we'll enjoy it. Enjoy it for the ones
+
+312
+00:46:42.480 --> 00:46:48.870
+Nick Bowman: And so now I actually want. I want to see you all to try something for yourself. So here the short little code snippet.
+
+313
+00:46:49.290 --> 00:46:56.190
+Nick Bowman: And I want you to actually work through this and see if you can predict what the behavior here is going to be
+
+314
+00:46:56.670 --> 00:47:05.100
+Nick Bowman: And I'm going to go ahead and launch this poll. And so just take a second to look at this code and see if you can predict exactly what's going to happen.
+
+315
+00:47:05.970 --> 00:47:14.730
+Nick Bowman: And, you know, if you have a piece of paper on you know you can. I would actually recommend starting to drop this diagrams, see if you can figure out what actually
+
+316
+00:47:18.780 --> 00:47:20.430
+Nick Bowman: See those answers for
+
+317
+00:47:32.010 --> 00:47:32.250
+Cool.
+
+318
+00:47:33.600 --> 00:47:40.980
+Nick Bowman: Okay, so good. So we're getting a good spread of answers. And again, if you're confused about what the answer here might be that that's kind of the point, right.
+
+319
+00:47:41.190 --> 00:47:47.100
+Nick Bowman: You have no idea what's going to happen. So kind of mostly just curious to see what your predictions are. And so let me end the poll and share the results.
+
+320
+00:47:47.550 --> 00:47:56.730
+Nick Bowman: And so overwhelming majority here was actually that the program complete but nothing is printed out. And then we had kind of an even spread across the other for answers.
+
+321
+00:47:57.390 --> 00:48:06.720
+Nick Bowman: So let's actually see what happens. I mean, I think, and I think sort of what we talked about so far. I think these are all sort of potentially reasonable reasonable options and what's actually going to happen.
+
+322
+00:48:08.160 --> 00:48:11.280
+Nick Bowman: And what we actually see and and so
+
+323
+00:48:14.850 --> 00:48:18.240
+Nick Bowman: Okay. And so this is what you'll actually see what happens. And so we try to run this code.
+
+324
+00:48:18.870 --> 00:48:26.640
+Nick Bowman: You'll get this wonderful well known error and that you're going to become super familiar with and work in the assignment, which is something called a segmentation fault.
+
+325
+00:48:27.150 --> 00:48:36.510
+Nick Bowman: So let's actually see what a segmentation caucus. So if we were to draw the state of our memory diagram here, right, we would have our string pointer variable set to know pointer, we would have our screen. Hello.
+
+326
+00:48:37.410 --> 00:48:46.290
+Nick Bowman: And what would happen if we try to D reference this pointer, right, we get this thing called a segmentation fault. I mean, so it's actually an error, it will crash your program.
+
+327
+00:48:47.130 --> 00:48:59.880
+Nick Bowman: And and specifically D referencing a null pointer. So trying to follow an arrow that doesn't exist. Real crash our program. And so this is it. This is our class of air call the segmentation fault and and so this is sort of
+
+328
+00:49:01.380 --> 00:49:09.870
+Nick Bowman: Kind of something we want to avoid. And so that's why exactly as I mentioned earlier, before we do reference a pointer, we should always be checking to see if it's an appointment.
+
+329
+00:49:10.140 --> 00:49:17.040
+Nick Bowman: Right, we should always be protecting ourselves. We can reality that the pointer might not be pointing to me right and so that
+
+330
+00:49:17.610 --> 00:49:28.470
+Nick Bowman: That is sort of kind of the big takeaway here which is if you try to do reference and open on your computer will be very and so you always want to make sure that you're avoiding that working
+
+331
+00:49:31.740 --> 00:49:35.160
+Nick Bowman: So again takeaway, you should always be using a null pointer check before keep referencing
+
+332
+00:49:37.410 --> 00:49:43.830
+Nick Bowman: Cool. And then in the last minute or two that we have left. Let's finish up and wrap up with this last example, and this is actually a
+
+333
+00:49:44.370 --> 00:49:50.730
+Nick Bowman: Cool example. I'm a little bit more in depth. So let's, so why don't you go ahead and start reading through that.
+
+334
+00:49:51.150 --> 00:49:56.610
+Nick Bowman: And I will launch the poll here in the polls kind of just asked you to say, hey, if you trace through this code.
+
+335
+00:49:57.420 --> 00:50:07.230
+Nick Bowman: What is going to get printed out again. If you have a piece of paper and a pencil laying your You busted out, you know, draw out these variable drought, the boxes, draw the way that the arrows are going
+
+336
+00:50:08.250 --> 00:50:13.440
+Nick Bowman: And and really work through this. If you have the opportunity to sort of work through this and practice it out yourself.
+
+337
+00:50:13.860 --> 00:50:20.400
+Nick Bowman: And one, it'll be a lot easier to figure out what the answer is. And to hopefully you'll find them easier kind of organize your thoughts about exactly what's going on.
+
+338
+00:50:22.410 --> 00:50:26.400
+Nick Bowman: So just give me a second. And we'll see
+
+339
+00:50:27.870 --> 00:50:29.010
+Nick Bowman: We'll see what
+
+340
+00:50:38.700 --> 00:50:43.140
+Nick Bowman: We're getting a good number of answers rolling in. So let me
+
+341
+00:50:45.450 --> 00:50:55.380
+Nick Bowman: End the poll and share the results. And so what we see here is kind of close to a tie between goodbye hello and goodbye, goodbye. So let's work through this really quick and see what
+
+342
+00:50:56.280 --> 00:51:01.110
+Nick Bowman: Time. So again, let's go through this line by line and draw memory diagram exactly as we expect things to pop up.
+
+343
+00:51:02.130 --> 00:51:08.040
+Nick Bowman: And so when we first few lines of code, we create two new pointer variables we set them both equal not free.
+
+344
+00:51:09.090 --> 00:51:13.650
+Nick Bowman: Then we create a new string variable and then we said, it's how you could have hello
+
+345
+00:51:14.040 --> 00:51:23.940
+Nick Bowman: And I am going to explicitly show it to them. It's baggage tag and its memory value here because I think it'll make illustrating the process easier. Remember, again, this value is totally randomly generated. It has no specific
+
+346
+00:51:25.710 --> 00:51:34.470
+Nick Bowman: So now let's see what happens. So first we said we make the first point of variable point to the variable free so it now stories with value at 400
+
+347
+00:51:35.940 --> 00:51:37.170
+Nick Bowman: Then we
+
+348
+00:51:38.730 --> 00:51:50.970
+Nick Bowman: Then we set the second point of value equal to that exact same value. Right. So we say take the value stored in SharePoint or one which is this memory address at 400 and store it insert pointer to. So now it's story starts
+
+349
+00:51:51.420 --> 00:52:00.420
+Nick Bowman: At 400 and by virtue of doing that. It now also maintains a pointer to the same variable. So kind of an important takeaway here is you can have multiple pointers pointing to the same thing.
+
+350
+00:52:01.950 --> 00:52:08.940
+Nick Bowman: And then what happened was kind of the trick of the trade here when we follow giving stuff.
+
+351
+00:52:10.380 --> 00:52:22.320
+Nick Bowman: Away the answer. Sorry. Well, anyway, when we follow the arrow to D referenced or point or one and change the value that it's pointing to. Right. It goes ahead and it changes the value of variable s to contain the string. Goodbye.
+
+352
+00:52:23.460 --> 00:52:37.170
+Nick Bowman: And now when you go to print out the values of what both pointers are pointing to, because they're pointing to the same variable. And because they're pointing to the same variable that now has the value. Goodbye. When we print out these values we actually see goodbye. Goodbye.
+
+353
+00:52:38.370 --> 00:52:48.720
+Nick Bowman: And I'm and so this is kind of an interesting way of seeing that if you have multiple pointer is pointing to the same object and changing the value pointed to buy one of them actually has consequences on other things.
+
+354
+00:52:50.460 --> 00:52:54.930
+Nick Bowman: And so this is sort of our final kind of example of seeing how we can work with me.
+
+355
+00:52:56.910 --> 00:53:03.900
+Nick Bowman: And there's a fun video here. I'm not going to show today because it's a couple minutes long and you want to watch it after class. Feel free to stick around and we can watch it together.
+
+356
+00:53:04.140 --> 00:53:11.460
+Nick Bowman: And it's kind of just a fun video to visualize everything that we just saw and but just the takeaways for today. Right. We talked about memory.
+
+357
+00:53:11.880 --> 00:53:20.760
+Nick Bowman: computer memory, memory addresses. We saw pointers as a way of storing them we addresses and as a way of sort of being able to read them manipulate directly computer memory.
+
+358
+00:53:21.330 --> 00:53:32.670
+Nick Bowman: And then we talked about this a lot of operators, we can do on point. Specifically things like the referencing and getting gathers of things and sort of putting that all together kind of builds our toolbox of being able to work directly with computer
+
+359
+00:53:33.930 --> 00:53:44.580
+Nick Bowman: And so it will see tomorrow we're going to start talking about linked data structures around and start talking about this idea of linked lists. And so that's going to be a really interesting lecture. And so we're looking forward to see you all tomorrow.
+
+360
+00:53:45.720 --> 00:53:51.570
+Nick Bowman: So that's all we have for today. And as always, your questions, feel free to stick around and I hope you all have a good rest your day.
+
+361
+00:53:54.570 --> 00:53:55.050
+Aadi M Rane: Thank you.
+
+362
+00:53:55.080 --> 00:53:56.490
+Evan F Davis: Thank you. Thank you.
+
+363
+00:53:57.780 --> 00:53:58.410
+Thomas Tao Hale: Thank you.
+
+364
+00:53:58.680 --> 00:53:59.520
+shirley li: Thank you.
+
+365
+00:54:00.030 --> 00:54:05.430
+Nick Bowman: You actually, for those of you that are around. I don't know that we'll have time to show the video tomorrow so
+
+366
+00:54:05.550 --> 00:54:08.610
+Nick Bowman: For those of those thinking around your, your, your
+
+367
+00:54:09.780 --> 00:54:14.730
+Nick Bowman: Prize for singing as we get to watch this video together. So let's let me share my computer's
+
+368
+00:54:16.560 --> 00:54:19.320
+Nick Bowman: Not much to say. So if any of you took CS one
+
+369
+00:54:19.320 --> 00:54:22.200
+Nick Bowman: And six a with mcpartlin say he actually created this video.
+
+370
+00:54:22.860 --> 00:54:27.210
+Nick Bowman: Like literally 21 years ago and using claim reason that's just
+
+371
+00:54:28.260 --> 00:54:35.640
+Nick Bowman: A Biggie wake up. It's time for pointer fun. What's that one about pointers. Oh.
+
+372
+00:54:36.990 --> 00:54:43.980
+Well, to get started. I guess we're gonna need a couple pointers. Okay, this code allocates two pointers, which can point to integers.
+
+373
+00:54:44.550 --> 00:54:53.280
+Okay, well, I see the two pointers, but they don't seem to be pointing to anything. That's right. Initially pointers. Don't point to anything. The things they point to our call points.
+
+374
+00:54:53.790 --> 00:55:07.380
+And setting them up so separate step. Oh, right, right. I knew that the point teaser a separate or. So how do you allocate a pointy. Okay, well this code allocates new integer pointy and this part sets extra point to it.
+
+375
+00:55:08.460 --> 00:55:24.630
+Nick Bowman: Hey, that looks better. So make it do something. Okay. Oh, the reference the pointer X to store the number 42 into its pointy for this trick. I'll need my magic wand of the referencing your magic wand of D referencing that, that's great.
+
+376
+00:55:25.740 --> 00:55:29.310
+Nick Bowman: This is what the code looks like. I'll just set up the number and
+
+377
+00:55:30.540 --> 00:55:39.090
+Nick Bowman: A look, there it goes. So doing a D reference on X follows the arrow to access. It's pointy in this case to store 42 in there.
+
+378
+00:55:39.570 --> 00:55:53.550
+Nick Bowman: Hey, try using it to store the number 13 through the other pointer. Why, okay, I'll just go over here to why and get the number 13 setup and then take the one of D referencing and just
+
+379
+00:55:55.230 --> 00:56:05.880
+Oh hey, that didn't work. Say Binky. I don't think the referencing. Why is a good idea because, you know, setting up the point is a separate step. And I don't think we ever did it.
+
+380
+00:56:06.390 --> 00:56:16.380
+Hmm, good point, yeah we allocated the pointer. Why, but we never set it to point to a pointy hmm very observant. A. You're looking good there Binky.
+
+381
+00:56:16.830 --> 00:56:22.680
+Can you fix it so that why points to the same point. He is X. Sure, I'll use my magic wand of pointer assignment.
+
+382
+00:56:23.220 --> 00:56:29.970
+Is that going to be a problem like before. No, this doesn't touch the point to it just changes one pointer to point to the same thing as another
+
+383
+00:56:30.810 --> 00:56:43.500
+Oh, I see now why points to the same place as x. So, so wait. Now, why is fixed. It has a pointy so you can try the one to do referencing again to send the 13 over. Ah, OK. Here goes.
+
+384
+00:56:44.520 --> 00:56:50.970
+Hey, look at that. Now do you referencing works on why and because the pointers are sharing that one pointy. They both see the 13
+
+385
+00:56:51.570 --> 00:56:57.420
+Yeah, sharing. Now, whatever. So are we going to switch places now. Oh look, we're out of time, but
+
+386
+00:56:57.990 --> 00:57:04.710
+Just remember the three pointer rules. Number one, the basic structure is that you have a pointer and it points over to a pointy
+
+387
+00:57:05.070 --> 00:57:10.800
+But the pointer and pointy are separate and the common error is to set up a pointer, but to forget to give it a pointy
+
+388
+00:57:11.430 --> 00:57:18.090
+Number two points or D referencing starts at the pointer and follows its arrow over to access. It's pointy, as we all know.
+
+389
+00:57:18.480 --> 00:57:22.110
+This only works if there is a pointy which kind of gets back to rule number one.
+
+390
+00:57:22.680 --> 00:57:36.750
+Number three pointer assignment takes one pointer and changes it to point to the same pointy as another pointer. So after the assignment. The two pointers will point to the same pointy sometimes that's called sharing and that's all there is to it. Really, bye bye now.
+
+391
+00:57:38.940 --> 00:57:48.420
+Nick Bowman: So there you go, there's, there's a state of point to education and in 1999 we still we can obviously see it, it's still a good video. We still show it on the class so
+
+392
+00:57:49.770 --> 00:57:58.380
+Nick Bowman: Appreciate you guys sticking around. Watch it. But yeah, anyway. If you have questions as you normally would. I'd be happy to. Excellent. I just needed to get that immortalized in
+
+393
+00:58:10.650 --> 00:58:12.960
+haoming li: The video is critical and
+
+394
+00:58:14.610 --> 00:58:15.090
+Nick Bowman: That's good.
+
+395
+00:58:17.550 --> 00:58:24.180
+haoming li: And I mentioned the magic one. I think it's a pastor's wife star sign. And I know there's been
+
+396
+00:58:26.400 --> 00:58:33.840
+haoming li: A couple previous slides when printing or declare, sometimes we have. That's our side. Sometimes we don't
+
+397
+00:58:35.040 --> 00:58:42.600
+haoming li: came in, we just we like tell us again what when we need that. And what this star sign does
+
+398
+00:58:43.950 --> 00:58:54.840
+Nick Bowman: Yeah, absolutely. So the differences. So look at this line compared to this line, right. So this line has standpoint or one on the left hand side with no d reference operator and this one has
+
+399
+00:58:55.320 --> 00:58:58.650
+Nick Bowman: The it on the left hand side of equal sign with the reference operator right
+
+400
+00:58:59.130 --> 00:59:08.790
+Nick Bowman: And so the main difference here is when you don't have the D reference operator. You're directly modifying the value stored by the pointer. Right. So remember the pointer stores have value.
+
+401
+00:59:09.120 --> 00:59:22.590
+Nick Bowman: Right. So in this case, executing this line of code stories like f 400 in the pointer. Right. So when you when you're doing operations on the pointer. Right. You're always working with the value of the pointers, a little bit of the memory address that it's going
+
+402
+00:59:24.060 --> 00:59:34.110
+Nick Bowman: Down here when you now use the D reference operator. Again, remember the the reference operator tells you traverse the arrow right. Think of yourself. Now, at the end of the arrow, rather than at the beginning of the arrow.
+
+403
+00:59:34.530 --> 00:59:45.990
+Nick Bowman: And so when you say d reference star pointer one equals goodbye and that is going to be your, your key that now you're changing the value down here, right, you're changing the value in the suitcase from hello to the class.
+
+404
+00:59:46.680 --> 00:59:51.780
+Nick Bowman: And so, so it depends on what you're trying to accomplish if you're trying to point the point or somewhere new.
+
+405
+00:59:52.110 --> 00:59:56.730
+Nick Bowman: Right, you don't use the D reference operator, because when you're pointing at somewhere new. You're just changing the value that stored in it.
+
+406
+00:59:57.510 --> 01:00:07.440
+Nick Bowman: And if you want to change the actual thing that it's pointing to right the memory that it's pointing to. You want to change the value of that. That's when you or if you just want to read it out. That's when you need to use it here.
+
+407
+01:00:08.910 --> 01:00:10.110
+haoming li: So what about
+
+408
+01:00:13.260 --> 01:00:14.040
+Nick Bowman: What about sorry, where
+
+409
+01:00:14.550 --> 01:00:18.120
+haoming li: What about you can see out the printing. We also have the reference
+
+410
+01:00:19.290 --> 01:00:24.240
+Nick Bowman: Yeah, because in this case, right. We want to see out statement to print the value that the pointer is pointing to.
+
+411
+01:00:24.540 --> 01:00:39.450
+Nick Bowman: Right, if you didn't include the map the memory if you didn't include the, the, the, the reference operator here. You just said, See out standpoint or one sir pointer to your output would literally say zero x F 4000400 right
+
+412
+01:00:39.600 --> 01:00:41.550
+Nick Bowman: And that's not super meaningful right
+
+413
+01:00:41.910 --> 01:00:47.160
+Nick Bowman: So what we really care about is the value at the pointer is pointing to, right, not the not the value of the printer itself.
+
+414
+01:00:49.620 --> 01:01:02.550
+haoming li: AC and with the SDR team. Dr. Warren and the person and asked, so that one is passing the S by reference.
+
+415
+01:01:04.650 --> 01:01:10.140
+Nick Bowman: So, so it's, yeah. It's not right. It's the same operator, but it's it's just a completely different.
+
+416
+01:01:10.140 --> 01:01:11.250
+haoming li: Oh, yeah, yeah.
+
+417
+01:01:12.060 --> 01:01:31.230
+Nick Bowman: So that the ampersand operator is saying, Ask the computer for the memory address of s right. So like literally like get like look at its baggage tag and get f 400 it's yeah and it's confusing, but it is a completely different operation then passing reference
+
+418
+01:01:31.440 --> 01:01:34.260
+haoming li: Oh yeah, I remember that. Thank you.
+
+419
+01:01:39.030 --> 01:01:39.930
+haoming li: Jennifer. You have a question.
+
+420
+01:01:45.990 --> 01:01:48.780
+Nick Bowman: I quit. Sorry, I don't think I can hear you.
+
+421
+01:01:51.720 --> 01:01:53.820
+Nick Bowman: It says here, it says, You were unmuted, but I
+
+422
+01:01:55.230 --> 01:01:55.530
+Wasn't
+
+423
+01:01:58.290 --> 01:02:01.650
+Nick Bowman: Oh, yeah, yeah. If you type it out. Yeah, I've been surfing and
+
+424
+01:02:02.100 --> 01:02:02.850
+Nick Bowman: Edward, you have a
+
+425
+01:02:03.120 --> 01:02:03.660
+Nick Bowman: Your question.
+
+426
+01:02:04.500 --> 01:02:11.340
+edouard des: Yeah. And I was just wondering, and then pointers themselves are stored in memory as well. Right. But they're sort of the stack, not the heat.
+
+427
+01:02:13.020 --> 01:02:28.020
+Nick Bowman: Yeah, so if we go that far back, but right when we saw our third pointer tip right or third point or syntax for it. And so, so we can we can make a point or point to dynamically allocating memory.
+
+428
+01:02:30.090 --> 01:02:36.990
+Nick Bowman: And in that case, right, the pointers themselves are just normal variables, right. And so just like normal variables, they're stored on the stack and
+
+429
+01:02:37.050 --> 01:02:38.880
+Nick Bowman: Like, like literally all the other variables that we've seen.
+
+430
+01:02:39.480 --> 01:02:45.300
+Nick Bowman: But we use the new keyword to generate a memory address 2.2 right that will sort of set up some space for some
+
+431
+01:02:46.740 --> 01:02:52.050
+edouard des: Okay, so, because like if we if we point her 20s or never sort of the stack. Right.
+
+432
+01:02:54.000 --> 01:02:54.570
+Nick Bowman: And
+
+433
+01:02:56.580 --> 01:02:58.500
+Nick Bowman: We're sorry winters appointees.
+
+434
+01:02:58.500 --> 01:02:59.850
+Nick Bowman: And never stored on a card.
+
+435
+01:03:00.030 --> 01:03:09.420
+edouard des: Or the candy store because it gave me please call back in an example with the, um, with like the string and the store and the store that we were just looking at two seconds ago. Um, with the
+
+436
+01:03:10.680 --> 01:03:11.940
+edouard des: Yeah, like, yeah, there
+
+437
+01:03:12.210 --> 01:03:18.840
+Nick Bowman: For instance, yeah. Everything here is on the stack. Right. We haven't used the new keyword on your right. Everything is almost up.
+
+438
+01:03:19.710 --> 01:03:22.530
+edouard des: So, would that mean that pointers themselves of addresses, if they're variable.
+
+439
+01:03:23.610 --> 01:03:30.360
+Nick Bowman: That is correct, yeah. I forgot to mention that note. So what are the key thing you might ask is, oh, do these these these baggage is
+
+440
+01:03:30.900 --> 01:03:37.110
+Nick Bowman: suitcases storing the pointers. Do they have baggage tags sort of specifying where they are. The answer is yes.
+
+441
+01:03:37.650 --> 01:03:52.890
+Nick Bowman: We're not going to show it because we don't that leads into discussion of pointers to pointers, which is again another topic that you'll cover in later CS classes, but it yes they do exist. But to us. They're sort of we're going to consider them as unimportant because we're not gonna
+
+442
+01:03:53.580 --> 01:04:00.960
+edouard des: Yeah, and also. So, and week so we can store pointers on the non pointers appointees, we can store them.
+
+443
+01:04:01.320 --> 01:04:09.510
+edouard des: On the stack and on the on the heat. But when we use the new keyword and we'll use the Delete with the two brackets that means we're deleting something on the heat and not on the stack for my guy.
+
+444
+01:04:09.780 --> 01:04:11.160
+Nick Bowman: Exactly. Yep. Okay.
+
+445
+01:04:12.450 --> 01:04:27.150
+Nick Bowman: Yep. And yeah. So, Jennifer, that's a great question. Why, why is based 16 more suitable than based time. And so it's actually, it's actually a multi step process. So based 10 is not great for computers because
+
+446
+01:04:28.140 --> 01:04:34.950
+Nick Bowman: Everything on your computer. And this is actually, this comes back to the sort of talking about the hardware and the fit physically how things work and
+
+447
+01:04:35.970 --> 01:04:40.110
+Nick Bowman: Your computer can actually only represent like physically represent information.
+
+448
+01:04:40.470 --> 01:04:50.640
+Nick Bowman: And using two signals right either on or off. Like there's like electrical signal exists or electrical signal does not exist. And it's like, quite literally the only two ways to represent information like physically
+
+449
+01:04:51.900 --> 01:04:58.320
+Nick Bowman: And so because of that, that leads to this this numerical representation called binary, which we'll talk about a little bit later in the class.
+
+450
+01:04:59.160 --> 01:05:12.660
+Nick Bowman: But binary is a way of representing numbers. That's actually based too. So there's only two digits zero and one and and and realistically like physically on your computer all numbers are actually represented in binary and and so
+
+451
+01:05:13.770 --> 01:05:20.250
+Nick Bowman: We. We. Yeah, but like, we use the numerical system, a binary because computer hardware actually dictates it
+
+452
+01:05:20.970 --> 01:05:24.930
+Nick Bowman: And the answer of why based 16 it's may seem a little bit unrelated.
+
+453
+01:05:25.410 --> 01:05:35.340
+Nick Bowman: And 16 is a power of 2AM. And so it's very easy to do conversions between based to and basics to me. I'm, again, it's not something we'll talk about in this class, but
+
+454
+01:05:35.910 --> 01:05:43.200
+Nick Bowman: If you, if you exist if it takes us one of seven, you'll see why. And so basics to me is, is a up
+
+455
+01:05:44.160 --> 01:05:54.210
+Nick Bowman: Another way as a another numerical system that that naturally sort of leads from something like the fact that we have to store information in this binary way on the computer.
+
+456
+01:05:54.660 --> 01:06:02.850
+Nick Bowman: And the reason why we prefer by a basic team to base to is that based two numbers are super long right because there's only two digits.
+
+457
+01:06:03.150 --> 01:06:10.080
+Nick Bowman: And it's just this like giant strings of zeros and ones and basic seems a more compressed way of representing the same numbers and
+
+458
+01:06:10.800 --> 01:06:19.230
+Nick Bowman: And for that same reason basics team is better than based 10 also because if you were to look at the numbers in base 10 they're just be really, really large numbers.
+
+459
+01:06:19.650 --> 01:06:34.500
+Nick Bowman: And with basics teen, it's a little bit easier to just like conceptualize and think about them. And again, we won't do that much in this class, but the 16 is derived from two and that too is derived from with the hardware, they can keep it hard words is kind of the short
+
+460
+01:06:40.440 --> 01:06:41.610
+kylie jue: Jordan. You want to go ahead and
+
+461
+01:06:45.570 --> 01:06:47.580
+Jordan Lin: Oh yeah, I have a question about
+
+462
+01:06:49.950 --> 01:06:56.340
+Jordan Lin: I'm kind of like the assignments like little small things on the assignments and when we are actually doing the classes.
+
+463
+01:06:57.960 --> 01:07:08.790
+Jordan Lin: So one of the, I guess functions we implement is a function of stuff a little wavy line. After all, it's called in the front that essentially allows us to delete the race.
+
+464
+01:07:11.220 --> 01:07:26.970
+Jordan Lin: At the end, but because we're never actually like like at least from what I'm seeing like in our tech. So we're never actually really assigning our, our peak us to any pointers. What is the purpose of that, like, like it is something that we just do so that
+
+465
+01:07:27.990 --> 01:07:32.430
+Jordan Lin: When we close the program can be creator will delete the race, or is it for something else.
+
+466
+01:07:33.990 --> 01:07:36.690
+Nick Bowman: Yeah, the way I would think about it is that the
+
+467
+01:07:36.720 --> 01:07:38.550
+Nick Bowman: whole purpose of the constructor and the
+
+468
+01:07:38.610 --> 01:07:39.300
+Jordan Lin: Instructor
+
+469
+01:07:39.540 --> 01:07:46.860
+Nick Bowman: Is to manage the internal data storage of the classes for it. So it's actually a good thing that from the client perspective, right.
+
+470
+01:07:47.100 --> 01:07:52.950
+Nick Bowman: That the client doesn't need to dynamically allocate anything the client doesn't need to create any pointers, the client doesn't need to free anything
+
+471
+01:07:53.190 --> 01:08:02.040
+Nick Bowman: Right, the client just says I want an instance of your class and the constructor says okay, an instance of my class requires dynamic memory. So let me go and allocate it
+
+472
+01:08:02.520 --> 01:08:10.620
+Nick Bowman: And then the instructor says cleaning up an instance of my class requires freeing that memory. So let me go do that right, those two functions together.
+
+473
+01:08:11.340 --> 01:08:21.900
+Nick Bowman: Allow the client to easily and safely to say, hey, I want a priority queue. Okay, I'm done with the priority queue. Right. And those two those two methods get called and then they do the cleanup and September and destruction.
+
+474
+01:08:22.350 --> 01:08:36.030
+Nick Bowman: And so you're right, the client doesn't see the point is the client doesn't ever do any dynamic allocation because it's it's happening for them already underneath the seats right and so your job is to implement or the class to to both setup and teardown that internal data store.
+
+475
+01:08:38.910 --> 01:08:39.840
+Jordan Lin: Okay, I see. Thanks.
+
+476
+01:08:46.350 --> 01:08:57.660
+Demi Lei: Yes. So a couple of questions. So first of all, so if we're not using and presented this class. Are we going to stay you keyword or are we going to talk about something else tomorrow.
+
+477
+01:08:58.950 --> 01:09:04.470
+Nick Bowman: Yeah, pretty much everything we talked about from here on out in terms of using pointers will be using the new keyword right
+
+478
+01:09:04.800 --> 01:09:17.070
+Nick Bowman: And we talked about this idea like that all the examples we saw today. We're kind of contrived, in the sense that, like we didn't need to like we were using. We were pointing to our existing variables, just because it made things easier.
+
+479
+01:09:17.640 --> 01:09:19.590
+Nick Bowman: But everything will see in the way that you'll actually use
+
+480
+01:09:19.590 --> 01:09:24.240
+Nick Bowman: Pointers, for the most part is actually right again, going, going back to
+
+481
+01:09:25.050 --> 01:09:31.500
+Nick Bowman: This, this idea of the pointer syntax for dynamic allocation, most of the way that you'll see yourself using pointers is with a new keyword
+
+482
+01:09:31.890 --> 01:09:44.250
+Nick Bowman: And and specifically the reason we need to learn pointers is because the return type of the new keyword easy memory address. Right. And so if we want to work with an m&p allocating memory. We have no option but to like sort of learn how to use pointers.
+
+483
+01:09:45.060 --> 01:09:47.280
+Nick Bowman: And so we'll see tomorrow, how we can
+
+484
+01:09:48.660 --> 01:09:58.830
+Nick Bowman: We'll see tomorrow actually specifically why we gain flexibility out of being able to dynamically allocate like one element at a time, rather than an array, right, like we've already seen an array and razor great and the powerful
+
+485
+01:09:59.400 --> 01:10:09.270
+Nick Bowman: But we'll see benefits tomorrow of actually being able to, you know, piecemeal, you know, maybe like kind of allocate things one at a time and then use pointers to actually organize it.
+
+486
+01:10:10.380 --> 01:10:14.430
+Nick Bowman: Rather than relying at all sort of being sort of continuous and and all on the same place.
+
+487
+01:10:16.110 --> 01:10:24.270
+Demi Lei: Okay. And, um, so just to make sure that the new keyword always creates a new variable and dice instead of like
+
+488
+01:10:24.450 --> 01:10:26.250
+Demi Lei: In the stack, like, more, more variable.
+
+489
+01:10:26.280 --> 01:10:27.450
+Demi Lei: Exactly. Okay.
+
+490
+01:10:27.930 --> 01:10:28.950
+Demi Lei: Yeah. And, um,
+
+491
+01:10:29.220 --> 01:10:30.720
+Demi Lei: Oh, and also, we're talking about
+
+492
+01:10:30.780 --> 01:10:45.510
+Demi Lei: Using like no point or as a safety check what is like. Like, what if the pointer was not initialize by using know pointer, like it's just being initialize and maybe pointing out some like garbage.
+
+493
+01:10:46.590 --> 01:10:48.060
+Demi Lei: Yeah, this is very bad.
+
+494
+01:10:48.120 --> 01:10:49.740
+Demi Lei: No pointers still work.
+
+495
+01:10:49.920 --> 01:10:51.210
+Demi Lei: As a safety checks.
+
+496
+01:10:51.930 --> 01:10:56.610
+Nick Bowman: So no, it wouldn't not that's a great point. Right. So if this is the situation right
+
+497
+01:10:57.090 --> 01:11:03.390
+Nick Bowman: And and so you declared pet pointer, but you didn't initialize it anything right. So now you're kind of getting getting garbage in it.
+
+498
+01:11:03.930 --> 01:11:09.600
+Nick Bowman: And if you then pass it to a function in the function was like Okay, let me check to see if I have a valid point or not.
+
+499
+01:11:09.900 --> 01:11:17.490
+Nick Bowman: And let's compare with null pointer and I'd say, oh, well, it's not know pointer. So I guess it must be fine. And then it tries to do reference it and it'll also crash. Right.
+
+500
+01:11:17.850 --> 01:11:24.570
+Nick Bowman: And so the point here was, you should never have an on initialize point. Right. And unlike initialized pointers about idea.
+
+501
+01:11:24.930 --> 01:11:35.160
+Nick Bowman: If you have a pointer and you know you don't know what you want it to point to just yet, but you want to have the pointer, you should always always initialize no point right that's sort of always the kind of the safe and consistently.
+
+502
+01:11:36.510 --> 01:11:44.370
+Demi Lei: Got it. All right. One last question. So for the when we're like, doing the the structure for class, we use a wiggly lines thing.
+
+503
+01:11:44.760 --> 01:11:58.560
+Demi Lei: So, um, but also I just kind of noticed during the live coding session, we actually have to write the delete key word inside of like the, you know, like, like when we're when we're defining
+
+504
+01:11:59.190 --> 01:12:09.750
+Demi Lei: Factor. Like, does that mean that c++ doesn't actually help us to delete the whole thing. Like it just automatically calls it when the, when the variable go out of stone.
+
+505
+01:12:11.070 --> 01:12:14.160
+Nick Bowman: Yeah c++ calls the D structure function.
+
+506
+01:12:14.460 --> 01:12:17.610
+Nick Bowman: But if you think about it, the system isn't smart enough to figure out
+
+507
+01:12:17.640 --> 01:12:26.580
+Nick Bowman: What needs to be free, right, like it's your job as a programmer to say what needs to be free. So this system gives you the nice benefit of it says, hey, I will always call this function when I need to be cleaned up.
+
+508
+01:12:26.970 --> 01:12:36.540
+Nick Bowman: But I don't actually know what it means to do cleanup right like the default the structure literally just does nothing. Right, so you know it exists, but it. It just assumes that it doesn't need to do anything.
+
+509
+01:12:36.960 --> 01:12:45.690
+Nick Bowman: So yes, you're right in the deep structure, we need to explicitly delete. But that's sort of that sort of us taking responsibility for the memory that we dynamically allocate earlier.
+
+510
+01:12:47.010 --> 01:12:49.470
+Nick Bowman: That the computer isn't smart enough to say, oh,
+
+511
+01:12:49.830 --> 01:13:03.960
+Nick Bowman: I have a pointer member variable and oh really pointing to something using new so like I need to clear it up. I guess it doesn't have that capability. Right. And so, so yes, you do have to explicitly say hey in the structure when you're ready to clean up like call the belief
+
+512
+01:13:05.700 --> 01:13:06.630
+Demi Lei: God, thank you.
+
+513
+01:13:15.240 --> 01:13:16.830
+kylie jue: If you have another question or what's that
+
+514
+01:13:17.160 --> 01:13:17.850
+edouard des: No, I did it.
+
+515
+01:13:19.140 --> 01:13:20.580
+edouard des: Yeah, I'm specifically
+
+516
+01:13:21.600 --> 01:13:33.510
+edouard des: On on also the hexadecimal little on zero x thing is exactly the same as using hashtag symbol and like something like 100 GB but a hex code colors. Correct.
+
+517
+01:13:35.970 --> 01:13:36.660
+edouard des: If you're familiar with that.
+
+518
+01:13:37.110 --> 01:13:39.300
+kylie jue: I think so.
+
+519
+01:13:39.360 --> 01:13:40.560
+edouard des: Yeah.
+
+520
+01:13:40.710 --> 01:13:52.920
+edouard des: They couldn't let us use yeah we're using it for free compiler pre processor decorated whatever they're called right the hashtag thing. So we had to come up with something else. They can see right you're interested in that, or mind coming to that.
+
+521
+01:13:53.400 --> 01:14:07.530
+Nick Bowman: Yeah, I think that's a fine way to think about it hex colors are a little bit different because they specifically represent three individual RGB components, rather than like one overall number
+
+522
+01:14:07.920 --> 01:14:10.110
+Nick Bowman: One, but it's the same. I like each each
+
+523
+01:14:10.290 --> 01:14:16.410
+Nick Bowman: RGB component is represented as an X number somewhere between zero and 128 or
+
+524
+01:14:16.890 --> 01:14:18.930
+edouard des: Whatever I think so. Yeah, something like that.
+
+525
+01:14:19.470 --> 01:14:27.450
+edouard des: And but they just they get the. Yeah. Okay. That makes sense. And also hex. I like numbers, take the same amount of space in the computer memory as regular
+
+526
+01:14:27.840 --> 01:14:34.500
+edouard des: As any other number that is represented differently. Correct. Yeah. Okay, so there's no there's no memory advantage.
+
+527
+01:14:34.950 --> 01:14:48.030
+edouard des: On also if we made a custom class and we wanted to give it a pointer and we use little like asterisk notation thing. Would that work, or do we need to have like some kind of construct or to tell it what to do if against that operator.
+
+528
+01:14:49.230 --> 01:14:57.150
+Nick Bowman: No, no, it'll work. What will see that tomorrow we'll define our own struck tomorrow and then just declare use the new keyword with a struct, and it'll, it'll just work.
+
+529
+01:14:57.930 --> 01:15:05.490
+Nick Bowman: The same way as a few as had like sort of default initialized. If you just created a variable of that type. Right. The new keyword doesn't
+
+530
+01:15:06.030 --> 01:15:16.860
+Nick Bowman: The new keyword does the exact same thing as you would have if you're just declared the variable. Normally, it just puts the memory in a different location right so if you have no constructor specify the just as default initialization of things.
+
+531
+01:15:17.460 --> 01:15:29.820
+edouard des: So it doesn't like make like a separate class like string store is not a separate class. Yeah. So then class from just regular string like it's the same class just with a special prayer, but there's no like special configuration.
+
+532
+01:15:29.850 --> 01:15:33.690
+Nick Bowman: Done. It's normally a class. It's a type
+
+533
+01:15:34.110 --> 01:15:37.140
+Nick Bowman: Of right it's a type that stores and memory address
+
+534
+01:15:37.470 --> 01:15:40.590
+Nick Bowman: And specifically, the reason why we have different pointer types for
+
+535
+01:15:40.590 --> 01:15:53.340
+Nick Bowman: Different variable types is because it says this is a memory address of a string or this is a memory address of the imager or tomorrow right when we define our customers truck. It's this is the memory address of an instance of our stroke and
+
+536
+01:15:55.200 --> 01:15:56.460
+edouard des: Try to put something else, then
+
+537
+01:15:58.170 --> 01:15:58.800
+Nick Bowman: Sorry, what's up.
+
+538
+01:15:59.340 --> 01:16:06.420
+edouard des: If you try to put something else in a string there, it won't like if you try to, if you could do that if you try to do reference it and put like an integer there.
+
+539
+01:16:06.810 --> 01:16:09.330
+Nick Bowman: It would probably get upset. Yeah, that would be bad. That's, that's not a lot
+
+540
+01:16:09.450 --> 01:16:10.320
+Nick Bowman: Yeah, and that's that's
+
+541
+01:16:10.350 --> 01:16:12.570
+Nick Bowman: Like, that's why the type specific things are there.
+
+542
+01:16:12.870 --> 01:16:18.570
+edouard des: Okay, and that's just a CSM since it's a c++ thing and also my phone fashion.
+
+543
+01:16:20.580 --> 01:16:31.530
+edouard des: We want. Oh, yes. Also, final question, just out of curiosity, the garbage value is, where do they come from, like, is the computer just sort of being like, I'm going to give them something random because he wants something or
+
+544
+01:16:31.680 --> 01:16:38.130
+Nick Bowman: No it's, it's literally what already exists in that memory, right. It's like whatever remnants are leftovers or whatever things already existed that
+
+545
+01:16:38.460 --> 01:16:38.970
+edouard des: When you can
+
+546
+01:16:39.570 --> 01:16:40.050
+Nick Bowman: It's not
+
+547
+01:16:40.140 --> 01:16:48.150
+Nick Bowman: It's not trying to give you a garbage. It's just giving you memory and saying, okay, there might be something left over there right it's not it's not my job to clean that up for set up for you, right, like it's her doctor said
+
+548
+01:16:48.300 --> 01:16:56.550
+edouard des: Yes, so the computer were like when you declare variable, it'll look from Emory. It'll give you that piece of memory in the stack. It'll give you the address for it, but you won't see it unless you specifically wanted
+
+549
+01:16:57.030 --> 01:17:04.770
+edouard des: And it'll end, you'll get whatever is there, but that was something and other program wanted and just sort of like deleted. Instead, I don't want anyone to be a great movie. Yeah.
+
+550
+01:17:05.820 --> 01:17:06.450
+Nick Bowman: Yeah, pretty much.
+
+551
+01:17:07.170 --> 01:17:10.290
+edouard des: Natalie Cole library to generate random values, just to trick us that no
+
+552
+01:17:11.700 --> 01:17:13.650
+Nick Bowman: No, no, it's just, it's just what already exists there.
+
+553
+01:17:14.580 --> 01:17:15.870
+edouard des: Because I have a good day.
+
+554
+01:17:17.040 --> 01:17:17.370
+Nick Bowman: Thank you.
+
+555
+01:17:21.120 --> 01:17:22.230
+kylie jue: Jordan did you still have a question.
+
+556
+01:17:26.190 --> 01:17:27.300
+Jordan Lin: Oh no, sorry, I just
+
+557
+01:17:27.510 --> 01:17:28.770
+Jordan Lin: Have to hand out to me.
+
+558
+01:17:34.350 --> 01:17:42.960
+Kenneth Fischer: So my question isn't quite related to what we're talking about today, but I noticed in the assignment for some of the provided helper functions in the tests.
+
+559
+01:17:43.980 --> 01:17:53.550
+Kenneth Fischer: In the function declaration, we were using keywords static like static void feel curious static void empty and things like that and wondering what then
+
+560
+01:17:53.580 --> 01:17:55.200
+Kenneth Fischer: That keyword static means
+
+561
+01:17:57.000 --> 01:18:00.030
+Nick Bowman: Yeah, the keyword static when it relates to
+
+562
+01:18:01.470 --> 01:18:04.950
+Nick Bowman: Whenever relates to methods in c++
+
+563
+01:18:07.020 --> 01:18:12.630
+Nick Bowman: Is or functions in c++ it basically is saying.
+
+564
+01:18:14.730 --> 01:18:18.180
+Nick Bowman: Things was the best service rather it's basically saying something along the lines of
+
+565
+01:18:19.680 --> 01:18:29.400
+Nick Bowman: Like there is only like this function is not tied to like an instance of anything at all. Like there's sort of like one version of this function and it will sort of always have the same behavior.
+
+566
+01:18:29.850 --> 01:18:36.720
+Nick Bowman: And the reason so so most of the functions that we wrote for most of this concept until we got here were static, but you just didn't see it.
+
+567
+01:18:37.230 --> 01:18:41.640
+Nick Bowman: And the reason that we specified that keyword in the files.
+
+568
+01:18:42.030 --> 01:18:51.000
+Nick Bowman: For this assignment is because we are writing functions in a file that mostly contained like class implementations right like mostly mostly contained
+
+569
+01:18:51.330 --> 01:19:04.440
+Nick Bowman: Like methods that belong to classes. And so it's kind of just like specify that says like this method doesn't really belong to a classical and it's kind of just like standing on its own. It's kind of is to help her function to accomplish kind of a shared fast that you want to accomplish.
+
+570
+01:19:06.240 --> 01:19:17.610
+Nick Bowman: Yeah, I'm actually not super familiar with specifically with all the details of static and c++ are for the different as it relates to variables and as it relates to functions and things like that. But as far as I can remember, that's, that's a distinction
+
+571
+01:19:18.870 --> 01:19:20.520
+Kenneth Fischer: All right. I see. Thank you.
+
+572
+01:19:21.540 --> 01:19:21.930
+Nick Bowman: Yeah, for
+
+573
+01:19:28.020 --> 01:19:28.470
+Nick Bowman: Questions.
+
+574
+01:19:33.120 --> 01:19:33.450
+Thanks, a
+
+575
+01:19:35.520 --> 01:19:36.150
+Nick Bowman: Lot for today.
+

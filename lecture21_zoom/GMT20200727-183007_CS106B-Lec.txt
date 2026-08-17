@@ -1,0 +1,99 @@
+00:10:40	Hemant Chaudhary:	Recursion!
+00:10:42	shirley li:	Linked lists
+00:10:43	Kenny Wang:	uhhh maybe something to do with recursion
+00:10:47	louise marzolf:	Backtracking
+00:10:48	Kenny Wang:	or classes
+00:10:49	brianzhg@stanford.edu:	backtracking
+00:10:52	Kenneth Fischer:	Converting between different types of ADTs!
+00:10:55	Nadia Palar:	backtracking w/ OOP
+00:11:04	Tongjun (Albert) Zhang:	OOP
+00:11:27	Elan Smolar Eisenberg:	Backtracking or adts
+00:11:33	Jacob Knego:	backtracking
+00:11:42	ian rundle:	Finding the right ADT for certain tasks
+00:11:45	Jordan Lin:	Sorting algorithms
+00:18:54	Elan Smolar Eisenberg:	Sometimes I can’t compile the code because of the std/stanford library with cout. It says it can’t print out that type of object. Which ones can you print?
+00:20:19	kylie jue:	Objects that have explicitly defined what cost should look like for them can be used with cout (so ones where you’ve often defined the class yourself may not have that).  We won’t go over how to define the cout operator for our classes though
+00:20:36	kylie jue:	*Cout not cost
+00:24:22	Kyle Thomas Booker:	nodes vs cells?
+00:24:43	kylie jue:	They’re the same here!
+00:24:50	Pepe Bolorinos:	What was mean and sd of mid quarter evaluation?
+00:24:54	kylie jue:	(You can basically call the struct anything you want)
+00:25:09	kylie jue:	@Pepe we’ll discuss mid-quarter evaluation during announcements
+00:25:16	Pepe Bolorinos:	oki thanks
+00:25:17	Elan Smolar Eisenberg:	Is there a toString type function we could use?
+00:26:09	kylie jue:	@Elan not one that just works for every type.  You’d have to define it for your class (or struct).  But there are some conversion functions for types like int/double/boolean
+00:34:43	Kenneth Fischer:	What makes that difference from 16-64k elements? Is it purely based on RAM?
+00:35:07	kylie jue:	@Kenneth I think there are other factors but RAM is the primary part of it yes.
+00:36:09	christopher cooper:	Because of the stack frame issue, should we always try to use a while loop in place of a recursive function?
+00:36:31	kylie jue:	Yes for traversal generally a while loop is better.  Unless you know for sure that your linked list will be small
+00:37:32	christopher cooper:	Thank You
+00:38:03	George Halal:	Is assignment 5 the last one?
+00:38:23	kylie jue:	No there are 6 assignments
+00:38:34	Jordan Lin:	Are LaIR hours suitable for final project ideas?
+00:38:37	Samuel Lynn Ledden:	where do we check our diagnostic grades?
+00:38:41	kylie jue:	@Jordan yes!
+00:38:47	Evan F Davis:	Where can you find the diagnostic grades?
+00:38:53	Elan Smolar Eisenberg:	What’s gradescope?
+00:39:04	yukun yang:	Is there a mean and a standard deviation of the grade for midterm diagnostics?
+00:39:09	kylie jue:	@Samuel/Evan/Elan you should have received an email through Gradescope with a link to your diagnostic score
+00:39:23	kylie jue:	@Yukun will answer out loud
+00:39:57	Kenny Wang:	so I am confused / disagree about one of the problems on the exam - can I discuss it in office hours or should I just submit a regrade request?
+00:40:26	kylie jue:	@Kenny you can come talk through it during OH and then we can help you assess if a regrade request is appropriate if you’re not sure
+00:40:36	Kenny Wang:	alright, thanks
+00:40:49	Demi Lei:	can we see the score we got on each problem? and where can we find them if that's a yes
+00:41:42	Liza George:	gradescope shows the full point breakdown, and any written feedback you might get too
+00:42:06	kylie jue:	Answered out loud!
+00:43:25	Ryan Bernstein:	For assignment 4, can we use recursion? Or no?
+00:44:01	kylie jue:	@Ryan you might run into memory issues if you do it recursively so the iterative solution works better in this case
+00:44:11	Ryan Bernstein:	ok
+00:46:23	Kyle Thomas Booker:	Rip trip
+00:46:34	Kenny Wang:	"I just got yeeted to the land of leaked memory" - Trip 2020
+00:48:13	Liza George:	wait we could write those first three lines in one line right?
+00:48:34	Michael M Hu:	How does c++ differentiate between & used to pass a pointer by reference and the other & use for pointers?
+00:48:58	kylie jue:	@Liza Sorry it went away too fast for me to see it - do you mean the initializing of Node?
+00:49:06	Liza George:	yes
+00:49:07	kathleen bryan:	so if you hand’t passed by reference then you’d be unable to change where it was pointed correct?
+00:49:15	Kenny Wang:	remind me how long we have to submit a regrade request?
+00:49:24	kylie jue:	@Michael it depends the context in which it’s used
+00:49:31	kylie jue:	@Kathleen yes exactly
+00:49:50	kylie jue:	@Liza yes you could do that in one line
+00:49:55	Dominic Lo:	Could we just change list->data and list->next instead of making a new node pointer?
+00:50:04	kylie jue:	@Kenny this Wednesday at 11:59pm
+00:50:30	kylie jue:	@Dominic not within the helper function because the list variable is different from the list in the outer function
+00:50:54	Dominic Lo:	But isn't it referenced?
+00:51:11	Junhao Wang:	when we are traversing, since we are passing the value, the linked list wont be modified?
+00:51:57	Elan Smolar Eisenberg:	Is there any way to see the questions from the test again?
+00:52:04	kylie jue:	Oh sorry I misunderstood your question - yes that works if you only are currently pointing to null pointer. But if there’s already an existing list when you call prependTo, you need to make sure you’ll still have access to it
+00:52:10	kylie jue:	@Dominic^
+00:52:20	Dominic Lo:	Ok, got it
+00:52:40	kylie jue:	@Junhao Yes that’s true - but in our traversal examples we didn’t swat to actually edit the list itself
+00:52:46	kylie jue:	*want not swat
+00:53:14	kylie jue:	@Elan We released solutions on the course website that also includes the original questions
+00:59:18	Kenneth Fischer:	Do && and || have short-circuit evaluation?
+00:59:29	Kenneth Fischer:	In C++
+00:59:57	kylie jue:	yes
+01:02:30	kathleen bryan:	can you not use arrays outside of classes? I think I may have missed that
+01:02:40	Elan Smolar Eisenberg:	*tuesday
+01:02:42	kylie jue:	You can also use arrays outside classes!
+01:02:50	Lawrence Li:	thank you
+01:02:52	Kevin H Fan:	Thank you!
+01:02:57	Angela Zhang:	Thank you!
+01:03:03	Guozhen Miao:	thank you
+01:03:03	Jennifer Anna Bonello:	Thanks
+01:03:13	Aadi M Rane:	next class will be all "sorts" of fun!
+01:03:35	Michael M Hu:	Was our diagnostic was graded by our section leader?
+01:03:45	Kenny Wang:	LaIR for minors seems to be full … any other way I can talk about my exam problem?
+01:04:02	kylie jue:	@Michael: not necessarily - different section leaders did each problem
+01:04:15	kylie jue:	@Kenny: LaIR only opens up at 5pm
+01:04:19	kylie jue:	*7pm for minors
+01:04:20	Kenny Wang:	aha okay
+01:04:26	kylie jue:	(At least today)
+01:04:34	kylie jue:	There’s also minors lair at 9am tomorrow morning
+01:04:38	Kenny Wang:	will it be the same tomorrow?
+01:04:38	Liza George:	Can we use smth similar to the append method to  insert an element into the middle of the linked list? Just also change the next pointer of what we're inserting to the next element in the list?
+01:04:56	kylie jue:	@Kenny tomorrow minors lair starts at 5pm (adult/minors swaps each day in the evening)
+01:05:06	Kenny Wang:	okay, perfect
+01:05:22	kylie jue:	@Liza we’ll actually cover insertion into the middle of the linked list tomorrow!  But yes it will be similar
+01:05:30	Liza George:	Oh ok, thank you!
+01:08:05	Liza George:	is the difference between var++ and ++var in c++ the same as in java?
+01:08:17	kylie jue:	@Liza I’m actually not sure how they work in Java

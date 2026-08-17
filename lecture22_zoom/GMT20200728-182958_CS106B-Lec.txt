@@ -1,0 +1,85 @@
+00:10:03	Jordan Lin:	... batch renaming files :P
+00:10:04	Dima Timofeev:	Watering plants when on vacation.
+00:10:15	Elan Smolar Eisenberg:	Organizing and viewing data
+00:16:24	Kenny Wang:	what if we kept track of the tail node
+00:17:34	Nick Bowman:	Yes, that’s the right idea! We’ll see how to do so right now.
+00:20:09	Elena Williams:	Is this O(N)?
+00:20:13	Nick Bowman:	Yes!
+00:20:20	Elena Williams:	thanks!
+00:20:27	Nick Bowman:	Each individual append is now O(1) only requires a single pointer rewiring operatin
+00:26:40	Jordan Lin:	Shouldn't we first convert the data to lower case?
+00:26:53	Jordan Lin:	Since in c++ the case affects alphabetical sort
+00:27:16	Nick Bowman:	The comparison operator will enforce correct ordering based on the casing – i you wanted a case-agnostic sort then yeah you should probably toLowerCase everything
+00:27:49	Nick Bowman:	In this case however it will still be true that “Nick” > “Kylie” and “Nick” < “Trip"
+00:29:34	Akash Bhargava:	What if we use a do while loop rather than a while loop?
+00:30:13	Nick Bowman:	We won’t talk about do while loops specifically in this class, but you could certainly find a way to write this functionality using that kind of loop
+00:30:43	Akash Bhargava:	Okay, thanks!
+00:30:59	Liza George:	this function was still O(n) right?
+00:31:13	Liza George:	**^ alphabeticalAdd
+00:31:33	Nick Bowman:	Yes, the alphabeticalAdd is necessarily O(n) since we need to search the whole list to find the right place to insert
+00:31:45	Nick Bowman:	Unfortunately there’s no clever workaround like with the tail pointer on appending to the back
+00:32:07	Liza George:	ok, thanks!
+00:33:26	Aadi M Rane:	if you delete cur, then why can you point prev to cur?
+00:34:36	Nick Bowman:	That’s a good point, I think there might be an issue here with potentially removing multiple consecutive elements in the list.
+00:34:44	Pepe Bolorinos:	What about making sure that cur is not nullptr?
+00:34:47	Nick Bowman:	Let me look into it after class and we’ll make sure to post a correct version!
+00:34:57	Nick Bowman:	@Pepe that is guaranteed by the while loop
+00:35:27	Nick Bowman:	*while loop condition – the while loop will only execute if cur is not nullptr
+00:35:35	Pepe Bolorinos:	yep yep, misse that!
+00:35:38	Pepe Bolorinos:	thx
+00:38:11	Elan Smolar Eisenberg:	For regrades, are we supposed to change our answers or just ask for a second look?
+00:38:57	Nick Bowman:	You should only submit a regrade request if you believe the criteria has been misapplied to your submission. You don’t submit revised code – just an explanation about why you think the criteria may have been misapplied.
+00:42:44	Siddharth Balaji:	Would it be more efficient to run a selection sort iteratively or recursively?
+00:43:15	Samuel Lynn Ledden:	If we want guidance with our final projects but can't go to either LAIR or office hours, what should we do?
+00:43:21	Nick Bowman:	This one is probably more straightforward if implemented iteratively
+00:43:50	Nick Bowman:	If you can’t make it to any LaIR shifts or any instructor office hours, you can post privately on Ed or email your section leader
+00:44:42	Kenneth Fischer:	What's the difference between a comment like this: /* … */ and  a comment like this: /** … */?
+00:45:07	Nick Bowman:	No difference, I think its mostly individual programmer’s preference
+00:52:59	Sedef Emekli:	ok what was that
+00:53:02	Elan Smolar Eisenberg:	I can’t hear kylie
+00:53:04	Kenny Wang:	my ears
+00:53:05	Michael M Hu:	We can’t hear you, the video is very loud
+00:53:06	Thomas Tao Hale:	Hell
+00:53:12	Kyle Thomas Booker:	Galaga type beat
+00:53:14	Kevin H Fan:	My ears are bleeding
+00:53:15	Angela Zhang:	so this is what death sounds like...
+00:53:17	Ryan Gabel:	MY EARS
+00:53:19	Thomas Tao Hale:	OH GOS
+00:53:33	Kyle Thomas Booker:	Everywhere at the end of time
+00:53:36	Elan Smolar Eisenberg:	Yes we can hear it!
+00:53:39	Kevin H Fan:	OH GOD THE NON EXISTENT HUMANITY
+00:53:49	Ryan Gabel:	TURN THE SOUND DOWN PLEASE
+00:53:56	Kenneth Fischer:	I can't Kylie at all
+00:53:58	Thomas Tao Hale:	WHY???
+00:54:00	Liza George:	sorry kylie, but we can't hear what you just said
+00:54:01	Kenneth Fischer:	^can't hear
+00:54:06	Kyle Thomas Booker:	Alexa, play merge sort
+00:54:15	Thomas Tao Hale:	Oh the humanity!
+00:54:16	Kenny Wang:	LMAO
+00:54:19	Dominic Lo:	lol
+00:54:19	Kevin H Fan:	I’m deaf now
+00:54:36	Rohan Chowla:	i think i will pass on watching that again
+00:54:37	Kevin H Fan:	Even if I mute that YouTube video I will still be able to hear the sounds
+00:54:37	Kenny Wang:	https://en.wikipedia.org/wiki/Bogosort
+00:54:42	Kenny Wang:	"slowsort" "stupidsort"
+00:54:47	Aadi M Rane:	the best sort!
+00:54:51	Kevin H Fan:	Thank you!
+00:54:52	Angela Zhang:	Thank you!
+00:54:54	Tongjun (Albert) Zhang:	Thank you
+00:54:55	Jennifer Anna Bonello:	Thank you
+00:54:57	Michael M Hu:	Thanks!
+00:55:01	Shifeng Hong:	Thank you
+00:55:07	karan parikh:	wait so the diagnostic regrade is only if we have a problem with the way it was graded?
+00:55:14	karan parikh:	like its not a way to make up points
+00:55:25	Liza George:	this may be my misinterpreting the video, but it almost looked like insertion sort took more time than selection sort
+00:55:29	Nick Bowman:	No, regrade requests are only a way to remedy any mistakes made when grading
+00:55:47	Nick Bowman:	If you want to make up points, you can complete the optional extra component of the final project
+00:55:48	Liza George:	I thought that insertion sort was supposed to be 'better'
+00:57:53	Evan Baldonado:	Can you go over delete[] versus delete again, please?
+00:58:53	Nick Bowman:	@Liza Insertion sort is “better” depending on how presorted the data is. In this case, both sorts were operating on random data, and both are O(n^2) in the random/average case
+00:59:28	Evan Baldonado:	Thanks!
+00:59:34	Nick Bowman:	If you ran insertion and selection sort on input that was almost sorted (but not quite) then insertion sort would run a lot quicker
+00:59:38	Junhao Wang:	thank you
+01:02:50	Liza George:	(basically the same question - https://stackoverflow.com/questions/197675/how-does-delete-know-the-size-of-the-operand-array)
+01:03:05	Liza George:	that would be nice if we knew the sad tho :(
+01:03:10	Liza George:	**size

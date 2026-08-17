@@ -1,0 +1,121 @@
+00:10:01	Ryan Gabel:	zip files
+00:10:16	Thomas Tao Hale:	images
+00:10:19	Rohan Chowla:	zoom
+00:10:24	Lukas Fullner:	Neural nets
+00:10:27	Thomas Tao Hale:	sound
+00:10:31	Hemant Chaudhary:	Image compression
+00:10:35	Thomas Tao Hale:	Images of foo
+00:10:36	Thomas Tao Hale:	d
+00:11:16	Thomas Tao Hale:	Would you like some salt with your hashes?
+00:13:30	Siddharth Balaji:	After a certain number of characters, won’t a prefix code actually be bigger than the characters ASCII value?
+00:13:38	Siddharth Balaji:	Like if you have more than 8 edges
+00:13:47	Siddharth Balaji:	Wont it be bigger than 1 byte
+00:14:17	Nick Bowman:	@Siddharth yes, you may have some characters that have encodings that are longer than 8 bits. However, those would be for very infrequent characters and if your frequent characters had much shorter encodings, you could still get good comrpession
+00:14:25	Hemant Chaudhary:	When building our Huffman tree, does it matter whether we put the higher priority elements on the left or right if we follow merging the higher priority elements first?
+00:15:07	Nick Bowman:	The order doesn’t really matter but the standard practice is that the first element that is dequeued becomes the left subtree and the second element that gets dequeued becomes the right subtree
+00:15:32	Hemant Chaudhary:	Great thank you!
+00:15:52	Elan Smolar Eisenberg:	Wait, does that mean if there’s 1 and 9, do you dequeue 9? Or 1?
+00:16:10	Nick Bowman:	Same as with the PQueue assignment – 1 gets dequeued first
+00:16:19	Elan Smolar Eisenberg:	Ok thank you
+00:16:34	Nick Bowman:	You’ll use a PQueue implemented in the stanford’s libraries for the assignment so you don’t have to specifically worry about that
+00:16:39	Siddharth Balaji:	Is it possible to use a mix of both Huffman encoding and the ASCII values if there are characters that are bigger than 1 byte when a Huffman tree is used?
+00:17:23	Nick Bowman:	@Siddharth no, you can’t really mix encoding schemes that way because then you might end up with two different characters that have the same encoding
+00:25:27	Hemant Chaudhary:	Is the binary encoding of the tree on Slide 36: 1100100? (do we use inorder traversal?)
+00:26:01	Nick Bowman:	Do you mean how the tree gets flattened?
+00:26:45	Hemant Chaudhary:	Yes
+00:27:30	Nick Bowman:	Not quite – you’ll explore the exact way that the tree gets transmitted in the assignment warmup. You actually need two sequences to represent the tree in order to transmit. One is a pre-order traversal of the node structure and the other is an in-order traversal of the leaf nodes.
+00:28:08	Hemant Chaudhary:	Ah right its pre-order for the node structure, thanks!
+00:30:07	Siddharth Balaji:	Since hash functions have constant runtime can we use them for crazy fast sorting
+00:30:39	Kevin H Fan:	So I don’t have to submit my presentation for the final, just the write up?
+00:30:55	Nick Bowman:	Not quite – hashing is useful for a lot of things, but it generally is not great for ordering things since there is no guarantee about what hash values for different values will look like
+00:31:08	Nick Bowman:	@Kevin all you need to submit on Paperless is your report PDF
+00:31:19	Marcela Simone De los Rios:	Will there be YEAH hours for the next assignment?
+00:31:29	Nick Bowman:	Yes, tonight at 7pm.
+00:32:23	Gautham Rajesh:	When would someone use a set instead of a hashset?
+00:33:09	Nick Bowman:	I think Kylie will talk about that later in the lecture but sets (with the binary search tree backing) provide the nice property that if you want to iterate over all the elements, you get them in sorted order. HashSets don’t provide that guarantee at all.
+00:36:24	Shifeng Hong:	so we can trade space with speed？
+00:37:37	Nick Bowman:	Yes, the number of buckets is essentially a tradeoff between speed and space. More buckets means less collisions and better distribution = faster speed but more space taken up. Less buckets takes up less space, but inevitably results in less even distribution which slightly increases average lookup time
+00:39:43	Shifeng Hong:	got it，thanks
+00:42:48	Weiqi Yu:	I think it can be confusing that arrays and pointers both use * for their types, why do they design them in this way?
+00:43:14	louise marzolf:	Why can’t we use [] for arrays?
+00:43:59	Nick Bowman:	In the way that the underlying language is implemented an “Array” is really just an abstraction for working directly with contiguous chunks of computer memory, in a way that is slightly nicer than directly working with pointers. However, in essence since an array is just a location in computer memory, it makes sense that we use pointers to refer to them
+00:44:16	Nick Bowman:	@Louise You can use the [] syntax for arrays. Was there something that implied that you can't?
+00:44:37	Nick Bowman:	Sorry I guess I should clarify – what do you mean by the [] syntax?
+00:45:05	louise marzolf:	I just didn’t know we could use * as an array
+00:45:25	Nick Bowman:	Oh yes, arrays can be of any type and in this case we see that we have an array that stores type HashNode*
+00:45:55	louise marzolf:	Awesome thanks!
+00:49:00	Michael M Hu:	Did the add function handle collisions yet?
+00:49:51	Nick Bowman:	Yes, the add functions handles collisions by inserting into the front of the linked list of elements stored in a bucket
+00:50:02	Michael M Hu:	I see
+00:50:07	Nick Bowman:	That way, a single bucket can hold multiple elements, which resolves the collisions issue
+00:50:37	Michael M Hu:	What happens if you delete the array without deleting the pointers inside?
+00:50:54	Nick Bowman:	You will get memory leaks of all the hash nodes
+00:51:26	Kenny Wang:	what does HashNode** mean
+00:51:30	Kenny Wang:	pointer to pointer?
+00:51:43	Nick Bowman:	You can think of it as an array of HashNode* values
+00:51:54	Kenny Wang:	huh I see
+00:51:56	Nick Bowman:	But the other interpretation is that its a pointer to a pointer, yes
+00:53:37	Aadi M Rane:	does this mean you can have an arbitrary number of *'s for a pointer? Like can you have a pointer to an array of pointers (or a pointer that points to a pointer pointing to a pointer)? Does something like HashNode*** exist?
+00:54:00	Nick Bowman:	Yes, you can have as many levels of pointer indirection that you want. In practice, we almost never go beyond using ** though.
+00:54:12	Nick Bowman:	The usefulness of the extra levels o indirection disappears beyond that
+00:57:24	Thomas Tao Hale:	And this is to go even further beyond!…. HashNode********************
+00:57:54	Jordan Lin:	For hash functions that are extremely hard to decode without the function, are those functions usually really complex, or is it that the prime numbers it uses are just really large?
+00:57:59	Elan Smolar Eisenberg:	Where can I find the rules about the Huffman trees? Like can the two nodes be equal in value or do they follow the same over/under that are used in binary trees?
+00:58:53	Aadi M Rane:	what if you know the hash value AND the hash function somehow? that means you can get the original value?
+00:58:53	Kenny Wang:	this is incredible
+00:58:54	ian rundle:	My ears
+00:58:57	Nick Bowman:	@Jordan Great question! It depends – some hash functions are hard to reverse because they use large prime numbers and some are hard to reverse because they are rather complex to calculate.
+00:59:02	Thomas Tao Hale:	Oh cmon this song? YMCA horror flashbacks
+00:59:04	Kevin H Fan:	I just got this song out of my head after 2 years of pain
+00:59:04	Kenny Wang:	11/10
+00:59:05	Michael M Hu:	Art in its highest form
+00:59:07	Kevin H Fan:	Why do you do this
+00:59:12	Kyle Thomas Booker:	DODODOODODODO
+00:59:12	Hanna Mofid:	I'm living for this omg
+00:59:15	Sedef Emekli:	Why am I enjoying this
+00:59:16	Thomas Tao Hale:	Whyyyyyy???
+00:59:22	Jordan Lin:	You know that's pretty catchy
+00:59:38	Kenny Wang:	DOODOODOODOODOODOO
+00:59:43	Nick Bowman:	@Aadi even if you know the hash function and the hash value, good hash functions will make it very hard to reverse and find what the input is
+00:59:47	Thomas Tao Hale:	It reminds me of my 7 years of pain at the YMCA
+00:59:52	christopher cooper:	🦈
+00:59:53	Weiqi Yu:	I think a good hash function should not allow one to do the reverse process according to my amateur cryptography knowledge
+01:00:17	Elan Smolar Eisenberg:	Where can I find the rules for the Huffman trees? Can the nodes have equal values or do they follow the over/under rule that binary trees use?
+01:00:28	Nick Bowman:	@Elan I’m not sure what you’re referring to by Huffman tree rules – what do you mean by that?
+01:00:48	Nick Bowman:	The nodes themselves don’t store values – they are associated with priorities in the priority queue but we rely on the priority queue to order the nodes
+01:00:51	Liza George:	that's why the password-storage use of hashing works. we're trusting that giving our password hashed won't risk the original password being leaked
+01:01:06	Elan Smolar Eisenberg:	I meant with the priorities
+01:01:06	Liza George:	**the non-reversible thing
+01:01:09	Thomas Tao Hale:	Is there a red black tree for a Huffman tree?
+01:01:39	Nick Bowman:	@Liza exactly! And in particular, good security/cryptography doesn’t rely on secrecy of the hash function that is used. In fact, the worlds most used cryptographic hash functions are all publicly avialable
+01:02:01	Nick Bowman:	Yet it is still nearly impossible to reverse them – so even if you know the hashed password you can’t quickly figure out what the original password us
+01:02:05	Kenny Wang:	oooo Trip lecture
+01:02:07	Jordan Lin:	Can minors attend Trip's lecture?
+01:02:13	Trip (he/him):	No :(
+01:02:15	Nick Bowman:	@Thomas no, red-black trees and huffman trees are two totally different concepts
+01:02:21	Kevin H Fan:	Thank you!
+01:02:22	Weiqi Yu:	Thank you!
+01:02:22	Thomas Tao Hale:	Thats what I thought
+01:02:25	Tongjun (Albert) Zhang:	Thank you
+01:02:26	Kenny Wang:	oof :(
+01:02:27	Kyle Thomas Booker:	Trip lecture :) no minors :(
+01:02:27	Nick Bowman:	@Jordan, we’re going to stream it on an alternative platform for minors so that you can teach live
+01:02:32	Nick Bowman:	*watch live
+01:02:37	Aadi M Rane:	in general, hash functions are hard to construct, right?
+01:02:38	Nick Bowman:	More details will be sent out next Monday
+01:02:39	Sedef Emekli:	i wanna join trip’s lecture
+01:02:43	Liza George:	will it still be recorded?
+01:02:57	Trip (he/him):	yep
+01:03:02	Nick Bowman:	It will be recorded but there will also be an option to watch live
+01:03:09	Trip (he/him):	unless I forget to record it :o
+01:03:10	Nick Bowman:	It just won’t bedireclty through zoom as normal
+01:03:13	Liza George:	cool, thanks.
+01:03:44	Nick Bowman:	@Aadi yes, constructing good hash functions is hard. In CS, you normally won’t construct your own but rather rely on predefined ones that are part of a library someone else has written
+01:03:50	Nick Bowman:	usually a smart mathematician lol
+01:04:22	Liza George:	wait are we actually going to use hash functions in this quarter or was it just the fun thing kylie was talking about?
+01:04:57	Nick Bowman:	@Liza you won’t be implementing anything with hash functions – it’s just a very important topic that you we wanted to get you familiarity with moving forward form this class
+01:05:03	Aadi M Rane:	is there a hash function implemented in the Stanford cpp library, im just curious
+01:05:13	Nick Bowman:	“use a hash table” is often times the answer to 9-% of interview questions
+01:05:16	Nick Bowman:	*90%
+01:05:38	Nick Bowman:	@Aadi I believe so, you might have to look in the HashSet source code to see what hash function is sued ther
+01:05:41	Nick Bowman:	*used there

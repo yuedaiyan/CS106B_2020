@@ -1,0 +1,2138 @@
+WEBVTT
+
+1
+00:00:21.630 --> 00:00:30.990
+kylie jue: Alright, I'm just go ahead and get started. So welcome back to classrooms and we're going to finish up this week.
+
+2
+00:00:31.560 --> 00:00:42.570
+kylie jue: By talking about dynamic memory Andres. And so today's question is related back to yesterday. And so we finally started talking about classes kind of formally
+
+3
+00:00:43.140 --> 00:00:57.180
+kylie jue: This idea of abstractions, being able to bundle information and represent sort of real life phenomena and so go ahead and put in the chat sort of what examples of classes and attractions and have you started to see and notice or come across in your day to day life.
+
+4
+00:00:58.560 --> 00:00:58.980
+kylie jue: Alright.
+
+5
+00:01:00.570 --> 00:01:08.820
+kylie jue: So where we are today we're going to be talking about finally crossing the obstruction boundary and talking about this idea of arrays and dynamic memory management.
+
+6
+00:01:11.160 --> 00:01:19.650
+kylie jue: And the real question is, today, sort of, what are the fundamental building blocks for data storage and data management that c++ provides to us.
+
+7
+00:01:20.490 --> 00:01:31.980
+kylie jue: By sort of learning about these fundamental building blocks will finally be able to cross over the abstraction boundary and actually start to be able to like implementing our own data structures and classes in general.
+
+8
+00:01:33.390 --> 00:01:41.820
+kylie jue: And so we're going to do some review of the classes stuff. I'm going to do another sort of in depth class example with working with the bank account. And just to introduce
+
+9
+00:01:42.180 --> 00:01:44.520
+kylie jue: A couple of components of classes that we didn't get to yesterday.
+
+10
+00:01:44.970 --> 00:01:49.980
+kylie jue: And then we'll start talking to my dynamic allocation and arrays and that'll be sort of our fundamental building blocks.
+
+11
+00:01:50.280 --> 00:02:04.410
+kylie jue: And then we'll get started on implementing this class called our vector. I'm going to be sort of our very own implementation of it after class and and that will be a read into one day we will actually spend pretty much all of lecture just implementing that class.
+
+12
+00:02:05.790 --> 00:02:13.830
+kylie jue: And so the review yesterday. Right. So we we've been talking about this idea of abstraction all courted along so far and everything that we learned about
+
+13
+00:02:14.340 --> 00:02:22.560
+kylie jue: Up until now, was was abstractions was these things that sort of hit the complexity of how things work while while still allowing us to like build powerful things on top of it.
+
+14
+00:02:23.160 --> 00:02:32.640
+kylie jue: And and the way that abstraction formally shows up in c++ is this idea of classes. And so we saw classes as this way of defining new data types.
+
+15
+00:02:33.000 --> 00:02:42.870
+kylie jue: And it for our programs to us and we talked a little bit about, you know, classes versus trucks with the differences and I'll actually revisit that with the bank account example at the end.
+
+16
+00:02:43.320 --> 00:02:47.340
+kylie jue: So if you're still sort of unsure, why you would ever want to use one over the other. We'll, we'll talk about that.
+
+17
+00:02:48.690 --> 00:02:51.420
+kylie jue: But what classes gave us was this idea of encapsulation.
+
+18
+00:02:52.290 --> 00:02:58.530
+kylie jue: Encapsulation to this idea where we can sort of group related information relevant functions that operate on that information.
+
+19
+00:02:58.830 --> 00:03:07.530
+kylie jue: And sort of bundle that all together into one unit right into this one class and we also gain the ability to define where and when information is accessible.
+
+20
+00:03:07.800 --> 00:03:16.620
+kylie jue: And so it sort of is a very important factor, being able to define this sort of interface where communication boundary between our implementation and the clients that are using it.
+
+21
+00:03:18.930 --> 00:03:25.260
+kylie jue: So we've already seen a ton of classes right I've all the teams that we work with so far and vector is map stacks and Q's
+
+22
+00:03:25.620 --> 00:03:34.650
+kylie jue: And we, but what we saw yesterday was that every class actually has two parts, one that we've seen so far, which is the interface. So these are the functions you can use
+
+23
+00:03:34.980 --> 00:03:45.000
+kylie jue: And the base in general just the operations that you can do on a certain class and that interface is the attraction boundary that is the boundary that we look at. And that we're about to cross over.
+
+24
+00:03:45.480 --> 00:03:50.850
+kylie jue: And on the other side of that boundary right is the implementation. This is what actually sort of defines how these things work.
+
+25
+00:03:52.920 --> 00:04:01.530
+kylie jue: And we talked about this difference for structuring classes have different defaults about how they make information available, you know, structure default to having public information.
+
+26
+00:04:05.220 --> 00:04:09.630
+kylie jue: And we'll see, like I said, we'll see that short sort of show up on our bank account example.
+
+27
+00:04:14.880 --> 00:04:27.570
+kylie jue: Yeah, sorry. So the classes as the base of the main difference. We've seen between structured classes and that they just have different defaults and how their information is accessible so structured, we assume that
+
+28
+00:04:28.110 --> 00:04:39.780
+kylie jue: All their information is going to be public, whereas for classes, the information itself is private. But then we we implement an interface of functions to actually give access to that information in a controlled manner.
+
+29
+00:04:41.610 --> 00:04:54.930
+kylie jue: And we also thought about this idea as classes as blueprints for objects. And so we were able to create lots and lots of instances or you're a lots of vectors, lots of sets, things like that. Every single one of those things that we create is an instance of those classes.
+
+30
+00:04:56.280 --> 00:05:06.900
+kylie jue: And then we also saw them when we were designing classes, there's a sort of three main components and we had the member variables. So, this is what sort of stores the data stores the information within the class.
+
+31
+00:05:07.560 --> 00:05:12.120
+kylie jue: For classes, specifically where we're going to reiterate that they're usually not accessible outside the class.
+
+32
+00:05:12.750 --> 00:05:19.590
+kylie jue: And but then we had member functions, this idea of methods which are the things that we can do on the class, the actions that we can take
+
+33
+00:05:19.890 --> 00:05:24.930
+kylie jue: And those are most often public right because that's what actually allows people to do something interesting with our classes.
+
+34
+00:05:25.530 --> 00:05:32.160
+kylie jue: And then we had the constructor and we didn't see an explicit example of a constructor yesterday, but we'll see that come up with, with our bank account example on a second.
+
+35
+00:05:32.670 --> 00:05:39.660
+kylie jue: And that's just what what actually creates a new instance when you declare something like a vector or set or any other classes.
+
+36
+00:05:41.430 --> 00:05:50.490
+kylie jue: So we talked about designing a class requires answering questions about each one of these three areas and we give you a little bit of an example yesterday of designing a Spotify playlist.
+
+37
+00:05:50.700 --> 00:06:01.140
+kylie jue: And we actually also asked you to design a bank account yesterday, specifically with this example today in mind. So we can actually kind of come in kind of primed and ready to think about how to answer each of these three questions for designing a bank.
+
+38
+00:06:03.000 --> 00:06:11.910
+kylie jue: And then the sort of last part that we saw yesterday was how to, how do we actually make classes in c++. So some of you may have had exposure to classes before in Java or Python.
+
+39
+00:06:12.300 --> 00:06:16.920
+kylie jue: And classes and c++ and do you look kind of distinctly different in a couple of ways.
+
+40
+00:06:17.700 --> 00:06:24.480
+kylie jue: One is that there's always sort of these two steps and step one is always to create the header file that's sort of what defines the interface.
+
+41
+00:06:24.720 --> 00:06:29.490
+kylie jue: Defines the operations. The class can perform and also defines what sort of internal member variables. It has
+
+42
+00:06:30.030 --> 00:06:37.260
+kylie jue: And then you have a separate file that actually has the implementation that actually like says how to do each of those things that you're promising a client that you can do.
+
+43
+00:06:38.220 --> 00:06:50.880
+kylie jue: And then we've we've seen this a lot already. But then you all you have to do is you pound include the header file and that gives you all of the access to the class and it gives you the ability to refer to the class functions and methods and constructor and all that good stuff.
+
+44
+00:06:52.950 --> 00:07:00.210
+kylie jue: And so kind of the takeaways that we saw yesterday. Right. And we saw that when we're declaring
+
+45
+00:07:01.590 --> 00:07:10.590
+kylie jue: member variables in the header file right they become accessible in methods that we defined in the implementation file. So it was a really critical component. And we'll see that come up again today.
+
+46
+00:07:11.220 --> 00:07:22.590
+kylie jue: And remember, we saw the member variables for classes should almost always be private and c++ will allow you to make them public. But if you start making your member variables public you're breaking that attraction boundary
+
+47
+00:07:22.860 --> 00:07:32.580
+kylie jue: You're exposing your, your information directly to the client. And it kind of gives them free range to do whatever they want with it. But generally it's not the sort of safest or cleanest way to design class.
+
+48
+00:07:33.810 --> 00:07:47.910
+kylie jue: We talked about this idea of implicit parameters. So like when we call like like we have a vector name V and we say V. Add the V sort of this implicit parameter that tells the methods of the class. Hey, this is this specific instance that I have this factor that I want you to do.
+
+49
+00:07:48.960 --> 00:07:57.300
+kylie jue: And we also saw sort of this idea of a default constructor, which is if you don't specify a constructor, you'll get all your variables. Remember variable sort of initialized a default
+
+50
+00:07:59.190 --> 00:08:01.830
+kylie jue: And so let's look at an example. And so
+
+51
+00:08:06.240 --> 00:08:16.320
+kylie jue: Zoom in, so that everyone can see this and and so sort of what what I want to show off here is this idea of just designing your bank account and
+
+52
+00:08:16.800 --> 00:08:22.500
+kylie jue: Hopefully, when you guys had a chance to discuss with your breakout rooms yesterday and you came across this notion of
+
+53
+00:08:23.130 --> 00:08:33.450
+kylie jue: You know, thinking about what should have bank accounts store. What you represent. And in this example, we're just going to say that a bank account only has two components that has the name of the owner and it has the amount that's currently stored in it.
+
+54
+00:08:35.010 --> 00:08:41.910
+kylie jue: And so before yesterday's lecture, maybe like a natural way that we would have represented that as we would have represented this information with a struct.
+
+55
+00:08:42.480 --> 00:08:49.890
+kylie jue: Super easy to bundle up together the name and the account and and theoretically it would give us some of the sort of functionality that we would want
+
+56
+00:08:51.060 --> 00:08:58.680
+kylie jue: And so I have a little demo here that sort of shows how maybe we might have used those strikes right so we could have created two strokes.
+
+57
+00:08:59.220 --> 00:09:07.080
+kylie jue: initialize them. One of them to have Nick be the owner and I would have $100 in it. The other would have Kylie as the owner, I would have $1,000 in it.
+
+58
+00:09:07.710 --> 00:09:16.410
+kylie jue: And then let's just say we wanted to do something. So we wanted to say, all right, you know, one of our accounts. Someone just got a paycheck. So let's deposit some money. Do it.
+
+59
+00:09:16.980 --> 00:09:24.630
+kylie jue: Great. We could do that. We just directly access the amount modify it increase it all looks good. And same thing if we want to take out money.
+
+60
+00:09:25.200 --> 00:09:32.880
+kylie jue: So Kylie wants to buy a new dog stroller. She would withdraw some money from her account and she would just do that by by decreasing the amount of money that she has in there.
+
+61
+00:09:34.800 --> 00:09:47.940
+kylie jue: But then things. The problem with structure is they don't provide good encapsulation. Right. They don't provide good clear, defined access of what it means and to be able to have valid data a valid or sort of well form data.
+
+62
+00:09:48.390 --> 00:09:57.090
+kylie jue: And so say you know I want to go to Costa Rica on a Hangout with some sloss plane tickets, a pretty expensive. And I say, all right, I'm going to take $2,000 out of my account.
+
+63
+00:09:57.720 --> 00:10:06.660
+kylie jue: And and it works and nothing nothing bad happens, but this is really bad, right, like I didn't have nearly enough money in my account to do that.
+
+64
+00:10:07.230 --> 00:10:13.410
+kylie jue: There's really no reason, I should be able to do this, but because I have direct access to my bank account balance, I can just make it go negative.
+
+65
+00:10:13.920 --> 00:10:23.370
+kylie jue: And probably the bank that is controlling my bank account really doesn't want that. Right. They don't want basically to be owing me money because I've made my account negative
+
+66
+00:10:24.540 --> 00:10:35.160
+kylie jue: So that's bad. Another thing that could be bad to say maybe I wanted to transfer some money to college for lunch. So say right here, Kylie here's $20 and Kylie takes the $20 and puts it in your account.
+
+67
+00:10:36.270 --> 00:10:43.530
+kylie jue: But what are we forget. Well, we forgot to actually take the money out of my account. And so this money is sort of just appears out of nowhere. Just also really bad.
+
+68
+00:10:43.980 --> 00:10:49.290
+kylie jue: And so if you ever have a more complex operation that involves changing multiple pieces of information.
+
+69
+00:10:50.190 --> 00:11:01.440
+kylie jue: It's probably really bad to be able to do one without doing the other and so structure don't provide any way for you to sort of bundle up those actions into one single function and and then I can just, I can just do all kinds of
+
+70
+00:11:04.950 --> 00:11:09.780
+kylie jue: Me, I can change my name, there's there's absolutely no access control sort of stopping me from doing so.
+
+71
+00:11:11.010 --> 00:11:15.300
+kylie jue: And so, you know, I can do all of these things. And if I run this run this demo really quick.
+
+72
+00:11:16.800 --> 00:11:22.590
+kylie jue: You'll see that the end state of the world, in this case is just really, really bad right like
+
+73
+00:11:22.920 --> 00:11:31.650
+kylie jue: I my name. Somehow there's two Kylie's one of them has negative money. The, the total amount of money doesn't add up. Like, it's all kind of just a huge mess right
+
+74
+00:11:32.280 --> 00:11:41.400
+kylie jue: And so even though you could represent a bank account with destruct right in reality in sort of the real world in large sort of complex systems. It's a really, really bad idea to do so.
+
+75
+00:11:42.510 --> 00:11:47.640
+kylie jue: So let's, let's try to do it better. And let's try to actually define this bank account as a class.
+
+76
+00:11:48.240 --> 00:11:54.540
+kylie jue: And so if you remember right, the two components of what we need to do that is a dot h file and a dot cpp file.
+
+77
+00:11:55.230 --> 00:12:04.110
+kylie jue: And these are provided partially filled in for us. And I want to walk you through what's already existing here to understand what's here and what's missing and that we need to fill in.
+
+78
+00:12:05.370 --> 00:12:13.410
+kylie jue: What we see this here ready and what will be very common and this will happen on your assignment and oftentimes will happen when you're working on a job or a project.
+
+79
+00:12:13.860 --> 00:12:25.800
+kylie jue: Is someone will provide an interface for you, like, they will tell you, I need these functions. I need to be able to deposit to withdraw to transfer need to be able to get my account and get my name.
+
+80
+00:12:26.310 --> 00:12:38.400
+kylie jue: And they basically tell you, I need to be able to do these actions. And so, so on the assignments will give you a partially completed header file and will say you're defining this class in this class has to have these these public actions.
+
+81
+00:12:40.260 --> 00:12:50.340
+kylie jue: But what's missing is there's no, you know, you know, no one is telling you how you, how you accomplish that. And so no one tries to sort of dictate. Okay, these are the private pieces of information that you have to store.
+
+82
+00:12:51.030 --> 00:12:57.750
+kylie jue: And so the very first component of our class design, right, if we remember our first question about member variables and it's
+
+83
+00:12:58.350 --> 00:13:03.330
+kylie jue: Yeah, our first question about number of variables is what sub variables makeup this new type right
+
+84
+00:13:03.900 --> 00:13:14.730
+kylie jue: And so if we think about in this example, right, if we think back to our structure structure or two pieces of information. So probably makes sense for our class to store two pieces information right and and call those name.
+
+85
+00:13:15.810 --> 00:13:16.980
+kylie jue: And account or
+
+86
+00:13:20.220 --> 00:13:30.750
+kylie jue: And so what we see here, right, is it is for now it's, it looks like we've completed our age file right we've defined all the methods that should be applicable, we have kind of our boilerplate information.
+
+87
+00:13:31.560 --> 00:13:37.200
+kylie jue: In our class definition right, all that stuff usually will be provided for you, but it's good to just make sure that it's there.
+
+88
+00:13:37.800 --> 00:13:40.770
+kylie jue: And we finally we filled in the important component. We've said okay
+
+89
+00:13:41.340 --> 00:13:43.590
+kylie jue: These are the pieces of information we need to keep track of.
+
+90
+00:13:43.860 --> 00:13:56.490
+kylie jue: And these this is sort of the private information that my class methods will be able to manipulate, but someone outside of the class won't be able to touch and that sort of the exactly the encapsulation. And the access control that we gain working with classes.
+
+91
+00:13:57.690 --> 00:14:09.300
+kylie jue: And so then let's hop on over to the cpp file, right. So again, there's some things here already, and there is, remember our pounder include we need to include the header file to get the class definition.
+
+92
+00:14:09.990 --> 00:14:23.880
+kylie jue: And then we see sort of again the kind of weird syntax that we saw yesterday, which is that when we're defining all of our methods here when we're about to fill them in. We always we always have to preface them with this class name and then the scope resolution operator.
+
+93
+00:14:25.620 --> 00:14:37.170
+kylie jue: The scope resolution opportunities to Colin's they basically tell us this function belongs to the bank account class. It has all the privileges of the bank account class. It can access all the private information to the bank account class.
+
+94
+00:14:37.500 --> 00:14:50.310
+kylie jue: And when someone goes to instantiate a bank account object and they call the withdrawal method. This is where you go to find the instructions for that method. And so that is sort of very important when we define all of these methods.
+
+95
+00:14:51.450 --> 00:15:02.370
+kylie jue: The first thing that we see that's different from yesterday is we have a function that just looks plain weird. It would function whose name is bank account colon colon bank account was like what the heck is this
+
+96
+00:15:02.820 --> 00:15:09.330
+kylie jue: And so this is a constructor and so constructors always have this slightly kind of weird obscure syntax.
+
+97
+00:15:09.660 --> 00:15:21.630
+kylie jue: Where they still need the original class name and the scope resolution operator, but the literal name of the function, the function that is actually that makes up the constructor is also the name of the class itself.
+
+98
+00:15:22.020 --> 00:15:29.070
+kylie jue: And so you if you ever see a function prototype that begins with something like that. That's a good way to sort of identify the constructor.
+
+99
+00:15:29.640 --> 00:15:37.350
+kylie jue: And it's always the constructor job given some information. Right. So given someone's name and their initial balance that they have
+
+100
+00:15:37.950 --> 00:15:51.300
+kylie jue: It's the it's the constructors job to to initialize these private number of variables, right. Remember we talked about yesterday. If you don't define a constructor. You get default values for these things. Right. So you might get the empty string or things like that.
+
+101
+00:15:52.350 --> 00:15:58.020
+kylie jue: But if we want to have meaningful information stored in those values from the very beginning, the constructor is the place to do it.
+
+102
+00:15:58.710 --> 00:16:09.720
+kylie jue: And the thing that I'll point out is the constructor also needs to be prototype that also needs to show up in the class definition. And so that is so defined there and then we can actually implement it down here.
+
+103
+00:16:10.710 --> 00:16:26.010
+kylie jue: So let's try to implement it. Let's try to actually just instantiate or initialize our variables. So if we remember our variables that actually called name and amount which probably brings up alarm bells, because I might say, I'm gonna try to say oh name equals name.
+
+104
+00:16:27.360 --> 00:16:34.800
+kylie jue: Oh, that doesn't look right. Right. Like, you may not know exactly what's wrong with that, but kind of like your spidey senses are tingling, the guy that doesn't look right.
+
+105
+00:16:35.550 --> 00:16:44.250
+kylie jue: And and why is it not right. Well, we have a local variable with our local parameter with name name and name amendment.
+
+106
+00:16:44.940 --> 00:16:53.640
+kylie jue: And but we also have a class member variable with that same name. And so now we're kind of like run into an issue is, like, why is this even allowed or how do we get around this.
+
+107
+00:16:54.330 --> 00:17:01.830
+kylie jue: And the trick is, there's a special keyword called this. And so if you say this arrow something
+
+108
+00:17:02.790 --> 00:17:11.280
+kylie jue: It'll show you what what comes up when you autocomplete so if you go this arrow, you get a reference to the current instance of the object. Right. And so this is
+
+109
+00:17:11.940 --> 00:17:26.790
+kylie jue: This is literally a way to sort of specify I want the class member variables, right. And so if I want to set the class member variables name of account right then I can say this arrow account I keep saying account amount
+
+110
+00:17:28.110 --> 00:17:39.540
+kylie jue: Equals enough. And so now the name by itself refers to the local parameter and the this specify allows us to specify. Okay. I want the member variable with that name.
+
+111
+00:17:41.490 --> 00:17:54.210
+kylie jue: So the question is, yesterday we saw, we didn't need that now we see that we do need it. How can you tell when you need to actually include that this specify really the only time you'll need to explicitly include it is if you are
+
+112
+00:17:55.650 --> 00:18:03.630
+kylie jue: If you have parameters with the same name, basically as your as your member variables. So in the rest of these functions we won't see it come up, but in this case we do
+
+113
+00:18:05.130 --> 00:18:19.770
+kylie jue: And so then we can think about okay well down here. We want to fill in our functions that get the amount and the name they can just return them again. We don't need that this specify here because there's no parameters. There's no other variables that might conflict with that name.
+
+114
+00:18:21.570 --> 00:18:27.780
+kylie jue: Cool. So let's think about what it means to deposit. And one of the nice things is now because we have a function to do the depositing for us.
+
+115
+00:18:28.050 --> 00:18:35.190
+kylie jue: And as we can do error checking. And this is something that can be brought up yesterday, which is that error checking and access control is one of the really important things that comes out of
+
+116
+00:18:36.840 --> 00:18:44.190
+kylie jue: Out of being able to write classes. And so now we can do things like this, we can say like, Oh, well, if the deposit amount is negative. Right. That's bad.
+
+117
+00:18:46.650 --> 00:18:52.350
+kylie jue: So maybe we can throw on air and that basically says, hey, you can't have negative money.
+
+118
+00:18:54.060 --> 00:18:54.630
+kylie jue: That's bad.
+
+119
+00:18:56.880 --> 00:19:02.880
+kylie jue: But as long as that checks out. Then, then we can do our simple deposit where we say amount plus equals
+
+120
+00:19:05.010 --> 00:19:08.070
+kylie jue: Withdrawal will look very similar. So I'll cheat a little bit
+
+121
+00:19:10.380 --> 00:19:10.830
+kylie jue: Yeah what's up.
+
+122
+00:19:14.220 --> 00:19:22.740
+kylie jue: And this arrow. Yeah, that's a great question. And for now, just know that this will not work in c++ this will not work.
+
+123
+00:19:23.070 --> 00:19:39.300
+kylie jue: And you need this arrow and next week we'll learn what the arrow actually means. And yeah, and if you may have seen self and this in Java and Python, respectively, but this will not work in Python. Yeah, sorry. Sorry. In c++ yes
+
+124
+00:19:41.880 --> 00:19:45.720
+kylie jue: Cool. So now for implementing withdrawal right it looks very similar
+
+125
+00:19:47.490 --> 00:19:53.040
+kylie jue: And then we actually have this interesting idea that we can write functions that take in bank accounts as parameters.
+
+126
+00:19:53.340 --> 00:20:00.840
+kylie jue: And so if I wanted to transfer certain amount of money from myself to some other recipient. I can actually take a bank account in as a parameter by reference.
+
+127
+00:20:01.440 --> 00:20:06.150
+kylie jue: That's kind of a weird thought that you're defining a class and you can take an instance of that class in as a parameter
+
+128
+00:20:06.870 --> 00:20:11.130
+kylie jue: But it kind of just works. Right. It works just the same way as you were taking you in any other different types
+
+129
+00:20:11.970 --> 00:20:18.240
+kylie jue: And the cool thing about this is, once we get to writing something like transfer rate, we can define it right because
+
+130
+00:20:18.660 --> 00:20:31.500
+kylie jue: Methods can call other methods in the same class right they have all the same privileges, we can do things like say, oh, well, a transfer is really just a withdrawal from myself of the certain amount of money.
+
+131
+00:20:33.030 --> 00:20:39.930
+kylie jue: And then it's a deposit into my recipient. Right. And so you see these two different ways of calling functions which is
+
+132
+00:20:40.170 --> 00:20:49.950
+kylie jue: If I don't specify a parameter or sorry if I don't specify the implicit parameter right this withdraw X on the same instance that this that this function is being called on
+
+133
+00:20:50.610 --> 00:20:57.360
+kylie jue: But I can also go to my explicit other bank account. And I can say, hey, go deposit into yourself.
+
+134
+00:20:57.960 --> 00:21:03.780
+kylie jue: And so it will call this function that's defined, it'll just call it on a different instance of the class.
+
+135
+00:21:04.320 --> 00:21:14.250
+kylie jue: And so it's kind of a lot to wrap your head around. Don't worry. I don't make a ton of sense right now. We'll see more examples of this in the future and but just know that you can actually write methods that operate on other instances of that same class.
+
+136
+00:21:16.170 --> 00:21:24.210
+kylie jue: And so now, right, given this class definition. Let's try to recreate this demo right but we using classes instead. And what you'll see is, things get a lot nicer.
+
+137
+00:21:24.870 --> 00:21:29.580
+kylie jue: And so let's say, Alright, so how do we call the constructor that we defined actually
+
+138
+00:21:30.330 --> 00:21:39.990
+kylie jue: And so the way that you call a constructor and you specify the type you specify the name of your variable and then you just put parameters. After the name of the variable is a little bit different than what we've seen before.
+
+139
+00:21:40.680 --> 00:21:47.550
+kylie jue: But you can just put these these parentheses immediately afterwards. Let me say this is Nick with the top 100
+
+140
+00:21:49.140 --> 00:21:50.880
+kylie jue: And then we have
+
+141
+00:21:52.200 --> 00:21:52.710
+kylie jue: Any
+
+142
+00:21:54.090 --> 00:21:55.080
+kylie jue: Amount 1000
+
+143
+00:21:57.810 --> 00:22:12.540
+kylie jue: And so now our methods are going to really allow us to write this demo a lot cleaner and protect ourselves from some of the dangerous things we were doing before, right. So now depositing money is just as easy as calling a function called deposit
+
+144
+00:22:13.980 --> 00:22:18.270
+kylie jue: withdrawing money is just as easy as calling a function called strong
+
+145
+00:22:19.320 --> 00:22:30.270
+kylie jue: Right. And we're getting all these nice built in protections. We know that the class is handling all the details of what it means to deposit withdraw all we have to do as a client is to just call these methods.
+
+146
+00:22:31.350 --> 00:22:37.830
+kylie jue: And now, now we can sort of see where the protection comes in. So, let's say, right, I try to do something dangerous, right. I try to overdraw.
+
+147
+00:22:38.760 --> 00:22:46.560
+kylie jue: My account and that's going to remind me that I actually didn't put that in there. One thing that we need to do if we're trying to withdraw money right
+
+148
+00:22:47.250 --> 00:22:55.020
+kylie jue: I realized that that was not going to work if we're trying to withdraw money we actually need to make sure that we have enough money to withdraw. Right, that's kind of the key component of
+
+149
+00:22:55.680 --> 00:23:09.210
+kylie jue: pushing this implementation into the class is the class can actually make sure. Hey, do you have, do you actually have this money that you're claiming to have to try and withdraw. Right. And so in this case we can say something like, not enough money.
+
+150
+00:23:11.880 --> 00:23:21.990
+kylie jue: And so now, right, we as the client, we try to do something dangerous. We try to withdraw that amount of money and then let's see what happens. This probably
+
+151
+00:23:23.910 --> 00:23:26.010
+kylie jue: Let's see if I can pull up the window in time.
+
+152
+00:23:29.550 --> 00:23:32.430
+kylie jue: Yep. And what we see here is the program actually crashes.
+
+153
+00:23:32.760 --> 00:23:42.660
+kylie jue: And if we look at why the program crashed. We see our very own error message right we tried to withdraw the money and it did something really, really bad. Right. And so just quit the program and said,
+
+154
+00:23:43.200 --> 00:23:53.580
+kylie jue: No negative money right that's bad now crushing the whole program is probably a little bit of extreme right, you probably want to handle it a little bit more gracefully. But the idea is here at you, and for some protections on top of what's going on right
+
+155
+00:23:54.720 --> 00:23:58.380
+kylie jue: And sending it will comment that out so that doesn't crush our program.
+
+156
+00:23:59.430 --> 00:24:09.600
+kylie jue: But then we could do things like you know transferring again is relatively easy right we specify an amount. And then we just specify a different person to transfer to right. So in this case, Kylie is a bank account.
+
+157
+00:24:09.990 --> 00:24:14.370
+kylie jue: And so if I want to transfer to her right i just specify her as a second parameter
+
+158
+00:24:15.870 --> 00:24:24.840
+kylie jue: The other nice thing is we have no more direct access to these private member variable, so I can no longer do something like that the compiler won't even let me
+
+159
+00:24:25.140 --> 00:24:35.010
+kylie jue: Write the compiler will just say, Hey, this is a private member, you are not allowed to touch it. Right. You don't belong to the class right you know there's no there's no scope resolution operator here telling me that you belong to the class.
+
+160
+00:24:35.550 --> 00:24:39.540
+kylie jue: So cut that out. You're not even allowed to do that which is great. Another protection that we didn't have
+
+161
+00:24:43.530 --> 00:24:48.240
+kylie jue: When we call the functions inside of our class like withdraw, for example.
+
+162
+00:24:49.320 --> 00:24:59.940
+kylie jue: Could we use like this era was talking to us. Yeah, exactly. Absolutely. You can totally if you wanted to, you could specify like that and that will have exactly the same behavior.
+
+163
+00:25:00.480 --> 00:25:12.030
+kylie jue: Remember, this is just like more specific. Right. It won't hurt you to do it. It's just sometimes it's not necessarily right so if you it is kind of implied if you call a function or reference a variable.
+
+164
+00:25:12.840 --> 00:25:23.460
+kylie jue: That is not sort of declared anywhere else. It'll know to look like for the search for the current instance or for the current class. Yeah, that's a good question. You can also use this with with method names as well.
+
+165
+00:25:25.830 --> 00:25:37.590
+kylie jue: So remember, it's only it's only necessary when you might have a potential name conflict. Right. So for functions that probably will almost never be necessary. Right. Like it doesn't, you can't have a unless you have a, like a
+
+166
+00:25:38.280 --> 00:25:47.940
+kylie jue: variable name that's similar to fund it almost will never happen right you you need it, though, when there might be ambiguity about what name you're referencing, basically. Yeah.
+
+167
+00:25:50.310 --> 00:26:00.390
+kylie jue: Cool. And then, so the very last thing that we can do is if we actually want to get information about our class right we can use these helpful methods that we provided to get the name
+
+168
+00:26:01.410 --> 00:26:02.940
+kylie jue: And get the amount, for example.
+
+169
+00:26:04.470 --> 00:26:07.080
+kylie jue: I knew the same thing. Okay.
+
+170
+00:26:09.090 --> 00:26:19.590
+kylie jue: And so now, hopefully, what we see is we see with our demo with classes as we see an ending state of this demo that makes a lot more sense. Right.
+
+171
+00:26:19.980 --> 00:26:32.460
+kylie jue: And so we're now longer no longer allowed to commit identity fraud are no longer allowed to get into negative money. And that's exactly what we see right by the time we're done. Our amounts make sense. We have the same names and everything sort of works out nicely.
+
+172
+00:26:36.210 --> 00:26:41.550
+kylie jue: Like for example, in the main function. Here we're using my arrow, arrow, the class.
+
+173
+00:26:44.730 --> 00:26:55.200
+kylie jue: For now, the only place you have to use arrows with this and nowhere else like there's, there's a whole sort of discussion like deeper discussion, we need to get into of like when the arrow operators useful.
+
+174
+00:26:55.770 --> 00:27:02.910
+kylie jue: For now for yourself. Just think, if I'm going to use the this specify or inside a class method is the only time when you to use the arrow operator.
+
+175
+00:27:03.270 --> 00:27:13.440
+kylie jue: And acting as a client, right, this is all acting as a client, it's the same operation that we've seen before. With with instances and functions. Yeah.
+
+176
+00:27:14.880 --> 00:27:15.030
+Yeah.
+
+177
+00:27:16.260 --> 00:27:24.270
+kylie jue: Cool. And so now. So just to summarize that really quick. Right. So we've seen a constructor. Now we've seen the special naming convention.
+
+178
+00:27:25.050 --> 00:27:38.070
+kylie jue: One thing I want to note is that you never directly call a constructor. The constructor is implicit we called for you when you use syntax like this. And so when you include the parentheses here. You can think of this as passing arguments to the constructor.
+
+179
+00:27:39.240 --> 00:27:43.590
+kylie jue: And the other thing that we saw was this right. So again, this is similar to the self keyword and Python.
+
+180
+00:27:43.950 --> 00:27:54.600
+kylie jue: And it's used basically to if you have parameter names that match the names of object members like variables and things like that is used to sort of disambiguate what you're referencing to
+
+181
+00:27:55.110 --> 00:28:01.320
+kylie jue: And it's the only place we'll see so far that we use the arrow operator and we'll revisit that next week.
+
+182
+00:28:02.790 --> 00:28:03.000
+Okay.
+
+183
+00:28:04.320 --> 00:28:12.330
+kylie jue: So I'll pause for announcements really quick. And so again, just a reminder, the diagnostic is going to be released later tonight. So at 1201 and once midnight hits
+
+184
+00:28:12.690 --> 00:28:19.410
+kylie jue: Will release the link to access it on the front page of the course website. Please don't visit the link until you're ready to take it.
+
+185
+00:28:19.920 --> 00:28:25.200
+kylie jue: We're going to log when you download the exam. And when you submit it. And those times have to be within three hours of one another.
+
+186
+00:28:25.650 --> 00:28:33.180
+kylie jue: So please don't like download it first and then wait a day and take it don't visit that link to download it until you're ready to sit down and actually take it.
+
+187
+00:28:34.770 --> 00:28:39.840
+kylie jue: Over the assignments also do tonight and that trip is going to be hosting a review session at seven o'clock tonight.
+
+188
+00:28:40.380 --> 00:28:54.900
+kylie jue: And then we'll just wanna make a note. Now that assignment to greeting feedback is back for most folks, the revisions for assignment to we're going to be available until Sunday night, and if you have questions about revisions on, feel free to talk to us after class or shoot us an email.
+
+189
+00:28:57.390 --> 00:29:08.340
+kylie jue: And there's some words of advice and we we hope that you all are going to do great on this and you know we really want to just emphasize that this is truly a diagnostic. I mean, it's there to sort of help you self assess
+
+190
+00:29:08.940 --> 00:29:13.530
+kylie jue: sort of look at areas of strength in areas of growth and we expect that everyone will have areas.
+
+191
+00:29:13.770 --> 00:29:23.850
+kylie jue: Of improvement. Right. Like if you struggle on it. And there's some things that don't come so easily like that is fully expected and we sort of want this to be an opportunity for you to reflect and sort of focus on the things
+
+192
+00:29:24.090 --> 00:29:32.010
+kylie jue: And that you can work on in the second half of the class and the other two pieces of advice. Just, even though it is open resources just collect what you need in advance. You don't want to be like
+
+193
+00:29:32.550 --> 00:29:39.210
+kylie jue: fumbling through like slides and looking for things like during the actual diagnostic so just collect what you want to use in advance.
+
+194
+00:29:39.690 --> 00:29:53.310
+kylie jue: And and just, you know, get a good night's sleep before you whenever you're going to take it, eat a meal, get some exercise like you all are going to do great. And hopefully, trying to make this as low stress on experience as possible and and yeah so best, best of luck on that.
+
+195
+00:29:55.320 --> 00:30:07.050
+kylie jue: Cool. So now let's sort of revisit where we are now. And so yesterday Kylie brought up this diagram that we saw at the beginning of class. And at this point, we've completed actually a lot of what's on this diagram.
+
+196
+00:30:08.100 --> 00:30:12.930
+kylie jue: And now what we're going to do and sort of the last half of class we're going to finally crossed the obstruction boundary
+
+197
+00:30:13.440 --> 00:30:23.490
+kylie jue: We're going to talk about arrays dynamic memory. Memory management and this is going to sort of allow us to start writing really interesting implementations of classes and up data structures and things like that.
+
+198
+00:30:25.080 --> 00:30:37.800
+kylie jue: And so if you think about the random bag that we saw yesterday. And what was interesting about the random bag is we built it on top of a vector right we said this new data structure that we're defining is defined using internal data storage of a vector.
+
+199
+00:30:39.840 --> 00:30:45.300
+kylie jue: But what's weird about that is the vector itself as an abstraction. Right. It is a class someone's written it.
+
+200
+00:30:46.200 --> 00:30:53.460
+kylie jue: What is it used for data storage, right, like what is it on top of it can't be on top of another vector. That doesn't make sense. So what does it actually on top of
+
+201
+00:30:54.360 --> 00:30:58.890
+kylie jue: And so the question we're going to ask ourselves today actually over the next two days. But today, and Monday.
+
+202
+00:30:59.280 --> 00:31:10.740
+kylie jue: Is what are the building blocks that you can actually use for data storage and c++ and then how can you leverage that to build your own custom creative, interesting data structures that provide really cool properties.
+
+203
+00:31:12.360 --> 00:31:13.680
+kylie jue: And so that's our question for today.
+
+204
+00:31:14.880 --> 00:31:29.790
+kylie jue: And so the reason we asked this question is because obviously when you have vector stacks cues, all that good stuff. And they all need space to put the things that their story right you know based or integers or strings or whatever it is, but they need to put that somewhere.
+
+205
+00:31:31.230 --> 00:31:38.490
+kylie jue: And the way the the technique that we're going to use and c++ to get this memory is something called dynamic memory allocation right so
+
+206
+00:31:39.330 --> 00:31:43.020
+kylie jue: That's sort of we're going to really delve into that and in the rest of this class.
+
+207
+00:31:43.680 --> 00:31:53.460
+kylie jue: But at a high level, the way that this works is we sort of go to the computer with c++ we go to the computer and we say, Please give me a storage space.
+
+208
+00:31:53.850 --> 00:32:06.480
+kylie jue: And then the computer gives us storage space, then we can use that however we want we can put things in it store things in it, move them around, doing a bunch of interesting stuff. And then when we're done, we say, Okay, I'm done. Here's your storage space back
+
+209
+00:32:07.500 --> 00:32:15.990
+kylie jue: And so these are the three components that we're going to investigate, sort of, how do you do each of these three things. How do you ask for it. How do you use it and how do you give it back. When you're done.
+
+210
+00:32:17.820 --> 00:32:22.590
+kylie jue: In order to do that we need to talk about these things called arrays. Arrays are
+
+211
+00:32:23.970 --> 00:32:31.620
+kylie jue: Arrays are sort of what we used to represent storage space on computers and you can think of them as organized chunks of storage space.
+
+212
+00:32:33.000 --> 00:32:42.930
+kylie jue: They have interesting properties. They are contiguous, which means that they're sort of one big continuous block with no like gaps or anything like that.
+
+213
+00:32:43.590 --> 00:32:48.240
+kylie jue: And they're split into slots. Each of these slots can store one piece of information.
+
+214
+00:32:48.930 --> 00:32:54.360
+kylie jue: And each of these slots has an index. They which we reference it to. So the idea of indexes actually that we've seen before, comes back.
+
+215
+00:32:55.020 --> 00:33:04.320
+kylie jue: And the last thing is that arrays have a specific type. So once you define a type of the array it each one of its storage slots can store one instance of that.
+
+216
+00:33:05.190 --> 00:33:19.260
+kylie jue: Okay, so it looks something like this. Right. So it's kind of one continuous block split into many different slots. They each have indexes and we can use these indexes to access and retrieve and override information and in these arrays.
+
+217
+00:33:21.690 --> 00:33:32.670
+kylie jue: So, so that's sort of the underlying structure of what will be working with. So now let's let's see how we actually do this. So the way that in order to actually work with a razor. We're gonna have to introduce a new data type.
+
+218
+00:33:33.960 --> 00:33:41.130
+kylie jue: And this new data type is called a pointer and for any pointers are defined based off of existing types.
+
+219
+00:33:41.610 --> 00:33:48.810
+kylie jue: So if you have an integer. You can also have an integer pointer. If you have a string, you can have a string pointer. If you have vector, you can have a vector pointer.
+
+220
+00:33:49.680 --> 00:33:59.880
+kylie jue: This pointer relationship is defined by this asterisk operator and and that will sort of be the syntax that in when we look at code will identify this point or type for us.
+
+221
+00:34:01.440 --> 00:34:09.690
+kylie jue: And then so so again if that, you know, we'll, we'll touch on all of this code example in a little bit. So if there's there's all kind of just to introduce the terminology
+
+222
+00:34:10.920 --> 00:34:20.850
+kylie jue: But what we'll do next is then we use this special keyword called New so new is that is our way of telling C plus plus I need storage space. Give me some
+
+223
+00:34:22.590 --> 00:34:34.200
+kylie jue: And the way that this will look like the syntax of this will look like, and is if we do it in two lines we define our new pointer type right store that and define that as a type of variable.
+
+224
+00:34:34.650 --> 00:34:48.990
+kylie jue: And then into that variable we store the result of asking for new storage space. So we use the new operator we specify our type we use this interesting square brackets syntax to specify exactly how many storage slots, if you want.
+
+225
+00:34:49.530 --> 00:34:55.440
+kylie jue: And and combine. You can also do this in one line combined. This gives a storage space that we can refer to
+
+226
+00:34:56.520 --> 00:35:00.360
+kylie jue: And then we'll see an example of how this plays out in reality in a second.
+
+227
+00:35:01.740 --> 00:35:11.730
+kylie jue: And so a couple of new like point points on pointers, basically. And so what is the pointer, you saw in this last slide that it's really just a new data type. Right.
+
+228
+00:35:12.660 --> 00:35:21.210
+kylie jue: So it's a new data type, and it becomes really, really important. And really, really prominent and necessary when we start working with this idea of lower level.
+
+229
+00:35:21.690 --> 00:35:35.730
+kylie jue: Memory within the computer, right. And so this idea of storage space that the computer is giving to us directly. So we're coming, coming closer to the real like innards of how the computer is actually working. I mean pointers or a data type that allow us to interface with that.
+
+230
+00:35:36.840 --> 00:35:49.080
+kylie jue: And just like all other data types or you can declare variables that are of type pointer and they store, they take up space and memory. They store certain values, and we'll talk about those values in a ton of detail next week.
+
+231
+00:35:50.430 --> 00:35:58.800
+kylie jue: And and the preview. I'll give of what these values that they actually store is they store this thing called a memory address
+
+232
+00:35:59.250 --> 00:36:06.510
+kylie jue: We're going to hammer this sentence in a pointer always stores and memory address, you're going to see it today, is it Monday and Tuesday and probably Wednesday to
+
+233
+00:36:07.830 --> 00:36:17.610
+kylie jue: It's not going to make sense. Right now what that means. But if you think about what a pointer is it's just a new type of variable and the value that it stores is a memory address
+
+234
+00:36:18.030 --> 00:36:22.440
+kylie jue: The way you can think of this memory address. Think of it as like a coordinate somewhere on your computer.
+
+235
+00:36:23.280 --> 00:36:30.060
+kylie jue: And if you know that coordinate, you can go to that location on your computer and you can look up a piece of information you can look up a piece of data.
+
+236
+00:36:30.960 --> 00:36:40.770
+kylie jue: And so these coordinates define our storage space, right. So the computer has some amount of storage space and these coordinates or pointers define where that sort of space is and allow us to reference it
+
+237
+00:36:43.290 --> 00:36:51.930
+kylie jue: And so, in doing so, right there. The reason they're called pointers is they're pointing to somewhere else on your computer right by storing these coordinates of where to go.
+
+238
+00:36:52.110 --> 00:37:00.750
+kylie jue: They tell you where something else is and they point to that location. And we'll see you an example of how these pointers actually point to play for the memory in this upcoming day
+
+239
+00:37:02.640 --> 00:37:08.580
+kylie jue: So let's, let's look at a demo. And this is going to be sort of a kind of a just a fun example of what dynamic allocation looks like.
+
+240
+00:37:09.660 --> 00:37:20.760
+kylie jue: And so here's the code, there's, there's a lot going on in this code. And so we're going to do it. We're going to walk through each line, step by step, and we're going to exactly trace out what's happening in memory over time.
+
+241
+00:37:22.500 --> 00:37:35.700
+kylie jue: So we start at the beginning. The beginning looks pretty normal. We've seen that before, just defining a new variable. And let's say the user is is just a console program. So say the user enters the value seven. Great. We have a new variable name num values. Life is good.
+
+242
+00:37:37.560 --> 00:37:45.060
+kylie jue: The next line is where sort of all the magic happens. Right. So we have, we want to basically define an array to store strings.
+
+243
+00:37:45.870 --> 00:37:55.440
+kylie jue: In order to do so right. Remember our from our previous slide, we first need to define a pointer variable to store information about where the storage spaces located
+
+244
+00:37:55.710 --> 00:38:00.990
+kylie jue: So we say string asterisk is our data type and AR AR is going to be the name of our variable.
+
+245
+00:38:01.920 --> 00:38:07.590
+kylie jue: And then we said it equal to this new string array that has num values different spots in it.
+
+246
+00:38:08.340 --> 00:38:22.650
+kylie jue: And the way that this looks and memory, right, is we now have a local variable with name AR AR and it's data type is string pointer and what's the value that goes in it and I'm going to show you something that looks really cryptic
+
+247
+00:38:24.240 --> 00:38:40.140
+kylie jue: Because what happens is this this value right this variable stores this really weird looking number. It's not like any number. You've probably seen before and it's got actually like digits and numbers and it's got this weird zero x prefix.
+
+248
+00:38:41.730 --> 00:38:55.980
+kylie jue: All you need to know is, I'll repeat my line from before a pointer stores a memory address. And so what is this, it is a memory address. It is a is a coordinate somewhere on your computer, right, where this storage spaces located
+
+249
+00:38:56.520 --> 00:39:10.440
+kylie jue: Now why that particular number I literally made it up. Right. These are the actual values, we have no control over the computer tells us, hey, this is where it is and we just store it and we trust the computer. So I completely made that number up. It has no significance.
+
+250
+00:39:10.950 --> 00:39:27.210
+kylie jue: Except for the fact that also in our next meetup example this new array that we defined lives at that location. Right. So it's at this specific coordinates in our network. And when we say that something is a pointer right what we see happening is this
+
+251
+00:39:28.590 --> 00:39:34.140
+kylie jue: Reference basically points to the array right it's it's saying, hey, this is where you should go and look for this.
+
+252
+00:39:35.970 --> 00:39:42.600
+kylie jue: And so, and we also see this idea that again like before our race have indexes. And so we can label those with there.
+
+253
+00:39:43.590 --> 00:39:58.140
+kylie jue: And again, right, this arrow relationship is going to show up all next week. Right. But this idea that AR AR stores memory address by doing so if points to somewhere else and memory and it says there's your storage space, go ahead and use it.
+
+254
+00:39:59.790 --> 00:40:08.460
+kylie jue: And then let's let's actually ok so now we kind of go into how do we actually use this space that we have. So we jump into a for loop we define our iterator variable.
+
+255
+00:40:09.150 --> 00:40:17.310
+kylie jue: And now we see that we can access arrays using square brackets syntax, actually the exact same syntax. We've seen for accessing things before
+
+256
+00:40:18.180 --> 00:40:24.330
+kylie jue: And the way that this works is it will get a string from the user. And it will store it at the zero with position of the array.
+
+257
+00:40:24.990 --> 00:40:35.100
+kylie jue: Right. And so now that slot is full. There's one string and that slot right there can't be more than one string in any given slot and so we say, all right, let's move on.
+
+258
+00:40:36.120 --> 00:40:39.360
+kylie jue: And then when we get to this line. We've got another string from the user.
+
+259
+00:40:39.720 --> 00:40:55.560
+kylie jue: Now we store it in the first position. So when we say AR AR square bracket i when i equals one that actually tells us a sign into this location in the array, go to the first slide URL, go to the one slot, the index one slot and store that information there.
+
+260
+00:40:56.820 --> 00:41:03.660
+kylie jue: And what you see is this process just keeps repeating right we can just keep getting springs from the user incremental value of i.
+
+261
+00:41:04.800 --> 00:41:06.870
+kylie jue: And if you guys know
+
+262
+00:41:07.980 --> 00:41:14.850
+kylie jue: Maybe get a hint of what some of our favorite songs are and what the user is just inputting and it's just strings like say we condense it
+
+263
+00:41:15.750 --> 00:41:26.670
+kylie jue: Right, and so we use this index variable very, very similarly to how we did before, right, we can use it to actually access certain elements of the raid in store information in there.
+
+264
+00:41:29.190 --> 00:41:29.610
+kylie jue: Yeah.
+
+265
+00:41:30.750 --> 00:41:31.560
+kylie jue: Good question about
+
+266
+00:41:32.070 --> 00:41:46.560
+kylie jue: Our memory location. How can we do our practice. I like how something. Yeah, it just is as the crazy part. It just is it the way that it works is kind of beyond the scope of this class, but that's kind of the cool like
+
+267
+00:41:47.490 --> 00:41:54.840
+kylie jue: It's defined by the pointer type actually like the fact that this variable is of type pointer.
+
+268
+00:41:55.170 --> 00:42:02.190
+kylie jue: Allows you to do this right, and specifically because it's a pointer referencing to an array. It is like safe and allowed to do this.
+
+269
+00:42:02.520 --> 00:42:11.250
+kylie jue: And there you'll go into a lot more depth. So if you go to the next sort of class in the CS sequence. It's at Stanford, which is CS one of seven. And you'll see this pop up.
+
+270
+00:42:12.240 --> 00:42:25.800
+kylie jue: And you'll actually learn kind of what's going underneath the scenes and but the answer for us. Is it just works, why does it work, I don't know, but it allows it kind of gives us this ability to access specific slots of the array.
+
+271
+00:42:26.880 --> 00:42:30.270
+kylie jue: And that square brackets syntax is just defined for us. Yeah.
+
+272
+00:42:32.970 --> 00:42:41.070
+kylie jue: Cool. And so, you know, we get to the end of this for loop, and we see. Okay, great. We've actually stored stuff in our A we've just put information in dynamic memory.
+
+273
+00:42:41.430 --> 00:42:50.040
+kylie jue: And that's really cool. Right. That's something we haven't done before and it actually opens up sort of a wide range of possibilities of things that we can do in the future.
+
+274
+00:42:51.990 --> 00:43:00.810
+kylie jue: And so our father finishes up i equals seven and seven is long longer less than them values and then. So when we jump to this second for loop, right.
+
+275
+00:43:01.350 --> 00:43:08.010
+kylie jue: It looks very similar except now we're just accessing the values in the array. So we say oh okay go from
+
+276
+00:43:08.460 --> 00:43:24.420
+kylie jue: Zero up to number values print out the value of AI and then the piece of information stored at slot with index. And so the output that we get from this right is kind of this textual representation of the array that we see sort of visually represented in the slide.
+
+277
+00:43:26.190 --> 00:43:33.150
+kylie jue: And so now you've seen an example of using the indexing operation of accessing slots and an array to both store information.
+
+278
+00:43:33.810 --> 00:43:39.150
+kylie jue: And to retrieve information. And so those are the kind of a two really the only two things we can do to an array.
+
+279
+00:43:39.330 --> 00:43:47.490
+kylie jue: We can either get information out of it using the brackets and tax or we can store information into it using the brackets attacks and really that's about it. And that's kind of a crazy part
+
+280
+00:43:49.110 --> 00:43:53.520
+kylie jue: And yet, and yet that's super powerful. And we'll spend all of my new sort of seeing why why that's actually powerful
+
+281
+00:43:55.470 --> 00:44:07.290
+kylie jue: So interesting things about how c++ does arrays and c++ is a dangerous programming language in the sense that it prioritises doing things very fast and very efficiently.
+
+282
+00:44:07.740 --> 00:44:12.420
+kylie jue: Over doing things in a way that's, you know, safe or simple or easy to understand.
+
+283
+00:44:12.810 --> 00:44:23.220
+kylie jue: And that's one of kind of the challenging things of working with dynamic arrays that that you'll encounter, you will do dangerous things the rays and you will sort of, quote unquote, pay the consequences will working on the assignment.
+
+284
+00:44:24.030 --> 00:44:28.650
+kylie jue: But, but hopefully that'll build your appreciation for why these are both powerful but also you have to be really careful with them.
+
+285
+00:44:29.490 --> 00:44:44.850
+kylie jue: And to have the ways in which they're dangerous. The first is that the array that you get is fixed size. So whatever size you specify when you allocate it, it will not get bigger than that and it will not get smaller than that it will be exactly that size for its entire lifetime.
+
+286
+00:44:46.080 --> 00:44:50.370
+kylie jue: That doesn't seem very dynamic. The fact that once you specify a size, you know,
+
+287
+00:44:51.360 --> 00:45:01.410
+kylie jue: How does that even work if you if you initialize a data structure and you said okay has 20 spots. That's it, no more, no less. That's it. That's all you get. So it kind of be a useless data structure.
+
+288
+00:45:02.010 --> 00:45:08.130
+kylie jue: And so we'll revisit that on Monday we'll see how can we work around this this this restriction that it's sort of fixed size.
+
+289
+00:45:09.330 --> 00:45:09.630
+christopher cooper: But the
+
+290
+00:45:09.660 --> 00:45:13.050
+kylie jue: Other restriction and this is the really, really dangerous part
+
+291
+00:45:13.440 --> 00:45:21.630
+kylie jue: Is that there is no bounds checking. So if you remember with vectors. If you use the brackets syntax or strings you use the brackets attacks.
+
+292
+00:45:21.930 --> 00:45:34.680
+kylie jue: And you try to get an index that's, you know, less than zero or greater than the length of the of the size of the data structure, you get an error message you know your program crashes, but nothing too bad happens, you know, you go and fix it matches. Fine.
+
+293
+00:45:36.030 --> 00:45:48.990
+kylie jue: Arrays do no such thing. You are allowed to do whatever you want with the bracket syntax. You could put negative one in the brackets. You could put 10 million in the brackets. There is no restriction on what you can put in those brackets.
+
+294
+00:45:49.740 --> 00:45:59.670
+kylie jue: If you do so if you go beyond the bounds of your array, what you get is this idea of undefined behavior. And when we say undefined behavior we mean literally anything can happen.
+
+295
+00:46:00.180 --> 00:46:10.860
+kylie jue: You can get garbage data. Your program can work totally fine. You can crash your program you can create a security vulnerability that lets hacker take over your program.
+
+296
+00:46:11.220 --> 00:46:23.370
+kylie jue: And you can end up on the front page in New York Times, right, like the wide range of possibilities that can happen if you're if you're not careful with downs of an array can be really, really sort of wild.
+
+297
+00:46:24.390 --> 00:46:25.320
+kylie jue: The question. Yeah.
+
+298
+00:46:27.330 --> 00:46:31.350
+kylie jue: Yeah, it was a question about could you for like in the previous slide on that.
+
+299
+00:46:34.740 --> 00:46:43.500
+kylie jue: Yeah, that's a great question. We'll cover this in a little bit, but no. So like I said, when I said that literally the only thing you can do with the race is like index them.
+
+300
+00:46:43.980 --> 00:46:56.400
+kylie jue: I was not really exaggerating. I mean, obviously you can create them. But in terms of actually accessing the data within them. You really cannot do much more than just index them index them to get things out for indexing put things in
+
+301
+00:46:56.850 --> 00:47:05.880
+kylie jue: And so we no longer have the nice cushy benefits of for each loops or a dot size function and which will see in a little bit. And that's kind of one of the
+
+302
+00:47:06.330 --> 00:47:18.780
+kylie jue: The kind of just the things that we have to deal with. Now that we're working and moving. We're actually implementing things right. We're going to be implementing the functionality is that enable things like for each loops and stuff like that. Yeah, that's a good question.
+
+303
+00:47:20.100 --> 00:47:30.120
+kylie jue: So One famous example of what happens if you don't index your arrays correctly. And one of the very first computer viruses actually took advantage of this
+
+304
+00:47:30.480 --> 00:47:38.220
+kylie jue: When you, when you go beyond the bounds of an array. It's called something called buffer overflow. And so in the in the 1980s, there was this
+
+305
+00:47:39.540 --> 00:47:46.140
+kylie jue: Virus that someone developed and that took advantage of code that didn't do good bounced checking and and
+
+306
+00:47:46.710 --> 00:47:55.740
+kylie jue: The, the man that did it was name is Robert Morris, Jr. And he was actually the first person and there was sentence under the new law called the Computer Fraud Act.
+
+307
+00:47:56.130 --> 00:48:04.230
+kylie jue: And he claimed that he was just sort of messing around and trying to find things that worked well, but he actually got convicted. You know, he
+
+308
+00:48:04.860 --> 00:48:12.000
+kylie jue: took down a bunch of government computers and took down a bunch of systems and infrastructure, because the people that have been writing the code didn't use good bounced check in.
+
+309
+00:48:12.420 --> 00:48:19.230
+kylie jue: And obviously he got in trouble. He actually came away pretty fine with it in the end. He's now a professor at MIT and the founder of, you know, giant
+
+310
+00:48:19.710 --> 00:48:31.530
+kylie jue: Company called Y Combinator. So he came out fine. On the other end, but just just just buffer overflows. And one of the one of the most dangerous things actually when working with memory like this. And so just kind of a cautionary tale on that.
+
+311
+00:48:33.090 --> 00:48:36.450
+kylie jue: Should we be worried about that when we're writing our own c++ code.
+
+312
+00:48:37.470 --> 00:48:43.530
+kylie jue: Yeah, absolutely. Yeah, you're gonna have to be really, really careful about about not indexing buffers.
+
+313
+00:48:44.250 --> 00:48:51.000
+kylie jue: Not indexing arrays at sizes that aren't valid. And that's one of the things that will be sort of one of the key things that you'll have to figure out how to do
+
+314
+00:48:51.480 --> 00:49:02.250
+kylie jue: On the next assignment. Yeah. So you always want to be really careful about that. Never. You should never be indexing an array and an index that is not valid and in keeping track of what's valid is non trivial. So that's one of the things we'll talk about as well.
+
+315
+00:49:05.040 --> 00:49:16.440
+kylie jue: Cool. So the next thing that the the last kind of set of points that I want to make is this idea that we now are getting memory or storage space from two different places.
+
+316
+00:49:17.250 --> 00:49:27.510
+kylie jue: Everything that we've seen so far has been from this place called the stack. So, you know, when you declare a variable just a vector. He said bar on stack that gets created on the stack and
+
+317
+00:49:27.930 --> 00:49:33.330
+kylie jue: It's called. This is called static memory allocation. You don't really need to know why, but that's kind of the formal term with it.
+
+318
+00:49:34.350 --> 00:49:45.720
+kylie jue: What's nice about it is, they are sort of they're easy, fast access. We don't have to worry about memory management, right, there's no special keywords or allocation or deletion that we need to worry about.
+
+319
+00:49:47.700 --> 00:49:59.100
+kylie jue: And then there's information on the heap and the and the information on the heat. That's what we get with the new keyword and this is what we call dynamic memory allocation, as opposed to the static ones from before.
+
+320
+00:49:59.580 --> 00:50:04.740
+kylie jue: We now have greater control over the memory. So one of the limitations of stack memory.
+
+321
+00:50:05.160 --> 00:50:13.920
+kylie jue: And that you've seen so far is that it's limited by scope right once a variable goes out of scope its memory is gone, right, it gets recycled and reused by the computer.
+
+322
+00:50:14.910 --> 00:50:23.820
+kylie jue: But the nice thing and also the dangerous thing about heap allocated memory is that it's yours and yours for as long as you want it right
+
+323
+00:50:24.360 --> 00:50:35.490
+kylie jue: From the moment that you allocate it, it's yours, even if the pointer goes out of scope the memory there still exists, which is both powerful and dangerous and and this idea that the
+
+324
+00:50:35.490 --> 00:50:38.220
+kylie jue: memory on the heap exists until we clean it up.
+
+325
+00:50:38.340 --> 00:50:41.820
+kylie jue: We just to kind of the last point for today, which will hopefully be able to get through in the next two minutes.
+
+326
+00:50:42.420 --> 00:50:52.050
+kylie jue: Which is this idea that you need to clean up after yourself if you're going to ask for storage space from the computer. What you need to do when you're done with it is you need to give it back.
+
+327
+00:50:53.520 --> 00:51:09.090
+kylie jue: And specifically, you are in charge of memory allocation and D allocation. And when we say memory allocation. That's just the process of asking the computer for the information and D allocation is the process of relinquishing that storage space back to the computer.
+
+328
+00:51:10.230 --> 00:51:21.330
+kylie jue: And so again, I'm going to repeat it when you use the new keyword. It is your job, like you, as the programmer writing the code. It is your job to do allocate that memory to explicitly give it back to the computer.
+
+329
+00:51:22.470 --> 00:51:31.860
+kylie jue: And if you don't, you get this thing called a memory leak and if some of you have noticed, maybe your computer's stay on for a really long time and they get slower and slower and slower over time.
+
+330
+00:51:32.370 --> 00:51:42.150
+kylie jue: And that actually is a consequence of memory leaks you computer starts to run out of storage space and it actually becomes slower to access memory because it's getting less and less and less over time.
+
+331
+00:51:42.720 --> 00:51:49.890
+kylie jue: And if you actually have too many leaks and your program can crash. You can run out of storage space and all sort of really, really bad things.
+
+332
+00:51:51.210 --> 00:51:52.230
+kylie jue: And the question.
+
+333
+00:51:53.430 --> 00:51:54.480
+kylie jue: Good question about
+
+334
+00:51:58.650 --> 00:52:06.300
+kylie jue: Yeah, that's a great question. So back in this line of code, right. So we said earlier, when you define variables. Normally they exist on the stack.
+
+335
+00:52:06.660 --> 00:52:12.000
+kylie jue: And but we said over here. Now, we're actually allocating memory on the heat and let me go back actually
+
+336
+00:52:12.810 --> 00:52:21.870
+kylie jue: So what you can see here, and I put these all these things and very specific locations, the variable itself the pointer itself lives on the stack.
+
+337
+00:52:22.170 --> 00:52:30.540
+kylie jue: Right, it's just a normal variable again. Oh, Peter familiar, it's a normal variable that stores a memory address. That's all it does. Right. It's not really special outside of that.
+
+338
+00:52:31.320 --> 00:52:38.340
+kylie jue: The array itself exists in this sort of murky area called the heat break kind of outside of the stack in a very different location.
+
+339
+00:52:38.700 --> 00:52:46.620
+kylie jue: And that's why we actually cross the boundary. See this arrow crosses the boundary. And you can think of everything inside the box as the stack and everything outside the box is the heat.
+
+340
+00:52:46.860 --> 00:52:52.440
+kylie jue: And so this arrow actually crossed that boundary which is an interesting an interesting point. Yeah, that's a really good question.
+
+341
+00:52:54.420 --> 00:52:56.370
+kylie jue: Um, cool. And then, yeah.
+
+342
+00:53:01.980 --> 00:53:11.160
+kylie jue: And that's a great question. I actually don't. I come talk to us about that after class because actually, that's a it's an interesting question. It depends on what you mean by program ending
+
+343
+00:53:12.270 --> 00:53:20.490
+kylie jue: Yeah. And, well, we can talk about that after class because it it dependent it. Yeah, kind of. The answer is it depends. And it's not it's not super well defined.
+
+344
+00:53:22.260 --> 00:53:28.380
+kylie jue: Yeah. And so then, yeah. So then let's just to finish up. And so the last thing that we have here is how do we actually
+
+345
+00:53:28.920 --> 00:53:35.670
+kylie jue: relinquish this memory back to the computer and the way that we do that is with this keyword called delete so delete.
+
+346
+00:53:36.270 --> 00:53:44.820
+kylie jue: And it has these weird to square brackets at the end of it. And, but that is the whole key word is delete square brackets and the way that it works. Right.
+
+347
+00:53:45.480 --> 00:53:52.470
+kylie jue: Is that if you have you know a pointer pointing to an array, you call Delete on the pointer.
+
+348
+00:53:52.980 --> 00:54:00.060
+kylie jue: And what that does is it gives back the array, right. So this is kind of weird as you're calling the operation on the pointer.
+
+349
+00:54:00.540 --> 00:54:11.220
+kylie jue: But the array itself is what kind of goes away. And when I say goes away. I just mean it's given back to the computer. It's no longer ours to control if we're trying to access it anymore. Really bad things.
+
+350
+00:54:12.960 --> 00:54:24.000
+kylie jue: And so the way that we update our picture normally to represent this is, again, the point you're still exists right the pointer is still around. But now what we say is it's pointing to garbage.
+
+351
+00:54:25.440 --> 00:54:29.250
+kylie jue: And what we mean by that is the pointer still exists.
+
+352
+00:54:30.360 --> 00:54:37.020
+kylie jue: And we can point it somewhere else, right, we can store a new memory address we can we can use it again with a new keyword to get some more information.
+
+353
+00:54:37.350 --> 00:54:51.720
+kylie jue: And but if we try to read or write from it really, really bad things will happen. And your warm up your warm up portion of the next assignment will deal with with that you'll actually see what happens if you free an array and then immediately try to access it again afterwards.
+
+354
+00:54:59.400 --> 00:54:59.640
+christopher cooper: Okay.
+
+355
+00:55:00.180 --> 00:55:02.370
+kylie jue: Yeah, sorry. So basically all I was saying is that
+
+356
+00:55:03.390 --> 00:55:15.600
+kylie jue: The pointer sticks around and we can reassign it to point somewhere else. But if we try to read from it or right from it. Again, I'm really bad things will happen. And you'll investigate that on the warm up to the next slide.
+
+357
+00:55:18.150 --> 00:55:25.080
+kylie jue: Okay. And so the takeaways. We've gone over most of it already. And so I'll just wrap up by saying next week. What we're going to do.
+
+358
+00:55:25.710 --> 00:55:35.520
+kylie jue: Is all on Monday is we're going to do this, we're going to design our own vector, we're actually going to use dynamic memory. We're going to use all of these things that we just learned about and we're going to implement our very own
+
+359
+00:55:35.880 --> 00:55:42.510
+kylie jue: Vector class which is going to be really cool. And we're also going to talk about this idea of
+
+360
+00:55:43.440 --> 00:55:48.000
+kylie jue: Dynamic resizing of arrays. And so I just want to leave on this very cute picture of a hermit crab.
+
+361
+00:55:48.330 --> 00:55:55.800
+kylie jue: And to leave you sort of excited for Monday and we're going to bring a talk about hermit crab. Actually, when we're designing these factors and so come back and forth.
+
+362
+00:55:56.670 --> 00:56:03.570
+kylie jue: So that's all we have for today. And as always, if you have questions, feel free to stick around and best of luck on the diagnostic
+
+363
+00:56:04.650 --> 00:56:05.070
+Thank you.
+
+364
+00:56:06.270 --> 00:56:06.600
+gavin gee: Do
+
+365
+00:56:07.200 --> 00:56:08.130
+louise marzolf: You you
+
+366
+00:56:08.430 --> 00:56:09.060
+Elan Smolar Eisenberg: Thank you.
+
+367
+00:56:09.480 --> 00:56:10.260
+shirley li: Thank you.
+
+368
+00:56:10.290 --> 00:56:10.680
+Jihe He: Thank you.
+
+369
+00:56:18.990 --> 00:56:21.180
+kylie jue: Yeah, so if we remember right
+
+370
+00:56:22.950 --> 00:56:27.450
+kylie jue: We just so we just talked about this idea actually go back to this diagram.
+
+371
+00:56:28.500 --> 00:56:33.960
+kylie jue: And so we just talked about this idea, actually, that the the pointer itself. Right.
+
+372
+00:56:34.650 --> 00:56:46.290
+kylie jue: Is just another variable. It lives on the stack. Right. It is very much a sibling to numb values, right. So the way that we thought about values. Before we can think about the pointer itself a are very similarly here.
+
+373
+00:56:47.370 --> 00:56:58.140
+kylie jue: What that means is that it's it's defined by its scope. So again, both num values and AR AR AR defined in this opening curly brace of main here and this closing curly braces main here.
+
+374
+00:56:59.370 --> 00:57:08.280
+kylie jue: Which means that after main finishes after these after we finished the code within the scope of these curly brackets and they will just disappear.
+
+375
+00:57:08.940 --> 00:57:14.730
+kylie jue: So again, the anything that we put on the stack. We don't have to worry about manually, you know,
+
+376
+00:57:15.510 --> 00:57:31.350
+kylie jue: Allocating or D allocating or freeing or anything like that because the pointer itself is just another variable on the stack it behaves exactly the same way. It's everything that we saw before. Right. So the pointer variable itself will just disappear once the main function is done.
+
+377
+00:57:33.450 --> 00:57:34.560
+kylie jue: Yeah. Does that answer the question.
+
+378
+00:57:41.010 --> 00:57:43.320
+kylie jue: So there's also a request to go over
+
+379
+00:57:47.250 --> 00:57:49.890
+Again, just to like really understand what it's doing.
+
+380
+00:57:51.360 --> 00:57:52.710
+kylie jue: Pointer versus down
+
+381
+00:57:54.030 --> 00:57:58.800
+kylie jue: Arrow. Like, what could you repeat again that explanation of, like, what is the difference versus thought
+
+382
+00:58:00.450 --> 00:58:08.880
+kylie jue: Yeah, I really don't want, I don't want to answer the question about what the difference between them is but but I can tell you, like, like for now.
+
+383
+00:58:09.150 --> 00:58:13.830
+kylie jue: For the next couple of days until we until we explicitly define what that arrow operator means
+
+384
+00:58:14.550 --> 00:58:26.640
+kylie jue: The, the only place that you will use that is with this keyword. So if you want. If you're writing a class method and you wanted you know disambiguate between a member variable and a parameter that have the same name.
+
+385
+00:58:26.910 --> 00:58:34.890
+kylie jue: You can use this arrow as a as a specific sort of way of identifying I want to reference this member variable.
+
+386
+00:58:36.150 --> 00:58:36.870
+kylie jue: And
+
+387
+00:58:38.070 --> 00:58:49.650
+kylie jue: Everywhere else when you're referencing methods or anything else related to that class you'll use the dot notation specifically when you're acting as the client when you're acting as the client, you will only ever be using the dot notation.
+
+388
+00:58:50.280 --> 00:58:58.800
+kylie jue: To to access functions within that class and I promise you we will define what the arrow operator means and why it's needed, but not
+
+389
+00:58:59.520 --> 00:59:08.760
+kylie jue: Yeah, it's just it, it requires a more in depth sort of exploration of pointers before we can actually understand what what that arrow operator is doing. Yeah.
+
+390
+00:59:12.540 --> 00:59:15.510
+Kenneth Fischer: So you mentioned that if you try to
+
+391
+00:59:17.310 --> 00:59:20.970
+Kenneth Fischer: If you try to call an index on an array that's out of scope that that because undefined behavior.
+
+392
+00:59:21.570 --> 00:59:26.520
+Kenneth Fischer: I was just wondering what actually causes that undefined behavior is it like trying to do things do random memory or something.
+
+393
+00:59:26.940 --> 00:59:33.090
+kylie jue: Yeah, yeah. The reason why the behaviors undefined is that
+
+394
+00:59:33.900 --> 00:59:34.320
+Kenneth Fischer: Hmm.
+
+395
+00:59:34.800 --> 00:59:35.730
+kylie jue: Think about it this way.
+
+396
+00:59:38.130 --> 00:59:41.790
+kylie jue: Okay, that's, that's the example Julius. Okay, so think about it this way, you
+
+397
+00:59:43.500 --> 00:59:55.050
+kylie jue: Use you are checking in at a hotel. Right. And so you're like responsible for like a group like you're taking a group of friends on a trip. And so, checking into a hotel and you tell the hotel. Hey, I need three rooms.
+
+398
+00:59:55.680 --> 01:00:06.150
+kylie jue: And they give you three room keys. Right. So you can think of that as asking for an array right you've asked for an array of size three hotels, give it to you. You can store your friends and those hotel rooms, whatever, whatever the knowledge is right.
+
+399
+01:00:08.460 --> 01:00:17.220
+kylie jue: But say the same since the world's like worst worst like secure hotel and really they gave you three keys.
+
+400
+01:00:17.790 --> 01:00:27.810
+kylie jue: But really, any key works on any door in the hole and the hole hotel right like and and you know you have this key and and you can use it to really access anywhere.
+
+401
+01:00:28.650 --> 01:00:34.380
+kylie jue: And so what happens if you took your key. So the key in this case is the pointer right the reference to the ray
+
+402
+01:00:34.920 --> 01:00:41.370
+kylie jue: And and you said like, I want to go to the fifth. So that say the hotel gave you like their, their rooms 01 and two
+
+403
+01:00:41.700 --> 01:00:45.720
+kylie jue: And you said, no, I really want to go look at Room five right you take your room key.
+
+404
+01:00:46.080 --> 01:00:56.160
+kylie jue: And you go to Room five and you open up the door. And what the heck do you find in there. I don't know, you could find someone having a party, you could find an empty room, you could find housekeeping like
+
+405
+01:00:56.790 --> 01:01:04.170
+kylie jue: You, you can go look at it, you can at least try to go look at it. Right. But what you find there is like absolutely no idea what's going to be there. Right.
+
+406
+01:01:05.040 --> 01:01:12.660
+kylie jue: You could also find a security guard there where you try to get in the security guard like beats you up says no, you're not allowed in there right the system might like crashing that way.
+
+407
+01:01:13.830 --> 01:01:16.920
+kylie jue: There's just so many things that could happen, and none of them are good.
+
+408
+01:01:18.450 --> 01:01:26.160
+kylie jue: And and and and and it's what you said, basically. It's just you're looking in places in the computer that don't belong to you and that you don't have control over.
+
+409
+01:01:26.400 --> 01:01:33.360
+kylie jue: And so you have absolutely no idea of knowing what you're going to find there and what behavior gonna have if you try to use the information that's stored there.
+
+410
+01:01:34.680 --> 01:01:34.860
+Yeah.
+
+411
+01:01:36.540 --> 01:01:37.170
+Kenneth Fischer: Yeah, thank you.
+
+412
+01:01:38.520 --> 01:01:50.520
+edouard des: That's a follow up that doesn't like a program can't access and other programs memory, though, right, like you couldn't go and access like secure memory or is it, and is it like do all programs encrypt their stuff so people can't just go ahead and take it.
+
+413
+01:01:51.300 --> 01:01:59.310
+kylie jue: Yeah, that so that's what I said. That's why I said that the range of possible outcomes can be anywhere from you open the room and find nothing
+
+414
+01:01:59.520 --> 01:02:08.670
+kylie jue: To you open the room and find private information to you try to open the room and you get beat up by the security officer, right, like any one of those things can happen.
+
+415
+01:02:10.020 --> 01:02:14.820
+edouard des: So the computer can prevent you from accessing so yeah yeah yeah exactly the computer can prevent you
+
+416
+01:02:14.880 --> 01:02:21.300
+kylie jue: Right, I guess like using the example where your key could access everywhere is not technically fully correct
+
+417
+01:02:21.960 --> 01:02:24.420
+edouard des: Anymore, you have read permissions you can access
+
+418
+01:02:25.050 --> 01:02:26.010
+kylie jue: Um, I'm
+
+419
+01:02:26.160 --> 01:02:26.670
+edouard des: Not even
+
+420
+01:02:26.880 --> 01:02:30.090
+kylie jue: And there's a lot of details that are that are being
+
+421
+01:02:30.090 --> 01:02:30.360
+edouard des: Lost
+
+422
+01:02:30.570 --> 01:02:36.210
+kylie jue: But I'll just say again, the way that I'll phrase, it is when you try to go somewhere, you're not supposed to go.
+
+423
+01:02:36.870 --> 01:02:39.060
+kylie jue: Lots of really bad things could happen, right.
+
+424
+01:02:39.330 --> 01:02:50.850
+kylie jue: And and and it is totally possible that you interfere with another portion of your program or a portion of someone else's program that if it wasn't designed well right like that is that is what super dangerous about
+
+425
+01:02:51.180 --> 01:02:53.940
+kylie jue: About like kind of going beyond the bounds of where you're allowed to
+
+426
+01:02:56.430 --> 01:02:57.180
+Jordan Lin: Wait, so
+
+427
+01:02:57.570 --> 01:02:58.500
+kylie jue: Yeah, Jordan, you have a question.
+
+428
+01:02:59.100 --> 01:03:07.470
+Jordan Lin: I'm essentially another full often that you can crash another program just spy. Like I'm bad access of
+
+429
+01:03:08.010 --> 01:03:17.310
+Jordan Lin: Every memory. We're like you go out about because say you try to access your accessing some other memory and have proven just happens to be trying to access that memory and things fail.
+
+430
+01:03:19.050 --> 01:03:21.000
+kylie jue: Yeah it again.
+
+431
+01:03:22.110 --> 01:03:25.920
+kylie jue: In modern computers cross program communication like that.
+
+432
+01:03:26.340 --> 01:03:32.850
+kylie jue: Will likely be disallowed like like likely the computer will stop you from touching another programs memory before you're allowed to
+
+433
+01:03:33.060 --> 01:03:41.910
+kylie jue: But theoretically, yes. Right, like, theoretically, if you just go somewhere in the computer storage space where you go to some coordinate in the in the computer that you're not allowed to go to
+
+434
+01:03:42.240 --> 01:03:49.650
+kylie jue: And and nobody stops you from doing it, then yeah, you can you can cause really bad things to happen right and that is why, like things like
+
+435
+01:03:50.220 --> 01:04:03.900
+kylie jue: Array overflow and going past the bounds of an array is actually a security issue right like someone can put another program on your computer that takes advantage of that right or or feed some inputs into your program that cause bad things to happen. Yeah.
+
+436
+01:04:06.480 --> 01:04:11.970
+kylie jue: There was about when initializing an instance of bank account. We use like parentheses name.
+
+437
+01:04:18.930 --> 01:04:27.120
+kylie jue: Yeah, the, the Stanford c++ data structures define these things called initialize or list. So the thing that you put inside curly braces.
+
+438
+01:04:27.450 --> 01:04:31.890
+kylie jue: And the technical name for that is in initialize or List It basically gives you a quick
+
+439
+01:04:32.580 --> 01:04:37.860
+kylie jue: And easy way to add lots of things to the data structure without having to like literally call out on everyone.
+
+440
+01:04:38.340 --> 01:04:48.780
+kylie jue: And the way in which you would add that functionality to a class is kind of beyond the scope of what we're going to talk about. So like for example, when we implement our vector, we're not going to have that
+
+441
+01:04:49.110 --> 01:04:54.390
+kylie jue: We're not going to have that capability. And it's kind of just an advanced feature that the Stanford libraries enable for you.
+
+442
+01:04:55.560 --> 01:05:04.230
+kylie jue: In general, right, for any class, you can always use the the the parentheses to to pass information into the into the constructor.
+
+443
+01:05:05.280 --> 01:05:05.550
+kylie jue: Yeah.
+
+444
+01:05:08.640 --> 01:05:09.360
+I'm
+
+445
+01:05:12.270 --> 01:05:18.660
+kylie jue: An array and ran the program every week, I realized that after running the program. Is there any way to go back and delete.
+
+446
+01:05:20.790 --> 01:05:28.110
+kylie jue: Yeah and that that relates back to the question that you asked earlier, or someone asked earlier about how well, how bad is a memory leak really
+
+447
+01:05:28.650 --> 01:05:37.170
+kylie jue: In the sense that, like, you know, you inevitably like like you as students and us as instructors and are developing code like we will inevitably write code that has memory leaks.
+
+448
+01:05:37.380 --> 01:05:44.640
+kylie jue: Right, like will write us will write a c++ program will run it and then like it finishes running and we're like, oh crap like we forgot to fill your memory.
+
+449
+01:05:45.810 --> 01:05:46.350
+kylie jue: And
+
+450
+01:05:48.360 --> 01:05:50.760
+kylie jue: The computer is usually smart enough
+
+451
+01:05:51.840 --> 01:05:53.880
+kylie jue: To figure out like
+
+452
+01:05:54.930 --> 01:06:03.420
+kylie jue: After a full program runs like after you hit the play button your console window pump comes up, you know, you run you run the whole program and then it goes away.
+
+453
+01:06:04.560 --> 01:06:15.540
+kylie jue: Computers are generally implemented in a smart enough way to realize that once a program is completely done that it should clean up any memory that was left over, like it should clean up any memory that was given to that program.
+
+454
+01:06:17.040 --> 01:06:26.010
+kylie jue: That being said, right, like if you have one program. Right. That's just running for a long time, right, like say you have like like state zoom right like Zoom is open on your computer.
+
+455
+01:06:26.400 --> 01:06:36.450
+kylie jue: And the zoom programmers like did a really bad job of implementing their code. And so like every second or like every like video frame that you receive. There's a memory leak associated with it.
+
+456
+01:06:37.080 --> 01:06:41.460
+kylie jue: And those will build up over time, right, and you'll start to see the performance of zoom sort of
+
+457
+01:06:42.960 --> 01:06:50.040
+kylie jue: Sort of decrease and get worse over time because the computer isn't allowed to come in and say, hey, zoom
+
+458
+01:06:50.430 --> 01:06:54.780
+kylie jue: I'm going to free this memory because I can tell you're done using it because the program is kind of still just running
+
+459
+01:06:55.380 --> 01:07:04.620
+kylie jue: And so memory leaks are more they're more sort of dangerous and impactful. When you have programs that run for a very long amount of time and that like don't have a designated beginning and end
+
+460
+01:07:05.130 --> 01:07:11.730
+kylie jue: And if the program truly has an end like with most of the things will right so far memory leaks are more of a
+
+461
+01:07:14.460 --> 01:07:17.190
+kylie jue: Actually, I would say, memory, memory leaks or more of a
+
+462
+01:07:18.330 --> 01:07:29.910
+kylie jue: Bad practice and a poor sort of implementation decision, then they would represent a critical flaw that like will forever, slow down your computer and like ruin everything and
+
+463
+01:07:31.200 --> 01:07:38.160
+kylie jue: Yeah, I think, I think that's probably the most straightforward way to put that. But. But to answer your question is
+
+464
+01:07:38.910 --> 01:07:50.100
+kylie jue: You can't like if you don't have it in the code to free the memory, then no like you can't you can't like stop your program in the middle and then like somehow like figure out a way to freedom. Every like it has to be like in the code of the program that's running
+
+465
+01:07:52.530 --> 01:08:07.080
+kylie jue: There are some questions about why it's called the stack and I was explaining how like with the SAS offerings that we saw in recursion. That's sort of how like information is stored in a sec. But that made a lot of questions also about like can you still not access like
+
+466
+01:08:08.910 --> 01:08:15.060
+kylie jue: Basically you have more information about like what is exactly the status of
+
+467
+01:08:16.710 --> 01:08:28.080
+kylie jue: A yeah you actually can't you if you like so. So say you have a like your I guess the easiest thing to do to pull up one of the recursive stack frame diagrams, but like, say you had
+
+468
+01:08:29.250 --> 01:08:33.120
+kylie jue: You know you had a recursive function and we we've talked about this idea that like
+
+469
+01:08:33.990 --> 01:08:42.780
+kylie jue: Each call has its own stack frame and only the top most one is the one that's sort of like active right and you've noticed this in your code as well when you're debugging. Right.
+
+470
+01:08:43.080 --> 01:08:49.860
+kylie jue: When you're debugging. You have that lower left hand panel that shows you sort of the, the stack frames of program execution.
+
+471
+01:08:50.490 --> 01:09:02.970
+kylie jue: And there is always one top frame and the code that you see executing right like when you're stepping over lines and stuff like that code can only execute in that top most stack frame. So actually, yes, like
+
+472
+01:09:04.140 --> 01:09:16.920
+kylie jue: If you had a variable like defined somewhere lower down in the stack and you try to access it. You just, you couldn't right because the only code that is allowed to execute is this code that's in the stack frame at the very top, and so
+
+473
+01:09:18.450 --> 01:09:34.650
+kylie jue: While there are clear differences between stack the place where we put memory and stack the data structure and it is called stack for a reason. And a lot of those same restrictions apply in the sense that there's only ever like one sort of context in which code is executing at a time.
+
+474
+01:09:36.450 --> 01:09:37.350
+kylie jue: And so
+
+475
+01:09:39.990 --> 01:09:53.160
+kylie jue: It almost plays into the notion of scope, a little bit in the sense that, like the scope of the current stack frame is the only scope that's valid right anything lower down in in in the stacks in the in the sort of call stack.
+
+476
+01:09:53.610 --> 01:09:58.260
+kylie jue: And isn't really relevant at that point in time, right. It's only what's at the top there.
+
+477
+01:09:59.010 --> 01:10:04.590
+kylie jue: And and that is actually like why recursion works the way that it does, right, like if we had to somehow
+
+478
+01:10:05.280 --> 01:10:20.160
+kylie jue: Tell oh I want variable I from like the third stack friend because I want to do something with it like that, wouldn't really work. And then so so it does, it does have this restriction that it actually is kind of kind of a meaningful one that we we do take advantage of.
+
+479
+01:10:22.800 --> 01:10:25.080
+kylie jue: The difference between the way versus just a
+
+480
+01:10:26.400 --> 01:10:28.590
+kylie jue: String or brackets.
+
+481
+01:10:31.080 --> 01:10:46.020
+kylie jue: We're not going to talk about that array declaration syntax in this class. We don't really have a need to use a static we declared array as opposed to a dynamically declared erase everything that we saw today was dynamically declared or is and
+
+482
+01:10:47.340 --> 01:10:55.230
+kylie jue: In reality, it's you get the access to the same structure like you can still say like AR AR I and things like that.
+
+483
+01:10:56.400 --> 01:11:07.770
+kylie jue: It's just the parts that are missing or the first and the third part. You don't have to use the new keyword to ask for the memory and because because it exists on the stack. You don't have to use the Delete key word to give it back.
+
+484
+01:11:09.420 --> 01:11:16.260
+kylie jue: Yeah, but we won't. We won't if, for those of you that are on that you haven't heard about that. There are other ways to declare a raise that we're just not going to talk about
+
+485
+01:11:24.060 --> 01:11:25.740
+edouard des: Next question. I'm kind of putting into
+
+486
+01:11:38.730 --> 01:11:42.870
+kylie jue: Edward, go ahead and leave like we can revisit your question.
+
+487
+01:11:43.890 --> 01:11:44.100
+kylie jue: Yeah.
+
+488
+01:11:44.610 --> 01:11:54.690
+edouard des: Well, I just want you to know this might, but so if it's not to be answered them, don't answer, but I'm just like, is there is this all stored in your heart rate for, like, is this program memory, like, well, this one you end the program. This is all deleted. Correct.
+
+489
+01:11:55.800 --> 01:11:56.430
+kylie jue: Yeah.
+
+490
+01:11:56.580 --> 01:12:04.980
+kylie jue: So yeah there. This is not the memory when we talk about storage space and programs and we talked about memory. We're always referring to, sort of,
+
+491
+01:12:06.180 --> 01:12:14.820
+kylie jue: We're referring to sort of like a ram on your computer, right, like not, it's not like it's not persistent storage. It's sort of temporary
+
+492
+01:12:14.880 --> 01:12:16.050
+kylie jue: Dynamic so rich.
+
+493
+01:12:17.220 --> 01:12:18.060
+kylie jue: But yes.
+
+494
+01:12:18.750 --> 01:12:22.890
+edouard des: So like when you shut off your computer and you reopen everything is gone, including memory leaks.
+
+495
+01:12:24.420 --> 01:12:27.600
+kylie jue: That is, that's exactly why power cycling your computer works.
+
+496
+01:12:27.750 --> 01:12:31.680
+kylie jue: That's exactly what I guess because like capacitors don't store anything if there's no power.
+
+497
+01:12:31.980 --> 01:12:40.230
+kylie jue: Yeah, like the reason that that power cycling devices were cool fast that the reason that power cycling devices works a lot of the time.
+
+498
+01:12:41.250 --> 01:12:49.830
+kylie jue: Is that it will clear out all memory and it will start from scratch. When it starts back up again. And oftentimes that can actually fix most issues. Yeah.
+
+499
+01:12:50.040 --> 01:12:50.250
+Yeah.
+
+500
+01:12:51.270 --> 01:12:56.460
+edouard des: Okay, that makes sense. We're not. We're not ever touching like actual hard drive storage space.
+
+501
+01:12:56.970 --> 01:12:57.450
+kylie jue: I'm
+
+502
+01:12:57.480 --> 01:12:59.310
+edouard des: In these things unless you write a file, which we kind of
+
+503
+01:12:59.370 --> 01:13:03.780
+kylie jue: Got it. Yeah, not encode the we're writing when we do file stuff we are but
+
+504
+01:13:03.840 --> 01:13:04.950
+kylie jue: We've kind of obscure
+
+505
+01:13:06.330 --> 01:13:07.290
+kylie jue: Not gonna worry about it. Yeah.
+
+506
+01:13:07.890 --> 01:13:09.000
+edouard des: So they keep us in the room.
+
+507
+01:13:10.170 --> 01:13:17.970
+kylie jue: The heap, both of stock in the heat are in RAM. Yeah, they're, they're just two different locations and then they serve two different purposes.
+
+508
+01:13:18.750 --> 01:13:19.320
+edouard des: Okay, thank you.
+
+509
+01:13:20.520 --> 01:13:21.990
+kylie jue: Yeah, you want to go in and ask your question.
+
+510
+01:13:26.070 --> 01:13:27.150
+kylie jue: Very barely
+
+511
+01:13:31.980 --> 01:13:32.100
+Liza George: Now,
+
+512
+01:13:32.280 --> 01:13:33.300
+kylie jue: Yeah, much better.
+
+513
+01:13:33.570 --> 01:13:43.560
+Liza George: Okay, yeah. So I guess my main question is like how our staff things on the stack differentiated. Is it like a big or real
+
+514
+01:13:46.800 --> 01:13:55.230
+kylie jue: Actually, yeah, you can almost think about it that way, the way that I, the way that I like to think about the stack is it's almost like a vertical array. Right.
+
+515
+01:13:55.860 --> 01:14:07.050
+kylie jue: Every, every slot is one stack frame right and they quite literally stack on top of one another. Right. And so if you move on to further classes. You'll, you'll actually see the stack drawn vertically, a lot
+
+516
+01:14:07.380 --> 01:14:14.310
+kylie jue: And so and so. Yeah. Like, it's basically it's just a contiguous portion of memory. Right. And that way, it's no different than an array.
+
+517
+01:14:14.700 --> 01:14:25.530
+kylie jue: And it has slots. Right. Like there's one stack frame per slot. And that way, it's not really that different from an array and and so so so your question there. Like, when is the stack frame deleted.
+
+518
+01:14:26.820 --> 01:14:36.660
+kylie jue: It really is just, I mean, depends on how into the details, you want to get with it. But realistically, it's just kind of like removed from the top right and so like
+
+519
+01:14:36.930 --> 01:14:43.680
+kylie jue: The program knows. Oh, I'm currently executing in the very top stack frame. Oh, this function just ended. Let me go down to the one below me.
+
+520
+01:14:44.010 --> 01:14:56.640
+kylie jue: And that's, that's really all that it does. Right. It's not like the it's not like the one above it is deleted necessarily or like that it goes away. It's just that your computer says, Okay, I'm now down to executing in this in the stack from below.
+
+521
+01:14:57.660 --> 01:15:02.310
+kylie jue: And then it you know it does that process of going up on a function call and going down on a return
+
+522
+01:15:04.050 --> 01:15:07.080
+Liza George: And then each slot. When you're talking about
+
+523
+01:15:11.640 --> 01:15:21.300
+kylie jue: Yeah, that's a great question, and that is the one component that that would be different between the call stack and an array. Is that an array all the slots are fixed size.
+
+524
+01:15:22.260 --> 01:15:26.370
+kylie jue: But there actually is no limit on how big an individual stack frame can be
+
+525
+01:15:27.150 --> 01:15:35.940
+kylie jue: As you explore in the assignment. There's an overall limit on how big your stack frame can get right. I think for me it's like 16,000 stack frames for some people it's like 60,000
+
+526
+01:15:36.510 --> 01:15:50.490
+kylie jue: And so there's an overall limit on how much, how much real computer memory is allocated to the status given to the stack, but any given stock room can actually take up as little or as much of that as it wants. So, that is that is the part that's a little bit different.
+
+527
+01:15:51.960 --> 01:16:00.450
+kylie jue: And specifically, if you think about why that's true. Like think about a one function that declares like 10 local variables and one function. The declared one
+
+528
+01:16:00.870 --> 01:16:11.910
+kylie jue: Right, like you would expect that like that first function needs a lot more memory, right, like it's going to put a lot more things on the stack. Then, then the then the second one is. And so, so in that case, they can be very different sizes.
+
+529
+01:16:13.980 --> 01:16:18.840
+Liza George: Okay, so it's almost like the staff is like a stack of stuff.
+
+530
+01:16:19.590 --> 01:16:21.720
+kylie jue: Yeah, yeah. Yeah, exactly.
+
+531
+01:16:22.470 --> 01:16:22.950
+Alright, cool.
+
+532
+01:16:29.160 --> 01:16:30.060
+kylie jue: Any other questions.
+
+533
+01:16:34.590 --> 01:16:36.090
+kylie jue: Alright, well I hope everyone has a good weekend.
+
+534
+01:16:37.350 --> 01:16:38.310
+kylie jue: And we'll see you on Monday.
+

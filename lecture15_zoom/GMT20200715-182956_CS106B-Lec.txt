@@ -1,0 +1,110 @@
+00:09:18	hriday chhabria:	Easily readable functions
+00:09:38	Aadi M Rane:	Performs a variety of tasks
+00:09:39	Samuel Lynn Ledden:	a lot of options and utility
+00:09:46	Siddharth Balaji:	Usability
+00:09:47	kevin yang:	Lots of tasks and easy to use
+00:09:48	Jihe He:	Clean code :D
+00:09:49	Zachary Alon:	Simple to use
+00:09:49	shirley li:	Efficient and decomposed into simple functions
+00:09:53	Lukas Fullner:	consistent and easy to use
+00:09:53	Dima Timofeev:	Simple API
+00:09:54	Ryan Gabel:	Foolproof
+00:09:57	Thomas Tao Hale:	Efficiency and unsability
+00:10:03	Hemant Chaudhary:	Ease of use
+00:10:05	yukun yang:	Efficiency and fool proof
+00:10:05	Kenny Wang:	easy to use
+00:10:08	louise marzolf:	straightforward and no errors
+00:10:09	Liza George:	easy to use for the user, error-free
+00:10:15	Tongjun (Albert) Zhang:	Low runtime and robustness
+00:10:24	Blake Salvador:	Can be used without necessarily knowing the code itself
+00:12:35	edouard des:	One that means the user does not need to be an expert in the field to use the abstraction. For instance, HTML is an abstraction of complex 2D rendering. It was designed so that, instead of viewing the screen as pixels that must be drawn and redrawn, one may view it as a set of objects that can dynamically change, much like a table covered with items that can be moved around. Everyone is familiar with items on a table, which makes it much easier to understand UI design for non-experts.
+00:16:12	Ismael Lemhadri:	Can we have a struct with three items instead of two for example ?
+00:16:35	Nick Bowman:	Yes, you can have as many pieces of information in a struct as you want.
+00:19:31	Usman Iqbal Hanif:	So is a class just a struct that is private?
+00:20:18	Jihe He:	Feels fun to learn Java in C++ (jk)
+00:21:03	Nick Bowman:	The main difference between a class and a struct is that a class defaults to having its members be private, while the struct defaults to having them be public. You can technically specify whatever public/private split you want in both, but our convention in this class will be to use structs for bundling information that we want public (direct) access to while we will use classes to bundle private information + methods that can operate on that data.
+00:22:02	Siddharth Balaji:	Does c++ provide a default constructor like Java does?
+00:22:17	Nick Bowman:	Yes, we will talk about that once we get to the coding example.
+00:23:19	Usman Iqbal Hanif:	So can one have ‘member functions’ in a struct?
+00:23:49	Nick Bowman:	Yes, you can. However, we will not do that in this class just to maintain a clear distinction between structs and classes
+00:24:02	Usman Iqbal Hanif:	Ah makes sense! Thanks!
+00:36:01	Siddharth Balaji:	Question, how does the policy on submitting assignments late work again?
+00:36:18	Ismael Lemhadri:	Hah good question for assignment 3
+00:36:38	Nick Bowman:	There’s nothing really different about how you submit – just make sure to submit on Paperless before the grace period expires.
+00:36:56	Siddharth Balaji:	Is there a limit on how many grace periods we can use over the semester or no?
+00:37:03	Demi Lei:	^
+00:37:16	Nick Bowman:	No, the grace period is available to all students for every assignment.
+00:37:22	Siddharth Balaji:	Sounds good thank you so much
+00:39:04	Nadia Palar:	what’s the difference between .h and .hpp?
+00:39:27	Nick Bowman:	No difference, its usually personal preference for programmers which they use
+00:39:56	Nick Bowman:	.hpp semantically means a header file for C++ specifically, but .h is used for both C and C++ header files
+00:41:59	Usman Iqbal Hanif:	What is the scoping between the private and public sections? If I have a private variable, can it be utilized to conduct a public function?
+00:42:02	Evan Baldonado:	Does public have to come before private? If so, is it able to access things that are defined after it (ex: elms here)?
+00:42:41	Nick Bowman:	Yes, private variables can be accessed from public member functions defined in the same class. That’s how we’ll actually implement the connection between our interface and the implementation
+00:43:13	Nick Bowman:	@Evan I’m not sure, I doubt the order matters, but it’s convention to put the public section before the private section, so that the public section is the first thing a programmer sees when they open the file
+00:43:43	Evan Baldonado:	Thank you!
+00:43:50	Aadi M Rane:	what are the  :: for?
+00:44:05	Hemant Chaudhary:	was the previous program we wrote in a RandomBag.h file? And now we're in a RandomBag.cpp file?
+00:44:05	Aadi M Rane:	nvm
+00:44:26	Nick Bowman:	@Hemant, yes the previous set of slides defined RandomBag.h and now we’re defining RandomBag.cpp
+00:45:23	Liza George:	wait so you can't have member variables that aren't private? like I know that in java you can set some variables to be public...or in the same way certain methods can be set to private
+00:45:49	Liza George:	ig what I;m asking is, can we have public variables or private emthods?
+00:45:58	Nick Bowman:	@Liza you technically can have both public members and private methods. We will not use public members because that is a bad practice with abstraction. But yes, we will have private helpers!
+00:46:29	Nick Bowman:	Private helpers can be very valuable in designing a clean implementation, and sometimes there are functions we don’t want clients to be able to call on the object
+00:47:09	Kenny Wang:	are there some cases where it may be useful to have public member variables? I feel like I remember using some occasionally
+00:47:09	Nick Bowman:	It will take a little bit of a more complex class in order for us to motivate the need for private helper functions, but we’ll see that in an extensive example on Monday
+00:47:42	Nick Bowman:	@Kenny Maybe, but we’re going to focus on abstraction definitions that don’t allow direct access to public member variables
+00:47:46	Liza George:	oh ok. and to make the function private, do we just define it in the "private" portion of the header?
+00:47:53	Kenny Wang:	alright
+00:47:54	Nick Bowman:	Exactly!
+00:47:58	Siddharth Balaji:	Why not just call elems.size? Isn’t it more efficient?
+00:48:01	Liza George:	cool, thanks!
+00:48:42	Nick Bowman:	@Siddharth in this case it doesn’t make too much of a difference, but we would generally do it for the same reason we usually do decomposition, which is to make the code more readable and easily understandable
+00:48:54	Siddharth Balaji:	Gotchu thanks
+00:49:01	Samuel Lynn Ledden:	why do we need to state const?
+00:49:20	Nick Bowman:	@Samuel it’s good practice to label methods that won’t change the state of the object to be const.
+00:49:38	Nick Bowman:	it’s a good way to communicate to the user of the class as well that they can trust this method not to change the state of the object
+00:49:44	Samuel Lynn Ledden:	thanks
+00:51:23	Usman Iqbal Hanif:	What does Kylie mean by “if we put them in public, we could edit them”. Does she mean like outside of the implementation file you could edit? Because in the implementation couldn’t she very will edit elems?
+00:51:40	Usman Iqbal Hanif:	I’m referring to elems btw
+00:51:50	Nick Bowman:	Yes, making a member variable public would allow you to access that variable outside of the implementation
+00:51:58	Nick Bowman:	Whereas making it private makes it accessible only in the implementation
+00:52:42	Shifeng Hong:	how can we generalize the data type store in the vector elem？
+00:53:13	max chou:	Is the public private stuff in the .h file the constructor?
+00:53:48	Usman Iqbal Hanif:	Ok thanks! Last question (hopefully, sorry for so many), but how do we distinguish an implementation .cpp file, and some other (public) .cpp file? Don’t we include the .h in all that refer to this class?
+00:54:04	Nick Bowman:	@Max Not quite – the constructor is a special function that we’ll see tomorrow. The public/private stuff is part of the class definition
+00:54:30	Jordan Lin:	Can we possibly use 'class templates'?
+00:55:10	Nick Bowman:	@Jordan yes, C++ allows templatized classes that allow you to store many different types of data, but that’s beyond the scope of this class
+00:55:12	runze yu:	What does #pragma once mean again?
+00:55:39	Nick Bowman:	@Usman Good question! The implementation file is specifically the one that defines the behavior of RandomBag::add() for example
+00:55:48	Nick Bowman:	Other files that include the header file would do things like
+00:55:52	Nick Bowman:	RandomBag bag;
+00:55:54	Nick Bowman:	and bag.add()
+00:56:31	Nick Bowman:	@Runze it just prevents duplication of the class definition if many files #include the same header file
+00:57:05	Kenneth Fischer:	Are the function declarations in the header file akin to function prototypes for the .cpp file?
+00:57:13	Hanna Mofid:	Where does the constructor go? In the header file or .cpp file?
+00:57:25	Usman Iqbal Hanif:	Great sounds good!
+00:57:53	Nick Bowman:	@Hanna The constructor is similar to other methods – the prototype is defined in the .h and the implementation goes in the .cpp
+00:58:07	Nick Bowman:	@kenneth yup, exactly
+00:59:37	Liza George:	does the order in which we implement functions in the .cpp file matter? like if one function calls another, does the later one have to be defined first like they do we when we write new functions regularly?
+01:00:00	Kevin H Fan:	Thank you!
+01:00:00	paul gialis:	thank you
+01:00:01	alz1022@stanford.edu:	Thank you!
+01:00:02	Lawrence Li:	thank you
+01:00:03	Zachary Alon:	Thank you!
+01:00:06	Guozhen Miao:	thank you
+01:00:08	Pranav Nair:	Thank you!
+01:00:09	Gautham Rajesh:	thanks!
+01:00:09	Kenneth Fischer:	Thank you!
+01:00:09	Nick Bowman:	@Liza Good question! Actually no – since you’ve effectively declared all the methods with prototypes int he class definition, you can implement them in any order you see fit
+01:01:16	Liza George:	oh ok. so like Kenny said, the defining of functions in header files and function prototypes are equivalent huh
+01:01:19	Liza George:	cool, thank you!
+01:01:23	Nick Bowman:	Yup, exactly!
+01:01:39	David Huang:	Does the implementation file has to have the same name as the header file?
+01:02:09	Nick Bowman:	No, but that is standard practice to make your file structure easier to understand for other functions
+01:04:35	Tongjun (Albert) Zhang:	so its pretty much the same as the #ifndef #define ... thing
+01:04:53	Nick Bowman:	@Albert yes, but #pragma once is the newer, cleaner way to do that
+01:05:01	Tongjun (Albert) Zhang:	got it, thanks
+01:11:24	Jennifer Anna Bonello:	Thank you!
+01:11:30	Demi Lei:	Thank you!
+01:11:35	haoming li:	have a good one guys.

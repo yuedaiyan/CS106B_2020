@@ -1,0 +1,1346 @@
+WEBVTT
+
+1
+00:00:04.770 --> 00:00:05.310
+Nick Bowman: Alright.
+
+2
+00:00:06.509 --> 00:00:06.779
+Nick Bowman: Hello.
+
+3
+00:00:08.069 --> 00:00:16.500
+Nick Bowman: There we go. Alright, so welcome everyone to our last lecture on trees. Today, and then actually talking about
+
+4
+00:00:17.039 --> 00:00:25.350
+Nick Bowman: Trees in the context of this really cool sort of very widespread algorithm called Huffman coding and and so let's jump into anything so
+
+5
+00:00:26.130 --> 00:00:39.540
+Nick Bowman: Today's lecture is actually just going to be full of means that that was not the intention going into it, but it's just, that's just going to be true. So I hope you all can can kind of enjoy it and laugh, along with us. But today, his question has is actually a visual question.
+
+6
+00:00:40.650 --> 00:00:54.360
+Nick Bowman: Which is that if a binary tree wore pants would wear them as in picture a picture be so as usual. Please put your answers in the chat box and that will be what gets us started off today.
+
+7
+00:00:56.460 --> 00:01:03.930
+Nick Bowman: But so we're going to be today is we're going to be sort of talking about the intersection of think data structures and and real world algorithms.
+
+8
+00:01:04.440 --> 00:01:08.190
+Nick Bowman: And and we're going to be answering this question about how we can use trees.
+
+9
+00:01:08.430 --> 00:01:20.550
+Nick Bowman: To actually develop better data representation techniques and before we can even do that, we'll spend the good first half electrically talking about what data representation even means or what it is and then we'll talk about that.
+
+10
+00:01:21.270 --> 00:01:33.960
+Nick Bowman: At the end of class to bring that all together. And so like I said, we'll do some review from yesterday in binary search trees and then we'll talk about this idea of either representation and compression and encoding. And then finally, we'll talk about
+
+11
+00:01:36.240 --> 00:01:41.760
+Nick Bowman: So please review. So remember, yesterday we talked about binary search trees and binary surgery is
+
+12
+00:01:42.360 --> 00:01:51.390
+Nick Bowman: Sort of was our first attempt to take advantage of the fact that in trees right if you organize your data. Well, the distance between sort of elements and loads of the tree.
+
+13
+00:01:51.660 --> 00:01:55.890
+Nick Bowman: And to the top of the tree can be very short. They're very small, even if there are elements.
+
+14
+00:01:56.640 --> 00:02:06.900
+Nick Bowman: And so when we went back to our levels of abstraction. We said we can take advantage of this property entries and use this data organizations to either be called on research trees.
+
+15
+00:02:07.350 --> 00:02:15.360
+Nick Bowman: And then finally put that together to actually implement a set actually sort of build a powerful abstract data structure that takes advantage of all these things.
+
+16
+00:02:16.380 --> 00:02:29.700
+Nick Bowman: And so that was sort of our return to actually final answer this question of why do we get a login performance when we, when we have sets and maps and we're doing things like avenues and contains and binary search trees are actually exactly
+
+17
+00:02:31.800 --> 00:02:37.740
+Nick Bowman: And so I remember we defined binary search trees, we have this sort of recursive definition similarly to how we define trees.
+
+18
+00:02:38.370 --> 00:02:44.190
+Nick Bowman: Which is that either they're empty structures which are represented by appointment or they're composed of a single element.
+
+19
+00:02:44.700 --> 00:02:56.370
+Nick Bowman: With up to two sub dreams and every all the values in the centuries to the left or a binary search three values smaller than the current value and then everything to the right is a binary search string of values, largely them.
+
+20
+00:02:58.320 --> 00:03:07.230
+Nick Bowman: And so this was the example of a binary search for that you worked with. And so, sort of, if you look at this, you can see that it satisfies the binary search string property, which is that at our root node.
+
+21
+00:03:07.590 --> 00:03:13.410
+Nick Bowman: Number 108 everything to the left hand side is less than one away and everything to the right hand side is greater than one away.
+
+22
+00:03:14.040 --> 00:03:24.390
+Nick Bowman: And so that's the critical component. It's not just that everything is less. But actually this entire left hand sub tree is a binary search to its own right and this entire right hand sub tree is a vitamin C treatments.
+
+23
+00:03:26.340 --> 00:03:41.910
+Nick Bowman: And the nice thing that we saw is that as long as we sort of organize this data. Well, with with end nodes in the tree, we can actually find or get to any node and actually just a log and steps. The other sort of nice tree branch and
+
+24
+00:03:44.250 --> 00:03:51.480
+Nick Bowman: Then we saw sort of how we would do operations on binary search screen. So for example, if you wanted to look up to see if an element existed in the tree.
+
+25
+00:03:51.840 --> 00:03:57.060
+Nick Bowman: And what we would do is we would start at the root do a comparison, the value is less. So we would go left.
+
+26
+00:03:57.390 --> 00:04:02.340
+Nick Bowman: Then we can do a comparison, the value that we're looking for is more so we would go right and go left.
+
+27
+00:04:02.700 --> 00:04:11.760
+Nick Bowman: And then we could sort of with only three comparisons, even though there are 13 nodes in this tree with number three comparisons. We could actually find that the value of one and six was in the tree.
+
+28
+00:04:12.840 --> 00:04:16.080
+Nick Bowman: And then we saw similar thing for at it when we were adding elements.
+
+29
+00:04:16.260 --> 00:04:18.720
+Nick Bowman: We could find the correct place to add them by doing similar
+
+30
+00:04:18.720 --> 00:04:31.650
+Nick Bowman: Comparisons when we compare the target value with the root node if since it's greater we go right and it's still greater we go right again and and then we can actually insert it into the replication. As soon as we sort of find
+
+31
+00:04:32.730 --> 00:04:34.830
+Nick Bowman: Their hit the end of the tree and find find out
+
+32
+00:04:36.240 --> 00:04:40.530
+Nick Bowman: And so we saw these two operations of adding contains is kind of on the operation side.
+
+33
+00:04:42.720 --> 00:04:50.340
+Nick Bowman: And we also saw that that binary search trees, what was interesting about them is the order in which you added them to the tree actually matter.
+
+34
+00:04:50.880 --> 00:05:00.450
+Nick Bowman: And so what we care, though, is actually having binary search trees are balanced. So this idea that no one sub tree was ever much longer or much taller than any of the others.
+
+35
+00:05:00.990 --> 00:05:14.550
+Nick Bowman: And we saw this idea that if you if you were building one from scratch. You know, you would always want to choose the median elements to be your new node and then you would split everything into left and two elements. Less than or greater than and you'd recursive build centuries outputs.
+
+36
+00:05:15.900 --> 00:05:19.290
+Nick Bowman: And we're not going to go into any more detail than that on how to build the STS
+
+37
+00:05:19.740 --> 00:05:31.320
+Nick Bowman: But if you're ever interested in sort of like a cool challenge problem and I would recommend doing some research on self balancing PST, so these are binary search trees that actually adapt to their shape to maintain this balance property as you keep
+
+38
+00:05:32.610 --> 00:05:38.520
+Nick Bowman: And most of what most of the set and mock data structures that you see in the real world are actually built on top of the special effects.
+
+39
+00:05:40.830 --> 00:05:53.220
+Nick Bowman: But then talking about data structures. We also saw that we can implement a set with a binary circuitry. And so, we saw that directly really good backing store for data when we need to sort of fast look up faster addition in class.
+
+40
+00:05:54.300 --> 00:06:01.860
+Nick Bowman: And which made them great for things like sets and maps. And then so sort of our last exercise yesterday was we actually implemented a very onset.
+
+41
+00:06:02.430 --> 00:06:06.360
+Nick Bowman: And saw that we could use a binary search tree to store the data for the set
+
+42
+00:06:06.840 --> 00:06:15.210
+Nick Bowman: And and using sort of recursive functions and recursive helper functions and taking advantage of reversals and everything that we talked about on Monday.
+
+43
+00:06:15.810 --> 00:06:24.420
+Nick Bowman: We were able to sort of finally see what the back ends for this data structure would look like. And sort of get that new a good log in on time for all of them.
+
+44
+00:06:25.950 --> 00:06:31.170
+Nick Bowman: We also saw that working the trees sort of rewiring them can actually get a little bit more complicated than working with
+
+45
+00:06:31.470 --> 00:06:41.880
+Nick Bowman: With lists. So really we didn't cover their move method together, but we sort of encourage you to check it out and just because it's interesting to see what it looks like the trees is comparable.
+
+46
+00:06:43.590 --> 00:06:56.310
+Nick Bowman: And so, so that was sort of our introduction into the application of trees to interesting real world problems right we finally answered this question that we asked all the way back to, like, how do we get such good performance on setting.
+
+47
+00:06:57.240 --> 00:07:13.170
+Nick Bowman: And this was, this is sort of a combination of that but trees can be used to do a lot more and to solve even more interesting problems. And so the question for today is sort of how can we continue to use trees and but this time to actually develop better data representation
+
+48
+00:07:14.340 --> 00:07:20.190
+Nick Bowman: And and so, you know, if we go back to our instruction diagram what we're going to be talking about today.
+
+49
+00:07:21.270 --> 00:07:24.090
+Nick Bowman: Is this idea of still using trees to store data.
+
+50
+00:07:24.990 --> 00:07:31.350
+Nick Bowman: But organizing it in a slightly different way and interpreting the meaning of the data organization and the tree in a slightly different way.
+
+51
+00:07:31.710 --> 00:07:44.490
+Nick Bowman: And under the under this sort of method call Huffman coding and Kaufman trees and and and we'll, we'll work our way up to sort of understanding exactly how and why you might want to structure information in the tree.
+
+52
+00:07:47.130 --> 00:07:55.890
+Nick Bowman: And so, just as an acknowledgement, most of the examples and slides on in today's lecture are barred from a lecture by piece works. So thank you for having such good
+
+53
+00:07:58.260 --> 00:08:09.240
+Nick Bowman: So before we can talk about what it means to have, you know, trees and trees to make it better data representation and to be better data storage it, we actually have to talk about what data storage and data representation
+
+54
+00:08:10.470 --> 00:08:22.350
+Nick Bowman: And and so if you ask yourself the question of sort of how to computer store and represent data. Well, you might actually remember from when we were talking about pointers and not how computers sort of internal storage.
+
+55
+00:08:22.920 --> 00:08:30.360
+Nick Bowman: We sort of have this idea that there are physical components of the computer. So this is actually a look inside to a physical hard disk or a hard drive.
+
+56
+00:08:30.720 --> 00:08:37.560
+Nick Bowman: And you might have heard it called. And so in literally a physical device that that is part of your computer that stores information.
+
+57
+00:08:38.340 --> 00:08:48.870
+Nick Bowman: And this is a picture of RAM. We talked about RAM. When we learned about pointers, but this is again another physical device that exists inside your computer that sort of somehow stores stores data stores in Mecca.
+
+58
+00:08:51.240 --> 00:08:57.780
+Nick Bowman: And it's a little bit of magic of actually how it works. But, but the kind of key core components is that
+
+59
+00:08:58.050 --> 00:09:08.250
+Nick Bowman: All of these physical devices store all of your digital data anything you've ever interacted with on computer as just sequences of the numbers zero and one. That's it. It's just zeros and ones.
+
+60
+00:09:09.210 --> 00:09:24.600
+Nick Bowman: And the way that they do that is actually very cool. So if any of your into physics or into electrical engineering and these values of zero and one are actually represented a lot of times by magnetic orientation. So these physical devices and how these giant sort of
+
+61
+00:09:25.920 --> 00:09:36.030
+Nick Bowman: Sort of small components that use magnetic orientation on tiny, tiny little particles or by trapping electrons to literally represent the concept of zero or one.
+
+62
+00:09:36.630 --> 00:09:43.980
+Nick Bowman: Or if you've worked with circuits before you know concept of a high and a low voltage but just this idea of there is information or there is not
+
+63
+00:09:45.030 --> 00:09:47.940
+Nick Bowman: And sort of, we were able to represent everything you've ever seen on the computer.
+
+64
+00:09:49.740 --> 00:10:01.290
+Nick Bowman: And so we call this this this a single zero or a single one a bit so so you see that that up. You may have heard of that before but a single one of these years of them is called it
+
+65
+00:10:02.040 --> 00:10:15.900
+Nick Bowman: And and what what we normally do is we group these bits and pieces of information called bucks so so grouping of eight of these zeros and ones is called a bite. So these are some examples of bytes. They're just as you can see sequences of zeros and ones.
+
+66
+00:10:17.220 --> 00:10:26.880
+Nick Bowman: And there's actually 256 possible different values of bytes. So I'm actually a good exercise for yourselves. If you want to go practice with the person backtracking.
+
+67
+00:10:27.330 --> 00:10:40.680
+Nick Bowman: Right go after class and try to write a recursive function that actually prints out all possible fight sequences. So, so eight letter or eight length A sequences of zeros and but if you do that, you'll see that there should be two.
+
+68
+00:10:43.560 --> 00:10:49.500
+Nick Bowman: And so what the system is called as the system is called binary and some of you may have may have heard of the system before
+
+69
+00:10:50.220 --> 00:11:01.260
+Nick Bowman: But it's, it's, that's what we sort of refer to this idea that there's a binary between the value zero, and the value one, and that is sort of the only way that we have to sort of present information in digital systems.
+
+70
+00:11:02.010 --> 00:11:06.570
+Nick Bowman: And so we use binary to represent numbers and text and images and all this different stuff.
+
+71
+00:11:08.130 --> 00:11:16.680
+Nick Bowman: But as a as a brief aside. And again, we don't expect you to fully understand how this works right now because it's not super important. But I just want to give you kind of a taste of this
+
+72
+00:11:17.070 --> 00:11:23.100
+Nick Bowman: And when we talked about pointers and memory addresses. We talked about this idea of hexadecimal to this idea of base 16 numbers.
+
+73
+00:11:23.670 --> 00:11:33.540
+Nick Bowman: And binary numbers actually can be thought of in a very similar way except for the fact that they're based two numbers, which just means that every sort of place value is now represents a power of two.
+
+74
+00:11:34.020 --> 00:11:41.700
+Nick Bowman: And then this is similar to how and again in base 10 you know you have the ones place in the 10th place in the hundreds place every, every place value is power.
+
+75
+00:11:42.960 --> 00:11:51.600
+Nick Bowman: And so if we think about how to, for example, represent my age and different medical systems right in base 10 which is the base system that we're all all very familiar with.
+
+76
+00:11:51.990 --> 00:12:06.600
+Nick Bowman: And the number 22 literally means to 10s and to ones. So two times 10 to the one and two times can be zero or two in the 10th place in between the ones place together gives us this numerical representation of the quantity of
+
+77
+00:12:08.580 --> 00:12:20.820
+Nick Bowman: In beings to what you the way that you would equivalent represent that is just by thinking of every place value. Now, as a power of two. And then, so then you have ones and zeros that sort of tell you hey I want this power to do
+
+78
+00:12:22.080 --> 00:12:31.710
+Nick Bowman: So if you wanted to represent the number 22 you would actually presented with a sequence 10110 and you can see kind of how the breakdown there is, it says I want one times to to the fourth.
+
+79
+00:12:32.190 --> 00:12:42.570
+Nick Bowman: I don't want any to to the third. I need to do the second and into the first, but I don't want to disagree and together. That gives you 16 plus four plus two, which again adds up to these meetings.
+
+80
+00:12:44.490 --> 00:12:54.000
+Nick Bowman: And so this is sort of our introduction into how binary can actually represent information that we're familiar with like the number 22 but in a slightly different
+
+81
+00:12:55.140 --> 00:13:03.150
+Nick Bowman: And so now that you know a little bit about binary right you can go enjoy the giant world of a binary jokes and means and comments and stuff that are popping up there.
+
+82
+00:13:03.960 --> 00:13:12.240
+Nick Bowman: But that the actually that was not my main reason for teaching you this, but I figured out. So that's a nice benefit you out there and and understand sort of binary matrix.
+
+83
+00:13:13.980 --> 00:13:21.990
+Nick Bowman: So that's what we can use sort of sequences of zeros and ones represent numbers, but there's lots of other things you might want to represent on computers and one of those texts.
+
+84
+00:13:22.560 --> 00:13:29.640
+Nick Bowman: And so, you know, we think of strings as the text is a string is made up of characters and letters and numbers and Modi's and all not
+
+85
+00:13:31.020 --> 00:13:39.420
+Nick Bowman: But again, we just said computers need everything to be zero. So how do we how do we sort of make those two definitions kind of lineup.
+
+86
+00:13:40.860 --> 00:13:55.800
+Nick Bowman: And the way that we're going to do that or the way that this is done is you need some way to represent characters so like the letter A, or number three, or the emoji like smiling face of representing that as some sequence of bits. Some, some binary seeking security.
+
+87
+00:13:57.150 --> 00:14:09.270
+Nick Bowman: And so the mean sort of one of the main facets of what we're going to talk about today, these things called codes which are literally just associations between characters and sequences events and that's all that code is going to be
+
+88
+00:14:10.770 --> 00:14:19.500
+Nick Bowman: And perhaps the most common commonly used coding system or system of codes and computer systems and as the system called ASCII
+
+89
+00:14:19.890 --> 00:14:26.070
+Nick Bowman: And you may have heard us mention it earlier before this class, but it was actually developed way back in the 1960s.
+
+90
+00:14:26.490 --> 00:14:32.700
+Nick Bowman: And what they decided is they said hey, there's actually bytes. Let us represent 256 values.
+
+91
+00:14:33.060 --> 00:14:42.690
+Nick Bowman: And back in the 1960s. We didn't have a Modi's yet so they were like, all right, with the letters in the English language, you know, capital a lowercase all the number of digits. That's way less than 256 characters.
+
+92
+00:14:43.290 --> 00:14:49.530
+Nick Bowman: So let's just associate fight sequences with with characters. And so that's actually exactly what they did.
+
+93
+00:14:50.040 --> 00:14:58.020
+Nick Bowman: And you can you've actually encountered this before in the class because we've told you. Hey, every character that you see actually has an integer representation
+
+94
+00:14:58.440 --> 00:15:06.030
+Nick Bowman: And the reason why is, every character has a bite sequence representation and every bite sequence or presentation has an associated numerical value.
+
+95
+00:15:06.360 --> 00:15:18.840
+Nick Bowman: And so the letter capital A actually is represented underneath the hood by this fight sequence, whose value of 65. And so if you just print out the integer value of the character. A you actually see this kind of kind of random value of 65
+
+96
+00:15:21.150 --> 00:15:29.970
+Nick Bowman: And so to show you how these systems actually work right. Let's work through an example. So there's kind of a mystery string that shows up in the title of this slide.
+
+97
+00:15:30.540 --> 00:15:38.220
+Nick Bowman: And what you can see on the right here is actually a subset of the ASCII system. So this is actually exactly what the asking and coding system looks like.
+
+98
+00:15:38.520 --> 00:15:46.620
+Nick Bowman: It quite literally says here, our characters and here are there are associated codes and each code is right. It's just a sequence of zeros.
+
+99
+00:15:47.820 --> 00:15:56.160
+Nick Bowman: And so if we wanted to decode the number I say decode. I mean to translate from the coded version to the sort of human readable character version.
+
+100
+00:15:56.850 --> 00:16:06.390
+Nick Bowman: All we would have to do is look at sequences of eight bits in the title. Title side and actually look to see what kind of those correspond to
+
+101
+00:16:07.140 --> 00:16:17.910
+Nick Bowman: So if we looked at our first set of bytes, we see that corresponds to the character be if we look at the second bite. We see where it corresponds to the character. And if we look at the third, but if you see that corresponds to the case.
+
+102
+00:16:19.560 --> 00:16:30.960
+Nick Bowman: And so putting all that together. We've actually gone from this binary representation of zeros and ones to the string back. Right. And this is sort of our first exposure to
+
+103
+00:16:31.440 --> 00:16:46.500
+Nick Bowman: How the computer is actually taking the strings that we see and that we are able to interpret as humans and how it actually goes and interprets or I should say translates it into something that the computer can interpret and reason about and store and it's in its infancy.
+
+104
+00:16:48.000 --> 00:16:51.090
+Nick Bowman: And so, so that is kind of our first exposure.
+
+105
+00:16:52.320 --> 00:17:03.090
+Nick Bowman: And so all the rest of the lecture today is going to be thinking about ways that we can do this system better. So this is our sort of baseline system, how to take text or human understandable information.
+
+106
+00:17:03.450 --> 00:17:09.090
+Nick Bowman: And translate it to computer understandable information and we're going to try to see if we can find ways to do that.
+
+107
+00:17:10.860 --> 00:17:23.880
+Nick Bowman: And so the reason when what I mean when I say better is is we can make an observation that in ask the right every character will always take a peek. That's right. It doesn't matter what character. It is. It's always going to take up eight minutes.
+
+108
+00:17:24.480 --> 00:17:31.560
+Nick Bowman: And so if we want to send a message with n characters will always need sort of eight and bits to represent that that message to the Zookeeper
+
+109
+00:17:32.430 --> 00:17:43.020
+Nick Bowman: And so when I say better. What I mean is the question I'm going to spend all the today answering is can be reduced this number, can we come up with better data representations and ask you
+
+110
+00:17:43.290 --> 00:17:49.560
+Nick Bowman: To actually reduce the number of bits that we need to sort of PIN code or store a piece of information on
+
+111
+00:17:51.630 --> 00:18:00.060
+Nick Bowman: And so we're actually going to have a special guests into his lecture and it is this devastating with you, animals, if any of you ever encounter this animal forth
+
+112
+00:18:00.420 --> 00:18:06.060
+Nick Bowman: And it's actually, it's called a pretty hectic and it's a small antelope native Eastern Africa.
+
+113
+00:18:06.720 --> 00:18:13.980
+Nick Bowman: That is like well known for one, how cute it is, but to just how like distinctive it's Indonesians. So you have to have a picture on the right.
+
+114
+00:18:14.460 --> 00:18:15.720
+Nick Bowman: Kind of close up of its nose.
+
+115
+00:18:16.110 --> 00:18:27.000
+Nick Bowman: And this is one of Keith's favorite animals. And so when at that acknowledgement. I gave time at the beginning, you know, this is all all his example, but it's a very, very cute animal. And so, so all of our examples. Today we're going to focus on
+
+116
+00:18:27.990 --> 00:18:35.610
+Nick Bowman: Trying to find an efficient way to represent the name of this animal so cryptic as sort of a binary
+
+117
+00:18:38.730 --> 00:18:48.840
+Nick Bowman: And the first observation that we're going to make is that for ASCII right there's 256 possible characters that asked me can represent. And that's because it uses one Viper care.
+
+118
+00:18:50.640 --> 00:18:57.480
+Nick Bowman: But if we're specifically only worried about this task of writing or encoding the screen correct stick
+
+119
+00:18:58.710 --> 00:19:13.260
+Nick Bowman: It only has seven unique characters in it. And so it kind of seems almost wasteful to be using full bytes of information to represent the characters in that screen and and because we don't need 256 possible characters we only need seven
+
+120
+00:19:15.480 --> 00:19:19.380
+Nick Bowman: And so we can actually get away with using three bits of information for every code.
+
+121
+00:19:20.340 --> 00:19:25.680
+Nick Bowman: So, for example, and, you know, this is completely made up. There's no sort of real life significance to this.
+
+122
+00:19:26.130 --> 00:19:37.920
+Nick Bowman: But you could just say, Hey, take these bits sequences use them to represent the characters and Boom, you're done right. This is a much more efficient way to representing the character information in in the strength
+
+123
+00:19:38.730 --> 00:19:49.170
+Nick Bowman: And specifically, you can see this is what the new encoding. So by using these these three bit long codes, rather than the eight bit long ones we actually save
+
+124
+00:19:49.710 --> 00:20:00.150
+Nick Bowman: We should only use about 37% as much space as the SP, which means we were able to get almost a 65% improvement on on our original amount of space that we need to store.
+
+125
+00:20:01.680 --> 00:20:15.000
+Nick Bowman: And so this just goes to show you that if you're only worried about representing a specific piece of information, right, one that doesn't need the full expressiveness of ASCII and all 256 possible characters you can do better.
+
+126
+00:20:17.430 --> 00:20:25.920
+Nick Bowman: And so, so that that is kind of the takeaway here and that's kind of where we're going to continue to go for the rest of lecture, which is that when we store data using asked me in coatings right
+
+127
+00:20:26.370 --> 00:20:33.090
+Nick Bowman: It makes it nice because it's agreed upon system between everywhere. And so it sort of portable and usable by everybody, Peter.
+
+128
+00:20:33.960 --> 00:20:40.980
+Nick Bowman: But it's not ideal, in terms of how much space. It uses. And so actually making a custom codes for custom pieces of information that we want to store.
+
+129
+00:20:41.730 --> 00:20:53.760
+Nick Bowman: Will. Let us fix fix. And so this is going to sort of take us into this idea of compression algorithms. And so what we're going to do is build algorithms that can actually reduce the amount of space that we need to store specific
+
+130
+00:20:55.470 --> 00:21:08.160
+Nick Bowman: And so this class of algorithms that we're going to talk about is, is called compression algorithms and what they are is they're basically algorithms that sort of associate characters with codes. Right. So they give all these characters specific that
+
+131
+00:21:09.390 --> 00:21:16.470
+Nick Bowman: They do it in such a way that the person sending the information, the person receiving information, you know, both know about what the schemas.
+
+132
+00:21:17.070 --> 00:21:28.050
+Nick Bowman: And and importantly they do it in such a way that you can uniquely decode the information which means that there is only one possible message, they can create one possible encoded message. And then same going back
+
+133
+00:21:28.320 --> 00:21:34.920
+Nick Bowman: Right, you shouldn't be able to encode a message, send it to someone and then they try to decode it and I have no idea, like they got something
+
+134
+00:21:36.540 --> 00:21:44.700
+Nick Bowman: And so if we can build an algorithm that does this, and do it in such a way that it uses less space than standard ASCII, and then we'll sort of accomplished our goal.
+
+135
+00:21:46.620 --> 00:21:51.990
+Nick Bowman: And the reason we talk about compression algorithms is actually because they're super, super important in the real world.
+
+136
+00:21:52.620 --> 00:21:58.170
+Nick Bowman: And specifically, this idea of lossless compression algorithms. So these are algorithms that
+
+137
+00:21:58.740 --> 00:22:06.210
+Nick Bowman: Allow you to. It kind of seems crazy that you're able to do this, but they allow you to reduce the amount of space so that you're using to store something
+
+138
+00:22:06.540 --> 00:22:13.530
+Nick Bowman: without losing any of the details. So you can think of this as a picture if you're looking at a picture that's super high quality and very very
+
+139
+00:22:14.130 --> 00:22:22.380
+Nick Bowman: Sort of in detail that you took this is saying you can take that picture somehow cram it into a tiny box that is much smaller than the original picture.
+
+140
+00:22:22.650 --> 00:22:28.770
+Nick Bowman: Hand that box over to someone and then they're able to run a decompression. I'll give them that gives them back exactly that picture with none of the details.
+
+141
+00:22:30.060 --> 00:22:34.950
+Nick Bowman: Which is pretty crazy that that's even something that we can do. But that's actually exactly what was accomplished.
+
+142
+00:22:37.260 --> 00:22:44.490
+Nick Bowman: And the reason this is important is because everything you do online involves data compression. So when you're visiting a Website or downloading a file.
+
+143
+00:22:45.030 --> 00:22:49.110
+Nick Bowman: We, we use this. We do this idea where the data is compressed when it's sent
+
+144
+00:22:49.650 --> 00:22:56.880
+Nick Bowman: And then it's decompress when it's received. And so in transit. It takes up much less space than it does for either the person sending it to the person receiving it.
+
+145
+00:22:57.240 --> 00:23:03.030
+Nick Bowman: And that's actually why we're allowed to why we can have such a robust internet system, but that allows us to to do things.
+
+146
+00:23:03.990 --> 00:23:07.140
+Nick Bowman: And so for example right now you're all watching the video stream on zoom
+
+147
+00:23:07.680 --> 00:23:15.720
+Nick Bowman: The information between when it's being recorded on my computer right now and when it's reaching your screen gets compressed by a factor of 2000
+
+148
+00:23:16.110 --> 00:23:20.010
+Nick Bowman: So give comes 2000 times smaller wallet transits over the internet to get to you.
+
+149
+00:23:20.370 --> 00:23:27.060
+Nick Bowman: And somehow on my end and on your end, they are matching pairs and algorithms that compressing decompress the data that allows us to do that.
+
+150
+00:23:27.450 --> 00:23:35.220
+Nick Bowman: And that's kind of mind blowing to me that that even works, but that is actually exactly what's happening right now. And so that's why, that's why we talk about these
+
+151
+00:23:37.320 --> 00:23:45.840
+Nick Bowman: And so the key idea that we're going to take advantage of here and the way that these algorithms can start to work is the fact that they identify patterns in data.
+
+152
+00:23:46.440 --> 00:23:55.410
+Nick Bowman: And what I mean by that is, they look for ways they look for common trends and data and actually take advantage of those trends to find better fit more efficient representations
+
+153
+00:23:57.420 --> 00:24:03.300
+Nick Bowman: And so our first step here is going to be to try to figure out how can we actually sort of take advantage of patterns in the data.
+
+154
+00:24:04.080 --> 00:24:08.370
+Nick Bowman: And so what we're going to do here is we're going to take advantage of redundancy. And what do I mean by that.
+
+155
+00:24:08.970 --> 00:24:13.620
+Nick Bowman: So we're going to actually notice that in this message that we want to send cryptic
+
+156
+00:24:14.250 --> 00:24:22.410
+Nick Bowman: Some of the characters show up more frequently than others. So, in particular the k and the I show up a lot, but the characters like the apostrophe s and the empty space.
+
+157
+00:24:22.860 --> 00:24:31.830
+Nick Bowman: They all show up very infrequently. And so our sort of key insight here is, can we develop a system where we actually give shorter and coatings to more commentary
+
+158
+00:24:34.050 --> 00:24:51.780
+Nick Bowman: And there's actually systems that already do this. So for any of you that know Morse code Morse code does. Exactly. That's the most common letters, right, things like he and. Am I right, all have Wayne Shorter Morse code representations and things like why and K and Q AMP J.
+
+159
+00:24:52.890 --> 00:25:02.640
+Nick Bowman: And that's, that's too because Morse code is most often used to transmit sort of textual information. And so we give the frequent letters for workloads to make it fast be translated
+
+160
+00:25:05.610 --> 00:25:15.810
+Nick Bowman: And so let's try it. Let's sort of give our first attempt at developing such a system. And so here's a proposed system is a shorter corrodes for more frequent characters.
+
+161
+00:25:16.350 --> 00:25:30.450
+Nick Bowman: And and here is without much explanation. I'm just going to say here is the sequence of events that would represent our message and and you can sort of, you know, go back to the slides and convince yourself that that the true. But this is sort of the encoded message.
+
+162
+00:25:33.360 --> 00:25:41.670
+Nick Bowman: And the question is, okay, well, if we don't know the original message can we actually work backwards. Can we go from this original message back to the story.
+
+163
+00:25:43.470 --> 00:25:56.160
+Nick Bowman: And so if we sort of make a guess as to where the boundaries between bits are might say, Okay, here's one way to split up the bits then I translate them all into their associated characters and Life is good.
+
+164
+00:25:57.330 --> 00:26:02.490
+Nick Bowman: But if I get unlucky. And I choose the wrong places to distinguish between different bits sequences.
+
+165
+00:26:02.700 --> 00:26:11.970
+Nick Bowman: Then I get this completely nonsensical message right and you can you can if you split that between these two. It's the exact same sequence of bits. It's just split up in different locations.
+
+166
+00:26:12.390 --> 00:26:20.340
+Nick Bowman: And if I don't know what the original messages. I have no idea what the actual, you know what the right thing is right. I can use my mind to reason about which one of these two makes more sense but
+
+167
+00:26:20.520 --> 00:26:24.180
+Nick Bowman: This is kind of bad, that we can start with the same depot encoded message and and get some
+
+168
+00:26:25.980 --> 00:26:36.150
+Nick Bowman: And so what went wrong here is that we, we weren't able the fact that we were using different numbers of bits for every character we couldn't distinguish the boundaries between them.
+
+169
+00:26:36.600 --> 00:26:51.600
+Nick Bowman: Right, we couldn't uniquely figure out what is about music system and so we need actually an encoding system that somehow uses variable numbers of bits per character, but still allows us to uniquely determine where one character stops in one character.
+
+170
+00:26:52.650 --> 00:27:07.680
+Nick Bowman: And so the way that we do that is with this idea of a prefix code and specifically a prefix code is a system where no code is a prefix have another code, right. And so what I mean by that is so here's a sample prefix code for a message.
+
+171
+00:27:09.030 --> 00:27:18.030
+Nick Bowman: And and you'll notice that if you look at the codes very closely, no code is a prefix of another coat. And what I mean by that is, for example, the code for k is one zero.
+
+172
+00:27:18.600 --> 00:27:30.420
+Nick Bowman: There is no other code in the system that begins with one, zero. So, if we see a the beginning of message and a one followed by zero. We know that is exactly the letter K, it can't possibly be part of another.
+
+173
+00:27:32.310 --> 00:27:42.510
+Nick Bowman: And so the benefit that that gives us is that we can now decode pieces of information that looks like this. Right. So this is the encoding of Kirk's diptych in this new coding system.
+
+174
+00:27:43.050 --> 00:27:52.290
+Nick Bowman: And if we didn't have the original message. The way that we could encode it is to start off like this and say, okay, do I have a code that corresponds to the sequence one
+
+175
+00:27:52.710 --> 00:28:07.170
+Nick Bowman: No, okay, people, you will have a code that corresponds to the sequence one zero and if I find one. I know that it exactly has to be that letter because I know that none of my other codes actually begin with one, zero, so I can uniquely say okay, that has to be delivered
+
+176
+00:28:08.280 --> 00:28:17.070
+Nick Bowman: And then I just keep going. I say, Do I have a code that starts with zero. Nope. I have a code that starts with 01. Yes. So let me translate it to the letter I. Boom. I'm done.
+
+177
+00:28:17.640 --> 00:28:26.580
+Nick Bowman: Then I keep mine. I say something that starts the letter zero. Nope. So if something that starts with 00 yes I do. But I don't have something that exactly matches so I have to keep going.
+
+178
+00:28:27.330 --> 00:28:39.870
+Nick Bowman: And I say, Do I have something that matches 001 and now that I do find that I do find something that matches 001 I translated to let her art and life is good. And so you can continue this process and just continue decoding the message.
+
+179
+00:28:42.150 --> 00:28:47.010
+Nick Bowman: And so what's cool about this is, we've now sort of developed our first kind of
+
+180
+00:28:47.340 --> 00:28:58.350
+Nick Bowman: Idea of a compression algorithm, which allows us to represent cryptic as a sequence that only has 34 bits. And if you remember our initial asking putting 140 minutes because it had
+
+181
+00:28:58.800 --> 00:29:09.960
+Nick Bowman: 13 characters times A Pittsburgh everything. And that's huge. That's a huge speed up and that's that's that's really, really cool that we were actually able to magically come up with a system that that just worked
+
+182
+00:29:11.130 --> 00:29:17.040
+Nick Bowman: But hopefully, what's going on in your head right now is all these questions of, like, how did you come up with this coding system.
+
+183
+00:29:17.490 --> 00:29:25.410
+Nick Bowman: Does the system work for the strings. How do we know that it's good, you know, what does this even have to do a trees right we're like half an hour and electric today and we haven't even talking about trees yet.
+
+184
+00:29:26.040 --> 00:29:41.040
+Nick Bowman: And so I'll answer this last question first. But by the end of this lecture will actually answer all the questions. And the answer to this last question is that prefix coating seems work very well as it as represented by binary trees.
+
+185
+00:29:42.810 --> 00:29:52.050
+Nick Bowman: And specific special types of binary tree is called coding, please. And what do I mean by that. Well, you can actually represent this coding scheme as a binary tree.
+
+186
+00:29:52.710 --> 00:30:00.060
+Nick Bowman: Where every left hand child corresponds to the bit zero AND EVERY RIGHT HAND path corresponds to the child one
+
+187
+00:30:00.870 --> 00:30:07.290
+Nick Bowman: And then every leaf node is actually represented their coding in the system is represented by the path.
+
+188
+00:30:07.980 --> 00:30:19.140
+Nick Bowman: From the route to the leaf node. So for example, we have the the leaf node today. And the way that we get to pay from the moon is to say, okay, go to my left child zero go to my child zero
+
+189
+00:30:19.860 --> 00:30:26.820
+Nick Bowman: Or sorry, left child zero left titled zero left town zero and boom, we have this representation of k as the bit sequences 00
+
+190
+00:30:28.650 --> 00:30:35.430
+Nick Bowman: And so now we can actually apply the exact same process that we just did, but think of it in terms of proof reversals.
+
+191
+00:30:35.910 --> 00:30:45.090
+Nick Bowman: And so if I gave you this mystery message. And I asked you. Hey, use this prefix coding ski represented by this coding tree to decode the message, what would you do
+
+192
+00:30:45.600 --> 00:30:52.050
+Nick Bowman: Well, you would start the route. And you would say, okay, there's a one, so I need to go to the right, there's zero, so I need to go to the left.
+
+193
+00:30:52.590 --> 00:31:02.730
+Nick Bowman: There's a one, so I need to go to the right, and boom, I reached a leaf node so that I know that I must now translate to a character. So I say, Okay, the first character might be coded messages.
+
+194
+00:31:03.720 --> 00:31:13.830
+Nick Bowman: And then now that I'm at a leaf node. I know that I have to restart back through and then I keep going. I say, Okay, I see a zero. So I go left. I see another zero. So I go left again.
+
+195
+00:31:14.280 --> 00:31:29.130
+Nick Bowman: I see another zero, so I feel left again three I reached a leaf node. So I know I need to stop I translate my character and then I start back at them. And then if you do this for the last character right you follow the path of 00 and one, you get to later on. And then you translate that
+
+196
+00:31:30.510 --> 00:31:41.700
+Nick Bowman: And so now we can actually think about this idea of using prefix cloning skis in the context of working trees. I'm not going to be kind of our main connection between those two today.
+
+197
+00:31:43.500 --> 00:31:51.600
+Nick Bowman: And we can actually now we express the process of decoding the message in terms of a simple treat reversal, which is
+
+198
+00:31:54.030 --> 00:32:04.770
+Nick Bowman: And so a final note on coding theory. Right. Not all binary trees will work as coding trees. So for example, this tree to the right, right, is not a valid coding tree.
+
+199
+00:32:05.250 --> 00:32:14.400
+Nick Bowman: Why well because it doesn't give a prefix code, write the code for a is to zero. But that's a prefix for the codes for C and D, which basically 00
+
+200
+00:32:15.120 --> 00:32:20.460
+Nick Bowman: And so not all binary trees have this property but binary trees that to have this property.
+
+201
+00:32:21.330 --> 00:32:28.860
+Nick Bowman: What makes them valid is if all the letters are stored at the leads right and so this is going to be very important for for when you get to the assignment.
+
+202
+00:32:29.400 --> 00:32:37.650
+Nick Bowman: We're just thinking about the fact that these coding trees all the have information stored if leaf nodes, I should say character information stored
+
+203
+00:32:38.640 --> 00:32:50.400
+Nick Bowman: All of these color gray internal nodes. We don't know and or care about what they store internally. But all of these leaf nodes. Store the character values the course monkey and coatings that we get from traversing up
+
+204
+00:32:52.350 --> 00:33:05.100
+Nick Bowman: And so what we're going to answer in the last 20 minutes today and our main insight into the Hoffman algorithm is how do we actually find the quote unquote best binary tree with this property and what does it even need to have the best binary tree.
+
+205
+00:33:06.600 --> 00:33:08.250
+Nick Bowman: And so that will be kind of our last week.
+
+206
+00:33:10.590 --> 00:33:16.860
+Nick Bowman: But before we jump into that and just have some quick announcements and it's pretty much everything that you saw from yesterday.
+
+207
+00:33:17.670 --> 00:33:27.540
+Nick Bowman: In terms of the assignment is going to get released after lecture today and then it'll be do a week from today. And again remember there's no grace period, it's a it's a hard deadline so just make sure to turn in by them.
+
+208
+00:33:28.050 --> 00:33:40.380
+Nick Bowman: And and then for your final project reports, those will be do this Sunday night, there is no grace period for that either. So we need to make sure that section is have enough time to to read through all the reports before the presentations and so do please make sure to get that
+
+209
+00:33:41.910 --> 00:33:48.240
+Nick Bowman: And then you'll be submitting the reports to paperless and after you've submitted. You'll also be able to sign up for presentation slide.
+
+210
+00:33:51.330 --> 00:33:52.020
+Nick Bowman: Okay.
+
+211
+00:33:53.760 --> 00:34:00.300
+Nick Bowman: So now let's talk about kind of the crowning jewel of today's lecture, which is this idea of Huffman coding
+
+212
+00:34:00.990 --> 00:34:05.070
+Nick Bowman: And and so this is the algorithm, you're going to be implementing in your last assignment.
+
+213
+00:34:05.550 --> 00:34:12.600
+Nick Bowman: And it's really cool because it's kind of a combination of a lot of different really interesting things, and a lot of interesting topics throughout the class.
+
+214
+00:34:13.530 --> 00:34:21.450
+Nick Bowman: But before we talk about the algorithm actually want to want to do a little bit of story time and and if you want to read the full story, I highly recommend
+
+215
+00:34:22.650 --> 00:34:29.460
+Nick Bowman: recommend reading. It's this awesome kind of history of the half now john written by a by a computer science professor from University of New Mexico.
+
+216
+00:34:29.790 --> 00:34:42.000
+Nick Bowman: And and she tells this story that I think actually fits in very well with our what we've been trying to tell you this whole quarter about kind of the benefits of struggle and the rewards of kind of taking on challenging things in your life.
+
+217
+00:34:42.630 --> 00:34:48.240
+Nick Bowman: And so the brief I'll summarize most of what's there and then I'll read one paragraph verbatim, because I think it's very important.
+
+218
+00:34:49.470 --> 00:34:59.730
+Nick Bowman: But the general summary of how this algorithm developed is there was this guy, David Huffman. He was a graduate student at MIT. And he was in a class and and his class.
+
+219
+00:35:00.420 --> 00:35:05.730
+Nick Bowman: Gave him the option of a final project or a final exam. So reading like a paper or writing a final exam.
+
+220
+00:35:06.570 --> 00:35:18.900
+Nick Bowman: And for the final paper if they did it the Professor had given them this problem that seemed rather easy sort of ask them, hey, if you wanted to represent you know letters are symbols and binary, what would be the most efficient way to do so.
+
+221
+00:35:19.770 --> 00:35:25.620
+Nick Bowman: And so, so David Huffman. He was like, I don't want to do a final exam I want to do this final project seems pretty easy.
+
+222
+00:35:26.790 --> 00:35:36.120
+Nick Bowman: So, and he worked on it for months and he tried so many different approaches and he was, you know, getting to the end of the semester. And he basically thought he was going to give up the
+
+223
+00:35:37.170 --> 00:35:39.090
+Nick Bowman: Problem ended up being way harder than expected.
+
+224
+00:35:40.350 --> 00:35:50.400
+Nick Bowman: And it basically just kind of, you know, ended up being not not a great experience. And so he tells the story of how he was like going to basically go throw his notes in the garbage.
+
+225
+00:35:50.790 --> 00:35:57.210
+Nick Bowman: And then he had this kind of moment of inspiration and he got the idea for this algorithm. And then we kind of sat down and
+
+226
+00:35:57.600 --> 00:36:09.150
+Nick Bowman: And he can flush it out and and his idea in that moment for that term paper and actually ended up becoming the basis of this algorithm that is now kind of fundamental and used everywhere by many different computer systems everywhere.
+
+227
+00:36:10.530 --> 00:36:17.250
+Nick Bowman: But the funny part of the story may not have been funny today. What happened at the time was his professor had given him a problem.
+
+228
+00:36:17.730 --> 00:36:29.280
+Nick Bowman: That was unsolved. At the time, there was literally no answer to the problem. The thing that he had asked them to do the project on the many computer scientists have tried to work on for a long time, and no one had been able to figure it out.
+
+229
+00:36:31.170 --> 00:36:35.970
+Nick Bowman: And and and Huffman says this, I'm going to read this last paragraph verbatim, because I think it's very interesting.
+
+230
+00:36:36.840 --> 00:36:44.400
+Nick Bowman: And this is from the words of the author. She says puffin says he might not have never tried his hand at the problem, much less solved it at the age of 25
+
+231
+00:36:44.790 --> 00:36:51.390
+Nick Bowman: If he had known that his professor and Claude Shannon, the creator of the whole field of information theory had struggled with the problem.
+
+232
+00:36:51.960 --> 00:37:01.500
+Nick Bowman: And she quotes Huffman. It was my luck to be there at the right time, and also to not have a professor discouraging me by telling me that other good people had struggled with this problem. He says,
+
+233
+00:37:02.640 --> 00:37:11.790
+Nick Bowman: And I think this is kind of a very cool realization that, like, you know, taking on challenging problems and not not being intimidated by having other people have having to struggle and working
+
+234
+00:37:12.180 --> 00:37:16.830
+Nick Bowman: On was actually kind of what allowed Hoffman to kind of just go into this and solve this problem that we cannot solve
+
+235
+00:37:18.390 --> 00:37:22.440
+Nick Bowman: So kind of a cool story. I recommend reading that that full PDF. If you have a chance but
+
+236
+00:37:23.670 --> 00:37:25.200
+Nick Bowman: Let's actually jump into what
+
+237
+00:37:26.370 --> 00:37:26.700
+Size.
+
+238
+00:37:27.990 --> 00:37:35.550
+Nick Bowman: And so what does the algorithm. Tell us so Huffman coding is actually an algorithm for generating these coding trees that we just saw.
+
+239
+00:37:36.240 --> 00:37:44.400
+Nick Bowman: And what's interesting about it is it gives us what is called a provably minimal encoding for a certain set of letter frequencies.
+
+240
+00:37:44.790 --> 00:37:52.470
+Nick Bowman: And what does that mean, that just means that there is no more efficient way to represent the information, then by using this coding for you that has generated by the Hoffman out
+
+241
+00:37:53.280 --> 00:38:03.900
+Nick Bowman: If you're interested in actually how to prove that or how that would work. I'm thinking in classics. Yes. When a three year CS 161 is a good sort of step into figuring out what formalizing proof of that.
+
+242
+00:38:05.010 --> 00:38:11.250
+Nick Bowman: But, but for our purposes, it's just to say that this is the best possible way that we could represent information and a half. Not good.
+
+243
+00:38:13.170 --> 00:38:28.530
+Nick Bowman: And what's interesting about the Hoffman algorithm is every different set of piece of data, you might want to represent has its own personalized tree. So different texts different images. They all have their own different Hoffman trees that define their coding systems for them.
+
+244
+00:38:30.240 --> 00:38:36.810
+Nick Bowman: And it's very flexible. It's very powerful. And like I said, you're actually going to implement this out and you're going to actually write
+
+245
+00:38:37.230 --> 00:38:41.820
+Nick Bowman: The components of a program that will allow you to compress and decompress different pieces of information.
+
+246
+00:38:42.300 --> 00:38:51.660
+Nick Bowman: And exactly this algorithm, you're going to implement on your final assignment is exactly how good that is using so many has been used in so many different computer systems and digital online systems to be data.
+
+247
+00:38:52.560 --> 00:38:59.010
+Nick Bowman: And so it'll add kind of a nice really kind of rewarding and and applicable final conclusion.
+
+248
+00:39:00.930 --> 00:39:08.520
+Nick Bowman: So what is the algorithm. I'm going to show you the pseudo code or the algorithm. And then we're going to work through an example together to actually see how building industry works.
+
+249
+00:39:09.780 --> 00:39:17.940
+Nick Bowman: And so this is what happens after themselves. So it says First you need to take your piece of input text and you need to build a frequency table from it.
+
+250
+00:39:18.450 --> 00:39:28.710
+Nick Bowman: And then what is the frequency table, it basically just tallies up the number of times that each character appears and attacks and and sort of shows you hate this character for that this week with me so
+
+251
+00:39:30.810 --> 00:39:40.200
+Nick Bowman: When you initialize an empty priority queue. So we got a nice throwback to our use of 80s and prior to us that we've actually we already know how to implement and how to use from a previous assignment.
+
+252
+00:39:40.980 --> 00:39:49.590
+Nick Bowman: And to implement this priority queue and it's going to hold what we call partial trees, realistically, you can think of it as just holding Pointers. Pointers of different trees.
+
+253
+00:39:51.780 --> 00:39:57.210
+Nick Bowman: Then what you do is you know that every character in your string has to be represented by a new film.
+
+254
+00:39:57.900 --> 00:40:04.890
+Nick Bowman: So what you do is you just create a new leaf node for every character in the original string or actress every distinct character in the original screen.
+
+255
+00:40:05.580 --> 00:40:17.280
+Nick Bowman: And you add each leaf node to the priority queue and you give it weeks or sort of priority in that queue that corresponds to how frequent, it is. And you'll see why that's important in second.
+
+256
+00:40:18.780 --> 00:40:24.660
+Nick Bowman: And then the algorithm is actually a straightforward. Is this it basically says once you populate your priority queue.
+
+257
+00:40:25.290 --> 00:40:33.090
+Nick Bowman: And repeat this process until you have generated a single tree you DQ the two trees from the front of the queue.
+
+258
+00:40:33.810 --> 00:40:41.730
+Nick Bowman: You combine them together to make a new tree. So you put another node above them that that that has those two trees, it's left in this way, children.
+
+259
+00:40:42.450 --> 00:40:56.970
+Nick Bowman: You give it a weight. That's the some of the weights of those two children are those two trees that use the Q and then you put that tree bathroom. So you can think of is just this like pairwise merging of merging two nodes at a time and building up the tree.
+
+260
+00:40:58.320 --> 00:41:04.290
+Nick Bowman: And if that's you know that's a lot of information kind of to read and in pseudo code form and but let's actually just jump into one example.
+
+261
+00:41:06.240 --> 00:41:07.740
+Nick Bowman: So this is what the Hoffman algorithm looks like.
+
+262
+00:41:09.000 --> 00:41:22.710
+Nick Bowman: And again, we're going to go back to our main goal for today, which is we want to build the optimal encoding tree for the string Kurtz, tick, tick that will allow us to represent this string using the minimal sort of the minimum possible information on our own.
+
+263
+00:41:24.840 --> 00:41:37.740
+Nick Bowman: So step one, what does that say, Well, step one told us to go the frequency table so that you, you know, we've actually done that in lecture, way back from, you know, working with ETS and so hopefully you have a good understanding of what that looks like. So that's step one.
+
+264
+00:41:38.850 --> 00:41:45.240
+Nick Bowman: And step two is to initialize the priority queue. And the way that I'm going to represent the priority queue visually is we'll have
+
+265
+00:41:45.480 --> 00:41:53.160
+Nick Bowman: This will be similar to the priority queue implemented, which is things with higher priority will be lower numerical values and those will be on the left.
+
+266
+00:41:53.490 --> 00:42:01.980
+Nick Bowman: And things with a lower priority will have larger numerical values and those will show up on the right. And so what will always be decreasing from the left hand side of this this q&a
+
+267
+00:42:04.320 --> 00:42:09.150
+Nick Bowman: And so then what the next step tells us is, OK, now that you've initialize this priority queue. Go ahead and fill it up.
+
+268
+00:42:09.540 --> 00:42:24.540
+Nick Bowman: And what you fill it up with is a leaf node for every character every unique character and the original string and you give it a weight that corresponds to the, the frequency or the number of times with it showed up with in the original script.
+
+269
+00:42:25.740 --> 00:42:37.740
+Nick Bowman: And so you'll see that the least frequent characters show up on the left hand side of our queue. And so those are the ones that are going to be cute and merged first. I mean, you'll see why that's important as we start working through the burden.
+
+270
+00:42:39.330 --> 00:42:53.790
+Nick Bowman: And and so we built a frequency table we populated a priority queue. So now we can jump into the main portion of the algorithm, which tells us okay build the Hoffman tree by joining a decent notes together and will specify whether it actually needs to join.
+
+271
+00:42:55.830 --> 00:43:04.110
+Nick Bowman: So the process looks like this. It says, all right, dq, the first element from the queue and DQ. The second element from the queue. So those are now article
+
+272
+00:43:05.130 --> 00:43:10.740
+Nick Bowman: Now, join them. And what does it mean to join them well joining them means creating a new tree note.
+
+273
+00:43:11.130 --> 00:43:23.220
+Nick Bowman: Right. That is, we'll call it an internal note so it doesn't store any value. But what's important is it has a left child and a right child. And so it's left child would be the first know that the cube and it's right child would be this.
+
+274
+00:43:25.620 --> 00:43:36.360
+Nick Bowman: And then we say, okay, the priority of this new partial tree is going to be the some of the priorities of the two things that made it up. So we had a parody of one and a priority of one do this a priority to
+
+275
+00:43:37.140 --> 00:43:43.830
+Nick Bowman: And then just put this tree back in priority. So that means we can go ahead and make space for it and then boom, put it back in.
+
+276
+00:43:46.260 --> 00:43:58.980
+Nick Bowman: Notice that there there's a potential for ties and priorities and because of this potential for trials, it's, it's actually possible that you can come up with multiple different trees that are equally as optimal for the same input.
+
+277
+00:43:59.610 --> 00:44:04.590
+Nick Bowman: So you don't have to. When you're working on the assignment. You don't have to do anything explicitly to worry about these ties.
+
+278
+00:44:05.070 --> 00:44:14.310
+Nick Bowman: Because it will mostly be handled internally by the priority to you. But just know. You know, you might ask, why did I put it before the D I could have also put it after the deep, but I will work.
+
+279
+00:44:15.720 --> 00:44:29.160
+Nick Bowman: And then the process just repeats. So we say alright GQ GQ join them. So make a new node that contains their, their combined priorities and give it a week that
+
+280
+00:44:30.420 --> 00:44:38.880
+Nick Bowman: That corresponds to the some other frequencies on the two characters that just I toys and then make space for the fire to queue and go ahead and into it there.
+
+281
+00:44:40.050 --> 00:44:50.940
+Nick Bowman: And I want to stop here to to see and to point out hopefully the intuition. You're starting to see about why we build the tree. In this way, which is almost from a bottom up manner.
+
+282
+00:44:51.720 --> 00:45:00.480
+Nick Bowman: And the reason why is, actually, because we want the things with low frequencies. Right. So the characters that show up less often.
+
+283
+00:45:00.930 --> 00:45:16.560
+Nick Bowman: To literally be lower in the tree because lower in the tree means longer encoded and higher in the tree mean shorter encoding. And so we don't want to add our high priority notes, things like can I to the tree until the tree itself, or we want to add it as high up as possible.
+
+284
+00:45:17.880 --> 00:45:18.840
+Nick Bowman: And so, yeah.
+
+285
+00:45:20.190 --> 00:45:20.790
+Nick Bowman: Just to make sure.
+
+286
+00:45:21.810 --> 00:45:31.500
+Nick Bowman: You just call a higher priority for them. Sorry, sorry, large larger numbers more more frequent numbers. Yeah, there are lower priority, the priority queues, which means they'll get to keep it.
+
+287
+00:45:34.050 --> 00:45:48.630
+Nick Bowman: So that we can just continue repeating this process. And what's interesting is because our priority queue just stores route nodes. And when we go to DQ this tree right, bye bye just removing the root node itself from the queue, we actually get the whole kind of tree structure coming on.
+
+288
+00:45:49.680 --> 00:46:08.280
+Nick Bowman: So we'll do that one DQ the D join them. And now the new priority is again the some of the two original one. So that's the priority of this or the week of this nutrient is actually for right we summed up the two and the two elements. And so then we make space for it added into our queue.
+
+289
+00:46:09.330 --> 00:46:20.190
+Nick Bowman: And then we keep going. So we remove that one from the queue. Remove the three or I'm sorry, I joined them. They now have clarity five. So it actually goes to the very back for clarity.
+
+290
+00:46:20.910 --> 00:46:31.110
+Nick Bowman: And you can repeat this with the letter K. And then what you'll notice is now we have two final trees left, which means we DQ both of them we join them and now
+
+291
+00:46:32.280 --> 00:46:39.570
+Nick Bowman: We technically can give it a new weight. But now that we're done our algorithm terminates right so now we've actually merged everything into one final treat
+
+292
+00:46:40.020 --> 00:46:47.310
+Nick Bowman: And so we can get rid of all of our weights the weights are no longer important but what we've literally built up here is actually the optimal including tree.
+
+293
+00:46:47.880 --> 00:46:51.840
+Nick Bowman: For the sequence of for the our target sequence just protect it.
+
+294
+00:46:52.770 --> 00:47:01.440
+Nick Bowman: And and now what I want you to think about is how can we actually go from this tree to the encoding table that we've seen before.
+
+295
+00:47:01.890 --> 00:47:08.370
+Nick Bowman: And and specifically to this and coding people right here and this will actually be one of the components of what you do on your assignment.
+
+296
+00:47:09.000 --> 00:47:13.980
+Nick Bowman: But what you can think about is, actually, we can associate each character or each leaf node.
+
+297
+00:47:14.370 --> 00:47:24.480
+Nick Bowman: And evaluate each leaf node with the path of the tree to get to that effect. And so if we did that for every single character again probably lends itself well to some sort of recursive algorithm since
+
+298
+00:47:24.960 --> 00:47:30.840
+Nick Bowman: We have a lot of possible paths that we want to explore. But we can actually generate exactly this coating seems that we saw before.
+
+299
+00:47:32.430 --> 00:47:40.710
+Nick Bowman: And I don't expect you to recognize this because the slides was a long time ago, but this is actually exactly the coding sequence that we saw when we talked about prefix tones.
+
+300
+00:47:41.130 --> 00:47:50.970
+Nick Bowman: And so the nice thing about the Hoffman algorithm is because it starts out at this place where all where it knows that all of the the children are all of the characters are going to be stored in leaf nodes.
+
+301
+00:47:51.360 --> 00:48:05.250
+Nick Bowman: It's actually always guaranteed to give us a prefix backlinks and so all by following the Hoffman algorithm, we've generated a coding tree that coding tree allows us to generate this sort of
+
+302
+00:48:05.730 --> 00:48:12.960
+Nick Bowman: Table of coatings and we saw earlier, actually how to then use this table to translate between encoding and decoding message.
+
+303
+00:48:15.660 --> 00:48:22.170
+Nick Bowman: And so I'll actually just play this video really quick. But this is actually an animation of exactly what this algorithm looks like.
+
+304
+00:48:22.680 --> 00:48:30.120
+Nick Bowman: And so it will look very similar to exactly what we just did, but I, what I want you to notice. And what I'll narrate over this algorithm as it's happening.
+
+305
+00:48:30.510 --> 00:48:38.400
+Nick Bowman: Is exactly the fact that the letters with the sort of least frequent frequencies are the ones that continually get
+
+306
+00:48:39.060 --> 00:48:52.830
+Nick Bowman: pushed down further and further down the tree and it's those letters like the letter D, for example, that gotten merged into the tree at the very last moment, and is able to maintain its sort of higher level.
+
+307
+00:48:57.900 --> 00:49:06.000
+Nick Bowman: So we can see in the final three here that that he and the more frequent letters like the vowels Iowa day I'll show up higher.
+
+308
+00:49:07.770 --> 00:49:20.550
+Nick Bowman: And so that's actually that's you can think of that as the high level intuition for why this, why this actually is an optimal coding scheme because the more frequent letters are given shorter and coatings and the less frequent monitors are getting longer ones.
+
+309
+00:49:22.230 --> 00:49:32.760
+Nick Bowman: And there's a second video here that I encourage you to check out this is actually the running this on actually all the Scrabble tiles and using the, the frequency of scrap pile sexually
+
+310
+00:49:35.160 --> 00:49:44.880
+Nick Bowman: And so as we finish up today. There's one last final detail on I mentioned, which is so far we've thought about how to actually generate this coding. So remember we did this much earlier.
+
+311
+00:49:46.110 --> 00:49:51.090
+Nick Bowman: But we haven't actually talked about the fact that we need the information we need the coding scheme.
+
+312
+00:49:52.170 --> 00:49:55.560
+Nick Bowman: In order to be able to sort of decompress or decode the data.
+
+313
+00:49:56.970 --> 00:50:07.560
+Nick Bowman: And so if we were just given this sequence of binary with absolutely no information right we would kind of be lost, right, we would have kind of absolutely no idea what what to do.
+
+314
+00:50:08.400 --> 00:50:23.010
+Nick Bowman: And so the last important component of the algorithm is that we need to actually include the encoding tree alongside the data. So we compress the data we get this this nicely sort of compact represented form.
+
+315
+00:50:23.400 --> 00:50:32.580
+Nick Bowman: But we also need to send along the encoding tree because the encoding tree is the one that dictates exactly how the person that's receiving our data will know to decompress
+
+316
+00:50:33.330 --> 00:50:43.950
+Nick Bowman: And but one thing that that might actually do is, in some cases, because you need to transmit both the compressed data and the encoding tree, you might actually end up needing to send more data than you originally were trying to send
+
+317
+00:50:44.430 --> 00:50:57.390
+Nick Bowman: And and that is actually kind of fundamental theorem which says there is no one algorithm that can always compress all inputs. So compression algorithms, because they rely on this idea of making use of patterns in the data.
+
+318
+00:50:57.840 --> 00:51:08.910
+Nick Bowman: They are kind of specialized for different data. Right. So for example we just built an encoding tree that was specialized for for the streaming Kurtz tactic. But if we try to apply that tree to other data.
+
+319
+00:51:09.510 --> 00:51:18.360
+Nick Bowman: We may actually end up not with a good representation, because the the patterns in the string that we use to build a foreign country don't match the patterns in the data.
+
+320
+00:51:20.940 --> 00:51:26.190
+Nick Bowman: And so if you're interested in actually proving the theorem. And that's actually one of the things that you get to do it in CS
+
+321
+00:51:27.780 --> 00:51:36.210
+Nick Bowman: And so the summary for today. Right. So we saw this idea of Huffman coding and we introduced this idea of data compression is a very important real world problem.
+
+322
+00:51:36.840 --> 00:51:46.920
+Nick Bowman: We saw that variable length and coding can do more efficient and compact way to represent data. But if we have variable length encoding. We need to make sure to use prefix coating schemes.
+
+323
+00:51:47.250 --> 00:51:53.100
+Nick Bowman: And which guarantee that we'll be able to sort of uniquely decompress or decoder our messages.
+
+324
+00:51:53.940 --> 00:52:04.230
+Nick Bowman: And we saw that happen, including was a cool algorithm to actually construct optimal coding trees and we saw that we also need to send these coding trees, alongside the compressors.
+
+325
+00:52:05.010 --> 00:52:11.970
+Nick Bowman: And so you'll you'll you'll make note and you'll sort of play with all of these different facets of the algorithm. When you're working on the left side.
+
+326
+00:52:13.230 --> 00:52:20.700
+Nick Bowman: And here, here's here's if you're interested if you're sort of had your interest piqued by today's lecture. There's actually a lot of other cool areas that you can explore
+
+327
+00:52:21.180 --> 00:52:26.910
+Nick Bowman: So I recommend going back to the slides and doing more research on those topics if if any of them. Some particularly interesting
+
+328
+00:52:28.500 --> 00:52:42.900
+Nick Bowman: And then. So to wrap up. Basically, what we'll see tomorrow and is we'll kind of go squarely into the world rule algorithms and we will talk about hashing, which is actually an even better way to store and organize information than anything yet seen so far.
+
+329
+00:52:44.460 --> 00:52:48.360
+Nick Bowman: So that's all we have for today. So thanks everyone for sticking around and see you tomorrow.
+
+330
+00:52:50.340 --> 00:52:50.700
+Siddharth Balaji: Thank you.
+
+331
+00:52:51.300 --> 00:52:51.570
+Jihe He: Thank you.
+
+332
+00:52:52.050 --> 00:52:52.410
+Samuel Lynn Ledden: Thank you.
+
+333
+00:52:52.560 --> 00:52:52.920
+Evan F Davis: Thank you.
+
+334
+00:53:30.720 --> 00:53:32.910
+Nick Bowman: Well, if there's no questions.
+
+335
+00:53:36.420 --> 00:53:36.690
+Nick Bowman: Today,
+
+336
+00:53:38.550 --> 00:53:39.150
+Nick Bowman: So, see you guys.
+

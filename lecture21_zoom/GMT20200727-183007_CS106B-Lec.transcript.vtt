@@ -1,0 +1,1726 @@
+WEBVTT
+
+1
+00:00:03.750 --> 00:00:13.469
+Nick Bowman: Hey, welcome everyone. Let's go ahead and get started and Happy Monday and we're glad to have you all back to us. And so today, we're going to keep talking about Nicholas
+
+2
+00:00:14.549 --> 00:00:19.560
+Nick Bowman: And so we're going to talk a lot about different operations will actually do on the list. And we like to coach.
+
+3
+00:00:20.820 --> 00:00:30.000
+Nick Bowman: And awesome so today's question is actually about the final project. So let's go ahead and get started in the chat. I'm telling us what you thought about so far and what you're interested in investigating
+
+4
+00:00:32.640 --> 00:00:44.940
+Nick Bowman: So, and today we're going to keep talking about like data structures. And our question today is pretty practical and it's basically asking how can we write code to examine and manipulate the structure of linked lists. So there's going to be all about writing code that work.
+
+5
+00:00:47.040 --> 00:00:56.190
+Nick Bowman: And so to do that, we'll do a little bit of review of what we talked about on Thursday, and then we'll talk about a big section on Nicholas dorsal and then update section on the first answer.
+
+6
+00:00:57.840 --> 00:01:01.590
+Nick Bowman: Um, so a little bit of what we saw on Thursday, right. On Thursday we talked about this idea
+
+7
+00:01:02.220 --> 00:01:09.810
+Nick Bowman: That pointers allow us to sort of move and translate across the boundary between sort of fundamental data stored in c++ and our computers hardware.
+
+8
+00:01:10.410 --> 00:01:20.880
+Nick Bowman: And and so we talk about these things called linquist which are really built on top of pointers, and it was a different way of organizing data and storing data and then arrays necessary.
+
+9
+00:01:21.990 --> 00:01:26.820
+Nick Bowman: And so we talked about this idea of link this as a fundamental way of storing data in c++
+
+10
+00:01:27.810 --> 00:01:34.740
+Nick Bowman: And what wasn't weakness. So link list was this idea of having a chain of nerds and they would usually store some sequencing data.
+
+11
+00:01:35.250 --> 00:01:43.440
+Nick Bowman: And so each node always contains the data for that particular node and then I'm linked to the next node in the list. And so we can sort of traverse these
+
+12
+00:01:43.800 --> 00:01:53.580
+Nick Bowman: These other we could traverse the business by starting at the first node and then just repeatedly following these neck links following them over and over again until we get some special indicator that told us we sort of had beach
+
+13
+00:01:55.410 --> 00:02:00.930
+Nick Bowman: And so, visually, and we talked about super important to represent Memphis visually. So visually, it would look something like this.
+
+14
+00:02:01.200 --> 00:02:09.930
+Nick Bowman: Right, we have a collection of nodes that each connected with some link and then we have this special idea of the null pointer as as the terminated as the special city.
+
+15
+00:02:13.200 --> 00:02:19.650
+Nick Bowman: And these linked lists, when we actually talked about, okay, what is the know that sort of the data. We started this idea of the structure called
+
+16
+00:02:20.190 --> 00:02:32.460
+Nick Bowman: Which will just caught with certain generally for Tuesday. And it's sort some data and continuing the string and then importantly it's sort of pointer to another node or pointer to the next another list.
+
+17
+00:02:33.720 --> 00:02:36.930
+Nick Bowman: We saw that we could create new list using new keyword
+
+18
+00:02:37.680 --> 00:02:49.230
+Nick Bowman: Sorry, creating a node using the keyword. We could also use this arrow notation to access and store data with a moose. Remember the arrow is shorthand for D reference and access to feel the same.
+
+19
+00:02:50.100 --> 00:02:54.360
+Nick Bowman: And so when we're working with pointers two strikes, we have to use the arrow operator instead of the
+
+20
+00:02:56.280 --> 00:02:59.790
+Nick Bowman: One thing that is actually slightly new that I'll sneak in here because it's kind of the best place to put it.
+
+21
+00:03:00.660 --> 00:03:08.280
+Nick Bowman: No, it's actually in in starting with the startup or today and continuing on to the assignment and the section, you'll actually see that the notes struck has a
+
+22
+00:03:08.640 --> 00:03:14.190
+Nick Bowman: Conveniently defined constructor. It actually allows us to create and initialize the data in the note all in one line.
+
+23
+00:03:15.000 --> 00:03:23.070
+Nick Bowman: So just keep that in mind. It maybe instead of, you know, instead of having three lines of code, you can actually just do all that on one line of code didn't specify the data and the next point at all.
+
+24
+00:03:25.830 --> 00:03:32.940
+Nick Bowman: And then finally, we talked about we started talking about common linguist operation. So this idea of reversal rewiring insertion and beliefs.
+
+25
+00:03:33.390 --> 00:03:37.470
+Nick Bowman: And this will continue to be the main theme of today and will even wrap it up tomorrow.
+
+26
+00:03:37.980 --> 00:03:44.580
+Nick Bowman: On, but where we started off with we actually start off with this idea of using a linked list to sort of be the fundamental data storage from ATT
+
+27
+00:03:45.240 --> 00:03:53.550
+Nick Bowman: And we saw that link. This actually kind of function is a great way of implementing a stack. And so we saw these three operations of push popping the destruction
+
+28
+00:03:54.030 --> 00:04:04.980
+Nick Bowman: And these are sort of our first exposure to some of these common interest operation. So things like insertion wiring deletion rewiring the pop and then for destructively reversal and and
+
+29
+00:04:06.210 --> 00:04:18.030
+Nick Bowman: And and we'll see code actually from most of these operations pop up again in today's lecture. And so this this sort of review component is going to be a little bit short but we'll revisit a lot of the stuff that we've heard from Thursday of the course.
+
+30
+00:04:20.430 --> 00:04:30.630
+Nick Bowman: And so kind of what we saw is that sort of the important base takeaways from Thursday. I mean, this was that link this are these chains of votes on which are represented by struts in c++
+
+31
+00:04:31.470 --> 00:04:38.370
+Nick Bowman: And then we saw, we had some common for virtual strategy. So we have sort of wire loops with a pointer and sort of the fundamentalist
+
+32
+00:04:38.910 --> 00:04:51.330
+Nick Bowman: And then we would check to make sure that point, or was it know yet you do something with the current mode. And then we would assign the pointer to point to the next. And so we'll see that strategy pop up for really a first lecture today we'll be talking a lot of time.
+
+33
+00:04:53.640 --> 00:05:01.680
+Nick Bowman: And then versus others common bugs and visualize the bugs as well. But sometimes when you're deleting and he wearing pointers, the order in which you do things is really, really critical.
+
+34
+00:05:02.370 --> 00:05:07.200
+Nick Bowman: And again we'll, we'll actually explore all of these things. We have the first part of lecture today when we start putting
+
+35
+00:05:08.340 --> 00:05:09.150
+Nick Bowman: Some of our practice.
+
+36
+00:05:11.040 --> 00:05:16.710
+Nick Bowman: And so as I'm sort of been alluding to today is going to be all about Revisiting these inputs operations.
+
+37
+00:05:17.550 --> 00:05:28.290
+Nick Bowman: And answering this question of, how can we write code to sort of examine manipulate the structure of and plus the reversals. And I'm rewiring and insertions and I'm going to be our focus for today.
+
+38
+00:05:30.360 --> 00:05:43.710
+Nick Bowman: I do want to make a small note that the way we're going to see link list today is a little bit different than what we saw on Thursday and on Thursday we saw linked lists as sort of a class number of a class sort of component as the data storage us to implement implants.
+
+39
+00:05:45.120 --> 00:05:53.820
+Nick Bowman: And this isn't the only way that you can use Lync listen c++ and it was a helpful and convenient way of introducing with plus, especially because they did have this nice property.
+
+40
+00:05:54.060 --> 00:05:58.890
+Nick Bowman: That kind of when we are inserting the front we got this reversal of elements which was really helpful for implementing a step.
+
+41
+00:05:59.670 --> 00:06:07.920
+Nick Bowman: But for the rest of lectures this week. So, today and tomorrow and on your assignment. Your we're just going to be working with what we're going to fall a standalone link list functions.
+
+42
+00:06:08.220 --> 00:06:15.480
+Nick Bowman: Which basically just means that we're going to write functions that don't belong to a class, they'll just take it a link list, they'll do something to that list and then McCall
+
+43
+00:06:17.550 --> 00:06:22.620
+Nick Bowman: And yeah and so like I said, this is just going to give us a little bit more flexibility to get practice in different contexts.
+
+44
+00:06:22.920 --> 00:06:28.950
+Nick Bowman: And again, there's nothing wrong with having a big list view the data storage component of the class. It's just something different in the way that we're going to be
+
+45
+00:06:31.890 --> 00:06:37.950
+Nick Bowman: So let's talk about reversal reversal is going to be kind of the main component of our first 20 minutes. So let's talk
+
+46
+00:06:39.990 --> 00:06:44.760
+Nick Bowman: Let's talk about printing awake list and kind of a basic operation right
+
+47
+00:06:45.330 --> 00:06:49.350
+Nick Bowman: But it allows us to see the contacts right and seeing the contents of what's in the interest
+
+48
+00:06:49.710 --> 00:06:58.200
+Nick Bowman: And is going to be really helpful debugging tool and especially when you get to the assignment, you're going to really, really sort of appreciate having a function that comes off the contents of your liquids.
+
+49
+00:07:00.180 --> 00:07:07.920
+Nick Bowman: We can totally inspect the contents of the implicit in the debugger and I'm not going to talk about that today because you actually have a whole warm up exercise under assignment that goes to that.
+
+50
+00:07:08.670 --> 00:07:13.350
+Nick Bowman: But another way of of inspecting and weakness sentences printing them up. And so that's what we're doing.
+
+51
+00:07:15.600 --> 00:07:22.110
+Nick Bowman: And so one thing that we can try right is we could just try sort of printing out the pointer to the beginning of the list correctly.
+
+52
+00:07:23.010 --> 00:07:28.260
+Nick Bowman: So maybe that could be our sort of first attempt at doing that. And, but
+
+53
+00:07:29.130 --> 00:07:38.100
+Nick Bowman: This may not work exactly as expected. So let's, let's just do a quick poll. And what do you think the results of the following code will be so if we create
+
+54
+00:07:38.610 --> 00:07:52.620
+Nick Bowman: A linked list with the first node contains hello points for an orthopedic world which points are not enough on it and what would happen if I just see our list, right. So this list in this case is just sort of the pointer to the farm. I like this. What do we think
+
+55
+00:07:55.980 --> 00:08:02.130
+Nick Bowman: So yeah, let's take a second to put into that see results communities. Good.
+
+56
+00:08:09.180 --> 00:08:10.830
+Nick Bowman: Alright, cool. So I'm going to go ahead and
+
+57
+00:08:12.210 --> 00:08:15.810
+Nick Bowman: Ensure the results. I haven't. So the results look good. So you guys look to you guys.
+
+58
+00:08:16.380 --> 00:08:20.730
+Nick Bowman: generally have a good intuition of this, which is that if I printed this out and printing out a pointer.
+
+59
+00:08:20.970 --> 00:08:26.970
+Nick Bowman: And what is it that we tried to hammer into your head last week a pointer is just a memory address right that's all that it is. And that's how its treated
+
+60
+00:08:27.300 --> 00:08:34.050
+Nick Bowman: And so if I just print out the pointer and that's all I'm going to see on the screen because I'm just going to see some random memory address that means absolutely nothing.
+
+61
+00:08:35.100 --> 00:08:36.810
+Nick Bowman: So maybe that's not exactly what we want.
+
+62
+00:08:38.220 --> 00:08:40.140
+Nick Bowman: So let's put those away.
+
+63
+00:08:41.190 --> 00:08:44.670
+Nick Bowman: And so that's the answer right. So we can't predict what the value is. But just some memory addresses.
+
+64
+00:08:46.380 --> 00:08:48.360
+Nick Bowman: So let's, let's try to write a function mentalist
+
+65
+00:08:49.560 --> 00:08:58.170
+Nick Bowman: So let's head on over there and say, Here's this function. Right. It's just avoid function. It's going to take an appointed in the beginning of August, and it's going to print it out.
+
+66
+00:08:58.890 --> 00:09:07.080
+Nick Bowman: And let's sort of put into practice. Everything that we saw from Thursday, right, so we know the printing the list is going to require traversing so sort of using this while
+
+67
+00:09:07.680 --> 00:09:09.120
+Nick Bowman: Syntax where we say, all right,
+
+68
+00:09:09.360 --> 00:09:18.630
+Nick Bowman: While we still have a list of traverse. Go ahead and keep everything and then maybe all we want to do is to say, all right, let's just go ahead and print out the data that's for with this node.
+
+69
+00:09:20.160 --> 00:09:29.910
+Nick Bowman: And then to update what's going on. We of course do this last really important part, which is we say, all right, reassigned my list pointer to actually be the next point here and sort of the next node.
+
+70
+00:09:31.170 --> 00:09:37.140
+Nick Bowman: And so sort of by combining all these things together. And if we actually run our demo really quick.
+
+71
+00:09:38.190 --> 00:09:50.220
+Nick Bowman: Let me see. So there's a little utility function here that a lot. It's just a little console program that allows me to build lists on the comes back with the starter code and but what we see is our contents of the list. Go ahead and give out executive
+
+72
+00:09:51.270 --> 00:10:04.080
+Nick Bowman: And you might notice that this line is incorrect and saying that there's yourselves, but that's actually not completely correct will remind me that in a little bit. And we see here is we actually get exactly what modern which is the contents of our link listing
+
+73
+00:10:05.730 --> 00:10:15.120
+Nick Bowman: And so if we jump back to the slides right and it was sort of asked how it works, there's like little sort of diagram. And we talked about how important diagrams are for understanding weakness.
+
+74
+00:10:15.720 --> 00:10:22.740
+Nick Bowman: So it's actually like look and see what's happening, what is happening on this course. And so over me and you can imagine with the list is created.
+
+75
+00:10:23.160 --> 00:10:30.030
+Nick Bowman: And then so when this this is created. It has these components. And then when we go ahead and call a fitness function right
+
+76
+00:10:30.780 --> 00:10:37.830
+Nick Bowman: We use it for normal syntax. We say, Okay, here's a copy of this function, it gets its own pointer called list that points to leave the nest.
+
+77
+00:10:38.340 --> 00:10:44.490
+Nick Bowman: And then what happens from that. And, well, we say, All right, well, this list point are still isn't not
+
+78
+00:10:44.970 --> 00:10:55.500
+Nick Bowman: Great. We still have a list of point that to go ahead and print out the data that's stored there. Remember, the data is a specific field of the mode that we're at. So in this case, the first know that we're pointing out the data is this field.
+
+79
+00:10:57.210 --> 00:11:08.130
+Nick Bowman: So we put that up and then the really important part is we say hey set list the variable, the pointer equal to less than x, which is this pointer down here in the bottom, there's no
+
+80
+00:11:08.640 --> 00:11:16.290
+Nick Bowman: And so what happens. Well, the memory address changes again. What does it change to it. We really have no idea. Again, I totally made up all these are actual memory of values.
+
+81
+00:11:16.740 --> 00:11:28.170
+Nick Bowman: And. But what's important is now points that kind of stuff. And then if we just keep on going. Now, again, we see that we can conduct Kylie's name. Then we update the list of one or 2.2 trips note.
+
+82
+00:11:29.190 --> 00:11:38.550
+Nick Bowman: Or we still have a valid point. So we can print off trips name and then at the very end, great trips next pointer is actually no pointer. So when we execute this line.
+
+83
+00:11:38.940 --> 00:11:50.520
+Nick Bowman: This point or now becomes null pointer and now when we look back to the beginning of our model. We know oh hey i don't i don't have a pointer to a list anymore, right, my pointer is sort of invalid. Now it's not playing anything to the House.
+
+84
+00:11:53.100 --> 00:11:56.790
+Nick Bowman: And so with that combination of things we actually get exactly the opposite. We want
+
+85
+00:11:57.570 --> 00:12:09.510
+Nick Bowman: And. And so again, when you're working with link list code, right, it's always super helpful to draw these diagrams and to visualize exactly what's happening. I mean, as you're writing code, and especially as you're debugging stuff will become even more valuable is very
+
+86
+00:12:12.900 --> 00:12:19.770
+Nick Bowman: Cool. And so then something else we might want to do with the link list that's kind of a little bit of a riff of this is measuring the request. Right.
+
+87
+00:12:20.310 --> 00:12:31.920
+Nick Bowman: And one thing to remember is that link list, similar to arrays don't have this like ability to think about their own size. Like, for example, I can't call list size or list. Length
+
+88
+00:12:32.400 --> 00:12:43.650
+Nick Bowman: If like list is the beginning on my list. And so it's not really allowed it won't, it won't even compile the list will say, Hey, I'm appointed i don't i don't know what you mean by by this cycle.
+
+89
+00:12:44.580 --> 00:12:55.860
+Nick Bowman: And so let's let's see what writing a function that actually calculating that might look like. If you remember from the output that we saw earlier. And right now we have a sort of a missing implementation of this length function. And so let's go ahead and read that.
+
+90
+00:12:57.810 --> 00:13:09.210
+Nick Bowman: Again, what you'll see here is this very, very common pattern where you will use the sort of while Miss 94 not pointer syntax to traverse a list and
+
+91
+00:13:09.990 --> 00:13:18.360
+Nick Bowman: It's super powerful. The nice thing is always guarantees inside the body of this while that list is not know which means we can say for the record, right.
+
+92
+00:13:19.530 --> 00:13:26.460
+Nick Bowman: So in this case, maybe we just initialize account and then we say, all right, for every know that we visit, just go ahead and implement this kind of by one
+
+93
+00:13:27.030 --> 00:13:38.820
+Nick Bowman: And again, are the so probably when you're coding this up, you will forget this line that says list equals this next. So what are you going to get there. Probably an infinite loop, right, because, listen to me that's updated and so kind of just like people
+
+94
+00:13:40.140 --> 00:13:44.730
+Nick Bowman: So remember, don't forget to update the list point or whatever pointer, you're using to iterate.
+
+95
+00:13:46.050 --> 00:13:53.490
+Nick Bowman: Over the list and. And again, sir. Very similar to what we saw with the fitness function with just a little bit of change actually make sure we're counting number
+
+96
+00:13:55.500 --> 00:13:57.150
+Nick Bowman: And so if we pronounce this value. Yeah.
+
+97
+00:13:58.920 --> 00:14:05.850
+Nick Bowman: Hopefully, what we find is now if I enter this elements.
+
+98
+00:14:07.440 --> 00:14:12.420
+Nick Bowman: Obviously see is the program our points to get yourself, which is great. That's exactly what we want.
+
+99
+00:14:13.950 --> 00:14:23.970
+Nick Bowman: And so I know that this is sort of a little bit of quick of, you know, going over the code but but I really just want you to see that there are lots of different ways you can use sort of some of the core component operation, the person
+
+100
+00:14:24.930 --> 00:14:36.900
+Nick Bowman: And these are sort of hopefully by exposing you as many examples as you can. And when you start working on some of them have your own you'll have this idea of, okay, these are common things that I can do this. How can I put them together to kind of accomplish
+
+101
+00:14:41.820 --> 00:14:44.190
+Nick Bowman: Today gonna fight for it, but we just cut it up, which was great.
+
+102
+00:14:45.450 --> 00:14:53.910
+Nick Bowman: Give last thing that we're going to touch on. And when we touched on this a little bit on Thursday, as well. Um, is this idea of freeing the waitlist. This will be our last reversal operation sort of first
+
+103
+00:14:56.280 --> 00:14:57.690
+Nick Bowman: And and what what
+
+104
+00:14:58.800 --> 00:15:14.160
+Nick Bowman: So what is freeing and simplicity. So remember linked lists are built out of dynamically allocated and this means that you know because we specifically asked the computer for this memory for the nodes of our link list. It's our job to give that memory back once we're done using elastic.
+
+105
+00:15:16.140 --> 00:15:21.960
+Nick Bowman: And doing that obviously requires traversing less, which is kind of the main themes in the first few doctrines
+
+106
+00:15:22.470 --> 00:15:30.780
+Nick Bowman: And but also see freeing everything along the way. And now emphasize safely because we're going to see a wrong way of doing this first on but we're going to turn safely free things along.
+
+107
+00:15:32.640 --> 00:15:43.620
+Nick Bowman: And if you remember, we've done this already. We were totally done this already. The insect descriptor that we saw on Thursday was actually exactly responsible for freeing up all the memory associated with list that was underlined.
+
+108
+00:15:44.790 --> 00:15:54.210
+Nick Bowman: And so what I want to point out and it or what I want to say is, we're not going to code this together and to to cater but I do want to leave visit and we revisit the code that we were on Thursday.
+
+109
+00:15:54.510 --> 00:16:00.900
+Nick Bowman: Over a very similar version of it and emphasize exactly why there was a right wave D allocating the memory and a wrong.
+
+110
+00:16:02.880 --> 00:16:06.360
+Nick Bowman: So let's talk about the wrong way of doing it first and see exactly what went wrong.
+
+111
+00:16:07.710 --> 00:16:18.510
+Nick Bowman: So if you remember the again that the fact that this function is operating on a past enlist parameter, rather than on a on a class member variable is really the only thing that's different.
+
+112
+00:16:19.230 --> 00:16:23.430
+Nick Bowman: But it is a difference that I do want to find out. So if this looks a little bit different to what you remember from Thursday.
+
+113
+00:16:24.480 --> 00:16:31.230
+Nick Bowman: Just know that that's that's sort of why but let's see what happens here. And this was the wrong way of doing things. And let's see exactly why.
+
+114
+00:16:32.430 --> 00:16:40.410
+Nick Bowman: So we have the same list from the last problem you can assume that there was a function call and mean that we're just not visualizing it and but we have it set up. And so what do we do
+
+115
+00:16:41.220 --> 00:16:45.720
+Nick Bowman: We have our normal list reversal looks good so far. You say, hey, we still have about let's
+
+116
+00:16:46.650 --> 00:16:52.860
+Nick Bowman: And then we say, okay, I need to free the current know but I'm on. So let's go ahead and delete it. So we dynamically allocate that node.
+
+117
+00:16:53.550 --> 00:17:02.820
+Nick Bowman: I don't remember after you dynamically allocate a memory address. You can't assume that there's a valid memory there, you kind of just have to assume it's some garbage.
+
+118
+00:17:03.660 --> 00:17:15.660
+Nick Bowman: Now you may look at it in the debugger and you're like, oh, hey, my stuff is still there. But remember, even if it still shows up is there, right. You cannot consider it two years after you've called the delete key word. It's sort of what we call it. This idea of garbage.
+
+119
+00:17:17.550 --> 00:17:22.470
+Nick Bowman: And so then we move to the next line and we try to say, Okay, let's go to the next field of my current partner.
+
+120
+00:17:23.100 --> 00:17:37.830
+Nick Bowman: And then that's bad, right, because my pointer doesn't point develop member anymore. And so we get undefined behavior and you'll explore exactly what that undefined behavior looks like also in the warm up exercise, but in general, it's bad, right, trying to
+
+121
+00:17:37.860 --> 00:17:38.700
+Nick Bowman: Do reference
+
+122
+00:17:38.730 --> 00:17:41.490
+Nick Bowman: Do a good memory is never going to turn that box.
+
+123
+00:17:44.040 --> 00:17:57.660
+Nick Bowman: So that we saw the right way. Right. And what was the right way of doing things look like. Well, it included this idea of introducing this temporary pointer. So storing a pointer to the next element in our list before we deleted the current
+
+124
+00:17:58.980 --> 00:18:02.460
+Nick Bowman: And then after we were done right. We could then update
+
+125
+00:18:03.810 --> 00:18:13.050
+Nick Bowman: The current point or can point to this sort of temporary appointment every individual sport. And so, now why did that solve things. Well, if we work through the same example right
+
+126
+00:18:13.710 --> 00:18:21.870
+Nick Bowman: If we look at how this function might execute right so now we actually create a second pointer right which temporarily point through the next element in the list.
+
+127
+00:18:22.800 --> 00:18:28.530
+Nick Bowman: Then we can go ahead and delete the the first element as you've seen before so that now wants to go, my man.
+
+128
+00:18:29.310 --> 00:18:40.230
+Nick Bowman: But now when we needed to update the value of our current list pointer, we were able to do that with simple assignment right pointer assignment instead of point or D referencing and that's the critical difference here.
+
+129
+00:18:40.890 --> 00:18:44.820
+Nick Bowman: Because we're just setting to point is equal to one another. That's kind of always going to be a safe thing to do.
+
+130
+00:18:45.480 --> 00:18:51.060
+Nick Bowman: And so that would just change the memory address stored here to now be the memory address that next was pointing to.
+
+131
+00:18:51.870 --> 00:19:01.470
+Nick Bowman: And then once the loop is done this point or just goes away again finer just like other variables are defined in the scope of their declared in. And so that's sort of just kind of disappear.
+
+132
+00:19:03.600 --> 00:19:15.600
+Nick Bowman: And then right now we're safe. Right. We haven't blown up yet. And someone can kind of just keep going. Right, so we get the next point on to the next node free the current one, and then redo the point every assignment winter goes away.
+
+133
+00:19:16.860 --> 00:19:25.380
+Nick Bowman: Now our points are points to know which is still fine again setting a point or equal to knowledge is always a safe operation. It just sort of D referencing that off on it a little, little dangerous.
+
+134
+00:19:26.220 --> 00:19:36.780
+Nick Bowman: For the memory set the value for know and then our while that comes around and says, Oh, hey, I'm done. I'm finished traversing list. And so now all my mom is free and I've kind of accomplishment.
+
+135
+00:19:37.830 --> 00:19:45.360
+Nick Bowman: And so be very, very, very, very careful if you're when you're freeing listen the reading list functions to feel the memory associated with them structures.
+
+136
+00:19:45.690 --> 00:19:57.990
+Nick Bowman: You have to be super careful about when you delete your pointers. And when you do reference them and the order in which you do those things, really. And so hopefully this is a good illustration of what we saw on Thursday about why exactly we parted things up.
+
+137
+00:20:01.680 --> 00:20:09.570
+Nick Bowman: Cool. And then, so the very last thing that I actually want to talk about and is kind of a little segue to something that you all maybe thought you were done with
+
+138
+00:20:10.350 --> 00:20:19.950
+Nick Bowman: But it's this idea of link listing recursion. And this is going to be kind of a brief section and which is just to say that recursion can show up with instructors.
+
+139
+00:20:21.030 --> 00:20:27.480
+Nick Bowman: And we actually kind of mentioned this on Thursday when she was defining the note structure. She defined this idea that
+
+140
+00:20:27.840 --> 00:20:43.290
+Nick Bowman: The contents of the nodes struck was itself to find the person right we had struck node and then inside the stroke know we got a node star or like, okay, how does that really work to have, you know, a recursive we defined definition of a struct. And we kind of just said, oh, you know, c++
+
+141
+00:20:46.170 --> 00:20:53.130
+Nick Bowman: And, oh yeah, sorry. So there's, there is a struct that we science. Besides, you know, node showed up in both the name of the structure and the point here.
+
+142
+00:20:56.040 --> 00:21:10.320
+Nick Bowman: But what this actually gets us and what I want what I want us to think about is that this definition actually gives us some insight into the fact that overall like it just general concept of a linked list can be expressed with person. So let's see how
+
+143
+00:21:11.730 --> 00:21:25.110
+Nick Bowman: And so those are the diagram created by T shirts, which is really clever way of thinking about what this really is. And this is just one of two things. It's either empty. Right. So it's either an empty list, which we represent with this idea of no appointment.
+
+144
+00:21:26.340 --> 00:21:39.420
+Nick Bowman: Or it's a single cell, right, a single node that just points out another link list right and so then this is where a recursive definition is because this cloud of another link list right there's, again, has the exact same person.
+
+145
+00:21:41.520 --> 00:21:46.020
+Nick Bowman: So now why, why am I, why am I pointing this out. And the reason that I wanted to bring this up.
+
+146
+00:21:46.770 --> 00:22:00.120
+Nick Bowman: Is because when you're writing some of these lists reversal functions and you may want to do it recursive or you may think about you know in your brain. It may make more sense to do it repetitively rather than I want you to show that show you that this is actually possible
+
+147
+00:22:01.920 --> 00:22:12.450
+Nick Bowman: So, for example, right. This is the code that we saw for printing OPEN, CLOSED earlier, this was it or to use the wireless and and it sort of I did this idea of updating the current pointer over and over again.
+
+148
+00:22:13.620 --> 00:22:20.490
+Nick Bowman: And here's what code to prevailing plus recursive. We might look like. And again, like most recursive functions. It has a base case and recursive case.
+
+149
+00:22:21.240 --> 00:22:30.960
+Nick Bowman: And corresponding to are linked list definition itself. The base case just handles the empty list. So it says, Hey, if I currently have a null pointer. There's nothing for me to do. So I'm going to stop the person
+
+150
+00:22:31.950 --> 00:22:42.210
+Nick Bowman: And then the recurrence of cases. Okay, let me break down my link list into two components. I have the element that I'm yeah, which I just go ahead and print out and say, hey, this is the data that I have. Go ahead and print out
+
+151
+00:22:42.960 --> 00:22:50.190
+Nick Bowman: And then I say, okay, whatever, whatever. My next point or points to. That's just another link list. So let me go ahead and read first on the rest of them.
+
+152
+00:22:51.840 --> 00:23:04.740
+Nick Bowman: And and so the reason I bring this up is, you know, for some of you like this may look like a much more elegant here to solve the problem and you know we've talked with a lot of you and you said, hey, look. Refreshing was fun. I enjoyed it was difficult, but I really enjoyed the columns.
+
+153
+00:23:05.820 --> 00:23:11.310
+Nick Bowman: And so the purpose of this is showing you. Hey, it is actually possible to express Memphis functions.
+
+154
+00:23:13.770 --> 00:23:23.730
+Nick Bowman: But that being said, I'm just like we talked about when we did our sort of long term investigation of recursion recursion is not always the perfect problem solve.
+
+155
+00:23:24.930 --> 00:23:27.150
+Nick Bowman: And and so let's let's think about
+
+156
+00:23:29.490 --> 00:23:34.860
+Nick Bowman: And so specifically for for recursive functions that require traversing a linked list.
+
+157
+00:23:35.880 --> 00:23:41.010
+Nick Bowman: By our definition of a link list as a single so which we process and then we were curse on the list of illness.
+
+158
+00:23:41.610 --> 00:23:53.400
+Nick Bowman: That means if our list has sort of this number and elements in it. We're going to have one stack frame for every element. And so we're going to need n total stack friends to actually complete a recursion on on this list.
+
+159
+00:23:54.660 --> 00:23:55.740
+Nick Bowman: Now why is that a problem.
+
+160
+00:23:56.760 --> 00:24:08.940
+Nick Bowman: Well you explored on assignment three that there's actually a limit. Most computers, place a limit on the number of staff friends that you can generate before it before it kind of just overflows, it, it, it just gets really unhappy.
+
+161
+00:24:09.810 --> 00:24:16.740
+Nick Bowman: And and for most computers, I think, probably from looking at your answers. Most of you got number somewhere between like 16,060 4000
+
+162
+00:24:17.970 --> 00:24:25.980
+Nick Bowman: And so that means basically that if we use a recursive strategy, the size of the list were able to process is going to be really limited
+
+163
+00:24:26.370 --> 00:24:32.070
+Nick Bowman: Right, it's going to be limited to only about 16,000 to 64,000 elements which seems like a relatively big number.
+
+164
+00:24:32.670 --> 00:24:42.330
+Nick Bowman: But what you'll see on the assignment is you'll, you'll be you'll be dealing with link lists that are actually much larger than that. And so you can really run into problems. And if you sort of using recursive servers and so
+
+165
+00:24:43.950 --> 00:24:54.420
+Nick Bowman: And so what's the takeaway here is if you sort of required doing some link list operation that asked you to traverse the whole list. And it really is better to do it effectively.
+
+166
+00:24:54.870 --> 00:25:03.030
+Nick Bowman: And I wanted to show you that it is possible it recursive Lee and on the second hand out as kind of a thought exercise and as a way to sort of exercise the reverse of skills.
+
+167
+00:25:03.300 --> 00:25:06.840
+Nick Bowman: We would do want you to think about, hey, what's a way that I can improve this function or personally
+
+168
+00:25:07.620 --> 00:25:17.910
+Nick Bowman: But just on the assignment fees implement all of your list helper functions and your list functions that required reversal of a whole list, intuitively, it'll avoid you sort of moving into some really tricky.
+
+169
+00:25:20.130 --> 00:25:27.660
+Nick Bowman: And the reason. Another reason why I wanted to bring this up now is at the end of this week, we'll start talking about a new type of link data structure called trees.
+
+170
+00:25:27.960 --> 00:25:37.530
+Nick Bowman: And trees actually work really, really well with recursive reversals. And we'll talk about why that's true and why that difference with this, but this is sort of just a primer for. We'll see you later.
+
+171
+00:25:40.350 --> 00:25:46.560
+Nick Bowman: And so what's our takeaways from reversal. So we're kind of at the end of March reversal section mean there's three main things that I want you to take away
+
+172
+00:25:47.430 --> 00:25:51.210
+Nick Bowman: The first is that having temporary pointers and to link list is super helpful.
+
+173
+00:25:51.750 --> 00:25:58.260
+Nick Bowman: And right when we're processing these weakness, sometimes we need new pointers that point to our current spot on the list, or the next spot in the list.
+
+174
+00:25:58.920 --> 00:26:07.050
+Nick Bowman: Especially for destroying or rewiring things and creating pointers to point to different locations and the list is is a super helpful practice and you'll use it a time and
+
+175
+00:26:08.610 --> 00:26:15.090
+Nick Bowman: We also saw this idea that why looks really powerful because they sort of allow us to keep traversing our link list until you stopping condition.
+
+176
+00:26:16.020 --> 00:26:30.030
+Nick Bowman: And then we talked about the fact that eternal reversals sort of give us the best sort of most flexible, and scalable way to write list one and iterative functions that traversing won't have any limit on the size of your list 31st, in the way that recursive
+
+177
+00:26:32.190 --> 00:26:32.370
+OK.
+
+178
+00:26:33.810 --> 00:26:38.460
+Nick Bowman: Cool, so I can stop here for questions really quick before we move on. Is there anything in
+
+179
+00:26:42.540 --> 00:26:49.710
+kylie jue: Particular I guess there was one about so because of the stack frame issue. Should we always be using a while loop or is there any case where you would want to use recursion.
+
+180
+00:26:50.790 --> 00:26:54.360
+Nick Bowman: The most part everything you'll be asked to do on the assignment.
+
+181
+00:26:55.140 --> 00:27:01.650
+Nick Bowman: That requires traversing like this so I'm making it up there will be some recursion on the assignment, and we'll talk about that more. On Wednesday, but
+
+182
+00:27:01.890 --> 00:27:10.680
+Nick Bowman: In general, when you're writing functions that either traverse or do some utility on a on a on just a request itself deliberative always going to be the best approach that yeah
+
+183
+00:27:12.990 --> 00:27:19.710
+Nick Bowman: Okay, cool. And so our announcements today. So actually, a little bit longer than usual. So they'll get a little bit more
+
+184
+00:27:20.940 --> 00:27:28.590
+Nick Bowman: And I first part of us that announcements is pretty boilerplate. And just to note that revisions for 70 open today. And those will be on Thursday.
+
+185
+00:27:29.430 --> 00:27:43.410
+Nick Bowman: Just remember that assignment for you tonight and assignment five will release it tomorrow afternoon and it'll be do the following Tuesday and on our same weekly normal students have assignments. So it sort of mostly logistics.
+
+186
+00:27:44.700 --> 00:27:53.880
+Nick Bowman: Some other logistics. Please note that the Office Hours times on Monday and Tuesday. And so today and tomorrow, a little bit shifted and the people you'll see there will be a little bit different.
+
+187
+00:27:54.180 --> 00:28:03.630
+Nick Bowman: And so, Kelly and Eric slapping slapping spots and today's officers are half hour folder and tomorrow's or a half hour longer to make up for that. And so, please. Just keep that in mind.
+
+188
+00:28:04.080 --> 00:28:18.390
+Nick Bowman: It's the same links, as usual, so you can get to them the same way and just know that those are the time for today. And if you're thinking about final project ideas and group officers and individual officers were a great time to contact us. And so, please, please do so. Come check us
+
+189
+00:28:19.950 --> 00:28:30.270
+Nick Bowman: And cool. And then the last or the last thing for this slide is that we did release diagnostic reads late last night and overall you all did fantastic. We're really happy to see how everyone can
+
+190
+00:28:31.290 --> 00:28:39.030
+Nick Bowman: Reread request requests are open. So if you think that we made an error, while grading, which does happen sometimes you can submit those through grade spoke on until Wednesday evening.
+
+191
+00:28:39.600 --> 00:28:44.910
+Nick Bowman: And please note only do so if you think there was actually a mistake in grading. If you think like if you disagree with the criteria.
+
+192
+00:28:45.210 --> 00:28:54.270
+Nick Bowman: Unfortunately, we cannot change that to you at this point. So please don't submit the request for that. And you can find more logistics for sending requests in the announcements on the front page.
+
+193
+00:28:56.970 --> 00:29:05.910
+Nick Bowman: And then a general announcement about the diagnostic and the grades and what you may be seeing your scores. And so some common questions we anticipate getting
+
+194
+00:29:06.480 --> 00:29:12.450
+Nick Bowman: Sort of, you know, what letter grade did you get is a curve. And do you have exam statistics. Your diagnostic statistics.
+
+195
+00:29:12.930 --> 00:29:21.720
+Nick Bowman: And again, we don't want you to think about this as an exam and there, there will not be a curve. So you can really just think of these 4512 points is making half 10% of your overall grade.
+
+196
+00:29:22.530 --> 00:29:31.230
+Nick Bowman: And but also in addition to that, if you're sort of unsatisfied with where you're at right now. We do want to give you the opportunity to sort of demonstrate growth and make up for part of that.
+
+197
+00:29:31.950 --> 00:29:37.590
+Nick Bowman: And so we're going to do is you can if you feel like there was one problem on the diagnostic that you really sort of struggled with.
+
+198
+00:29:38.010 --> 00:29:43.920
+Nick Bowman: And you can sort of do something to sort of earn back the points for that problem and to show us the reps. The master that concept.
+
+199
+00:29:44.400 --> 00:29:52.500
+Nick Bowman: And that will actually be through the final project and and so you can incorporate the whatever the topic of that problem was right. We only had four columns interpreting
+
+200
+00:29:53.130 --> 00:30:02.580
+Nick Bowman: At TS fundamentals and referred them. And so you can incorporate that topic and into your final project doesn't have to be the focus of your final product itself to show up in some manner.
+
+201
+00:30:03.240 --> 00:30:08.190
+Nick Bowman: And then you'll write a short add on to your final project right up, which is a reflection on the diagnostic
+
+202
+00:30:08.640 --> 00:30:14.370
+Nick Bowman: And and so that which demonstrates, you know how you improve how you would approach the problem differently now.
+
+203
+00:30:14.700 --> 00:30:20.670
+Nick Bowman: And why sort of incorporating your final private actually help you to build and develop that understanding that may have been missing before
+
+204
+00:30:21.450 --> 00:30:25.770
+Nick Bowman: And then if you do that, you'll be able to sort of earn back the credit for that one specific specify
+
+205
+00:30:26.400 --> 00:30:32.850
+Nick Bowman: And again, this is sort of just a general overview in a way of just telling you that overall you all did great. But if you're sort of a little bit
+
+206
+00:30:33.270 --> 00:30:41.910
+Nick Bowman: Concerned about where your where your understanding is that we're going to give you a chance to sort of improve on that. You can find more details about how the strategy is going to work in the
+
+207
+00:30:43.410 --> 00:30:52.260
+Nick Bowman: On the mid quarter diagnostic paid on the course website for the outline the details there. And also added a section to the final project page as well. And so, please, please check that out.
+
+208
+00:30:53.130 --> 00:30:53.970
+kylie jue: And it could I jump in.
+
+209
+00:30:54.900 --> 00:30:55.140
+Nick Bowman: Yeah.
+
+210
+00:30:55.200 --> 00:30:59.850
+kylie jue: Yeah, so there were a couple of quick things I wanted to clarify based on questions in the chat.
+
+211
+00:31:01.410 --> 00:31:11.760
+kylie jue: So you can you should have all received an email through grade scope but you can click on and then make an account and log in and see the problem by problem breakdown of your score.
+
+212
+00:31:12.390 --> 00:31:17.490
+kylie jue: As well as the rubric. So you have to check it through your Stanford email and use your Stanford email to login
+
+213
+00:31:18.030 --> 00:31:25.680
+kylie jue: And so that's where you'll find all that information. So if you're not sure what everything is yet just look for that email, you should have gotten it last night early this morning.
+
+214
+00:31:26.100 --> 00:31:31.500
+kylie jue: And then the other thing I wanted to. We've had a couple questions about, like, Oh, is there a standard deviation or I mean
+
+215
+00:31:32.640 --> 00:31:41.670
+kylie jue: We're not releasing that because of the fact that we don't want you to think about this exam. So those numbers actually like have no meaning. There was no distribution that we expected. That was a normal distribution.
+
+216
+00:31:41.940 --> 00:31:48.150
+kylie jue: There's no curve. So we're not releasing the information because it's not an exam with a like nice score curve.
+
+217
+00:31:48.420 --> 00:31:58.890
+kylie jue: Again, you can just think about it as like whatever number of points you got out of 45 is the percentage of the 10% that you had. And we're giving you an opportunity to make that up if you would like to do so.
+
+218
+00:32:02.190 --> 00:32:02.490
+Nick Bowman: Awesome.
+
+219
+00:32:03.660 --> 00:32:09.570
+Nick Bowman: Cool. So that's something we have announcements today. If you have questions about any of this stuff. Feel free to talk to us after class.
+
+220
+00:32:12.450 --> 00:32:19.440
+Nick Bowman: Okay, cool. So then our second portion of today. And the last point minutes we're going to talk about this idea of interest insertion
+
+221
+00:32:20.340 --> 00:32:28.440
+Nick Bowman: And so, especially, we're going to talk about two cases inserting at the front of the link list and 30 seconds. And we're going to start out by inserting the front that's a little bit more straightforward.
+
+222
+00:32:30.150 --> 00:32:39.300
+Nick Bowman: So again, say we have a list that looks like this. And we wanted to introduce a new element at the beginning. So we have this new element called Julie and we want to incorporate Julius part of the month list.
+
+223
+00:32:39.840 --> 00:32:43.320
+Nick Bowman: And so eventually we want our list to look something like that and
+
+224
+00:32:44.100 --> 00:32:56.040
+Nick Bowman: And so one thing that you probably noticed is this is actually very similar to the push function on Thursday, right. So, on Thursday we had a linked list inside of our stack. And when we push to that link list, we just were just doing insertion
+
+225
+00:32:57.030 --> 00:33:05.460
+Nick Bowman: And so let's see. So now we're going to spread out standalone function like kind of been the theme of today and to just do this to enlist. And so let's go ahead and cut it.
+
+226
+00:33:06.630 --> 00:33:18.480
+Nick Bowman: And so we jumped down. Oh, and a note on the recursive stuff I've included ways of quoting up all of the three functions that we saw earlier. Personally, I'm so feel free to check that out in the person file.
+
+227
+00:33:20.760 --> 00:33:27.420
+Nick Bowman: Because now we're gonna do is we're going to switch demos and we're going to talk about this pre pen.
+
+228
+00:33:29.190 --> 00:33:33.840
+Nick Bowman: And so our demo is going to try to pre plan trip Kylie in it, and then it's just going to try to pick up
+
+229
+00:33:35.040 --> 00:33:41.160
+Nick Bowman: On. Let's go ahead and see what that. So if you remember from what we saw on Thursday, right, this pre pending sort of had three components.
+
+230
+00:33:41.820 --> 00:33:53.190
+Nick Bowman: The first component was to say are really yeah we think there's three components. The first component was to say, hey, let's just create a new note and let store the data that we want to store and
+
+231
+00:33:55.830 --> 00:34:11.190
+Nick Bowman: Then the second component was to say, oh, we need to make this new node point to the current list because by making it a point to the current list right we'll sort of rewire it as now this sort of it. It's next pointer is just the remainder of the list that we started off.
+
+232
+00:34:12.360 --> 00:34:19.710
+Nick Bowman: And then the last component was to say, okay, well, now my list pointer which points to the beginning of my link Miss should actually just point to this.
+
+233
+00:34:21.840 --> 00:34:36.690
+Nick Bowman: Which is to say, okay, now once I'm done with this function my list has a new beginning right now has a new frontier. And so this code actually looks exactly like what we saw on Thursday. And so let's try running it. And let's see if it works.
+
+234
+00:34:39.180 --> 00:34:54.450
+Nick Bowman: And so we've done that and nothing gets printed out and we know our print function works from the previous demo. So, something went wrong. And so what went wrong here. So think about when you had serious thing or what might have done right. And let's let's illustrate how this process.
+
+235
+00:34:56.220 --> 00:35:00.420
+Nick Bowman: So we started off in our main function. And we had this variable called best that we said before,
+
+236
+00:35:02.580 --> 00:35:10.410
+Nick Bowman: And so this is sort of what the picture looks like and then we said, All right, let's prepare for this. So let's insert trip at the beginning of this list.
+
+237
+00:35:10.980 --> 00:35:23.250
+Nick Bowman: So that's fun off a phone call. And again, great, because what we've talked about how function calls and parameters works and this function got a copy of this thing called list and a copy of this thing called data. So it has its to own local variables.
+
+238
+00:35:24.510 --> 00:35:25.050
+Nick Bowman: That it has
+
+239
+00:35:26.370 --> 00:35:33.180
+Nick Bowman: And we can kind of illustrate the process what happened. So we created a new node that initially like garbage data. But then we overrode that
+
+240
+00:35:33.960 --> 00:35:42.330
+Nick Bowman: Then we overrode it. Next point to point to what the list was currently point which in this case was just no finer, which is fine because this is going to be the first element is routed to our list.
+
+241
+00:35:43.410 --> 00:35:52.920
+Nick Bowman: And then we said, Okay, let's update list, let's point out a note. Okay, so that's looking good so far list now points to this you know that we created and everything seems sort of happy.
+
+242
+00:35:55.080 --> 00:36:00.750
+Nick Bowman: And then our function goes away. And because it's a function right all of its local variables and all of its parameters also disappear.
+
+243
+00:36:01.410 --> 00:36:09.030
+Nick Bowman: And what do we have here. Well, we have our the real list pointer, right, the one that we're keeping track of the main still pointing to know
+
+244
+00:36:09.360 --> 00:36:20.940
+Nick Bowman: And this new node that we allocated is kind of just living on its own kind of deep memory now and so trip is very sad. He just got you did is kind of going to click cry. Here's all alone will never be able to recover.
+
+245
+00:36:22.680 --> 00:36:30.780
+Nick Bowman: So what what went wrong. Well, what went wrong, is the fact that pointers, just like any other function arguments are passed by value.
+
+246
+00:36:31.260 --> 00:36:38.850
+Nick Bowman: Which means that if a function takes a pointer as a parameter, it gets a copy of that point. And we actually have to separate pointers pointing to the same location memory.
+
+247
+00:36:39.570 --> 00:36:47.730
+Nick Bowman: And so we can change what the copy points to, but we can't change what the original pointer points to which seems like kind of a problem if we need to update what the beginning of the West Point.
+
+248
+00:36:48.930 --> 00:36:55.170
+Nick Bowman: And so what's the solution going to be here. Well, it's always going to be with the same solution on the readings with data structures which is passing things by reference.
+
+249
+00:36:56.850 --> 00:37:08.760
+Nick Bowman: And to solve this problem, we can actually pass them Inglis point of reference. This is kind of crazy like passing a pointer by reference. Yes, it's gonna look complicated, it's a lot to wrap your head around, but one, it's possible and to it's really powerful.
+
+250
+00:37:09.570 --> 00:37:15.600
+Nick Bowman: And so what does that look like, Well, we just make this one small change to our function. The body of the code looks exactly the same.
+
+251
+00:37:16.020 --> 00:37:20.190
+Nick Bowman: But now we say, hey, this list parameter we want to pass it by reference. Right.
+
+252
+00:37:20.730 --> 00:37:31.560
+Nick Bowman: And and so now when we do this update down at the very bottom of the function we're actually going to be updating the real pointer over and main right the same point that was provided to us rather than a copy of it.
+
+253
+00:37:32.460 --> 00:37:41.520
+Nick Bowman: Right. And again, this is a reference to a pointer to a note, which is very, very complicated, right. So if it's hard to wrap your head around right now.
+
+254
+00:37:42.030 --> 00:37:52.800
+Nick Bowman: That's, that's fine. You're going to get a lot of practice within on the assignment. But the important point is if we change what this point or points to the changes will stick over right and that's kind of exactly what we see.
+
+255
+00:37:53.880 --> 00:38:08.400
+Nick Bowman: And so if we jump back to our code and we quite literally just add this one character. I could eat out it over in the US as well and but if we add just as one character which has passed this list pointer by reference. And we rerun our demo.
+
+256
+00:38:09.540 --> 00:38:15.390
+Nick Bowman: What is that going to look like. Well, now we get our list quote created and printed out exactly
+
+257
+00:38:16.920 --> 00:38:21.210
+Nick Bowman: So just even a one character difference like that can make a real change in the way that the codex.
+
+258
+00:38:22.410 --> 00:38:30.960
+Nick Bowman: And let's let's actually again. Visualize why this is true, right. The reason why this is true is because now right again we set up our list pointer and man.
+
+259
+00:38:31.830 --> 00:38:37.440
+Nick Bowman: We call a pretend function. But now, right. This list parameter is not a copy
+
+260
+00:38:38.010 --> 00:38:45.690
+Nick Bowman: But it is a reference. So I've highlighted in purple and the highlighted this variable here in purple. There's a reference to this very robust pointer variable that exist in me.
+
+261
+00:38:46.530 --> 00:38:52.080
+Nick Bowman: And so now when we run through our same steps of creating a new node and setting these values. Same everything will be solved before
+
+262
+00:38:52.590 --> 00:39:00.960
+Nick Bowman: But now when we get to this line, the actual thing that's getting changed is this pointer over there. And so there's pointer and main now stores the memory address of our new node.
+
+263
+00:39:01.470 --> 00:39:12.390
+Nick Bowman: And our points to the correct location. And so now our functions stack frame disappears. But our list itself, right, the list that we're trying to build up via these helper functions now has valid see
+
+264
+00:39:12.960 --> 00:39:22.050
+Nick Bowman: Right. And so now we get a much happier trip. And he says, I'm no longer lost and he gives one of his sort of well known because sort of Life is good. Now, and we sort of fix this.
+
+265
+00:39:24.120 --> 00:39:29.040
+Nick Bowman: And so what's the takeaway here and passing pointed by reference. Very powerful.
+
+266
+00:39:29.610 --> 00:39:40.470
+Nick Bowman: And if you pass a planner to a function by value you can change the contents of the note that it's pointing out right to remember because you can do reference it and you can change the contents of what it's pointing at
+
+267
+00:39:40.980 --> 00:39:45.510
+Nick Bowman: But you can't actually change which object it or you can say hey point at a different
+
+268
+00:39:46.620 --> 00:39:47.250
+Nick Bowman: If you pass in a
+
+269
+00:39:48.420 --> 00:39:58.560
+Nick Bowman: Pointer by reference. You can also change what object that concept. And that's going to be really helpful. And we're doing things like list insertions and this removals for the beginning of the list might actually change.
+
+270
+00:40:00.240 --> 00:40:11.580
+Nick Bowman: But the other to be really careful. Right. And when you're passing and pointers by reference. You have to be super careful not to change the pointer unless you really, really do want to change it. So it's kind of a fine edge to rest on and
+
+271
+00:40:12.600 --> 00:40:14.430
+Nick Bowman: On so just make sure to keep that
+
+272
+00:40:16.770 --> 00:40:24.000
+Nick Bowman: And again, you'll, you'll see pointed by reference popping up a lot on the assignment when you're doing this manipulations. So hopefully you'll get there.
+
+273
+00:40:26.100 --> 00:40:26.280
+Nick Bowman: Yeah.
+
+274
+00:40:28.200 --> 00:40:29.670
+kathleen bryan: Yeah, sorry I'm
+
+275
+00:40:32.490 --> 00:40:37.170
+kathleen bryan: Just so if you if you read point two different value because you passed by, where
+
+276
+00:40:38.580 --> 00:40:45.450
+kathleen bryan: Does it like what happens to the original object. It was pointing out like is that is that value like anywhere.
+
+277
+00:40:46.950 --> 00:40:49.290
+Nick Bowman: Yeah, that's a good question. Yeah.
+
+278
+00:40:49.320 --> 00:40:59.820
+Nick Bowman: In this case, right, in this case, no pointers kind of just a value. So it's a little bit disingenuous to Representative you know as like something that exists to point to is just kind of helpful for our visualizations.
+
+279
+00:41:00.270 --> 00:41:11.820
+Nick Bowman: And so in this case, you're right. Like it just like the value that's stored by list gets overwritten. And so just like the value changes and no pointer. Again, it's just a special value. So it doesn't really matter, but I
+
+280
+00:41:12.240 --> 00:41:25.440
+kathleen bryan: I yeah I mean I guess like that the object that the pointer was pointing to, like, that has a space in memory. So like, then what space and memory is it occupying if you like reappointing it's pointer to something else that makes sense.
+
+281
+00:41:26.730 --> 00:41:34.890
+Nick Bowman: Yeah, well, so that, so you have to be careful. Right. If this was a real object, instead of just a null pointer. You could you might unintentionally create a memory leak rate. That's why it's actually important.
+
+282
+00:41:35.160 --> 00:41:43.050
+Nick Bowman: That this step right this step that says hey point. The next point or of the new node that I just created to the existing value or object that list pointed to write
+
+283
+00:41:43.380 --> 00:41:48.810
+Nick Bowman: Such that when I reassign this next one, right, it doesn't get lost. Yeah, that that's a good observation. That's why, that's why this line right here is necessary.
+
+284
+00:41:49.320 --> 00:41:52.320
+kathleen bryan: Okay, okay. So okay, so you're pointing it back to nothing. Okay.
+
+285
+00:41:52.440 --> 00:41:52.950
+kathleen bryan: Yeah yeah
+
+286
+00:41:52.980 --> 00:41:53.310
+Exactly.
+
+287
+00:41:57.360 --> 00:42:01.530
+Nick Bowman: Awesome. And so, you know, life is good. Now we have our successful treatment.
+
+288
+00:42:03.840 --> 00:42:11.880
+Nick Bowman: So then the very last thing I'll talk about today in the last sort of eight or so minutes we have lost is this idea of inserting at the end of this idea of opinion.
+
+289
+00:42:12.930 --> 00:42:16.770
+Nick Bowman: And inserting at the end can also be relatively useful and we'll talk about why as a summary.
+
+290
+00:42:17.100 --> 00:42:25.530
+Nick Bowman: And but so far with inserting at the beginning. We've always seen that, that the order in which we inserted ended up being the opposite order that we really saw in the list.
+
+291
+00:42:25.740 --> 00:42:33.450
+Nick Bowman: Which can sometimes be helpful, but it's sometimes kind of annoying sometimes you want to just actually be able to maintain the order of things and so adding to the end of the linguist will be helpful.
+
+292
+00:42:34.770 --> 00:42:50.040
+Nick Bowman: So again, let's say that are linked with I think this looks like this. We want to add Julie again. So we create hers, and you know, and then we rewire things, such that she's part of the mist and such that she now becomes she now holds the next value that terminates from us.
+
+293
+00:42:51.150 --> 00:42:55.740
+Nick Bowman: And so if we summarize this in three steps, right, we have to create a new cell.
+
+294
+00:42:56.160 --> 00:43:06.780
+Nick Bowman: And the new cell now is going to have a next field with no point because this cell we know is going to exist at the very end of the list. And we know that our cell that exists at the very end of the list is always going to should always values x naught point
+
+295
+00:43:08.130 --> 00:43:20.220
+Nick Bowman: Then we find the last so in the West. And so in this case it was trip for it's rare to find trip, somehow, and we have to change where he points to right, we now have to say, okay, instead of pointing to a pointer. Go ahead and point to this email.
+
+296
+00:43:21.870 --> 00:43:27.300
+Nick Bowman: And so with these three steps. Let's give it a shot to actually defend or to implement this.
+
+297
+00:43:29.640 --> 00:43:42.540
+Nick Bowman: And and so one thing that you'll notice right is, again, we're passing in class and we're passing in our node pointer to the beginning of the list by reference.
+
+298
+00:43:43.110 --> 00:43:53.130
+Nick Bowman: And and I want you to just take a second to think about why that's necessary and then you'll see in step three, and actually why why it's necessary. Let's start out with step one.
+
+299
+00:43:55.020 --> 00:43:59.400
+Nick Bowman: So, you know, with your sort of normal process. We say, all right, I want to create a new node.
+
+300
+00:44:00.210 --> 00:44:13.890
+Nick Bowman: And now I'm actually going to make use of that constructor. I was telling you about earlier. And so I know that I want this node that has data, the specified data. And I know already, for sure that it's it's next value has to be not because this, this value is going to be existing
+
+301
+00:44:15.240 --> 00:44:22.350
+Nick Bowman: And so it's actually nice is with this one step right here I'm able to both create the node and give it value.
+
+302
+00:44:25.080 --> 00:44:33.540
+Nick Bowman: So now is really the tricky part. So let's say this step two is really probably the hardest and then the trickiest part about trying to find the last element.
+
+303
+00:44:35.310 --> 00:44:48.930
+Nick Bowman: If we look back to our diagram really quick. So before the insertion happen. And one thing you might notice that specifies sort of distinguishes our last element in the list from the others is that it's the only one who's next pointer is not
+
+304
+00:44:50.010 --> 00:45:01.230
+Nick Bowman: That kind of sets off in our head about hey you know maybe it's important, but that's what I want to look for. Right. I want to look for an element, who's next pointer is not right. So rather than the element being know itself, but it's if next one.
+
+305
+00:45:02.610 --> 00:45:04.380
+Nick Bowman: Let's see if we can, if we can formalize that
+
+306
+00:45:05.820 --> 00:45:15.000
+Nick Bowman: And so let's just create a new pointer and let's call it because hopefully eventually by the time we're done looking and it'll be pointing to analyst.
+
+307
+00:45:15.690 --> 00:45:23.040
+Nick Bowman: But when we first start off right we always have to start iterating over linquist starting from the very beginning. So we just say, all right, starting off you're going to point to the very beginning.
+
+308
+00:45:25.230 --> 00:45:36.630
+Nick Bowman: And then let's do this. So, let's say, Okay, I just codify that I want to keep updating this pointer until I get to a point where the next point or is all
+
+309
+00:45:37.680 --> 00:45:49.260
+Nick Bowman: Right, and so we say, okay, you know, that makes sense. I want to finish this loop. Once I've encountered an element, who's next point as well because then truly my end pointer will be pointing to the current last element.
+
+310
+00:45:50.760 --> 00:45:56.250
+Nick Bowman: But, well, that's not true. I'll just say again, you are a little updating stuff. And let's go ahead and
+
+311
+00:45:58.530 --> 00:45:59.730
+Nick Bowman: And so
+
+312
+00:46:00.990 --> 00:46:11.700
+Nick Bowman: Let's do. And then, you know, one thing that we can get at the very end and then we can just say, Okay, let's set the next point guard and from nought to equal to one.
+
+313
+00:46:14.130 --> 00:46:17.670
+Nick Bowman: Maybe this is our first our first sort of attempt at writing
+
+314
+00:46:19.500 --> 00:46:23.340
+Nick Bowman: So let's go ahead and switch up our demo and fly to test this.
+
+315
+00:46:24.150 --> 00:46:28.200
+kylie jue: Is Kathleen, can stop from before. Do you have any question as you're demoing
+
+316
+00:46:29.100 --> 00:46:31.410
+kathleen bryan: Oh no, I think it just is still up. Sorry.
+
+317
+00:46:31.440 --> 00:46:32.130
+kylie jue: Okay, no worries.
+
+318
+00:46:34.380 --> 00:46:53.910
+Nick Bowman: Cool. So let's see what is gonna happen. So let's run our demo and SEC fault, okay. Alright, so we got our nice little warning. It's like, oh no segmentation fault occurred tried to do reference a pointer to an invalid memory address. And so what what's going on here. Why didn't this work.
+
+319
+00:46:55.350 --> 00:46:57.450
+Nick Bowman: And. And let's think carefully about this while
+
+320
+00:46:58.800 --> 00:47:07.890
+Nick Bowman: So now, unlike before before, while the condition which involved checking equality radio just saying is the pointer equal to one point while that's true keep looping
+
+321
+00:47:08.550 --> 00:47:16.440
+Nick Bowman: And I was always safe, right, because even if the point I was, well, then it's just an equality comparison and quality comparisons are always pretty
+
+322
+00:47:17.430 --> 00:47:26.310
+Nick Bowman: But now, our while the condition is a little bit trickier right or wireless condition actually says, O D reference and and look at its next point.
+
+323
+00:47:27.330 --> 00:47:35.400
+Nick Bowman: And your alarm bells should be going off in your head. You're saying, Oh, you're referencing a pointer, but you have absolutely no guarantee that it's not. All right.
+
+324
+00:47:35.970 --> 00:47:44.370
+Nick Bowman: And in particular, right, if we look at our demo, the very first time that we call the opponent function. The point of that were given is equal to know and so that just seems like like I'm
+
+325
+00:47:45.540 --> 00:47:46.980
+Nick Bowman: Just waiting for fun, right.
+
+326
+00:47:48.330 --> 00:47:51.660
+Nick Bowman: And so we have to protect ourselves somehow right we have to kind of say, hey,
+
+327
+00:47:52.110 --> 00:48:00.300
+Nick Bowman: We also need to make sure you know in this special case right where the first point or the world class and you know we need to make sure that that's not true.
+
+328
+00:48:00.690 --> 00:48:12.540
+Nick Bowman: Right, or we need to make sure that that we're not about to be referencing all pointer. And so let's protect ourselves with actually protect ourselves and say, oh, hey, you know, don't do reference this unless you know that it's not
+
+329
+00:48:13.590 --> 00:48:13.740
+Nick Bowman: Right.
+
+330
+00:48:15.420 --> 00:48:17.820
+Nick Bowman: Now, oh, that says, and yeah.
+
+331
+00:48:18.900 --> 00:48:32.460
+Nick Bowman: So now the tricky part is we also have to protect ourselves here, right, if this d referencing was dangerous because and might potentially be no well then hey, this is, this one is also pretty dangerous as well. But how can we, how can we protect
+
+332
+00:48:34.740 --> 00:48:44.580
+Nick Bowman: And in this case, right, we can just add sort of a conditional check in and say, hey, if it's actually true that our end pointer is initially know
+
+333
+00:48:45.270 --> 00:48:53.520
+Nick Bowman: What does that tell us. Well, that tells us we have a very special case. And it's specifically a special case when we're inserting at the end of an empty list.
+
+334
+00:48:54.300 --> 00:49:04.470
+Nick Bowman: And one thing I will need to know is that inserting at the end of an empty list, kind of counter intuitively requires updating the beginning of the list, right, because the beginning is currently no
+
+335
+00:49:05.250 --> 00:49:15.330
+Nick Bowman: And so this is why we needed to pass our list pointer by reference because in this case, we can just say, oh, if there was nothing in the list. Initially, just go ahead and set the beginning of the list equal to the TV.
+
+336
+00:49:17.520 --> 00:49:25.470
+Nick Bowman: Otherwise, right, then we can say, okay, now I know that it's safe to the references and pointer. So what's the reference it and let's make it
+
+337
+00:49:27.870 --> 00:49:28.920
+Nick Bowman: And so hopefully
+
+338
+00:49:30.030 --> 00:49:37.110
+Nick Bowman: By adding in these protections in both of these places. Now, when we run our tests, we see that we successfully do it.
+
+339
+00:49:37.680 --> 00:49:45.840
+Nick Bowman: And again, what I want you to notice as compared to before, is now the order in which we added elements because we're always adding on to the end is actually preserved.
+
+340
+00:49:46.410 --> 00:49:57.630
+Nick Bowman: Right, and so we entered a lot from before we entered trip Korean Nick and we got back from Thailand, which is a helpful property to have and something that you'll find useful.
+
+341
+00:50:00.060 --> 00:50:08.730
+Nick Bowman: And so. So to wrap things up. And what we saw here from the pending takeaways and is that there's lots of tricky edge cases that you have to humble when you're doing a public
+
+342
+00:50:09.330 --> 00:50:14.940
+Nick Bowman: And you have to pass the pointer by reference. Right, because we have to transfer the case we're inserting into the empty list.
+
+343
+00:50:15.930 --> 00:50:28.950
+Nick Bowman: You have to be super careful to make sure that you're a while if condition doesn't do referencing a pointer. Right. And because if if we don't have that, then on the very first insertion our program will crash which which we obviously don't want
+
+344
+00:50:29.970 --> 00:50:33.120
+Nick Bowman: And the other thing was actually have to be careful to make sure that we're not using
+
+345
+00:50:33.750 --> 00:50:38.700
+Nick Bowman: You'll notice here that I created this separate pointer that becomes my iterator pointer over the list.
+
+346
+00:50:39.120 --> 00:50:47.040
+Nick Bowman: The reason I couldn't just use directly this parameter here is because it is passed by reference. Right. I don't want to destroy what this value is pointing to you if I don't have to
+
+347
+00:50:47.760 --> 00:50:53.940
+Nick Bowman: So using separate pointers as as your pointer to keep track of where you're in the list also makes it makes it sort of important
+
+348
+00:50:56.370 --> 00:51:01.290
+Nick Bowman: And. And again, we didn't get a chance to do this. I wanted sort of my iPod, to be able to draw, but I couldn't quite figure it out.
+
+349
+00:51:01.860 --> 00:51:08.340
+Nick Bowman: So we didn't have a diagram for this one. But the reason I got these cases we come a lot easier to reason about if you draw these diagrams.
+
+350
+00:51:08.700 --> 00:51:18.780
+Nick Bowman: And so I would strongly recommend Revisiting these these couple of edge cases and drawing out the diagrams for yourself and sort of just tracing the value of the different pointers over time and seeing a lot of infrastructure box.
+
+351
+00:51:21.210 --> 00:51:29.070
+Nick Bowman: The last thing. It was sort of an unresolved issue for tomorrow is the bigger complexity of adding to the back of a link list. But what is it
+
+352
+00:51:29.580 --> 00:51:35.610
+Nick Bowman: It's actually. Oh, then right we have to traverse the whole list to find the end in order to add into the last position.
+
+353
+00:51:36.600 --> 00:51:47.580
+Nick Bowman: This seems kind of bad, like, oh, ran for a single and surfing seems like it could get really slow really quickly. And so we're going to think about whether we can do better or not. And that's where we'll start off on on Tuesday.
+
+354
+00:51:49.110 --> 00:51:54.210
+Nick Bowman: And so in summary, right, we saw that we can use link lists outside of classes which will be doing an assignment five
+
+355
+00:51:54.900 --> 00:52:01.350
+Nick Bowman: And we saw that we can have pointed by reference in order to edit where they actually point to in these standalone functions.
+
+356
+00:52:01.980 --> 00:52:08.250
+Nick Bowman: And we saw that insertion into English can either be done at the beginning or the end and the beginning is simpler and faster.
+
+357
+00:52:08.760 --> 00:52:15.210
+Nick Bowman: But it reverses the order of things in your list. And so if you don't care about the order of the things get inserted in pretending is probably the right way to go.
+
+358
+00:52:15.900 --> 00:52:21.570
+Nick Bowman: On a pending on the other hand, is a little bit slower at least so far because it required traversing the whole list.
+
+359
+00:52:22.410 --> 00:52:32.550
+Nick Bowman: But it's really nice because it maintains the order that you Athens and so if maintaining the order of the things you're adding to the list is important, which hint. It will be important on the assignment than a pending policy.
+
+360
+00:52:35.310 --> 00:52:44.940
+Nick Bowman: Right. And then so what you'll see on Monday is we're actually going to talk about finishing up link. Listen, we're going to start talking about sorting, which is a cool and real world algorithm that you will
+
+361
+00:52:45.540 --> 00:52:49.980
+Nick Bowman: Enjoy them. So thanks everyone for sticking around. And I hope you have a good rest your day.
+
+362
+00:52:51.360 --> 00:52:51.720
+Siddharth Balaji: Thank you.
+
+363
+00:52:52.320 --> 00:52:53.550
+Evan F Davis: Thank you. Thank you.
+
+364
+00:52:54.810 --> 00:52:55.380
+Oz Gitelson: Thank you.
+
+365
+00:52:55.980 --> 00:52:57.720
+shirley li: Thank you. Thanks.
+
+366
+00:53:08.850 --> 00:53:10.020
+klaus cerny: So Nick, I have a question.
+
+367
+00:53:10.620 --> 00:53:11.070
+Nick Bowman: Yeah what's up.
+
+368
+00:53:11.940 --> 00:53:18.840
+klaus cerny: And can you go back to the last coat you displayed on inserting it and
+
+369
+00:53:19.860 --> 00:53:20.220
+Nick Bowman: The
+
+370
+00:53:21.060 --> 00:53:21.660
+klaus cerny: Code. Yeah.
+
+371
+00:53:22.050 --> 00:53:26.070
+klaus cerny: Yeah, exactly. And looking at the wire.
+
+372
+00:53:26.160 --> 00:53:26.940
+Statement. Yep.
+
+373
+00:53:28.980 --> 00:53:37.020
+klaus cerny: And arrow next and if the list is empty then end or next points into garbage.
+
+374
+00:53:38.160 --> 00:53:38.580
+klaus cerny: Yes.
+
+375
+00:53:38.820 --> 00:53:41.520
+klaus cerny: Here the segmentation fault. When the
+
+376
+00:53:41.550 --> 00:53:43.560
+Nick Bowman: Oh yeah, sorry. I should have mentioned this.
+
+377
+00:53:44.040 --> 00:53:54.390
+Nick Bowman: To c++ we haven't talked about this formally in class. I think we had an interview about it and c++ does this thing called short circuit evaluation and which says that
+
+378
+00:53:55.080 --> 00:54:03.510
+Nick Bowman: Evaluates bullying conditions from left to right. And so before it ever gets here, it evaluates this condition and it asks is an equal to know pointer.
+
+379
+00:54:04.020 --> 00:54:14.610
+Nick Bowman: And and and in the case of an empty list, right, that if that condition is going to be false, right. So, and, and not equal not pointer is going to be false. And because the first component of the and is false.
+
+380
+00:54:15.000 --> 00:54:17.640
+Nick Bowman: You know that the overall condition can never be true.
+
+381
+00:54:18.060 --> 00:54:18.960
+klaus cerny: Right, right. So,
+
+382
+00:54:20.580 --> 00:54:22.290
+Nick Bowman: Yeah, it's completely ignored. Yeah.
+
+383
+00:54:22.890 --> 00:54:26.430
+Nick Bowman: Yeah, it's basically just skipped over. Yeah. And so that's why we can write it in this
+
+384
+00:54:26.430 --> 00:54:26.970
+Nick Bowman: Way. Yeah, that's
+
+385
+00:54:27.450 --> 00:54:28.770
+Nick Bowman: That's a good thing. Yeah, that's a good man.
+
+386
+00:54:29.880 --> 00:54:30.480
+klaus cerny: Thank you.
+
+387
+00:54:42.690 --> 00:54:51.300
+edouard des: It may only be about the current you would it be possible to like keep on an index in memory of which one is the last ones. You don't have to go through the entire
+
+388
+00:54:51.810 --> 00:54:59.970
+edouard des: ARRAY, ARRAY but link list every time could you have that inside or do you have a separate container contains the nodes. And if you're an illness as a class.
+
+389
+00:55:01.290 --> 00:55:09.900
+Nick Bowman: So in this seas are probably not the exact right thing to do here, right, because link list again don't have a notion of indexes right like
+
+390
+00:55:10.290 --> 00:55:13.650
+Nick Bowman: Yes, there is a first and a second and a third element, but
+
+391
+00:55:14.220 --> 00:55:24.000
+Nick Bowman: Even if we knew that something was the third element right there is no way to get to it. Like, you can't say linked list at three right like you would have to actually traverse the whole list to get it.
+
+392
+00:55:24.450 --> 00:55:31.590
+Nick Bowman: Right, I'm so indices, or maybe not the not not exactly right but but i think what you're suggesting is on the right track. And what it is, what we'll see tomorrow, which is
+
+393
+00:55:31.980 --> 00:55:43.590
+Nick Bowman: Can you somehow remember where the last element was right and and just store that as another piece of information and then use that as as as sort of a helpful thing as your as your
+
+394
+00:55:44.580 --> 00:55:47.610
+Nick Bowman: Sort of a pending later on. Yeah. And then that that's that's that's what we'll see
+
+395
+00:55:48.720 --> 00:55:54.000
+edouard des: And also follow up question isn't a good idea. I know, I know that it's like I was
+
+396
+00:55:54.600 --> 00:55:59.100
+edouard des: Going to go with the question, but if isn't going to get to think about these kind of link list. It's kind of a similar thing to
+
+397
+00:55:59.430 --> 00:56:07.950
+edouard des: Technology, such as blockchain. But I know Boston's little bit more complicated because of the way they work. But the idea of having multiple blocks kind of linked to each other. Is that a good way to imagine
+
+398
+00:56:09.450 --> 00:56:15.420
+Nick Bowman: Honestly, I know nothing about blockchain. I'm taking a class on it in the fall, but as of now, I don't know that I could answer that question, unfortunately.
+
+399
+00:56:16.140 --> 00:56:16.560
+OK.
+
+400
+00:56:17.820 --> 00:56:18.210
+edouard des: OK, then.
+
+401
+00:56:20.670 --> 00:56:21.780
+Nick Bowman: Yeah. During your question.
+
+402
+00:56:23.370 --> 00:56:27.720
+Jordan Lin: Okay. I have a question on c++ syntax is completely unrelated to this.
+
+403
+00:56:28.800 --> 00:56:37.620
+Jordan Lin: But so I A while ago I was reading on, so like whenever you're iterating something we typically think like, you know, variable plus plus. Right.
+
+404
+00:56:39.180 --> 00:56:44.100
+Jordan Lin: Or variable minus, minus, but I've seen some people do the opposite direction. So plus plus variable.
+
+405
+00:56:44.730 --> 00:56:58.320
+Jordan Lin: And I read somewhere. It's like, oh, it's more efficient because then you're like incrementally, and you're like, you're not creating a new variable to do it, but I'm not sure. Like, like it's actually true. Like, how exactly does variable plus plus and plus plus variable different
+
+406
+00:56:59.580 --> 00:57:02.280
+Nick Bowman: Yeah. Both. Both of those are valid.
+
+407
+00:57:03.240 --> 00:57:04.740
+Nick Bowman: Both of those are valid ways
+
+408
+00:57:04.800 --> 00:57:16.380
+Nick Bowman: Of doing things and like valid ways of implementing a variable and people will generally say that that plus plus. And then the variable name is quicker than the other way around.
+
+409
+00:57:16.830 --> 00:57:24.960
+Nick Bowman: And the reason why is something that you'll actually it's mean it's beyond the scope of this class, but it's actually something that's covered in CS one of seven.
+
+410
+00:57:25.350 --> 00:57:30.090
+Nick Bowman: And it has a lot to do with how variable that like underlying on the computer hardware, how're variable.
+
+411
+00:57:30.510 --> 00:57:39.750
+Nick Bowman: Values accessed and how does like one line of code translate into many sort of instructions to the computer and it actually turns out that for a specific reason.
+
+412
+00:57:40.140 --> 00:57:44.550
+Nick Bowman: One of those the version that has plus plus something versus something plus plus.
+
+413
+00:57:44.850 --> 00:57:53.100
+Nick Bowman: Translates to fewer instructions to the computer because the computer can be a little bit more efficient about how it accesses the values and then modifies and then resource them.
+
+414
+00:57:53.610 --> 00:58:02.040
+Nick Bowman: And but that requires sort of a discussion of like assembly instructions in the instructions of the computer is actually executing which which is actually covered in in
+
+415
+00:58:03.240 --> 00:58:07.440
+Nick Bowman: In CS one of seven, which is the next the next class in the sequence.
+
+416
+00:58:08.580 --> 00:58:08.760
+Nick Bowman: Yeah.
+
+417
+00:58:13.980 --> 00:58:15.000
+Nick Bowman: Jeff, if you have another question.
+
+418
+00:58:16.050 --> 00:58:21.450
+kathleen bryan: Oh yeah, my mind is actually just about like corrections on the assignment and
+
+419
+00:58:21.990 --> 00:58:34.020
+kathleen bryan: I haven't been getting grades from my section leader until like Wednesday, which an Eastern time is like basically like midnight or like one in the morning and then I have to have it turned in by Thursday. Is there any way to like
+
+420
+00:58:34.470 --> 00:58:44.340
+kathleen bryan: At least have like a whole day to do that or should I just like start just like assuming that I'm going to get to do corrections on that film and just start like doing it now.
+
+421
+00:58:45.450 --> 00:58:51.330
+Nick Bowman: I'm we should that shouldn't be happening, what's happening specifically in their case. And just like reach out to us individually for
+
+422
+00:58:51.720 --> 00:58:57.810
+Nick Bowman: The great should not be killing released that late I know for this specific one. You should expect to get your grades back by the end of the day to day
+
+423
+00:58:58.140 --> 00:59:07.740
+Nick Bowman: And then the original won't be doing until Thursday. So for the recent time there. And yeah, the you can talk to us about that and the joy. That's the great shouldn't be getting released that late
+
+424
+00:59:08.460 --> 00:59:11.190
+kathleen bryan: I I put it in my like like
+
+425
+00:59:11.340 --> 00:59:21.600
+kathleen bryan: Feedback for the second later, like I mean he's doing a great job. I just just we're getting the grades later like every time. It's like, oh, it'll be released tonight. It's like the day after
+
+426
+00:59:22.140 --> 00:59:34.830
+kathleen bryan: And this is the first time I've had to make corrections, but like when I have like a day job and I don't, and I'm an Eastern time, it's like it's going to be like really tough to do like a like a 20 hour turnaround, you know,
+
+427
+00:59:34.860 --> 00:59:45.480
+Nick Bowman: Yeah, that makes sense. Yeah, I will try to check in on section to see what's happening there because the other should not be getting out that late and they, I mean, I don't know why they're consistently sort of getting them out late after the deadline.
+
+428
+00:59:47.250 --> 00:59:55.050
+Nick Bowman: But yeah, if you also feel like you need more time to do the revisions. Just, just tell us like more than happy to be flexible. So just, yeah. Okay.
+
+429
+00:59:55.200 --> 00:59:55.590
+kathleen bryan: Thank you.
+
+430
+01:00:12.120 --> 01:00:12.510
+Nick Bowman: Everyone
+
+431
+01:00:14.850 --> 01:00:15.300
+Jordan Lin: You do.
+

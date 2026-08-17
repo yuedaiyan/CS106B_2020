@@ -1,0 +1,2102 @@
+WEBVTT
+
+1
+00:00:04.020 --> 00:00:12.990
+Nick Bowman: So welcome, everyone. Happy Monday and it's nice to see you all next. And so let's go ahead and get started. So today is going to be all about
+
+2
+00:00:13.559 --> 00:00:18.539
+Nick Bowman: implementing our very own data structure. So last week we talked about classes and object oriented programming.
+
+3
+00:00:18.810 --> 00:00:25.710
+Nick Bowman: And dynamic memory and sort of all the all the building blocks that we needed to sort of cross the instruction boundary and start building our classes.
+
+4
+00:00:26.100 --> 00:00:34.620
+Nick Bowman: And our own sort of data structure classes. And that's what we're going to end up doing today. And today's question is, all of you took the diagnostic over the weekend.
+
+5
+00:00:35.100 --> 00:00:44.040
+Nick Bowman: So what was one takeaway that you had about something and it was an area of strength, that's something that you felt that you understand really well and was able to demonstrate that on the diagnostic
+
+6
+00:00:47.340 --> 00:00:53.850
+Nick Bowman: And so we're going to be today. We're still going to be on the implementation side of things still going to be working with the reason dynamic memory management.
+
+7
+00:00:54.630 --> 00:01:08.700
+Nick Bowman: And in particular, the question that we're going to be answering this sort of thinking about how we can use fundamental data storage capabilities and c++ so that was the topic of Thursdays lecture to actually implement and add class and that'll be our, our goal today.
+
+8
+00:01:09.900 --> 00:01:22.020
+Nick Bowman: And so we'll go over some review and will basically spend on the whole rest of the class talking about this new class called our vector and we'll design it will visualize some of its operations and then we'll go ahead and implement it at the very end.
+
+9
+00:01:23.700 --> 00:01:35.730
+Nick Bowman: And so today's review. So we talked about on Thursday that when you need storage space to store information in c++ programs and you can use this technique called dynamic memory allocation to actually
+
+10
+00:01:36.330 --> 00:01:45.810
+Nick Bowman: Get storage space from a computer that you can use in whatever ways you see fit. And we saw that it had three parts and will formally talk about the parts on the next slides.
+
+11
+00:01:46.620 --> 00:01:55.320
+Nick Bowman: But the general idea is we asked for storage space and we use it however we like and then when we're done using it, we explicitly give it back to the computer and say, hey, we're done using
+
+12
+00:01:57.960 --> 00:02:06.630
+Nick Bowman: The format of the storage spaces, these things called arrays. You can think of a raise of sort of organized chunks of look of sort of memory locations and computer
+
+13
+00:02:07.200 --> 00:02:13.980
+Nick Bowman: Maybe in think of them as sort of slots, where we can store information and arrays of indexes, so we can refer to them.
+
+14
+00:02:14.640 --> 00:02:21.870
+Nick Bowman: Using search indexing syntax that we've gotten familiar with throughout the quarter and arrays usually arrays always have to have a specific type
+
+15
+00:02:22.530 --> 00:02:32.910
+Nick Bowman: Which means that they're the types of dictates exactly what they can hold and each slot in the array can always hold one instance or one sort of value of that specific type
+
+16
+00:02:35.340 --> 00:02:39.600
+Nick Bowman: The way that we dynamically alligator is I'm as we use this thing called the new keyword
+
+17
+00:02:40.260 --> 00:02:49.080
+Nick Bowman: So we use the syntax and new and then we put the type that we want and then we tell the computer. How many slots, we want. So we have to specify the size of our right.
+
+18
+00:02:49.500 --> 00:02:57.630
+Nick Bowman: And that's important because our arrays are fixed size upon creation. So, once they're created and they have a certain number of spots. And then after that, they can't grow or shrink.
+
+19
+00:02:58.410 --> 00:03:09.540
+Nick Bowman: And in doing so, we learned about this new data type called pointers and pointers, where this new data type that we said held memory addresses so held locations of storage space on the computer.
+
+20
+00:03:10.260 --> 00:03:24.720
+Nick Bowman: And we are going to spend sort of all Wednesday, talking about winters and a lot more depth. But we basically could think of them as storing a memory address. And in doing so, pointing to another location on the computer where we can store certain information.
+
+21
+00:03:26.760 --> 00:03:35.550
+Nick Bowman: And then we saw that these dynamically allocate it raised this storage space that we're able to get from the computer. It was really powerful, but it was also really constrained
+
+22
+00:03:36.270 --> 00:03:43.590
+Nick Bowman: So the arrays that we got it. Like I mentioned, we're always excited. So once we allocate an array of a certain size, it can't grow or shrink.
+
+23
+00:03:44.010 --> 00:03:47.160
+Nick Bowman: And it seems like an interesting constraint and something that will work around today.
+
+24
+00:03:47.910 --> 00:03:54.570
+Nick Bowman: And the other thing that we talked about as they can be dangerous. Right. They don't offer any sort of balanced checking. So if you try to go beyond the array or index.
+
+25
+00:03:54.900 --> 00:04:07.800
+Nick Bowman: Index, that doesn't exist, and you can get really crazy behavior. So you can just get garbage values, you can crash your program and you can sort of open yourself up to security vulnerabilities also all sorts of sort of really bad stuff can happen.
+
+26
+00:04:09.000 --> 00:04:14.820
+Nick Bowman: And we also talked about this fact that the sort of storage space that you are getting came from this place called heat
+
+27
+00:04:15.390 --> 00:04:22.770
+Nick Bowman: And so then we talked a little bit about this distinction between the stack and the heap. Most of what we've seen so far have been variables in the stack.
+
+28
+00:04:23.490 --> 00:04:31.680
+Nick Bowman: The variables. They're, they're sort of defined by their scope, they get created when the declarative them to go away when they're sort of fall out of scope.
+
+29
+00:04:32.220 --> 00:04:45.570
+Nick Bowman: And that was different from the heat. The heat of the place you're getting the standard memory. Memory from. I mean, it was more powerful because we had more control over you know when and how long that memory exists and but it also means that we were responsible for cleaning it up.
+
+30
+00:04:48.150 --> 00:04:54.270
+Nick Bowman: And so sort of our final takeaways, we saw that we were able to use the new keyword to allocate fixed size arrays.
+
+31
+00:04:54.870 --> 00:05:00.420
+Nick Bowman: We saw that there were sort of things that we had to be cognizant of and keep in mind when we were used working with the razor specifically
+
+32
+00:05:00.930 --> 00:05:11.820
+Nick Bowman: They don't know their size, their fixed size. I mean, you don't have any bounds checking and sort of thinking about this idea of like we have really great power now, but we're also going to have to have really great responsibility when we're using them and working
+
+33
+00:05:12.840 --> 00:05:21.540
+Nick Bowman: And we also saw that we were responsible for freeing them with this thing called the delete key word. And so that's what actually tells the computer here. You can have your back.
+
+34
+00:05:22.470 --> 00:05:32.010
+Nick Bowman: And then the last thing that we saw is when we delete things from a pointer, the pointer variable itself still exists, but now references and location and memory that is no longer valid.
+
+35
+00:05:32.310 --> 00:05:39.630
+Nick Bowman: So we try to do things with that pointer before reallocating it or pointing it to a new place in memory and bad things can happen.
+
+36
+00:05:42.210 --> 00:05:57.450
+Nick Bowman: So that was sort of a quick review what was on Thursday. And so kind of the question will spend all today, focusing on. And is this idea of how we can use the fundamental data storage capabilities that we just reviewed and implement a class and a data structure class.
+
+37
+00:06:00.870 --> 00:06:10.560
+Nick Bowman: One of the things that we mentioned right at the very end on Thursday, but we didn't get a chance to talk about in depth, which was this idea that a reason vectors kind of look similar.
+
+38
+00:06:11.100 --> 00:06:17.100
+Nick Bowman: And you know, we use the same bracket syntax to access them. They both store values in a certain fixed order.
+
+39
+00:06:18.150 --> 00:06:24.540
+Nick Bowman: But kind of the key difference was that arrays are not objects, right there, aren't we can't call functions on arrays.
+
+40
+00:06:25.230 --> 00:06:30.030
+Nick Bowman: So for example, we can't do things like a radar length. We can't say a radio ad
+
+41
+00:06:30.870 --> 00:06:41.940
+Nick Bowman: If we try to access out of bounds. We don't get nice errors we kind of just get this sort of undefined behavior that we talked about. And so even though they look a little bit similar they are kind of distinctly different
+
+42
+00:06:42.960 --> 00:06:56.820
+Nick Bowman: But the thing is they're both useful in their own regard right arrays are very necessary and very useful because they give us the ability to actually store information they're kind of the first c++ like really low level primitive that gives us the ability to store information.
+
+43
+00:06:57.900 --> 00:07:05.250
+Nick Bowman: Vectors are, but on the other hand vectors are a great abstraction. Right. They provide really helpful methods they provide clean interfaces that provide error checking.
+
+44
+00:07:05.850 --> 00:07:13.920
+Nick Bowman: You've been using vectors. This whole quarter and you know how nice they are to work with. Right. And so it's really sort of nice to be able to just sort of work with them.
+
+45
+00:07:14.520 --> 00:07:21.270
+Nick Bowman: And so the idea for today and I will spend all lecture long exploring is let's use a dynamically allocated array.
+
+46
+00:07:21.510 --> 00:07:34.110
+Nick Bowman: As the data storage method for a new vector class so will will provide both will have the capability to store information, but will also provide the really nice interface and benefits of working class and kind of get that best of both worlds.
+
+47
+00:07:36.360 --> 00:07:49.290
+Nick Bowman: So we're going to design this class called our vector. And we're going to revisit our good friend vector and I included this picture in earlier lecture on record themselves. We're going to make a couple modifications kind of sort of make it our, our barrier.
+
+48
+00:07:50.520 --> 00:08:01.050
+Nick Bowman: And our goal is going to be, we're going to make our own version of the Stanford c++ vector even working with popcorn along and hopefully it's going to be a lot cooler. Once we built it ourselves.
+
+49
+00:08:03.090 --> 00:08:10.860
+Nick Bowman: And there's going to just be some constraints, obviously the Stanford c++ vectors were developed by a lot of programmers over a lot of time and have a lot of advanced features.
+
+50
+00:08:11.460 --> 00:08:16.230
+Nick Bowman: So wouldn't be feasible to implement it all in 15 minutes. And so there's a couple constraints are going to work under
+
+51
+00:08:16.860 --> 00:08:26.430
+Nick Bowman: And the first is we're only going to implement a subset of the methods that vectors offer. And so instead of there's like 20 different methods that real vectors offer will focus on a subset of like six or seven of them.
+
+52
+00:08:28.500 --> 00:08:39.300
+Nick Bowman: Are vectors only going to store integers and so you've seen so far that you've been able to declare vectors that store all kinds of different data types and you sort of can configure what data type stored in it as, as you saw fit.
+
+53
+00:08:40.290 --> 00:08:53.700
+Nick Bowman: The real Stanford c++ vectors are these things called generic or template classes that actually allow the client to specify what data type of story. Unfortunately, doing that as a little bit beyond the scope of this class. So we're going to go ahead and just focus on store inventory
+
+54
+00:08:55.500 --> 00:09:08.160
+Nick Bowman: And then for most of the class. We're going to be limited to this constraint that the vector can only store a fixed number of elements. There's gonna be like a maximum number of elements that we can store in our vector. That seems like a pretty sort of whack constraint.
+
+55
+00:09:09.240 --> 00:09:13.800
+Nick Bowman: But you'll see it sort of, I mean with what we've seen so far with doctors being fixed size. That kind of makes sense.
+
+56
+00:09:14.430 --> 00:09:23.910
+Nick Bowman: And so hopefully what we'll what we'll try to do is, by the end of class will relax that and we'll learn a new technique to actually allow our data structure to sort of dynamically hold. How many
+
+57
+00:09:25.650 --> 00:09:28.650
+Nick Bowman: But for now, what we'll, we'll just assume if we run out of space would have thrown in there.
+
+58
+00:09:30.900 --> 00:09:36.510
+Nick Bowman: So if you remember from last ones his lecture right when we were designing a class, we always have these three questions, right, which was
+
+59
+00:09:37.080 --> 00:09:48.480
+Nick Bowman: What are the member functions. What are the member of variables and what is the constructor do right answering these three questions is always kind of the first important step designing our class. So let's go ahead and ask these three questions for our vector
+
+60
+00:09:49.560 --> 00:09:56.190
+Nick Bowman: And specifically, we're going to ask sort of what's the public interface going to be you know what functions might have client want to call on an instance of our vector
+
+61
+00:09:57.210 --> 00:09:59.100
+Nick Bowman: The second is going to be what the member variables are
+
+62
+00:09:59.430 --> 00:10:12.000
+Nick Bowman: So sort of what private information do we need to keep track of. And the last one will be the constructor and what actually happens when you initialize in your instance of ivector what what how do we sort of instinct initializing instantiate or number of variables.
+
+63
+00:10:13.380 --> 00:10:17.940
+Nick Bowman: So let's start with the first question, which was, what is the the public interface that are vectors going to support
+
+64
+00:10:19.080 --> 00:10:29.460
+Nick Bowman: The nice thing is, in this case, and in a lot of cases like on the assignment, you'll be told what the public interfaces, someone will tell you, hey, I need to be able to call these functions on your class.
+
+65
+00:10:30.000 --> 00:10:33.510
+Nick Bowman: So you have to constrain to this interface, you have to provide me this capabilities.
+
+66
+00:10:34.140 --> 00:10:38.340
+Nick Bowman: So like I said, we're going to focus on a subset of six functions that you've probably seen throughout the corner.
+
+67
+00:10:38.790 --> 00:10:43.620
+Nick Bowman: And they should all look very familiar, you've been using them really since we end of week one of this class.
+
+68
+00:10:44.220 --> 00:10:49.110
+Nick Bowman: And the one thing that might look a little bit different, is you'll notice that we don't have the square bracket operator defined
+
+69
+00:10:49.320 --> 00:11:00.510
+Nick Bowman: Again, defining operators on classes is possible, but it's a little bit beyond the scope of what we're going to do. And so we'll just have this get function will be the filling, which will allow us to get things get the value stored in certain indexes.
+
+70
+00:11:02.190 --> 00:11:08.310
+Nick Bowman: And so that is so that's sort of our public interface. This is exactly the functions that we want to be able to provide when implementing our class.
+
+71
+00:11:10.560 --> 00:11:20.490
+Nick Bowman: So the next question is sort of what goes in the private section right and so what member variables what helper functions what needs to go down there and that sort of
+
+72
+00:11:21.210 --> 00:11:26.820
+Nick Bowman: Sort of falls into our second question, which is what private information will we need to store in order to actually
+
+73
+00:11:27.030 --> 00:11:34.980
+Nick Bowman: Enable all of these public functions that we want to create. Right. What will we need to do to do data storage and to keep track of how many things happen and things like that.
+
+74
+00:11:35.820 --> 00:11:42.990
+Nick Bowman: And so we're actually going to have your discuss this. And so this will be a really quick breakout room. It'll be probably two, two and a half minutes max.
+
+75
+00:11:43.770 --> 00:11:50.910
+Nick Bowman: But just get into your breakout room and discuss with your group mates and you can go to your workspace is always the instructions are provided there as we usually do.
+
+76
+00:11:51.600 --> 00:12:00.330
+Nick Bowman: But just go ahead and answer this question of what some variables make up the vector type. What variables do we need to store in order to be able to keep track of the information that's stored
+
+77
+00:12:02.400 --> 00:12:04.590
+Nick Bowman: So let's go ahead and open those up.
+
+78
+00:12:19.980 --> 00:12:21.750
+Ask your question out loud, you're welcome to
+
+79
+00:12:26.130 --> 00:12:30.780
+shreyas ravi: My question is basically, if our vector is only going to be like holding integers.
+
+80
+00:12:35.610 --> 00:12:36.960
+Nick Bowman: Sorry, what was the question.
+
+81
+00:12:36.990 --> 00:12:42.120
+shreyas ravi: So like the they get method in the in the class, like it was returning and and so I was
+
+82
+00:12:42.540 --> 00:12:47.010
+shreyas ravi: I was wondering if our if our vector was only supposed to hold integers.
+
+83
+00:12:48.030 --> 00:12:59.730
+Nick Bowman: Yeah so well we'll only right like that's one of our three constraints, our vector will only be storing integers, right, like we talked about it would be, it is possible in c++ to define a class that sort of sort of generic types.
+
+84
+00:13:00.240 --> 00:13:02.850
+Nick Bowman: But that's sort of beyond the scope of what we're going to talk about here.
+
+85
+00:13:03.240 --> 00:13:03.540
+Okay.
+
+86
+00:13:17.910 --> 00:13:24.000
+Nick Bowman: And then, yeah, so for so people can people are dropping into breakout rooms. For those of you that are watching
+
+87
+00:13:24.630 --> 00:13:30.900
+Nick Bowman: Asynchronously and take a second to think about sort of the answer to this, this question on the previous slide.
+
+88
+00:13:31.650 --> 00:13:40.110
+Nick Bowman: Which is this idea of what private information do you actually need to store in order to keep track of it. Basically, in order to provide the functionality of the vector
+
+89
+00:13:40.770 --> 00:13:54.060
+Nick Bowman: Sort of what's going to be important to keep track of as we're going through implementing this class. And if you keep that in your mind, and then we'll go over once you bring people back from break out rooms will go over sort of the different components to keep track of.
+
+90
+00:14:41.250 --> 00:14:41.940
+Nick Bowman: Two minutes.
+
+91
+00:14:43.980 --> 00:14:45.720
+Nick Bowman: Probably within the next 15 seconds or so.
+
+92
+00:15:19.980 --> 00:15:26.310
+Nick Bowman: And summarize, we already talked about with your groups. So what number variables do we need for the vector class.
+
+93
+00:15:26.820 --> 00:15:34.260
+Nick Bowman: And kind of the first obvious one is we're going to need to store, you know, a pointer to an array. Right, we're going to need an array.
+
+94
+00:15:34.620 --> 00:15:47.310
+Nick Bowman: It's going to be mentioned earlier that it's going to sort of act as our underlying data storage mechanism. And so we're going to need sort of some way of referencing and keeping track better. Right. So a pointer to an array of integers and we're going to call it up.
+
+95
+00:15:49.080 --> 00:15:50.880
+Nick Bowman: Some other things that we might need to keep track of.
+
+96
+00:15:51.930 --> 00:15:57.960
+Nick Bowman: Remember that are raised don't know their size, right, there's no way to sort of ask an array. Hey, how big are you
+
+97
+00:15:58.560 --> 00:16:04.650
+Nick Bowman: And so we're going to use to actually keep track on our own. How big we've actually allocated the array to be right.
+
+98
+00:16:05.460 --> 00:16:10.080
+Nick Bowman: So that way you know we're going to need to do, be able to do bounced checking and error checking and things like that.
+
+99
+00:16:10.440 --> 00:16:21.300
+Nick Bowman: And so allocated capacity is going to tell us, hey, this is how much memory, we've allocated so far. So we've, for example, we've allocated space for eight integer. So we better not try to store more than the integers.
+
+100
+00:16:22.380 --> 00:16:28.530
+Nick Bowman: And then the last thing that will be pretty important as well is actually how many elements are currently stored in the vector
+
+101
+00:16:28.950 --> 00:16:39.810
+Nick Bowman: And remember we had to implement a size function. So we're going to be able to pass this information on to the planet, but it's also going to be important when we're actually sort of figuring out how to add in store things in our
+
+102
+00:16:41.310 --> 00:16:49.170
+Nick Bowman: In our underlying right. So with these three pieces of information. These are going to work and be with the member variables are of our class.
+
+103
+00:16:50.340 --> 00:17:03.480
+Nick Bowman: And so then when we see our completed header file looks something like this. We just define all three of these elements in the private section of the of the class declaration and we'll do that in kitty crater in just a bit.
+
+104
+00:17:05.220 --> 00:17:11.640
+Nick Bowman: So then the last question is that we need to answer is how do we actually initialize these values when we create an instance of our vector
+
+105
+00:17:12.480 --> 00:17:22.140
+Nick Bowman: And if you remember from Thursday we talked about this idea of constructors, which are the sort of special member functions that are that are called when you create a new instance of an object.
+
+106
+00:17:22.650 --> 00:17:32.430
+Nick Bowman: And there they usually have this weird naming system where the name of the function is actually a class name itself and then they can either take a no parameters or any parameters in the specified
+
+107
+00:17:33.870 --> 00:17:44.400
+Nick Bowman: And so for our vector right the constructor is going to be responsible for sort of initializing the values of all of these member of variables that we just defined, right, remember it's always sort of dangerous teams and initialize variables.
+
+108
+00:17:44.760 --> 00:17:52.560
+Nick Bowman: And so the constructors job is going to be there to actually initialize all these things. So I'll probably set allocated capacity to be some small integer
+
+109
+00:17:53.310 --> 00:18:06.990
+Nick Bowman: will set the elements array to actually be equal to a new array. And so actually allocate our array of the specified capacity and then we probably want to start out the Num items counter just initialize to zero. Right. That seems like a reasonable value.
+
+110
+00:18:08.370 --> 00:18:10.710
+Nick Bowman: For our for our items.
+
+111
+00:18:12.480 --> 00:18:25.680
+Nick Bowman: But the question you should be asking yourself is, we just allocate an array with new when does this memory ever actually get the allocated right we have we really harp on this idea on Thursday that any memory that we we explicitly allocate
+
+112
+00:18:26.100 --> 00:18:31.620
+Nick Bowman: Is going to need to show is going to need to sort of be explicitly given back to the computer or sort of de allocated.
+
+113
+00:18:32.070 --> 00:18:39.990
+Nick Bowman: And right now we have a new keyword without a corresponding delete key word. And so in order to understand actually where that deletion needs to happen.
+
+114
+00:18:40.500 --> 00:18:49.890
+Nick Bowman: We need to introduce this idea of a disrupter a disrupter is actually just another special function. It's similar to the constructor and that is this special function with a special name.
+
+115
+00:18:50.610 --> 00:18:59.250
+Nick Bowman: That is automatically called when an object goes out of scope. Right. So remember we talked about this idea and we declare things that come into scope and that's when we initialize them.
+
+116
+00:18:59.520 --> 00:19:04.950
+Nick Bowman: And then eventually you know when you're if statement finishes or your function and then they go out of scope.
+
+117
+00:19:05.550 --> 00:19:16.140
+Nick Bowman: And so the destruction is this weirdly named function that's literally a Tilda, and then the class name, and it's a special function that gets called when the class is done. So when we're done using an instance of a class.
+
+118
+00:19:17.070 --> 00:19:22.110
+Nick Bowman: And so for our vector what that would look like is adding another function to our public interface.
+
+119
+00:19:22.590 --> 00:19:34.770
+Nick Bowman: That is literally called till the our vector and it doesn't take any arguments. I'm distractors actually usually don't ever taken any arguments, but it will get specially called when our function goes out of scope.
+
+120
+00:19:36.360 --> 00:19:43.650
+Nick Bowman: And so what's important about this is that the instructor has to take responsibility for freeing any sort of resources that are dynamically allocated.
+
+121
+00:19:44.610 --> 00:19:53.820
+Nick Bowman: So, in particular for our class for our vector and this means that is the exact location where we can call the delete operator to actually officially give that memory back to the computer.
+
+122
+00:19:54.420 --> 00:20:03.330
+Nick Bowman: And if we didn't implement the disrupter then our, our class would go out of scope but are dynamically allocated array that we made in the constructor would kind of just live there forever.
+
+123
+00:20:03.750 --> 00:20:07.950
+Nick Bowman: This would be a memory leak and we talked about on Thursday, why numbers so bad and why we want to avoid.
+
+124
+00:20:09.360 --> 00:20:16.740
+Nick Bowman: The other member variables are just normal variables and so they'll go away just like normal. You'll notice that we haven't had to worry about disruptors for for anything that we use before
+
+125
+00:20:17.040 --> 00:20:23.910
+Nick Bowman: And that's because for primitive types like integers and strings and stuff like that, they kind of just they know how to clean themselves up. And so they kind of just go
+
+126
+00:20:25.980 --> 00:20:30.780
+Nick Bowman: And so let's cut this up really quickly, actually. So let's actually formalize everything that we just talked about.
+
+127
+00:20:31.530 --> 00:20:37.590
+Nick Bowman: And so the first place that we should start right is we're going to want to add our member variables to our private section.
+
+128
+00:20:38.430 --> 00:20:48.960
+Nick Bowman: And so this will look like exactly what we saw on the slides, which is that we want to declare our array of elements or a pointer. Actually, to be clear, a pointer that will eventually point to our right.
+
+129
+00:20:50.760 --> 00:20:52.410
+Nick Bowman: We're then we're going to have our integer
+
+130
+00:20:53.460 --> 00:20:58.260
+Nick Bowman: That represents the allocated capacity and then we're going to have our integers that represents
+
+131
+00:21:01.080 --> 00:21:06.840
+Nick Bowman: And so now that we've sort of declare these number variables, we can start using them in methods like the constructor.
+
+132
+00:21:08.820 --> 00:21:23.370
+Nick Bowman: So if we go over to our cpp file. So again, as a reminder, there's a dot h file that has the class declaration and there's a dot cpp file that actually has the classic mutation. And what you see here so far in the dot cpp file is kind of just skeletons of all the methods that
+
+133
+00:21:24.840 --> 00:21:32.370
+Nick Bowman: They remember they use this scope resolution operator to actually say, hey, these methods belong to the our vector class.
+
+134
+00:21:33.090 --> 00:21:45.420
+Nick Bowman: And specifically, the two that we care about, right, are going to be kind of these weirdly named ones where the method name is actually just the name of the class and with respect to the constructor and is the name of the class, preceded by a tilda for the extractor.
+
+135
+00:21:46.740 --> 00:21:51.570
+Nick Bowman: So we mentioned again are three steps that we need to do in the constructor is we need to initialize everything that we just declared and
+
+136
+00:21:53.940 --> 00:21:55.980
+Nick Bowman: So we said, All right, let's start off our
+
+137
+00:21:56.610 --> 00:22:06.150
+Nick Bowman: Capacity of just some small value in this case will use a constant. It's just a fine to the number eight. So for now, we're going to be having this restriction that will only ever be able to store a integers and our vector
+
+138
+00:22:06.420 --> 00:22:11.820
+Nick Bowman: Again, if that sounds crazy, we will we will lift this by the end of class, but for now. It's kind of just the constraint.
+
+139
+00:22:14.040 --> 00:22:22.170
+Nick Bowman: Don't say all right, um, you know, initially we don't have any item stored. And then the last thing that we need to do is store.
+
+140
+00:22:23.340 --> 00:22:30.210
+Nick Bowman: Or we want to initialize a new array and then the value that are the, the size of it is going to be the advocate.
+
+141
+00:22:31.230 --> 00:22:31.770
+Nick Bowman: And
+
+142
+00:22:37.230 --> 00:22:50.490
+Nick Bowman: And so hopefully what we see here is we see this on purpose in bathroom receive that our constructor is responsible now for initializing all of our members.
+
+143
+00:22:51.600 --> 00:23:02.730
+Nick Bowman: And then the last step here is that our D structure like we mentioned its job is this going to be on to give back to the computer. So to D allocate using the delete key word this array.
+
+144
+00:23:04.440 --> 00:23:12.270
+Nick Bowman: Of elements that we've allocated and so once we're done with an instance of our class this d structure will get called and then the elegance array will get
+
+145
+00:23:13.950 --> 00:23:24.510
+Nick Bowman: And so with that, we actually have sort of created our skeleton of a function in class are defined remember variables are defined what happened when we create an instance. And we've defined what happens when we
+
+146
+00:23:25.860 --> 00:23:30.180
+Nick Bowman: When we destroyed instance. So if I run. There's actually a set of tests.
+
+147
+00:23:30.780 --> 00:23:38.490
+Nick Bowman: In the same file and what we will talk about these tests in detail, I would really, really strongly recommend that you check out the tests that are in the starter code file.
+
+148
+00:23:38.970 --> 00:23:48.780
+Nick Bowman: Because they'll actually show you how you would write tests of your very own class which is kind of a new thing that we haven't actually seen before in this class. And so I would definitely recommend checking that out.
+
+149
+00:23:49.920 --> 00:23:59.640
+Nick Bowman: But if we go ahead and totally we see our tests at least run without falling and we see that the one test that works with the constructor that instructor goes ahead.
+
+150
+00:24:01.980 --> 00:24:07.230
+Nick Bowman: question in the chat. Is there anything else you would normally have to do besides
+
+151
+00:24:08.790 --> 00:24:17.880
+Nick Bowman: creating value for everything that will see in this class that the structure will almost exclusively be used for free memory. I'm just because most of everything else that we do.
+
+152
+00:24:18.390 --> 00:24:23.580
+Nick Bowman: Doesn't require any sort of explicit enough. Right. So if the purpose of the disruptors to do explicit Lena
+
+153
+00:24:24.270 --> 00:24:36.210
+Nick Bowman: Oftentimes, the only things we need to explicitly clean up is dynamically memory dynamic dynamically allocating memory that we've that we've received and yeah, that's a good question. In this class will almost always use it only for just freedom every
+
+154
+00:24:39.150 --> 00:24:45.960
+Nick Bowman: So sort of the summary of what we saw here, right. We saw member variables and sort of acting as the data storage components of our class.
+
+155
+00:24:46.620 --> 00:24:54.240
+Nick Bowman: We saw the constructor and as a special method that called when a new instances declare and this is where we sort of initial ours. All the member variables.
+
+156
+00:24:54.540 --> 00:25:03.690
+Nick Bowman: And then we saw the D structure, which was the special methods like it's called when we need to do explicit cleanup of things that we initialize in our constructor, or just over the lifetime.
+
+157
+00:25:06.210 --> 00:25:13.620
+Nick Bowman: And so that's sort of the first stuff that is that is designing our vector, and after a quick break for announcements will actually jumped into starting to implement
+
+158
+00:25:14.880 --> 00:25:18.330
+Nick Bowman: Is it possible to call from another class with each doctor like
+
+159
+00:25:19.710 --> 00:25:28.530
+Nick Bowman: You can, but you should never yeah you can technically it is a name function that you can call directly, but you should never do it. Yeah.
+
+160
+00:25:29.880 --> 00:25:39.300
+Nick Bowman: Ah, and then someone asked me, can you just explain what the syntax. What are we using those square brackets.
+
+161
+00:25:39.900 --> 00:25:50.040
+Nick Bowman: Yeah, so the the this the syntax there right is that's just how we actually create. Oh, sorry. On the delete key word. That's just when you're when you're freeing an array.
+
+162
+00:25:50.490 --> 00:25:57.150
+Nick Bowman: You just need to use the version of the delete key word that has the square brackets afterwards. We're going to talk about on Wednesday over the W.
+
+163
+00:25:59.310 --> 00:26:10.500
+Nick Bowman: Oh, I mean this. Yeah. So this is just the syntax of declare an array. Right. So we say new we declare the type we want in our ray and then in the square brackets, we have to put the size, the number of spots that we want.
+
+164
+00:26:12.030 --> 00:26:13.800
+Nick Bowman: So we can just use the square brackets and text.
+
+165
+00:26:16.260 --> 00:26:17.880
+Nick Bowman: I'm sorry there's
+
+166
+00:26:21.150 --> 00:26:28.500
+Nick Bowman: There's another question about what about managing pointers one creating these classes, how we ensure that we don't accidentally use a dangling
+
+167
+00:26:29.970 --> 00:26:35.670
+Nick Bowman: And we'll talk about that, once we once we talked about dynamic resizing at the very end of the class. Yeah.
+
+168
+00:26:37.080 --> 00:26:41.280
+Nick Bowman: Um, yeah, let me let me keep moving on. Otherwise we won't get a chance to talk about that. Yeah.
+
+169
+00:26:43.080 --> 00:26:50.760
+Nick Bowman: Cool. So announcements for today. So congratulations, everyone. I'm finishing up the diagnostic we're going to be working on creating it. And throughout this week.
+
+170
+00:26:51.420 --> 00:27:03.150
+Nick Bowman: We're going to aim to have grades. Back to you by next Monday and and then the next assignment is going to be released shortly after lecture today, and that'll be the next Monday at 1159 as usual.
+
+171
+00:27:03.720 --> 00:27:09.930
+Nick Bowman: The session for that assignment is going to be tomorrow night at 6pm triple be hosting that and it should be really useful.
+
+172
+00:27:10.590 --> 00:27:20.610
+Nick Bowman: Again, this is sort of a brand sort of a new concept. A lot of new concepts are getting covered on this assignment. And so I recommend attending the hours and really getting a head start on the assignment as soon as you can.
+
+173
+00:27:21.600 --> 00:27:31.230
+Nick Bowman: And then we posted guidelines on the final project on the website. And actually, they'll be posted right after lecture. And so a little bit more details on that.
+
+174
+00:27:31.770 --> 00:27:37.440
+Nick Bowman: So, as we mentioned at the beginning of the quarter, right, you're going to be working on this sort of Capstone final project of the last three, four weeks of the class.
+
+175
+00:27:38.250 --> 00:27:41.910
+Nick Bowman: What you're going to do is you're going to pick a topic that you struggle with throughout the quarter.
+
+176
+00:27:42.570 --> 00:27:48.960
+Nick Bowman: And instead of us giving you an exam on things that you might have struggled on, you're going to write your own exam problem basically
+
+177
+00:27:49.350 --> 00:27:56.340
+Nick Bowman: So you're gonna you're going to pick a topic and you're going to write a problem on that topic, and it should be scoped to something like a section a diagnostic or an exam.
+
+178
+00:27:56.880 --> 00:28:00.330
+Nick Bowman: It doesn't have to be as widely scoped. As you know, our assignment problems are
+
+179
+00:28:01.260 --> 00:28:10.590
+Nick Bowman: But what you'll do is you're going to write a project report on that's actually going to include a description of the problem possible solutions and the motivation behind why you define that problem.
+
+180
+00:28:10.890 --> 00:28:19.890
+Nick Bowman: And then also, like possible misconceptions that students might have had when working on the problem and you're going to sort of compile that all together into a report and
+
+181
+00:28:20.520 --> 00:28:26.910
+Nick Bowman: And that will be do on Sunday, August 9 and we provided an example report as part of what we're going to post later today.
+
+182
+00:28:27.510 --> 00:28:33.000
+Nick Bowman: Should have all the guidelines for the final project. And then what you'll do is you'll actually take on the role of your section leader.
+
+183
+00:28:33.420 --> 00:28:41.280
+Nick Bowman: And you're in your SWAT SWAT with them. Basically, and you'll teach such present the problem to your section leader in a 30 minute one on one session at the end of the quarter.
+
+184
+00:28:41.880 --> 00:28:46.920
+Nick Bowman: This little sort of take place, take the place of where the sort of time span or final exams would normally be
+
+185
+00:28:47.280 --> 00:28:53.190
+Nick Bowman: And so you'll have the opportunity to self schedule a time slot, your section leader sometime between August 13 1916
+
+186
+00:28:53.880 --> 00:29:03.720
+Nick Bowman: And feel free to come and talk to us and officers. If you have any questions about the final project we it's something new that we're trying out but really excited for sort of the possibilities that it's going to enable
+
+187
+00:29:05.400 --> 00:29:18.690
+Nick Bowman: Cool. And so let's jump back into working with our vector. And so the first thing that we're going to want to do is we're going to actually want to visualize what the internal sort of data storage contents of our vector class is going to look like as we do different operations.
+
+188
+00:29:20.610 --> 00:29:25.980
+Nick Bowman: So the first is we just define the constructor. So what's actually happening when we initialize an instance of our class.
+
+189
+00:29:27.030 --> 00:29:36.240
+Nick Bowman: And so you can imagine sort of this little box over here and that's going to represent our client code is going to represent our client actually sort of initializing and using an instance of our class.
+
+190
+00:29:36.720 --> 00:29:41.730
+Nick Bowman: And so when they say the line of code actually initialize an instance of our vector, what happens
+
+191
+00:29:42.810 --> 00:29:52.350
+Nick Bowman: Well, what happens is we get you can think of this yellow area sort of our sort of our internal data storage components. And what we see, right, is we get
+
+192
+00:29:52.770 --> 00:29:59.790
+Nick Bowman: A elements pointer which points to a newly allocated. Right. Remember we use this just default size of eight. So that's what we'll be working with so far.
+
+193
+00:30:00.390 --> 00:30:09.990
+Nick Bowman: And we get are allocated capacity says, Hey, I have eight slots to store information and are numb items variable which says, Okay, I don't have anything right now. So I just have to things.
+
+194
+00:30:11.130 --> 00:30:20.550
+Nick Bowman: And so when you initialize when when a client initialize an instance of our class underneath the scenes. This is what our sort of our member variables and our class instance looks like.
+
+195
+00:30:22.920 --> 00:30:26.370
+Nick Bowman: Notice that right now we're representing the contents of our array as these question marks.
+
+196
+00:30:26.640 --> 00:30:35.250
+Nick Bowman: And so remember that newly allocated arrays initially store sort of random or what we call completely garbage values. So we can't rely on what's stored in there.
+
+197
+00:30:35.460 --> 00:30:44.880
+Nick Bowman: And specifically, it's like not all zeros. It's not all a nice value. It's kind of all just kind of random random values and you'll see that on the assignment. When you actually Inspector raised in the debugger.
+
+198
+00:30:45.450 --> 00:30:54.060
+Nick Bowman: Which is right after you initially create it. It's just got all this like random stuff in it and it sort of, you know, your job to start inserting elements into here infrastructure.
+
+199
+00:30:56.430 --> 00:31:08.220
+Nick Bowman: So let's talk about the operation. Right. So you've seen the operation. You've used it a ton is probably the operation and use the most of the vectors and it's going to be responsible for just taking a specified element and adding it to the first open spot spot.
+
+200
+00:31:10.230 --> 00:31:18.660
+Nick Bowman: So okay, so what's that going to look like. Well, our client my call something like that. And one of six. And what happens here. Well,
+
+201
+00:31:19.560 --> 00:31:31.260
+Nick Bowman: We go ahead and restore that element that this, this number 106 in our first index of the array. And then what else do we need to do well we update our number of items and we say, okay, I'm now store. And when I did.
+
+202
+00:31:32.730 --> 00:31:45.630
+Nick Bowman: Notice that as we go back from here, the index that we store the element at was our old value of items. And so we knew that we didn't have anything in our vector, so far. So the first thing for discovery.
+
+203
+00:31:48.420 --> 00:32:05.040
+Nick Bowman: Well, then, what happens if we add another element. So we say after add 42 again our number of items, the current very value of this variable actually tells us what the first open slot in our vector is so then we can go ahead of the number 42 there and increment our items carried by one
+
+204
+00:32:06.120 --> 00:32:14.280
+Nick Bowman: And hopefully what we see you again, you know, we can continue doing that. So if we had negative three. That gets added index to and then our items goes up by one
+
+205
+00:32:15.000 --> 00:32:24.030
+Nick Bowman: And the same thing for routing 27 right we add to our array like store that value in the array and then we update our menu items counter to represent the fact that we're now starting
+
+206
+00:32:25.710 --> 00:32:38.670
+Nick Bowman: So the ad operation with these underlying array is really nice because by keeping track of the number of items, we've stored. So far, we always know exactly where the end of our sort of defined vector spaces. I mean, so we can always it's very easy to add
+
+207
+00:32:41.730 --> 00:32:51.000
+Nick Bowman: So now kind of the two next operations that might be a little bit tricky or the insert operation, which is very similar to ad, but actually allows us to
+
+208
+00:32:52.590 --> 00:33:04.020
+Nick Bowman: Allows us to specify the index of which we want to insert and then the remove operation, but actually allows the client to specify an index that which to remove an element and then sort of removes it and update the state of the vector. You can system.
+
+209
+00:33:05.610 --> 00:33:10.350
+Nick Bowman: And so for your second breakout activity today. And this won't be a little bit longer will give you about three, four minutes on this one.
+
+210
+00:33:11.130 --> 00:33:17.520
+Nick Bowman: Go ahead and go back to your workspace and I've given you a representation of the vector that we just built up so
+
+211
+00:33:18.000 --> 00:33:34.770
+Nick Bowman: We've got these three values are these four values stored in the array. And I want you to trace through to operations first see what happens if you call remove on index one. What happens to the internal state of the array and then the call insert you try to insert the value 198 at index.
+
+212
+00:33:35.940 --> 00:33:47.400
+Nick Bowman: So work through those twos examples with your group. And then if you have time at the end, trying to formalize what you just did right What process did you have to go through to actually maintain the internal state of the array in the state that you want it to be.
+
+213
+00:33:48.510 --> 00:33:52.620
+Nick Bowman: So let's go ahead and open this up and I'll give you about three to four minutes to work on.
+
+214
+00:34:17.310 --> 00:34:24.270
+Nick Bowman: And yeah, and again, for those of you watching asynchronously. As always, there's a there's a public version of this workspace.
+
+215
+00:34:25.320 --> 00:34:35.700
+Nick Bowman: Called lecture 17 exercise public that you can go to would strongly, strongly recommend again pausing the recording here and go to this workspace and actually trace out what happens when you do the remove operations.
+
+216
+00:34:36.300 --> 00:34:53.880
+Nick Bowman: Like what's the, what happens to the internal data storage and and what happens when you do an insertion and then take actually a moment after you've sort of convinced yourself that I'm able to trace through how those operations work and go ahead and try to formalize or sort of
+
+217
+00:34:55.680 --> 00:35:00.360
+Nick Bowman: Yeah, kind of put into words or put into maybe some algorithmic pseudo code.
+
+218
+00:35:01.080 --> 00:35:16.050
+Nick Bowman: Exactly what happens or what we need to do to the array in order to support the remove operation and in order to support the insert operation and then you can you just go ahead and pause here and then fast forward to about two, two to three minutes.
+
+219
+00:35:29.070 --> 00:35:37.350
+And there was a question in the chat about what happens when the memory gets depleted, like other things actually go away once it gets up to zero. Is it random values.
+
+220
+00:35:38.430 --> 00:35:41.730
+Nick Bowman: Yeah, we can just, yeah, we can talk about when we do the expansion. Yeah.
+
+221
+00:36:33.090 --> 00:36:39.810
+Nick Bowman: Alright. Welcome back, everyone. I'm so glad you had a chance to talk with your groups about what those operations might look like.
+
+222
+00:36:40.350 --> 00:36:46.980
+Nick Bowman: So let's go ahead, we're going to pick one of the two. We're going to trace through remove again if you didn't get a chance to finish up tracing through insert
+
+223
+00:36:47.280 --> 00:36:55.200
+Nick Bowman: In your groups and I'm highly recommend doing that on your own, you'll be doing a very similar task on your assignment and so getting practice with that early on, this is a good idea.
+
+224
+00:36:56.340 --> 00:37:03.990
+Nick Bowman: But let's look at what the remove operation might look like. So again, say say as you had in your breakout rooms, you're being asked to
+
+225
+00:37:05.460 --> 00:37:14.970
+Nick Bowman: Say, remove and index one. So we want to delete the 42 and and then we want to shift over the negative three. In the 27th. So they exist in sort of one index.
+
+226
+00:37:16.050 --> 00:37:16.770
+Nick Bowman: So what do we need to do.
+
+227
+00:37:17.940 --> 00:37:27.300
+Nick Bowman: Well, interestingly enough, we don't actually need to sort of there's no reason to kind of delete the 42 itself because it's eventually going to get overwritten by those other values coming in.
+
+228
+00:37:27.990 --> 00:37:34.710
+Nick Bowman: So actually what we need to do is we just need to start shifting values to the left, starting with the negative three. So we shift the negative three over
+
+229
+00:37:35.640 --> 00:37:49.500
+Nick Bowman: Then we say okay let's shift the 27 over. So now our first three elements are looking looking just about right. And then we say, okay, now we only have three items stored in our re right there's only three meaningful items store.
+
+230
+00:37:50.610 --> 00:37:54.300
+Nick Bowman: But then the question is what about this value 27 that exists here, right.
+
+231
+00:37:55.710 --> 00:37:57.960
+Nick Bowman: And why is it highlighted in red.
+
+232
+00:37:58.800 --> 00:38:08.220
+Nick Bowman: And so, interestingly enough, right. Remember earlier, we said raise themselves can't grow and trick, right, the amount of data that we've meaningfully stored in the micro and shrink.
+
+233
+00:38:08.400 --> 00:38:13.800
+Nick Bowman: But the array itself can't like it doesn't reclaim that space just because it's sort of knows that it's no longer being used.
+
+234
+00:38:14.610 --> 00:38:23.070
+Nick Bowman: So that value that 27 is actually still there. Right. And so what we're going to do is, even though it's still there.
+
+235
+00:38:23.400 --> 00:38:32.640
+Nick Bowman: We're just going to pretend that it's not. And we're going to treat it as if it's garbage. So we're just going to assume. Okay, now I'm just going to assume there's some random completely meaningless value there.
+
+236
+00:38:32.940 --> 00:38:40.320
+Nick Bowman: And because that because my number of items is is now three I'm only going to consider the first three elements in the vector to sort of be
+
+237
+00:38:41.760 --> 00:38:48.720
+Nick Bowman: So remember that when you're debugging your assignments and you're like, why is this element still there, right, if you're trying to like remove an element or do something like that.
+
+238
+00:38:49.020 --> 00:39:00.180
+Nick Bowman: It never really goes away, right, the value stays there. It's just more in our heads of how we conceptualize, is that a meaningful value or not. Right. And after we've done the remove operation that is no longer a meaningful difference
+
+239
+00:39:02.670 --> 00:39:07.080
+Nick Bowman: We're not going to go over the insert operation in detail, but I do want to show you a sort of before and after.
+
+240
+00:39:07.530 --> 00:39:16.440
+Nick Bowman: So this would be before the insert operation and then afterwards, right, we we've we've inserted the element one idea to the next year. And we've shifted everything over by one
+
+241
+00:39:16.800 --> 00:39:30.000
+Nick Bowman: And this idea of insertion and shifting things over and will be very valuable when you when you work on the first part of the assignment that we're going to release. So make sure you revisit both this diagram and the code that will will close
+
+242
+00:39:32.700 --> 00:39:39.720
+Nick Bowman: The remaining operations that we have what's nice about them is that actually relatively straightforward and the three that we have our get size and is empty.
+
+243
+00:39:40.440 --> 00:39:50.880
+Nick Bowman: The nice thing is in the way that we've structured data, they get operation to actually get an element at a certain index is super straightforward. We just actually just index the array that element. And we're done.
+
+244
+00:39:51.750 --> 00:39:57.240
+Nick Bowman: And the same goes for sizing is empty, right, because of how we chose. And I remember variables and the fact that we've chosen
+
+245
+00:39:57.930 --> 00:40:09.540
+Nick Bowman: Num items to represent the number of elements in the in the doctor, we can just directly return that value and then is empty is just as simple as comparing that value to zero and seeing if there's currently
+
+246
+00:40:12.390 --> 00:40:18.480
+Nick Bowman: And so sort of the last thing that will do for the last 10 minutes is let's actually jump into the code and implement our factor.
+
+247
+00:40:19.920 --> 00:40:22.620
+Nick Bowman: And so let's implement these operations that we just talked about.
+
+248
+00:40:24.330 --> 00:40:28.530
+Nick Bowman: A good place to start. And this sort of a kind of a grid motivation builder. When you're working the assignment to
+
+249
+00:40:29.100 --> 00:40:33.210
+Nick Bowman: Start with the things that are straightforward, right. And so we just talked about, hey, like
+
+250
+00:40:34.110 --> 00:40:43.530
+Nick Bowman: You know the size function really all it has to do is return the number of items and is an empty function or has to do is return the number of items and whether or not that's equal to zero.
+
+251
+00:40:44.250 --> 00:40:50.640
+Nick Bowman: So start off with the with the straightforward. It's always good to say, hey, okay, I've actually just implemented a couple of methods like was good.
+
+252
+00:40:52.260 --> 00:41:04.200
+Nick Bowman: And then probably the next simplest thing we can do is the the get function. Right. We probably want to do a little bit of error checking. Right. So if the user tries to pass us an index that is invalid.
+
+253
+00:41:05.040 --> 00:41:13.980
+Nick Bowman: We probably don't want to let them access. So you'll notice that the vector c++ class, the Stanford one who does this for you as well and you try to access a
+
+254
+00:41:15.690 --> 00:41:19.320
+Nick Bowman: An index out of bounds and it'll throw an error and it won't let you do it.
+
+255
+00:41:20.670 --> 00:41:27.810
+Nick Bowman: But as long as we've sort of specified that our index is indeed in and then we can see if we access
+
+256
+00:41:28.980 --> 00:41:40.950
+Nick Bowman: The value store to that index and that's it right because of the way that again because of the way that we've chosen to use the underlying array to always make sure to store the data in a way that it's sort of structured with
+
+257
+00:41:41.340 --> 00:41:45.810
+Nick Bowman: Through making use of the indexes and the get function here is relatively straightforward.
+
+258
+00:41:48.300 --> 00:41:54.000
+Nick Bowman: So the next thing. Let's focus on next. So we talked about add in the
+
+259
+00:41:55.440 --> 00:42:05.940
+Nick Bowman: The very beginning was sort of the first thing that we saw. And remember for now we're gonna we're going to work with this constraint that if we're out of space in our vector
+
+260
+00:42:06.990 --> 00:42:13.800
+Nick Bowman: That we're just going to hope, go ahead and care. So if there's no more sort of space between the allocated capacity and the number of items.
+
+261
+00:42:15.330 --> 00:42:27.660
+Nick Bowman: Will just go ahead and say, all right, we're out of space for now and we'll revisit this either at the end of today or beginning tomorrow and we'll, we'll lift this constraint for now for outer space for to say a lot of space.
+
+262
+00:42:29.430 --> 00:42:33.300
+Nick Bowman: But then the key observation that we made when we were working on
+
+263
+00:42:34.380 --> 00:42:43.500
+Nick Bowman: Working through the example is that the next empty slot index was actually just directly equal to the value of our number items.
+
+264
+00:42:44.970 --> 00:42:50.340
+Nick Bowman: And then so what we could do is we could just insert into our right, we can say hey at that index.
+
+265
+00:42:52.770 --> 00:42:54.090
+Nick Bowman: Go ahead and storytelling.
+
+266
+00:42:55.230 --> 00:43:06.780
+Nick Bowman: And then the last important part, right, is you need to also update this new variable and say, Okay, at this point, we've added something to our right. So the number of items of restoring should go.
+
+267
+00:43:08.580 --> 00:43:22.860
+Nick Bowman: And hopefully what we see now is with this combination of methods implemented and we are actually able to start passing some of the basic vector test. And so let me pull up window.
+
+268
+00:43:29.490 --> 00:43:36.120
+Nick Bowman: Separate window, and we're going to test what we see is now we passed the test.
+
+269
+00:43:36.660 --> 00:43:49.920
+Nick Bowman: So we're able to create an empty vector and have it have the right size and we're able to add five elements to the vector and actually have it passed the test. And so that's a great sort of indication that are
+
+270
+00:43:53.670 --> 00:44:02.850
+Nick Bowman: Cool. So like I mentioned. Similarly, how we work through the example I'm going to go ahead and code up the removes just in the interest of time, let's go ahead and code up remove function together.
+
+271
+00:44:03.720 --> 00:44:13.800
+Nick Bowman: And then what you can do as an exercise on your own, is what post the code for insert and so work through the example for insert and the code on your own time.
+
+272
+00:44:14.100 --> 00:44:20.790
+Nick Bowman: And sort of look at how how that works because the logic there is very similar to something else to do on the assignment. So it'll be a good thing to revisit when you're
+
+273
+00:44:22.290 --> 00:44:29.190
+Nick Bowman: And but let's go ahead and put up the remove operations, this will be the last one that we do together. And so again, right. We always want to make sure
+
+274
+00:44:29.790 --> 00:44:38.040
+Nick Bowman: That our indexes inbounds I'm actually going to do a little bit of us in our copy paste a little lazy and I don't want it to find a helper function.
+
+275
+00:44:39.630 --> 00:44:45.480
+Nick Bowman: So now we know that the indexes and bounce. And so what did our process look like, what did we actually need to do
+
+276
+00:44:46.200 --> 00:44:57.720
+Nick Bowman: Well, we needed to shift elements over to the left, starting from the index that we want to remove at night and going up all the way to the end of the array.
+
+277
+00:44:58.230 --> 00:45:10.200
+Nick Bowman: And I'm going to put in a minus one here and you're seeing a second that's necessary but starting the index that we want to we want to remove and then going all the way up to the end of the array. We're going to need to shift things over.
+
+278
+00:45:12.390 --> 00:45:25.230
+Nick Bowman: And the way that you do this shifting is going to look a little bit weird, but what you're going to say here is you're going to say, hey, I want to overwrite what's currently sorted index i with the value that's currently stored at index, if possible.
+
+279
+00:45:26.310 --> 00:45:26.520
+Nick Bowman: Right.
+
+280
+00:45:27.750 --> 00:45:33.600
+Nick Bowman: And so what that says is that basically does exactly what you saw in our diagram which is it takes
+
+281
+00:45:34.830 --> 00:45:43.170
+Nick Bowman: The element that's just to the right of you and it overrides your current value with it and then it goes to that one over. It's that one no repeat that process until it shifted everything in
+
+282
+00:45:44.820 --> 00:45:53.400
+Nick Bowman: The reason. So normally, you know, we would have a for loop that goes up until a month items. And the reason we need this minus one here, right, is that we're always accessing the array.
+
+283
+00:45:54.030 --> 00:46:02.160
+Nick Bowman: at i plus one. And so if we didn't. So this sort of code is really right for off by one errors. And so if we didn't have this minus one here.
+
+284
+00:46:02.400 --> 00:46:10.260
+Nick Bowman: Our last re indexing operation would actually go off the end of sort of the valid spacebar. Right. And so you want to be really careful not to do that.
+
+285
+00:46:11.280 --> 00:46:17.790
+Nick Bowman: And remember the very last thing that we did is we said, Okay, well, we just remove something so let's represent the fact that distribute something by decreasing
+
+286
+00:46:19.920 --> 00:46:24.630
+Nick Bowman: And hopefully with that there will see that we actually
+
+287
+00:46:26.010 --> 00:46:27.540
+Nick Bowman: Have our
+
+288
+00:46:32.790 --> 00:46:41.130
+Nick Bowman: We run the test net. And what we see, hopefully is so now we passed the test that actually has certain texts.
+
+289
+00:46:43.860 --> 00:46:45.720
+Nick Bowman: Cool. So then the very last thing.
+
+290
+00:46:46.860 --> 00:46:50.430
+Nick Bowman: So we read the slides for it to the summary sort of what we just saw in the code.
+
+291
+00:46:51.120 --> 00:46:58.260
+Nick Bowman: Which is, you know, we were using this array as a backing store of data. And when we do that we're going to need to shift and move elements around
+
+292
+00:46:58.620 --> 00:47:02.670
+Nick Bowman: And so we really, really, really cognizant off by one years when you're working on code like that.
+
+293
+00:47:03.450 --> 00:47:09.630
+Nick Bowman: And the other thing that we saw when we choose good number of variables. A lot of our functions are relatively straightforward to implement
+
+294
+00:47:10.080 --> 00:47:18.090
+Nick Bowman: And so we saw things like size and is empty and get things like that. We're actually really straightforward to implement if we made really good decisions about what our member variables.
+
+295
+00:47:19.350 --> 00:47:29.190
+Nick Bowman: And the other cool thing is we've actually now we've been telling you this whole quarter. Hey, like removing from a doctor or inserting into the beginning of a vector is a really expensive kind of open operation.
+
+296
+00:47:29.670 --> 00:47:33.960
+Nick Bowman: And now we've actually seen literally why like we have seen why that is true.
+
+297
+00:47:34.290 --> 00:47:44.640
+Nick Bowman: And that's because in order to actually do that operation. We need to shift all of these elements over by one, right. So when we remove everything needs to shift to the left. And when we insert everything needs to shift to the right.
+
+298
+00:47:45.210 --> 00:47:50.850
+Nick Bowman: And so hopefully that sort of gives you an appreciation for for why those operations are expensive.
+
+299
+00:47:52.530 --> 00:48:02.580
+Nick Bowman: And cool and then. So the last thing we'll talk about today is you'll notice that for now or what in our current implementation, we have this really, really bad constraint.
+
+300
+00:48:02.850 --> 00:48:06.060
+Nick Bowman: Which is that as soon as our number of items which is our initial capacity.
+
+301
+00:48:06.360 --> 00:48:14.430
+Nick Bowman: We're kind of out of luck, we're just, we're out of space and we have no idea how to grow because we've said arrays can't grow right like like a race of a fixed size.
+
+302
+00:48:14.730 --> 00:48:21.510
+Nick Bowman: And so it seems like any container that's built on top of an array would kind of be doomed to this reality of just like not being able to grow.
+
+303
+00:48:22.740 --> 00:48:25.470
+Nick Bowman: So we're gonna we're going to be creative and actually find a way to work around
+
+304
+00:48:26.310 --> 00:48:36.480
+Nick Bowman: And so for now. Like I said, we're just limited it's throwing an error, which is really bad, right, like what data structures we use that could only hold eight items that would be kind of the world's most useless data structures.
+
+305
+00:48:37.140 --> 00:48:47.790
+Nick Bowman: And so we're going to talk about this idea of dynamically resizing or growing our internal data storage mechanism. And we'll talk about this at a high level, today, and then we'll start out on Tuesday by seeing what that looks like in code.
+
+306
+00:48:49.830 --> 00:49:00.600
+Nick Bowman: The analogy. We're going to use here is this analogy of a hermit crab. This was partially an excuse to read us a really cute picture of a hermit crab, but also partially because the analogy actually works really well surprisingly well.
+
+307
+00:49:01.920 --> 00:49:11.250
+Nick Bowman: Firstly, firstly, the don't know hermit crabs are crabs. The basically live in scavenge shells that they find on the sea floor and as they grow right they have this lifestyle where
+
+308
+00:49:11.760 --> 00:49:20.700
+Nick Bowman: As they grow, they discard their old shells and they move and they find a new one. And they kind of just continue growing and finding stranger and stranger and larger objects to sort of move it.
+
+309
+00:49:21.630 --> 00:49:30.210
+Nick Bowman: And so what you can think about is their, their life cycle looks something like this. And they keep growing until they've outgrown their current shell and then they follow these sort of five steps.
+
+310
+00:49:30.990 --> 00:49:34.590
+Nick Bowman: They find a bigger show this other sort of search on the sea floor and they find the bigger show
+
+311
+00:49:35.220 --> 00:49:48.930
+Nick Bowman: They move all their belongings into this new shells themselves, anything that they own. They moved to this new shell, then they kind of just ditch their old one. They leave it behind. They say here, you know, another crab can use it or, you know, here's the floor like take it back requirement.
+
+312
+00:49:50.310 --> 00:50:00.060
+Nick Bowman: Then, what they say is they need to tell everyone. Hey, this is where I sort of live now this is my show and it's my new sort of address and so they go to the hermit crab postal service and say, hey, this is where I live now.
+
+313
+00:50:00.780 --> 00:50:02.910
+Nick Bowman: We're getting a little bit of poetic license at this point.
+
+314
+00:50:03.480 --> 00:50:13.950
+Nick Bowman: And then they then they want to show off right then they wanted to tell everyone. Hey, I looked at all this space. I got so they go to like hermit crab Instagram and they're like a pit my crib and they just like post all these, they say, like, I've got so much space now.
+
+315
+00:50:14.190 --> 00:50:18.180
+Nick Bowman: There's like tell the world. Hey, look. Look at this. Like the fact that I just moved into this larger show
+
+316
+00:50:19.680 --> 00:50:32.550
+Nick Bowman: It is meant to be funny. Right. It's a little bit of a silly analogy. But what's interesting is this process actually models almost exactly what we need to do in order to dynamically resize our sort of internal data storage mechanism. And what do I mean by that.
+
+317
+00:50:33.840 --> 00:50:46.560
+Nick Bowman: Well, what I mean by that is, in essence, when we run out of space in our array we want to allocate a new, bigger array right we've said we can't actually change the size of our older a. So, our only option is to create one that's that's new. And that's bigger
+
+318
+00:50:47.760 --> 00:50:55.860
+Nick Bowman: And then we find a way to transfer all of our data over an update our state to say, hey, let's use this new array as our data storage and set
+
+319
+00:50:56.520 --> 00:51:03.450
+Nick Bowman: And so these five steps actually model very closely the hermit crab analogy, which is that we grow until you run out of space.
+
+320
+00:51:04.050 --> 00:51:07.830
+Nick Bowman: Then when we run out of space. We say, all right, I'm going to create a new larger array.
+
+321
+00:51:08.580 --> 00:51:15.960
+Nick Bowman: And usually what we do is we choose to double the size. So we if we had an old size we just recreate the new one of double that size.
+
+322
+00:51:16.380 --> 00:51:29.130
+Nick Bowman: And the reason why we do so it's kind of beyond the scope of this class, but just know that at for in this class, and in general has been proven to work. Well, that just doubling your capacity is kind of a good sort of approximation. How much extra spacing.
+
+323
+00:51:30.630 --> 00:51:38.910
+Nick Bowman: But then what we do is we copy the old elements over we free our old array and then we update our a pointer to actually point to the new array.
+
+324
+00:51:39.510 --> 00:51:48.480
+Nick Bowman: And then we update our capacity to say, hey, I actually have now twice as much space. Now I've grown and I have now a new sort of extra empty space to
+
+325
+00:51:49.320 --> 00:51:57.480
+Nick Bowman: To store elements in. And so the last thing that will cover before we finished for the day is just an illustration of how this all happens right
+
+326
+00:51:57.810 --> 00:52:07.650
+Nick Bowman: So if we start out with our illustration of what we saw before. And now let's pretend that we only allocated for spots initially. So right now we're out of space and we need to grow. So what is this growing process.
+
+327
+00:52:08.850 --> 00:52:17.490
+Nick Bowman: When we say, all right, create a new array that's larger. Great. So we allocate our new larger right we again we double the size. So we go from four spots to EIGHT SPOTS.
+
+328
+00:52:18.810 --> 00:52:27.090
+Nick Bowman: Then we have to copy everything over into our new array. So you can think of this is basically just taking are four elements and just shifting them up right copying them over into the new array.
+
+329
+00:52:28.680 --> 00:52:36.930
+Nick Bowman: Then we want to free the older a right again it's bad to have memory leaks. So we want to free the older age and say, hey, computer I'm done with this. You can take it back.
+
+330
+00:52:37.560 --> 00:52:42.180
+Nick Bowman: So we use the Delete key word on our pointer. This results in dynamic D allocation of the array.
+
+331
+00:52:42.810 --> 00:52:50.070
+Nick Bowman: And then, for all intents and purposes, the array disappears. I know we got a good question in the chat earlier of what is actually happening there.
+
+332
+00:52:50.730 --> 00:52:59.940
+Nick Bowman: The details of what actually happens a little bit beyond the scope of this class, but in effect, you can think of it as no longer accessible to us we should no longer try to access that memory because it's no longer ours.
+
+333
+00:53:01.170 --> 00:53:04.710
+Nick Bowman: And if you have more questions about specific how that works. Feel free to feel free to ask us
+
+334
+00:53:06.090 --> 00:53:09.810
+Nick Bowman: But then the next important step is we point the older a variable to our newer right
+
+335
+00:53:10.230 --> 00:53:19.230
+Nick Bowman: Right. Notice that this changes the memory address Jordan elements. This means because we're going to a new location, our computers memory and this also updates, where the pointer points that
+
+336
+00:53:20.160 --> 00:53:33.210
+Nick Bowman: And then the very last thing is we update our capacity we say, Hey, I have a empty slots now. And so now our ad or insert functions can run normally because they're just assuming hey I have empty space that I can add into. And so I can go ahead and do that.
+
+337
+00:53:34.410 --> 00:53:41.070
+Nick Bowman: And so sort of where this combination of five steps we can actually now define what it means to dynamically grow our internal data storage.
+
+338
+00:53:41.490 --> 00:53:56.130
+Nick Bowman: And what we'll start off with on Tuesday is let's just start off with what defining this helper function called expand and then seeing what how that actually allows our vector to now store kind of infinite and unbounded amounts of data.
+
+339
+00:53:57.180 --> 00:54:08.220
+Nick Bowman: And so cool. So that's it for today. So thanks for sticking around. We're going to continue talking about implementation details tomorrow and best of luck starting out on the assignment and the final project, both of which is
+
+340
+00:54:08.220 --> 00:54:09.180
+Nick Bowman: Going to be released. Right.
+
+341
+00:54:09.210 --> 00:54:12.060
+Nick Bowman: After we're done here. And so how good rushing
+
+342
+00:54:13.200 --> 00:54:15.180
+Samuel Lynn Ledden: Thank you. Thank you. Thank
+
+343
+00:54:15.420 --> 00:54:16.200
+ian rundle: You. Thank you.
+
+344
+00:54:17.070 --> 00:54:17.730
+Elan Smolar Eisenberg: Thank you.
+
+345
+00:54:19.980 --> 00:54:31.800
+Nick Bowman: There's another question in the chat about if you try to access an area that data is getting deleted so similar to the question from before, like what exactly happens when that memory gets deleted.
+
+346
+00:54:32.820 --> 00:54:40.410
+Nick Bowman: Yeah, so basically the state, the state that you're asking you about a sort of exactly right here, right, so we've called the delete operator in our pointer.
+
+347
+00:54:41.070 --> 00:54:50.700
+Nick Bowman: And and we are dynamic the allocation operation has happened. And so the really the state that we imagine ourselves being in is the state like this, right.
+
+348
+00:54:51.360 --> 00:54:54.240
+Nick Bowman: This is not a fully accurate picture of the situation.
+
+349
+00:54:54.630 --> 00:55:07.680
+Nick Bowman: Realistically, right, realistically, this array still exists right like that that memory locations still exists right like the computers met when you do dynamic the allocation. It's not like the computer's memory just combust right like that location memory still exists.
+
+350
+00:55:07.980 --> 00:55:17.220
+Nick Bowman: And it's still there, but the reason we represented as having disappeared. Now is it no longer hours right we have no claim to it, we have no control over the values there.
+
+351
+00:55:17.610 --> 00:55:22.860
+Nick Bowman: And so to answer the question of what actually happens to the memory. Well, lots of different things could happen.
+
+352
+00:55:23.250 --> 00:55:34.470
+Nick Bowman: And the computer could decide to clear it out the computer could decide to store its own information there. The computer could decide to give that memory address to a new a new program. And so the new program starts using it.
+
+353
+00:55:35.970 --> 00:55:49.560
+Nick Bowman: But specifically, all of these things like what they guarantee or what they what they mean for us as the old owners of or as the fact of kind of the owners of this pointer that is still technically referencing a location in memory.
+
+354
+00:55:49.920 --> 00:56:02.520
+Nick Bowman: Is that we can't like we are not allowed to. Well, I mean, we are allowed to, but we should not do anything to that array. Right. We shouldn't try to access it. We shouldn't try to read into it, we can try to write to it.
+
+355
+00:56:03.630 --> 00:56:12.840
+Nick Bowman: And so for our visualizations. We're going to represent it as no longer being there so that we don't have any temptations to try to edit it or do something with it.
+
+356
+00:56:13.530 --> 00:56:22.020
+Nick Bowman: But in reality, what you'll see in the debugger is when you call the delete key word on a pointer, you'll look at it and you'll be like, Oh my god, nothing happened.
+
+357
+00:56:22.560 --> 00:56:26.910
+Nick Bowman: Right, the memory will still be there, the values will likely still be there right
+
+358
+00:56:27.840 --> 00:56:37.200
+Nick Bowman: But they are no longer yours and you kind of have to like you, as a programmer to take on that responsibility of, like, I know that I just called the delete key word. And so I know not access anymore.
+
+359
+00:56:37.950 --> 00:56:49.110
+Nick Bowman: But if you actually literally just look at what the contents that are there actually like we haven't changed, which is kind of weird to think about. But if we try not to represent that pictorial because then it just kind of gets extra
+
+360
+00:56:50.760 --> 00:57:04.890
+Nick Bowman: Yeah. Does that answer the question. I think that was a follow up to that question. We talked about one memory allocated referrals. So what do we mean by going out. Yeah. The easiest way to think about it is, like, let's look at one of our tests here.
+
+361
+00:57:06.000 --> 00:57:09.600
+Nick Bowman: So actually here. So let me do this. See
+
+362
+00:57:16.860 --> 00:57:18.570
+Nick Bowman: So say we did this.
+
+363
+00:57:19.980 --> 00:57:20.340
+Nick Bowman: Saying
+
+364
+00:57:22.080 --> 00:57:24.510
+Nick Bowman: This tractor.
+
+365
+00:57:27.930 --> 00:57:41.040
+Nick Bowman: And so what you'll see here in this test. So, this this test. This first test quite literally just test constructing and destroying the vector. And what you'll see is pay careful attention.
+
+366
+00:57:42.300 --> 00:57:45.690
+Nick Bowman: To the order in which these statements are printed out
+
+367
+00:57:47.040 --> 00:57:59.250
+Nick Bowman: So let me run this and I'll flip the test results, what you should expect to see is we know that the constructor gets called when this line is created. So we should have probably expect to see
+
+368
+00:58:02.070 --> 00:58:03.150
+Nick Bowman: run our tests.
+
+369
+00:58:06.300 --> 00:58:08.310
+Nick Bowman: Okay, let's pull these two things upside
+
+370
+00:58:10.320 --> 00:58:19.080
+Nick Bowman: So what we should expect to see is that our constructor is always the first thing to get right. So when a constructor is called we print out this line and that's great.
+
+371
+00:58:20.310 --> 00:58:25.170
+Nick Bowman: Then you know you are generally expect okay code executes linearly. What we should see next is
+
+372
+00:58:26.220 --> 00:58:28.740
+Nick Bowman: The things inside the text test actually happening.
+
+373
+00:58:31.470 --> 00:58:39.840
+Nick Bowman: That vector. You can think of the vector going out of scope. So again, the scope that is vector is defined. It is the set of opening and
+
+374
+00:58:40.290 --> 00:58:46.770
+Nick Bowman: Opening and closing curly braces that it's defined it right through the most broad set of opening and closing curly braces that it's dependent
+
+375
+00:58:47.640 --> 00:59:00.240
+Nick Bowman: And so for something to go out of school, quite literally means that when you reach this curly brace right the computer now knows that you're done using this vector, you have to be done because it's going out of scope. Right.
+
+376
+00:59:00.840 --> 00:59:04.860
+Nick Bowman: And so, quite literally, when this curly brace gets hit and you'll see this in the descriptor.
+
+377
+00:59:05.160 --> 00:59:13.440
+Nick Bowman: If you put a breakpoint on your disrupter and you actually make the like forced the program to stop at the at the point in your in your test when the disruptors getting called
+
+378
+00:59:13.740 --> 00:59:25.170
+Nick Bowman: Your debugger arrow will stop on this closing curly brace right and what that's telling you is like that closing curly braces being interpreted as whatever was inside the braces going out of scope.
+
+379
+00:59:25.500 --> 00:59:33.030
+Nick Bowman: And so then that's the point where the destruction finally gets called. And so when we say something goes out of scope and gets cleaned up and
+
+380
+00:59:33.540 --> 00:59:43.140
+Nick Bowman: The computer knows that when it reaches a closing curly brace. It has the responsibility of calling the disrupter on anything that existed in that scope and
+
+381
+00:59:44.070 --> 00:59:53.730
+Nick Bowman: And so that's why, you know, in this example, we see these three Princeton. Let's get printed out in that order. So whatever is inside the braces will always finish executing before the destructive. It's called
+
+382
+01:00:01.170 --> 01:00:05.010
+Kaan Alp Yay: Yeah, I had two related questions that are a little different though so
+
+383
+01:00:05.910 --> 01:00:20.070
+Kaan Alp Yay: It seems that when we're implementing ads. We have to whatever we are going out of bounds, you have to create a whole new thing copy everything and then butts butts in the in the vector class and the Stanford library ad is concerned have one. How is that
+
+384
+01:00:20.310 --> 01:00:22.950
+Kaan Alp Yay: One. If you are sort of moving them out.
+
+385
+01:00:23.970 --> 01:00:34.680
+Nick Bowman: Yeah, that's a fantastic question. And the answer to that will not the answer to that question, but the, the answer to why do we choose to double the capacity, every time.
+
+386
+01:00:34.830 --> 01:00:45.180
+Nick Bowman: Is part of the answer to your question, right. So if you think about it, right, the one way you can motivate why we choose to double the capacity. Every time is that
+
+387
+01:00:46.710 --> 01:00:52.140
+Nick Bowman: That oftentimes the past predicts the future. Right. So if our vector was very large to begin with.
+
+388
+01:00:52.710 --> 01:01:02.520
+Nick Bowman: And we already ran out of space, it's very likely that it's going to need a lot more space in the future, right, like it's just as this just seems to be a curse sort of large memory hungry. Right, right.
+
+389
+01:01:03.150 --> 01:01:11.580
+Nick Bowman: And so we say, all right, we want, you're totally right. Copying everything over super expensive and we want to do it as infrequently as possible. Right.
+
+390
+01:01:12.900 --> 01:01:20.130
+Nick Bowman: And at the same time, it's, it's sort of wasteful to because you know you could ask the question, why don't we just set this to like
+
+391
+01:01:20.430 --> 01:01:27.630
+Nick Bowman: 8 million right rather than eight right well because it's wasteful right if we know we're not going to use the space. It's bad practice to to allocate it all.
+
+392
+01:01:27.720 --> 01:01:28.890
+Kaan Alp Yay: Right. I see. So you're saying it's a
+
+393
+01:01:28.890 --> 01:01:32.700
+Kaan Alp Yay: Good one. But every once in a while, it doesn't open operation.
+
+394
+01:01:33.300 --> 01:01:34.080
+Nick Bowman: Exactly.
+
+395
+01:01:34.290 --> 01:01:35.970
+Kaan Alp Yay: An average of like eating concern.
+
+396
+01:01:36.180 --> 01:01:37.110
+Nick Bowman: On an average
+
+397
+01:01:37.170 --> 01:01:44.640
+Nick Bowman: Yeah, that's, that's exactly right. And so because we we strike this balance between a infrequent.
+
+398
+01:01:46.080 --> 01:01:52.950
+Nick Bowman: You know, oh, then copying operation and like actually the way that the way that you can think about it is
+
+399
+01:01:53.370 --> 01:02:08.580
+Nick Bowman: Because we double right that gives us sort of n more. So if we add elements in our a doubling the capacity gives us and more open slots and so you can think about it as you'll have n total app like add operations that operate in over one time.
+
+400
+01:02:09.900 --> 01:02:26.010
+Nick Bowman: Until you have to double again and then when you double again. Then you have to pay the overhead costs, but really that open cost is spread out kind of spread out over those all those total and operations. And so it's almost like open work divided by an operations really is just constant
+
+401
+01:02:26.160 --> 01:02:27.150
+Nick Bowman: Constant. Constant.
+
+402
+01:02:27.420 --> 01:02:40.290
+Nick Bowman: That's a really good expensive. That's a great question. Yeah. And and the technical term that you might see for that is called a more ties. So we say that the game more ties runtime is constant, which is a more ties us to fancy way of saying like the
+
+403
+01:02:40.290 --> 01:02:41.130
+Kaan Alp Yay: Overtime or
+
+404
+01:02:41.160 --> 01:02:42.090
+Kaan Alp Yay: Over many a
+
+405
+01:02:42.180 --> 01:02:42.570
+I see.
+
+406
+01:02:43.710 --> 01:02:54.570
+Kaan Alp Yay: Another question the validity. So I can easily see how we can implement the stack with this but Q seems a little, little weird, with all the HQ and DQ being off one again.
+
+407
+01:02:56.310 --> 01:02:56.670
+Kaan Alp Yay: I was that
+
+408
+01:02:56.700 --> 01:02:57.840
+Nick Bowman: I was asked, well, yeah, like
+
+409
+01:02:57.870 --> 01:03:02.130
+Kaan Alp Yay: Moving and shifting things when it looks like you're supposed to be shifting things in an array.
+
+410
+01:03:03.510 --> 01:03:09.120
+Nick Bowman: Yeah, that's it. That's a great question. I actually, I off the top of my head, I'm not sure what the best
+
+411
+01:03:11.070 --> 01:03:16.950
+Nick Bowman: Oh actually no, I know actually exactly what the answer your question is, and it's it's last week section problem.
+
+412
+01:03:17.310 --> 01:03:27.090
+Nick Bowman: And take a look at the ring buffer cue from last week section. And that's actually exactly doing that. It's, it's, you making clever use of an array to implement a Q
+
+413
+01:03:28.020 --> 01:03:33.000
+Nick Bowman: Specifically, specifically the key insight that it uses is
+
+414
+01:03:33.780 --> 01:03:44.910
+Nick Bowman: In the vector. And you're right, like with a vector and with the stack. We kind of only keep track of, like, one location too hot. Right. It's like if you know our, our ads if know indexes specify, they always sort of go to the end location.
+
+415
+01:03:46.350 --> 01:03:54.060
+Nick Bowman: The ring buffer acute keeps track of a clever system where it keeps track of it stores the elements in the order that they were added.
+
+416
+01:03:55.500 --> 01:03:59.100
+Nick Bowman: But instead of shifting everything over when something gets removed.
+
+417
+01:03:59.430 --> 01:04:05.730
+Nick Bowman: It just keeps track of a second index, which says this is the current index. That's the front of my queue. This is the current index. That's the back of my queue.
+
+418
+01:04:06.060 --> 01:04:19.350
+Nick Bowman: And when I Q I add to the end. And when I DQ I only I like I just give you the element that's at this index. And then I just increment the index by one. And so no actual shifting of elements happens
+
+419
+01:04:20.250 --> 01:04:20.850
+Kaan Alp Yay: I see.
+
+420
+01:04:20.940 --> 01:04:24.270
+Nick Bowman: It. And so it just kind of these two pointers kind of follow each other.
+
+421
+01:04:24.330 --> 01:04:28.230
+Nick Bowman: Sure. The tricky thing with that. And the reason that's called a ring buffer queue.
+
+422
+01:04:28.470 --> 01:04:34.950
+Nick Bowman: Is eventually, you need to wrap around, right, because you will run out of space, very quickly, if you do that. And so you need to kind of wrap around
+
+423
+01:04:35.400 --> 01:04:46.800
+Nick Bowman: And so that that there's some clever logic that needs to happen as, as, for example, your, your end of the queue could actually wrap around and be a lower index than your front of the queue. And so you have to be able to handle that.
+
+424
+01:04:47.460 --> 01:04:57.630
+Nick Bowman: But I would I would we say this in the assignment end up. But if you didn't get a sense to do that problem in Section last week, and that would be a really great warm up exercise before you start on the assignment.
+
+425
+01:04:57.870 --> 01:05:01.260
+Nick Bowman: Because we got to learn how to implement all the classes in the Stanford.
+
+426
+01:05:01.290 --> 01:05:03.120
+Kaan Alp Yay: c++ library, or at least get a
+
+427
+01:05:04.620 --> 01:05:13.890
+Nick Bowman: No, no, that's a great question. Unfortunately not. We'll, we'll do a total of two. So, or I would say one and a half. One was today's which is the vector
+
+428
+01:05:14.310 --> 01:05:21.360
+Nick Bowman: And then tomorrow we'll talk actually about a special type of Q called a priority queue. So, we will talk a little bit about how you might implement a queue.
+
+429
+01:05:22.530 --> 01:05:29.250
+Nick Bowman: But it'll also, we won't do the implementation tomorrow, we'll just do this sort of motivation of the of the internal data storage technique.
+
+430
+01:05:29.700 --> 01:05:37.170
+Nick Bowman: And then your assignment will actually be to implement the priority queue. And so you'll actually implement one of the data structures from the, from the standard c++ cool
+
+431
+01:05:37.200 --> 01:05:37.800
+Kaan Alp Yay: Thank you so much.
+
+432
+01:05:37.830 --> 01:05:38.250
+Nick Bowman: Time. Bye.
+
+433
+01:05:38.790 --> 01:05:39.660
+Kaan Alp Yay: Have a good one. Yeah.
+
+434
+01:05:40.380 --> 01:05:40.890
+Nick Bowman: Yeah you to
+
+435
+01:05:43.080 --> 01:05:43.890
+Nick Bowman: damage your question.
+
+436
+01:05:47.460 --> 01:05:53.340
+Demi Lei: Yeah, so it's just like quick follow up with that delete question so
+
+437
+01:05:53.610 --> 01:05:57.360
+Demi Lei: If we delete something and we accidentally try to access it again.
+
+438
+01:05:57.780 --> 01:06:02.310
+Demi Lei: Like we just get like garbage or with c++ throws an error.
+
+439
+01:06:04.200 --> 01:06:08.520
+Nick Bowman: That's a great question. And the answer is sort of. All of the above. And you'll you'll try
+
+440
+01:06:09.090 --> 01:06:18.750
+Nick Bowman: You'll, you'll you'll literally do that as the warm up your assignment you will you will run buggy code that does exactly that and you'll see the answer is, like, it's almost like
+
+441
+01:06:19.530 --> 01:06:28.860
+Nick Bowman: All of the above. Plus, like your results may vary. Right. Because, like, it will depend on your computer and many might actually depend from from sort of execution execution.
+
+442
+01:06:29.340 --> 01:06:41.820
+Nick Bowman: And so, so everything you listed as a possible outcome, obviously, only one thing will happen at a time. Right. It's not like this parallel universe where like all of them might happen at the same time, but all of them are equally likely possibilities, right.
+
+443
+01:06:42.420 --> 01:06:49.890
+Nick Bowman: So, for example, like if here. I said, like, oh, I don't know if I try and do something stupid like elements of zero equals zero. Right.
+
+444
+01:06:51.000 --> 01:06:59.070
+Nick Bowman: What it's possible that this line runs totally fine. And I don't get a crash. It's possible that across my program. It's possible that
+
+445
+01:06:59.670 --> 01:07:06.840
+Nick Bowman: There's, there's so many things that could happen and and that's gonna that's actually one of the trickiest things about working on this upcoming assignment.
+
+446
+01:07:07.230 --> 01:07:15.870
+Nick Bowman: Is you'll see your code work sometimes and then doesn't work. Other times it's like the very first time that will see your code actually has non deterministic behavior.
+
+447
+01:07:16.140 --> 01:07:24.630
+Nick Bowman: Because if you accidentally make errors like this and you actually go out of bounds or you use a garbage value, you might get lucky. Sometimes, and then your code works. And you're like, oh, my foot works.
+
+448
+01:07:24.930 --> 01:07:35.430
+Nick Bowman: And then other times you might get unlucky. And then you're like my code, the same code seems to be both working and not working and and that is sort of the probably the most the trickiest part of work in this
+
+449
+01:07:37.920 --> 01:07:39.060
+Demi Lei: Got it. Thank you.
+
+450
+01:07:40.380 --> 01:07:40.710
+Chris
+
+451
+01:07:48.420 --> 01:07:56.610
+Nick Bowman: Mentioned how can you add something to the beginning of the lecture without repositioning everything. Um, and then how would you end up being
+
+452
+01:07:58.140 --> 01:08:08.640
+Nick Bowman: A Yeah, I'm not going to go super in depth into that because it is like it is. I'll just show you the section problem. It's actually illustrated there um
+
+453
+01:08:10.080 --> 01:08:20.700
+Nick Bowman: But yeah, so basically this is what your internal data storage would look like. And so like I said you keep track of the index that is sort of the head of your queue and then index of the tail of your queue.
+
+454
+01:08:21.210 --> 01:08:26.700
+Nick Bowman: And so, you know, as you add things as you in queue things your tail sort of moves along the right
+
+455
+01:08:27.210 --> 01:08:36.000
+Nick Bowman: And and as you do a few things. Right. So if you called the DQ operation, you would just return the value one, and then increment your head by one right
+
+456
+01:08:36.270 --> 01:08:41.820
+Nick Bowman: And if you did it twice, right, your head, your head sort of index would would go to the element three
+
+457
+01:08:42.030 --> 01:08:50.220
+Nick Bowman: But notice that the elements, three, four, and five. It's not that they've shifted right they're still in their same locations. It's just you shifted your interpretation of what is the front of the queue.
+
+458
+01:08:50.700 --> 01:09:00.000
+Nick Bowman: Right. And, and so the same thing with with with with n queuing, which is that you just find the next empty slot and you put a value there. And so both of those operations into being one
+
+459
+01:09:00.540 --> 01:09:08.340
+Nick Bowman: Because specifically you never shift anything right. You're only you're only updating what you keep track of with your head and your kale sort of indexes.
+
+460
+01:09:08.760 --> 01:09:17.790
+Nick Bowman: And so specifically because shifting isn't a sense of operation so you you try to say how can I organize my data and organize how I keep track of my data.
+
+461
+01:09:18.180 --> 01:09:23.100
+Nick Bowman: To fulfill my like Q requirements that I'm always encouraging and decreasing the front in the back of the queue.
+
+462
+01:09:24.090 --> 01:09:27.960
+Nick Bowman: But without sort of having to shift everything over. Right. And so this is the benefit.
+
+463
+01:09:28.260 --> 01:09:33.750
+Nick Bowman: This is, this is the benefit that you get from working with a RA RA is you can make those decisions for yourself. Right.
+
+464
+01:09:34.020 --> 01:09:45.060
+Nick Bowman: Whereas if you try to use a vector, tobacco, the queue. You would be sort of constrained from always like inserting or adding to the end and then removing from the zero index and that removal will always be inexpensive operation.
+
+465
+01:09:45.600 --> 01:09:57.300
+Nick Bowman: And so the reason we implement our own data structures because with with greater control over how you store and interpret the data you get greater control over how efficiently and how sort of cleverly you can you can do things.
+
+466
+01:09:59.190 --> 01:10:10.290
+Nick Bowman: See if you get if you didn't get a chance to get to this problem with your section last week, like I there's no greater advice I can give them to go. Just do that problem. It's a, it's a, it's a very interesting and very useful problem to work through
+
+467
+01:10:15.660 --> 01:10:24.390
+edouard des: And I had one question about the, um, there was at some point, or I think it was in the ad. We did amounts equal equal to max capacity on
+
+468
+01:10:25.530 --> 01:10:29.550
+edouard des: An arrow thrown. If that was true. And I'm just wondering if, why not
+
+469
+01:10:29.550 --> 01:10:33.000
+edouard des: Do a non item because if I have a maximum
+
+470
+01:10:33.540 --> 01:10:43.320
+edouard des: Capacity of eight, when I try to add the element, it'll die. But technically, there's still space for an eighth element. Now what am I doing some items is greater than the capacity
+
+471
+01:10:44.460 --> 01:10:53.100
+Nick Bowman: Know, so if you, if you look at this, if you look at this illustration. Right. So the point where we know that the queue is full is when like it's
+
+472
+01:10:53.730 --> 01:11:01.200
+Nick Bowman: It's only when we try to add to a state where the allocated capacity is exactly equal to the number of items right
+
+473
+01:11:01.470 --> 01:11:09.750
+Nick Bowman: What you're describing what you're describing it. Well, I guess I don't have. I don't have an illustration of it. But what you're describing is if save this file was like the 2017 spot was currently empty.
+
+474
+01:11:09.930 --> 01:11:14.070
+Nick Bowman: At that point, num items would be three. Right. And so it's not yet equal to. Right.
+
+475
+01:11:14.430 --> 01:11:24.450
+Nick Bowman: But at the point where they become equal to we know that we only have four slots and we've used up all for them. Right. So there's no way to add anything in without without sort of being able to to grow in some way.
+
+476
+01:11:25.530 --> 01:11:34.590
+edouard des: To increments it. Like, no might have before adding it to the to the to the event to the array that then you would have you would use that logic that doesn't make much sense, yes.
+
+477
+01:11:34.650 --> 01:11:39.030
+Nick Bowman: Yeah, yeah. Although, you know, the reason we don't update
+
+478
+01:11:39.180 --> 01:11:39.480
+edouard des: Number.
+
+479
+01:11:39.870 --> 01:11:49.500
+Nick Bowman: Four is specifically right like this. The next empty slot is always defined by our old value. So it always makes sense to update them items is the very last thing, right. Yeah.
+
+480
+01:11:49.890 --> 01:11:50.910
+edouard des: And also isn't like
+
+481
+01:11:52.140 --> 01:11:59.700
+edouard des: If you go over the buffer and you're trying to add value that's not in your array, it'll get it'll get upset, but you can still technically out of it. Right.
+
+482
+01:12:02.550 --> 01:12:03.510
+edouard des: Like the program.
+
+483
+01:12:05.040 --> 01:12:05.850
+Nick Bowman: You can
+
+484
+01:12:06.390 --> 01:12:08.190
+Nick Bowman: You gonna do right
+
+485
+01:12:08.220 --> 01:12:12.150
+edouard des: Yeah, you can try to but but it might crash and might not crash right like
+
+486
+01:12:12.360 --> 01:12:19.710
+Nick Bowman: I wouldn't, I wouldn't think of it in terms of like I can, and maybe I'll get away with it like I really like I really think you should think
+
+487
+01:12:19.710 --> 01:12:22.320
+Nick Bowman: Of it as like, I cannot right like I am not allowed to
+
+488
+01:12:22.560 --> 01:12:26.190
+Nick Bowman: Even though you are allowed to write like you have to tell yourself. I am not allowed to do this.
+
+489
+01:12:26.220 --> 01:12:30.240
+Nick Bowman: Right. Like, I'm not going to tempt fate. I'm not going to play with fire. Like, I am not allowed to do this.
+
+490
+01:12:30.390 --> 01:12:32.430
+edouard des: Yeah, but I can, yeah.
+
+491
+01:12:33.030 --> 01:12:33.990
+edouard des: And why why
+
+492
+01:12:34.230 --> 01:12:50.550
+edouard des: Why did they make it that are he is we're like infinitely sizable like what, why did they make it and maybe that just like is really like depression, possibly, it is but like it was there a particular reason for why they made a raise. So annoyingly like non I'm like dynamically sizable
+
+493
+01:12:52.380 --> 01:13:02.940
+Nick Bowman: Um, it's just a feature of the language c++ is built on top of see and the way that memory allocation and arrays and things like that for c++ is very similar to how they work and see and
+
+494
+01:13:03.660 --> 01:13:12.780
+Nick Bowman: Specifically, really, the motivation is like, it's that trade off between like control you're giving the programmer versus things that you're doing for them.
+
+495
+01:13:13.200 --> 01:13:20.130
+Nick Bowman: And like the the motivating like design theory, it's like give the programmer as much power as possible, right, like
+
+496
+01:13:20.370 --> 01:13:31.020
+Nick Bowman: Like it may seem like a bad thing that we don't do as much as we can for the programmer. Right. But like, don't try to dynamically routes resize thing for the programmer, right, make it their job to do it right because it gives them full control.
+
+497
+01:13:31.230 --> 01:13:41.040
+Nick Bowman: Over when things get resize and when things are stored and shifted and things like that. So it really is. It's kind of the, it's the consequence of the language, giving you
+
+498
+01:13:41.580 --> 01:13:56.580
+Nick Bowman: full control over everything right and you can't have full control over everything. And also, like, great default nice behavior of like how things will work right when you run out of space and stuff. Right, so it's it's it's just that trade off of. Like what, like what
+
+499
+01:13:57.960 --> 01:14:05.850
+Nick Bowman: Specific powers and responsibilities are you giving to the programmer versus like taking on for yourself or yes like you as a designer of the language for yourself.
+
+500
+01:14:06.690 --> 01:14:13.140
+edouard des: So other languages may not necessarily work like this correctly. It's the way the way the heat is handled depends on the language.
+
+501
+01:14:14.130 --> 01:14:15.480
+Nick Bowman: Correct, correct.
+
+502
+01:14:17.670 --> 01:14:28.050
+edouard des: Okay, and also the final question, if I were to make a program that had a for loop that access random buffers and placed zero inside of them and threw away any errors with that like destroy the entire heap of
+
+503
+01:14:30.300 --> 01:14:33.570
+edouard des: The computer you like I don't know what's going on anymore. Or like what it just
+
+504
+01:14:33.900 --> 01:14:37.590
+Nick Bowman: So you can't you can't throw away memory errors like
+
+505
+01:14:38.850 --> 01:14:39.210
+edouard des: Thing.
+
+506
+01:14:39.810 --> 01:14:42.570
+Nick Bowman: It will literally crash report, and there's a special set up.
+
+507
+01:14:42.930 --> 01:14:46.560
+Nick Bowman: A signal that the computer will send to your program. If you try to do something bad.
+
+508
+01:14:46.740 --> 01:14:53.190
+Nick Bowman: Where it will literally crush your program. You can't like you can't ignore it. Right. You can't say, oh, actually no. Hi, I'm
+
+509
+01:14:54.420 --> 01:14:54.570
+Nick Bowman: Like
+
+510
+01:14:56.700 --> 01:14:57.090
+edouard des: Okay.
+
+511
+01:14:58.500 --> 01:15:08.160
+edouard des: Our memory addresses generated at the beginning, or are they sort of generated like when you ask for memory, it'll put all little like find everything put them together nice little package you get your memory address and then give it to you.
+
+512
+01:15:09.330 --> 01:15:19.140
+Nick Bowman: They're, they're generated as you asked for them right that's. That's the dynamic portion right when you ask for. Let's like if you run your program twice, and you actually look at the memory address stored in your elements.
+
+513
+01:15:19.710 --> 01:15:20.220
+Nick Bowman: Variable
+
+514
+01:15:20.640 --> 01:15:23.610
+Nick Bowman: You'll see completely different values right it's specifically
+
+515
+01:15:24.870 --> 01:15:32.070
+Nick Bowman: Yeah, it is specifically dynamically generated, you are like actually asking your computer at that point in time, like, give me some memory that you have free
+
+516
+01:15:33.480 --> 01:15:42.990
+edouard des: Time together, which I guess is why they're limited because like you can't, if it doesn't know how much memory needs to find it wouldn't be able to find it. Right, so he needs to know like how many slots needs to find for you.
+
+517
+01:15:43.200 --> 01:15:55.230
+edouard des: Exactly. And that's the amount of space per slot based off of the type you specify. It's like don't know that if you give an integer. This last need to be 32 bits or something free slots because you want to start
+
+518
+01:15:56.340 --> 01:15:57.120
+edouard des: Okay, thank you.
+
+519
+01:16:06.570 --> 01:16:20.700
+Nick Bowman: Although I guess one thing that some folks are asking some questions about certain things being out of scope and so if this material super interesting to you, CS 107 is a good next step about learning about these lower level computer systems.
+
+520
+01:16:23.130 --> 01:16:32.190
+Nick Bowman: This question about you access index site is greater than the size of the array. How's it possible for pointer will point to BB it to a garbage value rather than
+
+521
+01:16:36.270 --> 01:16:51.480
+Nick Bowman: The reason why that's true, is because like the memory on your computer is one big sort of pool. And so, and it's sort of all one big kind of continuous pool and so when you're given a pointer, a memory location.
+
+522
+01:16:52.740 --> 01:17:02.400
+Nick Bowman: If you just say, oh, I want you know five slots over from where I am. But you've only been given like three to work with, for example.
+
+523
+01:17:02.640 --> 01:17:12.810
+Nick Bowman: Like that memory is still exists right and it exists on your computer and you know generated. What is technically valid memory address is just not a memory address you have access to. Right. And so it specifically
+
+524
+01:17:13.620 --> 01:17:24.000
+Nick Bowman: You, you can get values back because it is a valid memory address but you can't depend on the behavior because it's not a memory address that belongs to you. And this is basically the best way
+
+525
+01:17:31.380 --> 01:17:32.520
+Any other questions.
+

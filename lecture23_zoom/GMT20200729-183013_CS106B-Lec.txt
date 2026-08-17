@@ -1,0 +1,121 @@
+00:10:02	Thomas Tao Hale:	Funny how the piano practically stutters with the notes, and then Caltrain just rushes off
+00:10:20	Thomas Tao Hale:	Nick your sound is fuzzy
+00:10:24	Elan Smolar Eisenberg:	Alphabatizing books and things like that
+00:10:33	Rohan Chowla:	group projects
+00:10:33	Kenneth Fischer:	Building a house
+00:10:40	Kenny Wang:	does anyone else think Nick's sound quality is worse than before?
+00:10:41	Samuel Lynn Ledden:	Essays
+00:10:47	Lukas Fullner:	Moving lots of objects
+00:10:48	Hemant Chaudhary:	Manufacturing 
+00:10:50	Thomas Tao Hale:	chores
+00:11:02	Elan Smolar Eisenberg:	Yeah, the sound’s fuzz
+00:11:07	Jordan Lin:	Agreed
+00:11:07	Liza George:	103 psets
+00:11:27	Kenny Wang:	way better
+00:13:54	edouard des:	According to French philosopher and mathematician Rene Descartes, everything! “If at any point you get stuck, break it down even further. Keep going until you have a problem small enough to fix.” (More: https://forge.medium.com/the-500-year-old-piece-of-advice-that-will-change-your-life-1e580f115731)
+00:15:03	Aadi Rane:	What "sort" of efficiency is this?
+00:15:29	kylie jue:	This is the efficiency in terms of runtime for insertion sort
+00:16:12	Thomas Tao Hale:	Descartes and the hors
+00:18:27	Kenny Wang:	I missed the "each" smh me
+00:19:57	Thomas Tao Hale:	I prefer the Multiply-and-Surrender approach
+00:20:47	Siddharth Balaji:	What happens if the list youre sorting is extremely huge and goes past the number of stack frames your computer can manage?
+00:21:07	Jordan Lin:	If your stack frame is, say, 50000
+00:21:18	Jordan Lin:	It will take 2^50000 elements to break that limit
+00:21:47	hriday chhabria:	How can you have an empty list for the base case?
+00:21:52	kylie jue:	You’ll see the same behavior as we did in one of the assignment warmups when you ran out of stack frames - but like Jordan mentioned, it would be difficult to actually reach that limit
+00:22:22	Thomas Tao Hale:	Is there an application where such a number could be reasonably reached?
+00:22:53	kylie jue:	@Thomas I’m not aware of one but maybe
+00:23:16	Marcela Simone De los Rios:	Is the base case of an empty element to account for an array that has an odd number of items?
+00:24:29	kylie jue:	@Hriday - I think it might not actually hit the 0 element case for merge sort (if you’re returning when you hit one element)
+00:24:46	kylie jue:	I think it’s mostly a fail safe in case you actually pass in an empty lis
+00:24:46	kylie jue:	t
+00:25:16	hriday chhabria:	Got it. Thanks!
+00:25:26	kylie jue:	@Marcela + Hriday - I’ll have Nick answer out loud though as well when we get to code
+00:26:09	Marcela Simone De los Rios:	Thank you!
+00:26:38	Thomas Tao Hale:	So this sort of “zipper” part of the recursion, what is its big O?
+00:26:42	mpresson@stanford.edu:	O(n*logn)
+00:26:58	kylie jue:	@ Thomas - we’ll actually discuss the big O shortly (after coding it!)
+00:27:03	Thomas Tao Hale:	Oh ok
+00:27:39	Jordan Lin:	Won't merge sort be a lot less efficient for linked lists?
+00:27:53	christopher cooper:	A vector with 3 elements
+00:27:53	Jordan Lin:	Since there is not an obvious, quick way to split a linked list in half
+00:28:31	kylie jue:	@Jordan it actually won’t! Since the split will still be O(n) which will end up being a lower runtime than our max runtime step
+00:28:48	Jordan Lin:	Ah I see
+00:29:50	Jordan Lin:	A vector of vectors!
+00:29:58	Jordan Lin:	(very expensive)
+00:30:41	Michael M Hu:	What argument do you pass in for left and right? Would any vector work because you’re reassigning it?
+00:31:08	kylie jue:	@Michael yes - we’ll be creating the vectors here in mergeSort
+00:32:49	Kenneth Fischer:	Can you also initialize multiple variables in a single line? Like this: int one = 1, two = 2;
+00:33:32	kylie jue:	@Kenneth - no you’d need those to be separate lines separated by a ;
+00:34:03	Liza George:	just to be clear, the merge function is the exact same as the one we coded in the recursive assignment?
+00:34:13	Liza George:	or at least, I think it was the recursive assignment
+00:34:32	Aadi Rane:	I think that one was for queues
+00:35:02	kylie jue:	@Liza yes it’s very similar just different data structures
+00:39:43	Kenny Wang:	how should we talk to you guys?
+00:39:44	Kenny Wang:	LaIR?
+00:40:10	kylie jue:	@Kenny Office hours or lecture tomorrow for me/Nick/Trip; LaIR works for talking to any section leaders
+00:40:57	Pablo Manjon Gamez:	Is it mandatory to meet up with one of you this week?
+00:41:22	kylie jue:	@Pablo not mandatory, just recommended so we can help you with scope.  You can also meet with us next week if that works better for your schedule
+00:42:02	Thomas Tao Hale:	Who first made quicksort>
+00:42:29	kylie jue:	@Thomas I don’t know I’d have to Google it
+00:43:12	Elan Smolar Eisenberg:	What do you mean pivot?
+00:43:22	kylie jue:	We’ll show you what we mean in the visual!
+00:43:27	kylie jue:	*by pivot
+00:47:47	Liza George:	wait so does each partition step take O(n)? Because we have to go through each list/sub-list to compare each element to the pivot? wouldn't this be super inneffienct?
+00:47:50	kathleen bryan:	I know you said we should just use the first element as pivot but I’m not sure I understand what a pivot is in this case? Is it just an element to compare to?
+00:48:31	kylie jue:	@Liza yes each partition step is O(n) but since our max runtime step is still O(n log n), it doesn’t make a difference
+00:48:57	kylie jue:	@Kathleen yes! It’s just the value we’re comparing to, and we use the first element in the vector as that pivot value
+00:49:12	kathleen bryan:	Ok got it, thanks!
+00:53:13	klaus cerny:	do we not need to treat multiple equal elements being same as the pivot?
+00:54:13	kylie jue:	@Klaus What do you mean by treat?  We know they’ll all go in the middle so we don’t need to sort them and can just add them between the sorted smaller and greater values.
+00:54:30	hriday chhabria:	Are there cases where you would want to use merge sort over quick sort or the reverse?
+00:54:58	kylie jue:	@Hriday I’ll have Nick answer this out loud when we’re wrapping up sorting!
+00:55:07	klaus cerny:	I mean building up a vector incl. all elements having the same value as the pivot value.
+00:55:27	hriday chhabria:	Great! Thanks
+00:55:30	kylie jue:	@Klaus we end up doing that because of the equal vector that we add to in the partition step
+00:55:40	Kenneth Fischer:	Is quicksort faster than mergeSort?
+00:55:53	kylie jue:	@Kenneth being discussed now!
+00:55:56	klaus cerny:	ok. we look again at it. Thx
+00:56:07	Kenneth Fischer:	Oh yeah, sorry!
+00:56:23	Kenny Wang:	like a pivot that doesn't split it in half but splits it into one really small group and one nearly n-sized group?
+00:56:34	kylie jue:	@Kenny yes exactly
+00:57:27	Thomas Tao Hale:	Oh god I thought I left proofs back in geometry
+00:58:53	Thomas Tao Hale:	So how will quantum computing affect this limit?
+00:59:14	kylie jue:	@Thomas come talk to us after lecture since that’s beyond the scope of the class
+01:00:56	Kevin H Fan:	And this one doesn’t kill my ears
+01:00:59	Kenny Wang:	ikr
+01:01:04	Thomas Tao Hale:	Thats always a plus
+01:01:23	Kenny Wang:	remind me of the benefits of quicksort vs mergesort?
+01:01:42	Thomas Tao Hale:	So merge sort is in effect more reliable than quick sort is?
+01:01:48	Siddharth Balaji:	Is the “worst” case for these algorithms just the case when all inputted values are different?
+01:02:25	kylie jue:	@Siddharth it actually depends on the algorithm itself!  You’ll see in that visualization we linked that it depends on how sorted the existing data is
+01:02:28	Kevin H Fan:	Thank you!
+01:02:32	Zachary Alon:	Thank you
+01:02:34	Thomas Tao Hale:	First you guys kill my ears, and now you guys are murdering my eyes!
+01:02:37	Tongjun (Albert) Zhang:	Thank you
+01:02:38	Thomas Tao Hale:	jk
+01:02:42	Kenneth Fischer:	Thank you!
+01:02:48	Kenny Wang:	lmaooo Tom ikr
+01:02:49	Lawrence Li:	hhh thanks guys
+01:04:13	marcus forst:	what are some of the methods for finding good pivots?
+01:05:04	kylie jue:	@Marcus it depends on what you know about how the data is sorted (is it always completely random or is there some existing sorting that’s already there)
+01:05:28	Jordan Lin:	The smallest or largest element
+01:06:33	Aadi Rane:	Are there sorting algorithms worse than O(n^2) or is O(n^2) the worst possible runtime? Is there a worst possible runtime?
+01:06:46	Thomas Tao Hale:	O((n+1)!)
+01:06:51	Thomas Tao Hale:	bogosort
+01:07:19	Jordan Lin:	Bogosort!
+01:07:31	Thomas Tao Hale:	The best type of sort ever!
+01:07:40	Thomas Tao Hale:	Almost as good as Multiply-and-Surrender
+01:07:47	Liza George:	:) i'll do that for the extension :DDDDD
+01:09:49	Thomas Tao Hale:	Damn Jordan’s room looks as neat as a hotel room
+01:11:33	Pablo Manjon Gamez:	How hard is assignment 5 compared to assignment 4?
+01:12:50	kylie jue:	@Pablo it will depend on how you’re feeling about linked lists vs. arrays conceptually.  For me personally, I think assignment 5 is more code that took longer to write, but was easier/took less time to debug than pqueue
+01:13:11	kylie jue:	They’re on par with one another in terms of intended difficulty though
+01:13:50	Pablo Manjon Gamez:	Okay thanks
+01:14:12	Elena Williams:	My question is, if quicksort ends up taking O(N^2) time (maybe all the elements are in increasing order) then could that cause stack problems in the recursive step? Is there something that might come up in the assignment or is it fairly unlikely?
+01:14:24	Demi Lei:	for the topic for our final project, can we choose something that we do this week or even next week?
+01:15:00	kylie jue:	@Elena - that shouldn’t come up in the assignment
+01:15:08	kylie jue:	@Demi yes you can!
+01:15:10	Elena Williams:	Ok, thanks!
+01:15:54	Demi Lei:	thank you!
+01:15:54	christopher cooper:	I have a question about assignment 4 extension

@@ -1,0 +1,120 @@
+00:07:46	Siddharth Balaji:	Learning HTML, JS, and CSS to start work on my own website
+00:08:00	Evan F Davis:	Same, I took 193C alongside this
+00:08:08	christopher cooper:	CS103 and CS107
+00:08:16	Kenneth Fischer:	SAT, ACT, college applications, learning Java.
+00:08:23	Demi Lei:	^
+00:08:29	Hemant Chaudhary:	Building a website
+00:08:33	yukun yang:	Continue using CS for scientific researches
+00:08:35	kathleen bryan:	sleep
+00:08:41	louise marzolf:	^^^
+00:08:44	Demi Lei:	^^^^
+00:08:54	Siddharth Balaji:	Oh my god yeah my sleep schedule needs SO MUCH HELP
+00:09:03	Aadi M Rane:	Expanding my knowledge of C++
+00:09:04	Kyle Thomas Booker:	college apps, continuing an E145 project based in CS
+00:29:24	Siddharth Balaji:	This will probably be answered later, but what will happen to all the lecture recordings after this week and will we be able to access them after the semester ends or no?
+00:29:55	Jordan Lin:	What is the difference between CS106B and X?
+00:30:13	kylie jue:	@Siddharth it depends on when your Stanford email address expires - you’ll lose access once that goes away
+00:30:25	Siddharth Balaji:	Sounds good thanks
+00:30:28	kylie jue:	@Jordan X is just a slightly accelerated version of B that also encapsulates some of A
+00:30:34	tomhal@stanford.edu:	Stanford deactivates I think in winter quarter
+00:30:37	kylie jue:	but they teach the same material
+00:30:53	Hanna Mofid:	When will the CS106B website be taken down? Will it be taken down at the end of the week? or later
+00:31:30	kylie jue:	@Hanna it might be a little longer than a week - whenever the new quarter switches over so at the latest, the first week of Stanford’s fall quarter in September
+00:31:50	Hanna Mofid:	Ok thanks!
+00:38:31	tomhal@stanford.edu:	Doesn’t growing up come with a midlife crisis?
+00:39:51	Nick Bowman:	@Hanna The website actually will never truly go “down”, it may no longer be hosted at cs106b.stanford.edu a  couple weeks from now but if you’re interested in still accessing it, it will be moved to an archived link that we can share with you
+00:40:21	Hanna Mofid:	Yes, I would definitely want the link!
+00:40:43	Siddharth Balaji:	I would love to have access to that link too
+00:40:44	Nick Bowman:	It should always remain accessible at this link: https://web.stanford.edu/class/archive/cs/cs106b/cs106b.1208/
+00:41:37	Siddharth Balaji:	In order to finish an undergrad degree at Stanford all 6 core classes will have to be finished correct?
+00:41:51	Nick Bowman:	@Siddharth Yes
+00:48:38	haoming li:	That’s philosophical lol
+00:50:41	Kyle Thomas Booker:	After you graduate from Stanford are you still able to take classes?
+00:51:18	Nick Bowman:	I don’t believe you can officially take courses anymore, but I’m not sure to what level you retain access to online/digital materials
+00:51:33	Liza George:	If we went to a different university, would credits from this course count towards those core requirements for a cs degree there?
+00:51:52	kylie jue:	@Liza - It depends on the university
+00:51:58	kylie jue:	you’d have to check with the school
+00:52:14	Liza George:	oh ok. thank you!
+00:54:06	tomhal@stanford.edu:	Speaking of python
+00:54:06	tomhal@stanford.edu:	https://www.latlmes.com/tech/python-software-foundation-announces-python-4-to-be-released-in-march-2021-1
+00:54:35	Kyle Thomas Booker:	^ I am disappointed
+00:56:01	Michael M Hu:	Pain.
+00:58:01	tomhal@stanford.edu:	Hyuck hyuck hyuck
+00:58:30	haoming li:	I see trip’s piano
+00:58:39	Elena Williams:	Hi! First off, I /loved/ this class, it really opened my eyes to a lot of problem-solving techniques and concepts in CS! I love the practice of CS (computational thinking & problem solving is fun!) but I was wondering a little more about how I might apply it should I pursue a major. So my question is: what are some of the most interesting or important problems today that are being solved my CS?
+00:59:01	Siddharth Balaji:	Are there Lair hours tonight?
+00:59:28	Liza George:	yeah, 7-9 for minors
+00:59:39	kylie jue:	@Siddharth yes there’s lair tonight
+00:59:43	Siddharth Balaji:	Sounds good thanks
+00:59:45	kylie jue:	@Elena will answer after this!
+00:59:59	tomhal@stanford.edu:	Oh interesting zoom shows who is recording in the participants tab
+01:00:56	Hemant Chaudhary:	Will you be dropping by for final project presentations?
+01:01:00	kevinfan@stanford.edu:	Thank you!
+01:01:01	Kenneth Fischer:	Thank you!
+01:01:13	Lydia Berger:	Thank you!
+01:01:20	Demi Lei:	Thank you
+01:01:23	Tongjun (Albert) Zhang:	Thank you
+01:01:33	Weiqi Yu:	Thank you!
+01:01:34	kylie jue:	@Hemant Nick and I probably won’t just because there are so many!  but we’ll review notes from your SLs
+01:01:34	Kyle Thomas Booker:	Thank You! Really amazing course!
+01:01:36	christopher cooper:	Thank You!
+01:02:21	Hemant Chaudhary:	Great! Thank you!
+01:03:01	klaus cerny:	Excellent course! Great job by the team.
+01:03:13	yukun yang:	For those people going on a STEM track but NOT CS, is there other courses in the CS and related departments do you recommend after 106B?
+01:03:44	Nick Bowman:	@Yukun it depends on the area, do you have a specific one you’re interested in?
+01:04:28	Elena Williams:	My mic is broken, haha
+01:04:43	yukun yang:	I am learning environmental engineering, which requires mega data analysis.
+01:05:23	Nick Bowman:	CS145 and CS246
+01:05:31	Elena Williams:	Not particularly, but going into this class I was intending to take engineering (engg/applied physics) was a major and possibly CS as a minor, but now I’m wondering whether I should apply to a double major? I’m interested in a lot of different problems though
+01:06:02	Elena Williams:	Regardless, I really loved this class — thanks so much for everything you guys have done!
+01:06:15	Elena Williams:	No, high school student
+01:06:18	Elena Williams:	Hoping to apply!
+01:07:01	Elena Williams:	Thanks so much!
+01:07:03	yukun yang:	Got it. Thank you!
+01:07:12	Elena Williams:	Bye!
+01:07:13	Michael M Hu:	What pets do you have and can we please see them?
+01:07:47	Weiqi Yu:	Furry time lol
+01:08:04	Michael M Hu:	awww
+01:08:17	Hanna Mofid:	soo cute
+01:08:47	haoming li:	Oh my god soooo cute
+01:08:55	Michael M Hu:	aw
+01:09:07	edouard des:	Awwww!
+01:09:14	haoming li:	hahahaha
+01:09:17	haoming li:	Fish sounds good
+01:09:30	Liza George:	the kitty is so tiny 🥺
+01:09:48	edouard des:	Out of curiosity, are there any classes that deal specifically with cryptography at Stanford? If so, have you taken them and do you recommend them?
+01:09:48	Hanna Mofid:	Can you guys tell us an embarrassing/funny moment you experienced at Stanford?
+01:09:49	Kaelyn O:	Any advice for balancing CS courses with other interests, like music, at stanford?
+01:10:41	Weiqi Yu:	Why did you choose Stanford University?
+01:12:13	Kaelyn O:	that’s good to know, thank you! Thanks so much for all the advice and encouragement! Really appreciate everything you’ve done for us this quarter
+01:14:16	haoming li:	wow
+01:14:22	Hanna Mofid:	omg
+01:17:40	christopher cooper:	I am going to take CS103 and CS107 in the fall. Any recommendations on preparing to take them?
+01:17:56	Weiqi Yu:	Does Nick play KSP?
+01:18:20	Nick Bowman:	No but I might get into it in the future
+01:18:36	Edward Chung Yik Yeung:	Are we presenting our final project purely based off of our write-up or are we also supposed to demonstrate our code with qt-creator and whatnot?
+01:19:00	Nick Bowman:	It’s up to you – you should do whatever you think will best show off your work in the most clear/accessible way
+01:19:23	Nick Bowman:	For some people that is slides, for some that is code demos, for some that is drawing on a whiteboard app, etc.
+01:19:58	Kyle Thomas Booker:	How accommodating is Stanford for exploring interests if you don't know what you want to major in?
+01:21:47	Liza George:	This may sound weird but how different do you think your life would be if you didn't get into Stanford? Asking as a high schooler who just knows I won't get into my dream school lol
+01:22:04	Kyle Thomas Booker:	^ gotta manifest Liza
+01:22:15	Michael M Hu:	Currently manifesting Stanford
+01:22:21	Kyle Thomas Booker:	I had a bad partner for the first half of 103 and it was kinda a nightmare
+01:22:29	Liza George:	i would have failed without my 103 partner T^T
+01:22:29	Kyle Thomas Booker:	I'm not getting an A that's for sure lol
+01:22:39	Lydia Berger:	^^
+01:23:35	Kyle Thomas Booker:	How difficult is it to get involved in the teaching process or is it mandatory? Like SL or Lecturing in the summer
+01:25:04	Kyle Thomas Booker:	That's awesome!
+01:26:26	Kyle Thomas Booker:	How do you guys find out about all these opportunities like do you just hear about it or just know lol
+01:27:37	Liza George:	"back in my day"
+01:27:48	Kyle Thomas Booker:	That would be an interesting change of pace, the problem being choosing opportunities.
+01:28:10	haoming li:	Thank you guys!
+01:28:15	Hanna Mofid:	Thank you so much! I truly loved this course and you guys did such a great job teaching it! I feel so inspired and excited to learn/explore more in CS!
+01:28:21	Weiqi Yu:	Thank you so much！
+01:28:23	Liza George:	^^
+01:28:25	Liza George:	Thank you so much for an amazing quarter! The assignments from this course were what I chose to do late at night, because they were so engaging and fun I wouldn't get tired from them. Understanding what goes on behind the hood of the libraries I used was really interesting. So thank you for introducing us to all these new concepts, and thank you for my first uni level cs course!
+01:28:28	Liza George:	bye~
+01:28:29	Michael M Hu:	Thank you so much for quarter!
+01:28:31	chitra mukherjee:	Thank you so much!!
+01:28:33	Lydia Berger:	Thank you so much!
+01:28:34	edouard des:	Thank you so much!!!

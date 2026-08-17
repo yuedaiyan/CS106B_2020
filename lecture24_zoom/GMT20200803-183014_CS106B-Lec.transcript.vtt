@@ -1,0 +1,1594 @@
+WEBVTT
+
+1
+00:00:03.600 --> 00:00:11.700
+Nick Bowman: Alright, so welcome. Happy Monday. Nice to see you after little, little non traditional breakdown on Thursday.
+
+2
+00:00:13.049 --> 00:00:19.830
+Nick Bowman: But yes, let's just jump into anything. So today we're going to be talking about this idea of trees. So it's going to be
+
+3
+00:00:20.520 --> 00:00:24.120
+Nick Bowman: Sort of exploring what what what more we can do with like data structures.
+
+4
+00:00:24.720 --> 00:00:33.000
+Nick Bowman: And and so your question for today's lecture unrelated to trees, but we're gonna lecture next week are actually our very last lecture, and it's gonna be called Life After CES 2016
+
+5
+00:00:33.600 --> 00:00:37.020
+Nick Bowman: Which was sort of just talk about where you can go after taking this class.
+
+6
+00:00:37.350 --> 00:00:47.430
+Nick Bowman: And so if you have any suggestions about like questions you have about like what you can do, or what classes to take or sort of how to expand on knowledge in this class. Go ahead and drop them in the chat and we'll try to incorporate as much of it.
+
+7
+00:00:49.860 --> 00:00:59.700
+Nick Bowman: Cool. So like I mentioned, where we're going to be today and is talking about this idea of linked to the structures and so sort of continuing our discussion of that.
+
+8
+00:01:00.750 --> 00:01:10.890
+Nick Bowman: And in particular, we're going to be answering this question of how we can better sort of organize the data that is stored in that structure linked lists were helpful, but they weren't always great for everything.
+
+9
+00:01:14.220 --> 00:01:16.140
+Nick Bowman: And so what we'll cover today.
+
+10
+00:01:19.500 --> 00:01:28.140
+Nick Bowman: So we're going to cover today is we're going to do an overview of like data structures and then we're going to be an introduction to trees and I'm going to talk about trees and c++
+
+11
+00:01:29.250 --> 00:01:30.450
+Nick Bowman: And so review for today.
+
+12
+00:01:31.890 --> 00:01:45.270
+Nick Bowman: So last week we talked about linked lists. And this was a really our first example of what we call them linked to your structure. And remember, they look something like this and and the link and linked data structure came from this idea that
+
+13
+00:01:47.130 --> 00:01:52.410
+Nick Bowman: That so didn't want like Sarah, can you take this point please
+
+14
+00:01:53.610 --> 00:01:54.180
+Nick Bowman: Give me one sec.
+
+15
+00:02:05.340 --> 00:02:06.270
+Nick Bowman: So what we saw as
+
+16
+00:02:07.590 --> 00:02:20.130
+Nick Bowman: We had this idea of sort of nodes and they were linked together sort of transported by these this idea of when we worked in the idea of pointers and what that allowed us to do is that allowed us to store this data and kind of a distributed manner.
+
+17
+00:02:20.730 --> 00:02:25.380
+Nick Bowman: Which really meant that the data that we have in these nodes and things like that.
+
+18
+00:02:26.070 --> 00:02:36.030
+Nick Bowman: Was stored across many different locations and computer memory. I mean, that was sort of distinctly different from what we saw with the race, the race. We had all of our sort of data in one kind of continuous walking
+
+19
+00:02:38.160 --> 00:02:49.950
+Nick Bowman: And so in order to do that, like I mentioned, we started doing this idea of bundling data with pointers. So the, the, you have the structure that stored some information and also pointers to more information that actually allows us to generate the links.
+
+20
+00:02:51.480 --> 00:02:52.560
+Nick Bowman: In our the instructor
+
+21
+00:02:53.610 --> 00:03:02.760
+Nick Bowman: And and using these pointers allow us to create these links between nodes. So we had no ones that had data and pointers and then the pointers or actually what employee restructure our data.
+
+22
+00:03:04.830 --> 00:03:11.550
+Nick Bowman: And we saw some trade offs with linked lists. So we, we saw some benefits. And this is kind of the reason why we introduced in plus, which is that
+
+23
+00:03:12.450 --> 00:03:18.750
+Nick Bowman: When we were sort of working with with this non contiguous data in comparison to raise
+
+24
+00:03:19.260 --> 00:03:29.370
+Nick Bowman: And insertion and removal of things often very quick because we all want to do what's required some pointers. There was never this idea of having to shift elements to make space or to sort of
+
+25
+00:03:30.090 --> 00:03:32.610
+Nick Bowman: kind of move all the elements in our way over.
+
+26
+00:03:33.540 --> 00:03:42.690
+Nick Bowman: Which was nice. It allowed us to do some operations quicker and hopefully what you'll find out on your assignment is that when when with a task like sorting that requires a lot of shuffling around elements and things like that.
+
+27
+00:03:43.170 --> 00:03:49.590
+Nick Bowman: link list actually with the exact same audience given way, way better before just kind of the goal of what we want you to see anything.
+
+28
+00:03:50.790 --> 00:03:56.580
+Nick Bowman: And also because all of the data was already in dynamic memory and kind of spread out all over the place.
+
+29
+00:03:56.910 --> 00:04:08.130
+Nick Bowman: Resizing was also very easy. We, we didn't have to do something like we saw resizing an array, where if we ran out of space. We had to go find another much larger continuous block of space and copy everything over and all of that.
+
+30
+00:04:08.550 --> 00:04:13.650
+Nick Bowman: And so we didn't really have a have that sort of expensive nature of funding to 50 cents.
+
+31
+00:04:15.450 --> 00:04:19.290
+Nick Bowman: But aren't always perfect. So they did have some limitations.
+
+32
+00:04:20.130 --> 00:04:32.430
+Nick Bowman: And specifically, we saw that, because the data was sort of organized linearly and the only way for example that we could get to the fifth element in the link list was to traverse all the 49 clicks on this link list elements before it.
+
+33
+00:04:33.000 --> 00:04:45.870
+Nick Bowman: The path between any two nodes to get really long and specifically if you we always had to start at the front. So the path between the front and any other node and the list would get longer and longer and longer sort of as as a list have more elements in it.
+
+34
+00:04:47.370 --> 00:04:56.640
+Nick Bowman: And for that reason, right, we saw that finding elements was oftentimes over and operation because we had to scan the entire list right look at every single element in order to be refined something that would be able to
+
+35
+00:04:59.400 --> 00:05:10.530
+Nick Bowman: And we also saw because of that we couldn't really right recursive algorithms to traversing close. I mean, we could, but then they wouldn't really scale to large simplicity, so we had to kind of limit ourselves to doing all of operations intuitively
+
+36
+00:05:11.070 --> 00:05:16.950
+Nick Bowman: And so there's kind of some downsides into the actual way that the data itself restructuring and kind of this linear
+
+37
+00:05:18.510 --> 00:05:25.110
+Nick Bowman: And so the question that we're going to answer today is we're going to answer this question of, sort of, can we organize data in this link data structure.
+
+38
+00:05:25.590 --> 00:05:31.050
+Nick Bowman: In a way that the path between maybe the front or the the entry point into the link data structure.
+
+39
+00:05:31.320 --> 00:05:43.410
+Nick Bowman: And any element anywhere else in the structure is short and we're going to define short as as sort of much better than oh event like we don't have to look at all and elements in the structure to sort of generate that even if there are many
+
+40
+00:05:45.720 --> 00:05:51.420
+Nick Bowman: And so that kind of evens the question for that which is sort of how can we better organize data that's stored in
+
+41
+00:05:51.690 --> 00:06:00.450
+Nick Bowman: Asia. So we're still going to be working with linked data structures. Still going and working in pointers where it's going to be slightly tweaking how we actually manage in sort of organized
+
+42
+00:06:02.160 --> 00:06:14.100
+Nick Bowman: And so, Keith, Keith shorts actually has this really great interactive exercise which is always a good, a good thing to do so. So the exercise today is just, just take a deep breath. Right. So just, just take a deep breath, inhale.
+
+43
+00:06:16.410 --> 00:06:18.120
+Nick Bowman: And then let it out so
+
+44
+00:06:20.160 --> 00:06:25.950
+Nick Bowman: And so hopefully you feel you're kind of nicely oxygen deep restaurant is a good way to kind of just calm down and send yourself.
+
+45
+00:06:27.510 --> 00:06:30.090
+Nick Bowman: But, but why, why, why do we have you do that. Why is that, oh,
+
+46
+00:06:31.170 --> 00:06:39.510
+Nick Bowman: I'm so this is probably the world's cutest pair of lungs, so you can keep as a great PowerPoint slide artists are still at the diner and Simon
+
+47
+00:06:40.050 --> 00:06:46.110
+Nick Bowman: And but this. So this is sort of kind of our own visualization of what's happening in your lungs and you take the breath.
+
+48
+00:06:46.920 --> 00:06:54.570
+Nick Bowman: And and if you know a little bit about biology, you know about what's actually happening is there's kind of a stylized representation of your lungs, which is
+
+49
+00:06:54.840 --> 00:07:03.720
+Nick Bowman: In your lungs, there's there's 500 million of the things called alveoli, which is actually where the deoxygenated blood sort of comes into contact with the air that you're breathing and doesn't sort of
+
+50
+00:07:04.590 --> 00:07:08.190
+Nick Bowman: Gas exchanges and there's lots of them. Like I said, there's 500 million
+
+51
+00:07:09.120 --> 00:07:13.920
+Nick Bowman: But your lungs sort of organize them in this interesting kind of branching way where
+
+52
+00:07:14.310 --> 00:07:20.250
+Nick Bowman: You know, at every sort of bridge point there's there's two different pathways that can that can lead you to do two different sets.
+
+53
+00:07:20.700 --> 00:07:29.730
+Nick Bowman: And this branching keeps kind of happening over and over and over. And what you end up seeing is that the path to any one of these sort of exchange points is very, very short.
+
+54
+00:07:30.240 --> 00:07:37.350
+Nick Bowman: Even though there's 500 million of these, these little exchange points to get to any individual one. The air itself. Just don't have to travel that far.
+
+55
+00:07:39.600 --> 00:07:50.310
+Nick Bowman: And so, what sort of the insight here. Well, the insight is that if we store data in the sort of branching structure where we actually allow any one point to point to multiple locations.
+
+56
+00:07:51.030 --> 00:07:58.170
+Nick Bowman: We can organize data in this way, that's the distance from any element to the top of the structure is very small, even if there's many elements.
+
+57
+00:07:59.100 --> 00:08:09.450
+Nick Bowman: And and so that's going to be kind of our key idea for promoting what we talked about today. And, you know, as we've sort of been hinting at that data structure that we're going to talk about today is this idea
+
+58
+00:08:11.610 --> 00:08:23.100
+Nick Bowman: And so we've actually already seen trees in this class. And so I wanted to give this lecture. If we were to giving this lecture on thurs last I heard of him. Throwback Thursday, but we had to push it back to it. But we've been we've already seen trees before
+
+59
+00:08:24.060 --> 00:08:34.230
+Nick Bowman: And that was with decision trees. Right. And so if you remember our decision tree for the word review stability problem we had this idea where we started off with a large problem at the very top of the tree.
+
+60
+00:08:35.040 --> 00:08:42.330
+Nick Bowman: And then we had all of these different possible ways that we could branch out sort of take one step one action make one choice.
+
+61
+00:08:43.080 --> 00:08:54.870
+Nick Bowman: And then we repeatedly did that were repeated the we, you know, had multiple options. We could take at each point and we sort of worked our way down to these very sort of simple cases these cases that didn't have any migration.
+
+62
+00:08:56.070 --> 00:09:05.820
+Nick Bowman: And so with the recursion. These recipes cases. And when we start talking about more generally about trees will see that these cases actually have a very special name and a special sauce.
+
+63
+00:09:06.900 --> 00:09:09.210
+Nick Bowman: But all that is to say you've actually seen trees.
+
+64
+00:09:11.490 --> 00:09:23.190
+Nick Bowman: And what we can see is trees actually show up in many other ways besides just visualizing the curse of backtracking and trees actually can be used to describe hierarchy. So if you think about location.
+
+65
+00:09:24.240 --> 00:09:33.180
+Nick Bowman: You know, look at location as a hierarchy. There are many different sort of levels of specificity that you can use when describing where you are in the world. Right. You could specify a country.
+
+66
+00:09:33.630 --> 00:09:46.320
+Nick Bowman: Once you specify the country you can specify state and to specify the state, you can specify city. And so there's sort of hierarchical nature where there's this very broad class of information and the top and then more and more specific classes information as you work your way down.
+
+67
+00:09:47.970 --> 00:09:54.930
+Nick Bowman: And trees actually are used to model the structure of websites as well. So if any of you done any HTML coding or work on websites.
+
+68
+00:09:55.290 --> 00:10:06.630
+Nick Bowman: And you might actually be familiar with this idea that when you write HTML code your code gets parsed into this tree and the natural website structure is represented using these tree, which is kind of stylized in this diagram.
+
+69
+00:10:08.280 --> 00:10:11.370
+Nick Bowman: program's themselves actually computer programs and
+
+70
+00:10:12.210 --> 00:10:21.000
+Nick Bowman: A lot of times representatives tree. So this is actually an interesting diagram pulled from a paper actually written by by a student that took us on a six another long time ago.
+
+71
+00:10:21.420 --> 00:10:31.230
+Nick Bowman: And then what you can see here, this is kind of like Python. So pseudo Curtis program on the left and you can represent the structure, the overall logical flow. The program actually ality
+
+72
+00:10:31.800 --> 00:10:41.790
+Nick Bowman: And that's actually a very common way to represent programs. And when you're trying to analyze them and to reason about program, which is actually kind of this is meta level of problems or you can reason about program's themselves.
+
+73
+00:10:42.210 --> 00:10:50.280
+Nick Bowman: And then when you do so you can actually represent the programs as as these things called abstract syntax tree is so so true show up kind of all over the place.
+
+74
+00:10:52.050 --> 00:10:57.600
+Nick Bowman: But it's not really a coincidence that when we first saw trees. He saw them appear in conjunction with recursion.
+
+75
+00:10:58.260 --> 00:11:08.190
+Nick Bowman: And the reason why is because trees are inherently a very recursive data structure. And so, kind of, unlike link list almost everything we're going to do with tree recursive
+
+76
+00:11:08.940 --> 00:11:11.760
+Nick Bowman: Partially because the way in which they're really defined
+
+77
+00:11:12.570 --> 00:11:18.480
+Nick Bowman: Actually you know benefits from recursive definition, but also partially because they solved our earlier problem.
+
+78
+00:11:18.690 --> 00:11:29.250
+Nick Bowman: Now the path between any node and any other node is actually very short. So we don't actually need that many staff friends to do those sort of commercials. So let's actually try to come up with a recursive definition of a tree.
+
+79
+00:11:31.200 --> 00:11:34.080
+Nick Bowman: So a tree in this case is going to be one of two things.
+
+80
+00:11:34.920 --> 00:11:42.780
+Nick Bowman: It's either going to be an empty data structure. So if we're sort of defining this recursive these is kind of our, our simple case, the tree can either just not have anything unique
+
+81
+00:11:43.710 --> 00:11:50.280
+Nick Bowman: Or a tree can be a single node or the new this terminology of a parent node, which will touch on in a second.
+
+82
+00:11:51.000 --> 00:12:04.890
+Nick Bowman: With zero or more non empty trees or sub trees derived from it or existing below. So each of these purple clouds represents another tree, right. So think of it as as another sort of recursive defined structure. It's either empty or
+
+83
+00:12:07.560 --> 00:12:11.190
+Nick Bowman: Not. And so this is this is kind of how we have a recursive definition.
+
+84
+00:12:13.740 --> 00:12:14.400
+Nick Bowman: And
+
+85
+00:12:15.810 --> 00:12:16.770
+Nick Bowman: Science
+
+86
+00:12:19.980 --> 00:12:28.200
+Nick Bowman: And so if we actually wanted to sort of come up with a formal definition of a tree and this can kind of be our, our, our take on it, which is to say that a tree.
+
+87
+00:12:28.530 --> 00:12:35.850
+Nick Bowman: Is this hierarchical data organization structure composed of a value link to zero or more non existent trees.
+
+88
+00:12:36.270 --> 00:12:42.210
+Nick Bowman: And when I say hierarchical I really do mean this this visual concept of their nodes that are higher up in the tree.
+
+89
+00:12:42.570 --> 00:12:55.290
+Nick Bowman: And they sort of have links to nodes that are lower in the tree. And this process sort of continues downloads and we think of the nodes that are higher up in the tree as sort of imposing this sort of hierarchy of structure here.
+
+90
+00:12:56.430 --> 00:13:01.980
+Nick Bowman: And so if we actually wanted to go ahead and start defining trees and looking at the terminology that we use for trees.
+
+91
+00:13:03.870 --> 00:13:04.770
+Nick Bowman: We can see that
+
+92
+00:13:05.970 --> 00:13:06.420
+This land.
+
+93
+00:13:07.800 --> 00:13:08.430
+Belongs to
+
+94
+00:13:13.200 --> 00:13:18.900
+Nick Bowman: So we can see that this is an example of a tree. So this is sort of kind of just a tree that I came up with.
+
+95
+00:13:20.190 --> 00:13:27.330
+Nick Bowman: And we can see that it fits the definition of a tree because what is it. Well, it's a single node if again if we start from the top. It's a single node.
+
+96
+00:13:28.500 --> 00:13:35.730
+Nick Bowman: With zero more none of the sub tree. So in this case, it actually is five sub trees. And so the first step three is just a single node.
+
+97
+00:13:36.360 --> 00:13:51.090
+Nick Bowman: The second sub tree is actually another tree composed of more than more than one level and then. So remember, because these trees or recursive we define this sub tree is actually a tree in and of its own right. So it's certain have many elements in many branches.
+
+98
+00:13:52.470 --> 00:13:59.580
+Nick Bowman: But then we have another single elements of tree and another one and then one final sub tree that's actually again sort of multiple levels.
+
+99
+00:14:01.710 --> 00:14:07.680
+Nick Bowman: And so we sort of define our sub tree recursive we starting from the very top level and then working down
+
+100
+00:14:09.930 --> 00:14:13.920
+Nick Bowman: And as I mentioned before, there's very top note is always very important
+
+101
+00:14:14.490 --> 00:14:25.410
+Nick Bowman: And we refer to it as the root node of the tree. So just like sort of trees in real life conference. The, the very top note in the tree is always referred to as the movement. So the node containing a in this case is the root node.
+
+102
+00:14:26.250 --> 00:14:35.430
+Nick Bowman: And every tree, unless it's empty. Always has one right. It can't. It can't have more than one it will always have one node that exists at the very top.
+
+103
+00:14:38.220 --> 00:14:52.470
+Nick Bowman: Then as we work our way down the nodes that are directly connected to to another node via the sort of directed arrow relationship or cold children. So in this case, B, C, D, E and F are all children of the movement.
+
+104
+00:14:54.120 --> 00:15:01.290
+Nick Bowman: And as you can imagine that the that relationship also works in reverse. So we say that A is the parent node of the CD.
+
+105
+00:15:04.110 --> 00:15:15.480
+Nick Bowman: And so this parent child relationship sort of repeats itself all around the tree right so we can see that see is the parent of G, H, and I f is the Panda J and K and so on and
+
+106
+00:15:18.270 --> 00:15:26.250
+Nick Bowman: We can also have nodes that have no children. So if we have nodes that have no children. So that means no arrow getting derive out from them to know sort of
+
+107
+00:15:26.790 --> 00:15:40.680
+Nick Bowman: Descended notes from them. We call this a leaf node. So if you remember back to our decision trees or just hidden fees, the leaf nodes are the ones that we sort of associated with our base case. That's where we really didn't do any more branching really go any further outwards.
+
+108
+00:15:41.700 --> 00:15:48.090
+Nick Bowman: And we feel are important because they represent sort of the termination of our tree right if we're sort of following this recursive definition.
+
+109
+00:15:48.330 --> 00:15:57.330
+Nick Bowman: Once we get to a leaf node right we look at it, some trees will all of its sub trees are empty and so that we know that we no longer sort of have any more valid fortunes but creeper.
+
+110
+00:15:59.010 --> 00:16:09.510
+Nick Bowman: So in this case, in this tree. We actually have lots of leaf nodes. So the G H I J K L are all the fields, right, because they are all notes that don't have any children.
+
+111
+00:16:10.980 --> 00:16:16.170
+Nick Bowman: And AC F AND K. We don't really have any special name for them, but they are not
+
+112
+00:16:20.070 --> 00:16:25.650
+Nick Bowman: There's also this concept of siblings. So nodes that have the same parents are actually referred to as siblings.
+
+113
+00:16:26.070 --> 00:16:31.560
+Nick Bowman: And so in this case g h and I all have this all share the same parent in C and sort of columns.
+
+114
+00:16:32.280 --> 00:16:41.790
+Nick Bowman: And this is perhaps the least important of the terminology that will cover. We don't really have to reason about sibling knows when it comes to trees and most often we're only reading about the direct relationship between parents
+
+115
+00:16:44.820 --> 00:16:54.900
+Nick Bowman: And so one thing you might notice is, well, these arrows seem to sort of represent ways to move between certain node sort of this this encapsulation, the parent child relationship.
+
+116
+00:16:55.380 --> 00:17:05.370
+Nick Bowman: And so we can actually define paths through the tree. So a pad between two nodes is sort of a way of starting at one node and following these links and to get to a different node.
+
+117
+00:17:06.390 --> 00:17:10.440
+Nick Bowman: One thing to note though is we can only follow the links in the direction that the arrow points.
+
+118
+00:17:10.980 --> 00:17:18.510
+Nick Bowman: Which is actually really, really important. This this hierarchy of data structure means that we can only ever travel from the parent to the children.
+
+119
+00:17:18.780 --> 00:17:21.570
+Nick Bowman: And we cannot travel backwards from the children up to the parent
+
+120
+00:17:21.960 --> 00:17:31.050
+Nick Bowman: So it's actually similar to how I think data structures we could only traverse from a node to its next known and not backwards, right, because we only stored links going in one direction.
+
+121
+00:17:31.680 --> 00:17:36.960
+Nick Bowman: So when we think about defining pass to the tree is when you think about algorithms that work on trees, you have to kind of
+
+122
+00:17:38.160 --> 00:17:43.140
+Nick Bowman: Be aware of this limitation. You can only go from parents to their children who cannot really go back
+
+123
+00:17:45.090 --> 00:18:01.260
+Nick Bowman: And so an example of a Pathan this tree. If we wanted to look at the path from ATL and would go from A to F from Africa, a kit now. So that's just one example. You can see that there's actually many examples of pads in this tree.
+
+124
+00:18:02.820 --> 00:18:15.690
+Nick Bowman: And we can see that the length of a path to the tree is just the number of edges it contains. So in this case, we have to reverse three edges or three links to get from A to F abdicated L. So the this path in this case has like the three
+
+125
+00:18:17.790 --> 00:18:26.250
+Nick Bowman: And we can also reason we also like to reason about this, this notion of depth of nodes. So the depth of a node is really just the length of it's tough.
+
+126
+00:18:26.850 --> 00:18:39.840
+Nick Bowman: To the root node. And so what I mean by that is, for example, the root node itself and the length of its path to the root node. Well, it's already there. So you don't need to traverse the edges. So the root node, we always say has a depth of zero.
+
+127
+00:18:41.610 --> 00:18:47.010
+Nick Bowman: All of the nodes that exist on the next level that are directly connected to the written word, we say that they have a depth of war.
+
+128
+00:18:47.310 --> 00:18:56.130
+Nick Bowman: And the reason why right if you look at the length of their path to the loop it always sort of traverses they're always involves traversing exactly one inch or one pair of chocolate.
+
+129
+00:18:57.780 --> 00:19:06.810
+Nick Bowman: Some early everything that the next level is said to have been at two and then the note at the last single set of three because you need to traverse sort of three links to get to
+
+130
+00:19:07.890 --> 00:19:13.920
+Nick Bowman: And again, what I want to point out here is we actually have 12 nodes in this tree.
+
+131
+00:19:14.370 --> 00:19:24.660
+Nick Bowman: But the maximum depth that we have is three, which means to get from the route to any node in the tree, right, at most, we have to traverse to the notes or three sort of make three steps.
+
+132
+00:19:25.020 --> 00:19:34.290
+Nick Bowman: And that is sort of the power of organizing data in this way. Right. It's sort of going back to the lungs example. It's sort of saying you're able to have many, many, many possible endpoints.
+
+133
+00:19:34.950 --> 00:19:42.360
+Nick Bowman: But the path to get the each one is actually very, very short. And that's kind of the, the main benefit that we get out of organizing things in this way.
+
+134
+00:19:44.280 --> 00:19:51.210
+Nick Bowman: And then the very last thing and sort of formalized concept of how many, what is the maximum number of steps that we have to take
+
+135
+00:19:51.780 --> 00:19:59.370
+Nick Bowman: To actually get from the root node anywhere else. Well, we can say that that is just the number of levels that a tree house right
+
+136
+00:20:00.240 --> 00:20:09.450
+Nick Bowman: Or another way of thinking about it is it's just the number of nodes along the path from a route to a leaf node or. So if you say the most number of nodes along the path.
+
+137
+00:20:11.280 --> 00:20:17.130
+Nick Bowman: And so in this case, right, the longest path is from A to L. And so the Hyper V is for and forget it.
+
+138
+00:20:17.490 --> 00:20:28.200
+Nick Bowman: Sort of traverse four nodes are going there. But the other way you can think about it as sort of visually our tree has four levels right and so that the most of the level have to traverse is sort of across these four questions.
+
+139
+00:20:29.850 --> 00:20:35.610
+Nick Bowman: And answers. So as a summary of the terminology that will see here. And again, we just talked a lot of terminology and you
+
+140
+00:20:36.300 --> 00:20:41.580
+Nick Bowman: will refer back to it in the next two days as we're as we're continuing our discussion of tree. So if it's not all sort of
+
+141
+00:20:41.910 --> 00:20:46.380
+Nick Bowman: finalizing your head right now that that's totally fine. I'm just make sure to refer back to the slides as you
+
+142
+00:20:47.040 --> 00:20:54.690
+Nick Bowman: As you sort of get started getting more and more practice with these terms. But in general, every non empty tree has a rhythm that exists at the top.
+
+143
+00:20:55.560 --> 00:21:04.530
+Nick Bowman: Of every node in the tree can have zero more children node descended from it and but those nodes that have actually zero children nodes are especially referred to as leaf nodes.
+
+144
+00:21:05.400 --> 00:21:13.260
+Nick Bowman: We saw that every node in the tree actually has exactly one parent. So one know that it's derived from. And that's actually true for all nodes, except for them.
+
+145
+00:21:14.910 --> 00:21:21.330
+Nick Bowman: And we saw this idea of pad. So we can sort of move between parents and their children by following the sequences.
+
+146
+00:21:22.080 --> 00:21:29.790
+Nick Bowman: And then we saw some terminology. The reason about path. So inside this idea of the depth of a node, which was the length of the path between the room and that node.
+
+147
+00:21:30.270 --> 00:21:38.940
+Nick Bowman: And this idea of a trees height, which is just the sort of the total number of levels that were kind of the maximum Catholic existing in the industry.
+
+148
+00:21:41.670 --> 00:21:48.750
+Nick Bowman: And so with that, that actually sort of wraps up our three terminology introductions. If you have any any quick questions here and you can take those
+
+149
+00:21:54.720 --> 00:21:54.960
+Okay.
+
+150
+00:21:57.060 --> 00:22:06.900
+Nick Bowman: And so what the last thing that we're going to talk about is this idea of property so trees actually has two important properties that we always need to make sure hold true in order to
+
+151
+00:22:07.920 --> 00:22:09.330
+Nick Bowman: Actually say that we're working in the tree.
+
+152
+00:22:10.740 --> 00:22:19.500
+Nick Bowman: And the first is that any node in the tree can only have one node. So any node in a tree can only have one parent that is super, super important.
+
+153
+00:22:20.220 --> 00:22:30.120
+Nick Bowman: So what do I mean by that. Well, I mean that this is not a valid tree right and the fact that the node see has two nodes pointing into it has two nodes that are acting as a parent node.
+
+154
+00:22:30.690 --> 00:22:36.120
+Nick Bowman: Is actually not allowed. So if you see a structure that looks like this. That is actually not considered a tree.
+
+155
+00:22:37.500 --> 00:22:51.930
+Nick Bowman: And the other important thing is the trees can't have this idea of a cycle and then. So what I mean by a cycle is that if you are trying to find a path through the tree. There should be no way that you can make one continuous loop through the tree.
+
+156
+00:22:52.950 --> 00:23:00.540
+Nick Bowman: What do I mean by that. Well, in this case, it doesn't make sense or it's actually not allowed for deed to have a as its child.
+
+157
+00:23:00.840 --> 00:23:08.280
+Nick Bowman: Because that would sort of introduced this loop into the tree where you could go from A to B, from B to D from D back to A. And now you've made a folder.
+
+158
+00:23:08.640 --> 00:23:14.940
+Nick Bowman: Right. And this loophole cause many, many problems. We try to be algorithms that work on trees are returned to be treat reversals.
+
+159
+00:23:15.630 --> 00:23:31.710
+Nick Bowman: So we say that, like, by definition, a tree is not allowed to have cycles, which means that really apparent a node can't have a pant one of its parents as as a child is really sort of plates. So we should not be able to make this retreat. So again, this is not a valid.
+
+160
+00:23:34.110 --> 00:23:43.050
+Nick Bowman: Again what just keep that in mind as you're working with trees and, for example, as you're inspecting things in the debugger. As you look at trees. If you start seeing this idea of loops, then probably something
+
+161
+00:23:46.230 --> 00:23:52.500
+Nick Bowman: Cool. So do a quick pause for announcements and then we'll and then we'll jump into actually looking at how to code with trees.
+
+162
+00:23:53.730 --> 00:23:58.350
+Nick Bowman: So the announcements for today. And just a reminder that assignment five is going to be do tomorrow night.
+
+163
+00:23:59.040 --> 00:24:04.830
+Nick Bowman: We'll be releasing assignment six by the end of the day, on Wednesday. And as always, it'll be a week later on the following Wednesday.
+
+164
+00:24:05.340 --> 00:24:14.160
+Nick Bowman: And do note, though the for this assignment that deadline is a hard deadline which means there's there's no grace period, and we can accept any submissions. After that time.
+
+165
+00:24:14.580 --> 00:24:21.270
+Nick Bowman: And it sort of in order for us to be able to create all those assignments and get those periods finalized as part of your final grades.
+
+166
+00:24:21.750 --> 00:24:30.900
+Nick Bowman: We just can't accept any submissions after that last date so please make sure to get started on the assignment sort of earlier than you normally would, because there's not really any built in flexibility on this laughs
+
+167
+00:24:32.100 --> 00:24:38.250
+Nick Bowman: And similarly, due to just the end of quarter nature timeline and getting things done. We're not going to be accepting revisions on the sentence.
+
+168
+00:24:39.570 --> 00:24:47.430
+Nick Bowman: To just keep that in mind when you're working on those. And then the last thing is remember that your final projects were parts are do this upcoming Sunday at midnight.
+
+169
+00:24:48.810 --> 00:24:54.870
+Nick Bowman: You will have the opportunity to schedule a time to do your final presentation with your section leader over the weekend.
+
+170
+00:24:55.530 --> 00:25:00.540
+Nick Bowman: But note that you're not gonna be able to use our online signups system until you actually have a submission
+
+171
+00:25:01.170 --> 00:25:12.000
+Nick Bowman: In paperless and so even if it's not your final submission and you can just go ahead and submit something so that you're able to schedule a meeting time with your section leader and we'll be releasing those will be asking your section leaders to release those times.
+
+172
+00:25:13.620 --> 00:25:14.670
+Nick Bowman: So just just
+
+173
+00:25:17.070 --> 00:25:27.180
+Nick Bowman: Okay, so let's jump into looking at what trees, how we actually represent trees in and how we actually are able to kind of think about trees in inappropriate.
+
+174
+00:25:30.240 --> 00:25:37.710
+Nick Bowman: One one sort of constraint of scope that on there. Before we move on, and is that we saw in our, in our general definition of trees.
+
+175
+00:25:38.040 --> 00:25:49.890
+Nick Bowman: That at a high level. Trees could have many different sub children sometimes very, very many right we saw in our example, we have one node with five children, one with three and sort of very high branch refactor.
+
+176
+00:25:51.150 --> 00:25:58.530
+Nick Bowman: But in order to simplify things, and generally when you were working with trees and computer programs you mostly work with these things called binary trees.
+
+177
+00:25:59.370 --> 00:26:10.080
+Nick Bowman: All a binary tree is is just any tree where nodes are constrained to only have 01 or two children. And so, that is to say no note in a binary tree can have more than two children.
+
+178
+00:26:10.680 --> 00:26:24.210
+Nick Bowman: And that will just allow make it easier for us to sort of programmatic and represent. And actually, interestingly enough, this branching factor of up to two children is actually most of what you need to solve most problems. And so that's what we're that's all work with
+
+179
+00:26:25.980 --> 00:26:30.120
+Nick Bowman: And typically we use this terminology since since there's only ever up to two children.
+
+180
+00:26:30.450 --> 00:26:35.550
+Nick Bowman: And will represent will talk about the children in the binary tree as the left child and the right child.
+
+181
+00:26:35.850 --> 00:26:44.640
+Nick Bowman: And so that would be visually. When you're trying it. There will always be one node on the left and one note on the right. And so we'll refer to those you'll hear me refer to those as the left child.
+
+182
+00:26:47.550 --> 00:27:03.000
+Nick Bowman: So this is an example of a binary tree right. Notice that each node has either 01 or two children. So a C and C and D. Both have no children no D has only one child and note and it has has both allowed children.
+
+183
+00:27:04.290 --> 00:27:12.090
+Nick Bowman: So that is a binary tree, but what we saw earlier was not a binary tree right a had five children see had three children.
+
+184
+00:27:12.600 --> 00:27:20.250
+Nick Bowman: So kind of all over the place. And it wasn't sort of working, subject to the constraint. So even though that tree that we saw earlier. Was it helpful introduction to things. It's actually not
+
+185
+00:27:21.330 --> 00:27:26.460
+Nick Bowman: To just just keep that in mind as your as your as we sort of move forward to part two.
+
+186
+00:27:28.770 --> 00:27:31.710
+Nick Bowman: So now we can actually talk about how to sort of build trees program.
+
+187
+00:27:32.790 --> 00:27:46.920
+Nick Bowman: And sort of to build trees and C plus plus. We're going to revisit the node strike that we talked about thankless but we're going to need a slightly different version of it right the We Can't use exactly the same struck that we saw before, because it just doesn't have enough information.
+
+188
+00:27:49.170 --> 00:27:54.660
+Nick Bowman: And so in this case we're actually going to want to design each node to still have a data value.
+
+189
+00:27:55.080 --> 00:28:02.220
+Nick Bowman: So, similar to the link list. It's going to store some piece of information that's that's actually going to qualify it as a data structure store data.
+
+190
+00:28:03.000 --> 00:28:11.070
+Nick Bowman: But now we're going to have two pointers, rather than just one we're going to have one pointer for our left child sub tree and one pointer for our right child something
+
+191
+00:28:12.330 --> 00:28:20.340
+Nick Bowman: And so what that's gonna look like in practice is we're going to define this new structure called a tree node. It's going to contain the string data in it.
+
+192
+00:28:21.210 --> 00:28:28.530
+Nick Bowman: And the important part is right. It's going to have two pointers right a pointer to another tree node.
+
+193
+00:28:29.250 --> 00:28:34.950
+Nick Bowman: Is going to make up the root of the left child sub tree and then a pointer to the equivalent thing for the right
+
+194
+00:28:35.820 --> 00:28:46.320
+Nick Bowman: And so really the main change that we made from what we saw with linked lists as rather than being able to link to one element were not able to link to two elements and that one simple change is going to sort of
+
+195
+00:28:46.680 --> 00:28:53.010
+Nick Bowman: Kind of revolutionize. What are the kind of problems and consult with treating this like this, which is actually really cool.
+
+196
+00:28:55.080 --> 00:29:03.720
+Nick Bowman: And so if we revisit our definition of what a treat, is we defined a tree and very sort of abstract vague terms earlier when it came to this recursive definition.
+
+197
+00:29:04.560 --> 00:29:13.050
+Nick Bowman: But I want to revisit this definition and rework it a little bit to be a little bit more specific and so we can actually say that a tree is either in
+
+198
+00:29:13.650 --> 00:29:24.870
+Nick Bowman: Or we want to answer this question of what is a tree in c++ and to answer that question. We're going to say that an empty tree is going to be one that's just represented by Knopf winner. So, same way that we saw that empty list is represented by know pointer.
+
+199
+00:29:26.310 --> 00:29:34.380
+Nick Bowman: Or what it will be is a single instance of the tree notes trapped with either 01 or two non know pointers to other treatments.
+
+200
+00:29:35.220 --> 00:29:48.510
+Nick Bowman: So again, we're either gonna have an empty tree represented by know pointer or a single element a single tree notes during some piece of information and pointing them to to other trees that can either be empty or not.
+
+201
+00:29:50.670 --> 00:30:02.580
+Nick Bowman: And so we're going to work with this definition to actually build up an example. So let's see what that looks like. So when we first start off right we have the empty tree, you can think of the saying, well, we have no point but just kind of poetry.
+
+202
+00:30:03.990 --> 00:30:09.030
+Nick Bowman: But then we wouldn't say we add a single element to it. And so we say, okay, so we want to add a new
+
+203
+00:30:09.630 --> 00:30:14.130
+Nick Bowman: Note, it's going to contain the data pineapple, you'll see a tropical fruit theme throughout this example.
+
+204
+00:30:14.670 --> 00:30:26.250
+Nick Bowman: And when we first start out a tree with only one node in it is going to have both of the children pointers pointing to. Right. And that's just saying I have no derived children. There are no more elements.
+
+205
+00:30:28.050 --> 00:30:38.940
+Nick Bowman: But then when we start adding more elements. So we add a new element coconut we create it and then we say the left child pointer of this original note now points to this new book.
+
+206
+00:30:39.960 --> 00:30:44.580
+Nick Bowman: And so now the left child is not know because it now references sort of a non empty sub tree.
+
+207
+00:30:45.540 --> 00:30:59.340
+Nick Bowman: And so we can sort of just repeat that process over and over again. And so as we add more nodes to the tree we always make sure to link them in by resetting the left child or the right child in this case pointer value to point to this and you know that we've created.
+
+208
+00:31:00.360 --> 00:31:13.680
+Nick Bowman: And and so if we continue this process, we see that overall, right, we can just build an example of a tree and all it is is composed of different tree notes again remember these are going to have been dynamically allocated and we'll see how to do that in a second.
+
+209
+00:31:14.430 --> 00:31:21.270
+Nick Bowman: And the links themselves right just consist of setting pointer values to point to other other instances.
+
+210
+00:31:23.010 --> 00:31:29.220
+Nick Bowman: And so I'm note that trees actually don't have to be complete, like the solid keeps
+
+211
+00:31:29.910 --> 00:31:40.560
+Nick Bowman: So remember, completeness, was this idea that on the bottom level of the tree structure, you always had to fill in your elements from left to right. But notice that there's actually, there's actually an empty.
+
+212
+00:31:42.960 --> 00:31:54.360
+Nick Bowman: And this is actually an empty space right here. So since strawberry doesn't have left child and that's actually allowed and working trees and so it's it's true that any node can actually have 01 or two.
+
+213
+00:31:57.480 --> 00:31:58.290
+kylie jue: Before we move on, I
+
+214
+00:31:59.640 --> 00:32:01.530
+kylie jue: Had their hand raised.
+
+215
+00:32:01.560 --> 00:32:02.640
+Nick Bowman: If you would like you to
+
+216
+00:32:02.970 --> 00:32:10.200
+Kaan Alp Yay: Yeah, you just answered with the notes. I was just gonna ask if trees are supposed to be completed by trusted already. Thank you. Yeah, yeah. Cool.
+
+217
+00:32:12.000 --> 00:32:25.320
+Nick Bowman: Um, and so what I actually want to do here. Let's actually jump over to Katie crater and let's actually just build this tree like let's let's just write some specific code that is going to sort of build this tree that will function as as our example for the rest of the code today.
+
+218
+00:32:26.520 --> 00:32:37.560
+Nick Bowman: And so the way that we're going to do this is, it's actually going to be kind of backwards is from the way that I showed it on the slides and record and create the leaf nodes first and then the middle nodes and unknown and you'll see why is as we work through this
+
+219
+00:32:38.640 --> 00:32:45.870
+Nick Bowman: But kind of what I, what I want to point out here is that the idea of actually creating three nodes and linking them together is going to look very similar.
+
+220
+00:32:46.260 --> 00:32:58.590
+Nick Bowman: To what you saw when you're working with us. Right. So it's this idea that we always if we want to allocate a new node, we have to use the new keyword. Once we've used the new keyword and we have to set sort of the fields.
+
+221
+00:32:59.730 --> 00:33:07.770
+Nick Bowman: Sort of appropriately. So in this case, the banana node, the leaf node on the very left and has a data field, but also named banana.
+
+222
+00:33:08.280 --> 00:33:18.420
+Nick Bowman: And then it's left and it's right pointers are actually total points right and so that's important because that's saying, hey, this is a leaf node. There's actually nothing that exists below it.
+
+223
+00:33:19.410 --> 00:33:27.360
+Nick Bowman: And if we had to do this all the time that would get kind of really annoying. So three nodes actually have a defined constructor, similar to how we talked about with less notes.
+
+224
+00:33:27.870 --> 00:33:45.450
+Nick Bowman: And so for example if I wanted to construct the durian node I can actually do that all in one line. And I can say, oh, give it the data Darien and make the left point or no pointer and make the right point or no pointer. And so the the order of things is data left pointer.
+
+225
+00:33:46.680 --> 00:33:50.250
+Nick Bowman: Right point. And so you can always just do that all in one month.
+
+226
+00:33:51.660 --> 00:33:56.160
+Nick Bowman: And then we have one more before. So let's go ahead and say that
+
+227
+00:34:04.410 --> 00:34:07.050
+Nick Bowman: Again, we say this is the leaf node and sort of has those
+
+228
+00:34:08.400 --> 00:34:16.290
+Nick Bowman: And then now we can actually create the intermediate notes. So we can say that our intermediate node, which was coconut
+
+229
+00:34:16.890 --> 00:34:22.290
+Nick Bowman: And this is where things get a little different. So again, it's stores a certain piece of data.
+
+230
+00:34:22.860 --> 00:34:28.890
+Nick Bowman: But the left and the right pointers are actually the things the sub tree. Is that a valid children nodes that are on the left, and it's right.
+
+231
+00:34:29.310 --> 00:34:37.110
+Nick Bowman: So to its left it has the banana node. And so it's right at Hunter, you know. So that's sort of establishes the link between this node and it's twofold.
+
+232
+00:34:39.120 --> 00:34:42.360
+Nick Bowman: We can do a similar thing with the strawberry node.
+
+233
+00:34:43.560 --> 00:34:44.490
+Nick Bowman: Which is to say
+
+234
+00:34:47.160 --> 00:34:56.910
+Nick Bowman: It's data and then we say, oh, it actually doesn't have a left child. So it's left tribe pointers. Still no. But it's right child pointer points to Taro
+
+235
+00:34:58.560 --> 00:35:04.140
+Nick Bowman: And then the very last thing that we can do is just repeat this step for the root node right so now we've defined our to intermediate nodes.
+
+236
+00:35:04.800 --> 00:35:14.970
+Nick Bowman: So our root node at the very top is going to be a new node itself. It's going to store pineapple and on its left, it's going to have a token that node and on the right.
+
+237
+00:35:17.730 --> 00:35:22.140
+Nick Bowman: And so at the very end of this function if we just go ahead and return a pointer to the root of the tree.
+
+238
+00:35:23.280 --> 00:35:30.360
+Nick Bowman: And hopefully we'll see is we get this nice output. And so obviously the main function and the couple that's building
+
+239
+00:35:30.930 --> 00:35:43.380
+Nick Bowman: So the main function is just calling this code that we just wrote, and then it's calling this function called pretty print. I wouldn't worry about how that works because we've actually implemented for you and but what you see is it's actually gone ahead.
+
+240
+00:35:46.380 --> 00:35:53.520
+Nick Bowman: Well, it's not letting me zoom in, unfortunately. But when we can see is we get the exact structure of our tree kind of printed out in this nice format.
+
+241
+00:35:54.270 --> 00:36:02.730
+Nick Bowman: That we saw in this life. And so this again, the idea of what I wanted to point out here is just that the site is just that it's possible to that now.
+
+242
+00:36:03.990 --> 00:36:06.780
+Nick Bowman: It's just possible to, you know, create
+
+243
+00:36:08.880 --> 00:36:19.200
+Nick Bowman: The building a tree is actually very similar to the process of growing a request, you know, recreate new nodes by dynamically allocating memory. And then we integrate those nodes that rewiring the left of me that wonders of the existing ones.
+
+244
+00:36:20.760 --> 00:36:25.770
+Nick Bowman: But what I one thing I do want to point out is, notice that in this case we built that we built a very specific tree.
+
+245
+00:36:26.340 --> 00:36:33.090
+Nick Bowman: And unlike with link list, we were able to write a general function that just given some vector was able to sort of transform the vector interlink plus
+
+246
+00:36:33.840 --> 00:36:44.250
+Nick Bowman: Writing code to generally sort of take one structure and turn it into a tree is actually non trivial and it's sort of a little bit more as a fair amount more complicated and
+
+247
+00:36:44.670 --> 00:36:49.740
+Nick Bowman: More difficult to parse them and it was a thankless and so we're not going to explicitly talk about it in lecture.
+
+248
+00:36:50.100 --> 00:36:52.680
+Nick Bowman: And when you're doing your assignment. Also, you're not going to have to
+
+249
+00:36:52.980 --> 00:37:03.330
+Nick Bowman: Kind of directly translate for example between a vector and the tree just because it's actually not very meaningful to try to translate between a linear data structure and one that is sort of represented as a tree.
+
+250
+00:37:03.720 --> 00:37:07.950
+Nick Bowman: And so you'll see when we work with trees. We have some some workarounds that you'll see
+
+251
+00:37:10.290 --> 00:37:20.340
+Nick Bowman: Okay. And so then the very last thing and we'll talk about in the last, you know, 1314 minutes we have today. And this idea of treats reversals. And so what is a reversal.
+
+252
+00:37:21.030 --> 00:37:32.910
+Nick Bowman: And well, a reversal is similar to what we talked about when we talked about a trigger. So building list. And oftentimes, you know, we might want to do something. It was a very they do something
+
+253
+00:37:33.780 --> 00:37:43.050
+Nick Bowman: To each node in the tree. So whether that's printed or counted or do some analysis of the data that's stored there. We want to be able to reverse all the nodes that existence pretty
+
+254
+00:37:44.340 --> 00:37:56.520
+Nick Bowman: But since it you know has all this different branching and, you know, multiple places that we might have to go visit. It's not as straightforward as it is within class where we're sort of this repeatedly follow the next point over and over
+
+255
+00:37:58.410 --> 00:38:06.330
+Nick Bowman: And what we're going to talk about today is sort of three main ways to traverse a binary tree. We're going to talk about pre order to reversal and in order to reversal and a bookstore reversal.
+
+256
+00:38:07.050 --> 00:38:11.700
+Nick Bowman: But the common theme that's going to link all of them is that all of these algorithms are going to be defined recursive
+
+257
+00:38:12.630 --> 00:38:26.370
+Nick Bowman: Answer. If you remember what I said at the very beginning of class trees themselves are defined recursive Lee. And so when we write algorithms that operate on trees, very, very often, we're going to see things, and we're going to see things behaving recruits Lucy algorithms and code, especially
+
+258
+00:38:28.620 --> 00:38:36.870
+Nick Bowman: So let's talk about 100 reversal. So appeared reversal work something like this. It says, do something with the current node.
+
+259
+00:38:37.620 --> 00:38:45.720
+Nick Bowman: And then traverse the left sub tree and then traverse the racing. And so those are sort of our recursive steps right to say hey traverse the left and first the right
+
+260
+00:38:46.860 --> 00:38:55.440
+Nick Bowman: For example, purposes let's just say, but do something in this case is just print the contents of the current node. So if we do that, we'll be able to actually just print everything that exists in the tree.
+
+261
+00:38:56.880 --> 00:39:02.730
+Nick Bowman: And what I want to actually show you, here's how this algorithm actually might work out on on on not, for example.
+
+262
+00:39:04.050 --> 00:39:09.150
+Nick Bowman: And so for example if we saw our steps for sort of do something
+
+263
+00:39:11.580 --> 00:39:12.570
+Nick Bowman: Go left
+
+264
+00:39:14.430 --> 00:39:15.270
+Nick Bowman: And go right
+
+265
+00:39:17.370 --> 00:39:25.290
+Nick Bowman: And so if we started a reversal at the, at the beginning of the tree here. Well, then we would just follow or three steps. So we will say, do something
+
+266
+00:39:26.160 --> 00:39:41.310
+Nick Bowman: In this case, that would just involve printing out the value we would print out the value pineapple and then it would say traverse the entire left some free so go left and repeat that exact same classes. And so then when we go left, you get to this node.
+
+267
+00:39:42.540 --> 00:39:48.990
+Nick Bowman: The algorithm tells us, okay. Do something which is print out the value and then traverse the left sub tree.
+
+268
+00:39:50.760 --> 00:39:54.840
+Nick Bowman: And so then we get to the next one. Again, we do something we pronounce value.
+
+269
+00:39:55.710 --> 00:40:07.800
+Nick Bowman: In this case, we try to go left and we try to go right and we end up at no point or in both ways. So we probably that's when we know we want to stop. So when I sort of base case we're probably want to handle some case of when we get to an empty an empty century.
+
+270
+00:40:08.850 --> 00:40:19.590
+Nick Bowman: But now, again, remember that sort of recursive algorithms we once this step. So once the go left step at coconut finishes executing
+
+271
+00:40:20.040 --> 00:40:29.880
+Nick Bowman: We actually work our way back to this node and then we execute the go right steps. So then we say, okay, now it's time to visit the durian node to recruit that out.
+
+272
+00:40:31.170 --> 00:40:34.770
+Nick Bowman: Then we notice, hey, there's, it's empty here and empty here so that we're all done.
+
+273
+00:40:36.240 --> 00:40:44.850
+Nick Bowman: And then we are, know that we're finished with this entire again version of the left hand sub tree. So we get back to the recursive call that's currently
+
+274
+00:40:45.240 --> 00:41:02.070
+Nick Bowman: Operating on pineapple and we say, oh, well, we just finished the go left step for the entire left sub tree. So now you have to go right step. And so now operate on this, on the whole, right sub tree. And so again, you know, repeat those steps will visit the strawberry node and
+
+275
+00:41:05.040 --> 00:41:13.470
+Nick Bowman: We'll try to visit the left hand sub tree. But again, it's empty. So we don't do anything there. And then we'll work our way back going over to the right hand side tree.
+
+276
+00:41:14.970 --> 00:41:16.140
+Nick Bowman: Print out the tar node.
+
+277
+00:41:17.370 --> 00:41:31.290
+Nick Bowman: And then again we reach the business there. So we work our way back. You say, we're all done with those reversals. And then they come back to the root node and we say, okay, now that it's done. And so we've completed all the steps. And so the pre order to reversal.
+
+278
+00:41:32.370 --> 00:41:35.400
+Nick Bowman: Of this tree is actually going to give us that
+
+279
+00:41:37.710 --> 00:41:42.960
+Nick Bowman: And so if we actually jump on over to coding it up. And what we'll see
+
+280
+00:41:47.640 --> 00:41:57.030
+Nick Bowman: So hopefully, and so what we can see is if we actually want to write a pre order for Nestle, and it's sort of as easy as just sort of taking care of these four steps that we talked about.
+
+281
+00:41:57.870 --> 00:42:07.440
+Nick Bowman: So our first case was to say, oh, in the base case. Well, you know, if we're at an MP3. Well, then we probably don't want to do anything. We can just stop our recursion.
+
+282
+00:42:09.300 --> 00:42:14.280
+Nick Bowman: But once we're at a valid node, we can say okay let's print out the data at that node.
+
+283
+00:42:19.200 --> 00:42:25.680
+Nick Bowman: And then once we're done printing out the data recursive we call the same function to print the left hand some tree.
+
+284
+00:42:27.780 --> 00:42:31.350
+Nick Bowman: And then do the same thing to print out the right
+
+285
+00:42:35.640 --> 00:42:50.460
+Nick Bowman: And and hopefully what we'll see here if we run the code is when we now do a pre order reversal of our example tree we should get exactly the same output and that we generated by and so pull up the console.
+
+286
+00:42:52.830 --> 00:43:03.180
+Nick Bowman: And then we say, Hey, do a pre order reversal and will you should see is exactly the same output from just because pineapple coconut banana and then dairy and then and then
+
+287
+00:43:04.650 --> 00:43:16.950
+Nick Bowman: And so that's sort of one way to visit all the nodes in the tree and and if you don't have any specific requirements on what you're trying to do with the elements of a pre order to reversal works just fine. It's kind of your baseline rate, of course.
+
+288
+00:43:19.830 --> 00:43:32.520
+Nick Bowman: So then if we jump back to slides. So what we see is we see that this is the output that we got and regenerated. And so that's sort of just one way to traverse the tree. But there are other ways as well.
+
+289
+00:43:33.570 --> 00:43:45.210
+Nick Bowman: So there's this idea of an inward reversal and you'll hopefully you're starting to see a bit of a pattern in the naming. So with the pre order to reversal. We did our something and then we did we finish that reversal.
+
+290
+00:43:45.900 --> 00:43:57.540
+Nick Bowman: For in order to reversal. We actually do something that looks a little bit weird, which is we traverse the left sub tree first, then we come back we do or something with the current node and then we traverse the right
+
+291
+00:43:59.280 --> 00:44:08.250
+Nick Bowman: And so that's a little bit different, but you can kind of, you can associate that in in in order with literally the do something happens in between the two person calls
+
+292
+00:44:10.380 --> 00:44:25.800
+Nick Bowman: And so for example on and actually we won't. We won't walk through the example on this tree directly, but let's see what what actually, the output is of this inward reversal. And so when we do our in order to reversal, we again have something that looks like this. You say,
+
+293
+00:44:27.060 --> 00:44:29.850
+Nick Bowman: All right, well, if we have an empty tree.
+
+294
+00:44:30.990 --> 00:44:41.340
+Nick Bowman: Then again, we don't want to do anything but now we just rearrange the order of our steps, a little bit. We say, hey, I actually want to traverse my left hand sub tree first
+
+295
+00:44:44.460 --> 00:44:49.410
+Nick Bowman: And then once I'm done doing that, then I can actually print out the data that I'm currently on
+
+296
+00:44:52.650 --> 00:44:58.830
+Nick Bowman: And then I go and actually do the right handsome tree. And so I say, all right, recursive we traverse
+
+297
+00:45:01.020 --> 00:45:03.330
+Nick Bowman: The data that exists right hand side.
+
+298
+00:45:05.160 --> 00:45:16.800
+Nick Bowman: And so if we put these things together. And while this while this compiles actually want to point you guys to the slides and just think about really quickly. Well, this is coming up before I run it.
+
+299
+00:45:18.270 --> 00:45:30.060
+Nick Bowman: That's in play. But what would the output, other than in order to reversal on this tree. So just give you a quick second to think about that before I before
+
+300
+00:45:40.110 --> 00:45:53.940
+Nick Bowman: Okay, so let's actually, let's see what happens. Now for running in order to reversal. Well, what do we get. And so if I actually pull this up alongside. So what we see here.
+
+301
+00:45:54.480 --> 00:46:06.870
+Nick Bowman: Is actually that the very first element that gets cleared out is no longer pineapple, like we saw before, but it's actually banana right and so banana gets printed out so we actually print out this node first
+
+302
+00:46:10.290 --> 00:46:17.790
+Nick Bowman: So we actually print out this node first and then we print out this node and then we print out Darien
+
+303
+00:46:18.510 --> 00:46:29.970
+Nick Bowman: And now once the whole left hand sub tree of our initial starting point has been printed out then we finally revisit this starting node and we print out its value. So then find out what comes next.
+
+304
+00:46:30.570 --> 00:46:37.980
+Nick Bowman: And then we follow a similar pattern with what happens on the right hand side, which is to say we go to strawberries. We're currently visiting this node.
+
+305
+00:46:38.490 --> 00:46:47.730
+Nick Bowman: We try to print out what's here, but there's actually nothing here. So then we print out the current know that exists, and then we go ahead and traverse the right hand side.
+
+306
+00:46:49.980 --> 00:47:06.150
+Nick Bowman: And so we actually get this interesting order of things. I actually, I wonder, I want to see if you can sort of visualize an interesting powering the data here, which is actually that the output of this reversal seems to give us all these values in alphabetical order.
+
+307
+00:47:07.170 --> 00:47:10.440
+Nick Bowman: So it goes you know plant banana coconut Darien pineapple strawberry.
+
+308
+00:47:11.760 --> 00:47:12.600
+Nick Bowman: And
+
+309
+00:47:14.850 --> 00:47:20.760
+Nick Bowman: This is actually is not a coincidence that we end up getting these values and kind of this interesting nice order.
+
+310
+00:47:21.300 --> 00:47:27.660
+Nick Bowman: And I'm not going to tell you why yet, but the topic of why is actually going to be all about what tomorrow's lecture is about
+
+311
+00:47:28.440 --> 00:47:39.780
+Nick Bowman: But I want you to keep in mind that, that when there's a certain structure in our tree that we'll talk about tomorrow in order to reversals are actually very useful because they actually give us somehow this nice structure of our data.
+
+312
+00:47:41.280 --> 00:47:47.610
+Nick Bowman: And so in order traverses are useful and so you can probably guess what our last traverse is going to look like.
+
+313
+00:47:48.390 --> 00:47:58.110
+Nick Bowman: Well, a post or reversal. Again, the post and post order means that you don't do something with your current node until you're fully done traversing the left hand and the right hand side.
+
+314
+00:47:59.310 --> 00:48:10.260
+Nick Bowman: And so we were originally going to have you try this yourself as an exercise, but we are running a little bit of time. And so we just jumped in a cutie creator and we can actually just clear it up ourselves.
+
+315
+00:48:11.100 --> 00:48:18.510
+Nick Bowman: And it will follow a very, very similar comment everything received before, and in particular will see
+
+316
+00:48:19.890 --> 00:48:23.130
+Nick Bowman: Will say again, if we have an empty tree.
+
+317
+00:48:24.390 --> 00:48:25.470
+Nick Bowman: And your hand and return
+
+318
+00:48:26.700 --> 00:48:30.510
+Nick Bowman: Otherwise, do your reversal of the left hand tree.
+
+319
+00:48:32.640 --> 00:48:35.160
+Nick Bowman: And then do your reversal of the right entry.
+
+320
+00:48:36.930 --> 00:48:44.820
+Nick Bowman: And finally, after you're done with both of those. Then finally print out the data that's actually existing at that
+
+321
+00:48:49.320 --> 00:48:59.280
+Nick Bowman: And so with these things combined. And again, we'll see another distinct ordering of the way in which nodes are visited and that sort of just the main. The main difference between these the traverse
+
+322
+00:48:59.730 --> 00:49:14.550
+Nick Bowman: Right. They all look very similar in terms of their structure, but they all produce kind of different ways of visiting the elements. And so one thing I wanted to point out is now our root node, which was the very first thing, actually, let me just put all three on the screen.
+
+323
+00:49:15.990 --> 00:49:25.140
+Nick Bowman: And so we noticed that now our root node, which was the very first thing they got printed out when we did the in order to reversal is actually now the very last thing that gets printed out when we do a purchase order.
+
+324
+00:49:26.400 --> 00:49:32.100
+Nick Bowman: And and so sort of summarize that and, you know, this is the output that we see.
+
+325
+00:49:32.580 --> 00:49:43.230
+Nick Bowman: And an interesting application of this is actually going to be freeing tree, right. So you might ask, why would I want to only do something with my current node after I finished traversing both my left hand and my right hand side, please.
+
+326
+00:49:44.010 --> 00:49:49.560
+Nick Bowman: Well, actually, freeing trees are going to be a great example of this, and that'll be our actually our warm up exercise when you start off
+
+327
+00:49:51.540 --> 00:49:57.720
+Nick Bowman: And so, sort of, just to summarize in the last minute here trees are really nice because they allow us to organize information.
+
+328
+00:49:58.110 --> 00:50:03.120
+Nick Bowman: And getting the benefits of big data structures, which is sort of this distributed way of storing information.
+
+329
+00:50:03.780 --> 00:50:10.860
+Nick Bowman: But in such a way that the distance to any one element is short. So you know if there's many elements are path. Anyone element is actually very short.
+
+330
+00:50:11.760 --> 00:50:21.720
+Nick Bowman: And so in order to accomplish that we have organized nodes in this hierarchical manner where every sort of element contains connections to potentially many different folder notes or nodes that are derived from it.
+
+331
+00:50:22.620 --> 00:50:35.970
+Nick Bowman: And once you've actually organize your data entry. There's many different orders. Now, in which you can actually visit the Conference of the trees. We talked about these three different commercials that all result in different orders of the ways of accessing those
+
+332
+00:50:37.290 --> 00:50:48.630
+Nick Bowman: And then we'll see over the next two days will actually see kind of interesting, real life applications of all three of these reversals why why sometimes you might want to visit elements and can get reporters.
+
+333
+00:50:50.220 --> 00:51:00.720
+Nick Bowman: And so to give you the highlight of what's going to be coming up next we're going to keep talking about trees and we're going to talk about this specific kind of tree called a binary search tree.
+
+334
+00:51:01.140 --> 00:51:09.900
+Nick Bowman: And binary search trees are actually perhaps one of the most powerful ways organizing information that we've talked about in this class and actually underlies many of the data structures. Have you been using
+
+335
+00:51:10.590 --> 00:51:18.240
+Nick Bowman: And it's it's used sort of all over the place and kind of the real world algorithms. So we're going to spend all day tomorrow, talking about that.
+
+336
+00:51:19.410 --> 00:51:24.420
+Nick Bowman: And yep so that's all we have. So thanks everybody for being here and we will see you all tomorrow.
+
+337
+00:51:25.830 --> 00:51:26.940
+Evan F Davis: Thank you so much. Thank you.
+
+338
+00:51:27.360 --> 00:51:28.200
+Thank you.
+
+339
+00:51:29.430 --> 00:51:30.000
+Oz Gitelson: Thank you.
+
+340
+00:51:30.420 --> 00:51:30.990
+Thank you.
+
+341
+00:51:34.170 --> 00:51:39.780
+kylie jue: Other questions, Nick that came up multiple times in the chat that I think would just be good to get on the recording is what is
+
+342
+00:51:39.840 --> 00:51:44.910
+kylie jue: The difference between a binary heap and a binary tree or just a tree in general.
+
+343
+00:51:45.870 --> 00:51:51.000
+Nick Bowman: Yeah, exactly. So, so the great question. And so remember
+
+344
+00:51:53.910 --> 00:51:58.530
+Nick Bowman: So remember the note that we may about here. So when are defining binary trees.
+
+345
+00:52:01.020 --> 00:52:06.870
+Nick Bowman: So a binary tree right I guess let's let's start from the top so
+
+346
+00:52:07.560 --> 00:52:17.700
+Nick Bowman: A tree is the most general form of structuring data. So everything that everything that you just mentioned, which is fine. A tree binary heat. All of that stuff, everything that she mentioned is there all
+
+347
+00:52:18.210 --> 00:52:31.050
+Nick Bowman: Right, they all follow the structure where there's this idea of parents and children is hierarchical manner data storage and every element sort of have a tree can sort of point to zero or more, you know, up to many
+
+348
+00:52:31.590 --> 00:52:35.850
+Nick Bowman: Possible sort of children married right so trees are like that the very highest level.
+
+349
+00:52:36.720 --> 00:52:51.930
+Nick Bowman: And binary trees are the next most specific thing. So a binary tree is like taking a tree but restricting it so that only so that each element can only have up to three children. Right. So that's to say that
+
+350
+00:52:53.100 --> 00:53:00.960
+Nick Bowman: When we when we sort of are looking at how many elements are linked to from each node. There's never more than two elements linked to from each other.
+
+351
+00:53:01.320 --> 00:53:17.910
+Nick Bowman: So so binary trees are kind of the next most specific thing and binary heaps are actually even more specific version of a binary tree. Well, why are they a binary tree. Well, because each element, you know, has exactly two children are up to two children that could be valid.
+
+352
+00:53:19.860 --> 00:53:30.870
+Nick Bowman: And they have this extra constraint that when you're filling in nodes. The bottom most level is always filled in, left to right and there are no gaps. Right. So there is this, there's this idea
+
+353
+00:53:31.680 --> 00:53:42.480
+Nick Bowman: That they have to be complete. So for example, this tree right is is is not a binary keep or we're not fulfill the requirements for binary heat and
+
+354
+00:53:43.170 --> 00:53:52.170
+Nick Bowman: Specifically because there's a missing whole right here right this this bottom most level is not complete, because if you traverse it from left to right. There's kind of a gap right there.
+
+355
+00:53:52.890 --> 00:53:57.930
+Nick Bowman: So a binary heap is just a binary tree with even more restrictions. Right.
+
+356
+00:53:58.380 --> 00:54:06.540
+Nick Bowman: And specifically, the there's actually a right there's that other restriction for binary keep such as you have, you have to have this relationship is data relationship between the parents and the children.
+
+357
+00:54:07.080 --> 00:54:23.010
+Nick Bowman: Again, that's just a more specific constraint on what a binary tree actually is so binary heaps are the most specific version of that example and and so there they are trees that are binary trees that have extra constraints on the on the way that they're filled in and on the relationship
+
+358
+00:54:24.240 --> 00:54:29.400
+Nick Bowman: And what we'll talk about tomorrow with binary search fees will exist at a very sort of
+
+359
+00:54:30.720 --> 00:54:44.820
+Nick Bowman: Similar order in the hierarchy where binary search trees are trees that are binary trees that have a very specific constraint on the data that they store and that constraint on the do this for allows us to do really interesting things.
+
+360
+00:54:50.850 --> 00:54:56.310
+kylie jue: Yeah. Another good question in the chat that I just think it's good to have on recording is sort of what is the big trip or so.
+
+361
+00:54:57.990 --> 00:54:58.470
+Nick Bowman: Will
+
+362
+00:54:59.490 --> 00:55:12.690
+Nick Bowman: You may not know, we'll talk about this tomorrow with with binary search trees. Oh, sorry, the big of reversal. Oh, the big of reversal will always be open and frank, because if you think about it, you're visiting every node in the tree. So there's no
+
+363
+00:55:13.800 --> 00:55:18.240
+Nick Bowman: There's no better. There's no faster way to do that then then this event.
+
+364
+00:55:19.560 --> 00:55:24.540
+Nick Bowman: And we'll see you tomorrow with binary search for us and with with this idea of what we call balance trees.
+
+365
+00:55:24.840 --> 00:55:39.720
+Nick Bowman: An individual look ups and individual insertions and individual removals can all operate in logarithmic time because of this nice property of trees, but for if you think about it, like, namely age reversal has to look at all elements. So it can't do better than that.
+
+366
+00:55:41.010 --> 00:55:47.130
+Nick Bowman: And that's that's assuming that you're doing constant work at each step. If you're doing some, I don't know, expensive operation and each step, it could get worse.
+
+367
+00:55:48.240 --> 00:55:50.520
+kylie jue: And then first search, specifically, we'll find out tomorrow.
+
+368
+00:55:51.420 --> 00:56:01.740
+Nick Bowman: Yeah yeah in search. And look, look up insertion removal. All of that stuff will take advantage of this fact that we talked about that the pads between any the route and then the element is short.
+
+369
+00:56:02.790 --> 00:56:04.440
+Nick Bowman: But those will apply to sort of
+
+370
+00:56:04.440 --> 00:56:06.660
+kylie jue: Individual operations, rather than this.
+
+371
+00:56:06.870 --> 00:56:08.220
+Nick Bowman: Reversal which requires
+
+372
+00:56:12.450 --> 00:56:13.200
+Nick Bowman: Me to question
+
+373
+00:56:14.610 --> 00:56:34.470
+Demi Lei: Yeah. So you were just talking about how like traverse soul, like the reversal through the entire tree would take over and but like if if I each individual moral compass going to take, like, oh of log n is not going to be, oh of n times login like I kind of don't get that part.
+
+374
+00:56:35.790 --> 00:56:51.480
+Nick Bowman: Well, no. I like i guess i'm saying we specifically just written an algorithm. Right. But that operates by this recursive visiting each node once right and so it'll be over and sort of by virtue of the fact that it visit each one's
+
+375
+00:56:52.560 --> 00:56:54.030
+Nick Bowman: Will see sorry
+
+376
+00:56:56.610 --> 00:57:00.960
+Nick Bowman: Yeah, we'll see tomorrow that right. Like, for example, if I just wanted to find dirty and in this
+
+377
+00:57:00.960 --> 00:57:05.610
+Nick Bowman: Tree right I could do so. Like I wouldn't have to look at all elements in the tree to find area.
+
+378
+00:57:05.940 --> 00:57:12.360
+Nick Bowman: Right. Like I would be able to using some nice structure that actually already exists in this tree that I just mentioned, I would be able to kind of
+
+379
+00:57:12.960 --> 00:57:19.860
+Nick Bowman: Say, oh, I want to go here, here, boom, I found it. Right. I didn't have to look at anything over here and then have to look at anything over here, right.
+
+380
+00:57:20.520 --> 00:57:28.920
+Nick Bowman: The, the, there's nice sort of constraints that we follow the one organizing the data that actually allows us to do that but but
+
+381
+00:57:29.820 --> 00:57:39.420
+Nick Bowman: When we're doing the reversal. It's not like we're individually, looking at each element like over and over again, right. That's kind of repetitive we write a different algorithm, right, whose job is to actually just visit
+
+382
+00:57:41.190 --> 00:57:41.370
+Yeah.
+
+383
+00:57:48.450 --> 00:57:49.440
+edouard des: Awesome. So question.
+
+384
+00:57:50.550 --> 00:58:04.410
+edouard des: Yeah, um, regarding when we, when we traverse it's by definition recursive a like when when we said we're going back to the root node or effectively going back to like to the previous parent and then going back down to the child like we were doing for something like that for search
+
+385
+00:58:05.340 --> 00:58:24.480
+Nick Bowman: Yeah, it's, it's all codified in the stack things. Yeah, exactly. Right. Like when for example when you're doing the, like, for example, you have the the cloud. The like pineapple stack frame, right. And so this stack frame has like three operations. Right. It has like print
+
+386
+00:58:26.160 --> 00:58:26.970
+Nick Bowman: Go left
+
+387
+00:58:28.350 --> 00:58:38.280
+Nick Bowman: Go. Right. Right. And so, you know, this deck frame it can do the first operation. But when it, when it says go left, right, there's another stack frame that gets created for coconut
+
+388
+00:58:38.760 --> 00:58:48.480
+Nick Bowman: Right, and so it will do this entire reversal first right before it returns to the stack frame and says, Okay, I finally completed my going left step. Let me go right
+
+389
+00:58:48.720 --> 00:59:00.210
+Nick Bowman: Right, so, so it's by the recursive nature of the algorithm. It's sort of encapsulated in the stack frame that you're not going to for your root node. For example, you can't go right until you've completely finished your rehearsal process it.
+
+390
+00:59:01.500 --> 00:59:07.230
+edouard des: Says guy that kind of connected to like decision trees and those types of things. We saw where they would keep going on one side.
+
+391
+00:59:07.890 --> 00:59:12.060
+Nick Bowman: Exactly, exactly the way that we saw decision trees being built is is
+
+392
+00:59:12.120 --> 00:59:13.440
+Nick Bowman: Is similar to the way English
+
+393
+00:59:14.370 --> 00:59:17.970
+Nick Bowman: Because it's kind of weird, but you could honestly build a decision tree for the
+
+394
+00:59:17.970 --> 00:59:18.540
+Nick Bowman: Process of
+
+395
+00:59:18.570 --> 00:59:30.450
+Nick Bowman: traversing the tree right i mean it would look identical to the tree itself right but but the way in which would operate as exactly right. Like you would make it, you kind of have to make it all the way down first, before you start working your way back
+
+396
+00:59:32.640 --> 00:59:33.300
+edouard des: Okay, thank you.
+
+397
+00:59:43.350 --> 00:59:46.470
+That's it. In terms of questions and nothing else in the chat.
+
+398
+00:59:47.520 --> 00:59:47.730
+Yeah.
+

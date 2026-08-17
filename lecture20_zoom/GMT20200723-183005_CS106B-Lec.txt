@@ -1,0 +1,80 @@
+00:11:05	dyson ye:	Compilers/interpreters
+00:11:06	Hemant Chaudhary:	Graphics!
+00:11:08	Rohan Chowla:	Machine learning
+00:11:09	Kenneth Fischer:	File reading
+00:11:21	ian rundle:	^^
+00:11:21	Elan Smolar Eisenberg:	Types (primitive, etc.), ai
+00:11:28	hriday chhabria:	Augmented Reality
+00:11:30	Nadia Palar:	template classes, tail end recursion, ifstream + cin
+00:11:33	Sedef Emekli:	ar
+00:11:34	Sami Kunaish:	creating graphics
+00:11:50	Tongjun (Albert) Zhang:	File reading/ simple user interface(if this is possible)
+00:12:20	edouard des:	Creating Graphical User Interfaces
+00:12:51	kathleen bryan:	search and graphics
+00:13:05	David Huang:	graphics
+00:13:56	Aadi M Rane:	is string* and int* different data types altogether, or are they the same type used for different types of variables?
+00:14:45	Nick Bowman:	For our purposes, we will consider them to be distinctly different data types. As you move into future classes (CS107) you will see that its possible to do conversion between different pointer types.
+00:15:31	Thomas Tao Hale:	Wonder if you can point to pointers?
+00:15:54	Nick Bowman:	Yes, that is possible, although we won’t need to do that in this class. Another topic that gets covered in CS107!
+00:16:07	Thomas Tao Hale:	Huh, will google uses later
+00:23:02	shreyas ravi:	do t you also need a node back so you can access parent elements instead of just child?
+00:23:56	Nick Bowman:	@Shreyas for now, we will only define nodes as pointing to the next element in the list, which limits the direction in which we can traverse the list. In practice, having “back pointers” is also helpful but we’re going to stick to just having one pointer per struct for now
+00:24:07	shreyas ravi:	ok cool
+00:24:26	runze yu:	Do we have to define a constructor for Node?
+00:25:12	Nick Bowman:	@Runze no, all structs have a “default” constructor that just default initializes each of the component variables. However, we know that default initialization for pointers just gives us garbage, so this second step here is very important
+00:25:18	klaus cerny:	why not *list.data ?
+00:25:28	shreyas ravi:	could you also not dereference and use the -> instead of dot?
+00:25:41	shreyas ravi:	oh lol just got answered
+00:26:16	Nick Bowman:	@Klaus It has to do with operator precedence, the parentheses are there to make sure the dereferencing happens first.
+00:26:40	Kenneth Fischer:	Does -> only work on structs?
+00:26:44	klaus cerny:	I see. Thx Nick.
+00:27:19	Nick Bowman:	@Kenneth,for structs and classes yeah, basically it only makes sense to use it with something that would normally have the dot operator defined
+00:27:35	Kenneth Fischer:	Ah, I see. Thanks!
+00:27:45	Nick Bowman:	since -> is shorthand for “dereference and then access the struct/class member/field with dot notation"
+00:31:14	Kenny Wang:	what about peek?
+00:31:30	Nick Bowman:	We’ve trimmed down the public interface to only support push/pop for now
+00:31:40	Kenny Wang:	alright
+00:40:23	Kenneth Fischer:	Do you need to include the error header?
+00:40:40	Nick Bowman:	Ah yeah that might be it. We can add that in before going to compile
+00:41:19	Nick Bowman:	Sometimes the “code model” that provides syntax highlighting just gets confused – it looks like after we wrote a couple more lines of code things are back to normal now
+00:44:25	Zelin (James) Li:	i still have trouble understand why we need an additional node call temp if we already store the value we want in topValue
+00:45:10	Nick Bowman:	@James we have to maintain a pointer to the node containing the value 7 s that we can call delete on that node to free the memory associated with it
+00:46:03	max chou:	Why is temp on the stack
+00:46:36	Nick Bowman:	@Max Because it’s just a local variable that we’ve declared and all local variable exist on the stack
+00:47:24	Nick Bowman:	Remember, there’s a difference between the pointer variable and the actual memory that it’s pointing to. In this case, the pointer variable is on the stack, but the node struct that it’s pointing to is on the heap
+00:48:16	runze yu:	If we just delete the pointer in top, wouldn’t that delete everything following it?
+00:48:43	Nick Bowman:	@Runze not quite, freeing linked lists is distinctly different from freeing arrays
+00:49:14	Nick Bowman:	The top pointer only points to a single node – freeing that memory would only result in freeing a single node, not all the nodes in the list
+00:50:24	Elan Smolar Eisenberg:	What do you mean “acting like a client”?
+00:51:00	Nick Bowman:	@Elan this is just referring to using the data structure to complete a certain task (rather than implementing it)
+00:53:28	ian rundle:	How would you catch those? Could you make the program run really slow so the memory could be reused in that time?
+00:54:08	Nick Bowman:	@Ian good question, it’s really tricky to catch errors like  this. Running tests under the debugger can sometimes catch issues like this because the debugger is a little more aggressive about learning out memory that is "freed"
+00:54:43	Nick Bowman:	Another thing you can do is run tests fro many trials or with large input sizes. The probably of getting “lucky” when accessing freed memory will go down as you run the operations lots of times
+00:55:02	Kevin H Fan:	So for this assignment, would it just be a good habit to just run the assignment in debugger even without breakpoints?
+00:55:07	Kevin H Fan:	Just in case
+00:55:56	Nick Bowman:	@Kevin yes, that would be a good idea. Running in both regimes (both with and without the debugger) is a good idea because sometimes memory errors won’t pop up in the debugger but will pop up when you run normally
+00:56:13	Kevin H Fan:	Ah ok thank you
+00:56:30	ian rundle:	Thats so weird lol. Thanks!
+00:56:58	Nick Bowman:	Yes, memory errors are WEIRD! That’s the main takeaway
+01:00:41	Lukas Fullner:	So of course we don't want memory leaks, but is there a way to recover lost memory?
+01:02:15	Nick Bowman:	No, once memory is “lost” in the sense that there are no more pointers referring to it, there is no way to recover it (at least within our programs)
+01:02:28	Nick Bowman:	Eventually your computer is smart enough to collect it, but it can only do so after the program is done running
+01:03:34	Kevin H Fan:	Thank you
+01:03:34	Lukas Fullner:	thank you
+01:03:35	Lawrence Li:	thank you
+01:03:36	Zachary Alon:	Thank you
+01:03:39	Angela Zhang:	Thank you
+01:03:41	Tongjun (Albert) Zhang:	Thank you
+01:03:43	Guozhen Miao:	thank you
+01:03:43	Kenneth Fischer:	Thank you!
+01:03:46	David Huang:	thank you.
+01:03:47	Blake Salvador:	Thank you!
+01:03:51	Shifeng Hong:	Thank you
+01:04:02	max chou:	Maybe I missed this earlier but how do you know what goes on the stack vs heap. I assumed all pointers with the * went on the heap
+01:04:25	Nick Bowman:	All variables that are declared in the format DataType varName; are created on the stack
+01:04:36	Nick Bowman:	only memory that is allocated with the new keyword is created on the heap
+01:04:45	Nick Bowman:	thus Node* temp = new Node; has tw ocomponents
+01:04:51	Nick Bowman:	the pointer variable temp is created on the stack
+01:04:59	Nick Bowman:	but it points to a location in memory that has bene allocated from the heap
+01:05:29	Nick Bowman:	So pointers themselves don’t go on the heap – the memory they point to is what usually exists on the heap
+01:05:58	haoming li:	Have a good one
