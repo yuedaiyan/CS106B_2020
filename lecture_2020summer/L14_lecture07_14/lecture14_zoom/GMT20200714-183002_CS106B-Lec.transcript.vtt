@@ -1,0 +1,2106 @@
+WEBVTT
+
+1
+00:00:02.610 --> 00:00:14.730
+Nick Bowman: Yeah. Awesome. So, um, welcome back everyone. So welcome to our last and talking about recursion and so today's question sort of getting you to reflect back a little bit and it's just asking.
+
+2
+00:00:15.240 --> 00:00:26.970
+Nick Bowman: So far, and all the different ways that you've applied recursion and seen it work so far I'm kind of what's been the most interesting sort of application you've encountered so far to go ahead and put your answers in chat and then we'll go ahead and get started.
+
+3
+00:00:28.710 --> 00:00:34.650
+Nick Bowman: So like I mentioned, today we are finishing up our discussion of recursive problem solving.
+
+4
+00:00:35.100 --> 00:00:43.140
+Nick Bowman: And this is really like this. Is it isn't the finish line. You know, we've been talking about this for a really long time and versions of pretty important topic. And so we dedicate a lot of time to it.
+
+5
+00:00:43.680 --> 00:00:49.560
+Nick Bowman: And so we're just about to kind of wrap up our discussion of recursion and records of backtracking today.
+
+6
+00:00:51.510 --> 00:01:04.980
+Nick Bowman: So today's question to sort of wrap it all up, is we're going to ask ourselves how we can use your cursor backtracking to find the best solution to some very challenging problems and we'll define what challenging problems means before we start answering this question.
+
+7
+00:01:06.360 --> 00:01:13.260
+Nick Bowman: So we'll do some review and we'll talk about this idea of combinations. So it's our sort of last recursive pattern that we haven't talked about yet.
+
+8
+00:01:14.070 --> 00:01:23.190
+Nick Bowman: We'll spend most of our time talking about this idea of its problem called the knapsack problem, which is a very famous problem in computer science, and then we'll do a little bit of recursion wrap up at the end.
+
+9
+00:01:25.170 --> 00:01:35.730
+Nick Bowman: So yes, it is lecture was all about recursive backtracking with data structures and so we saw a lot about this idea of choosing exploring and then explicitly undoing and changes to data structures or
+
+10
+00:01:37.410 --> 00:01:46.410
+Nick Bowman: First, we talked about subsets we saw some examples of generating subsets. This idea of just picking all sort of sub collections of items out of an initial collection.
+
+11
+00:01:47.460 --> 00:01:54.450
+Nick Bowman: And we saw this interesting recursive pattern that our decisions really just involved asking ourselves to questions about a given item.
+
+12
+00:01:54.810 --> 00:02:04.710
+Nick Bowman: And do we include that item in our subset or do we not and if we continuously. Ask yourself this question and the recursive process will actually allow us to generate all possible subsets of options.
+
+13
+00:02:06.360 --> 00:02:15.180
+Nick Bowman: We saw a decision tree and sort of illustrated this idea. And so, this again is important idea coming back of keeping track of the remaining decisions that we have left to make
+
+14
+00:02:16.020 --> 00:02:29.700
+Nick Bowman: Will see that again today. It's sort of keep hammering it in, but it's a very important pattern about keeping track of both the decisions you've made so far and the ones that you will have to make. And those two combined can define what your recruiters of cases interface cases are
+
+15
+00:02:31.590 --> 00:02:41.070
+Nick Bowman: But some of the important things that we saw come out of subsets rate. Remember we saw that we had to explicitly I'm shoes, the decisions that we're making. And we were passing sets by reference. And so editing them.
+
+16
+00:02:41.640 --> 00:02:51.870
+Nick Bowman: Made persistent changes and Kelly food as well. The end when someone is asking question, the whole reason that this isn't necessary is because any one path down the
+
+17
+00:02:52.200 --> 00:03:05.580
+Nick Bowman: Tree can't completely destroy our set of options. Right. And so as we come back up the tree of need to react the things that we had removed along the way to give all paths to the tree and sort of an equal opportunity to make decisions and to have access to
+
+18
+00:03:06.030 --> 00:03:15.540
+Nick Bowman: The same set of our meeting options each step of the tree. And again, second bullet point there, keep seeing as idea of keeping track of the decisions we've made so far and the ones that we have left.
+
+19
+00:03:16.020 --> 00:03:20.940
+Nick Bowman: And we again so recurring idea of building up solutions and using helper functions and all that.
+
+20
+00:03:22.530 --> 00:03:29.340
+Nick Bowman: And then we talked about choosing your own bias jury as our application of subsets. And again, our decision tree look
+
+21
+00:03:30.210 --> 00:03:39.480
+Nick Bowman: Almost exactly the same except now we were keeping track of the sum total bias of the current subset. We were selecting to just be able to make a decision about whether or not it was unbiased or not.
+
+22
+00:03:40.890 --> 00:03:56.370
+Nick Bowman: And again, the base case and recursive case look very similar to what we saw before with the difference that in our base case. We only displayed juries with a certain property. And so the sort of idea of constrained output will be kind of a main feature of today.
+
+23
+00:03:58.200 --> 00:04:04.890
+Nick Bowman: And then we saw this cool trick where we introduced this idea of an index to actually keep track of which decision we were going to make next
+
+24
+00:04:05.400 --> 00:04:14.550
+Nick Bowman: That allowed us to sort of avoid expensive addition and removal operations and and that was actually really nice when it came to optimizing the efficiency of our recursive solutions.
+
+25
+00:04:16.170 --> 00:04:23.460
+Nick Bowman: And so in the summary there was being able to look at all possible subsets and then trim down to a smaller selection of them was very powerful.
+
+26
+00:04:23.850 --> 00:04:36.690
+Nick Bowman: And we saw a nice application of this sort of index optimization. And in order to keep track of where in the decision making process work. And like I said, it will be useful on assignment three and will actually use it again today and will actually use both of us.
+
+27
+00:04:39.600 --> 00:04:43.590
+Nick Bowman: Will actually use both of these opportunities today.
+
+28
+00:04:45.450 --> 00:04:55.770
+Nick Bowman: And then the last thing that we saw yesterday that we wrapped up on was his idea of me solving but revisiting it with a different algorithm. So depth first search, rather than the breath first search that you did on the assignment.
+
+29
+00:04:56.640 --> 00:05:06.210
+Nick Bowman: And we saw that our decision tree involved sort of movement, making one step in each direction at a time and figuring out which of the valid moves that we had left to us that we were going to take
+
+30
+00:05:06.810 --> 00:05:11.790
+Nick Bowman: And then we were able to keep track of the path through our maze and over to actually find a solution.
+
+31
+00:05:13.080 --> 00:05:26.730
+Nick Bowman: And we introduced this idea of, you know, using helper functions to keep track of where we've been so far and actually even using a grid of information to keep track of what was valid and what was not and what had been visited before and what was not
+
+32
+00:05:27.750 --> 00:05:35.550
+Nick Bowman: A lot of you may find that useful once you get to working on the bottom portion of assignment for and so highly recommend revisiting that I'm starting to get working on that.
+
+33
+00:05:36.750 --> 00:05:48.420
+Nick Bowman: And we saw, I won't run the videos, but I included them again in actually I'll just run them while I talk we included this idea of these two visualizations with depth research on the left and breadth first on the right.
+
+34
+00:05:50.160 --> 00:05:53.550
+Nick Bowman: And you could actually see the two of them kind of competing
+
+35
+00:05:54.030 --> 00:06:00.870
+Nick Bowman: And also the way in which they differ. You can see how the breath versus always looking at passive the same link first before moving on.
+
+36
+00:06:01.230 --> 00:06:05.220
+Nick Bowman: Whereas the depth for search kind of puts his head down and kind of keeps trying to find a solution.
+
+37
+00:06:05.790 --> 00:06:10.380
+Nick Bowman: And we saw that for the mean solving problems, specifically depth for search actually finished a little bit quicker.
+
+38
+00:06:11.280 --> 00:06:18.990
+Nick Bowman: And then we saw a general comparison of the two algorithms, we saw that depth for search like recursion is the first search, there's a slide so
+
+39
+00:06:19.800 --> 00:06:30.210
+Nick Bowman: That said that. I mean, that's true, pretty much anytime we're doing recursion, the branching structure. It's always going to make it way all the way down to the leaves of the tree first before it comes back up and explores another possibility.
+
+40
+00:06:31.920 --> 00:06:39.360
+Nick Bowman: But on the other hand, breath research is really nice. If you care about finding the shortest possible time because it will always explore shorter path before it will look at longer pass
+
+41
+00:06:39.930 --> 00:06:46.740
+Nick Bowman: And we talked about that. That first search is actually a little bit more memory efficient in the, in the sense that it doesn't have to keep track of all partial path.
+
+42
+00:06:48.030 --> 00:06:56.430
+Nick Bowman: And and so yeah and so that was sort of our summary of what we saw yesterday and then today to kind of finish off our story every curse of
+
+43
+00:06:57.000 --> 00:07:03.390
+Nick Bowman: Recursion. We're going to ask ourselves if we can use recursive backtracking to now find the best solutions to challenging problems.
+
+44
+00:07:03.720 --> 00:07:15.960
+Nick Bowman: We've looked at all solutions. We've looked at finding one solution. And now we're going to kind of combine those two a little bit and find the best solution. So we're going to look at all solutions, but we're only going to return and find the best one.
+
+45
+00:07:17.280 --> 00:07:24.030
+Nick Bowman: And this is sort of the last category of what we saw what we could use backtracking for. And so this is going to kind of finish off our journey.
+
+46
+00:07:24.300 --> 00:07:30.990
+Nick Bowman: And along the way, we're going to talk about this idea of generating combinations as well and kind of another specific problem that we can solve with that.
+
+47
+00:07:32.970 --> 00:07:42.840
+Nick Bowman: And so what are combinations. And so this is a this is a photo of the nine US Supreme Court justices. And for those of you that know a little bit about how the supreme court system works.
+
+48
+00:07:43.500 --> 00:07:52.080
+Nick Bowman: You need five of these nine justices to agree in order to set a precedent and when they set a precedent. It's very important. And it's very impactful and it's referred to
+
+49
+00:07:52.470 --> 00:07:54.840
+Nick Bowman: For literally hundreds of years after the decision is made.
+
+50
+00:07:55.710 --> 00:08:05.610
+Nick Bowman: And so you might want to ask yourself, you know, if you're thinking about ways in which they could set a precedent and kind of what are all the ways you could pick five of them right and exactly five because that's sort of. That's how much we need
+
+51
+00:08:06.630 --> 00:08:08.880
+Nick Bowman: Off of the court in order to set a decision.
+
+52
+00:08:09.900 --> 00:08:19.980
+Nick Bowman: And this is gonna. This is going to lead us to this idea of combinations specifically what this problem is asking us to do is to pick a combination of five justices out of this original group of nine.
+
+53
+00:08:21.420 --> 00:08:28.290
+Nick Bowman: And but this sounds very similar to what we did yesterday right like these five justices, they're just a sub collection of the overall nine
+
+54
+00:08:28.890 --> 00:08:36.150
+Nick Bowman: Like, why don't we make a distinction between this idea that this is a combination of justices versus yesterday, we could have just done right and all subsets of justices
+
+55
+00:08:37.650 --> 00:08:47.610
+Nick Bowman: And it's a very subtle difference but just the main difference here is that combinations. Always have a fixed size like a specified fixed size. I remember when we talked about subsets.
+
+56
+00:08:48.180 --> 00:08:56.730
+Nick Bowman: There was no constraint on size, basically. And, you know, you could have the empty subset. You could have a subset with everything that you started off with and then sort of anywhere in between.
+
+57
+00:08:57.840 --> 00:09:12.330
+Nick Bowman: But when we specifically are going to deal with combinations. We're going to start introducing it's our first exposure to introducing constraints on subsets and so combinations. In this case, you can think of it is all subsets of size five out of our original group of nine justices
+
+58
+00:09:13.440 --> 00:09:20.130
+Nick Bowman: And so you might ask yourself what these two problems are so similar could reduce generate all of them and then filter out all of those five
+
+59
+00:09:20.670 --> 00:09:30.660
+Nick Bowman: And the answer is we could, but you know that seemed a little bit inefficient seems to be doing a little bit more work. They need to be doing. So let's see if we can develop a specific approach for for actually generating combinations
+
+60
+00:09:31.920 --> 00:09:42.390
+Nick Bowman: And intuition. And so these are do dots represent on nine or nine justices and intuition is going to look really really similar to what we saw subsets. Right. The idea is you can consider one person.
+
+61
+00:09:43.050 --> 00:09:47.280
+Nick Bowman: And then you have two options. You can either exclude this person from your combination
+
+62
+00:09:48.090 --> 00:09:57.600
+Nick Bowman: If you do, that means you have to select five out of the remaining eight people. So you can select those five you can select those five and it's like those five, all of those are valid combinations
+
+63
+00:09:58.470 --> 00:10:12.840
+Nick Bowman: And so, you know, one thing that you can do is you can exclude the first person and then keep your desired combination size, the same but your, your size of remaining elements to choose from shrinks a little bit. So instead of choosing five out of nine, which was five out of eight instead
+
+64
+00:10:14.550 --> 00:10:21.570
+Nick Bowman: But the other thing that we can do is we can choose to include this person, similar to the subsets we could have included them in our subset. So let's include them in a combination
+
+65
+00:10:22.380 --> 00:10:32.670
+Nick Bowman: And if we do that now we only have four o'clock four spots left so out of the remaining eight we can choose those for those for those four are lots of other possibilities.
+
+66
+00:10:33.540 --> 00:10:47.130
+Nick Bowman: And so the second thing that we can do is we can, if we wanted to choose five people out of nine is we can select the one that we're considering at the moment and then just select for more out of the remaining eight so both are combination size and our size of remaining health districts
+
+67
+00:10:48.660 --> 00:10:55.980
+Nick Bowman: And so what we want to do is let's actually write a function that builds all combinations and that we're interested in.
+
+68
+00:10:56.490 --> 00:11:08.340
+Nick Bowman: And before. And so we'll have we'll just represent our combinations of sets, it's a it's, there's no duplicates on the Supreme Court. And so we can represent their names as strings, and I'm going to set
+
+69
+00:11:09.480 --> 00:11:16.410
+Nick Bowman: But one thing that we saw before, is that before we just printed out all the solutions we in our base case. We were just do some printing and call it a day.
+
+70
+00:11:17.820 --> 00:11:26.550
+Nick Bowman: But you know sometimes you might actually want to do something with those combinations. You know, you might want to calculate the probability that these people agree or something interesting like that.
+
+71
+00:11:27.300 --> 00:11:33.690
+Nick Bowman: So let's actually build up a data structure. This time, let's actually return a collection that stores all of the possible combinations
+
+72
+00:11:34.320 --> 00:11:46.050
+Nick Bowman: And in order to do that, we're going to need a nested data structure right we're going to need. If a set of strings represents an individual combination. We're going to need a set of sets of strings and merge represent all possible combinations
+
+73
+00:11:47.820 --> 00:11:57.090
+Nick Bowman: You know, it's not unusual to see containers Nestor this way. You've seen this a lot in your prior assignments and discussions at Ts. So now we're just going to apply that to this idea of building up competitions.
+
+74
+00:11:59.430 --> 00:12:06.510
+Nick Bowman: And so this will be our function return type. And so I want what I want you to realize is before most of the backdrop and problems that we did.
+
+75
+00:12:07.140 --> 00:12:10.710
+Nick Bowman: How to Avoid return type because we were just print things out in the base case.
+
+76
+00:12:11.490 --> 00:12:22.920
+Nick Bowman: But, you know, there's no restriction that we need to always return nothing we can return a meaningful value as a return type. And in this case we will choose our return type to be this collection of all possible combinations
+
+77
+00:12:24.930 --> 00:12:38.220
+Nick Bowman: So let's examine some cases. So say we come into the situation where we have so far chosen five justices and and so now we need to pick zero more, but we still have some selections for me.
+
+78
+00:12:38.760 --> 00:12:48.150
+Nick Bowman: And. But in this case, there's no need to keep looking right so in this case we can just return the set continuing Ginzburg Robert score such common sense. Right.
+
+79
+00:12:49.500 --> 00:13:02.010
+Nick Bowman: So this can be, we can think of this as our first base case. Right. So if we have no more spots to fill in our combination right if we've already picked five people and then we're good to go. So let's just return a set containing that
+
+80
+00:13:04.740 --> 00:13:14.100
+Nick Bowman: Another place we could run into is we could run into a place where we need to sort of pick no more justices
+
+81
+00:13:14.880 --> 00:13:31.080
+Nick Bowman: Again, out of still some remaining combinations, but maybe at this point, we haven't chosen anyone so far and. And so in this case we can just return the empty set. And again, just saying, Okay, at this point, we have no more spots left. So we just have to return what we have so far.
+
+82
+00:13:32.310 --> 00:13:33.870
+Nick Bowman: And this can be this will be the second part.
+
+83
+00:13:35.970 --> 00:13:42.840
+Nick Bowman: And so if we start to explore this as decision tree again. This one gets a little bit complicated when you have nine people to choose from and
+
+84
+00:13:43.590 --> 00:13:47.340
+Nick Bowman: You know, there's a lot of depth in the tree. So we're not going to draw out the whole tree.
+
+85
+00:13:48.120 --> 00:13:56.880
+Nick Bowman: But you can imagine that we start off with this goal of picking five justices out of our initial collection of nine. And at that point, we haven't chosen anyone yet.
+
+86
+00:13:57.450 --> 00:14:02.100
+Nick Bowman: And so we ask ourselves a decision about the first thing that we have to make a decision.
+
+87
+00:14:02.550 --> 00:14:15.960
+Nick Bowman: So we asked ourselves, all right, what do we do with Elena Kagan. Well, we can choose to include her, at which point we now only need for more spots to fill out of our immune eight justices, and we include her as part of our combination that we've chosen
+
+88
+00:14:16.950 --> 00:14:27.660
+Nick Bowman: Or we exclude her and we say, all right, now we have, we still have five spots to fill. We still now now we only have eight more justices to choose from. And we haven't added her to our sectors.
+
+89
+00:14:29.220 --> 00:14:37.590
+Nick Bowman: And like I said, this is just the beginning of the tree, but it kind of helps us to understand and formalize that recursive intuition that we saw earlier when we had this sort of dotson's
+
+90
+00:14:39.840 --> 00:14:45.390
+Nick Bowman: And so how can we sort of form lines, what are, what are combinations decision tree has here.
+
+91
+00:14:46.320 --> 00:14:55.230
+Nick Bowman: Well, again, the first two bullet points are exactly the same as we saw with subsets. Basically, are we included live an element, our options are to include them or to exclude them.
+
+92
+00:14:55.920 --> 00:15:02.070
+Nick Bowman: And then the information we store along the way is what we built so far, the number of elements to choose from.
+
+93
+00:15:02.460 --> 00:15:08.880
+Nick Bowman: And then the last critical part is this remaining number of spots left to fill. That's the new information that we're dealing with.
+
+94
+00:15:09.240 --> 00:15:18.630
+Nick Bowman: And when we think about the constraint on our subset. This is it. Right, we, we not only have a fixed number of spots to fill and so we need to keep track of how many of them we filled and how many of them aren't.
+
+95
+00:15:19.350 --> 00:15:29.130
+Nick Bowman: And so we're going to keep track of that function. And so in order to do that, right, when we actually go to write this function in a second, you'll see that we now have an extra parameter to deal with.
+
+96
+00:15:29.700 --> 00:15:37.260
+Nick Bowman: We're just going to call it K and K is just the number of spots that we have left to fill K is like that. We want to find a combination of size k
+
+97
+00:15:38.550 --> 00:15:42.180
+Nick Bowman: And so when we break down our base in our records of cases.
+
+98
+00:15:43.410 --> 00:15:53.550
+Nick Bowman: Are choose explore are choosing our explorer look relatively similar right we pick an element out of remaining retry, including it and retry executing it and we do to recursive calls from there.
+
+99
+00:15:54.690 --> 00:16:01.560
+Nick Bowman: But the important part that's different now is we're going to store the sets that we get back from that. Right. So remember our function is now returning something
+
+100
+00:16:01.800 --> 00:16:08.160
+Nick Bowman: It's now returning a set of all combinations that are generated and so we should probably store that value because we're going to want to do something with that later on.
+
+101
+00:16:08.880 --> 00:16:16.530
+Nick Bowman: And then at the very end, we can just combine the two sets that we got back from both including and from excluding and then return that as I finally
+
+102
+00:16:18.630 --> 00:16:31.980
+Nick Bowman: And this is this is the part that's different, right before our recursive case our functions overall didn't have returned values for the most part. And so now that we're going to be returning a data structure that's kind of the last component of our recursive case that is a little bit
+
+103
+00:16:33.930 --> 00:16:47.490
+Nick Bowman: And then our base cases are going to look similar but with one extra wanted added. So just like before, if we don't have any remaining elements to choose from. Then we'll just say, all right, we're done. We can't form any more combinations. So we were turning the empty set.
+
+104
+00:16:48.780 --> 00:16:59.880
+Nick Bowman: And then if we don't have any more space. So if we've maxed out our value. Okay. And we don't have any more spots left. We've already generated our five justices, then we just returned a set containing the combination
+
+105
+00:17:03.690 --> 00:17:11.280
+Nick Bowman: Yeah, yeah. Questions in the class in the chat if you could clarify the difference between permutations and combinations
+
+106
+00:17:12.060 --> 00:17:21.060
+Nick Bowman: Uh, yeah, between permutations and companies. Yes. Okay. So permutations, remember the order in which we selected things mattered.
+
+107
+00:17:21.420 --> 00:17:30.390
+Nick Bowman: And so because of that every possible option was was a possible like we had to loop over all possible options for every possible spot in our output.
+
+108
+00:17:30.960 --> 00:17:41.190
+Nick Bowman: And so that's why we had sort of the variable branching factors and we considered like for one or genetic permutations of a string we consider all letters for every single location.
+
+109
+00:17:41.790 --> 00:17:44.190
+Nick Bowman: Or all the remaining letters for every single location.
+
+110
+00:17:44.790 --> 00:17:53.160
+Nick Bowman: And combinations. It doesn't matter the order in which we select the people. That's why when I say the choose step is just to pick an element and then make a decision about it.
+
+111
+00:17:53.340 --> 00:18:06.750
+Nick Bowman: It's very similar to subsets. Right. We don't care about the order. We just care about eventually is each person included or excluded. And so we can just arbitrarily pick any element then make a decision about whether to include them or exclude them and then call it
+
+112
+00:18:08.040 --> 00:18:09.030
+Nick Bowman: Does that answer the question.
+
+113
+00:18:11.850 --> 00:18:20.280
+Nick Bowman: I think so. Okay. Cool. Alright. So then let's jump into coating this. So here's the function or asked to implement
+
+114
+00:18:20.670 --> 00:18:29.160
+Nick Bowman: And for today's purposes. I've already written the helper. I've already defined the helper function and then just set up a little bit of scaffolding code down here.
+
+115
+00:18:29.550 --> 00:18:40.650
+Nick Bowman: We've already seen a ton of examples of using helper function. So we're not going to go over that explicitly but it's the same idea, and where we now introduce our second set of chosen things to this function.
+
+116
+00:18:41.400 --> 00:18:49.170
+Nick Bowman: And so let's try to formalize these based cases and recursive cases are exactly what you just saw in the slides, I'm so let's just try
+
+117
+00:18:50.670 --> 00:18:56.790
+Nick Bowman: So first one says if we filled up all the spots so far. And then we know that we're done.
+
+118
+00:18:57.300 --> 00:19:04.890
+Nick Bowman: So if we know that we don't have any more space left. So if we want it for finding a combination of zero things. That means, sort of, we're out of space.
+
+119
+00:19:05.520 --> 00:19:11.550
+Nick Bowman: And then we can just return and the notation here is going to look a little bit interesting.
+
+120
+00:19:12.090 --> 00:19:24.510
+Nick Bowman: But the same way that you can define a set into a variable with this curly brace syntax and you can define it in a return value as well. So you can think of this as just saying return a set containing this chosen combination
+
+121
+00:19:26.130 --> 00:19:35.940
+Nick Bowman: And so that is our first case. And then so when we get to our base, second base case basically says that if we need to find a combination
+
+122
+00:19:36.990 --> 00:19:46.200
+Nick Bowman: But the number of options we have left isn't enough to fill the number of spots. We need to fill. Then we also know that we can stop and that's that that's part of the constraints of our problem.
+
+123
+00:19:46.770 --> 00:19:58.860
+Nick Bowman: With when we were generating all subsets we didn't really care. We only stopped from your run up when we ran out of items, but in this case we can actually stop if the number of things that is remaining
+
+124
+00:20:00.300 --> 00:20:06.600
+Nick Bowman: Size is actually less than the value. Okay. And if that happens to be true.
+
+125
+00:20:08.070 --> 00:20:15.000
+Nick Bowman: Then we can just say, all right, at this point, I can't create any combination. So I'm just going to return the visa.
+
+126
+00:20:17.160 --> 00:20:28.080
+Nick Bowman: And then we can get to the recursive case. So this is kind of most of what you'll see here will look very similar to what we saw yesterday. So remember, we can pick an element to consider.
+
+127
+00:20:31.350 --> 00:20:33.570
+Nick Bowman: We always want to remove it.
+
+128
+00:20:34.710 --> 00:20:36.780
+Nick Bowman: Are set of the elements
+
+129
+00:20:40.020 --> 00:20:45.900
+Nick Bowman: And then we have our two options, right. So we have our in house. Let's do our exclude stuff.
+
+130
+00:20:47.220 --> 00:20:54.900
+Nick Bowman: And then the key difference here is again remember because our recursive function is actually returning something. Let's store the result of that person.
+
+131
+00:20:56.250 --> 00:21:03.660
+Nick Bowman: So we know that we're actually going to get a set of set of strings. And so this is combinations out
+
+132
+00:21:04.530 --> 00:21:12.690
+Nick Bowman: And that will be our recursive call, and the recursive call should look very similar to what we did yesterday, right, he said, take the remaining elements.
+
+133
+00:21:13.020 --> 00:21:23.070
+Nick Bowman: And take the same value of k, right. We haven't we haven't chosen to fill any spots yet. So the value of case, instead of saying, and then take this subset that we support.
+
+134
+00:21:25.200 --> 00:21:35.400
+Nick Bowman: And then we can do a very similar thing for any putting the element. And remember, this time we choose to. OK, I can just add
+
+135
+00:21:36.600 --> 00:21:38.160
+Nick Bowman: Elements are chosen set
+
+136
+00:21:39.870 --> 00:21:48.240
+Nick Bowman: And then our overall process looks very similar to do their scripts of calls except now we're generating all the combinations with the element.
+
+137
+00:21:50.250 --> 00:21:51.420
+Nick Bowman: Recursive function.
+
+138
+00:21:53.010 --> 00:22:06.750
+Nick Bowman: And now, the important part is we've taken up one spot. So our value of K now changes. We have one less bottom initially time and and that's important for the recursive function to actually be able to reach this base case over here.
+
+139
+00:22:08.220 --> 00:22:13.110
+Nick Bowman: And then, and let's do our own shoes.
+
+140
+00:22:14.820 --> 00:22:17.760
+Nick Bowman: And so again, remember we always need to undo.
+
+141
+00:22:20.550 --> 00:22:28.680
+Nick Bowman: The two operation that we did before. So we update our children and our meeting sets again looks exactly the same as we saw yesterday.
+
+142
+00:22:29.610 --> 00:22:40.290
+Nick Bowman: But then the real magic comes in this last return statement. And what this last return statement basically allows us to do is, it says all of the combination that I know how to generate
+
+143
+00:22:40.950 --> 00:22:50.400
+Nick Bowman: Is really just the union of the Congress combinations that I generated that didn't include myself and the combinations that I included that include
+
+144
+00:22:51.510 --> 00:22:54.930
+Nick Bowman: And together those two things combined together.
+
+145
+00:22:57.480 --> 00:23:11.010
+Nick Bowman: And so if you look very, very similar to our sub site code from yesterday, except with one extra base case for for our constraints and then introducing this idea actually returning value to our first call and then combining them to get
+
+146
+00:23:12.330 --> 00:23:13.830
+Nick Bowman: Their questions in the chat.
+
+147
+00:23:15.330 --> 00:23:17.850
+Nick Bowman: And sorry, I misspoke earlier in the class.
+
+148
+00:23:19.080 --> 00:23:22.470
+Nick Bowman: Well, there's one question about the exclusive I'm doing here.
+
+149
+00:23:23.670 --> 00:23:26.100
+Nick Bowman: And why
+
+150
+00:23:30.330 --> 00:23:31.800
+Nick Bowman: I'm doing the changes to remain
+
+151
+00:23:35.550 --> 00:23:36.810
+Nick Bowman: However, be empty.
+
+152
+00:23:39.960 --> 00:23:52.140
+Nick Bowman: So remember, by, by the depth first nature of recursion right this recursive call needs to complete like will complete fully before this line down here ever executes
+
+153
+00:23:52.560 --> 00:24:01.320
+Nick Bowman: And so if you keep making recursive calls, right, you will keep removing from remaining over and over and over and over again until you hit this base case.
+
+154
+00:24:02.040 --> 00:24:04.590
+Nick Bowman: And only after you hit this base case. Right.
+
+155
+00:24:05.520 --> 00:24:15.150
+Nick Bowman: In order to complete this recursive call, and only after you do that very similar process to do that for the other case as well. Then the line to do the and choosing actually happens.
+
+156
+00:24:15.540 --> 00:24:29.850
+Nick Bowman: So remember, yeah. Because this recursive call has to complete fully you will keep removing over and over and over and over again until you reach this base case for one of these two bass cases before the before the undoing to the two days.
+
+157
+00:24:34.470 --> 00:24:35.250
+Question.
+
+158
+00:24:37.980 --> 00:24:42.330
+Nick Bowman: Question I'm leaving is how you are justice.
+
+159
+00:24:43.530 --> 00:24:44.100
+And there are
+
+160
+00:24:48.930 --> 00:24:50.670
+Nick Bowman: Yes, that's a great question. So
+
+161
+00:24:51.810 --> 00:25:05.820
+Nick Bowman: We so we include this also as like as a sort of an error safeguard right like if someone asks us to find a combination of seven items from two things, right. Like, that doesn't really make sense. And I do think you are.
+
+162
+00:25:06.660 --> 00:25:18.600
+Nick Bowman: Well know if you think about it, actually it does happen, even in this case as well. Right. So for this first set of recursive calls the size of remaining is always decreasing, but the size of k is staying the same.
+
+163
+00:25:18.930 --> 00:25:24.690
+Nick Bowman: Right. And so if you if you're only following the branch where you choose to not include someone in your combination
+
+164
+00:25:25.230 --> 00:25:36.060
+Nick Bowman: And first, you'll have nine things to choose from and five spots, but then you'll have eight and 5756 and five. Five and five. And then finally, you'll be trying to choose for things
+
+165
+00:25:36.600 --> 00:25:44.940
+Nick Bowman: Or you'll have four things to choose from. But you'll have five spots to fill. And at that point, it doesn't make sense to keep going down workers of truth, because at that point you know it's not possible.
+
+166
+00:25:45.600 --> 00:25:58.890
+Nick Bowman: And so right. It's important to realize that both we have values of k that are changing and and we have values of like our size of our remaining stuff that is changing. And so we need recursive cases that take both of those things into consideration.
+
+167
+00:26:00.300 --> 00:26:00.480
+Yeah.
+
+168
+00:26:02.880 --> 00:26:03.090
+Yeah.
+
+169
+00:26:09.660 --> 00:26:12.840
+Nick Bowman: Well, that's what's going on, let me just run this demo and show you how this works.
+
+170
+00:26:13.230 --> 00:26:27.630
+Nick Bowman: And so what we see here is we're actually able to generate all combinations. Notice that these all have size five which is exactly what we wanted. And we're able to find out that there's actually 126 total possible ways that the justices could agree to your second question.
+
+171
+00:26:30.480 --> 00:26:32.940
+Nick Bowman: The other question was, how was this code, avoid repetition.
+
+172
+00:26:37.140 --> 00:26:38.400
+Nick Bowman: Is it a word.
+
+173
+00:26:39.570 --> 00:26:42.870
+Nick Bowman: What do you mean, I think the question is
+
+174
+00:26:43.890 --> 00:26:47.310
+Nick Bowman: Why would any of those things be printed out be
+
+175
+00:26:48.570 --> 00:26:49.260
+The same
+
+176
+00:26:51.000 --> 00:26:51.930
+Nick Bowman: Um,
+
+177
+00:26:53.250 --> 00:26:54.720
+Nick Bowman: I think
+
+178
+00:26:56.820 --> 00:27:02.520
+Nick Bowman: I mean, well I mean from a baseline level, it's because we're storing them in a set, so we can't have any duplicates by that way anyway.
+
+179
+00:27:02.940 --> 00:27:06.570
+Nick Bowman: But this process actually will not generate at duplicates.
+
+180
+00:27:07.170 --> 00:27:20.220
+Nick Bowman: Just like out of baseline level. I think the best way to explore that, as to like actually dry out the decision tree and see that because of the way that we're choosing to make the decisions were like, at one level we're doing an include execute have one justice one level.
+
+181
+00:27:20.940 --> 00:27:31.560
+Nick Bowman: Or even going back to the subsets example from yesterday with Kylie Nick and trip and just the way that the that the recursion sort of worked itself out when you're choosing to make a decision about one person at each level.
+
+182
+00:27:32.460 --> 00:27:42.660
+Nick Bowman: You like you, you won't ever get to the exact same subset or combination more than once. I mean, that's kind of just by the nature of the way that we chose choose our decisions.
+
+183
+00:27:43.800 --> 00:27:48.990
+Nick Bowman: Yeah, I would have to go through a decision tree to sort of prove that, too. But I would recommend sort of doing that.
+
+184
+00:27:50.940 --> 00:27:51.120
+Yeah.
+
+185
+00:27:53.340 --> 00:27:59.880
+Nick Bowman: Yeah. So then, some of the takeaways and we got from doing these combinations again or recursive code looked very similar
+
+186
+00:28:00.360 --> 00:28:08.400
+Nick Bowman: To the process that we have for generating subsets and really the main differences are that we were constraining the subset sides. So we introduced this new parameter of k
+
+187
+00:28:08.820 --> 00:28:10.770
+Nick Bowman: To let us know how many spots, we have left.
+
+188
+00:28:11.370 --> 00:28:22.230
+Nick Bowman: And but at the same time, right. We were just building up and then the other main difference is we were actually keeping track of all these combinations. And so we were building up a set of subsets or a set of combinations along the way.
+
+189
+00:28:22.620 --> 00:28:26.580
+Nick Bowman: And that allowed us to actually store all of them and count them and do interesting things.
+
+190
+00:28:27.480 --> 00:28:39.870
+Nick Bowman: And then that translated to our base case where instead of just printing things out. We now actually return data structures. Continuing our individual sets and in the recursive case, we were able to sort of combine those at every step to get our overall
+
+191
+00:28:42.570 --> 00:28:45.480
+Nick Bowman: And so then, so just a quick break for announcements today.
+
+192
+00:28:46.830 --> 00:28:52.860
+Nick Bowman: So just a reminder, again, the mid core diagnostic is coming up. This is all the same information from yesterday, so I'm not going to repeat it.
+
+193
+00:28:53.670 --> 00:28:59.910
+Nick Bowman: We did just post a bunch of additional practice problems as well on that page. And so we highly recommend checking that out.
+
+194
+00:29:00.690 --> 00:29:07.680
+Nick Bowman: And remember that the assignment is due on Thursday night, and then we are working on planning a diagnostic review session on Thursday night.
+
+195
+00:29:08.100 --> 00:29:17.100
+Nick Bowman: And it'll likely be from seven to eight or seven 830 and we're trying to see what we can do about who can host it so that miners could potentially attend
+
+196
+00:29:17.910 --> 00:29:29.940
+Nick Bowman: But if not, then triple hosted and we'll just do a recording. Just the same way that we do for the hours so would recommend checking out the material. I'm going to be a good, a good way to review and what we've done over the first three weeks.
+
+197
+00:29:32.250 --> 00:29:43.050
+Nick Bowman: Cool. So now let's talk about or spend the last sort of half of class today kind of finally answering this question, what it means to find best solutions and to solve this problem of recursive optimization
+
+198
+00:29:44.220 --> 00:29:54.720
+Nick Bowman: And before we talk about that actually want to introduce this notion of what hard problems are. We kept X ourselves like how, how can we find, you know, solutions to hard problems.
+
+199
+00:29:56.160 --> 00:30:03.360
+Nick Bowman: And what I mean when I say sort of hard or challenging problems. So there's actually different categories of problems in computer science.
+
+200
+00:30:03.720 --> 00:30:12.750
+Nick Bowman: And and when we refer to some of them as as hard to solve. They're actually problems that have been proved by people that that there is no efficient way to solve them.
+
+201
+00:30:13.230 --> 00:30:18.360
+Nick Bowman: And these problems are called NP harder NP complete and we have a whole class on this.
+
+202
+00:30:18.870 --> 00:30:28.950
+Nick Bowman: On this set of set of problems. So if you're in CS one of three and you either have seen this already, or you will see this a little bit later on if you're not in the class would highly recommend taking it through the class.
+
+203
+00:30:30.780 --> 00:30:37.080
+Nick Bowman: But what we say when we mean like these problems are actually hard to solve it means that there's no sort of good way to find the solution.
+
+204
+00:30:37.530 --> 00:30:47.730
+Nick Bowman: And literally the only possible way that you can get an exact answer to the question is by trying all possible solutions and and looking at all possible solutions and picking the best one.
+
+205
+00:30:48.630 --> 00:30:57.630
+Nick Bowman: And oftentimes these problems do involve finding permutations. You know, we talked about permutations. There's always n factorial permutations and things
+
+206
+00:30:58.200 --> 00:31:10.920
+Nick Bowman: Or combinations subsets we talked about, there's always two to the end and subsets of n possible items. And those are really, really large numbers for, you know, like, even just small values of that.
+
+207
+00:31:11.400 --> 00:31:16.740
+Nick Bowman: And so these problems are hard to solve because you literally have to look at all possible solutions in order to be able to solve.
+
+208
+00:31:18.570 --> 00:31:27.300
+Nick Bowman: But the nice thing is we've just spent a week and a half, learning about a way to solve these kinds of problems and to find really nice and elegant ways to try all possible solutions.
+
+209
+00:31:27.690 --> 00:31:35.820
+Nick Bowman: And so then we're going to the last layer that will happen today is how do we actually put on top of that, this notion of finding the best one on one.
+
+210
+00:31:37.620 --> 00:31:41.430
+Nick Bowman: And the problem we're specifically going to talk about is this problem called the knapsack problem.
+
+211
+00:31:42.030 --> 00:31:49.950
+Nick Bowman: Is it's actually a very famous problem in computer science. So by the end of today, you'll be able to like actually saw one of the very sort of famous and Cornerstone problems in computer science.
+
+212
+00:31:50.970 --> 00:31:53.280
+Nick Bowman: But I want to frame it a little bit of a fun way so
+
+213
+00:31:53.910 --> 00:32:07.050
+Nick Bowman: Let's pretend that you know you are done with being a student and you want to be kind of a wilderness survival expert and you're ready to sort of train yourself and learn all these skills and you're still getting ready to go off on this, on this grand journey.
+
+214
+00:32:08.100 --> 00:32:18.750
+Nick Bowman: And you're about to set out on a trip and you have to fill up your, your knapsack or most people know it as a backpack full of supplies. So here's your backpack, you need to put some supplements into it.
+
+215
+00:32:20.430 --> 00:32:27.510
+Nick Bowman: And all the supplies that you can take along with you and they all have two important pieces of information associated with them.
+
+216
+00:32:27.870 --> 00:32:35.790
+Nick Bowman: And they have a survival value which is like sort of how valuable they are to your survival and how important they are to have along and they have a week as well.
+
+217
+00:32:36.600 --> 00:32:44.160
+Nick Bowman: So you could have something like matches have Jerry hi survival value fire super important and very low weight. So they seem like a good thing to bring along
+
+218
+00:32:45.240 --> 00:32:48.780
+Nick Bowman: Maybe you wanted to bring along a dumbbell because you really want to work out on your journey.
+
+219
+00:32:49.290 --> 00:33:01.140
+Nick Bowman: That probably has very low survival weight or various low survival value, but very high. We probably may not want to take that along and then you have water right water has very high weight, but also very high survival about you kind of need it.
+
+220
+00:33:03.150 --> 00:33:09.930
+Nick Bowman: And so the question is, your backpack is only sturdy enough to hold a certain amount of weight. And so you're constrained on what you can bring along
+
+221
+00:33:11.040 --> 00:33:23.580
+Nick Bowman: And the question is, can you maximize the value of the things that you are bringing along with you and get the best possible survival value out of these options you have your exposure. And that's sort of the question we're going to try to answer it.
+
+222
+00:33:25.080 --> 00:33:34.380
+Nick Bowman: So we're going to actually send you off to breakout rooms and we're going to in your head workspace and there is a small example, there's four items and you're going to try to fill up a backpack.
+
+223
+00:33:35.190 --> 00:33:47.370
+Nick Bowman: That has a maximum possible. We have five so can hold five pounds of stuff. And so, discuss with your group, man. It's really all we want you to do is see if you can find what the best arrangement is what things do you need to take along with you in order to have the best survive.
+
+224
+00:33:48.420 --> 00:33:55.800
+Nick Bowman: And then as you're doing that, like we always do we want you to sort of, you know, have a little bit of meta cognition and think about how did you find that answer.
+
+225
+00:33:56.070 --> 00:34:04.890
+Nick Bowman: How can we be able to translate this into a general algorithm to solve this problem. And so if we go ahead and open those up and we'll give you about three, four minutes and then we'll come back.
+
+226
+00:34:14.460 --> 00:34:23.160
+Nick Bowman: And for those of you watching asynchronously, and would recommend taking the time again to pause here and go over to the workspace.
+
+227
+00:34:24.120 --> 00:34:33.300
+Nick Bowman: And all display these all display the contents of the stuff here. So you don't have to go to actually find it but pause here and think about if you had these options.
+
+228
+00:34:34.410 --> 00:34:46.380
+Nick Bowman: For things that you could take along with you and you could only hold you know five pounds of wheat in your backpack. Which of these things would you take along with you sort of maximize that survival value.
+
+229
+00:34:47.760 --> 00:34:52.620
+Nick Bowman: And then after you found that I'm hopefully you're able to find the maximum value pretty quickly.
+
+230
+00:34:53.340 --> 00:35:00.480
+Nick Bowman: And then after that I want you to think about how did you actually find these items. And what did you actually sort of think about in order to generate those
+
+231
+00:35:01.050 --> 00:35:08.550
+Nick Bowman: And then thinking about what would have happened if you just always chose the thing with the highest remaining survival. That is that a strategy that would work.
+
+232
+00:35:10.650 --> 00:35:19.440
+Nick Bowman: Yeah, so that's all the background and go ahead and pause here and try that out and then you can transport, about three minutes in the recording and also won't be all back together.
+
+233
+00:36:04.320 --> 00:36:06.300
+Nick Bowman: Um, yeah, and then
+
+234
+00:36:09.000 --> 00:36:16.050
+Nick Bowman: Yeah, sorry, so that the duplicate question is I'm just confused why that was coming up now, because it was the same.
+
+235
+00:36:16.350 --> 00:36:27.450
+Nick Bowman: Kind of core recursive logic, maybe, maybe it was just a leftover question from yesterday might be. There are a lot of questions where I think people are still asking. I'm still confused about like how does a doing word um
+
+236
+00:36:28.710 --> 00:36:32.400
+Yeah, so I'm not sure. It just says, yeah, it was just sort of Polycom
+
+237
+00:36:33.420 --> 00:36:39.720
+repetition of the same slashes. I wasn't clear if it was like solutions or
+
+238
+00:36:41.250 --> 00:36:50.640
+Nick Bowman: I mean, I mean, it does do yeah I mean it avoid repetitions of solution selections, but it will try to select the same element.
+
+239
+00:36:51.210 --> 00:36:58.920
+Nick Bowman: So now that's kind of the point, right, like at a given level, right, like all the paths at that level will have to make the decision about whether to include the next person and like
+
+240
+00:36:59.400 --> 00:37:06.570
+Nick Bowman: That actually ties into violet backtracking is necessary, right, because you need to put that element back so that some other path somewhere else can also make a decision.
+
+241
+00:37:11.880 --> 00:37:12.120
+Nick Bowman: Yet
+
+242
+00:37:23.070 --> 00:37:37.140
+Nick Bowman: Right. Cool. So welcome back everyone. Welcome back from your, your planning trip for your survival journey and hopefully you know you're able to kind of figure out what you wanted to take with you. Um, so let's see what the actual best solution is in this case.
+
+243
+00:37:38.220 --> 00:37:42.810
+Nick Bowman: So here's our items. Now we want to ask ourselves, right, what are the best things that we can take along with us.
+
+244
+00:37:43.260 --> 00:37:52.470
+Nick Bowman: And and a first natural approach me ask you to think about this approach, a little bit is what happens. Why don't we always just pick the thing with the highest value that will sit in the backpack.
+
+245
+00:37:52.890 --> 00:38:05.460
+Nick Bowman: And in this case, right, our canned food has a value of six got the highest possible value it has week five. It fits in our backpack. Totally fine. So we select it. All right, we selected our bag is for. We're done. We've got a value of six.
+
+246
+00:38:07.290 --> 00:38:13.980
+Nick Bowman: But this isn't the best one. And I think hopefully a lot of you found that there was actually a better combination of things that you could select to get better survival value.
+
+247
+00:38:15.780 --> 00:38:25.020
+Nick Bowman: And specifically, the best situation here was actually to take the rope and the X right combined their value was seven just higher than just taking the food.
+
+248
+00:38:25.500 --> 00:38:28.560
+Nick Bowman: But their weight is still five so it still fits the constraints of our backpack.
+
+249
+00:38:29.310 --> 00:38:38.610
+Nick Bowman: And so we can't always just take the highest thing with the remaining value and this would make this problem, hard to solve. We can't just take the thing with the highest remaining value.
+
+250
+00:38:38.970 --> 00:38:46.080
+Nick Bowman: Right, we have to consider all possible combinations of individual things because it's possible that those individual things might actually sum up to a larger
+
+251
+00:38:47.730 --> 00:38:55.140
+Nick Bowman: This approach you see us in the title. This approach is called Greedy, greedy approach is one that always just tries to take the next best possible thing.
+
+252
+00:38:55.830 --> 00:39:01.080
+Nick Bowman: Greedy approaches are often not recursive. So you could you could write a greedy approach that is just iterative that says
+
+253
+00:39:01.440 --> 00:39:12.750
+Nick Bowman: Give me the next largest thing. Give me the next largest thing and then you just keep going until you're full, but unfortunately this approach will not generate the best solution. It can be a good approximation, but it will not give us the best solution.
+
+254
+00:39:14.520 --> 00:39:18.300
+Nick Bowman: So what's the recursive approach and what's, what's the way that we actually need to solve this
+
+255
+00:39:18.810 --> 00:39:30.210
+Nick Bowman: Well, the idea here is we're just going to enumerate all the subsets that we have that where the wheat matches our constraint. So again, this idea of constraints subsets and then we'll just pick the one with the best total about
+
+256
+00:39:32.700 --> 00:39:41.430
+Nick Bowman: This idea again a new branding all subsets under a certain constraints of wheat less than or equal to five. This is exactly what we just saw when you're generating combinations. Right.
+
+257
+00:39:41.670 --> 00:39:49.050
+Nick Bowman: It's the CORE recursive logic of subsets with added base cases and maybe recursive cases to enforce these constraints.
+
+258
+00:39:51.840 --> 00:40:06.390
+Nick Bowman: And so now, right. The second component of this when we want to pick the solution with the best total value and that is what we're going to see our final backtracking use case we're finally getting to this idea of picking the one best solution. I'm more optimizing our solution to this.
+
+259
+00:40:08.310 --> 00:40:08.910
+Nick Bowman: And
+
+260
+00:40:09.990 --> 00:40:14.760
+Nick Bowman: In this case, we're going to keep track of the best value that we can get so like to the previous
+
+261
+00:40:15.540 --> 00:40:24.150
+Nick Bowman: Problem, we would be able to answer the value seven and we were worried about finding the actual best subset itself just yet. We're gonna leave that as a challenge problem for you because it's actually
+
+262
+00:40:24.600 --> 00:40:35.220
+Nick Bowman: A little bit tricky and but for now let's just, we're going to write a function that is going to just return the maximum possible value that we could get survival value that we could get by putting things in our back
+
+263
+00:40:37.080 --> 00:40:45.660
+Nick Bowman: And so again, our map that decision tree looks very, very similar to our previous combinations problem. The main difference here is you see at the bottom.
+
+264
+00:40:46.140 --> 00:40:54.480
+Nick Bowman: Rather than keeping track of the number of spots, we have left. We're just going to keep track of the remaining capacity in the backpack, but it serves almost exactly the same purpose.
+
+265
+00:40:56.010 --> 00:41:05.100
+Nick Bowman: And and so if we break down this function prototype that we're going to write. And we'll see this introduction and we're just a new type and it's called backpack item.
+
+266
+00:41:05.520 --> 00:41:13.680
+Nick Bowman: It's just a little structure that combines the survival value in the wait until one one little package. And so again, a nice use of strikes there.
+
+267
+00:41:14.460 --> 00:41:28.470
+Nick Bowman: And then the return type here, right. So we see that the return type is and what the that value is going to represent is the maximum possible value we can get from combining things in this items vector
+
+268
+00:41:29.370 --> 00:41:37.200
+Nick Bowman: But being constrained by this target weight. So in this in the, in the example we gave you the items vector would contain the rope. The x
+
+269
+00:41:38.160 --> 00:41:46.500
+Nick Bowman: The food and the water or now I'm missing something that but contain those four items and it would contain a target way to five. And your goal would be to say, okay,
+
+270
+00:41:46.770 --> 00:41:52.710
+Nick Bowman: I will can tell you that the maximum value you can take along with you. Is that right, you will have a survival value of seven.
+
+271
+00:41:54.390 --> 00:41:59.700
+Nick Bowman: And obviously, as always, we're going to need a helper function because there's all this extra information that we have to keep track of.
+
+272
+00:42:00.870 --> 00:42:09.480
+Nick Bowman: In particular, remember the two things that we want to keep track of is we're going to keep track of the current value of the backpack that we built up
+
+273
+00:42:09.900 --> 00:42:16.080
+Nick Bowman: And in previous combinations problems like the one with the justices, we actually kept track of a set of all of the things that we had added
+
+274
+00:42:16.710 --> 00:42:26.400
+Nick Bowman: In this case, we're just going to simplify, since all we really care about is the maximum value that we can get. We're just going to use this integer parameter to represent the total value of the backpack that we built up so far.
+
+275
+00:42:27.150 --> 00:42:41.370
+Nick Bowman: And then the second parameter that we introduce is this idea of the index, right. So that's our optimization from yesterday, and we're going to use this index to keep track of our location in the vector and represent what things we've made a decision about so far in which sense we
+
+276
+00:42:44.250 --> 00:42:50.220
+Nick Bowman: Are recursive and our base cases here again should look very similar to what we did for combinations and
+
+277
+00:42:50.670 --> 00:42:58.590
+Nick Bowman: We're going to in the recursive case select an item based on the index calculate the maximum values recursive Lee, with and without that item.
+
+278
+00:42:58.980 --> 00:43:10.290
+Nick Bowman: And then the key difference here is we're only going to return the larger of those two values. So even though we're going to explore all possible combinations and the value that they give us
+
+279
+00:43:10.560 --> 00:43:17.820
+Nick Bowman: We're only going to return the maximum, and that's going to kind of be the key difference that allows us to optimize and actually get the best solution.
+
+280
+00:43:18.750 --> 00:43:31.590
+Nick Bowman: And our base cases will look super similar to what we saw in the combinations, which is that if we don't have any more capacity. So if you don't have any more space or wait then we just say, all right, I can't get you any survival value. I don't have a week left in my backpack.
+
+281
+00:43:32.730 --> 00:43:41.340
+Nick Bowman: And if I run out of items to choose if I made a decision about all my items so far, then the best value that I can get is whatever I put in my backpack so far. So the current value.
+
+282
+00:43:44.010 --> 00:43:48.480
+Nick Bowman: And so let's cut it and I think we will have just about enough time to do that.
+
+283
+00:43:49.680 --> 00:43:56.760
+Nick Bowman: And so again I'm choose to help you out. We've already provided the definition of the helper function here.
+
+284
+00:43:57.420 --> 00:44:06.750
+Nick Bowman: Notice that it has both the current value and index. I didn't mention that explicitly but also has this capacity remaining which represents the week that we have left in our backpack.
+
+285
+00:44:07.500 --> 00:44:14.100
+Nick Bowman: And we've said that our function that we actually want to write just returns a call to the helper function.
+
+286
+00:44:14.700 --> 00:44:25.170
+Nick Bowman: It starts out the capacity at the target weight. It starts out the current value of the package zero because there's currently nothing in it and it starts out the index into our list of possible items also
+
+287
+00:44:26.790 --> 00:44:39.150
+Nick Bowman: And so let's see if we can formalize our base cases nervous cases. And so our first recursive or first base case actually told us if we're out of capacity in the backpack. So if we say if
+
+288
+00:44:39.870 --> 00:44:48.480
+Nick Bowman: The capacity that we have remaining is actually less than zero. Right. So it's possible that our capacity goes negative because when we try putting something into the backpack.
+
+289
+00:44:48.810 --> 00:44:57.090
+Nick Bowman: And if it's week is larger than the weight we have left, then the capacity will actually go negative. And that's not a bad thing, but that just tells us like okay like that.
+
+290
+00:44:59.910 --> 00:45:09.750
+Nick Bowman: So if it, if we don't have any capacity left, then we know we can't get any possible value right there's there's zero possible maximum value that we can get if our if we run out of
+
+291
+00:45:12.300 --> 00:45:23.910
+Nick Bowman: Our second base case and tells us that, well, if we now have run out of items to decide upon. So if we've we've finished our shopping at the store. We've looked at every possible item that we could take along
+
+292
+00:45:24.240 --> 00:45:30.330
+Nick Bowman: And we've made a decision about it. We've either included in our backpack or not included in our backpack and then we can also stop.
+
+293
+00:45:31.110 --> 00:45:43.380
+Nick Bowman: Remember when we're using the index optimization. The way that you determine this is you just compare your current index value to the size of the vector. And if the two of them are equal, then you know that you have no more things to choose.
+
+294
+00:45:45.330 --> 00:45:58.080
+Nick Bowman: And then in this case, right. The thing that we return is the value of the backpack that we built up so far and and so that is represented by this parameter that we're keeping track of representing recurrent
+
+295
+00:46:01.710 --> 00:46:09.630
+Nick Bowman: So those are two bass cases. And then for a recursive cases, again, it's going to look very similar to what we did in our competition.
+
+296
+00:46:11.550 --> 00:46:13.200
+Nick Bowman: So we're going to pick a backpack item.
+
+297
+00:46:14.580 --> 00:46:22.920
+Nick Bowman: Call this the current item. Remember with our indexing scheme we don't actually have to modify the vector at all. We just have to get the thing at the current index.
+
+298
+00:46:24.360 --> 00:46:33.240
+Nick Bowman: And then like always, we have two possible cases. So the first case is there's a certain maximum value that we can get if we don't include
+
+299
+00:46:33.630 --> 00:46:50.280
+Nick Bowman: This item in our back. And so let's calculate that, personally, so say this will be the max value without and then we can make a call to our helper function. And then what do we pass it will pass in the same factor that we've been doing
+
+300
+00:46:52.080 --> 00:47:00.420
+Nick Bowman: The capacity that we have left. If we choose not to include this item is just the same capacity that we started off and so nothing changes to our capacity.
+
+301
+00:47:01.530 --> 00:47:08.310
+Nick Bowman: And the value of our backpack. If we don't choose again choose to add nothing to it and the value of our backpack stays the same.
+
+302
+00:47:09.390 --> 00:47:19.500
+Nick Bowman: And then in order to make progress. We always say that now we're considering the next decision we need to make is the decision at the next index. So we will implement the next one.
+
+303
+00:47:21.000 --> 00:47:31.020
+Nick Bowman: And so this recursive call is going to sort of by the magic of the recursion. It's going to tell us this is the maximum possible value that you can get by not including this item.
+
+304
+00:47:33.120 --> 00:47:35.430
+Nick Bowman: Then to sort of
+
+305
+00:47:36.600 --> 00:47:43.530
+Nick Bowman: Take care of our second component of the base case we're going to do the exact same thing but we're going to calculate our maximum value with the item.
+
+306
+00:47:44.850 --> 00:47:52.740
+Nick Bowman: Will make another call to our helper function and passing in the same set of items. But this is where things start to differ a little bit
+
+307
+00:47:53.370 --> 00:48:02.430
+Nick Bowman: If we're going to include this item in our backpack. Right. Our capacity goes down. Right. Our capacity actually goes down by the weight of the current right
+
+308
+00:48:03.210 --> 00:48:11.460
+Nick Bowman: And so we need to update the new parameter that we're passing and to say hey you have less weight now or you're less capacity now because he just decided to put this thing.
+
+309
+00:48:13.410 --> 00:48:24.480
+Nick Bowman: And similarly are weak capacity decreases, but our value of the backpack increases, right. And so our new value is going to be whatever we started out before plus the value
+
+310
+00:48:25.920 --> 00:48:35.940
+Nick Bowman: That this current brings and just like before, right, we're done making a decision about this current item. So we want to go ahead and commit to the next.
+
+311
+00:48:37.440 --> 00:48:43.080
+Nick Bowman: And what's actually interesting here that I wanted to note is usually I would write an untrue step here.
+
+312
+00:48:44.040 --> 00:49:00.660
+Nick Bowman: But it's actually not needed in this case. Right. And why is that, well, there's no data structures that we made changes to right we kept track of our of our values, just by modifying sort of primitive integer values in our parameters and so we actually don't need an explicit punchy stuff.
+
+313
+00:49:02.370 --> 00:49:13.110
+Nick Bowman: And so the final thing that we need to do is we need to say how do we know which of these two situations with optimal right. How do we know which one actually gave us the truly the best value.
+
+314
+00:49:14.310 --> 00:49:19.950
+Nick Bowman: And what we do in this case is we say, all right, we're just going to say that the best possible value that we could get
+
+315
+00:49:20.820 --> 00:49:33.780
+Nick Bowman: Is just going to be the maximum of the two maximums and so this is kind of a kind of core piece that I said accomplishes our optimization. Roll it says, all right, I have explored everything but the
+
+316
+00:49:34.290 --> 00:49:46.140
+Nick Bowman: Answer that I'm going to report. I'm not going to report everything that I that I have seen so far I'm only going to report the best thing that I've seen. And so I'm going to return the maximum value of these two answers that I got from Eric
+
+317
+00:49:48.270 --> 00:50:01.770
+Nick Bowman: And so then if we run this. We put together a little demo. And that actually shows you if you run this code on the example I'm going to give you in the breakout rooms and
+
+318
+00:50:03.480 --> 00:50:07.770
+Nick Bowman: We will see that. Oh, I did not.
+
+319
+00:50:09.420 --> 00:50:11.910
+Nick Bowman: Give me a second, using the wrong version of
+
+320
+00:50:24.510 --> 00:50:40.920
+Nick Bowman: And so hopefully what we see here. Awesome. And so we see that if we give you the options from before. So I think this was the rope, the X thing. I keep forgetting and became food and the best solution has the value of seven. And that's exactly what we found out when we did it by
+
+321
+00:50:42.030 --> 00:50:48.240
+Nick Bowman: The nice thing and the powerful thing about this recursion is you can substitute in like, way more complicated examples.
+
+322
+00:50:48.900 --> 00:51:03.510
+Nick Bowman: So you could say, hey, maybe you were shopping with a target rate of 25 and, you know, a set of possible items available to you. That is like pretty complicated, and I can't imagine a way that I would solve that by hand. But we were just running through our program.
+
+323
+00:51:04.800 --> 00:51:17.340
+Nick Bowman: And we see that with this weird combination of items, the best possible value that we can get is actually 67 and so that is sort of our, our core optimization part of it.
+
+324
+00:51:18.330 --> 00:51:25.050
+Nick Bowman: There is started coding here that defines versions of functions that will actually find the best arrangement.
+
+325
+00:51:25.800 --> 00:51:34.530
+Nick Bowman: Obviously we're out of time, but we weren't planning to do this anyway, we're going to leave it in the challenge for you, actually, to see if you can go in and keep track of what best best
+
+326
+00:51:35.700 --> 00:51:41.550
+Nick Bowman: Best solution is it's a it's tricky. And so it's if you have questions about it, feel free to come outside of the post on it.
+
+327
+00:51:41.940 --> 00:51:51.420
+Nick Bowman: And it's actually a little bit tricky to figure out how can you remember what the best solution that you've seen so far is it requires introducing some new parameters to keep track that information.
+
+328
+00:51:52.950 --> 00:51:55.200
+Nick Bowman: But I'd recommend doing that if you have the chance
+
+329
+00:51:56.250 --> 00:52:04.320
+Nick Bowman: And so, kind of just the takeaways that we have here. And as we finish up. And when we think about optimizing and finding the best solution.
+
+330
+00:52:04.770 --> 00:52:10.650
+Nick Bowman: Really, you can think of it as just adding one extra layer of decision making on top of the enumeration you've seen before.
+
+331
+00:52:11.190 --> 00:52:18.300
+Nick Bowman: The core component of this code that we just wrote with the exact same subsets combinations code that we wrote in the last three examples that we did.
+
+332
+00:52:18.720 --> 00:52:34.470
+Nick Bowman: The only thing that we did is at the end we made one extra decision making step, we said, I'm only going to report the best answer that I've seen so far and and because we do that at every step of our process when you combine everything together, you get the overall best possible answer.
+
+333
+00:52:35.490 --> 00:52:44.910
+Nick Bowman: This is oftentimes, the only way to solve hard problems hard problems and computer science can often only be found or only be solved by looking at all possible options and actually selecting one
+
+334
+00:52:45.570 --> 00:52:53.400
+Nick Bowman: And so finding creative ways to use the return values of your functions and using things like maximum and things like that to make decisions about it.
+
+335
+00:52:54.420 --> 00:53:01.830
+Nick Bowman: Can actually allow you to take something that is just doing enumeration and then actually make it, find the best solution. All right.
+
+336
+00:53:03.420 --> 00:53:09.630
+Nick Bowman: So we are out of time and kind of the last words on recursion that I want to give you is kind of just some like motivating thoughts to say
+
+337
+00:53:09.840 --> 00:53:23.280
+Nick Bowman: Like you now know how to like use recursion to solve problems and really elegant ways. And so, even just think about problem solving and from a very different perspective and kind of after everything that we've talked about it last week and
+
+338
+00:53:24.660 --> 00:53:33.150
+Nick Bowman: You can use backtracking right we've talked so much about enumerating objects, finding the optimal solution, which is what we talked about today and
+
+339
+00:53:33.570 --> 00:53:42.030
+Nick Bowman: And so, you now have the capabilities to do that and you've given us backtracking to find whether things are possible. And if things are possible to find ways to do it.
+
+340
+00:53:42.540 --> 00:53:50.070
+Nick Bowman: And like all in all, like, hopefully, you know, by the end of this lecture. You've seen just how powerful recursive problem solving can be
+
+341
+00:53:50.730 --> 00:53:56.310
+Nick Bowman: And we hope that we and we wanted to say like you. You made it. Right. Like, you made it through like a week and a half of
+
+342
+00:53:56.760 --> 00:54:04.680
+Nick Bowman: Kind of changing the way that you think about problem solving. And so I hope that you kind of found it to be useful, and to be fruitful and
+
+343
+00:54:05.310 --> 00:54:09.270
+Nick Bowman: So I'll finish there as a. As always we'll stick around to answer questions.
+
+344
+00:54:09.810 --> 00:54:18.720
+Nick Bowman: For those of you that are interested in. There is a couple of sections here about questions you can ask yourself actually organize your new recursive toolbox, I would highly recommend checking those out.
+
+345
+00:54:19.350 --> 00:54:28.560
+Nick Bowman: And we only all come back. What's up next, obviously you guys have the diagnostic and then tomorrow we're finally going to start to cross the obstruction boundary as we start stuff right
+
+346
+00:54:30.450 --> 00:54:32.970
+Nick Bowman: So cool. Thanks everyone for sticking around and hope you have a good rest your day.
+
+347
+00:54:33.750 --> 00:54:34.590
+Elan Smolar Eisenberg: I think you
+
+348
+00:54:35.070 --> 00:54:35.370
+Evan F Davis: Thank you.
+
+349
+00:54:37.110 --> 00:54:37.440
+Jihe He: Thank you.
+
+350
+00:54:37.980 --> 00:54:39.630
+louise marzolf: Thank you so much. Thank you.
+
+351
+00:54:39.780 --> 00:54:40.350
+christopher cooper: Thank you.
+
+352
+00:54:40.530 --> 00:54:40.980
+Yeah.
+
+353
+00:54:42.780 --> 00:54:46.620
+Nick Bowman: Yeah, I had a quick question about the example.
+
+354
+00:54:46.830 --> 00:54:48.360
+Thomas Tao Hale: Here, would you do it with a form
+
+355
+00:54:50.160 --> 00:54:52.410
+Aadi M Rane: Factor instead of passing an index.
+
+356
+00:54:52.890 --> 00:54:55.050
+Or is that specific sort of
+
+357
+00:54:56.910 --> 00:54:57.510
+Structure.
+
+358
+00:54:59.940 --> 00:55:05.340
+Nick Bowman: Yeah, so the funnily enough, yes, you can actually totally solve this problem with a for loop, say something.
+
+359
+00:55:06.330 --> 00:55:16.290
+Nick Bowman: Right. So right there. There's this idea that we're using the index to kind of keep track of what we've made decisions about so far we've either included an element in our collection or not.
+
+360
+00:55:16.890 --> 00:55:27.750
+Nick Bowman: And you could replace these two recursive function calls with potentially, for example, like a for loop that tries like including an excluding every possible element.
+
+361
+00:55:28.470 --> 00:55:40.170
+Nick Bowman: And the thing is, though, that will actually end up, it won't. So like, you will still solve the problem and you will still find the best answer.
+
+362
+00:55:40.860 --> 00:55:46.560
+Nick Bowman: But along the way, you'll actually explore some redundant solutions. And the reason why is,
+
+363
+00:55:46.980 --> 00:55:55.680
+Nick Bowman: So think about, we have an empty backpack and three choices. And so at my very first recursive call. I use this for loop, and I say, oh, I could
+
+364
+00:55:55.860 --> 00:56:03.960
+Nick Bowman: Include nothing or I can include the first element. The second element or the third element. So, so my for loop, sort of a numerous these four possible these four possibilities.
+
+365
+00:56:05.280 --> 00:56:10.500
+Nick Bowman: And then obviously, I need to recur. So in order to figure out like backpack combinations of the remaining two elements.
+
+366
+00:56:14.160 --> 00:56:23.790
+Nick Bowman: On the next step. There are basically in multiple possible ways that you could get to the same solution. So I could have selected the first item first and then the second item.
+
+367
+00:56:24.000 --> 00:56:36.450
+Nick Bowman: Or I could have selected the second item first and then the first item, but the thing is both give you the same value and both give you the same weight. So really, we've now just explored more possibilities. Then, then we really need to in order to be able to solve the problem.
+
+368
+00:56:37.680 --> 00:56:54.060
+Nick Bowman: So, generally we save like we we use for loops to enumerate all of our possibilities and if we know like if we're in a situation like for permutations, for example, or we know that the order in which we select things matters. And so we have to like
+
+369
+00:56:55.500 --> 00:57:04.500
+Nick Bowman: Consider everything for the first possible option and everything for the second possible option and everything for the third possible option because the order in which we select them actually matters.
+
+370
+00:57:04.890 --> 00:57:18.450
+Nick Bowman: For something like the combinations and the knapsack problem or anything in which, like it's only the final value that we care about. Right. It's only the final way and the final survival value and like, specifically the order which we selected options. Doesn't matter.
+
+371
+00:57:20.010 --> 00:57:29.250
+Nick Bowman: The for the position will still work. It'll just be less efficient because you'll be exploring the same possibilities, more than once. Yeah. Does that, does that answer the question either
+
+372
+00:57:35.850 --> 00:57:38.460
+Nick Bowman: Possibilities. Oh wait, sorry, Lisa, could you say that again.
+
+373
+00:57:39.780 --> 00:57:40.110
+Nick Bowman: Yeah.
+
+374
+00:57:44.370 --> 00:57:51.420
+Nick Bowman: Yeah, yeah. Um, so if you, if you think about right like. So if you think about our combinations here, right.
+
+375
+00:57:52.920 --> 00:57:55.380
+Nick Bowman: I guess, let me let me go all the way back.
+
+376
+00:57:57.060 --> 00:58:05.580
+Nick Bowman: Really, really the way in which this this idea of considering one element for inclusion or exclusion and
+
+377
+00:58:06.480 --> 00:58:14.520
+Nick Bowman: Results in not having duplicates really just goes back to the, the decision tree that we fought for subsets. Right. So. So think about it this way, like
+
+378
+00:58:15.030 --> 00:58:27.240
+Nick Bowman: This decision tree like like shows the the results of what happens if at, you know, at your first step of your recursion. You ask yourself the question of do we include Nick, or do we not include Nick.
+
+379
+00:58:27.570 --> 00:58:32.580
+Nick Bowman: And if at the second step of your recursion. You ask yourself the question, Do I include Kylie are doing not include
+
+380
+00:58:33.480 --> 00:58:44.400
+Nick Bowman: And it's really at the second level where you you it's I think it's natural to think, Oh, could we get duplicates, because there's a whole path over here where we where we make a decision about whether to include Kylie or not include Kylie
+
+381
+00:58:44.760 --> 00:58:49.620
+Nick Bowman: And there's a whole decision path over here, whether, when we decide whether to include Kylie. Kylie
+
+382
+00:58:50.070 --> 00:59:01.110
+Nick Bowman: And so like if we take the right branch in both cases, like we have subsets, including comedy. So, like, how do we know that we're not going to like reach the same like even though we've made the same decision twice.
+
+383
+00:59:01.440 --> 00:59:10.980
+Nick Bowman: Right, like there are different locations in our Christmas tree where we've made exactly the same decision. So how can we make exactly the same decision without risk of actually generating duplicate answers.
+
+384
+00:59:11.700 --> 00:59:22.260
+Nick Bowman: And I think the key to that is, each of these decisions like if you split this tree and half one of these decision happened on the left side of the tree and one of these decisions happened on the right side of the tree.
+
+385
+00:59:22.860 --> 00:59:31.500
+Nick Bowman: And all sets on the right side of the tree are defined by the inclusion of mic and all sets on the left side of the tree are defined by the exclusion of Nick.
+
+386
+00:59:31.920 --> 00:59:37.710
+Nick Bowman: And so even though you're adding Kylie. In both cases, it's never possible you're going to hit a duplicate results.
+
+387
+00:59:37.980 --> 00:59:45.330
+Nick Bowman: Just because like the subsets on either side are fundamentally different right they fall into these sort of fundamentally like exclusive categories.
+
+388
+00:59:45.630 --> 00:59:52.110
+Nick Bowman: And so we're allowed to make the same exact decision multiple times without ever actually running into duplicate solutions.
+
+389
+00:59:52.500 --> 01:00:00.930
+Nick Bowman: And the jury selection will look exactly like this. But the reason we didn't draw decision tree for the jury selection, just because it looks exactly like this just way bigger.
+
+390
+01:00:01.470 --> 01:00:06.600
+Nick Bowman: Because it's the same core person inside. And so the reason we can avoid duplicates. There is the same reason we can avoid it.
+
+391
+01:00:08.010 --> 01:00:09.270
+Nick Bowman: Does that, does that kind of thing, though.
+
+392
+01:00:09.990 --> 01:00:20.340
+Liza George: I think so. So that's the reason that this, this wouldn't have worked in the knapsack problem is is that we're not removing options. Every time I'm not sure.
+
+393
+01:00:20.430 --> 01:00:25.650
+Nick Bowman: Um, yeah. So, so this is the also the exact same decision tree for the knapsack problem.
+
+394
+01:00:26.940 --> 01:00:36.120
+Nick Bowman: Right, like all the, all those problems that we solve our derivations of generating all subsets, but then just introducing some constraints and
+
+395
+01:00:36.750 --> 01:00:46.470
+Nick Bowman: The tree. I think we're the tricky thing there is because we implemented the knapsack problem using this idea of like optimization of using the index to keep track of where we are.
+
+396
+01:00:47.280 --> 01:00:54.420
+Nick Bowman: Our set of remaining elements never changes. But if you think about it, our index tells us sort of
+
+397
+01:00:55.200 --> 01:01:04.770
+Nick Bowman: Which like where we're at right now and everything to the left of the index. You can think of it as effective. We've gone because it's never it's not going to be touched. Again,
+
+398
+01:01:04.980 --> 01:01:10.260
+Nick Bowman: Right, whereas everything to the right of the index hasn't yet been decided on. And so our index will eventually visit them.
+
+399
+01:01:11.400 --> 01:01:16.830
+Nick Bowman: And so like if you want it to like accurately represent that on this tree, you would say that the remaining
+
+400
+01:01:17.040 --> 01:01:27.390
+Nick Bowman: List or vector is the exact same in each of these levels, but the index is different. So the index at the first level of be zero. It'd be one at the second one, the third one in three at the last one.
+
+401
+01:01:27.870 --> 01:01:40.980
+Nick Bowman: And then that that's the way that we were we're shrinking the size of our, our remaining set without actually modifying the data structure that's kind of just like the clever insight that that that that like strategies allows us to gain
+
+402
+01:01:42.060 --> 01:01:43.230
+Nick Bowman: And the jury will do
+
+403
+01:01:44.640 --> 01:01:51.060
+Nick Bowman: Yeah. And, and, yeah, right. Because if we look at, again, I'll like I'll swap between these two really quickly. So this is combinations
+
+404
+01:01:51.540 --> 01:01:59.010
+Nick Bowman: And this is another show you the recursive cases, right, so this is this is knapsack. And this is the jury problem right like
+
+405
+01:01:59.640 --> 01:02:07.500
+Nick Bowman: It's effectively the same code with just different leveraging of the opportunities right and so both cases.
+
+406
+01:02:08.220 --> 01:02:14.670
+Nick Bowman: And the jury selection from yesterday and the subsets from yesterday all their core insight is
+
+407
+01:02:15.540 --> 01:02:22.650
+Nick Bowman: Pick any element and then do to recursive calls, one of the recursive calls explorers with that element one of them explores without that element.
+
+408
+01:02:22.980 --> 01:02:35.070
+Nick Bowman: And then you you you come up with a final answer, it's somehow um but like core recursive structure both leverage this idea of including excluding just one element.
+
+409
+01:02:39.630 --> 01:02:41.640
+Nick Bowman: Yeah, I'm sorry. Yes.
+
+410
+01:02:50.190 --> 01:02:51.150
+Nick Bowman: Any other questions.
+
+411
+01:02:53.670 --> 01:02:56.460
+haoming li: I see subsets and
+
+412
+01:02:59.610 --> 01:03:16.260
+haoming li: Last one. You know the cause of COPD include the current either or do not include cart item that does that older manner, like we do without first and do with later or do with first four darling.
+
+413
+01:03:17.250 --> 01:03:32.400
+Nick Bowman: Yeah, great question. Um, the order doesn't matter, right, because the idea is you need to explore all of them. And, and so, like, in the end, you just need to do both. The only thing that would be different. And so one
+
+414
+01:03:32.970 --> 01:03:35.970
+Nick Bowman: tricky thing. So I so I just told you order doesn't matter.
+
+415
+01:03:36.270 --> 01:03:39.510
+Nick Bowman: The only thing you have to be careful of is that
+
+416
+01:03:40.980 --> 01:03:59.970
+Nick Bowman: If you put it in this order, you would need to put this undo step right afterwards, right, because you need chosen in this case to be the sort of unmodified version. Right. So if you're going to do them in this order. You just need to make sure to like make the change. Do the recursion.
+
+417
+01:04:00.420 --> 01:04:01.560
+Nick Bowman: unmake the change
+
+418
+01:04:01.710 --> 01:04:03.540
+Nick Bowman: Do the recursion for the without step.
+
+419
+01:04:03.750 --> 01:04:05.340
+Nick Bowman: And then you can return your final answer.
+
+420
+01:04:05.880 --> 01:04:15.960
+Nick Bowman: OK, so the reason the reason that I did it executed first and then include is just because it allows you to lump your to choosing steps together like that. Right.
+
+421
+01:04:16.680 --> 01:04:27.690
+Nick Bowman: But as long as you as long as you're careful to make sure that your without recursive call is actually like rehearsing on a structure that doesn't contain your option and the order in which you do the two doesn't matter.
+
+422
+01:04:29.940 --> 01:04:33.120
+haoming li: Does that make sense. Yeah, yeah. Makes sense and
+
+423
+01:04:34.590 --> 01:04:39.420
+haoming li: Turn on the last step, like a battery last we do the return max.
+
+424
+01:04:41.130 --> 01:04:41.760
+haoming li: I think
+
+425
+01:04:43.440 --> 01:04:51.810
+haoming li: The curtain might return something or at the end when puts a face to face, something, but I'm not keeping track of.
+
+426
+01:04:54.180 --> 01:04:55.590
+haoming li: How does the max.
+
+427
+01:04:57.090 --> 01:04:58.650
+haoming li: If we're not having the
+
+428
+01:05:00.030 --> 01:05:07.170
+Nick Bowman: Way, sorry. What do you mean we're not keeping track of the return values we are right where we're storing the return values of the tree recursive functions here.
+
+429
+01:05:08.910 --> 01:05:09.600
+haoming li: So,
+
+430
+01:05:12.750 --> 01:05:13.020
+haoming li: You
+
+431
+01:05:14.550 --> 01:05:14.820
+Nick Bowman: Know,
+
+432
+01:05:15.030 --> 01:05:15.300
+Yes.
+
+433
+01:05:19.470 --> 01:05:20.340
+haoming li: Okay, yeah.
+
+434
+01:05:20.520 --> 01:05:26.070
+Nick Bowman: It's like, yeah, right. Because like this, these two values because of the way it like
+
+435
+01:05:26.160 --> 01:05:27.090
+Nick Bowman: The recursion works.
+
+436
+01:05:27.240 --> 01:05:35.040
+Nick Bowman: Fully they are like the only two possible like maximum values. We could have generated so far. Right. And so just by comparing the two of them.
+
+437
+01:05:35.190 --> 01:05:43.620
+Nick Bowman: It's kind of like a local comparison right like whatever whatever node you are in the tree, you just aggregate the answers from below you, and then you pass it back up to the person that called you.
+
+438
+01:05:43.920 --> 01:05:54.000
+Nick Bowman: Right and so so slowly. The best answer is get filtered up and up and up until like the very last call get generate the true final maximum answer right with me.
+
+439
+01:05:54.780 --> 01:05:57.210
+haoming li: Yeah, yeah, I see it.
+
+440
+01:05:59.730 --> 01:06:00.630
+Nick Bowman: Every, every question.
+
+441
+01:06:02.940 --> 01:06:04.320
+Ismael Lemhadri: I have a question possible
+
+442
+01:06:08.010 --> 01:06:10.860
+Ismael Lemhadri: It's about what you explained with
+
+443
+01:06:15.120 --> 01:06:18.600
+Ismael Lemhadri: When, when you do the changes that you did.
+
+444
+01:06:20.580 --> 01:06:30.420
+Ismael Lemhadri: I can't see. It's in the hour here. So what do we call the combinations. Rick for the communications without it, it will call like a lot of
+
+445
+01:06:31.680 --> 01:06:33.540
+Ismael Lemhadri: SEC friends if I understood well
+
+446
+01:06:33.600 --> 01:06:34.950
+Ismael Lemhadri: And then when it returns it
+
+447
+01:06:35.640 --> 01:06:41.820
+Ismael Lemhadri: Adds back the LM every time so that we come back to the remaining that we had a different so that
+
+448
+01:06:43.650 --> 01:06:48.420
+Ismael Lemhadri: Is that like like that. Does it add back every time in the returning
+
+449
+01:06:49.530 --> 01:06:56.280
+Nick Bowman: Yeah it i think i think what you're describing is pretty much right on. I would just say, like, Yeah, every time a
+
+450
+01:06:56.670 --> 01:07:07.020
+Nick Bowman: Recursive staff frame is about to complete right like this is near the very end of a recursive case and we're just about to return evaluate which means like this doctrine is about to no longer exist anymore.
+
+451
+01:07:07.560 --> 01:07:15.600
+Nick Bowman: Right before it finishes right it does exactly what you said. Right. It adds it back so that the the the stack frame above it. That called it
+
+452
+01:07:16.170 --> 01:07:29.130
+Nick Bowman: If it needs to make another recursive call, or it needs to make some decision its state will be unchanged. Right. Like it's view of the parameters and the state of the parameters will be unchanged. And that's the whole point of doing that country stuff. Yeah.
+
+453
+01:07:29.970 --> 01:07:40.020
+Ismael Lemhadri: That's how does it know which of them that this is add if we don't, if we don't add it this time that we that we like take it off.
+
+454
+01:07:41.100 --> 01:07:46.920
+Nick Bowman: Yeah, so, so we. That's why we started the element itself, right, like the element that we add back
+
+455
+01:07:47.160 --> 01:07:56.250
+Nick Bowman: Is the same one that we like I might say we, I mean like a specific stack friend right like a specific stack frame is responsible for removing an element.
+
+456
+01:07:56.580 --> 01:08:03.360
+Nick Bowman: Doing its recursion and then adding that same element back right so this thing that we're adding is actually exactly the thing that we were
+
+457
+01:08:03.930 --> 01:08:16.350
+Nick Bowman: Right. Um, but, but that's a great question because every stack frame will have a different value of a lead. Right. That's the whole point. And so every stack frame will be responsible for removing and adding a different component of our of our search
+
+458
+01:08:17.460 --> 01:08:18.150
+Ismael Lemhadri: Is just
+
+459
+01:08:18.270 --> 01:08:30.900
+Ismael Lemhadri: If we, for example, a sex. I am which number is I its first quarter combinations wreck for like I missed one and then wait for the response and then add back. Yeah. Okay. Yeah.
+
+460
+01:08:30.960 --> 01:08:40.170
+Nick Bowman: Exactly, exactly. Yeah, and then wait for the response part is is super important. Right. Like, it will not continue to this line until it gets a value back from this call.
+
+461
+01:08:40.320 --> 01:08:41.910
+Ismael Lemhadri: So a lot of work might happen there.
+
+462
+01:08:41.940 --> 01:08:43.440
+Nick Bowman: Yeah, exactly. And then, and then
+
+463
+01:08:44.490 --> 01:08:52.710
+Ismael Lemhadri: Said before there was like, well, we don't know like what the remainder will be next. I thought that we just added it right away before
+
+464
+01:08:53.040 --> 01:08:53.340
+Yeah.
+
+465
+01:08:54.390 --> 01:09:01.470
+Nick Bowman: Yeah. And so that's the key component yeah that's that's a good. That's a good point. The key component is you have to wait for that recursive call to finish before you do anything. Yeah.
+
+466
+01:09:01.560 --> 01:09:02.910
+Ismael Lemhadri: Okay, good. Thank you.
+
+467
+01:09:07.290 --> 01:09:18.810
+edouard des: Yep, I just got a question about the offers for once again. The thing about the on the index is because we could have implemented without the index right and then just store an entire vector of all past choices.
+
+468
+01:09:20.820 --> 01:09:24.120
+edouard des: Copy for every new stack for him and I can slow everything down.
+
+469
+01:09:25.380 --> 01:09:30.180
+Nick Bowman: Yeah, so you could right here. I can, I can change. I won't remove it from the
+
+470
+01:09:31.290 --> 01:09:36.120
+Nick Bowman: Perimeter but say like, if you wanted to do this problem execute. Let me just do this.
+
+471
+01:09:37.380 --> 01:09:37.740
+Nick Bowman: Let's
+
+472
+01:09:40.410 --> 01:09:42.180
+Nick Bowman: Let's just make a copy of this function.
+
+473
+01:09:43.680 --> 01:09:52.620
+Nick Bowman: And say we wanted to do a version that didn't have index right there's basically two things that change. The first is the way that we know that we're done.
+
+474
+01:09:53.130 --> 01:10:09.000
+Nick Bowman: Is that now, like we were going to be like removing things from our items right so we were just change our base case and and then like we kind of just always like what we did yesterday, and we just said let's just always take the element index zero we
+
+475
+01:10:11.400 --> 01:10:14.520
+Nick Bowman: Were going to have to remove it. Right, so that nobody else considers it
+
+476
+01:10:16.320 --> 01:10:19.560
+Nick Bowman: And then right at the end, we would insert it
+
+477
+01:10:20.790 --> 01:10:24.600
+Nick Bowman: Right, so you can absolutely do this and
+
+478
+01:10:25.500 --> 01:10:27.060
+Nick Bowman: You can absolutely do this without a
+
+479
+01:10:27.510 --> 01:10:27.960
+Vector
+
+480
+01:10:29.520 --> 01:10:40.260
+Nick Bowman: Um, yeah, sure. You could use a cute, yeah. I mean, using a Q would improve the efficiency right really I think someone had a great comment during either after lecture yesterday or in the chat.
+
+481
+01:10:41.070 --> 01:10:55.770
+Nick Bowman: If you really wanted to be smart about this. What you would do is you would move in the back right because we're moving from the back of the vector is actually doesn't require shifting any elements over so if you if you removed from the back right that's effectively kind of
+
+482
+01:10:58.200 --> 01:11:03.150
+Nick Bowman: Making these operations like old one. So you could like, and then
+
+483
+01:11:05.940 --> 01:11:09.000
+Nick Bowman: Like you could do that. And that would also work and
+
+484
+01:11:13.260 --> 01:11:16.440
+Nick Bowman: So yeah, you could also you could also, this would be a totally fine way to do it.
+
+485
+01:11:17.430 --> 01:11:29.010
+Nick Bowman: But still, right, even though these are over one operations are removing and adding to the back of the Director of Operations clearly better than what we initially did and and yeah, you could get the same old one behavior with the queue or with other things.
+
+486
+01:11:30.150 --> 01:11:37.380
+Nick Bowman: It is still like an operation on the data structure right and it's still more expensive like then adding one Trinity.
+
+487
+01:11:37.470 --> 01:11:43.560
+Nick Bowman: Right, adding one. Oh, yes. Yeah. Yeah. And like I didn't want to an integer is a super cheap operation.
+
+488
+01:11:44.010 --> 01:11:49.470
+Nick Bowman: And so even though either like this is actually an interesting component of thinking about efficiency.
+
+489
+01:11:49.860 --> 01:11:54.960
+Nick Bowman: Something can be old one and still slow right like that. That's like, it's like kind of hard to wrap your mind around
+
+490
+01:11:55.350 --> 01:12:03.840
+Nick Bowman: Like it can still literally be slow time wise right even though that the runtime doesn't change with like input size, it can still literally just be slow.
+
+491
+01:12:04.260 --> 01:12:09.420
+Nick Bowman: And so we sometimes want to just even avoid slow operations at all. Even if they're open
+
+492
+01:12:09.930 --> 01:12:22.260
+Nick Bowman: Right. And so in this case, like we introduced the index to just be able to not have to modify the vector and all, but still be able to keep track of which decision making and like what decisions we've made so far and which ones we have, yeah.
+
+493
+01:12:23.040 --> 01:12:32.460
+edouard des: And we could implement this into this some index functionality to most if not all of the backtracking on different algorithms, we've seen over the past few few lectures.
+
+494
+01:12:32.520 --> 01:12:34.860
+edouard des: He wrecked like for yeah I'm on the
+
+495
+01:12:37.140 --> 01:12:52.170
+edouard des: One on the slide. For instance, right behind your window off on him and we could keep just a vector or a queue of Nick Kylie and trip and then just update the the index for each round. Yeah.
+
+496
+01:12:52.650 --> 01:13:01.530
+Nick Bowman: Oh yeah, kind of, I mean, it all depends on what data structure, you're given. Right. So, and I'd be careful about that. You couldn't do this with the queue, right, like the queue can't keep track of the
+
+497
+01:13:02.460 --> 01:13:14.070
+Nick Bowman: Right, so it really only applies if you're being asked to find a sub collection of something that is inexorable right in reality that for us, let us inspector right like you could not implement
+
+498
+01:13:15.780 --> 01:13:19.230
+Nick Bowman: Like for example, we do today, the combination
+
+499
+01:13:27.420 --> 01:13:34.800
+Nick Bowman: Like this function prototype right you're given sets of things right. You can't artificially impose an index on top of that, right.
+
+500
+01:13:35.040 --> 01:13:41.010
+Nick Bowman: So if you're giving it in a structure where the only thing you're allowed to do is add and remove from it, then you just throw up your hands and Sarah, it is the best I can do.
+
+501
+01:13:41.310 --> 01:13:54.390
+Nick Bowman: Right, the index optimization. We're just more of introducing something to show you that there are slightly better ways to do things when you can, like, have an index or having other things. But if you can't, then our sort of baseline strategies.
+
+502
+01:13:54.990 --> 01:14:05.610
+edouard des: Maybe because the thing like these in the stack frame things is that unlike them a loop or something where I'm stock from the more like the recursive operations for to continue needs to remember all the different types
+
+503
+01:14:07.260 --> 01:14:09.570
+edouard des: Of memory. Every time I just use the index. Correct. So
+
+504
+01:14:10.590 --> 01:14:16.470
+edouard des: You can like for instance I'm expensive, very fast with ripple effects like you know getting
+
+505
+01:14:18.300 --> 01:14:21.660
+edouard des: That aeration can sort of go on forever, it'll just go slowly. And so
+
+506
+01:14:22.230 --> 01:14:27.090
+Nick Bowman: Yeah, yeah. There's a lot of nuance there but but I would say that
+
+507
+01:14:28.980 --> 01:14:39.120
+Nick Bowman: Yeah. Generally, if you're doing the exact same operations, both internally and recursive Lee recursive. We will be slower because we do need to create a new stack.
+
+508
+01:14:39.720 --> 01:14:40.020
+edouard des: But I
+
+509
+01:14:41.700 --> 01:14:45.000
+edouard des: Like the limit, there is a limit for recursion, because
+
+510
+01:14:47.100 --> 01:14:48.420
+Nick Bowman: Yeah, exactly right. But
+
+511
+01:14:48.720 --> 01:14:57.240
+edouard des: There's not really like it might be. But, like, really. It's remembering one thing innovating, the index, but it's clearing the whole memory of relief every time.
+
+512
+01:14:58.140 --> 01:15:09.450
+Nick Bowman: Sure, sure. But, but I guess like the yes that is absolutely a restriction of recursion. But, and that's why we don't say, oh, solve every problem in person, because it doesn't make sense to solve a problem.
+
+513
+01:15:11.130 --> 01:15:18.210
+Nick Bowman: But at the same time right there are only problems that you can solve it like repetitively that you can't solve it, or, yeah. And so, so it's more of just
+
+514
+01:15:18.690 --> 01:15:27.420
+Nick Bowman: Being able to distinguish and decide upon like which ones are like, why you would want to select a certain problem solving strategy for certain
+
+515
+01:15:29.220 --> 01:15:29.460
+Nick Bowman: Yeah.
+
+516
+01:15:30.510 --> 01:15:32.130
+edouard des: Okay. Okay. Thank you.
+
+517
+01:15:36.300 --> 01:15:37.350
+Nick Bowman: Good afternoon. Question.
+
+518
+01:15:38.130 --> 01:15:50.940
+Jordan Lin: Up. I really quick question about the assignment. Um, so this may be a little weird to ask what do you know, like what's the actual name of like the dictionary.
+
+519
+01:15:51.300 --> 01:16:01.020
+Jordan Lin: We use ethos, thinking about, you know, using like one of those Boggle board generators online and like you know generates at and try to match my score to their score.
+
+520
+01:16:01.470 --> 01:16:12.960
+Jordan Lin: To do testing because they also allow stuff like, you know, five by five boards, which is fun and and they have different options for dictionaries. And I'm wondering, which one we're using sort of numbers, kind of match up.
+
+521
+01:16:13.860 --> 01:16:15.810
+Nick Bowman: I have no idea. Unfortunately,
+
+522
+01:16:16.800 --> 01:16:20.730
+Nick Bowman: Custom one in that file. I mean, yeah, if they allow you to upload your own like
+
+523
+01:16:21.060 --> 01:16:27.810
+Nick Bowman: There is that file of words that we use to define our dictionary, but I don't. I don't know where, where it came from. And this kind of stuff.
+
+524
+01:16:28.680 --> 01:16:29.250
+Alright, thanks.
+
+525
+01:16:33.480 --> 01:16:34.800
+Nick Bowman: All right. Any last questions.
+
+526
+01:16:39.180 --> 01:16:44.130
+Nick Bowman: Alright, thanks for sticking around guys go ahead and stop the recording and we'll see you all tomorrow.
+

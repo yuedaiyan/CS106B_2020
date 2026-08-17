@@ -1,0 +1,114 @@
+00:10:59	Ryan Gabel:	Boggle
+00:11:01	Evan Baldonado:	Boggle
+00:11:04	Samuel Lynn Ledden:	Sorting
+00:11:05	Hemant Chaudhary:	Boggle!
+00:11:06	Nadia Palar:	boggle
+00:11:06	alan hu:	DFS
+00:11:07	Aadi M Rane:	boggle
+00:11:08	Kyle Thomas Booker:	Boggle
+00:11:08	catherine deng:	boggle
+00:11:10	yukun yang:	Sierpinski
+00:11:10	Tongjun (Albert) Zhang:	DFS
+00:11:11	Aadi M Rane:	mazes as well
+00:11:11	klaus cerny:	Maze
+00:11:12	Sedef Emekli:	dfs
+00:11:12	Kenneth Fischer:	Sierpinski!
+00:11:13	Elena Williams:	Towers of hanoi!
+00:11:17	louise marzolf:	Sierpinski
+00:11:17	shirley li:	DFS
+00:11:19	Kenneth W.K. Wang:	maze solving is p cool
+00:11:21	Rohan Chowla:	sierpinski triangle
+00:11:25	Liza George:	cleaning a string with recursion was really...interesting
+00:11:33	christopher cooper:	boggle
+00:11:36	Liza George:	but actually p cool
+00:11:37	edouard des:	Cleaning strings –– It’s pretty mind boggling!
+00:11:53	Kenneth W.K. Wang:	knapsack problem! yay!
+00:14:03	Ismael Lemhadri:	But why do we set back "remaining" and "chosen" too ?
+00:14:10	Usman Iqbal Hanif:	Would we ever do this unchoose step for permutation problems when we are just looping at every stage?
+00:14:33	Usman Iqbal Hanif:	Yes, right? Assuming we are passing by reference.
+00:14:56	Kylie Jue:	We have to backtrack with both data structures since we’re updating both as we go down the tree
+00:15:02	Kylie Jue:	@Ismael is that what you mean?
+00:15:59	Kylie Jue:	@Usman Yes we would still need to unchoose explicitly in permutations with data structures passed by reference
+00:16:05	Aadi M Rane:	DFS does not necessarily find the shortest solution like BFS, right?
+00:16:06	Ismael Lemhadri:	Yes thanks, I’ll drop by office hours !
+00:16:25	Kylie Jue:	@Aadi Yes that’s correct
+00:17:27	Usman Iqbal Hanif:	Ok! (Sorry for the constant questions) But, is this idea of unchoosing specific to backtracking problems? Do we have to worry about this in basic recursion when we build up after we reach base case, whereas in backtracking we finish once we reach base case.
+00:18:42	Kylie Jue:	@Usman yes this is specific to backtracking and having a branching recursive structure where we need to undo changes.
+00:18:53	Usman Iqbal Hanif:	Thanks!!
+00:19:05	Thomas Tao Hale:	So like a 5 C 9 calculation uses recursion in a calculator?
+00:19:21	Kylie Jue:	@Thomas I don’t know - would have to google that
+00:19:57	Thomas Tao Hale:	No nvm im dumb it just uses a formula
+00:21:55	Liza George:	I'm a bit confused on the difference between combinations and permutations. Like how is it difference from when we made permutations of characters (of a set length, out of a larger pool of letters) for the unscrambling problem?
+00:22:52	Kylie Jue:	@Liza - for permutations, the order of the characters matters so we’re looping over all remaining characters in the recursive step.  in combinations, at each decision we’re deciding whether or not to include an item in the combination but order doesn’t matter.  so combinations will actually look more similar to subsets in its recursive structure
+00:24:08	Liza George:	ooh I forgot about the order. Thanks!
+00:25:05	Thomas Tao Hale:	“Order matters” is such a bad way of describing the difference between permutations and combinations tbh
+00:28:22	Ismael Lemhadri:	if we undo the change to "remaining" here for example, how will it ever be empty ? That’s what I don’t understand actually…
+00:29:37	Kylie Jue:	@Ismael I think it might be clearer once you see the code.  there actually won’t be an explicit undo step for combinations specifically
+00:29:49	Kylie Jue:	but after you see the code, let me know if you still have questions!
+00:30:18	Ismael Lemhadri:	oh it’s not the same than subsets then, thanks anyway !
+00:30:35	Kylie Jue:	yeah that’s actually one of the key differences between the two!
+00:32:00	Elan Smolar Eisenberg:	Should we use /* */ instead of // for one line comments? I thought the style guide was ok with //
+00:32:22	Kylie Jue:	yes // is fine!  we sometimes use /* */ because it more clearly looks like a heading
+00:32:40	Liza George:	i think i'm still confused about that...how would there ever  be fewer justices to pick from than there are open slots if we stop building up the set at a set size?
+00:33:58	Usman Iqbal Hanif:	So should we subtract out the empty set
+00:34:55	Usman Iqbal Hanif:	from cominationsWithout + combinationsWith
+00:35:02	Ismael Lemhadri:	Ohhhhh everything’s clear now
+00:36:16	Kylie Jue:	@Usman adding the empty set won’t change the resulting set!  if either combinationsWithout or combinationsWith is empty, the result will just be the other set that wasn’t empty
+00:36:35	yukun yang:	I am still confused on how this code avoids repetition of the same selections?
+00:36:39	michael hu:	Would this generate an error or is it just inefficient?
+00:37:45	Hemant Chaudhary:	Can't you not have duplicates in Sets?
+00:38:00	Kylie Jue:	@Michael What are you referring to generating an error?
+00:38:14	Kylie Jue:	@Hemant You can’t have duplicates in a set
+00:39:15	michael hu:	Never mind, my question was answered
+00:40:04	shreyas ravi:	so when you’re taking the diagnostic, you have to take it in one sitting right? you can’t do half and then finish the rest later
+00:40:05	Ismael Lemhadri:	will it be recorded ?
+00:40:10	Kylie Jue:	@Ismael yes
+00:40:25	Kylie Jue:	@Shreyas yes it has to be a continuous 3-hour block
+00:54:04	Regina Ta:	It seems like there are a lot of structs that can be made (backpack, jury, grid location), and I’m wondering if it’s possible to create our own struct types—or can they only be created & given to us by Stanford Libraries?
+00:54:31	rayjohns@stanford.edu:	You can make your own
+00:54:43	Kylie Jue:	Yes you can create your own structs as well!
+00:54:50	Regina Ta:	Oh, good to know, thank you!
+00:55:04	rayjohns@stanford.edu:	http://www.cplusplus.com/doc/tutorial/structures/
+00:55:19	rayjohns@stanford.edu:	https://www.learncpp.com/cpp-tutorial/47-structs/
+00:55:35	Liza George:	(I think the lecture with the battleship example, back when we were looking at matrices, explains it fully too)
+00:58:26	Regina Ta:	Thanks for the resources - will check them out!
+01:00:52	Liza George:	could we have done this with the for loop that iterates through the item vector (instead of passing on , like in the backtracking jury example? or was that only when we're implementing the choose-explore-undo structure?
+01:01:14	Liza George:	*(instead of passing on the index variable)
+01:01:26	Kenny Wang:	here's a weird question - how come Nick can build his project in 7 seconds and mine takes a minute or two?
+01:01:33	Kenny Wang:	is it a mac thing?
+01:01:44	Kylie Jue:	@Liza will answer out loud
+01:01:45	Ismael Lemhadri:	How do you uncomment a block of code ?
+01:01:46	Liza George:	sorry if that's unclear, I was confused about that note from the last lecture
+01:01:54	Kylie Jue:	@Kenny yes it’s computer dependent
+01:02:09	radu ilia:	@Kenny used to be like that for me too, but it got way better when I switched to 32bit
+01:02:11	Kenny Wang:	huh my computer is pretty much brand new though
+01:02:17	Kylie Jue:	@Ismael cmd (or control) + /
+01:02:19	Kenny Wang:	oh switch to 32 bit?
+01:02:21	Kenny Wang:	noted ty
+01:02:24	radu ilia:	np
+01:02:28	Kenny Wang:	so like 32 bit mingw right
+01:02:34	radu ilia:	yup
+01:02:38	Kenny Wang:	awesome
+01:04:19	Ismael Lemhadri:	Is the diagnostic covering backtracking but not this ?
+01:04:39	Kylie Jue:	@Ismael yes - backtracking will be extra credit on the exam
+01:04:51	Thomas Tao Hale:	This is not going to be a fun hw
+01:04:57	Kaelyn O:	@Ismael to comment out a block of code: cmd + /
+01:05:10	paul gialis:	thank you
+01:05:10	alan hu:	thanks!
+01:05:10	Kevin H Fan:	Thank you!
+01:05:14	Zachary Alon:	Thank you!
+01:05:14	Julia L Wang:	Thank you!
+01:05:15	Edward Chung Yik Yeung:	thank you
+01:05:15	hyy:	Thank you
+01:05:16	Angela Zhang:	Thank you!
+01:05:18	Guozhen Miao:	thank you
+01:05:18	Ismael Lemhadri:	Thank you very much !
+01:05:18	Tongjun (Albert) Zhang:	Thank you
+01:05:19	Jennifer Anna Bonello:	Thank you
+01:05:22	Shifeng Hong:	Thank you
+01:05:22	Kenneth Fischer:	Thank you!
+01:07:23	Liza George:	like you could have gone food>water>axe or water>food>axe in the decision tree?
+01:07:45	Kylie Jue:	yes either of those would work
+01:08:05	Liza George:	but how did the jury example avoid searching same possibilities
+01:13:37	Shifeng Hong:	Can we say the index method basically replace the unchoose step？
+01:27:20	Liza George:	thank you!
