@@ -23,7 +23,6 @@ int RandomBag::removeRandom() {
     int index  = randomInteger(0, size() - 1);
     int result = elems[index];
     elems.remove(index);
-
     return result;
 }
 

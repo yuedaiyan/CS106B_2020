@@ -11,12 +11,12 @@
 class RandomBag {
 public:
     void add(int value);
-    int  removeRandom();
+    int removeRandom();
 
     /* These functions are marked const because they don't change the
      * RandomBag.
      */
-    int  size() const;
+    int size() const;
     bool isEmpty() const;
 
 private:

@@ -6,7 +6,6 @@ BankAccount::BankAccount(string name, double amount){
     if (amount < 0){
         error("That is an invalid amount of money!");
     }
-    
     this->name = name;
     this->amount = amount;
 }
@@ -29,15 +28,13 @@ void BankAccount::withdraw(double withdrawlAmount){
 }
 
 void BankAccount::transfer(double transferAmount, BankAccount& recipient){
-    this->withdraw(transferAmount); // if we don't have enough money, this will error
+    // if we don't have enough money, this will error
+    this->withdraw(transferAmount);
     recipient.deposit(transferAmount);
 }
 
-
-/* These methods can be marked const because they don't modify the
- * contents of the bank account.
- */
-
+/* These methods can be marked const because they
+ * don't modify the contents of the bank account. */
 double BankAccount::getAmount() const {
     return amount;
 }

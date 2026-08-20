@@ -15,11 +15,12 @@ public:
 	BankAccount(string name, double amount);
     void deposit(double depositAmount);
     void withdraw(double withdrawlAmount);
-    void transfer(double transferAmount, BankAccount& recipient);
-    
-    /* These functions are marked const because they don't change the
-     * account.
-     */
+    void transfer(
+        double transferAmount,
+        BankAccount& recipient);
+
+    /* These functions are marked const because
+     * they don't change the account. */
     double getAmount() const;
     string getName() const;
 
