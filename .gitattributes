@@ -1,3 +1,6 @@
-CS106B-other-raw-assets/* filter=lfs diff=lfs merge=lfs -text
+CS106B-other-raw-assets/CS106B-master.zip filter=lfs diff=lfs merge=lfs -text
+CS106B-other-raw-assets/CS_Crouse-main.zip filter=lfs diff=lfs merge=lfs -text
+CS106B-other-raw-assets/cs106B-2020summer-master.zip filter=lfs diff=lfs merge=lfs -text
+
 *.mp4 filter=lfs diff=lfs merge=lfs -text
 *.m4a filter=lfs diff=lfs merge=lfs -text
