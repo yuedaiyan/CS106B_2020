@@ -1,4 +1,4 @@
-// myheaders.h
+/* @aughor Yue Daiyan, Summer 2026 */
 #pragma once
 
 // Stanford CS106 Library
@@ -13,7 +13,7 @@
 #include "hashmap.h"
 #include "hashset.h"
 #include "lexicon.h"
-#include "map.h"
+#include "map.h
 #include "priorityqueue.h"
 #include "queue.h"
 #include "random.h"
@@ -25,10 +25,9 @@
 #include "vector.h"
 
 // C++ Standard Library
+#include <cctype>
 #include <fstream>
 #include <iostream>
 #include <string>
-
-#include <cctype>
 
 using namespace std;
