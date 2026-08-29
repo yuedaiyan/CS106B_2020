@@ -6,7 +6,8 @@
 
 ---
 
-使用建议: 2020 summer 课程视频, 配 2020 summer Section, 配 2021 summer assignments. ( 2020 的材料是最全的,几乎除了 assignments 的 startCode.zip 不能下载外,其余资源都可以通过官下载 )
+使用建议: 2020 summer 课程视频, 配 2020 summer Section, 配 2021 summer assignments.
+( 2020 summer 的材料是最全的,几乎除了 assignments 的 Starter code 不能下载外,其余资源全部可以通过官网下载 )
 
 ---
 
@@ -30,6 +31,8 @@ CS106B 2021 Summer 完成课程作业,两次课程的内容基本是一样的,�
 ```
 https://web.stanford.edu/class/archive/cs/cs106b/cs106b.1228/
 ```
+
+---
 
 ![graph](/schedule.png)
 
