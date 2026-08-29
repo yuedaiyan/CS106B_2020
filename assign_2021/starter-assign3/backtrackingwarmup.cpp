@@ -13,6 +13,12 @@
 #include "testing/SimpleTest.h"
 using namespace std;
 
+// 辅助函数: 用于输出空格
+void coutSpace(int index) {
+    for (int i = 0; i < index; i++) {
+        cout << "   .";
+    }
+}
 
 /*
  * This is a correct implementation of a function that uses recursion
@@ -21,6 +27,8 @@ using namespace std;
  */
 int countZeroSumSubsets(Vector<int> &v, int index, int sumSoFar) {
     if (index == v.size()) {
+        // coutSpace(index);
+        // cout << sumSoFar << endl;
         return (sumSoFar == 0); // returns true(1) if sumSoFar equals zero, returns false(0) otherwise
     } else {
         return countZeroSumSubsets(v, index + 1, sumSoFar + v[index])
@@ -32,16 +40,19 @@ int countZeroSumSubsets(Vector<int> &v, int index, int sumSoFar) {
  * This function is only one character different than the
  * correct version above, but even a small edit can cause big havoc
  * when amplified by recursion.
- *
+ */
+/*
  * WARNING: The given code is buggy. See the exercise writeup for
  * more information on how to test and diagnose.
  */
-int buggyCount(Vector<int> &v, int index, int sumSoFar) {
+int buggyCount(Vector<int>& v, int index, int sumSoFar) {
     if (index == v.size()) {
+        coutSpace(index);
+        cout << sumSoFar << endl;
         return (sumSoFar == 0);
     } else {
         return buggyCount(v, index + 1, sumSoFar += v[index])
-             + buggyCount(v, index + 1, sumSoFar);
+            + buggyCount(v, index + 1, sumSoFar);
     }
 }
 
@@ -95,7 +106,14 @@ PROVIDED_TEST("Animate Towers of Hanoi") {
 PROVIDED_TEST("Test correct countZeroSumSubsets against buggyCount") {
     Vector<int> nums = {};
     EXPECT_EQUAL(countZeroSumSubsets(nums, 0, 0), buggyCount(nums, 0, 0));
+    nums = { 1, 2, 3, -4, -3, 2, 5, 1, 9, -2 };
+    EXPECT_EQUAL(countZeroSumSubsets(nums, 0, 0), buggyCount(nums, 0, 0));
+}
 
-    nums = {1, 2, 3, -4, -3, 2, 5, 1, 9, -2};
+STUDENT_TEST("Test correct countZeroSumSubsets against buggyCount") {
+    Vector<int> nums = { };
+    cout << endl;
+    cerr << "=============" << endl;
+    nums = { 3, 1, -3 };
     EXPECT_EQUAL(countZeroSumSubsets(nums, 0, 0), buggyCount(nums, 0, 0));
 }

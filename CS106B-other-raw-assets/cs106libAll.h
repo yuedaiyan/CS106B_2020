@@ -1,8 +1,8 @@
-/* @aughor Yue Daiyan, Summer 2026 */
+/* @anthor Yue Daiyan, Summer 2026 */
 #pragma once
 
 // Stanford CS106 Library
-#include "SimpleTest.h" // IWYU pragma: keep (needed to quiet spurious warning)
+#include "SimpleTest.h"
 #include "console.h"
 #include "direction.h"
 #include "error.h"
@@ -26,8 +26,7 @@
 
 // C++ Standard Library
 #include <cctype>
+#include <cmath>
 #include <fstream>
 #include <iostream>
 #include <string>
-
-using namespace std;
