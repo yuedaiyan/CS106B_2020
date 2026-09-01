@@ -1,4 +1,5 @@
 #include "cs106lib.h"
+using namespace std;
 void STUDENT_TEST_Help();
 
 Vector<string> divideHelp(int depth, Lexicon& dict, string& s1, string& s2, int index) {

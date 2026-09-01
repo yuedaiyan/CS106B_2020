@@ -63,12 +63,14 @@ DEFINES     +=  main=qMain qMain=studentMain
 SOURCES         *=  "" \
     src/kareltherobot.cpp \
     src/word2vec.cpp \
-    src/worddivide.cpp
+    src/worddivide.cpp \
+    src/worddivide2.cpp
 HEADERS         *=  "" \
     src/cs106lib.h \
     src/kareltherobot.h \
     src/word2vec.h \
-    src/worddivide.h
+    src/worddivide.h \
+    src/worddivide2.h
 
 # Gather any .cpp or .h files within the project folder (student/starter code).
 # Second argument true makes search recursive
