@@ -3,19 +3,30 @@
 using namespace std;
 
 BankAccount::BankAccount(string name, double amount){
-    /* TODO: Fill in this method! */
+    this->name = name;
+    this->amount = amount;
 }
 
 void BankAccount::deposit(double depositAmount){
-    /* TODO: Fill in this method! */
+    if (depositAmount < 0) {
+        error("Can's have negative money!");
+    }
+    amount += depositAmount;
 }
 
 void BankAccount::withdraw(double withdrawlAmount){
-    /* TODO: Fill in this method! */
+    if (withdrawlAmount < 0) {
+        error("Can's have negative money!");
+    }
+    if (amount - withdrawlAmount < 0) {
+        error("余额不足");
+    }
+    amount -= withdrawlAmount;
 }
 
 void BankAccount::transfer(double transferAmount, BankAccount& recipient){
-    /* TODO: Fill in this method! */
+    withdraw(transferAmount);
+    recipient.deposit(transferAmount);
 }
 
 
@@ -25,10 +36,10 @@ void BankAccount::transfer(double transferAmount, BankAccount& recipient){
 
 double BankAccount::getAmount() const {
     /* TODO: Fill in this method! */
-    return 0.0;
+    return amount;
 }
 
 string BankAccount::getName() const {
     /* TODO: Fill in this method! */
-    return "";
+    return name;
 }

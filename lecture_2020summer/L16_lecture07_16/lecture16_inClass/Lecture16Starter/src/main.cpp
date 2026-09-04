@@ -6,8 +6,6 @@
 #include "random.h"
 using namespace std;
 
-using namespace std;
-
 struct BankAccountStruct {
     string name;
     double amount;
@@ -42,18 +40,27 @@ void bankDemoStructs(){
 
 void bankDemoClasses(){
     /* Create two bank accounts for Nick and Kylie. */
+    BankAccount nick("Nick", 100);
+    BankAccount kylie("Kylie", 1000);
 
     /* Nick gets his paycheck and deposits it. */
+    nick.deposit(500);
 
     /* Kylie buys a new dog stroller for Saki. */
+    kylie.withdraw(900);
 
     /* Nick wants to travel to Costa Rica to hang out with sloths. */
+    // nick.withdraw(2000);
 
     /* Nick wants to transfer some money to Kylie for lunch. */
+    nick.transfer(20, kylie);
 
     /* Nick tries to commit identity fraud. */
+    // nick.name = "Kylie";
 
     /* Print out information about the accounts. */
+    cout << nick.getName() << ": " << nick.getAmount() << endl;
+    cout << kylie.getName() << ": " << kylie.getAmount() << endl;
 }
 
 int main() {
