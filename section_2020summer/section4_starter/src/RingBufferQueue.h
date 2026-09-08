@@ -17,34 +17,30 @@
 class RBQueue {
 
 public:
-    // TODO: label some of these methods as
-    // const where appropriate. Don't forget
-    // to update the method headers in the
-    // .cpp file as well! Then, delete these
-    // lines.
-
+    // 构建对象
     RBQueue();
+    // 析构对象
     ~RBQueue();
+    // 方法：添加元素
     void enqueue(int elem);
+    // 方法：删除元素（先进先出）
     int dequeue();
-    int peek();
-    bool isEmpty();
-    bool isFull();
-    int size();
+    // 方法：看一眼第一个元素（不删除任何元素）
+    int peek() const;
+    // 方法：看是不是空对象
+    bool isEmpty() const;
+    // 方法：看对象是否填满
+    bool isFull() const;
+    // 方法：看对象大小
+    int size() const;
 
 private:
-    // TODO: Include any private member functions
-    // or member variables here as you deem appropriate.
-    // Then, delete these lines.
+    int _maxCapacity;
+    int* _elements;
+    int _head;
+    int _tail;
+    int _classSize;
 
-    /* Note: since this is a header file, we've opted to refer to
-     * ostream by its "full name" of std::ostream.
-     *
-     * By listing this method as a "friend", this method can break
-     * object encapsulation and access private member variables
-     * of the RBQueue object.
-     *
-     * TODO: delete these lines and write a method comment
-     */
+    // out输出方法
     friend std::ostream& operator<<(std::ostream& out, const RBQueue& queue);
 };

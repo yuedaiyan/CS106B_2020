@@ -10,11 +10,13 @@
  * for creating an amazing testing harness!
  */
 
-#include <iostream>
-#include <string>
+#include "error.h"
+#include "strlib.h"
 #include "testing/SimpleTest.h"
 #include "testing/TextUtils.h"
-#include "error.h"
+#include "vector.h"
+#include <iostream>
+#include <string>
 using namespace std;
 
 /*
@@ -33,18 +35,103 @@ using namespace std;
  * accomplishes this task and uses only O(1) auxiliary storage space.
  */
 
-void reverseInPlace(string& str) {
-    /* TODO: Your code goes here! */
-    (void) str;
+void reverseInPlaceOneHalfNSpace(string& str) {
+    // cerr << "before: " << str << "   size: " << str.size() << endl;
+    if (str.size() <= 1) {
+        return;
+    }
+    char left = str[0];
+    char right = str[str.size() - 1];
+    str = str.substr(1, str.size() - 2);
+    reverseInPlaceOneHalfNSpace(str);
+    str.insert(0, 1, right);
+    str.insert(str.size(), 1, left);
+    // cerr << "after: " << str << "   size: " << str.size() << endl;
 }
 
+void reverseWordOrderingInOneHalfNSpace(string& sentence) {
+    // base case: no space
+    if (sentence.find(' ') == string::npos) {
+        return;
+    }
+
+    // base case: one space
+    if (sentence.find(' ') == sentence.rfind(' ')) {
+        int space = sentence.find(' ');
+        string left = sentence.substr(0, space);
+        string right = sentence.substr(space + 1);
+        sentence = right + ' ' + left;
+        return;
+    }
+
+    // recursive case: two of more space
+    int leftSpace = sentence.find(' ');
+    int rightSpace = sentence.rfind(' ');
+    string left = sentence.substr(0, leftSpace);
+    string right = sentence.substr(rightSpace + 1);
+    int len = sentence.length() - (left.length() + 1) - (right.length() + 1);
+    sentence = sentence.substr(leftSpace + 1, len);
+    reverseWordOrderingInOneHalfNSpace(sentence);
+    sentence = right + ' ' + sentence + ' ' + left;
+    return;
+}
+
+void reverseInPlace(string& str) {
+    for (int i = 0; i < str.length() / 2; i++) {
+        char left = str[i];
+        char right = str[str.length() - 1 - i];
+        str[i] = right;
+        str[str.length() - 1 - i] = left;
+    }
+    return;
+}
+
+void reverseWordOrderingInHelp(string& sentence, int start, int end) {
+    cerr << "Help() start!" << endl;
+    while (start < end) {
+        char left = sentence[start];
+        char right = sentence[end];
+
+        sentence[start] = right;
+        sentence[end] = left;
+
+        start++;
+        end--;
+    }
+    cerr << "Help() end!" << endl;
+    return;
+}
 
 void reverseWordOrderingIn(string& sentence) {
-    /* TODO: Your code goes here! */
-    (void) sentence;
+    cout << endl;
+    reverseInPlace(sentence);
+    int start = 0;
+    for (int end = start; end < sentence.length(); end++) {
+        cerr << "start: " << start << "   end: " << end << "    before: " << sentence << "      curr: " << sentence[end] << endl;
+        if (sentence[end] == ' ') {
+            reverseWordOrderingInHelp(sentence, start, end - 1);
+            start = end + 1;
+        }
+        cerr << "start: " << start << "   end: " << end << "    after : " << sentence << endl;
+    }
+    reverseWordOrderingInHelp(sentence, start, sentence.length() - 1);
+    cerr << "start: " << start << "    return : " << sentence << endl;
+    return;
 }
 
-PROVIDED_TEST("Simple Tests of Reverse String"){
+void learn_1() {
+    string str = "hello";
+    string subStr = str.substr(1, str.size() - 2);
+    cout << endl;
+    cerr << subStr << endl;
+}
+
+STUDENT_TEST("Learn: ") {
+    // learn_1();
+    EXPECT(true);
+}
+
+PROVIDED_TEST("Simple Tests of Reverse String") {
     string s = "Hello, World!";
     string soln = "!dlroW ,olleH";
     reverseInPlace(s);
@@ -61,7 +148,7 @@ PROVIDED_TEST("Simple Tests of Reverse String"){
     EXPECT_EQUAL(s, soln);
 }
 
-PROVIDED_TEST("Simple Tests of Reverse Sentence"){
+PROVIDED_TEST("Simple Tests of Reverse Sentence") {
     string s = "Hello, World!";
     string soln = "World! Hello,";
     reverseWordOrderingIn(s);
@@ -80,5 +167,44 @@ PROVIDED_TEST("Simple Tests of Reverse Sentence"){
     s = "I";
     soln = "I";
     reverseWordOrderingIn(s);
+    EXPECT_EQUAL(s, soln);
+}
+
+PROVIDED_TEST("Simple Tests of Reverse String for OneHalfNSpace() ") {
+    string s = "Hello, World!";
+    string soln = "!dlroW ,olleH";
+    reverseInPlaceOneHalfNSpace(s);
+    EXPECT_EQUAL(s, soln);
+
+    s = "";
+    soln = "";
+    reverseInPlaceOneHalfNSpace(s);
+    EXPECT_EQUAL(s, soln);
+
+    s = "I";
+    soln = "I";
+    reverseInPlaceOneHalfNSpace(s);
+    EXPECT_EQUAL(s, soln);
+}
+
+PROVIDED_TEST("Simple Tests of Reverse Sentence for OneHalfNSpace() ") {
+    string s = "Hello, World!";
+    string soln = "World! Hello,";
+    reverseWordOrderingInOneHalfNSpace(s);
+    EXPECT_EQUAL(s, soln);
+
+    s = "Congrats on finishing CS106B";
+    soln = "CS106B finishing on Congrats";
+    reverseWordOrderingInOneHalfNSpace(s);
+    EXPECT_EQUAL(s, soln);
+
+    s = "";
+    soln = "";
+    reverseWordOrderingInOneHalfNSpace(s);
+    EXPECT_EQUAL(s, soln);
+
+    s = "I";
+    soln = "I";
+    reverseWordOrderingInOneHalfNSpace(s);
     EXPECT_EQUAL(s, soln);
 }

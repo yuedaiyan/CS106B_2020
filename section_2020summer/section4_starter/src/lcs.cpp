@@ -28,8 +28,42 @@ using namespace std;
  */
 
 string longestCommonSubsequence(string s1, string s2) {
-    // TODO: Your code here
-    return 0;
+    // cerr << "s1: " << s1 << "    s2: " << s2 << endl;
+    // base case
+    if (s1.length() == 0 || s2.length() == 0) {
+        return "";
+    }
+
+    // recursive case
+    if (s1[0] == s2[0]) {
+        return s1[0] + longestCommonSubsequence(s1.substr(1), s2.substr(1));
+    } else {
+        // remove s1's first letter
+        string removeS1FirstLetter = longestCommonSubsequence(s1.substr(1), s2);
+        // remove s2's first letter
+        string removeS2FirstLetter = longestCommonSubsequence(s1, s2.substr(1));
+
+        if (removeS1FirstLetter.length() >= removeS2FirstLetter.length()) {
+            return removeS1FirstLetter;
+        } else {
+            return removeS2FirstLetter;
+        }
+    }
+}
+
+void lcs_learn_1() {
+    cout << endl;
+    string str = "abcde";
+    cout << str << endl;
+    str.substr(1);
+    cout << str << endl;
+    str = str.substr(1);
+    cout << str << endl;
+}
+
+STUDENT_TEST("Learn: ") {
+    lcs_learn_1();
+    EXPECT(true);
 }
 
 /* * * * * Provided Tests Below This Point * * * * */

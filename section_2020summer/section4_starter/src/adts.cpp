@@ -37,13 +37,35 @@ using namespace std;
 
 Map<int, Set<string>> reverseMap(Map<string, int>& map) {
     Map<int, Set<string>> result;
-     /* TODO: Your code goes here! */
+    for (const string& str : map) {
+        int i = map.get(str);
+        if (result.containsKey(i)) {
+            result[i].add(str);
+        } else {
+            Set<string> curr = { str };
+            result.put(i, curr);
+        }
+    }
     return result;
 }
 
-void printCompoundWords(Lexicon &dict) {
-    /* TODO: Your code goes here! */
-    (void) dict;
+bool printCompoundWordsHelp(Lexicon& dict, string str) {
+    for (int i = 1; i < str.length(); i++) {
+        string curr = str.substr(0, i);
+        string leftover = str.substr(i);
+        if (dict.contains(curr) && dict.contains(leftover)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void printCompoundWords(Lexicon& dict) {
+    for (const string& str : dict) {
+        if (printCompoundWordsHelp(dict, str)) {
+            cout << str << endl;
+        }
+    }
 }
 
 PROVIDED_TEST("Simple Tests for Reversing Map"){

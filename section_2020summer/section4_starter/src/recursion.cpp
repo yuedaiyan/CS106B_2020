@@ -33,8 +33,13 @@ using namespace std;
  */
 
 int numWaysToTile(int n) {
-    /* TODO: Your code goes here! */
-    return 0;
+    if (n == 1) {
+        return 1;
+    }
+    if (n == 0) {
+        return 1;
+    }
+    return numWaysToTile(n - 1) + numWaysToTile(n - 2);
 }
 
 PROVIDED_TEST("Examples from handout for tiling board"){
