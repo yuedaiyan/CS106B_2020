@@ -1,6 +1,5 @@
 // OurVector.cpp
 // Implementation of OurVector class
-
 #include "error.h"
 #include "strlib.h"
 #include "OurVector.h"
@@ -9,51 +8,81 @@
 const int INITIAL_CAPACITY = 8;
 
 // constructor
-OurVector::OurVector(){
-    /* TODO: Fill in this function! */
+OurVector::OurVector() {
+    this->allocatedCapacity = INITIAL_CAPACITY;
+    this->numItems = 0;
+    this->elements = new int[allocatedCapacity];
 }
 
 // destructor
 OurVector::~OurVector(){
-    /* TODO: Fill in this function! */
+    delete[] elements;
 }
 
 // append value to the end of our array
 void OurVector::add(int value){
-    /* TODO: Fill in this function! */
+    if (numItems < allocatedCapacity) {
+        this->elements[numItems] = value;
+        numItems++;
+    } else {
+        error("Index out of bounds!");
+    }
 }
 
 // insert value at index
 void OurVector::insert(int index, int value){
-    /* TODO: Fill in this function! */
+    if (index > this->numItems || index < 0) {
+        error("Index out of bounds!");
+    }
+    for (int i = this->numItems; i > index; i--) {
+        this->elements[i] = this->elements[i - 1];
+    }
+    this->elements[index] = value;
+    this->numItems++;
 }
 
 // return the element at index
-int OurVector::get(int index){
-    /* TODO: Fill in this function! */
-    return 0;
+int OurVector::get(int index) const {
+    if (index < this->numItems && index >= 0) {
+        return this->elements[index];
+    } else {
+        error("Index out of bounds!");
+    }
 }
 
 // remove value from index
 void OurVector::remove(int index){
-    /* TODO: Fill in this function! */
+    if (index < this->numItems && index >= 0) {
+        for (int i = index; i < this->numItems + 1; i++) {
+            this->elements[i] = this->elements[i + 1];
+        }
+        this->numItems--;
+    } else {
+        error("Index out of bounds!");
+    }
 }
 
 // returns the number of elements
-int OurVector::size(){
-    /* TODO: Fill in this function! */
-    return 0;
+int OurVector::size() const {
+    return this->numItems;
 }
 
 // returns true if there aren't any elements
-bool OurVector::isEmpty(){
-    return false;
+bool OurVector::isEmpty() const {
+    return this->numItems == 0;
 }
 
-void OurVector::printDebugInfo(){
-    /* TODO: Fill in this function! */
+void OurVector::printDebugInfo() const {
+    cout << endl;
+    cerr << "allocatedCapacity: " << this->allocatedCapacity << endl;
+    cerr << "numItems: " << this->numItems << endl;
+    for (int i = 0; i < this->numItems; i++) {
+        cerr << "index: " << i << "    value: " << this->elements[i] << endl;
+    }
+    cout << endl;
 }
 
+// TODO: read test, learn how to write test by your self.
 
 PROVIDED_TEST("Construct vector and see constructor/destructor be called."){
     OurVector vec;
