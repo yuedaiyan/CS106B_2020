@@ -1,3 +1,7 @@
+/***********************************************************************
+ * .cpp file
+ ***********************************************************************/
+
 /*
  * CS106B Section Handout Test Harness: Section 6
  * ----------------------------------------------
@@ -9,7 +13,6 @@
  * A huge thank you to Keith Schwarz and Julie Zelenski
  * for creating an amazing testing harness!
  */
-
 #include <iostream>
 #include "testing/SimpleTest.h"
 #include "testing/TextUtils.h"
@@ -28,14 +31,22 @@ using namespace std;
  */
 
 void reverse(Node*& front) {
-    (void) front;
-}
+    Node* result = nullptr;
 
+    while (front != nullptr) {
+        Node* currFree = front;
+        front = front->next;
+        currFree->next = result;
+        result = currFree;
+    }
+
+    front = result;
+}
 
 /* * * * * Provided Tests Below This Point * * * * */
 PROVIDED_TEST("Example from handout"){
-    Node *originalList = createListFromVector({1, 8, 19, 4, 17});
-    Node *reversedList = createListFromVector({17, 4, 19, 8, 1});
+    Node* originalList = createListFromVector({ 1, 8, 19, 4, 17 });
+    Node* reversedList = createListFromVector({ 17, 4, 19, 8, 1 });
 
     reverse(originalList);
 

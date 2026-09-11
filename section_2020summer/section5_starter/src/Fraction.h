@@ -13,9 +13,14 @@ public:
     double decimal();
     int getNumer();
     int getDenom();
-    friend ostream& operator<<(ostream& out, const Fraction &frac);
+
+    void reciprocal();
+    void divide(const Fraction& f);
+
+    friend ostream& operator<<(ostream& out, const Fraction& frac);
     friend Fraction operator*(const Fraction &first, const Fraction &second);
     friend bool operator<(const Fraction &first, const Fraction &second);
+
 private:
     int numer;   // the numerator
     int denom; // the denominator

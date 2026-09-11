@@ -17,34 +17,22 @@
 class RBQueue {
 
 public:
-    // TODO: label some of these methods as
-    // const where appropriate. Don't forget
-    // to update the method headers in the
-    // .cpp file as well! Then, delete these
-    // lines.
-
     RBQueue();
     ~RBQueue();
     void enqueue(int elem);
     int dequeue();
-    int peek();
-    bool isEmpty();
-    bool isFull();
-    int size();
+    int peek() const;
+    bool isEmpty() const;
+    bool isFull() const;
+    int size() const;
 
 private:
-    // TODO: Include any private member functions
-    // or member variables here as you deem appropriate.
-    // Then, delete these lines.
+    int* _elements;
+    int _head;
+    int _size;
+    int _max;
 
-    /* Note: since this is a header file, we've opted to refer to
-     * ostream by its "full name" of std::ostream.
-     *
-     * By listing this method as a "friend", this method can break
-     * object encapsulation and access private member variables
-     * of the RBQueue object.
-     *
-     * TODO: delete these lines and write a method comment
-     */
+    void _expand();
+
     friend std::ostream& operator<<(std::ostream& out, const RBQueue& queue);
 };
