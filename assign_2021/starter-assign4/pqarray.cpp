@@ -1,3 +1,9 @@
+/***********************************************************************
+ * pqarray.cpp file
+ * 队列: 优先弹出最高优先级元素.
+ * 数字越小，优先级最高.
+ * 最高优先级元素会被放到队列末尾，弹出元素时直接通过_size-1实现元素删除.
+ ***********************************************************************/
 #include "pqarray.h"
 #include "error.h"
 #include "random.h"
@@ -9,11 +15,13 @@ using namespace std;
 // program constant
 static const int INITIAL_CAPACITY = 10;
 
-/*
- * The constructor initializes all of the member variables needed for
- * an instance of the PQArray class. The allocated capacity
- * is initialized to a starting constant and a dynamic array of that
- * size is allocated. The number of filled slots is initially zero.
+/* The constructor initializes all of the member variables needed for
+ * an instance of the PQArray class.
+ *
+ * The allocated capacity is initialized to a starting constant and
+ * a dynamic array of that size is allocated.
+ *
+ * The number of filled slots is initially zero.
  */
 PQArray::PQArray() {
     _numAllocated = INITIAL_CAPACITY;
@@ -29,28 +37,56 @@ PQArray::~PQArray() {
     delete[] _elements;
 }
 
-/*
- * TODO: Replace this comment with a descriptive function
- * comment about your implementation of the function.
- */
-void PQArray::enqueue(DataPoint elem) {
-    /* TODO: Implement this function. */
+/* 辅助函数：扩容队列 */
+void PQArray::expand() {
+    _numAllocated *= 2;
+    DataPoint* _newElements = new DataPoint[_numAllocated]();
+    for (int i = 0; i < size(); i++) {
+        _newElements[i] = _elements[i];
+    }
+    delete[] _elements;
+    _elements = _newElements;
 }
 
-/*
- * The count of enqueued elements is tracked in the
+/* 加入队列方法(自动扩容)
+ * @param  : elem(新加入元素)
+ */
+void PQArray::enqueue(DataPoint elem) {
+    // 检测到需要扩容
+    if (_numFilled == _numAllocated) {
+        expand();
+    }
+
+    // 找到具体插入位置
+    int location = size();
+
+    // 搬运元素，流出空位
+    while (location > 0 && elem.priority > _elements[location - 1].priority) {
+        _elements[location] = _elements[location - 1];
+        location--;
+    }
+
+    // 向空位中插入新元素
+    _elements[location] = elem;
+    // 增加
+    _numFilled++;
+}
+
+/* The count of enqueued elements is tracked in the
  * member variable _numFilled.
  */
 int PQArray::size() const {
     return _numFilled;
 }
 
-/*
- * The array elements are stored in decreasing order of priority value.
+/* The array elements are stored in decreasing order of priority value.
+ *
  * The element at index 0 is the least urgent (largest priority value)
  * and the element in the last-filled index is the most urgent
- * (minimum priority value), this element is frontmost. peek returns
- * the frontmost element (most urgent, minimum priority value).
+ * (minimum priority value), this element is frontmost.
+ *
+ * peek returns the frontmost element
+ * (most urgent, minimum priority value).
  */
 DataPoint PQArray::peek() const {
     if (isEmpty()) {
@@ -59,10 +95,10 @@ DataPoint PQArray::peek() const {
     return _elements[size() - 1];
 }
 
-/*
- * This function returns the value of the frontmost element and removes
- * it from the queue.  Because the frontmost element was at the
- * last-filled index, decrementing filled count is sufficient to remove it.
+/* This function returns the value of the frontmost element and removes it from the queue.
+ *
+ * Because the frontmost element was at the last-filled index,
+ * decrementing filled count is sufficient to remove it.
  */
 DataPoint PQArray::dequeue() {
     DataPoint front = peek();
@@ -70,17 +106,18 @@ DataPoint PQArray::dequeue() {
     return front;
 }
 
-/*
- * Returns true if no elements in the queue, false otherwise
- */
+/* Returns true if no elements in the queue, false otherwise */
 bool PQArray::isEmpty() const {
     return size() == 0;
 }
 
-/*
- * Updates internal state to reflect that the queue is empty, e.g. count
- * of filled slots is reset to zero. The array memory stays allocated
- * at current capacity. The previously stored elements do not need to
+/* Updates internal state to reflect that the queue is empty,
+ *
+ * e.g. count of filled slots is reset to zero.
+ *
+ * The array memory stays allocated at current capacity.
+ *
+ * The previously stored elements do not need to
  * be cleared; the slots would be overwritten when additional elements
  * are enqueued, but as a defensive programming technique, we mark
  * each with a sentinel value as a debugging aid.
@@ -89,9 +126,8 @@ void PQArray::clear() {
     _numFilled = 0;
 }
 
-/*
- * Private member function. This helper exchanges the element at
- * indexA with the element at indexB.
+/* Private member function.
+ * This helper exchanges the element at indexA with the element at indexB.
  */
 void PQArray::swap(int indexA, int indexB) {
     DataPoint tmp = _elements[indexA];
@@ -99,9 +135,7 @@ void PQArray::swap(int indexA, int indexB) {
     _elements[indexB] = tmp;
 }
 
-/*
- * Prints the contents of internal array for debugging purposes.
- */
+/* Prints the contents of internal array for debugging purposes. */
 void PQArray::printDebugInfo(string msg) const {
     cout << msg << endl;
     for (int i = 0; i < size(); i++) {
@@ -109,21 +143,23 @@ void PQArray::printDebugInfo(string msg) const {
     }
 }
 
-/*
- * Confirm the internal state of member variables appears valid.
+/* Confirm the internal state of member variables appears valid.
+ *
  * In this case, check that the elements in the array are stored in
- * priority order. Report an error if problem iis found.
+ * priority order.
+ *
+ * Report an error if problem iis found.
  */
 void PQArray::validateInternalState() const {
-    /*
-     * If there are more elements than spots in the array, we have a problem.
-     */
+    /* If there are more elements than spots in the array, we have a problem. */
     if (_numFilled > _numAllocated) error("Too many elements in not enough space!");
-
     /* Loop over the elements in the array and compare priority of
-     * neighboring elements. If current element has larger priority
-     * than the previous, array elements are out of order with respect
-     * to our intention. Use error to report this problem.
+     * neighboring elements.
+     *
+     * If current element has larger priority than the previous,
+     * array elements are out of order with respect to our intention.
+     *
+     * Use error to report this problem.
      */
     for (int i = 1; i < size(); i++) {
         if (_elements[i].priority > _elements[i-1].priority) {
@@ -134,14 +170,40 @@ void PQArray::validateInternalState() const {
 }
 
 /* * * * * * Test Cases Below This Point * * * * * */
+void fillQueue(PQArray& pq, int n) {
+    pq.clear(); // start with empty queue
+    for (int i = 0; i < n; i++) {
+        pq.enqueue({ "", randomReal(0, 10) });
+    }
+}
+
+void emptyQueue(PQArray& pq, int n) {
+    for (int i = 0; i < n; i++) {
+        pq.dequeue();
+    }
+}
 
 /* TODO: Add your own custom tests here! */
+STUDENT_TEST("normal test: ") {
+    PQArray pq;
+    for (int i = 0; i < 20; i++) {
+        pq.enqueue({ randomColorString(), randomInteger(-1000, 1000) });
+    }
+    pq.validateInternalState();
+    pq.printDebugInfo("After enqueue");
+}
 
+STUDENT_TEST("PQArray timing test, fillQueue and emptyQueue") {
+    for (int i = 1; i < 7; i++) {
+        PQArray pq;
+        int bigI = i * 10000;
 
-
+        TIME_OPERATION(bigI, fillQueue(pq, bigI));
+        TIME_OPERATION(bigI, emptyQueue(pq, bigI));
+    }
+}
 
 /* * * * * Provided Tests Below This Point * * * * */
-
 PROVIDED_TEST("PQArray example from writeup") {
     PQArray pq;
 
@@ -287,19 +349,6 @@ PROVIDED_TEST("PQArray stress test, cycle many random elements in and out") {
         }
     }
     EXPECT_EQUAL(sumEnqueued, sumDequeued);
-}
-
-void fillQueue(PQArray& pq, int n) {
-    pq.clear(); // start with empty queue
-    for (int i = 0; i < n; i++) {
-        pq.enqueue({ "", randomReal(0, 10) });
-    }
-}
-
-void emptyQueue(PQArray& pq, int n) {
-    for (int i = 0; i < n; i++) {
-        pq.dequeue();
-    }
 }
 
 PROVIDED_TEST("PQArray timing test, fillQueue and emptyQueue") {

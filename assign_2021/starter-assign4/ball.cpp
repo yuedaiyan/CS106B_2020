@@ -18,8 +18,8 @@ static const int MAX_VELOCITY = 5;
 Ball::Ball(int id, GWindow* w) {
     _window = w;
     _id = id;
-    _x = randomInteger(0, _window->getWidth());
-    _y = randomInteger(0, _window->getHeight());
+    _x = randomInteger(0, _window->getWidth() - SIZE);
+    _y = randomInteger(0, _window->getHeight() - SIZE);
     _vx = randomInteger(MIN_VELOCITY, MAX_VELOCITY);
     _vy = randomInteger(MIN_VELOCITY, MAX_VELOCITY);
 }
@@ -53,6 +53,8 @@ void Ball::move() {
 /* * * * * * Test Cases * * * * * */
 
 PROVIDED_TEST("Animate bouncing balls in window for a while") {
+
+    // setRandomSeed(2);
 
     GWindow window;
     window.setTitle("Bouncing Balls");

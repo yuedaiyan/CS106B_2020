@@ -1,20 +1,19 @@
 #include "pqclient.h"
 #include "pqarray.h"
-#include "pqheap.h"
-#include "vector.h"
+// #include "pqheap.h"
 #include "strlib.h"
-#include <sstream>
 #include "testing/SimpleTest.h"
+#include "vector.h"
+#include <sstream>
 using namespace std;
 
-/* TODO: Refer to pqclient.h for more information about what this function does, then
- * delete this comment.
+/* 排序函数
+ * @param  : Vector
  */
 void pqSort(Vector<DataPoint>& v) {
-    PQArray pq;
-
     /* Using the Priority Queue data structure as a tool to sort, neat! */
-
+    PQArray pq;
+    // PQHeap pq;
     /* Add all the elements to the priority queue. */
     for (int i = 0; i < v.size(); i++) {
         pq.enqueue(v[i]);
@@ -30,15 +29,46 @@ void pqSort(Vector<DataPoint>& v) {
     }
 }
 
-/* TODO: Refer to pqclient.h for more information about what this function does, then
- * delete this comment.
- */
+// note: 降序排列：最大优先级在头部，index=0；次大为第二，index=1
 Vector<DataPoint> topK(istream& stream, int k) {
-    /* TODO: Implement this function. */
-    return {};
+    PQArray pq;
+    // PQHeap pq;
+    DataPoint cur;
+
+    for (int i = 0; i < k; i++) {
+        if (stream >> cur) {
+            pq.enqueue(cur);
+        } else {
+            break;
+        }
+    }
+    /*
+    cout << endl;
+    cerr << "size of pq: " << pq.size() << endl;
+    cerr << "---------" << endl;
+    */
+
+    while (stream >> cur) {
+        if (pq.peek().priority < cur.priority) {
+            pq.dequeue();
+            pq.enqueue(cur);
+        }
+    }
+
+    Vector<DataPoint> result(pq.size());
+    /*
+    cout << endl;
+    cerr << "size of pq: " << pq.size() << endl;
+    cerr << "size of result: " << result.size() << endl;
+    cerr << "reslut: " << result.toString() << endl;
+    cerr << "size of k: " << k << endl;
+    */
+    for (int i = pq.size() - 1; i >= 0; i--) {
+        result[i] = pq.dequeue();
+    }
+    return result;
+    // return { };
 }
-
-
 
 /* * * * * * Test Cases Below This Point * * * * * */
 
@@ -70,21 +100,7 @@ void fillVector(Vector<DataPoint>& vec, int n) {
     }
 }
 
-/* TODO: Add your own custom tests here! */
-
-
-
-
-
-
-
-
-
-
-
-
 /* * * * * Provided Tests Below This Point * * * * */
-
 PROVIDED_TEST("pqSort: vector of random elements") {
     setRandomSeed(137); // why might it be a good idea to set seed here?
 
@@ -186,11 +202,10 @@ PROVIDED_TEST("topK: stress test - many elements, ask for top half") {
 PROVIDED_TEST("topK: time trial") {
     int startSize = 200000;
     int k = 10;
-    for (int n = startSize; n < 10*startSize; n *= 2) {
+    for (int n = startSize; n < 17 * startSize; n *= 2) {
         Vector<DataPoint> input;
         fillVector(input, n);
         stringstream stream = asStream(input);
         TIME_OPERATION(n, topK(stream, k));
     }
 }
-

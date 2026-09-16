@@ -4,7 +4,6 @@
 #include "vector.h"
 #include <istream>
 
-
 /**
  * Given a Vector of DataPoints, modify the vector to re-arrange the
  * elements into increasing order by priority.
@@ -13,7 +12,6 @@
  *   N*(O(enqueue) + O(dequeue)) where enqueue/dequeue for PQueue of size N
  */
 void pqSort(Vector<DataPoint>& v);
-
 
 /**
  * Given a stream containing some number of DataPoints, returns the k elements from that

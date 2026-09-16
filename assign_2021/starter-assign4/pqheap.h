@@ -39,6 +39,7 @@ public:
      *
      * @return The frontmost element, which is removed from queue.
      */
+    void dequeueHelp(int parentIndex);
     DataPoint dequeue();
 
     /**
@@ -85,6 +86,8 @@ public:
      */
     void printDebugInfo(std::string msg) const;
 
+    void printDebugInfoBasic() const;
+
     /*
      * This function exits purely for testing purposes. It verifies
      * that the internal state of the queue is valid/consistent.
@@ -93,15 +96,47 @@ public:
      */
     void validateInternalState() const;
 
-private:
-    /* TODO: Add whatever fields, types, and helper functions that you'd like! */
+    /*
+     * 为测试服务，可以强行将节点插入任何位置
+     */
+    void unSortedAdd(int index, DataPoint elem, bool numAddQues);
 
-    /* While not a strict requirement, we strongly recommend implementing the
-     * helper functions declared below. They will make your code much cleaner, and
-     * will aid in the debuggin process.
+private:
+    DataPoint* _elements; // dynamic array
+    int _numAllocated; // number of slots allocated in array
+    int _numFilled; // number of slots filled in array
+
+    void printDebugInfoHelp(int layer, int location) const;
+
+    /*
+     * recursive help function
+     */
+    bool validateInternalStateHelp(int parent) const;
+
+    /*
+     * expand size of array
+     */
+    void expand();
+
+    /*
+     *  calculates the index of the element that is the parent of the
+     * specified child index. If this child has no parent, return
+     * the sentinel value NONE.
      */
     int getParentIndex(int child) const;
+
+    /*
+     * calculates the index of the element that is the left child of the
+     * specified parent index. If this parent has no left child, return
+     * the sentinel value NONE.
+     */
     int getLeftChildIndex(int parent) const;
+
+    /*
+     * calculates the index of the element that is the right child of the
+     * specified parent index. If this parent has no right child, return
+     * the sentinel value NONE.
+     */
     int getRightChildIndex(int parent) const;
 
     /* Weird C++isms: C++ loves to make copies of things, which is usually a good thing but
