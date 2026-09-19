@@ -4,7 +4,6 @@
  * Lots of fucntions that show off the many different ways
  * to do linked list operations!
  */
-
 #include <iostream>
 #include <string>
 #include "linkedlist.h"
@@ -147,17 +146,63 @@ Node* createListWithAppend(Vector<string> values) {
  * those values in the specified order.
  */
 Node* createListWithTailPtr(Vector<string> values) {
-    /* TODO: Implement this function! */
-    return nullptr;
+    if (values.isEmpty())
+        return nullptr;
+
+    Node* head = new Node(values[0], nullptr);
+    Node* curr = head;
+
+    for (int i = 1; i < values.size(); i++) {
+        Node* newNode = new Node(values[i], nullptr);
+        curr->next = newNode;
+        curr = newNode;
+    }
+
+    return head;
 }
 
 /* Adds data to a linked list in alphabetical order. Assumes existing list is already
  * sorted alphabetically. */
 void alphabeticalAdd(Node*& list, string data) {
-    /* TODO: Implement this function! */
+    Node* newNode = new Node(data, nullptr);
+
+    Node* next = list;
+    Node* prev = nullptr;
+
+    while (next != nullptr && next->data < data) {
+        prev = next;
+        next = next->next;
+    }
+
+    if (prev != nullptr) {
+        prev->next = newNode;
+        newNode->next = next;
+    } else {
+        // 如果尝试插入节点比第一个节点还要小，也就是在最开头插入，则置换开头
+        newNode->next = list;
+        list = newNode;
+    }
 }
 
 /* Removes all nodes matching dataToRemove from the passed in list (if the data exists). */
 void remove(Node*& list, string dataToRemove) {
-    /* TODO: Implement this function! */
+    Node* curr = list;
+    Node* prev = nullptr;
+
+    while (curr != nullptr) {
+        if (curr->data == dataToRemove) {
+            if (prev != nullptr) {
+                prev->next = curr->next;
+                delete curr;
+                curr = prev->next;
+            } else {
+                list = curr->next;
+                delete curr;
+                curr = list;
+            }
+        } else {
+            prev = curr;
+            curr = curr->next;
+        }
+    }
 }
