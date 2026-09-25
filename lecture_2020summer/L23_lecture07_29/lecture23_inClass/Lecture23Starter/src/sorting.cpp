@@ -56,7 +56,6 @@ int indexOfSmallest(const Vector<int>& elems, int startPoint) {
     return smallestIndex;
 }
 
-
 /*
  * Rearranges the elements of v into sorted order using
  * the insertion sort algorithm.
@@ -74,22 +73,30 @@ void insertionSort(Vector<int>& v) {
     }
 }
 
-
 /*
  * Rearranges the elements of v into sorted order using
  * the merge sort algorithm.
  */
 void mergeSort(Vector<int>& vec) {
     /* A list with 0 or 1 elements is already sorted by definition. */
+    if (vec.size() <= 1) {
+        return;
+    }
 
     /* Split the list into two, equally sized halves */
+    Vector<int> left, right;
+    split(vec, left, right);
 
     /* Recursively sort the two halves. */
+    mergeSort(left);
+    mergeSort(right);
 
     /*
      * Empty out the original vector and re-fill it with merged result
      * of the two sorted halves.
      */
+    vec = { };
+    merge(vec, left, right);
 }
 
 /*
@@ -98,7 +105,9 @@ void mergeSort(Vector<int>& vec) {
  * right.
  */
 void split(Vector<int>& vec, Vector<int>& left, Vector<int>& right){
-    /* TODO: Implement this function */
+    int half = vec.size() / 2;
+    left = vec.subList(0, half);
+    right = vec.subList(half);
 }
 
 /*
@@ -142,23 +151,41 @@ void merge(Vector<int>& vec, Vector<int>& v1, Vector<int>& v2) {
 
 void quickSort(Vector<int>& vec){
     /* A list with 0 or 1 elements is already sorted by definition. */
+    if (vec.size() <= 1) {
+        return;
+    }
 
     /* Pick the pviot and partition the list into three components.
      * 1) elements less than the pivot
      * 2) elements equal to the pivot
      * 3) elements greater than the pivot
-    */
+     */
+    int pivot = vec[0];
+    Vector<int> less, equal, greater;
+    partition(vec, less, equal, greater, pivot);
 
     /* Recursively sort the two unsorted components. */
+    quickSort(less);
+    quickSort(greater);
 
     /*
      * Empty out the original vector and re-fill it with merged result
      * of the two sorted halves.
      */
+    vec = { };
+    concatenate(vec, less, equal, greater);
 }
 
 void partition(Vector<int>& vec, Vector<int>& less, Vector<int>& equal, Vector<int>& greater, int pivot) {
-    /* TODO: Implement this function. */
+    for (int val : vec) {
+        if (val < pivot) {
+            less.add(val);
+        } else if (val > pivot) {
+            greater.add(val);
+        } else {
+            equal.add(val);
+        }
+    }
 }
 
 /* Assumes vec is empty when passed int othis function */
@@ -167,56 +194,56 @@ void concatenate(Vector<int>& vec, Vector<int>& less, Vector<int>& equal, Vector
      * Start with all sorted elements less than the pivot, then add in those equal,
      * followed by the sorted list of elements greater than pivot.
      */
-    /* TODO: Implement this function */
+    vec = less + equal + greater;
 }
 
-//PROVIDED_TEST("Simple test to test correctness of overall selection sort algorithm"){
-//    Vector<int> vals;
-//    Vector<int> soln;
-//    fillRandomIntVector(vals, 10);
-//    soln = vals;
+PROVIDED_TEST("Simple test to test correctness of overall selection sort algorithm") {
+    Vector<int> vals;
+    Vector<int> soln;
+    fillRandomIntVector(vals, 10);
+    soln = vals;
 
-//    /* Run selection sort algorithm. */
-//    selectionSort(vals);
-//    /* Use built-in sort funciton for solution */
-//    soln.sort();
+    /* Run selection sort algorithm. */
+    selectionSort(vals);
+    /* Use built-in sort funciton for solution */
+    soln.sort();
 
-//    EXPECT_EQUAL(vals, soln);
-//}
+    EXPECT_EQUAL(vals, soln);
+}
 
-//PROVIDED_TEST("Timing Test for Selection Sort"){
-//    int startSize = 5000;
-//    for (int size = startSize; size <= 10 * startSize; size *= 2){
-//        Vector<int> vals;
-//        fillRandomIntVector(vals, size);
-//        TIME_OPERATION(size, selectionSort(vals));
-//    }
-//}
+PROVIDED_TEST("Timing Test for Selection Sort") {
+    int startSize = 5000;
+    for (int size = startSize; size <= 10 * startSize; size *= 2) {
+        Vector<int> vals;
+        fillRandomIntVector(vals, size);
+        TIME_OPERATION(size, selectionSort(vals));
+    }
+}
 
-//PROVIDED_TEST("Simple test to test correctness of overall insertion sort algorithm"){
-//    Vector<int> vals;
-//    Vector<int> soln;
-//    fillRandomIntVector(vals, 10);
-//    soln = vals;
+PROVIDED_TEST("Simple test to test correctness of overall insertion sort algorithm") {
+    Vector<int> vals;
+    Vector<int> soln;
+    fillRandomIntVector(vals, 10);
+    soln = vals;
 
-//    /* Run insertion sort algorithm. */
-//    insertionSort(vals);
-//    /* Use built-in sort funciton for solution */
-//    soln.sort();
+    /* Run insertion sort algorithm. */
+    insertionSort(vals);
+    /* Use built-in sort funciton for solution */
+    soln.sort();
 
-//    EXPECT_EQUAL(vals, soln);
-//}
+    EXPECT_EQUAL(vals, soln);
+}
 
-//PROVIDED_TEST("Timing Test for Insertion Sort"){
-//    int startSize = 5000;
-//    for (int size = startSize; size <= 10 * startSize; size *= 2){
-//        Vector<int> vals;
-//        fillRandomIntVector(vals, size);
-//        TIME_OPERATION(size, insertionSort(vals));
-//    }
-//}
+PROVIDED_TEST("Timing Test for Insertion Sort") {
+    int startSize = 5000;
+    for (int size = startSize; size <= 10 * startSize; size *= 2) {
+        Vector<int> vals;
+        fillRandomIntVector(vals, size);
+        TIME_OPERATION(size, insertionSort(vals));
+    }
+}
 
-PROVIDED_TEST("Simple test to test correctness of split helper function."){
+PROVIDED_TEST("Simple test to test correctness of split helper function.") {
     Vector<int> vals = {1, 2, 3, 4, 5, 6};
     Vector<int> left, right;
     split(vals, left, right);
