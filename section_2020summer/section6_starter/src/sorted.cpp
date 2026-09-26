@@ -26,17 +26,36 @@ using namespace std;
  * that's pointed to is in sorted (nondecreasing) order. An
  * empty list is considered to be sorted.
  */
-
 bool isSorted(Node* front) {
-    (void) front;
-    return false;
+    if (front == nullptr || front->next == nullptr) {
+        return true;
+    }
+
+    return front->data <= front->next->data && isSorted(front->next);
 }
 
 
 /* * * * * Provided Tests Below This Point * * * * */
 
+STUDENT_TEST("isSorted(): empty input case") {
+    Node* list = createListFromVector({ });
+    EXPECT(isSorted(list));
+    freeList(list);
+}
 
-PROVIDED_TEST("Simple Sorted Example"){
+STUDENT_TEST("isSorted(): one element case") {
+    Node* list = createListFromVector({ 1 });
+    EXPECT(isSorted(list));
+    freeList(list);
+}
+
+STUDENT_TEST("isSorted(): two element case") {
+    Node* list = createListFromVector({ 1, 2 });
+    EXPECT(isSorted(list));
+    freeList(list);
+}
+
+PROVIDED_TEST("Simple Sorted Example") {
     Node *list = createListFromVector({1,2,3,3,4,5});
     EXPECT(isSorted(list));
     freeList(list);

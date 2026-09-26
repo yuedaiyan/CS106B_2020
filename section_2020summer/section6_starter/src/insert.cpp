@@ -39,10 +39,35 @@ using namespace std;
  */
 
 void insert(StringNode*& front, int index, string value) {
-    // TODO: Your code goes here
+
+    StringNode* prev = nullptr;
+    StringNode* next = front;
+
+    for (int i = 0; i < index; i++) {
+        prev = next;
+        next = next->next;
+    }
+
+    StringNode* curr = new StringNode(value, next);
+    if (prev != nullptr) {
+        prev->next = curr;
+        // curr->next = next;
+    } else {
+        // curr->next = next;
+        front = curr;
+    }
 }
 
 /* * * * * Provided Tests Below This Point * * * * */
+
+STUDENT_TEST("insert in front") {
+    StringNode* originalList = createStringListFromVector({ "Katherine", "Julie", "Kate" });
+    StringNode* solnList = createStringListFromVector({ "Mehran", "Katherine", "Julie", "Kate" });
+
+    insert(originalList, 0, "Mehran");
+    EXPECT(stringListEqual(solnList, originalList));
+}
+
 PROVIDED_TEST("Example from handout"){
     StringNode *originalList = createStringListFromVector({ "Katherine", "Julie", "Kate" });
     StringNode *solnList = createStringListFromVector({ "Katherine", "Julie", "Mehran", "Kate" });
