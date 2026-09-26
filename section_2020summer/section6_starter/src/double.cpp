@@ -33,8 +33,28 @@ using namespace std;
  */
 
 void doubleList(Node*& front) {
-    /* TODO: Your code goes here! */
-    (void) front;
+    if (front == nullptr) {
+        return;
+    }
+
+    Node* copyListFront = nullptr;
+    Node* copyListCurr = copyListFront;
+    Node* curr = front;
+    Node* lastNode = nullptr;
+
+    while (curr != nullptr) {
+        lastNode = curr;
+        Node* newNode = new Node(curr->data, nullptr);
+        curr = curr->next;
+        if (copyListFront == nullptr) {
+            copyListFront = newNode;
+            copyListCurr = newNode;
+        } else {
+            copyListCurr->next = newNode;
+            copyListCurr = newNode;
+        }
+    }
+    lastNode->next = copyListFront;
 }
 
 

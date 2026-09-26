@@ -28,20 +28,66 @@ using namespace std;
  * error if the list is empty).
  */
 
+int sumOfElementsIn_recursive(Node* list) {
+    if (list == nullptr) {
+        return 0;
+    }
+    return list->data + sumOfElementsIn_recursive(list->next);
+}
+
 int sumOfElementsIn(Node* list){
-    return 0;
+    int result = 0;
+
+    while (list != nullptr) {
+        result += list->data;
+        list = list->next;
+    }
+
+    return result;
 }
 
-Node* lastElementOf(Node* list){
-    return nullptr;
+Node* lastElementOf_recursiveHelp(Node* curr) {
+    if (curr->next == nullptr) {
+        return curr;
+    }
+    return lastElementOf_recursiveHelp(curr->next);
 }
 
+Node* lastElementOf_recursive(Node* list) {
+    if (list == nullptr) {
+        error("List is empty");
+    }
+    return lastElementOf_recursiveHelp(list);
+}
+
+Node* lastElementOf(Node* list) {
+    if (list == nullptr) {
+        error("List is empty");
+    }
+
+    while (list->next != nullptr) {
+        list = list->next;
+    }
+
+    return list;
+}
 
 /* * * * * Provided Tests Below This Point * * * * */
+STUDENT_TEST("Basic Sum Example recursive") {
+    Node* list = createListFromVector({ 1, 2, 3, 4, 5 });
+    EXPECT_EQUAL(sumOfElementsIn_recursive(list), 15);
+    freeList(list);
+}
 
 PROVIDED_TEST("Basic Sum Example"){
     Node *list = createListFromVector({1, 2, 3, 4, 5});
     EXPECT_EQUAL(sumOfElementsIn(list), 15);
+    freeList(list);
+}
+
+PROVIDED_TEST("Basic Find Last Example recursive") {
+    Node* list = createListFromVector({ 1, 2, 3 });
+    EXPECT_EQUAL(lastElementOf_recursive(list), list->next->next);
     freeList(list);
 }
 

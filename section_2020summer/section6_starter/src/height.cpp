@@ -33,8 +33,11 @@ using namespace std;
 
 
 int height(TreeNode *node) {
-    /* TODO: Your code goes here! */
-    return 0;
+    if (node == nullptr) {
+        return 0;
+    }
+
+    return 1 + max(height(node->left), height(node->right));
 }
 
 

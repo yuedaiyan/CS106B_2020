@@ -21,9 +21,29 @@
 using namespace std;
 
 void removeAllThreshold(DoubleNode*& front, double value, double threshold) {
-    (void) front;
-    (void) value;
-    (void) threshold;
+    DoubleNode* prev = nullptr;
+    DoubleNode* curr = front;
+
+    while (curr != nullptr) {
+        if (curr->data <= value + threshold && curr->data >= value - threshold) {
+            // remove
+            if (curr == front) {
+                // firt node
+                front = curr->next;
+                delete curr;
+                curr = front;
+            } else {
+                // other node
+                prev->next = curr->next;
+                delete curr;
+                curr = prev->next;
+            }
+        } else {
+            // 正常跳过
+            prev = curr;
+            curr = curr->next;
+        }
+    }
 }
 
 /* * * * * Provided Tests Below This Point * * * * */
