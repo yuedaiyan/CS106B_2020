@@ -11,21 +11,53 @@
 using namespace std;
 
 TreeNode* buildExampleTree() {
-    /* TODO: Fill in this function! */
-    return nullptr;
+    /* 1. Create the leaf nodes. */
+    TreeNode* banana = new TreeNode;
+    banana->data = "banana";
+    banana->left = nullptr;
+    banana->right = nullptr;
+
+    TreeNode* durian = new TreeNode("durian", nullptr, nullptr);
+    TreeNode* taro = new TreeNode("taro", nullptr, nullptr);
+
+    /* 2. Create the intermediate nodes. */
+    TreeNode* coconut = new TreeNode("coconut", banana, durian);
+    TreeNode* strawberry = new TreeNode("strawberry", nullptr, taro);
+
+    /* 3. Create the root node and return it. */
+    TreeNode* root = new TreeNode("pineapple", coconut, strawberry);
+
+    return root;
 }
 
-
 void preorderPrintTree(TreeNode* tree) {
-    /* TODO: Fill in this function! */
+    if (tree == nullptr) {
+        return;
+    }
+
+    cout << tree->data << endl;
+    preorderPrintTree(tree->left);
+    preorderPrintTree(tree->right);
 }
 
 void inorderPrintTree(TreeNode* tree) {
-    /* TODO: Fill in this function! */
+    if (tree == nullptr) {
+        return;
+    }
+
+    inorderPrintTree(tree->left);
+    cout << tree->data << endl;
+    inorderPrintTree(tree->right);
 }
 
 void postorderPrintTree(TreeNode* tree) {
-    /* TODO: Fill in this function! */
+    if (tree == nullptr) {
+        return;
+    }
+
+    postorderPrintTree(tree->left);
+    postorderPrintTree(tree->right);
+    cout << tree->data << endl;
 }
 
 /*
