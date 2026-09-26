@@ -15,10 +15,10 @@ int main() {
     prettyPrint(tree);
 
     cout << endl;
-
     cout << "1) Pre-order" << endl;
     cout << "2) In-order" << endl;
     cout << "3) Post-order" << endl;
+
     int choice = -1;
     while (choice != 0) {
         choice = getInteger("Please choose 1-3 (0 to quit): ");
