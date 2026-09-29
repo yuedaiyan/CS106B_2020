@@ -11,32 +11,32 @@ class OurSet {
 public:
     // constructor
     OurSet();
-
     // destructor
     ~OurSet();
 
     // put value into set
     void add(string value);
-
     // remove value from set
     void remove(string value);
-
     // check if set contains the value
     bool contains(string value);
-
     // removes all elements from the set
     void clear();
-
     // return the number of elements in the array
     int size();
-
     // true if zero elements
     bool isEmpty();
-
+    // print
     void printSetContents();
 
 private:
-    /* FILL ME IN */
+    TreeNode* root;
+    int numItems;
+
+    void freeTree(TreeNode* root);
+    void inorderPrintTree(TreeNode* tree);
+    bool containsHelper(string value, TreeNode* root);
+    void addHelper(string value, TreeNode*& node);
 
     void removeHelper(TreeNode*& node, string value);
     string removeLargestFrom(TreeNode*& root);
