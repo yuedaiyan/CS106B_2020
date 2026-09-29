@@ -8,7 +8,8 @@
  * correct values
  */
 OurSet::OurSet() {
-    /* FILL ME IN */
+    root = nullptr;
+    numItems = 0;
 }
 
 /*
@@ -16,7 +17,16 @@ OurSet::OurSet() {
  * the internal binary search tree.
  */
 OurSet::~OurSet(){
-    /* FILL ME IN */
+    freeTree(root);
+}
+
+void OurSet::freeTree(TreeNode* tree) {
+    if (tree == nullptr) {
+        return;
+    }
+    freeTree(tree->left);
+    freeTree(tree->right);
+    delete tree;
 }
 
 /*
@@ -31,8 +41,24 @@ void OurSet::clear() {
  * true if the element is in the set, and false otherwise.
  */
 bool OurSet::contains(string value) {
-    /* FILL ME IN */
-    return false;
+    return containsHelper(value, root);
+}
+
+bool OurSet::containsHelper(string value, TreeNode* root) {
+    // base case
+    if (root == nullptr) {
+        return false;
+    }
+    if (root->data == value) {
+        return true;
+    }
+
+    // recursive case
+    if (root->data > value) {
+        return containsHelper(value, root->left);
+    } else {
+        return containsHelper(value, root->right);
+    }
 }
 
 /*
@@ -40,23 +66,36 @@ bool OurSet::contains(string value) {
  * location in the internal binary search tree.
  */
 void OurSet::add(string value) {
-    /* FILL ME IN */
+    addHelper(value, root);
+}
+
+void OurSet::addHelper(string value, TreeNode*& node) {
+    // base case: new node
+    if (node == nullptr) {
+        node = new TreeNode(value, nullptr, nullptr);
+        numItems++;
+    } else if (node->data > value) {
+        // go left
+        addHelper(value, node->left);
+    } else if (node->data < value) {
+        // go right
+        addHelper(value, node->right);
+    }
+    // lese: node->data==value (value is already in list)
 }
 
 /*
  * Return the number of elements in the set
  */
 int OurSet::size() {
-    /* FILL ME IN */
-    return 0;
+    return numItems;
 }
 
 /*
  * Returns true if the set is empty, false otherwise.
  */
 bool OurSet::isEmpty() {
-    /* FILL ME IN */
-    return false;
+    return numItems == 0;
 }
 
 /*
@@ -67,9 +106,18 @@ bool OurSet::isEmpty() {
  */
 void OurSet::printSetContents() {
     cout << "{";
+    inorderPrintTree(root);
     cout << "}" << endl;
 }
 
+void OurSet::inorderPrintTree(TreeNode* tree) {
+    if (tree == nullptr) {
+        return;
+    }
+    inorderPrintTree(tree->left);
+    cout << tree->data << " ";
+    inorderPrintTree(tree->right);
+}
 
 /* Removes the specified value from the set by deleting the element
  * containing that value from the internal binary search tree, making sure

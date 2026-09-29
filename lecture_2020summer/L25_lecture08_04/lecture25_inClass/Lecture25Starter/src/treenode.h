@@ -8,7 +8,6 @@ struct TreeNode {
 
     // default constructor does not initialize
     TreeNode() {}
-
     // 3-arg constructor sets fields from arguments
     TreeNode(std::string d, TreeNode* l, TreeNode* r) {
         data = d;
