@@ -24,6 +24,7 @@ list=list2->next;
 ```
 
 **5) Tracing Pointers by Reference**
+
 ![graph](./5_1.jpeg)
 ![graph](./5_2.jpeg)
 
