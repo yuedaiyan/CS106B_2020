@@ -10,12 +10,12 @@
  * for creating an amazing testing harness!
  */
 
-#include <iostream>
+#include "error.h"
 #include "testing/SimpleTest.h"
 #include "testing/TextUtils.h"
 #include "treenode.h"
 #include "utility.h"
-#include "error.h"
+#include <iostream>
 using namespace std;
 
 /*
@@ -30,73 +30,92 @@ using namespace std;
  * like arrays, vectors, stacks, queues, etc., to solve this problem.
  */
 
+TreeNode* biggestNodeIn_bst(TreeNode* root) {
+    if (root == nullptr) error("error: root == nullptr");
+    return root->right == nullptr ? root : biggestNodeIn_bst(root->right);
+}
+
+TreeNode* smallestNodeIn_bst(TreeNode* root) {
+    if (root == nullptr) error("error: root == nullptr");
+    return root->left == nullptr ? root : smallestNodeIn_bst(root->left);
+}
+
 bool isBST(TreeNode* root) {
-    /* TODO: Your code goes here! */
-    return false;
+    if (root == nullptr) return true;
+
+    bool leftCheck = true;
+    bool rightCheck = true;
+    if (root->left != nullptr)
+        leftCheck = root->left->data <= root->data
+                    && biggestNodeIn_bst(root->left)->data <= root->data;
+    if (root->right != nullptr)
+        rightCheck = root->right->data >= root->data
+                     && smallestNodeIn_bst(root->right)->data >= root->data;
+
+    return leftCheck && rightCheck && isBST(root->left) && isBST(root->right);
 }
 
-PROVIDED_TEST("Simple positive tests for isBST function"){
-    TreeNode *tree = nullptr;
+PROVIDED_TEST("Simple positive tests for isBST function") {
+    TreeNode* tree = nullptr;
     EXPECT(isBST(tree));
 
-    tree = createTreeFromVector({/* Level 1*/ 5});
-    EXPECT(isBST(tree));
-
-    freeTree(tree);
-    tree = createTreeFromVector({/* Level 1*/ 5, /* Level 2*/ 3, EMPTY});
+    tree = createTreeFromVector({ /* Level 1*/ 5 });
     EXPECT(isBST(tree));
 
     freeTree(tree);
-    tree = createTreeFromVector({/* Level 1*/ 5, /* Level 2*/ EMPTY, 6});
+    tree = createTreeFromVector({ /* Level 1*/ 5, /* Level 2*/ 3, EMPTY });
     EXPECT(isBST(tree));
 
     freeTree(tree);
-    tree = createTreeFromVector({/* Level 1*/ 5, /* Level 2*/ 3, 6});
+    tree = createTreeFromVector({ /* Level 1*/ 5, /* Level 2*/ EMPTY, 6 });
     EXPECT(isBST(tree));
 
     freeTree(tree);
-    tree = createTreeFromVector({/* Level 1*/ 5, /* Level 2*/ 3, 6, /* Level 3*/ 1, 4, EMPTY, EMPTY});
+    tree = createTreeFromVector({ /* Level 1*/ 5, /* Level 2*/ 3, 6 });
     EXPECT(isBST(tree));
 
     freeTree(tree);
-    tree = createTreeFromVector({/* Level 1*/ 5, /* Level 2*/ 3, 6, /* Level 3*/ 1, 4, EMPTY, 9});
+    tree = createTreeFromVector({ /* Level 1*/ 5, /* Level 2*/ 3, 6, /* Level 3*/ 1, 4, EMPTY, EMPTY });
     EXPECT(isBST(tree));
 
     freeTree(tree);
-    tree = createTreeFromVector({/* Level 1*/ 5, /* Level 2*/ 3, 6, /* Level 3*/ 1, 4, EMPTY, 9, /* Level 4*/ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, 8, EMPTY});
+    tree = createTreeFromVector({ /* Level 1*/ 5, /* Level 2*/ 3, 6, /* Level 3*/ 1, 4, EMPTY, 9 });
     EXPECT(isBST(tree));
 
     freeTree(tree);
-    tree = createTreeFromVector({/* Level 1*/ 5, /* Level 2*/ 3, 6, /* Level 3*/ 1, 4, EMPTY, 9, /* Level 4*/ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, 8, 10});
+    tree = createTreeFromVector({ /* Level 1*/ 5, /* Level 2*/ 3, 6, /* Level 3*/ 1, 4, EMPTY, 9, /* Level 4*/ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, 8, EMPTY });
     EXPECT(isBST(tree));
 
     freeTree(tree);
-}
-
-PROVIDED_TEST("Simple negative tests for isBST function"){
-    TreeNode *tree = createTreeFromVector({5, 6});
-    EXPECT(!isBST(tree));
-
-    freeTree(tree);
-    tree = createTreeFromVector({/* Level 1*/ 5, /* Level 2*/ 4, 3});
-    EXPECT(!isBST(tree));
-
-    freeTree(tree);
-    tree = createTreeFromVector({/* Level 1*/ 5, /* Level 2*/ 4, 6, /* Level 3*/ 1, 7, EMPTY, EMPTY});
-    EXPECT(!isBST(tree));
-
-    freeTree(tree);
-    tree = createTreeFromVector({/* Level 1*/ 5, /* Level 2*/ 4, 6, /* Level 3*/ 7, 1, EMPTY, EMPTY});
-    EXPECT(!isBST(tree));
-
-    freeTree(tree);
-    tree = createTreeFromVector({/* Level 1*/ 5, /* Level 2*/ 4, 6, /* Level 3*/ 1, EMPTY, 8, 9});
-    EXPECT(!isBST(tree));
-
-    freeTree(tree);
-    tree = createTreeFromVector({/* Level 1*/ 5, /* Level 2*/ 4, 6, /* Level 3*/ 1, EMPTY, EMPTY, 9, /* Level 4*/ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, 1, 10});
-    EXPECT(!isBST(tree));
+    tree = createTreeFromVector({ /* Level 1*/ 5, /* Level 2*/ 3, 6, /* Level 3*/ 1, 4, EMPTY, 9, /* Level 4*/ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, 8, 10 });
+    EXPECT(isBST(tree));
 
     freeTree(tree);
 }
 
+PROVIDED_TEST("Simple negative tests for isBST function") {
+    TreeNode* tree = createTreeFromVector({ 5, 6 });
+    EXPECT(!isBST(tree));
+
+    freeTree(tree);
+    tree = createTreeFromVector({ /* Level 1*/ 5, /* Level 2*/ 4, 3 });
+    EXPECT(!isBST(tree));
+
+    freeTree(tree);
+    tree = createTreeFromVector({ /* Level 1*/ 5, /* Level 2*/ 4, 6, /* Level 3*/ 1, 7, EMPTY, EMPTY });
+    EXPECT(!isBST(tree));
+
+    freeTree(tree);
+    tree = createTreeFromVector({ /* Level 1*/ 5, /* Level 2*/ 4, 6, /* Level 3*/ 7, 1, EMPTY, EMPTY });
+    EXPECT(!isBST(tree));
+
+    freeTree(tree);
+    tree = createTreeFromVector({ /* Level 1*/ 5, /* Level 2*/ 4, 6, /* Level 3*/ 1, EMPTY, 8, 9 });
+    EXPECT(!isBST(tree));
+
+    freeTree(tree);
+    tree = createTreeFromVector({ /* Level 1*/ 5, /* Level 2*/ 4, 6, /* Level 3*/ 1, EMPTY, EMPTY, 9, /* Level 4*/ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, 1, 10 });
+    EXPECT(!isBST(tree));
+
+    freeTree(tree);
+}

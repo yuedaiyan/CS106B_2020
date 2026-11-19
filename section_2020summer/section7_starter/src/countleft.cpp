@@ -30,8 +30,12 @@ using namespace std;
  */
 
 int countLeftNodes(TreeNode *node) {
-    /* TODO: Your code goes here! */
-    return 0;
+    if (node == nullptr) return 0;
+
+    int curr = 0;
+    if (node->left != nullptr) curr = 1;
+
+    return curr + countLeftNodes(node->left) + countLeftNodes(node->right);
 }
 
 

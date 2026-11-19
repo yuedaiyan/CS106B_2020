@@ -29,8 +29,19 @@ using namespace std;
  * solved in this section handout.
  */
 
+int height(TreeNode* node) {
+    if (node == nullptr) return 0;
+
+    return 1 + max(height(node->left), height(node->right));
+}
+
 bool isBalanced(TreeNode *node) {
-    /* TODO: Your code goes here! */
+    if (node == nullptr) return true;
+
+    int gap = height(node->left) - height(node->right);
+
+    if (gap <= 1 && gap >= -1 && isBalanced(node->left) && isBalanced(node->right)) return true;
+
     return false;
 }
 
